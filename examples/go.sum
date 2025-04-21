@@ -1,0 +1,14 @@
+github.com/apparentlymart/go-textseg/v16 v16.0.0 h1:xD7KZ/8d+ED3d+k78g/2weJEIGzDMreyMqntQymTZB0=
+github.com/apparentlymart/go-textseg/v16 v16.0.0/go.mod h1:wCrfQB/AReGqD1ECqVHhhsq7BV2AxUhnirsBLInYHvE=
+github.com/dpb587/cursorio-go v0.0.0-20250415220656-c43e40f866fd h1:syuWYbcolG3GMI0R3iMcbPZSFrEEwR73FwvSWlvxMcY=
+github.com/dpb587/cursorio-go v0.0.0-20250415220656-c43e40f866fd/go.mod h1:YokGb5i31XI0Z+4t8bZxvZecyKY3ddLlih9Rr7eBgW0=
+github.com/dpb587/inspecthtml-go v0.0.0-20250415221629-0b01546cf452 h1:fUumOKG12H85rdMwPmIkTJeza7fZwHGzwlEastgpo0o=
+github.com/dpb587/inspecthtml-go v0.0.0-20250415221629-0b01546cf452/go.mod h1:STz5Xq0b2UCumUEpt65TTy86vJuq+R5QUyCqGtUVH54=
+github.com/dpb587/inspectjson-go v0.0.0-20250415223044-329970c2bfbb h1:amgm8HDwE1zAepZPlnjnt0scNhDXGfRu8tel75OPzpU=
+github.com/dpb587/inspectjson-go v0.0.0-20250415223044-329970c2bfbb/go.mod h1:7WsurL7NhaxYhLcLTMDfGoAz0kUgFwQqRfSQF322nKM=
+github.com/dpb587/inspectxml-go v0.0.0-20250415222439-71ac97da5967 h1:eDf5lVry/atdVqikH/ZC+b2uI6AeBdcOsoVaSOiNL/s=
+github.com/dpb587/inspectxml-go v0.0.0-20250415222439-71ac97da5967/go.mod h1:+0eCu7F5sPe9eNUj6yhxmqZc0C60jGtbPX2BTFhEjNo=
+github.com/tomnomnom/linkheader v0.0.0-20180905144013-02ca5825eb80 h1:nrZ3ySNYwJbSpD6ce9duiP+QkD3JuLCcWkdaehUS/3Y=
+github.com/tomnomnom/linkheader v0.0.0-20180905144013-02ca5825eb80/go.mod h1:iFyPdL66DjUD96XmzVL3ZntbzcflLnznH0fr99w5VqE=
+golang.org/x/net v0.39.0 h1:ZCu7HMWDxpXpaiKdhzIfaltL9Lp31x/3fCP11bc6/fY=
+golang.org/x/net v0.39.0/go.mod h1:X7NRbYVEA+ewNkCNyJ513WmMdQ3BineSwVtN2zD/d+E=

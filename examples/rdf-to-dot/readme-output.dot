@@ -1,0 +1,233 @@
+digraph {
+	rankdir="LR";
+	r0 [fillcolor="lavender",href="http://www.w3.org/2000/01/rdf-schema#",label="rdfs:",shape=box,style="filled,rounded,setlinewidth(2)"]
+	r1 [fillcolor="lavender",href="http://www.w3.org/2002/07/owl#Ontology",label="owl:Ontology",shape=box,style="filled,rounded,setlinewidth(2)"]
+	r0 -> r1 [href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type",label="rdf:type"]
+	lit0 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">The RDF Schema vocabulary (RDFS)</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r0 -> lit0 [href="http://purl.org/dc/elements/1.1/title",label="dc:title"]
+	r2 [fillcolor="lavender",href="http://www.w3.org/2000/01/rdf-schema#Resource",label="rdfs:Resource",shape=box,style="filled,rounded,setlinewidth(2)"]
+	r3 [fillcolor="lavender",href="http://www.w3.org/2000/01/rdf-schema#Class",label="rdfs:Class",shape=box,style="filled,rounded,setlinewidth(2)"]
+	r2 -> r3 [href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type",label="rdf:type"]
+	r2 -> r0 [href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy",label="rdfs:isDefinedBy"]
+	lit1 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">Resource</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r2 -> lit1 [href="http://www.w3.org/2000/01/rdf-schema#label",label="rdfs:label"]
+	lit2 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">The class resource, everything.</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r2 -> lit2 [href="http://www.w3.org/2000/01/rdf-schema#comment",label="rdfs:comment"]
+	r3 -> r3 [href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type",label="rdf:type"]
+	r3 -> r0 [href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy",label="rdfs:isDefinedBy"]
+	lit3 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">Class</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r3 -> lit3 [href="http://www.w3.org/2000/01/rdf-schema#label",label="rdfs:label"]
+	lit4 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">The class of classes.</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r3 -> lit4 [href="http://www.w3.org/2000/01/rdf-schema#comment",label="rdfs:comment"]
+	r3 -> r2 [href="http://www.w3.org/2000/01/rdf-schema#subClassOf",label="rdfs:subClassOf"]
+	r4 [fillcolor="lavender",href="http://www.w3.org/2000/01/rdf-schema#subClassOf",label="rdfs:subClassOf",shape=box,style="filled,rounded,setlinewidth(2)"]
+	r5 [fillcolor="lavender",href="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",label="rdf:Property",shape=box,style="filled,rounded,setlinewidth(2)"]
+	r4 -> r5 [href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type",label="rdf:type"]
+	r4 -> r0 [href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy",label="rdfs:isDefinedBy"]
+	lit5 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">subClassOf</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r4 -> lit5 [href="http://www.w3.org/2000/01/rdf-schema#label",label="rdfs:label"]
+	lit6 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">The subject is a subclass of a class.</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r4 -> lit6 [href="http://www.w3.org/2000/01/rdf-schema#comment",label="rdfs:comment"]
+	r4 -> r3 [href="http://www.w3.org/2000/01/rdf-schema#range",label="rdfs:range"]
+	r4 -> r3 [href="http://www.w3.org/2000/01/rdf-schema#domain",label="rdfs:domain"]
+	r6 [fillcolor="lavender",href="http://www.w3.org/2000/01/rdf-schema#subPropertyOf",label="rdfs:subPropertyOf",shape=box,style="filled,rounded,setlinewidth(2)"]
+	r6 -> r5 [href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type",label="rdf:type"]
+	r6 -> r0 [href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy",label="rdfs:isDefinedBy"]
+	lit7 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">subPropertyOf</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r6 -> lit7 [href="http://www.w3.org/2000/01/rdf-schema#label",label="rdfs:label"]
+	lit8 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">The subject is a subproperty of a property.</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r6 -> lit8 [href="http://www.w3.org/2000/01/rdf-schema#comment",label="rdfs:comment"]
+	r6 -> r5 [href="http://www.w3.org/2000/01/rdf-schema#range",label="rdfs:range"]
+	r6 -> r5 [href="http://www.w3.org/2000/01/rdf-schema#domain",label="rdfs:domain"]
+	r7 [fillcolor="lavender",href="http://www.w3.org/2000/01/rdf-schema#comment",label="rdfs:comment",shape=box,style="filled,rounded,setlinewidth(2)"]
+	r7 -> r5 [href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type",label="rdf:type"]
+	r7 -> r0 [href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy",label="rdfs:isDefinedBy"]
+	lit9 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">comment</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r7 -> lit9 [href="http://www.w3.org/2000/01/rdf-schema#label",label="rdfs:label"]
+	lit10 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">A description of the subject resource.</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r7 -> lit10 [href="http://www.w3.org/2000/01/rdf-schema#comment",label="rdfs:comment"]
+	r7 -> r2 [href="http://www.w3.org/2000/01/rdf-schema#domain",label="rdfs:domain"]
+	r8 [fillcolor="lavender",href="http://www.w3.org/2000/01/rdf-schema#Literal",label="rdfs:Literal",shape=box,style="filled,rounded,setlinewidth(2)"]
+	r7 -> r8 [href="http://www.w3.org/2000/01/rdf-schema#range",label="rdfs:range"]
+	r9 [fillcolor="lavender",href="http://www.w3.org/2000/01/rdf-schema#label",label="rdfs:label",shape=box,style="filled,rounded,setlinewidth(2)"]
+	r9 -> r5 [href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type",label="rdf:type"]
+	r9 -> r0 [href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy",label="rdfs:isDefinedBy"]
+	lit11 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">label</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r9 -> lit11 [href="http://www.w3.org/2000/01/rdf-schema#label",label="rdfs:label"]
+	lit12 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">A human-readable name for the subject.</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r9 -> lit12 [href="http://www.w3.org/2000/01/rdf-schema#comment",label="rdfs:comment"]
+	r9 -> r2 [href="http://www.w3.org/2000/01/rdf-schema#domain",label="rdfs:domain"]
+	r9 -> r8 [href="http://www.w3.org/2000/01/rdf-schema#range",label="rdfs:range"]
+	r10 [fillcolor="lavender",href="http://www.w3.org/2000/01/rdf-schema#domain",label="rdfs:domain",shape=box,style="filled,rounded,setlinewidth(2)"]
+	r10 -> r5 [href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type",label="rdf:type"]
+	r10 -> r0 [href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy",label="rdfs:isDefinedBy"]
+	lit13 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">domain</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r10 -> lit13 [href="http://www.w3.org/2000/01/rdf-schema#label",label="rdfs:label"]
+	lit14 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">A domain of the subject property.</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r10 -> lit14 [href="http://www.w3.org/2000/01/rdf-schema#comment",label="rdfs:comment"]
+	r10 -> r3 [href="http://www.w3.org/2000/01/rdf-schema#range",label="rdfs:range"]
+	r10 -> r5 [href="http://www.w3.org/2000/01/rdf-schema#domain",label="rdfs:domain"]
+	r11 [fillcolor="lavender",href="http://www.w3.org/2000/01/rdf-schema#range",label="rdfs:range",shape=box,style="filled,rounded,setlinewidth(2)"]
+	r11 -> r5 [href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type",label="rdf:type"]
+	r11 -> r0 [href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy",label="rdfs:isDefinedBy"]
+	lit15 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">range</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r11 -> lit15 [href="http://www.w3.org/2000/01/rdf-schema#label",label="rdfs:label"]
+	lit16 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">A range of the subject property.</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r11 -> lit16 [href="http://www.w3.org/2000/01/rdf-schema#comment",label="rdfs:comment"]
+	r11 -> r3 [href="http://www.w3.org/2000/01/rdf-schema#range",label="rdfs:range"]
+	r11 -> r5 [href="http://www.w3.org/2000/01/rdf-schema#domain",label="rdfs:domain"]
+	r12 [fillcolor="lavender",href="http://www.w3.org/2000/01/rdf-schema#seeAlso",label="rdfs:seeAlso",shape=box,style="filled,rounded,setlinewidth(2)"]
+	r12 -> r5 [href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type",label="rdf:type"]
+	r12 -> r0 [href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy",label="rdfs:isDefinedBy"]
+	lit17 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">seeAlso</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r12 -> lit17 [href="http://www.w3.org/2000/01/rdf-schema#label",label="rdfs:label"]
+	lit18 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">Further information about the subject resource.</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r12 -> lit18 [href="http://www.w3.org/2000/01/rdf-schema#comment",label="rdfs:comment"]
+	r12 -> r2 [href="http://www.w3.org/2000/01/rdf-schema#range",label="rdfs:range"]
+	r12 -> r2 [href="http://www.w3.org/2000/01/rdf-schema#domain",label="rdfs:domain"]
+	r13 [fillcolor="lavender",href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy",label="rdfs:isDefinedBy",shape=box,style="filled,rounded,setlinewidth(2)"]
+	r13 -> r5 [href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type",label="rdf:type"]
+	r13 -> r0 [href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy",label="rdfs:isDefinedBy"]
+	r13 -> r12 [href="http://www.w3.org/2000/01/rdf-schema#subPropertyOf",label="rdfs:subPropertyOf"]
+	lit19 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">isDefinedBy</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r13 -> lit19 [href="http://www.w3.org/2000/01/rdf-schema#label",label="rdfs:label"]
+	lit20 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">The definition of the subject resource.</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r13 -> lit20 [href="http://www.w3.org/2000/01/rdf-schema#comment",label="rdfs:comment"]
+	r13 -> r2 [href="http://www.w3.org/2000/01/rdf-schema#range",label="rdfs:range"]
+	r13 -> r2 [href="http://www.w3.org/2000/01/rdf-schema#domain",label="rdfs:domain"]
+	r8 -> r3 [href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type",label="rdf:type"]
+	r8 -> r0 [href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy",label="rdfs:isDefinedBy"]
+	lit21 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">Literal</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r8 -> lit21 [href="http://www.w3.org/2000/01/rdf-schema#label",label="rdfs:label"]
+	lit22 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">The class of literal values, eg. textual strings and integers.</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r8 -> lit22 [href="http://www.w3.org/2000/01/rdf-schema#comment",label="rdfs:comment"]
+	r8 -> r2 [href="http://www.w3.org/2000/01/rdf-schema#subClassOf",label="rdfs:subClassOf"]
+	r14 [fillcolor="lavender",href="http://www.w3.org/2000/01/rdf-schema#Container",label="rdfs:Container",shape=box,style="filled,rounded,setlinewidth(2)"]
+	r14 -> r3 [href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type",label="rdf:type"]
+	r14 -> r0 [href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy",label="rdfs:isDefinedBy"]
+	lit23 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">Container</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r14 -> lit23 [href="http://www.w3.org/2000/01/rdf-schema#label",label="rdfs:label"]
+	r14 -> r2 [href="http://www.w3.org/2000/01/rdf-schema#subClassOf",label="rdfs:subClassOf"]
+	lit24 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">The class of RDF containers.</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r14 -> lit24 [href="http://www.w3.org/2000/01/rdf-schema#comment",label="rdfs:comment"]
+	r15 [fillcolor="lavender",href="http://www.w3.org/2000/01/rdf-schema#ContainerMembershipProperty",label="rdfs:ContainerMembershipProperty",shape=box,style="filled,rounded,setlinewidth(2)"]
+	r15 -> r3 [href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type",label="rdf:type"]
+	r15 -> r0 [href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy",label="rdfs:isDefinedBy"]
+	lit25 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">ContainerMembershipProperty</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r15 -> lit25 [href="http://www.w3.org/2000/01/rdf-schema#label",label="rdfs:label"]
+	lit26 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">The class of container membership properties, rdf:_1, rdf:_2, ..., all of which are sub-properties of &#39;member&#39;.</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r15 -> lit26 [href="http://www.w3.org/2000/01/rdf-schema#comment",label="rdfs:comment"]
+	r15 -> r5 [href="http://www.w3.org/2000/01/rdf-schema#subClassOf",label="rdfs:subClassOf"]
+	r16 [fillcolor="lavender",href="http://www.w3.org/2000/01/rdf-schema#member",label="rdfs:member",shape=box,style="filled,rounded,setlinewidth(2)"]
+	r16 -> r5 [href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type",label="rdf:type"]
+	r16 -> r0 [href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy",label="rdfs:isDefinedBy"]
+	lit27 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">member</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r16 -> lit27 [href="http://www.w3.org/2000/01/rdf-schema#label",label="rdfs:label"]
+	lit28 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">A member of the subject resource.</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r16 -> lit28 [href="http://www.w3.org/2000/01/rdf-schema#comment",label="rdfs:comment"]
+	r16 -> r2 [href="http://www.w3.org/2000/01/rdf-schema#domain",label="rdfs:domain"]
+	r16 -> r2 [href="http://www.w3.org/2000/01/rdf-schema#range",label="rdfs:range"]
+	r17 [fillcolor="lavender",href="http://www.w3.org/2000/01/rdf-schema#Datatype",label="rdfs:Datatype",shape=box,style="filled,rounded,setlinewidth(2)"]
+	r17 -> r3 [href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type",label="rdf:type"]
+	r17 -> r0 [href="http://www.w3.org/2000/01/rdf-schema#isDefinedBy",label="rdfs:isDefinedBy"]
+	lit29 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">Datatype</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r17 -> lit29 [href="http://www.w3.org/2000/01/rdf-schema#label",label="rdfs:label"]
+	lit30 [label=<<table border="1" cellborder="1" cellspacing="0">
+		<tr><td align="left" colspan="2">The class of RDF datatypes.</td></tr>
+		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
+	</table>>,shape=plain];
+	r17 -> lit30 [href="http://www.w3.org/2000/01/rdf-schema#comment",label="rdfs:comment"]
+	r17 -> r3 [href="http://www.w3.org/2000/01/rdf-schema#subClassOf",label="rdfs:subClassOf"]
+	r18 [fillcolor="lavender",href="http://www.w3.org/2000/01/rdf-schema-more",label="<http://www.w3.org/2000/01/rdf-schema-more>",shape=box,style="filled,rounded,setlinewidth(2)"]
+	r0 -> r18 [href="http://www.w3.org/2000/01/rdf-schema#seeAlso",label="rdfs:seeAlso"]
+}
