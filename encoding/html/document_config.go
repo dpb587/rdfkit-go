@@ -81,7 +81,7 @@ func (b DocumentConfig) newDocument(r io.Reader) (*Document, error) {
 		hopt := []inspecthtml.ParserOption{}
 
 		if b.initialTextOffset != nil {
-			hopt = append(hopt, inspecthtml.InitialOffsetParserOption(*b.initialTextOffset))
+			hopt = append(hopt, inspecthtml.ParserConfig{}.SetInitialOffset(*b.initialTextOffset))
 		}
 
 		d.root, d.parseMetadata, err = inspecthtml.NewParser(r, hopt...).Parse()
