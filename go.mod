@@ -4,7 +4,7 @@ go 1.24.2
 
 require (
 	github.com/dpb587/cursorio-go v0.0.0-20250415220656-c43e40f866fd
-	github.com/dpb587/inspecthtml-go v0.0.0-20250428192013-2a281890b54c
+	github.com/dpb587/inspecthtml-go v0.0.0-20250428215612-941e03ce935f
 	github.com/dpb587/inspectjson-go v0.0.0-20250415223044-329970c2bfbb
 	github.com/dpb587/inspectxml-go v0.0.0-20250415222439-71ac97da5967
 	github.com/spf13/cobra v1.8.1
