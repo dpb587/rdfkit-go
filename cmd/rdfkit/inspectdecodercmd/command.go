@@ -76,7 +76,7 @@ var tmpl = template.Must(template.New("inspect").Parse(`<!DOCTYPE html>
 						return;
 					}
 					
-					const textPosition = spanRange.getAttribute('title').split(';', 2)[1].split(':', 2);
+					const textPosition = spanRange.getAttribute('title').split(';', 2)[0].split(':', 2);
 			
 					const textPositionStart = textPosition[0].match(/^L(\d+)C(\d+)$/);
 					if (!textPositionStart) {
