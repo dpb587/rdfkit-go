@@ -2,12 +2,11 @@ package iriutil
 
 import (
 	"maps"
-	"strings"
 
 	"github.com/dpb587/rdfkit-go/rdf"
 )
 
-type PrefixMap map[string]string
+type PrefixMap map[string]rdf.IRI
 
 var _ PrefixManager = PrefixMap{}
 
@@ -49,7 +48,7 @@ func (p PrefixMap) CompactPrefix(v rdf.IRI) (string, string, bool) {
 	var matchLen int
 
 	for prefix, expanded := range p {
-		if !strings.HasPrefix(string(v), expanded) {
+		if len(v) < len(expanded) || v[:len(expanded)] != expanded {
 			continue
 		} else if len(expanded) > matchLen {
 			matchPrefix = prefix
@@ -70,5 +69,5 @@ func (p PrefixMap) ExpandPrefix(prefix, reference string) (rdf.IRI, bool) {
 		return "", false
 	}
 
-	return rdf.IRI(expanded + reference), true
+	return expanded + rdf.IRI(reference), true
 }

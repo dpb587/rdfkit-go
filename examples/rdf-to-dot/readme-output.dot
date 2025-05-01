@@ -7,7 +7,7 @@ digraph {
 		<tr><td align="left" colspan="2">The RDF Schema vocabulary (RDFS)</td></tr>
 		<tr><td align="right">Datatype</td><td align="left" href="http://www.w3.org/2001/XMLSchema#string">xsd:string</td></tr>
 	</table>>,shape=plain];
-	r0 -> lit0 [href="http://purl.org/dc/elements/1.1/title",label="dc:title"]
+	r0 -> lit0 [href="http://purl.org/dc/elements/1.1/title",label="dc11:title"]
 	r2 [fillcolor="lavender",href="http://www.w3.org/2000/01/rdf-schema#Resource",label="rdfs:Resource",shape=box,style="filled,rounded,setlinewidth(2)"]
 	r3 [fillcolor="lavender",href="http://www.w3.org/2000/01/rdf-schema#Class",label="rdfs:Class",shape=box,style="filled,rounded,setlinewidth(2)"]
 	r2 -> r3 [href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type",label="rdf:type"]

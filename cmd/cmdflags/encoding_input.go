@@ -25,6 +25,7 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding/trig"
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
 	"github.com/dpb587/rdfkit-go/internal/ioutil"
+	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdfio/rdfioutil"
 )
@@ -335,7 +336,7 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 			SetPrefixDirectiveListener(func(data trig.DecoderEvent_PrefixDirective_Data) {
 				handle.DecodedPrefixMappings = append(handle.DecodedPrefixMappings, iriutil.PrefixMapping{
 					Prefix:   data.Prefix,
-					Expanded: data.Expanded,
+					Expanded: rdf.IRI(data.Expanded),
 				})
 			})
 
@@ -362,7 +363,7 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 			SetPrefixDirectiveListener(func(data turtle.DecoderEvent_PrefixDirective_Data) {
 				handle.DecodedPrefixMappings = append(handle.DecodedPrefixMappings, iriutil.PrefixMapping{
 					Prefix:   data.Prefix,
-					Expanded: data.Expanded,
+					Expanded: rdf.IRI(data.Expanded),
 				})
 			})
 

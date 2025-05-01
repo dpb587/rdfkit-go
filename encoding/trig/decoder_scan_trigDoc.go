@@ -181,7 +181,7 @@ func reader_scan_trigDoc(r *Decoder, ectx evaluationContext, r0 rune, err error)
 
 									r.commit([]rune{r0})
 
-									ectx.Global.Prefixes[prefixToken.DecodedString] = resolvedExpanded.String()
+									ectx.Global.Prefixes[prefixToken.DecodedString] = rdf.IRI(resolvedExpanded.String())
 
 									if r.prefixDirectiveListener != nil {
 										r.prefixDirectiveListener(DecoderEvent_PrefixDirective_Data{
@@ -363,7 +363,7 @@ func reader_scan_trigDoc(r *Decoder, ectx evaluationContext, r0 rune, err error)
 							return readerStack{}, grammar.R_block.Err(grammar.R_sparqlPrefix.Err(grammar.R_IRIREF.ErrCursorRange(err, expandedToken.Offsets)))
 						}
 
-						ectx.Global.Prefixes[prefixToken.DecodedString] = resolvedExpanded.String()
+						ectx.Global.Prefixes[prefixToken.DecodedString] = rdf.IRI(resolvedExpanded.String())
 
 						if r.prefixDirectiveListener != nil {
 							r.prefixDirectiveListener(DecoderEvent_PrefixDirective_Data{

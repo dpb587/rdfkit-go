@@ -304,7 +304,7 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 					if !ectx.Global.DisableBackcompatXmlnsPrefixes {
 						attrPrefixEntries = append(attrPrefixEntries, iriutil.PrefixMapping{
 							Prefix:   strings.ToLower(attr.Key[6:]),
-							Expanded: attr.Val,
+							Expanded: rdf.IRI(attr.Val),
 						})
 					}
 
@@ -358,7 +358,7 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 					// per spec, @prefix will be processed after xmlns (which added to attrPrefixEntries earlier)
 					attrPrefixEntries = append(attrPrefixEntries, iriutil.PrefixMapping{
 						Prefix:   prefixTerm[:len(prefixTerm)-1],
-						Expanded: fields[fieldIdx+1],
+						Expanded: rdf.IRI(fields[fieldIdx+1]),
 					})
 				}
 			}

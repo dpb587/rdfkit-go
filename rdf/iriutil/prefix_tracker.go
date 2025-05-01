@@ -27,7 +27,7 @@ func (p *PrefixTracker) GetUsedPrefixMappings() PrefixMappingList {
 
 		res = append(res, PrefixMapping{
 			Prefix:   prefix,
-			Expanded: string(expanded),
+			Expanded: expanded,
 		})
 	}
 

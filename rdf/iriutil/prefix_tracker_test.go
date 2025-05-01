@@ -30,7 +30,7 @@ func TestPrefixTracker(t *testing.T) {
 		t.Fatalf("len: expected %v, got %v", _e, _a)
 	} else if _a, _e := usedPrefixes[0].Prefix, "exp"; _a != _e {
 		t.Fatalf("prefix: expected %v, got %v", _e, _a)
-	} else if _a, _e := usedPrefixes[0].Expanded, "http://example.com/path/"; _a != _e {
+	} else if _a, _e := usedPrefixes[0].Expanded, rdf.IRI("http://example.com/path/"); _a != _e {
 		t.Fatalf("expanded: expected %v, got %v", _e, _a)
 	}
 }

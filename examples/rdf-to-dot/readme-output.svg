@@ -56,13 +56,13 @@
 <!-- r0&#45;&gt;lit0 -->
 <g id="edge2" class="edge">
 <title>r0&#45;&gt;lit0</title>
-<g id="a_edge2"><a xlink:href="http://purl.org/dc/elements/1.1/title" xlink:title="dc:title">
+<g id="a_edge2"><a xlink:href="http://purl.org/dc/elements/1.1/title" xlink:title="dc11:title">
 <path fill="none" stroke="black" d="M1874.25,-862.5C1909.27,-862.5 1973.56,-862.5 2031.23,-862.5"/>
 <polygon fill="black" stroke="black" points="2031.16,-866 2041.16,-862.5 2031.16,-859 2031.16,-866"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="http://purl.org/dc/elements/1.1/title" xlink:title="dc:title">
-<text text-anchor="middle" x="1958.25" y="-865.7" font-family="Times,serif" font-size="14.00">dc:title</text>
+<g id="a_edge2&#45;label"><a xlink:href="http://purl.org/dc/elements/1.1/title" xlink:title="dc11:title">
+<text text-anchor="middle" x="1958.25" y="-865.7" font-family="Times,serif" font-size="14.00">dc11:title</text>
 </a>
 </g>
 </g>

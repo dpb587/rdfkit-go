@@ -65,7 +65,7 @@ func main() {
 	)...)
 
 	shortenIRI := func(iri rdf.IRI) string {
-		if prefix, localName, ok := prefixes.CompactIRI(iri); ok {
+		if prefix, localName, ok := prefixes.CompactPrefix(iri); ok {
 			return fmt.Sprintf("%s:%s", prefix, localName)
 		}
 
