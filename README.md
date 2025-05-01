@@ -363,16 +363,16 @@ prefixes := iriutil.NewPrefixMap(
   },
 )
 
-rIRI, ok := prefixes.ExpandIRI("ex", "resource")
+rIRI, ok := prefixes.ExpandPrefix("ex", "resource")
 ok && rIRI == rdf.IRI("http://example.com/resource")
 
-_, ok = prefixes.ExpandIRI("unknown", "resource")
+_, ok = prefixes.ExpandPrefix("unknown", "resource")
 !ok
 
-rNS, rLocalName, ok := prefixes.CompactIRI(rdf.IRI("http://example.com/resource"))
+rNS, rLocalName, ok := prefixes.CompactPrefix(rdf.IRI("http://example.com/resource"))
 ok && rNS == "http://example.com/" && rLocalName == "resource"
 
-_, _, ok = prefixes.CompactIRI(rdf.IRI("https://example.com/secure"))
+_, _, ok = prefixes.CompactPrefix(rdf.IRI("https://example.com/secure"))
 !ok
 ```
 

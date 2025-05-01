@@ -492,7 +492,7 @@ func reader_scan_trigDoc(r *Decoder, ectx evaluationContext, r0 rune, err error)
 						return readerStack{}, grammar.R_block.Err(grammar.R_labelOrSubject.Err(grammar.R_iri.Err(err)))
 					}
 
-					expanded, ok := ectx.Global.Prefixes.ExpandIRI(token.NamespaceDecoded, token.LocalDecoded)
+					expanded, ok := ectx.Global.Prefixes.ExpandPrefix(token.NamespaceDecoded, token.LocalDecoded)
 					if !ok {
 						return readerStack{}, grammar.R_block.Err(grammar.R_labelOrSubject.Err(grammar.R_PrefixedName.ErrCursorRange(iriutil.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets)))
 					}

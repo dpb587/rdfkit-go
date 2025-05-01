@@ -7,6 +7,8 @@ type PrefixTracker struct {
 	tracked map[string]bool
 }
 
+var _ PrefixManager = (*PrefixTracker)(nil)
+
 func NewPrefixTracker(pm PrefixManager) *PrefixTracker {
 	return &PrefixTracker{
 		pm:      pm,
@@ -18,7 +20,7 @@ func (p *PrefixTracker) GetUsedPrefixMappings() PrefixMappingList {
 	var res PrefixMappingList
 
 	for prefix := range p.tracked {
-		expanded, ok := p.pm.ExpandIRI(prefix, "")
+		expanded, ok := p.pm.ExpandPrefix(prefix, "")
 		if !ok {
 			continue // weird
 		}
@@ -32,8 +34,8 @@ func (p *PrefixTracker) GetUsedPrefixMappings() PrefixMappingList {
 	return res
 }
 
-func (p *PrefixTracker) CompactIRI(v rdf.IRI) (string, string, bool) {
-	prefix, reference, ok := p.pm.CompactIRI(v)
+func (p *PrefixTracker) CompactPrefix(v rdf.IRI) (string, string, bool) {
+	prefix, reference, ok := p.pm.CompactPrefix(v)
 	if !ok {
 		return "", "", false
 	}
@@ -43,8 +45,8 @@ func (p *PrefixTracker) CompactIRI(v rdf.IRI) (string, string, bool) {
 	return prefix, reference, true
 }
 
-func (p *PrefixTracker) ExpandIRI(prefix, reference string) (rdf.IRI, bool) {
-	expanded, ok := p.pm.ExpandIRI(prefix, reference)
+func (p *PrefixTracker) ExpandPrefix(prefix, reference string) (rdf.IRI, bool) {
+	expanded, ok := p.pm.ExpandPrefix(prefix, reference)
 	if !ok {
 		return "", false
 	}

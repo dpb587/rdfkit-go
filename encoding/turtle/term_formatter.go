@@ -40,7 +40,7 @@ func NewTermFormatter(options TermFormatterOptions) termutil.Formatter {
 func (tf *termFormatter) FormatTerm(t rdf.Term) string {
 	switch t := t.(type) {
 	case rdf.IRI:
-		if prefix, localName, ok := tf.prefixes.CompactIRI(t); ok {
+		if prefix, localName, ok := tf.prefixes.CompactPrefix(t); ok {
 			return prefix + ":" + formatIRI(localName, tf.ascii)
 		} else if tf.base != nil {
 			if reference, ok := tf.base.RelativizeIRI(t); ok {

@@ -51,7 +51,7 @@ func reader_scan_PredicateObjectList(r *Decoder, ectx evaluationContext, r0 rune
 				return readerStack{}, grammar.R_predicateObjectList.Err(grammar.R_verb.Err(err))
 			}
 
-			expanded, ok := ectx.Global.Prefixes.ExpandIRI(token.NamespaceDecoded, token.LocalDecoded)
+			expanded, ok := ectx.Global.Prefixes.ExpandPrefix(token.NamespaceDecoded, token.LocalDecoded)
 			if !ok {
 				return readerStack{}, grammar.R_predicateObjectList.Err(grammar.R_verb.Err(grammar.R_PrefixedName.ErrCursorRange(iriutil.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets)))
 			}
@@ -74,7 +74,7 @@ func reader_scan_PredicateObjectList(r *Decoder, ectx evaluationContext, r0 rune
 			return readerStack{}, grammar.R_predicateObjectList.Err(grammar.R_verb.Err(err))
 		}
 
-		expanded, ok := ectx.Global.Prefixes.ExpandIRI(token.NamespaceDecoded, token.LocalDecoded)
+		expanded, ok := ectx.Global.Prefixes.ExpandPrefix(token.NamespaceDecoded, token.LocalDecoded)
 		if !ok {
 			return readerStack{}, grammar.R_predicateObjectList.Err(grammar.R_verb.Err(grammar.R_PrefixedName.ErrCursorRange(iriutil.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets)))
 		}

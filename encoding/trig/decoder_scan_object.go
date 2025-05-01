@@ -165,7 +165,7 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 rune, err error) 
 						return readerStack{}, grammar.R_object.Err(grammar.R_literal.Err(grammar.R_RDFLiteral.Err(err)))
 					}
 
-					expanded, ok := ectx.Global.Prefixes.ExpandIRI(datatypeToken.NamespaceDecoded, datatypeToken.LocalDecoded)
+					expanded, ok := ectx.Global.Prefixes.ExpandPrefix(datatypeToken.NamespaceDecoded, datatypeToken.LocalDecoded)
 					if !ok {
 						return readerStack{}, grammar.R_object.Err(grammar.R_literal.Err(grammar.R_RDFLiteral.Err(grammar.R_PrefixedName.ErrCursorRange(iriutil.NewUnknownPrefixError(datatypeToken.NamespaceDecoded), datatypeToken.Offsets))))
 					}
@@ -363,7 +363,7 @@ func reader_scan_object_PrefixedName(r *Decoder, ectx evaluationContext, r0 rune
 		return readerStack{}, grammar.R_object.Err(err)
 	}
 
-	expanded, ok := ectx.Global.Prefixes.ExpandIRI(token.NamespaceDecoded, token.LocalDecoded)
+	expanded, ok := ectx.Global.Prefixes.ExpandPrefix(token.NamespaceDecoded, token.LocalDecoded)
 	if !ok {
 		return readerStack{}, grammar.R_object.Err(grammar.R_PrefixedName.ErrCursorRange(iriutil.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets))
 	}

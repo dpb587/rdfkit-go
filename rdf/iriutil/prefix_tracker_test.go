@@ -15,7 +15,7 @@ func TestPrefixTracker(t *testing.T) {
 	{
 		original := rdf.IRI("http://example.com/path/1234")
 
-		prefix, reference, ok := s.CompactIRI(original)
+		prefix, reference, ok := s.CompactPrefix(original)
 		if _a, _e := ok, true; _a != _e {
 			t.Fatalf("ok: expected %v, got %v", _e, _a)
 		} else if _a, _e := prefix, "exp"; _a != _e {

@@ -301,7 +301,7 @@ func (w *Encoder) writeSubjectValue(buf *bytes.Buffer, v rdf.SubjectValue) error
 }
 
 func (w *Encoder) writeIRI(buffered *bytes.Buffer, v rdf.IRI) {
-	prefix, suffix, ok := w.prefixes.CompactIRI(v)
+	prefix, suffix, ok := w.prefixes.CompactPrefix(v)
 	if ok {
 		buffered.WriteString(prefix + ":" + formatIRI(suffix, false))
 

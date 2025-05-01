@@ -13,7 +13,7 @@ type MappingScope struct {
 }
 
 func (m MappingScope) CompactCURIE(v rdf.IRI) CURIE {
-	prefix, reference, ok := m.Prefixes.CompactIRI(v)
+	prefix, reference, ok := m.Prefixes.CompactPrefix(v)
 	if !ok {
 		return CURIE{
 			Safe:      m.Safe,
@@ -40,5 +40,5 @@ func (m MappingScope) ExpandCURIE(v CURIE) (rdf.IRI, bool) {
 		v.Prefix = m.DefaultPrefix
 	}
 
-	return m.Prefixes.ExpandIRI(v.Prefix, v.Reference)
+	return m.Prefixes.ExpandPrefix(v.Prefix, v.Reference)
 }

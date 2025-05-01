@@ -153,7 +153,7 @@ func resolveIRI(g *globalEvaluationContext, prefixes iriutil.PrefixMap, termMapp
 		return rdf.IRI(value)
 	}
 
-	expanded, ok := prefixes.ExpandIRI(valueSplit[0], valueSplit[1])
+	expanded, ok := prefixes.ExpandPrefix(valueSplit[0], valueSplit[1])
 	if ok {
 		return rdf.IRI(expanded)
 	}

@@ -44,7 +44,7 @@ func (p PrefixMap) AsPrefixMappingList() PrefixMappingList {
 	return res
 }
 
-func (p PrefixMap) CompactIRI(v rdf.IRI) (string, string, bool) {
+func (p PrefixMap) CompactPrefix(v rdf.IRI) (string, string, bool) {
 	var matchPrefix string
 	var matchLen int
 
@@ -64,7 +64,7 @@ func (p PrefixMap) CompactIRI(v rdf.IRI) (string, string, bool) {
 	return matchPrefix, string(v)[matchLen:], true
 }
 
-func (p PrefixMap) ExpandIRI(prefix, reference string) (rdf.IRI, bool) {
+func (p PrefixMap) ExpandPrefix(prefix, reference string) (rdf.IRI, bool) {
 	expanded, ok := p[prefix]
 	if !ok {
 		return "", false

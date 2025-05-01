@@ -369,7 +369,7 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 				// rdfa-in-html // 3.1 // Additional Processing Rule 6
 
 				for _, prefixEntry := range attrPrefixEntries {
-					if expanded, known := localPrefixMappings.ExpandIRI(prefixEntry.Prefix, ""); !known || expanded != rdf.IRI(prefixEntry.Expanded) {
+					if expanded, known := localPrefixMappings.ExpandPrefix(prefixEntry.Prefix, ""); !known || expanded != rdf.IRI(prefixEntry.Expanded) {
 						// TODO emit rdfa:PrefixRedefinition
 					}
 				}

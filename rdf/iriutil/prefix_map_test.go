@@ -15,7 +15,7 @@ func TestPrefixMap_LongestMatch(t *testing.T) {
 	{
 		original := rdf.IRI("http://example.com/path/1234")
 
-		prefix, reference, ok := s.CompactIRI(original)
+		prefix, reference, ok := s.CompactPrefix(original)
 		if _a, _e := ok, true; _a != _e {
 			t.Fatalf("ok: expected %v, got %v", _e, _a)
 		} else if _a, _e := prefix, "exp"; _a != _e {
@@ -24,7 +24,7 @@ func TestPrefixMap_LongestMatch(t *testing.T) {
 			t.Fatalf("reference: expected %v, got %v", _e, _a)
 		}
 
-		expanded, ok := s.ExpandIRI(prefix, reference)
+		expanded, ok := s.ExpandPrefix(prefix, reference)
 		if _a, _e := ok, true; _a != _e {
 			t.Fatalf("ok: expected %v, got %v", _e, _a)
 		} else if _a, _e := expanded, original; _a != _e {
@@ -35,7 +35,7 @@ func TestPrefixMap_LongestMatch(t *testing.T) {
 	{
 		original := rdf.IRI("http://example.com/1234")
 
-		prefix, reference, ok := s.CompactIRI(original)
+		prefix, reference, ok := s.CompactPrefix(original)
 		if _a, _e := ok, true; _a != _e {
 			t.Fatalf("ok: expected %v, got %v", _e, _a)
 		} else if _a, _e := prefix, "ex"; _a != _e {
@@ -44,7 +44,7 @@ func TestPrefixMap_LongestMatch(t *testing.T) {
 			t.Fatalf("reference: expected %v, got %v", _e, _a)
 		}
 
-		expanded, ok := s.ExpandIRI(prefix, reference)
+		expanded, ok := s.ExpandPrefix(prefix, reference)
 		if _a, _e := ok, true; _a != _e {
 			t.Fatalf("ok: expected %v, got %v", _e, _a)
 		} else if _a, _e := expanded, original; _a != _e {
@@ -62,7 +62,7 @@ func TestPrefixMap_NewPrefixMap(t *testing.T) {
 	originalOrg := rdf.IRI("http://example.org/path")
 
 	{
-		prefix, reference, ok := s0.CompactIRI(originalCom)
+		prefix, reference, ok := s0.CompactPrefix(originalCom)
 		if _a, _e := ok, true; _a != _e {
 			t.Fatalf("ok: expected %v, got %v", _e, _a)
 		} else if _a, _e := prefix, "ex"; _a != _e {
@@ -71,7 +71,7 @@ func TestPrefixMap_NewPrefixMap(t *testing.T) {
 			t.Fatalf("reference: expected %v, got %v", _e, _a)
 		}
 
-		_, _, ok = s0.CompactIRI(originalOrg)
+		_, _, ok = s0.CompactPrefix(originalOrg)
 		if _a, _e := ok, false; _a != _e {
 			t.Fatalf("ok: expected %v, got %v", _e, _a)
 		}
@@ -83,7 +83,7 @@ func TestPrefixMap_NewPrefixMap(t *testing.T) {
 	})
 
 	{ // s0 unchanged
-		prefix, reference, ok := s0.CompactIRI(originalCom)
+		prefix, reference, ok := s0.CompactPrefix(originalCom)
 		if _a, _e := ok, true; _a != _e {
 			t.Fatalf("ok: expected %v, got %v", _e, _a)
 		} else if _a, _e := prefix, "ex"; _a != _e {
@@ -92,14 +92,14 @@ func TestPrefixMap_NewPrefixMap(t *testing.T) {
 			t.Fatalf("reference: expected %v, got %v", _e, _a)
 		}
 
-		_, _, ok = s0.CompactIRI(originalOrg)
+		_, _, ok = s0.CompactPrefix(originalOrg)
 		if _a, _e := ok, false; _a != _e {
 			t.Fatalf("ok: expected %v, got %v", _e, _a)
 		}
 	}
 
 	{
-		prefix, reference, ok := s1.CompactIRI(originalOrg)
+		prefix, reference, ok := s1.CompactPrefix(originalOrg)
 		if _a, _e := ok, true; _a != _e {
 			t.Fatalf("ok: expected %v, got %v", _e, _a)
 		} else if _a, _e := prefix, "ex"; _a != _e {
@@ -108,7 +108,7 @@ func TestPrefixMap_NewPrefixMap(t *testing.T) {
 			t.Fatalf("reference: expected %v, got %v", _e, _a)
 		}
 
-		_, _, ok = s1.CompactIRI(originalCom)
+		_, _, ok = s1.CompactPrefix(originalCom)
 		if _a, _e := ok, false; _a != _e {
 			t.Fatalf("ok: expected %v, got %v", _e, _a)
 		}
