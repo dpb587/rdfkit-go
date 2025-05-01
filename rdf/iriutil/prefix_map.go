@@ -25,7 +25,7 @@ func (p PrefixMap) NewPrefixMap(entries ...PrefixMapping) PrefixMap {
 	next := maps.Clone(p)
 
 	for _, i := range entries {
-		p[i.Prefix] = i.Expanded
+		next[i.Prefix] = i.Expanded
 	}
 
 	return next

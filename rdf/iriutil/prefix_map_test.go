@@ -52,3 +52,65 @@ func TestPrefixMap_LongestMatch(t *testing.T) {
 		}
 	}
 }
+
+func TestPrefixMap_NewPrefixMap(t *testing.T) {
+	s0 := PrefixMap{
+		"ex": "http://example.com/",
+	}
+
+	originalCom := rdf.IRI("http://example.com/path")
+	originalOrg := rdf.IRI("http://example.org/path")
+
+	{
+		prefix, reference, ok := s0.CompactIRI(originalCom)
+		if _a, _e := ok, true; _a != _e {
+			t.Fatalf("ok: expected %v, got %v", _e, _a)
+		} else if _a, _e := prefix, "ex"; _a != _e {
+			t.Fatalf("prefix: expected %v, got %v", _e, _a)
+		} else if _a, _e := reference, "path"; _a != _e {
+			t.Fatalf("reference: expected %v, got %v", _e, _a)
+		}
+
+		_, _, ok = s0.CompactIRI(originalOrg)
+		if _a, _e := ok, false; _a != _e {
+			t.Fatalf("ok: expected %v, got %v", _e, _a)
+		}
+	}
+
+	s1 := s0.NewPrefixMap(PrefixMapping{
+		Prefix:   "ex",
+		Expanded: "http://example.org/",
+	})
+
+	{ // s0 unchanged
+		prefix, reference, ok := s0.CompactIRI(originalCom)
+		if _a, _e := ok, true; _a != _e {
+			t.Fatalf("ok: expected %v, got %v", _e, _a)
+		} else if _a, _e := prefix, "ex"; _a != _e {
+			t.Fatalf("prefix: expected %v, got %v", _e, _a)
+		} else if _a, _e := reference, "path"; _a != _e {
+			t.Fatalf("reference: expected %v, got %v", _e, _a)
+		}
+
+		_, _, ok = s0.CompactIRI(originalOrg)
+		if _a, _e := ok, false; _a != _e {
+			t.Fatalf("ok: expected %v, got %v", _e, _a)
+		}
+	}
+
+	{
+		prefix, reference, ok := s1.CompactIRI(originalOrg)
+		if _a, _e := ok, true; _a != _e {
+			t.Fatalf("ok: expected %v, got %v", _e, _a)
+		} else if _a, _e := prefix, "ex"; _a != _e {
+			t.Fatalf("prefix: expected %v, got %v", _e, _a)
+		} else if _a, _e := reference, "path"; _a != _e {
+			t.Fatalf("reference: expected %v, got %v", _e, _a)
+		}
+
+		_, _, ok = s1.CompactIRI(originalCom)
+		if _a, _e := ok, false; _a != _e {
+			t.Fatalf("ok: expected %v, got %v", _e, _a)
+		}
+	}
+}
