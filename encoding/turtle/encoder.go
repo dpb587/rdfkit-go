@@ -303,20 +303,20 @@ func (w *Encoder) writeSubjectValue(buf *bytes.Buffer, v rdf.SubjectValue) error
 func (w *Encoder) writeIRI(buffered *bytes.Buffer, v rdf.IRI) {
 	prefix, suffix, ok := w.prefixes.CompactIRI(v)
 	if ok {
-		buffered.WriteString(prefix + ":" + suffix)
+		buffered.WriteString(prefix + ":" + formatIRI(suffix, false))
 
 		return
 	}
 
 	if w.base != nil {
 		if relativized, ok := w.base.RelativizeIRI(v); ok {
-			fmt.Fprintf(buffered, "<%s>", relativized)
+			fmt.Fprintf(buffered, "<%s>", formatIRI(relativized, false))
 
 			return
 		}
 	}
 
-	fmt.Fprintf(buffered, "<%s>", v)
+	fmt.Fprintf(buffered, "<%s>", formatIRI(string(v), false))
 }
 
 func (e *Encoder) writeObjectValue(w *bytes.Buffer, v rdf.ObjectValue) error {
@@ -342,14 +342,14 @@ func (e *Encoder) writeObjectValue(w *bytes.Buffer, v rdf.ObjectValue) error {
 
 			return nil
 		case rdfiri.LangString_Datatype:
-			e.writeLiteralQuoted(w, literal.LexicalForm, false)
+			w.WriteString(formatLiteralLexicalForm(literal.LexicalForm, false))
 
 			fmt.Fprintf(w, "@%s", literal.Tags[rdf.LanguageLiteralTag])
 
 			return nil
 		}
 
-		e.writeLiteralQuoted(w, literal.LexicalForm, false)
+		w.WriteString(formatLiteralLexicalForm(literal.LexicalForm, false))
 
 		if literal.Datatype != xsdiri.String_Datatype {
 			w.WriteString("^^")
