@@ -98,7 +98,13 @@ func (s EncoderConfig) newEncoder(w io.Writer) (*Encoder, error) {
 		prefixMappings := prefixes.AsPrefixMappingList()
 		slices.SortFunc(prefixMappings, iriutil.ComparePrefixMappingByPrefix)
 
-		written, err := WriteDocumentHeader(e.w, e.base.String(), prefixMappings)
+		var baseString string
+
+		if e.base != nil {
+			baseString = e.base.String()
+		}
+
+		written, err := WriteDocumentHeader(e.w, baseString, prefixMappings)
 		if err != nil {
 			return nil, fmt.Errorf("write header: %v", err)
 		} else if written > 0 {
