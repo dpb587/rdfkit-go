@@ -131,3 +131,41 @@ ex:subject a <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
 		t.Fatalf("buffer content: expected %q, got %q", _e, _a)
 	}
 }
+
+func TestEncoder_Prefix_LocalNameEscapes(t *testing.T) {
+	buf := &bytes.Buffer{}
+	e, err := NewEncoder(buf, EncoderConfig{}.
+		SetPrefixes(iriutil.NewPrefixMap(iriutil.PrefixMapping{
+			Prefix:   "ex",
+			Expanded: "http://example.com/path/",
+		})),
+	)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	err = e.PutTriple(context.Background(), rdf.Triple{
+		Subject:   rdf.IRI("http://example.com/path/nested/subject"),
+		Predicate: rdfiri.Type_Property,
+		Object:    rdfiri.Property_Class,
+	})
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	if _a, _e := len(buf.Bytes()), 0; _a == _e {
+		t.Fatalf("buffer length: expected >%v, got %v", _e, _a)
+	}
+
+	err = e.Close()
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	if _a, _e := buf.String(), `@prefix ex: <http://example.com/path/> .
+
+ex:nested\/subject a <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+`; _a != _e {
+		t.Fatalf("buffer content: expected %q, got %q", _e, _a)
+	}
+}

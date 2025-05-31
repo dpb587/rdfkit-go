@@ -41,7 +41,7 @@ func (tf *termFormatter) FormatTerm(t rdf.Term) string {
 	switch t := t.(type) {
 	case rdf.IRI:
 		if prefix, localName, ok := tf.prefixes.CompactPrefix(t); ok {
-			return prefix + ":" + formatIRI(localName, tf.ascii)
+			return prefix + ":" + format_PN_LOCAL(localName)
 		} else if tf.base != nil {
 			if reference, ok := tf.base.RelativizeIRI(t); ok {
 				return "<" + formatIRI(reference, tf.ascii) + ">"
