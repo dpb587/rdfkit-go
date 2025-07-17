@@ -6,7 +6,7 @@
 	a schema:WebSite ;
 	schema:potentialAction [
 		a schema:SearchAction ;
-		schema:query-input "required name=search_term_string" ;
+		schema:query\-input "required name=search_term_string" ;
 		schema:target [
 			a schema:EntryPoint ;
 			schema:urlTemplate "https://www.microsoft.com/en-us/search/explore?q={search_term_string}&ocid=AID_seo_sitelinks_search"

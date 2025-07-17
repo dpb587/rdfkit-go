@@ -34,7 +34,7 @@ Some sample use cases and starter snippets can be found in the [`examples` direc
 	a schema:WebSite ;
 	schema:potentialAction [
 		a schema:SearchAction ;
-		schema:query-input "required name=search_term_string" ;
+		schema:query\-input "required name=search_term_string" ;
 		schema:target [
 			a schema:EntryPoint ;
 			schema:urlTemplate "https://www.microsoft.com/en-us/search/explore?q={search_term_string}&ocid=AID_seo_sitelinks_search"
@@ -55,6 +55,7 @@ _:b0
 	<logo> <https://uhf.microsoft.com/images/microsoft/RE1Mu3b.png> ;
 	<name> "Microsoft" ;
 	<url> <https://www.microsoft.com> .
+
 ```
 
 </details>
