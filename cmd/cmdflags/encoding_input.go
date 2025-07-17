@@ -243,7 +243,7 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 	case "jsonld", "json-ld":
 		jsonldOptions := jsonld.DecoderConfig{}.
 			SetCaptureTextOffsets(true).
-			SetParserOptions(inspectjson.TokenizerOptions{}.Lax(true)).
+			SetParserOptions(inspectjson.TokenizerConfig{}.SetLax(true)).
 			SetDocumentLoader(jsonldtype.NewDefaultDocumentLoader(http.DefaultClient))
 
 		if len(f.DefaultBase) > 0 {

@@ -24,7 +24,7 @@ type DecoderOption interface {
 
 type Decoder struct {
 	r                io.Reader
-	topts            []inspectjson.TokenizerOptionsApplier
+	topts            []inspectjson.TokenizerOption
 	buildTextOffsets encodingutil.TextOffsetsBuilderFunc
 
 	statements    []*statement

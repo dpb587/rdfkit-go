@@ -1,6 +1,7 @@
 package trig
 
 import (
+	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/cursorio-go/x/cursorioutil"
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/trig/internal"
@@ -11,13 +12,13 @@ import (
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
-func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 rune, err error) (readerStack, error) {
+func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, err error) (readerStack, error) {
 	if err != nil {
-		return readerStack{}, grammar.R_object.Err(r.newOffsetError(err, nil, nil))
+		return readerStack{}, grammar.R_object.Err(r.newOffsetError(err, cursorio.DecodedRunes{}, cursorio.DecodedRunes{}))
 	}
 
 	switch {
-	case r0 == '<':
+	case r0.Rune == '<':
 		token, err := r.produceIRIREF(r0)
 		if err != nil {
 			return readerStack{}, grammar.R_object.Err(err)
@@ -42,7 +43,7 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 rune, err error) 
 				encoding.ObjectStatementOffsets, token.Offsets,
 			),
 		})
-	case r0 == '_':
+	case r0.Rune == '_':
 		token, err := r.produceBlankNode(r0)
 		if err != nil {
 			return readerStack{}, grammar.R_object.Err(err)
@@ -64,10 +65,10 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 rune, err error) 
 				encoding.ObjectStatementOffsets, token.Offsets,
 			),
 		})
-	case r0 == '(':
-		cursor := r.commitForTextOffsetRange([]rune{r0})
+	case r0.Rune == '(':
+		cursor := r.commitForTextOffsetRange(r0.AsDecodedRunes())
 
-		fn := scanFunc(func(r *Decoder, ectx evaluationContext, r0 rune, err error) (readerStack, error) {
+		fn := scanFunc(func(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, err error) (readerStack, error) {
 			if err != nil {
 				return readerStack{}, grammar.R_object.Err(grammar.R_collection.Err(err))
 			}
@@ -76,9 +77,9 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 rune, err error) 
 		})
 
 		return readerStack{ectx, fn}, nil
-	case r0 == '[':
+	case r0.Rune == '[':
 		blankNode := ectx.Global.BlankNodeFactory.NewBlankNode()
-		blankNodeRange := r.commitForTextOffsetRange([]rune{r0})
+		blankNodeRange := r.commitForTextOffsetRange(r0.AsDecodedRunes())
 
 		nectx := ectx
 		nectx.CurSubject = blankNode
@@ -104,7 +105,7 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 rune, err error) 
 				encoding.ObjectStatementOffsets, blankNodeRange,
 			),
 		})
-	case r0 == '"', r0 == '\'':
+	case r0.Rune == '"', r0.Rune == '\'':
 		token, err := r.produceString(r0)
 		if err != nil {
 			return readerStack{}, grammar.R_object.Err(grammar.R_literal.Err(grammar.R_RDFLiteral.Err(err)))
@@ -118,10 +119,10 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 rune, err error) 
 		{
 			r0, err := r.buf.NextRune()
 			if err != nil {
-				return readerStack{}, grammar.R_object.Err(grammar.R_literal.Err(grammar.R_RDFLiteral.Err(r.newOffsetError(err, nil, nil))))
+				return readerStack{}, grammar.R_object.Err(grammar.R_literal.Err(grammar.R_RDFLiteral.Err(r.newOffsetError(err, cursorio.DecodedRunes{}, cursorio.DecodedRunes{}))))
 			}
 
-			switch r0 {
+			switch r0.Rune {
 			case '@':
 				langtagToken, err := r.produceLANGTAG(r0)
 				if err != nil {
@@ -135,19 +136,19 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 rune, err error) 
 			case '^':
 				r1, err := r.buf.NextRune()
 				if err != nil {
-					return readerStack{}, grammar.R_object.Err(grammar.R_literal.Err(grammar.R_RDFLiteral.Err(r.newOffsetError(err, []rune{r0}, nil))))
-				} else if r1 != '^' {
-					return readerStack{}, grammar.R_object.Err(grammar.R_literal.Err(grammar.R_RDFLiteral.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r1}, []rune{r0}, []rune{r1}))))
+					return readerStack{}, grammar.R_object.Err(grammar.R_literal.Err(grammar.R_RDFLiteral.Err(r.newOffsetError(err, r0.AsDecodedRunes(), cursorio.DecodedRunes{}))))
+				} else if r1.Rune != '^' {
+					return readerStack{}, grammar.R_object.Err(grammar.R_literal.Err(grammar.R_RDFLiteral.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r1.Rune}, r0.AsDecodedRunes(), r1.AsDecodedRunes()))))
 				}
 
 				r2, err := r.buf.NextRune()
 				if err != nil {
-					return readerStack{}, grammar.R_object.Err(grammar.R_literal.Err(grammar.R_RDFLiteral.Err(r.newOffsetError(err, []rune{r0, r1}, nil))))
+					return readerStack{}, grammar.R_object.Err(grammar.R_literal.Err(grammar.R_RDFLiteral.Err(r.newOffsetError(err, cursorio.DecodedRuneList{r0, r1}.AsDecodedRunes(), cursorio.DecodedRunes{}))))
 				}
 
-				r.commit([]rune{r0, r1})
+				r.commit(cursorio.DecodedRuneList{r0, r1}.AsDecodedRunes())
 
-				if r2 == '<' {
+				if r2.Rune == '<' {
 					datatypeToken, err := r.produceIRIREF(r2)
 					if err != nil {
 						return readerStack{}, grammar.R_object.Err(grammar.R_literal.Err(grammar.R_RDFLiteral.Err(err)))
@@ -191,14 +192,14 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 rune, err error) 
 				encoding.ObjectStatementOffsets, token.Offsets,
 			),
 		})
-	case r0 == '+', r0 == '-', '0' <= r0 && r0 <= '9',
-		r0 == '.':
+	case r0.Rune == '+', r0.Rune == '-', '0' <= r0.Rune && r0.Rune <= '9',
+		r0.Rune == '.':
 
-		if r0 == '.' {
+		if r0.Rune == '.' {
 			r1, err := r.buf.NextRune()
 			if err != nil {
 				return readerStack{}, err // TODO EOF check
-			} else if r1 < '0' || r1 > '9' {
+			} else if r1.Rune < '0' || r1.Rune > '9' {
 				r.buf.BacktrackRunes(r0, r1)
 
 				return readerStack{}, nil
@@ -241,11 +242,11 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 rune, err error) 
 				encoding.ObjectStatementOffsets, token.Offsets,
 			),
 		})
-	case r0 == 't':
+	case r0.Rune == 't':
 		r1, err := r.buf.NextRune()
 		if err != nil {
-			return readerStack{}, grammar.R_object.Err(r.newOffsetError(err, []rune{r0}, nil))
-		} else if r1 != 'r' {
+			return readerStack{}, grammar.R_object.Err(r.newOffsetError(err, r0.AsDecodedRunes(), cursorio.DecodedRunes{}))
+		} else if r1.Rune != 'r' {
 			r.buf.BacktrackRunes(r0, r1)
 
 			return readerStack{ectx, reader_scan_object_PrefixedName}, nil
@@ -253,8 +254,8 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 rune, err error) 
 
 		r2, err := r.buf.NextRune()
 		if err != nil {
-			return readerStack{}, grammar.R_object.Err(r.newOffsetError(err, []rune{r0, r1}, nil))
-		} else if r2 != 'u' {
+			return readerStack{}, grammar.R_object.Err(r.newOffsetError(err, cursorio.DecodedRuneList{r0, r1}.AsDecodedRunes(), cursorio.DecodedRunes{}))
+		} else if r2.Rune != 'u' {
 			r.buf.BacktrackRunes(r0, r1, r2)
 
 			return readerStack{ectx, reader_scan_object_PrefixedName}, nil
@@ -262,8 +263,8 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 rune, err error) 
 
 		r3, err := r.buf.NextRune()
 		if err != nil {
-			return readerStack{}, grammar.R_object.Err(r.newOffsetError(err, []rune{r0, r1, r2}, nil))
-		} else if r3 != 'e' {
+			return readerStack{}, grammar.R_object.Err(r.newOffsetError(err, cursorio.DecodedRuneList{r0, r1, r2}.AsDecodedRunes(), cursorio.DecodedRunes{}))
+		} else if r3.Rune != 'e' {
 			r.buf.BacktrackRunes(r0, r1, r2, r3)
 
 			return readerStack{ectx, reader_scan_object_PrefixedName}, nil
@@ -285,14 +286,14 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 rune, err error) 
 				encoding.GraphNameStatementOffsets, ectx.CurGraphNameLocation,
 				encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 				encoding.PredicateStatementOffsets, ectx.CurPredicateLocation,
-				encoding.ObjectStatementOffsets, r.commitForTextOffsetRange([]rune{r0, r1, r2, r3}),
+				encoding.ObjectStatementOffsets, r.commitForTextOffsetRange(cursorio.DecodedRuneList{r0, r1, r2, r3}.AsDecodedRunes()),
 			),
 		})
-	case r0 == 'f':
+	case r0.Rune == 'f':
 		r1, err := r.buf.NextRune()
 		if err != nil {
-			return readerStack{}, grammar.R_object.Err(r.newOffsetError(err, []rune{r0}, nil))
-		} else if r1 != 'a' {
+			return readerStack{}, grammar.R_object.Err(r.newOffsetError(err, r0.AsDecodedRunes(), cursorio.DecodedRunes{}))
+		} else if r1.Rune != 'a' {
 			r.buf.BacktrackRunes(r0, r1)
 
 			return readerStack{ectx, reader_scan_object_PrefixedName}, nil
@@ -300,8 +301,8 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 rune, err error) 
 
 		r2, err := r.buf.NextRune()
 		if err != nil {
-			return readerStack{}, grammar.R_object.Err(r.newOffsetError(err, []rune{r0, r1}, nil))
-		} else if r2 != 'l' {
+			return readerStack{}, grammar.R_object.Err(r.newOffsetError(err, cursorio.DecodedRuneList{r0, r1}.AsDecodedRunes(), cursorio.DecodedRunes{}))
+		} else if r2.Rune != 'l' {
 			r.buf.BacktrackRunes(r0, r1, r2)
 
 			return readerStack{ectx, reader_scan_object_PrefixedName}, nil
@@ -309,8 +310,8 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 rune, err error) 
 
 		r3, err := r.buf.NextRune()
 		if err != nil {
-			return readerStack{}, grammar.R_object.Err(r.newOffsetError(err, []rune{r0, r1, r2}, nil))
-		} else if r3 != 's' {
+			return readerStack{}, grammar.R_object.Err(r.newOffsetError(err, cursorio.DecodedRuneList{r0, r1, r2}.AsDecodedRunes(), cursorio.DecodedRunes{}))
+		} else if r3.Rune != 's' {
 			r.buf.BacktrackRunes(r0, r1, r2, r3)
 
 			return readerStack{ectx, reader_scan_object_PrefixedName}, nil
@@ -318,8 +319,8 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 rune, err error) 
 
 		r4, err := r.buf.NextRune()
 		if err != nil {
-			return readerStack{}, grammar.R_object.Err(r.newOffsetError(err, []rune{r0, r1, r2, r3}, nil))
-		} else if r4 != 'e' {
+			return readerStack{}, grammar.R_object.Err(r.newOffsetError(err, cursorio.DecodedRuneList{r0, r1, r2, r3}.AsDecodedRunes(), cursorio.DecodedRunes{}))
+		} else if r4.Rune != 'e' {
 			r.buf.BacktrackRunes(r0, r1, r2, r3, r4)
 
 			return readerStack{ectx, reader_scan_object_PrefixedName}, nil
@@ -341,19 +342,19 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 rune, err error) 
 				encoding.GraphNameStatementOffsets, ectx.CurGraphNameLocation,
 				encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 				encoding.PredicateStatementOffsets, ectx.CurPredicateLocation,
-				encoding.ObjectStatementOffsets, r.commitForTextOffsetRange([]rune{r0, r1, r2, r3, r4}),
+				encoding.ObjectStatementOffsets, r.commitForTextOffsetRange(cursorio.DecodedRuneList{r0, r1, r2, r3, r4}.AsDecodedRunes()),
 			),
 		})
-	case internal.IsRune_PN_CHARS_BASE(r0), r0 == ':':
+	case internal.IsRune_PN_CHARS_BASE(r0.Rune), r0.Rune == ':':
 		r.buf.BacktrackRunes(r0)
 
 		return readerStack{ectx, reader_scan_object_PrefixedName}, nil
 	}
 
-	return readerStack{}, grammar.R_object.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0}, nil, []rune{r0}))
+	return readerStack{}, grammar.R_object.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0.Rune}, cursorio.DecodedRunes{}, r0.AsDecodedRunes()))
 }
 
-func reader_scan_object_PrefixedName(r *Decoder, ectx evaluationContext, r0 rune, err error) (readerStack, error) {
+func reader_scan_object_PrefixedName(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, err error) (readerStack, error) {
 	if err != nil {
 		return readerStack{}, grammar.R_object.Err(grammar.R_PrefixedName.Err(err))
 	}

@@ -15,12 +15,12 @@ type tokenLANGTAG struct {
 }
 
 // LANGTAG ::= '@' [a-zA-Z]+ ('-' [a-zA-Z0-9]+)*
-func (r *Decoder) produceLANGTAG(r0 rune) (*tokenLANGTAG, error) {
-	if r0 != '@' {
-		return nil, grammar.R_LANGTAG.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0}, nil, []rune{r0}))
+func (r *Decoder) produceLANGTAG(r0 cursorio.DecodedRune) (*tokenLANGTAG, error) {
+	if r0.Rune != '@' {
+		return nil, grammar.R_LANGTAG.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0.Rune}, cursorio.DecodedRunes{}, r0.AsDecodedRunes()))
 	}
 
-	var uncommitted = []rune{r0}
+	var uncommitted cursorio.DecodedRuneList = cursorio.DecodedRuneList{r0}
 
 	for {
 		r0, err := r.buf.NextRune()
@@ -31,15 +31,15 @@ func (r *Decoder) produceLANGTAG(r0 rune) (*tokenLANGTAG, error) {
 				}
 			}
 
-			return nil, grammar.R_LANGTAG.Err(r.newOffsetError(err, uncommitted, nil))
+			return nil, grammar.R_LANGTAG.Err(r.newOffsetError(err, uncommitted.AsDecodedRunes(), cursorio.DecodedRunes{}))
 		}
 
 		switch {
-		case 'a' <= r0 && r0 <= 'z', 'A' <= r0 && r0 <= 'Z':
+		case 'a' <= r0.Rune && r0.Rune <= 'z', 'A' <= r0.Rune && r0.Rune <= 'Z':
 			uncommitted = append(uncommitted, r0)
-		case r0 == '-':
+		case r0.Rune == '-':
 			if len(uncommitted) == 1 {
-				return nil, grammar.R_LANGTAG.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0}, uncommitted, []rune{r0}))
+				return nil, grammar.R_LANGTAG.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0.Rune}, uncommitted.AsDecodedRunes(), r0.AsDecodedRunes()))
 			}
 
 			uncommitted = append(uncommitted, r0)
@@ -61,11 +61,11 @@ PRIMARY_DELIMITER_DONE:
 				goto DONE
 			}
 
-			return nil, grammar.R_LANGTAG.Err(r.newOffsetError(err, uncommitted, nil))
+			return nil, grammar.R_LANGTAG.Err(r.newOffsetError(err, uncommitted.AsDecodedRunes(), cursorio.DecodedRunes{}))
 		}
 
 		switch {
-		case 'a' <= r0 && r0 <= 'z', 'A' <= r0 && r0 <= 'Z', '0' <= r0 && r0 <= '9':
+		case 'a' <= r0.Rune && r0.Rune <= 'z', 'A' <= r0.Rune && r0.Rune <= 'Z', '0' <= r0.Rune && r0.Rune <= '9':
 			uncommitted = append(uncommitted, r0)
 		default:
 			r.buf.BacktrackRunes(r0)
@@ -76,22 +76,22 @@ PRIMARY_DELIMITER_DONE:
 
 DONE:
 
-	if uncommitted[len(uncommitted)-1] == '-' {
+	if uncommitted[len(uncommitted)-1].Rune == '-' {
 		return nil, grammar.R_LANGTAG.Err(r.newOffsetError(
 			cursorioutil.UnexpectedRuneError{
-				Rune: uncommitted[len(uncommitted)-1],
+				Rune: uncommitted[len(uncommitted)-1].Rune,
 			},
-			uncommitted[:len(uncommitted)-1],
-			[]rune{uncommitted[len(uncommitted)-1]},
+			uncommitted[:len(uncommitted)-1].AsDecodedRunes(),
+			uncommitted[len(uncommitted)-1].AsDecodedRunes(),
 		))
 	}
 
-	r.commit(uncommitted[0:1])
+	r.commit(uncommitted[0:1].AsDecodedRunes())
 
 	valueUncommitted := uncommitted[1:]
 
 	return &tokenLANGTAG{
-		Offsets: r.commitForTextOffsetRange(valueUncommitted),
-		Decoded: string(valueUncommitted),
+		Offsets: r.commitForTextOffsetRange(valueUncommitted.AsDecodedRunes()),
+		Decoded: valueUncommitted.AsDecodedRunes().String(),
 	}, nil
 }

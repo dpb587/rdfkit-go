@@ -24,7 +24,7 @@ type Decoder struct {
 	docProfile encodinghtml.DocumentInfo
 
 	nestedErrorListener func(err error)
-	parserOptions       inspectjson.ParserOptionsApplier
+	parserOptions       []inspectjson.ParserOption
 	documentLoader      jsonldtype.DocumentLoader
 
 	err       error
@@ -106,7 +106,7 @@ func (w *Decoder) walkNode(n *html.Node) {
 
 			dopt := jsonld.DecoderConfig{}.
 				SetDefaultBase(w.docProfile.BaseURL).
-				SetParserOptions(w.parserOptions).
+				SetParserOptions(w.parserOptions...).
 				SetDocumentLoader(w.documentLoader)
 
 			if w.docProfile.HasNodeMetadata {

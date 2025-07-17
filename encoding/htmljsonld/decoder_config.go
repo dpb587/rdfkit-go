@@ -8,7 +8,7 @@ import (
 
 type DecoderConfig struct {
 	nestedErrorListener func(err error)
-	parserOptions       inspectjson.ParserOptionsApplier
+	parserOptions       []inspectjson.ParserOption
 	documentLoader      jsonldtype.DocumentLoader
 }
 
@@ -20,7 +20,7 @@ func (b DecoderConfig) SetNestedErrorListener(v func(err error)) DecoderConfig {
 	return b
 }
 
-func (b DecoderConfig) SetParserOptions(v inspectjson.ParserOptionsApplier) DecoderConfig {
+func (b DecoderConfig) SetParserOptions(v ...inspectjson.ParserOption) DecoderConfig {
 	b.parserOptions = v
 
 	return b

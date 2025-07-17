@@ -12,32 +12,32 @@ type tokenIRIREF struct {
 }
 
 // IRIREF ::= '<' ([^#x00-#x20<>"{}|^`\] | UCHAR)* '>'
-func (r *Decoder) produceIRIREF(r0 rune) (*tokenIRIREF, error) {
-	if r0 != '<' {
-		return nil, grammar.R_IRIREF.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0}, nil, []rune{r0}))
+func (r *Decoder) produceIRIREF(r0 cursorio.DecodedRune) (*tokenIRIREF, error) {
+	if r0.Rune != '<' {
+		return nil, grammar.R_IRIREF.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0.Rune}, cursorio.DecodedRunes{}, r0.AsDecodedRunes()))
 	}
 
-	var uncommitted = []rune{r0}
+	var uncommitted cursorio.DecodedRuneList = cursorio.DecodedRuneList{r0}
 	var decoded []rune
 
 	for {
 		r0, err := r.buf.NextRune()
 		if err != nil {
-			return nil, grammar.R_IRIREF.Err(r.newOffsetError(err, uncommitted, nil))
+			return nil, grammar.R_IRIREF.Err(r.newOffsetError(err, uncommitted.AsDecodedRunes(), cursorio.DecodedRunes{}))
 		}
 
 		switch {
-		case r0 == '>':
+		case r0.Rune == '>':
 			uncommitted = append(uncommitted, r0)
 
 			goto DONE
-		case r0 == '\\':
+		case r0.Rune == '\\':
 			r1, err := r.buf.NextRune()
 			if err != nil {
-				return nil, grammar.R_IRIREF.Err(r.newOffsetError(err, append(uncommitted, r0), nil))
+				return nil, grammar.R_IRIREF.Err(r.newOffsetError(err, append(uncommitted, r0).AsDecodedRunes(), cursorio.DecodedRunes{}))
 			}
 
-			switch r1 {
+			switch r1.Rune {
 			case 'u':
 				decodedRune, nextUncommitted, err := r.decodeUCHAR4(append(uncommitted, r0, r1))
 				if err != nil {
@@ -55,19 +55,19 @@ func (r *Decoder) produceIRIREF(r0 rune) (*tokenIRIREF, error) {
 				decoded = append(decoded, decodedRune)
 				uncommitted = nextUncommitted
 			default:
-				return nil, grammar.R_IRIREF.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r1}, append(uncommitted[:], r0), []rune{r1}))
+				return nil, grammar.R_IRIREF.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r1.Rune}, append(uncommitted, r0).AsDecodedRunes(), r1.AsDecodedRunes()))
 			}
-		case 0x00 <= r0 && r0 <= 0x20,
-			r0 == '<',
-			r0 == '"',
-			r0 == '{',
-			r0 == '}',
-			r0 == '|',
-			r0 == '^',
-			r0 == '`':
-			return nil, grammar.R_IRIREF.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0}, uncommitted, []rune{r0}))
+		case 0x00 <= r0.Rune && r0.Rune <= 0x20,
+			r0.Rune == '<',
+			r0.Rune == '"',
+			r0.Rune == '{',
+			r0.Rune == '}',
+			r0.Rune == '|',
+			r0.Rune == '^',
+			r0.Rune == '`':
+			return nil, grammar.R_IRIREF.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0.Rune}, uncommitted.AsDecodedRunes(), r0.AsDecodedRunes()))
 		default:
-			decoded = append(decoded, r0)
+			decoded = append(decoded, r0.Rune)
 			uncommitted = append(uncommitted, r0)
 		}
 	}
@@ -75,7 +75,7 @@ func (r *Decoder) produceIRIREF(r0 rune) (*tokenIRIREF, error) {
 DONE:
 
 	return &tokenIRIREF{
-		Offsets: r.commitForTextOffsetRange(uncommitted),
+		Offsets: r.commitForTextOffsetRange(uncommitted.AsDecodedRunes()),
 		Decoded: string(decoded),
 	}, nil
 }

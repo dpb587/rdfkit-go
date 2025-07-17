@@ -95,7 +95,7 @@ type readerStack struct {
 	fn   scanFunc
 }
 
-type scanFunc func(r *Decoder, ectx evaluationContext, r0 rune, err error) (readerStack, error)
+type scanFunc func(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, err error) (readerStack, error)
 
 func (r *Decoder) pushState(ectx evaluationContext, fn scanFunc) error {
 	r.stack = append(r.stack, readerStack{ectx: ectx, fn: fn})
@@ -104,7 +104,7 @@ func (r *Decoder) pushState(ectx evaluationContext, fn scanFunc) error {
 }
 
 func (r *Decoder) scan(ectx evaluationContext, fn scanFunc) (readerStack, error) {
-	var uncommitted []rune
+	var uncommitted cursorio.DecodedRuneList
 
 	for {
 		r0, err := r.buf.NextRune()
@@ -112,7 +112,7 @@ func (r *Decoder) scan(ectx evaluationContext, fn scanFunc) (readerStack, error)
 			return fn(r, ectx, r0, err)
 		}
 
-		switch r0 {
+		switch r0.Rune {
 		case '#':
 			uncommitted = append(uncommitted, r0)
 
@@ -120,7 +120,7 @@ func (r *Decoder) scan(ectx evaluationContext, fn scanFunc) (readerStack, error)
 				r1, err := r.buf.NextRune()
 				if err != nil {
 					if errors.Is(err, io.EOF) {
-						r.commit(uncommitted)
+						r.commit(uncommitted.AsDecodedRunes())
 
 						return r.terminate()
 					}
@@ -130,19 +130,19 @@ func (r *Decoder) scan(ectx evaluationContext, fn scanFunc) (readerStack, error)
 
 				uncommitted = append(uncommitted, r1)
 
-				if r1 == '\n' {
+				if r1.Rune == '\n' {
 					break
 				}
 			}
 		case 0x20, 0x09, 0x0A, 0x0D:
 			uncommitted = append(uncommitted, r0)
 		default:
-			if unicode.IsSpace(r0) {
+			if unicode.IsSpace(r0.Rune) {
 				uncommitted = append(uncommitted, r0)
 
 				continue
 			} else {
-				r.commit(uncommitted)
+				r.commit(uncommitted.AsDecodedRunes())
 			}
 
 			return fn(r, ectx, r0, err)

@@ -20,11 +20,11 @@ type tokenNumericLiteral struct {
 // DECIMAL        ::= [+-]? [0-9]* '.' [0-9]+
 // DOUBLE         ::= [+-]? ([0-9]+ '.' [0-9]* EXPONENT | '.' [0-9]+ EXPONENT | [0-9]+ EXPONENT)
 // EXPONENT       ::= [eE] [+-]? [0-9]+
-func (r *Decoder) produceNumericLiteral(r0 rune) (*tokenNumericLiteral, error) {
-	var uncommitted []rune
+func (r *Decoder) produceNumericLiteral(r0 cursorio.DecodedRune) (*tokenNumericLiteral, error) {
+	var uncommitted cursorio.DecodedRuneList
 	var grammarToken = grammar.R_NumericLiteral
 
-	switch r0 {
+	switch r0.Rune {
 	case '-', '+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
 		uncommitted = append(uncommitted, r0)
 
@@ -35,7 +35,7 @@ func (r *Decoder) produceNumericLiteral(r0 rune) (*tokenNumericLiteral, error) {
 
 		goto INTEGER_DONE
 	default:
-		return nil, grammarToken.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0}, uncommitted, []rune{r0}))
+		return nil, grammarToken.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0.Rune}, uncommitted.AsDecodedRunes(), r0.AsDecodedRunes()))
 	}
 
 SIGN_DONE:
@@ -47,10 +47,10 @@ SIGN_DONE:
 				goto DONE
 			}
 
-			return nil, grammarToken.Err(r.newOffsetError(err, uncommitted, nil))
+			return nil, grammarToken.Err(r.newOffsetError(err, uncommitted.AsDecodedRunes(), cursorio.DecodedRunes{}))
 		}
 
-		switch r0 {
+		switch r0.Rune {
 		case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
 			uncommitted = append(uncommitted, r0)
 		case '.':
@@ -79,10 +79,10 @@ INTEGER_DONE:
 				goto DONE
 			}
 
-			return nil, grammarToken.Err(r.newOffsetError(err, uncommitted, nil))
+			return nil, grammarToken.Err(r.newOffsetError(err, uncommitted.AsDecodedRunes(), cursorio.DecodedRunes{}))
 		}
 
-		switch r0 {
+		switch r0.Rune {
 		case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
 			uncommitted = append(uncommitted, r0)
 		case 'e', 'E':
@@ -102,16 +102,16 @@ DECIMAL_DONE:
 	{
 		r0, err := r.buf.NextRune()
 		if err != nil {
-			return nil, grammarToken.Err(grammar.R_EXPONENT.Err(r.newOffsetError(err, uncommitted, nil)))
+			return nil, grammarToken.Err(grammar.R_EXPONENT.Err(r.newOffsetError(err, uncommitted.AsDecodedRunes(), cursorio.DecodedRunes{})))
 		}
 
-		switch r0 {
+		switch r0.Rune {
 		case '-', '+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
 			uncommitted = append(uncommitted, r0)
 
 			goto EXPONENT_SIGN_DONE
 		default:
-			return nil, grammarToken.Err(grammar.R_EXPONENT.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0}, uncommitted, []rune{r0})))
+			return nil, grammarToken.Err(grammar.R_EXPONENT.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0.Rune}, uncommitted.AsDecodedRunes(), r0.AsDecodedRunes())))
 		}
 	}
 
@@ -124,10 +124,10 @@ EXPONENT_SIGN_DONE:
 				goto DONE
 			}
 
-			return nil, grammarToken.Err(grammar.R_EXPONENT.Err(r.newOffsetError(err, uncommitted, nil)))
+			return nil, grammarToken.Err(grammar.R_EXPONENT.Err(r.newOffsetError(err, uncommitted.AsDecodedRunes(), cursorio.DecodedRunes{})))
 		}
 
-		switch r0 {
+		switch r0.Rune {
 		case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
 			uncommitted = append(uncommitted, r0)
 		default:
@@ -139,7 +139,7 @@ EXPONENT_SIGN_DONE:
 
 DONE:
 
-	switch uncommitted[len(uncommitted)-1] {
+	switch uncommitted[len(uncommitted)-1].Rune {
 	case '.':
 		r.buf.BacktrackRunes(uncommitted[len(uncommitted)-1])
 		uncommitted = uncommitted[:len(uncommitted)-1]
@@ -148,10 +148,10 @@ DONE:
 	case '-', '+', 'e', 'E':
 		return nil, grammarToken.Err(r.newOffsetError(
 			cursorioutil.UnexpectedRuneError{
-				Rune: uncommitted[len(uncommitted)-1],
+				Rune: uncommitted[len(uncommitted)-1].Rune,
 			},
-			uncommitted[:len(uncommitted)-1],
-			[]rune{uncommitted[len(uncommitted)-1]},
+			uncommitted[:len(uncommitted)-1].AsDecodedRunes(),
+			uncommitted[len(uncommitted)-1].AsDecodedRunes(),
 		))
 	}
 
@@ -160,8 +160,8 @@ DONE:
 	}
 
 	return &tokenNumericLiteral{
-		Offsets:     r.commitForTextOffsetRange(uncommitted),
+		Offsets:     r.commitForTextOffsetRange(uncommitted.AsDecodedRunes()),
 		GrammarRule: grammarToken,
-		Decoded:     string(uncommitted),
+		Decoded:     uncommitted.AsDecodedRunes().String(),
 	}, nil
 }

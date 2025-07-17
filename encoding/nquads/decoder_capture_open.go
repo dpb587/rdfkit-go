@@ -16,19 +16,19 @@ import (
 	"github.com/dpb587/rdfkit-go/rdf"
 )
 
-func (r *Decoder) captureOpenBlankNode(uncommitted []rune) (rdf.BlankNode, *cursorio.TextOffsetRange, error) {
+func (r *Decoder) captureOpenBlankNode(uncommitted cursorio.DecodedRuneList) (rdf.BlankNode, *cursorio.TextOffsetRange, error) {
 	// assert(len(uncommitted) == 2 && uncommitted[0:2] == "_:")
 
 	r0, err := r.buf.NextRune()
 	if err != nil {
-		return nil, nil, grammar.R_BLANK_NODE_LABEL.Err(r.newOffsetError(err, uncommitted, nil))
+		return nil, nil, grammar.R_BLANK_NODE_LABEL.Err(r.newOffsetError(err, uncommitted.AsDecodedRunes(), cursorio.DecodedRunes{}))
 	}
 
 	switch {
-	case internal.IsRune_PN_CHARS_U(r0), '0' <= r0 && r0 <= '9':
+	case internal.IsRune_PN_CHARS_U(r0.Rune), '0' <= r0.Rune && r0.Rune <= '9':
 		// valid
 	default:
-		return nil, nil, grammar.R_BLANK_NODE_LABEL.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0}, uncommitted, []rune{r0}))
+		return nil, nil, grammar.R_BLANK_NODE_LABEL.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0.Rune}, uncommitted.AsDecodedRunes(), r0.AsDecodedRunes()))
 	}
 
 	uncommitted = append(uncommitted, r0)
@@ -36,13 +36,13 @@ func (r *Decoder) captureOpenBlankNode(uncommitted []rune) (rdf.BlankNode, *curs
 	for {
 		r0, err := r.buf.NextRune()
 		if err != nil {
-			return nil, nil, grammar.R_BLANK_NODE_LABEL.Err(r.newOffsetError(err, uncommitted, nil))
+			return nil, nil, grammar.R_BLANK_NODE_LABEL.Err(r.newOffsetError(err, uncommitted.AsDecodedRunes(), cursorio.DecodedRunes{}))
 		}
 
 		switch {
-		case internal.IsRune_PN_CHARS(r0), r0 == '.':
+		case internal.IsRune_PN_CHARS(r0.Rune), r0.Rune == '.':
 			uncommitted = append(uncommitted, r0)
-		case unicode.IsSpace(r0):
+		case unicode.IsSpace(r0.Rune):
 			r.buf.BacktrackRunes(r0)
 
 			goto DONE
@@ -56,26 +56,26 @@ func (r *Decoder) captureOpenBlankNode(uncommitted []rune) (rdf.BlankNode, *curs
 DONE:
 
 	if len(uncommitted) > 3 {
-		if uncommitted[len(uncommitted)-1] == '.' {
+		if uncommitted[len(uncommitted)-1].Rune == '.' {
 			r.buf.BacktrackRunes(uncommitted[len(uncommitted)-1])
 			uncommitted = uncommitted[0 : len(uncommitted)-1]
 		}
 
-		if !internal.IsRune_PN_CHARS(uncommitted[len(uncommitted)-1]) {
+		if !internal.IsRune_PN_CHARS(uncommitted[len(uncommitted)-1].Rune) {
 			return nil, nil, grammar.R_BLANK_NODE_LABEL.Err(r.newOffsetError(
 				cursorioutil.UnexpectedRuneError{
-					Rune: uncommitted[len(uncommitted)-1],
+					Rune: uncommitted[len(uncommitted)-1].Rune,
 				},
-				uncommitted[0:len(uncommitted)-1],
-				[]rune{uncommitted[len(uncommitted)-1]},
+				uncommitted[0:len(uncommitted)-1].AsDecodedRunes(),
+				uncommitted[len(uncommitted)-1].AsDecodedRunes(),
 			))
 		}
 	}
 
-	return r.blankNodeStringMapper.MapBlankNodeIdentifier(string(uncommitted[2:])), r.commitForTextOffsetRange(uncommitted), nil
+	return r.blankNodeStringMapper.MapBlankNodeIdentifier(string(uncommitted[2:].AsDecodedRunes().Runes)), r.commitForTextOffsetRange(uncommitted.AsDecodedRunes()), nil
 }
 
-func (r *Decoder) captureOpenIRI(uncommitted []rune) (rdf.IRI, *cursorio.TextOffsetRange, error) {
+func (r *Decoder) captureOpenIRI(uncommitted cursorio.DecodedRuneList) (rdf.IRI, *cursorio.TextOffsetRange, error) {
 	// assert(len(uncommitted) == 1 && uncommitted[0] == '<')
 
 	var decoded []rune
@@ -83,21 +83,21 @@ func (r *Decoder) captureOpenIRI(uncommitted []rune) (rdf.IRI, *cursorio.TextOff
 	for {
 		r0, err := r.buf.NextRune()
 		if err != nil {
-			return "", nil, grammar.R_IRIREF.Err(r.newOffsetError(err, uncommitted, nil))
+			return "", nil, grammar.R_IRIREF.Err(r.newOffsetError(err, uncommitted.AsDecodedRunes(), cursorio.DecodedRunes{}))
 		}
 
 		switch {
-		case r0 == '>':
+		case r0.Rune == '>':
 			uncommitted = append(uncommitted, r0)
 
 			goto DONE
-		case r0 == '\\':
+		case r0.Rune == '\\':
 			r1, err := r.buf.NextRune()
 			if err != nil {
-				return "", nil, grammar.R_IRIREF.Err(r.newOffsetError(err, append(uncommitted, r0), nil))
+				return "", nil, grammar.R_IRIREF.Err(r.newOffsetError(err, append(uncommitted, r0).AsDecodedRunes(), cursorio.DecodedRunes{}))
 			}
 
-			switch r1 {
+			switch r1.Rune {
 			case 'u':
 				decodedRune, nextUncommitted, err := r.decodeUCHAR4(append(uncommitted, r0, r1))
 				if err != nil {
@@ -115,19 +115,19 @@ func (r *Decoder) captureOpenIRI(uncommitted []rune) (rdf.IRI, *cursorio.TextOff
 				decoded = append(decoded, decodedRune)
 				uncommitted = nextUncommitted
 			default:
-				return "", nil, grammar.R_IRIREF.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r1}, append(uncommitted[:], r0), []rune{r1}))
+				return "", nil, grammar.R_IRIREF.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r1.Rune}, append(uncommitted[:], r0).AsDecodedRunes(), r1.AsDecodedRunes()))
 			}
-		case 0x00 <= r0 && r0 <= 0x20,
-			r0 == '<',
-			r0 == '"',
-			r0 == '{',
-			r0 == '}',
-			r0 == '|',
-			r0 == '^',
-			r0 == '`':
-			return "", nil, grammar.R_IRIREF.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0}, uncommitted, []rune{r0}))
+		case 0x00 <= r0.Rune && r0.Rune <= 0x20,
+			r0.Rune == '<',
+			r0.Rune == '"',
+			r0.Rune == '{',
+			r0.Rune == '}',
+			r0.Rune == '|',
+			r0.Rune == '^',
+			r0.Rune == '`':
+			return "", nil, grammar.R_IRIREF.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0.Rune}, uncommitted.AsDecodedRunes(), r0.AsDecodedRunes()))
 		default:
-			decoded = append(decoded, r0)
+			decoded = append(decoded, r0.Rune)
 			uncommitted = append(uncommitted, r0)
 		}
 	}
@@ -136,7 +136,7 @@ DONE:
 
 	urlString := string(decoded)
 
-	cr := r.commitForTextOffsetRange(uncommitted)
+	cr := r.commitForTextOffsetRange(uncommitted.AsDecodedRunes())
 
 	{
 		// apparently we should validate these are absolute according to the w3 test suite
@@ -151,7 +151,7 @@ DONE:
 	return rdf.IRI(decoded), cr, nil
 }
 
-func (r *Decoder) captureOpenLiteral(uncommitted []rune) (rdf.Literal, *cursorio.TextOffsetRange, error) {
+func (r *Decoder) captureOpenLiteral(uncommitted cursorio.DecodedRuneList) (rdf.Literal, *cursorio.TextOffsetRange, error) {
 	// assert(len(uncommitted) == 1 && uncommitted[0] == '"')
 
 	var decoded []rune
@@ -159,21 +159,21 @@ func (r *Decoder) captureOpenLiteral(uncommitted []rune) (rdf.Literal, *cursorio
 	for {
 		r0, err := r.buf.NextRune()
 		if err != nil {
-			return rdf.Literal{}, nil, grammar.R_literal.Err(grammar.R_STRING_LITERAL_QUOTE.Err(r.newOffsetError(err, uncommitted, nil)))
+			return rdf.Literal{}, nil, grammar.R_literal.Err(grammar.R_STRING_LITERAL_QUOTE.Err(r.newOffsetError(err, uncommitted.AsDecodedRunes(), cursorio.DecodedRunes{})))
 		}
 
 		switch {
-		case r0 == '"':
+		case r0.Rune == '"':
 			uncommitted = append(uncommitted, r0)
 
 			goto END_LEXICAL_FORM
-		case r0 == '\\':
+		case r0.Rune == '\\':
 			r1, err := r.buf.NextRune()
 			if err != nil {
-				return rdf.Literal{}, nil, grammar.R_literal.Err(grammar.R_STRING_LITERAL_QUOTE.Err(r.newOffsetError(err, append(uncommitted, r0), nil)))
+				return rdf.Literal{}, nil, grammar.R_literal.Err(grammar.R_STRING_LITERAL_QUOTE.Err(r.newOffsetError(err, append(uncommitted, r0).AsDecodedRunes(), cursorio.DecodedRunes{})))
 			}
 
-			switch r1 {
+			switch r1.Rune {
 			case 'u':
 				decodedRune, nextUncommitted, err := r.decodeUCHAR4(append(uncommitted, r0, r1))
 				if err != nil {
@@ -215,17 +215,17 @@ func (r *Decoder) captureOpenLiteral(uncommitted []rune) (rdf.Literal, *cursorio
 				decoded = append(decoded, '\\')
 				uncommitted = append(uncommitted, r0, r1)
 			default:
-				return rdf.Literal{}, nil, grammar.R_literal.Err(grammar.R_STRING_LITERAL_QUOTE.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r1}, append(uncommitted[:], r0), []rune{r1})))
+				return rdf.Literal{}, nil, grammar.R_literal.Err(grammar.R_STRING_LITERAL_QUOTE.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r1.Rune}, append(uncommitted[:], r0).AsDecodedRunes(), r1.AsDecodedRunes())))
 			}
 		default:
-			decoded = append(decoded, r0)
+			decoded = append(decoded, r0.Rune)
 			uncommitted = append(uncommitted, r0)
 		}
 	}
 
 END_LEXICAL_FORM:
 
-	stringRange := r.commitForTextOffsetRange(uncommitted)
+	stringRange := r.commitForTextOffsetRange(uncommitted.AsDecodedRunes())
 
 	r0, err := r.buf.NextRune()
 	if err != nil {
@@ -233,12 +233,12 @@ END_LEXICAL_FORM:
 			goto END_TOKEN
 		}
 
-		return rdf.Literal{}, nil, grammar.R_literal.Err(grammar.R_STRING_LITERAL_QUOTE.Err(r.newOffsetError(err, uncommitted, nil)))
+		return rdf.Literal{}, nil, grammar.R_literal.Err(grammar.R_STRING_LITERAL_QUOTE.Err(r.newOffsetError(err, uncommitted.AsDecodedRunes(), cursorio.DecodedRunes{})))
 	}
 
 	switch {
-	case r0 == '@':
-		langtag, langtagRange, err := r.scanOpenLangtag([]rune{r0})
+	case r0.Rune == '@':
+		langtag, langtagRange, err := r.scanOpenLangtag(cursorio.DecodedRuneList{r0})
 		if err != nil {
 			return rdf.Literal{}, nil, grammar.R_literal.Err(err)
 		}
@@ -259,24 +259,24 @@ END_LEXICAL_FORM:
 				rdf.LanguageLiteralTag: langtag,
 			},
 		}, fullRange, nil
-	case r0 == '^':
+	case r0.Rune == '^':
 		r1, err := r.buf.NextRune()
 		if err != nil {
-			return rdf.Literal{}, nil, grammar.R_literal.Err(r.newOffsetError(err, append(uncommitted, r0), nil))
-		} else if r1 != '^' {
-			return rdf.Literal{}, nil, grammar.R_literal.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r1}, append(uncommitted[:], r0), []rune{r1}))
+			return rdf.Literal{}, nil, grammar.R_literal.Err(r.newOffsetError(err, append(uncommitted, r0).AsDecodedRunes(), cursorio.DecodedRunes{}))
+		} else if r1.Rune != '^' {
+			return rdf.Literal{}, nil, grammar.R_literal.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r1.Rune}, append(uncommitted[:], r0).AsDecodedRunes(), r1.AsDecodedRunes()))
 		}
 
-		r.commit([]rune{r0, r1})
+		r.commit(cursorio.DecodedRuneList{r0, r1}.AsDecodedRunes())
 
 		r2, err := r.buf.NextRune()
 		if err != nil {
-			return rdf.Literal{}, nil, grammar.R_literal.Err(r.newOffsetError(err, append(uncommitted, r0, r1), nil))
-		} else if r2 != '<' {
-			return rdf.Literal{}, nil, grammar.R_literal.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r2}, append(uncommitted[:], r0, r1), []rune{r2}))
+			return rdf.Literal{}, nil, grammar.R_literal.Err(r.newOffsetError(err, append(uncommitted, r0, r1).AsDecodedRunes(), cursorio.DecodedRunes{}))
+		} else if r2.Rune != '<' {
+			return rdf.Literal{}, nil, grammar.R_literal.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r2.Rune}, append(uncommitted[:], r0, r1).AsDecodedRunes(), r2.AsDecodedRunes()))
 		}
 
-		iri, iriRange, err := r.captureOpenIRI([]rune{r2})
+		iri, iriRange, err := r.captureOpenIRI(cursorio.DecodedRuneList{r2})
 		if err != nil {
 			return rdf.Literal{}, nil, grammar.R_literal.Err(err)
 		}
@@ -306,21 +306,21 @@ END_TOKEN:
 	}, stringRange, nil
 }
 
-func (r *Decoder) scanOpenLangtag(uncommitted []rune) (string, *cursorio.TextOffsetRange, error) {
+func (r *Decoder) scanOpenLangtag(uncommitted cursorio.DecodedRuneList) (string, *cursorio.TextOffsetRange, error) {
 	// assert(len(uncommitted) == 1 && uncommitted[0] == '@')
 
 	for {
 		r0, err := r.buf.NextRune()
 		if err != nil {
-			return "", nil, grammar.R_LANGTAG.Err(r.newOffsetError(err, uncommitted, nil))
+			return "", nil, grammar.R_LANGTAG.Err(r.newOffsetError(err, uncommitted.AsDecodedRunes(), cursorio.DecodedRunes{}))
 		}
 
 		switch {
-		case 'a' <= r0 && r0 <= 'z', 'A' <= r0 && r0 <= 'Z':
+		case 'a' <= r0.Rune && r0.Rune <= 'z', 'A' <= r0.Rune && r0.Rune <= 'Z':
 			uncommitted = append(uncommitted, r0)
-		case r0 == '-':
+		case r0.Rune == '-':
 			if len(uncommitted) == 1 {
-				return "", nil, grammar.R_LANGTAG.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0}, uncommitted, []rune{r0}))
+				return "", nil, grammar.R_LANGTAG.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0.Rune}, uncommitted.AsDecodedRunes(), r0.AsDecodedRunes()))
 			}
 
 			uncommitted = append(uncommitted, r0)
@@ -338,11 +338,11 @@ SECONDARY:
 	for {
 		r0, err := r.buf.NextRune()
 		if err != nil {
-			return "", nil, grammar.R_LANGTAG.Err(r.newOffsetError(err, uncommitted, nil))
+			return "", nil, grammar.R_LANGTAG.Err(r.newOffsetError(err, uncommitted.AsDecodedRunes(), cursorio.DecodedRunes{}))
 		}
 
 		switch {
-		case 'a' <= r0 && r0 <= 'z', 'A' <= r0 && r0 <= 'Z', '0' <= r0 && r0 <= '9':
+		case 'a' <= r0.Rune && r0.Rune <= 'z', 'A' <= r0.Rune && r0.Rune <= 'Z', '0' <= r0.Rune && r0.Rune <= '9':
 			uncommitted = append(uncommitted, r0)
 		default:
 			r.buf.BacktrackRunes(r0)
@@ -353,17 +353,17 @@ SECONDARY:
 
 END:
 
-	if uncommitted[len(uncommitted)-1] == '-' {
+	if uncommitted[len(uncommitted)-1].Rune == '-' {
 		return "", nil, grammar.R_LANGTAG.Err(r.newOffsetError(
 			cursorioutil.UnexpectedRuneError{
-				Rune: uncommitted[len(uncommitted)-1],
+				Rune: uncommitted[len(uncommitted)-1].Rune,
 			},
-			uncommitted[0:len(uncommitted)-1],
-			[]rune{uncommitted[len(uncommitted)-1]},
+			uncommitted[0:len(uncommitted)-1].AsDecodedRunes(),
+			uncommitted[len(uncommitted)-1].AsDecodedRunes(),
 		))
 	}
 
-	r.commit(uncommitted[0:1])
+	r.commit(uncommitted[0:1].AsDecodedRunes())
 
-	return string(uncommitted[1:]), r.commitForTextOffsetRange(uncommitted[1:]), nil
+	return uncommitted[1:].AsDecodedRunes().String(), r.commitForTextOffsetRange(uncommitted[1:].AsDecodedRunes()), nil
 }

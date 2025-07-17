@@ -16,7 +16,7 @@ type DecoderConfig struct {
 	captureTextOffsets *bool
 	initialTextOffset  *cursorio.TextOffset
 
-	parserOptions inspectjson.ParserOptionsApplier
+	parserOptions []inspectjson.ParserOption
 
 	processingMode *string
 	documentLoader jsonldtype.DocumentLoader
@@ -47,7 +47,7 @@ func (b DecoderConfig) SetInitialTextOffset(v cursorio.TextOffset) DecoderConfig
 	return b
 }
 
-func (b DecoderConfig) SetParserOptions(v inspectjson.ParserOptionsApplier) DecoderConfig {
+func (b DecoderConfig) SetParserOptions(v ...inspectjson.ParserOption) DecoderConfig {
 	b.parserOptions = v
 
 	return b

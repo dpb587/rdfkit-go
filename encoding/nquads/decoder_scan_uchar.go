@@ -1,26 +1,27 @@
 package nquads
 
 import (
+	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/cursorio-go/x/cursorioutil"
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/nquads/internal"
 	"github.com/dpb587/rdfkit-go/encoding/nquads/internal/grammar"
 )
 
-func (r *Decoder) decodeUCHAR4(uncommitted []rune) (rune, []rune, error) {
+func (r *Decoder) decodeUCHAR4(uncommitted cursorio.DecodedRuneList) (rune, cursorio.DecodedRuneList, error) {
 	r0, err := r.buf.NextRune()
 	if err != nil {
 		return 0, nil, grammar.R_UCHAR.Err(err)
 	}
 
-	r0x, ok := internal.HexDecode(r0)
+	r0x, ok := internal.HexDecode(r0.Rune)
 	if !ok {
 		return 0, nil, grammar.R_UCHAR.Err(r.newOffsetError(
 			cursorioutil.UnexpectedRuneError{
-				Rune: r0,
+				Rune: r0.Rune,
 			},
-			uncommitted,
-			[]rune{r0},
+			uncommitted.AsDecodedRunes(),
+			r0.AsDecodedRunes(),
 		))
 	}
 
@@ -29,14 +30,14 @@ func (r *Decoder) decodeUCHAR4(uncommitted []rune) (rune, []rune, error) {
 		return 0, nil, grammar.R_UCHAR.Err(err)
 	}
 
-	r1x, ok := internal.HexDecode(r1)
+	r1x, ok := internal.HexDecode(r1.Rune)
 	if !ok {
 		return 0, nil, grammar.R_UCHAR.Err(r.newOffsetError(
 			cursorioutil.UnexpectedRuneError{
-				Rune: r1,
+				Rune: r1.Rune,
 			},
-			append(uncommitted, r0),
-			[]rune{r1},
+			append(uncommitted, r0).AsDecodedRunes(),
+			r1.AsDecodedRunes(),
 		))
 	}
 
@@ -45,14 +46,14 @@ func (r *Decoder) decodeUCHAR4(uncommitted []rune) (rune, []rune, error) {
 		return 0, nil, grammar.R_UCHAR.Err(err)
 	}
 
-	r2x, ok := internal.HexDecode(r2)
+	r2x, ok := internal.HexDecode(r2.Rune)
 	if !ok {
 		return 0, nil, grammar.R_UCHAR.Err(r.newOffsetError(
 			cursorioutil.UnexpectedRuneError{
-				Rune: r2,
+				Rune: r2.Rune,
 			},
-			append(uncommitted, r0, r1),
-			[]rune{r2},
+			append(uncommitted, r0, r1).AsDecodedRunes(),
+			r2.AsDecodedRunes(),
 		))
 	}
 
@@ -61,14 +62,14 @@ func (r *Decoder) decodeUCHAR4(uncommitted []rune) (rune, []rune, error) {
 		return 0, nil, grammar.R_UCHAR.Err(err)
 	}
 
-	r3x, ok := internal.HexDecode(r3)
+	r3x, ok := internal.HexDecode(r3.Rune)
 	if !ok {
 		return 0, nil, grammar.R_UCHAR.Err(r.newOffsetError(
 			cursorioutil.UnexpectedRuneError{
-				Rune: r3,
+				Rune: r3.Rune,
 			},
-			append(uncommitted, r0, r1, r2),
-			[]rune{r3},
+			append(uncommitted, r0, r1, r2).AsDecodedRunes(),
+			r3.AsDecodedRunes(),
 		))
 	}
 
@@ -77,20 +78,20 @@ func (r *Decoder) decodeUCHAR4(uncommitted []rune) (rune, []rune, error) {
 		nil
 }
 
-func (r *Decoder) decodeUCHAR8(uncommitted []rune) (rune, []rune, error) {
+func (r *Decoder) decodeUCHAR8(uncommitted cursorio.DecodedRuneList) (rune, cursorio.DecodedRuneList, error) {
 	r0, err := r.buf.NextRune()
 	if err != nil {
 		return 0, nil, grammar.R_UCHAR.Err(err)
 	}
 
-	r0x, ok := internal.HexDecode(r0)
+	r0x, ok := internal.HexDecode(r0.Rune)
 	if !ok {
 		return 0, nil, grammar.R_UCHAR.Err(r.newOffsetError(
 			cursorioutil.UnexpectedRuneError{
-				Rune: r0,
+				Rune: r0.Rune,
 			},
-			uncommitted,
-			[]rune{r0},
+			uncommitted.AsDecodedRunes(),
+			r0.AsDecodedRunes(),
 		))
 	} else if r0x > 0 {
 		return 0, nil, grammar.R_UCHAR.Err(encoding.ExceedsMaxUnicodePointErr)
@@ -101,14 +102,14 @@ func (r *Decoder) decodeUCHAR8(uncommitted []rune) (rune, []rune, error) {
 		return 0, nil, grammar.R_UCHAR.Err(err)
 	}
 
-	r1x, ok := internal.HexDecode(r1)
+	r1x, ok := internal.HexDecode(r1.Rune)
 	if !ok {
 		return 0, nil, grammar.R_UCHAR.Err(r.newOffsetError(
 			cursorioutil.UnexpectedRuneError{
-				Rune: r1,
+				Rune: r1.Rune,
 			},
-			append(uncommitted, r0),
-			[]rune{r1},
+			append(uncommitted, r0).AsDecodedRunes(),
+			r1.AsDecodedRunes(),
 		))
 	} else if r1x > 0 {
 		return 0, nil, grammar.R_UCHAR.Err(encoding.ExceedsMaxUnicodePointErr)
@@ -119,14 +120,14 @@ func (r *Decoder) decodeUCHAR8(uncommitted []rune) (rune, []rune, error) {
 		return 0, nil, grammar.R_UCHAR.Err(err)
 	}
 
-	r2x, ok := internal.HexDecode(r2)
+	r2x, ok := internal.HexDecode(r2.Rune)
 	if !ok {
 		return 0, nil, grammar.R_UCHAR.Err(r.newOffsetError(
 			cursorioutil.UnexpectedRuneError{
-				Rune: r2,
+				Rune: r2.Rune,
 			},
-			append(uncommitted, r0, r1),
-			[]rune{r2},
+			append(uncommitted, r0, r1).AsDecodedRunes(),
+			r2.AsDecodedRunes(),
 		))
 	} else if r2x > 1 {
 		return 0, nil, grammar.R_UCHAR.Err(encoding.ExceedsMaxUnicodePointErr)
@@ -137,14 +138,14 @@ func (r *Decoder) decodeUCHAR8(uncommitted []rune) (rune, []rune, error) {
 		return 0, nil, grammar.R_UCHAR.Err(err)
 	}
 
-	r3x, ok := internal.HexDecode(r3)
+	r3x, ok := internal.HexDecode(r3.Rune)
 	if !ok {
 		return 0, nil, grammar.R_UCHAR.Err(r.newOffsetError(
 			cursorioutil.UnexpectedRuneError{
-				Rune: r3,
+				Rune: r3.Rune,
 			},
-			append(uncommitted, r0, r1, r2),
-			[]rune{r3},
+			append(uncommitted, r0, r1, r2).AsDecodedRunes(),
+			r3.AsDecodedRunes(),
 		))
 	}
 
@@ -153,14 +154,14 @@ func (r *Decoder) decodeUCHAR8(uncommitted []rune) (rune, []rune, error) {
 		return 0, nil, grammar.R_UCHAR.Err(err)
 	}
 
-	r4x, ok := internal.HexDecode(r4)
+	r4x, ok := internal.HexDecode(r4.Rune)
 	if !ok {
 		return 0, nil, grammar.R_UCHAR.Err(r.newOffsetError(
 			cursorioutil.UnexpectedRuneError{
-				Rune: r4,
+				Rune: r4.Rune,
 			},
-			append(uncommitted, r0, r1, r2, r3),
-			[]rune{r4},
+			append(uncommitted, r0, r1, r2, r3).AsDecodedRunes(),
+			r4.AsDecodedRunes(),
 		))
 	}
 
@@ -169,14 +170,14 @@ func (r *Decoder) decodeUCHAR8(uncommitted []rune) (rune, []rune, error) {
 		return 0, nil, grammar.R_UCHAR.Err(err)
 	}
 
-	r5x, ok := internal.HexDecode(r5)
+	r5x, ok := internal.HexDecode(r5.Rune)
 	if !ok {
 		return 0, nil, grammar.R_UCHAR.Err(r.newOffsetError(
 			cursorioutil.UnexpectedRuneError{
-				Rune: r5,
+				Rune: r5.Rune,
 			},
-			append(uncommitted, r0, r1, r2, r3, r4),
-			[]rune{r5},
+			append(uncommitted, r0, r1, r2, r3, r4).AsDecodedRunes(),
+			r5.AsDecodedRunes(),
 		))
 	}
 
@@ -185,14 +186,14 @@ func (r *Decoder) decodeUCHAR8(uncommitted []rune) (rune, []rune, error) {
 		return 0, nil, grammar.R_UCHAR.Err(err)
 	}
 
-	r6x, ok := internal.HexDecode(r6)
+	r6x, ok := internal.HexDecode(r6.Rune)
 	if !ok {
 		return 0, nil, grammar.R_UCHAR.Err(r.newOffsetError(
 			cursorioutil.UnexpectedRuneError{
-				Rune: r6,
+				Rune: r6.Rune,
 			},
-			append(uncommitted, r0, r1, r2, r3, r4, r5),
-			[]rune{r6},
+			append(uncommitted, r0, r1, r2, r3, r4, r5).AsDecodedRunes(),
+			r6.AsDecodedRunes(),
 		))
 	}
 
@@ -201,18 +202,18 @@ func (r *Decoder) decodeUCHAR8(uncommitted []rune) (rune, []rune, error) {
 		return 0, nil, grammar.R_UCHAR.Err(err)
 	}
 
-	r7x, ok := internal.HexDecode(r7)
+	r7x, ok := internal.HexDecode(r7.Rune)
 	if !ok {
 		return 0, nil, grammar.R_UCHAR.Err(r.newOffsetError(
 			cursorioutil.UnexpectedRuneError{
-				Rune: r7,
+				Rune: r7.Rune,
 			},
-			append(uncommitted, r0, r1, r2, r3, r4, r5, r6),
-			[]rune{r7},
+			append(uncommitted, r0, r1, r2, r3, r4, r5, r6).AsDecodedRunes(),
+			r7.AsDecodedRunes(),
 		))
 	}
 
 	return rune(r0x<<28 | r1x<<24 | r2x<<20 | r3x<<16 | r4x<<12 | r5x<<8 | r6x<<4 | r7x),
-		[]rune{r0, r1, r2, r3, r4, r5, r6, r7},
+		append(uncommitted, r0, r1, r2, r3, r4, r5, r6, r7),
 		nil
 }

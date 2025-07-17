@@ -15,34 +15,34 @@ type tokenBlankNode struct {
 	Decoded string
 }
 
-func (r *Decoder) produceBlankNode(r0 rune) (*tokenBlankNode, error) {
-	if r0 != '_' {
-		return nil, grammar.R_BLANK_NODE_LABEL.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0}, nil, []rune{r0}))
+func (r *Decoder) produceBlankNode(r0 cursorio.DecodedRune) (*tokenBlankNode, error) {
+	if r0.Rune != '_' {
+		return nil, grammar.R_BLANK_NODE_LABEL.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0.Rune}, cursorio.DecodedRunes{}, r0.AsDecodedRunes()))
 	}
 
-	var uncommitted = []rune{}
+	var uncommitted = cursorio.DecodedRuneList{}
 
 	{
 		r1, err := r.buf.NextRune()
 		if err != nil {
-			return nil, grammar.R_BLANK_NODE_LABEL.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r1}, append(uncommitted[:], r0), []rune{r1}))
-		} else if r1 != ':' {
-			return nil, grammar.R_BLANK_NODE_LABEL.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r1}, append(uncommitted[:], r0), []rune{r1}))
+			return nil, grammar.R_BLANK_NODE_LABEL.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r1.Rune}, append(uncommitted[:], r0).AsDecodedRunes(), r1.AsDecodedRunes()))
+		} else if r1.Rune != ':' {
+			return nil, grammar.R_BLANK_NODE_LABEL.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r1.Rune}, append(uncommitted[:], r0).AsDecodedRunes(), r1.AsDecodedRunes()))
 		}
 
 		r2, err := r.buf.NextRune()
 		if err != nil {
-			return nil, grammar.R_BLANK_NODE_LABEL.Err(r.newOffsetError(err, append(uncommitted, r0, r1), nil))
+			return nil, grammar.R_BLANK_NODE_LABEL.Err(r.newOffsetError(err, append(uncommitted, r0, r1).AsDecodedRunes(), cursorio.DecodedRunes{}))
 		}
 
 		switch {
-		case internal.IsRune_PN_CHARS_U(r2), '0' <= r2 && r2 <= '9':
+		case internal.IsRune_PN_CHARS_U(r2.Rune), '0' <= r2.Rune && r2.Rune <= '9':
 			// valid
 		default:
-			return nil, grammar.R_BLANK_NODE_LABEL.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r2}, append(uncommitted[:], r0, r1), []rune{r2}))
+			return nil, grammar.R_BLANK_NODE_LABEL.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r2.Rune}, append(uncommitted[:], r0, r1).AsDecodedRunes(), r2.AsDecodedRunes()))
 		}
 
-		r.commit([]rune{r0, r1})
+		r.commit(cursorio.DecodedRuneList{r0, r1}.AsDecodedRunes())
 
 		uncommitted = append(uncommitted, r2)
 	}
@@ -54,11 +54,11 @@ func (r *Decoder) produceBlankNode(r0 rune) (*tokenBlankNode, error) {
 				goto DONE
 			}
 
-			return nil, grammar.R_BLANK_NODE_LABEL.Err(r.newOffsetError(err, uncommitted, nil))
+			return nil, grammar.R_BLANK_NODE_LABEL.Err(r.newOffsetError(err, uncommitted.AsDecodedRunes(), cursorio.DecodedRunes{}))
 		}
 
 		switch {
-		case internal.IsRune_PN_CHARS(r0), r0 == '.':
+		case internal.IsRune_PN_CHARS(r0.Rune), r0.Rune == '.':
 			uncommitted = append(uncommitted, r0)
 		default:
 			r.buf.BacktrackRunes(r0)
@@ -69,24 +69,30 @@ func (r *Decoder) produceBlankNode(r0 rune) (*tokenBlankNode, error) {
 
 DONE:
 
-	if uncommitted[len(uncommitted)-1] == '.' {
+	if uncommitted[len(uncommitted)-1].Rune == '.' {
 		r.buf.BacktrackRunes(uncommitted[len(uncommitted)-1])
 		uncommitted = uncommitted[0 : len(uncommitted)-1]
 	}
 
-	if len(uncommitted) > 1 && !internal.IsRune_PN_CHARS(uncommitted[len(uncommitted)-1]) {
+	if len(uncommitted) > 1 && !internal.IsRune_PN_CHARS(uncommitted[len(uncommitted)-1].Rune) {
 		return nil, grammar.R_BLANK_NODE_LABEL.Err(r.newOffsetError(
 			cursorioutil.UnexpectedRuneError{
-				Rune: uncommitted[len(uncommitted)-1],
+				Rune: uncommitted[len(uncommitted)-1].Rune,
 			},
-			uncommitted[0:len(uncommitted)-1],
-			[]rune{uncommitted[len(uncommitted)-1]},
+			uncommitted[0:len(uncommitted)-1].AsDecodedRunes(),
+			uncommitted[len(uncommitted)-1].AsDecodedRunes(),
 		))
 	}
 
+	// Convert to rune slice for decoded string
+	decoded := make([]rune, len(uncommitted))
+	for i, dr := range uncommitted {
+		decoded[i] = dr.Rune
+	}
+
 	token := &tokenBlankNode{
-		Offsets: r.commitForTextOffsetRange(uncommitted),
-		Decoded: string(uncommitted),
+		Offsets: r.commitForTextOffsetRange(uncommitted.AsDecodedRunes()),
+		Decoded: string(decoded),
 	}
 
 	return token, nil

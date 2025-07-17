@@ -33,7 +33,7 @@ type Decoder struct {
 	captureTextOffsets bool
 	initialTextOffset  cursorio.TextOffset
 
-	parserOptions inspectjson.ParserOptionsApplier
+	parserOptions []inspectjson.ParserOption
 
 	processingMode string
 	documentLoader jsonldtype.DocumentLoader
@@ -93,13 +93,13 @@ func (d *Decoder) GetStatement() rdfio.Statement {
 }
 
 func (r *Decoder) parseRoot() error {
-	topt := inspectjson.TokenizerOptions{}
+	topt := inspectjson.TokenizerConfig{}
 
 	if r.captureTextOffsets {
-		topt = topt.SourceInitialOffset(r.initialTextOffset)
+		topt = topt.SetSourceInitialOffset(r.initialTextOffset)
 	}
 
-	ts, err := inspectjson.Parse(r.r, r.parserOptions, topt)
+	ts, err := inspectjson.Parse(r.r, append(r.parserOptions, topt)...)
 	if err != nil {
 		return fmt.Errorf("parse: %w", err)
 	}

@@ -8,12 +8,12 @@ import (
 )
 
 func reader_scan_triplesOrGraph_E1(value rdf.GraphNameValue, valueRange *cursorio.TextOffsetRange) scanFunc {
-	return func(r *Decoder, ectx evaluationContext, r0 rune, err error) (readerStack, error) {
-		if r0 == '{' {
+	return func(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, err error) (readerStack, error) {
+		if r0.Rune == '{' {
 			ectx.CurGraphName = value
 			ectx.CurGraphNameLocation = valueRange
 
-			r.commit([]rune{r0})
+			r.commit(r0.AsDecodedRunes())
 
 			r.pushState(ectx, reader_scan_wrappedGraph_End)
 
@@ -32,7 +32,7 @@ func reader_scan_triplesOrGraph_E1(value rdf.GraphNameValue, valueRange *cursori
 	}
 }
 
-func reader_scan_triplesOrGraph_labelOrSubject_IRIREF(r *Decoder, ectx evaluationContext, r0 rune, err error) (readerStack, error) {
+func reader_scan_triplesOrGraph_labelOrSubject_IRIREF(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, err error) (readerStack, error) {
 	if err != nil {
 		return readerStack{}, grammar.R_triples.Err(grammar.R_subject.Err(err))
 	}
@@ -50,7 +50,7 @@ func reader_scan_triplesOrGraph_labelOrSubject_IRIREF(r *Decoder, ectx evaluatio
 	return readerStack{ectx, reader_scan_triplesOrGraph_E1(resolvedIRI, token.Offsets)}, nil
 }
 
-func reader_scan_triplesOrGraph_labelOrSubject_PrefixedName(r *Decoder, ectx evaluationContext, r0 rune, err error) (readerStack, error) {
+func reader_scan_triplesOrGraph_labelOrSubject_PrefixedName(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, err error) (readerStack, error) {
 	if err != nil {
 		return readerStack{}, grammar.R_triples.Err(grammar.R_subject.Err(grammar.R_PrefixedName.Err(err)))
 	}
@@ -68,7 +68,7 @@ func reader_scan_triplesOrGraph_labelOrSubject_PrefixedName(r *Decoder, ectx eva
 	return readerStack{ectx, reader_scan_triplesOrGraph_E1(rdf.IRI(expanded), token.Offsets)}, nil
 }
 
-func reader_scan_triplesOrGraph_labelOrSubject_BlankNode(r *Decoder, ectx evaluationContext, r0 rune, err error) (readerStack, error) {
+func reader_scan_triplesOrGraph_labelOrSubject_BlankNode(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, err error) (readerStack, error) {
 	if err != nil {
 		return readerStack{}, grammar.R_triples.Err(grammar.R_subject.Err(grammar.R_BlankNode.Err(err)))
 	}

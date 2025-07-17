@@ -15,61 +15,61 @@ type tokenPNAME_NS struct {
 	DecodedString string
 }
 
-func (r *Decoder) producePNAME_NS(r0 rune) (*tokenPNAME_NS, error) {
-	var uncommitted []rune
+func (r *Decoder) producePNAME_NS(r0 cursorio.DecodedRune) (*tokenPNAME_NS, error) {
+	var uncommitted cursorio.DecodedRuneList
 	var namespace []rune
 
 	switch {
-	case r0 == ':':
+	case r0.Rune == ':':
 		uncommitted = append(uncommitted, r0)
 
 		goto DONE
-	case internal.IsRune_PN_CHARS_BASE(r0):
-		namespace = append(namespace, r0)
+	case internal.IsRune_PN_CHARS_BASE(r0.Rune):
+		namespace = append(namespace, r0.Rune)
 		uncommitted = append(uncommitted, r0)
 	default:
-		return nil, grammar.R_PNAME_NS.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0}, nil, []rune{r0}))
+		return nil, grammar.R_PNAME_NS.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0.Rune}, cursorio.DecodedRunes{}, r0.AsDecodedRunes()))
 	}
 
 	for {
-		r0, err := r.buf.NextRune()
+		r1, err := r.buf.NextRune()
 		if err != nil {
-			return nil, grammar.R_PNAME_NS.Err(r.newOffsetError(err, uncommitted, nil))
+			return nil, grammar.R_PNAME_NS.Err(r.newOffsetError(err, uncommitted.AsDecodedRunes(), cursorio.DecodedRunes{}))
 		}
 
 		switch {
-		case r0 == ':':
-			uncommitted = append(uncommitted, r0)
+		case r1.Rune == ':':
+			uncommitted = append(uncommitted, r1)
 
 			goto PN_PREFIX_DONE
-		case internal.IsRune_PN_CHARS(r0), r0 == '.':
-			namespace = append(namespace, r0)
-			uncommitted = append(uncommitted, r0)
+		case internal.IsRune_PN_CHARS(r1.Rune), r1.Rune == '.':
+			namespace = append(namespace, r1.Rune)
+			uncommitted = append(uncommitted, r1)
 		default:
 			return nil, r.newOffsetError(
-				cursorioutil.UnexpectedRuneError{Rune: r0},
-				uncommitted,
-				[]rune{r0},
+				cursorioutil.UnexpectedRuneError{Rune: r1.Rune},
+				uncommitted.AsDecodedRunes(),
+				r1.AsDecodedRunes(),
 			)
 		}
 	}
 
 PN_PREFIX_DONE:
 
-	if len(uncommitted) > 1 && uncommitted[len(uncommitted)-1] == '.' {
+	if len(uncommitted) > 1 && uncommitted[len(uncommitted)-1].Rune == '.' {
 		return nil, grammar.R_PNAME_NS.Err(r.newOffsetError(
 			cursorioutil.UnexpectedRuneError{
-				Rune: uncommitted[len(uncommitted)-1],
+				Rune: uncommitted[len(uncommitted)-1].Rune,
 			},
-			uncommitted[:len(uncommitted)-1],
-			[]rune{uncommitted[len(uncommitted)-1]},
+			uncommitted[:len(uncommitted)-1].AsDecodedRunes(),
+			uncommitted[len(uncommitted)-1].AsDecodedRunes(),
 		))
 	}
 
 DONE:
 
 	return &tokenPNAME_NS{
-		Offsets:       r.commitForTextOffsetRange(uncommitted),
+		Offsets:       r.commitForTextOffsetRange(uncommitted.AsDecodedRunes()),
 		DecodedString: string(namespace),
 	}, nil
 }
@@ -83,8 +83,8 @@ type tokenPrefixedName struct {
 // PrefixedName ::= PNAME_LN | PNAME_NS
 // PNAME_NS     ::= PN_PREFIX? ':'
 // PNAME_LN     ::= PNAME_NS PN_LOCAL
-func (r *Decoder) producePrefixedName(r0 rune) (*tokenPrefixedName, error) {
-	var uncommitted []rune
+func (r *Decoder) producePrefixedName(r0 cursorio.DecodedRune) (*tokenPrefixedName, error) {
+	var uncommitted cursorio.DecodedRuneList
 
 	var decodedLocal []rune
 
@@ -100,44 +100,44 @@ func (r *Decoder) producePrefixedName(r0 rune) (*tokenPrefixedName, error) {
 				goto DONE
 			}
 
-			return nil, grammar.R_PrefixedName.Err(r.newOffsetError(err, nil, nil))
+			return nil, grammar.R_PrefixedName.Err(r.newOffsetError(err, cursorio.DecodedRunes{}, cursorio.DecodedRunes{}))
 		}
 
 		switch {
-		case internal.IsRune_PN_CHARS_U(r0),
-			r0 == ':',
-			'0' <= r0 && r0 <= '9':
-			decodedLocal = append(decodedLocal, r0)
+		case internal.IsRune_PN_CHARS_U(r0.Rune),
+			r0.Rune == ':',
+			'0' <= r0.Rune && r0.Rune <= '9':
+			decodedLocal = append(decodedLocal, r0.Rune)
 			uncommitted = append(uncommitted, r0)
-		case r0 == '%':
+		case r0.Rune == '%':
 			r1, err := r.buf.NextRune()
 			if err != nil {
-				return nil, grammar.R_PrefixedName.Err(grammar.R_PN_LOCAL.Err(grammar.R_PERCENT.Err(r.newOffsetError(err, append(uncommitted, r0), nil))))
-			} else if _, ok := internal.HexDecode(r1); !ok {
-				return nil, grammar.R_PrefixedName.Err(grammar.R_PN_LOCAL.Err(grammar.R_PERCENT.Err(grammar.R_HEX.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r1}, append(uncommitted[:], r0), []rune{r1})))))
+				return nil, grammar.R_PrefixedName.Err(grammar.R_PN_LOCAL.Err(grammar.R_PERCENT.Err(r.newOffsetError(err, append(uncommitted, r0).AsDecodedRunes(), cursorio.DecodedRunes{}))))
+			} else if _, ok := internal.HexDecode(r1.Rune); !ok {
+				return nil, grammar.R_PrefixedName.Err(grammar.R_PN_LOCAL.Err(grammar.R_PERCENT.Err(grammar.R_HEX.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r1.Rune}, append(uncommitted[:], r0).AsDecodedRunes(), r1.AsDecodedRunes())))))
 			}
 
 			r2, err := r.buf.NextRune()
 			if err != nil {
-				return nil, grammar.R_PrefixedName.Err(grammar.R_PN_LOCAL.Err(grammar.R_PERCENT.Err(r.newOffsetError(err, append(uncommitted, r0, r1), nil))))
-			} else if _, ok := internal.HexDecode(r2); !ok {
-				return nil, grammar.R_PrefixedName.Err(grammar.R_PN_LOCAL.Err(grammar.R_PERCENT.Err(grammar.R_HEX.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r2}, append(uncommitted[:], r0, r1), []rune{r2})))))
+				return nil, grammar.R_PrefixedName.Err(grammar.R_PN_LOCAL.Err(grammar.R_PERCENT.Err(r.newOffsetError(err, append(uncommitted, r0, r1).AsDecodedRunes(), cursorio.DecodedRunes{}))))
+			} else if _, ok := internal.HexDecode(r2.Rune); !ok {
+				return nil, grammar.R_PrefixedName.Err(grammar.R_PN_LOCAL.Err(grammar.R_PERCENT.Err(grammar.R_HEX.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r2.Rune}, append(uncommitted[:], r0, r1).AsDecodedRunes(), r2.AsDecodedRunes())))))
 			}
 
-			decodedLocal = append(decodedLocal, r0, r1, r2)
+			decodedLocal = append(decodedLocal, r0.Rune, r1.Rune, r2.Rune)
 			uncommitted = append(uncommitted, r0, r1, r2)
-		case r0 == '\\':
+		case r0.Rune == '\\':
 			r1, err := r.buf.NextRune()
 			if err != nil {
-				return nil, grammar.R_PrefixedName.Err(grammar.R_PN_LOCAL.Err(r.newOffsetError(err, append(uncommitted, r0), nil)))
+				return nil, grammar.R_PrefixedName.Err(grammar.R_PN_LOCAL.Err(r.newOffsetError(err, append(uncommitted, r0).AsDecodedRunes(), cursorio.DecodedRunes{})))
 			}
 
-			switch r1 {
+			switch r1.Rune {
 			case '_', '~', '.', '-', '!', '$', '&', '\'', '(', ')', '*', '+', ',', ';', '=', '/', '?', '#', '@', '%':
-				decodedLocal = append(decodedLocal, r1)
+				decodedLocal = append(decodedLocal, r1.Rune)
 				uncommitted = append(uncommitted, r0, r1)
 			default:
-				return nil, grammar.R_PrefixedName.Err(grammar.R_PN_LOCAL.Err(grammar.R_PN_LOCAL_ESC.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r1}, append(uncommitted[:], r0), []rune{r1}))))
+				return nil, grammar.R_PrefixedName.Err(grammar.R_PN_LOCAL.Err(grammar.R_PN_LOCAL_ESC.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r1.Rune}, append(uncommitted[:], r0).AsDecodedRunes(), r1.AsDecodedRunes()))))
 			}
 		default:
 			r.buf.BacktrackRunes(r0)
@@ -153,44 +153,44 @@ func (r *Decoder) producePrefixedName(r0 rune) (*tokenPrefixedName, error) {
 				goto PN_LOCAL_DONE
 			}
 
-			return nil, grammar.R_PrefixedName.Err(grammar.R_PN_LOCAL.Err(r.newOffsetError(err, uncommitted, nil)))
+			return nil, grammar.R_PrefixedName.Err(grammar.R_PN_LOCAL.Err(r.newOffsetError(err, uncommitted.AsDecodedRunes(), cursorio.DecodedRunes{})))
 		}
 
 		switch {
-		case internal.IsRune_PN_CHARS(r0),
-			r0 == '.',
-			r0 == ':':
-			decodedLocal = append(decodedLocal, r0)
+		case internal.IsRune_PN_CHARS(r0.Rune),
+			r0.Rune == '.',
+			r0.Rune == ':':
+			decodedLocal = append(decodedLocal, r0.Rune)
 			uncommitted = append(uncommitted, r0)
-		case r0 == '%':
+		case r0.Rune == '%':
 			r1, err := r.buf.NextRune()
 			if err != nil {
-				return nil, grammar.R_PrefixedName.Err(grammar.R_PN_LOCAL.Err(grammar.R_PERCENT.Err(r.newOffsetError(err, append(uncommitted, r0), nil))))
-			} else if _, ok := internal.HexDecode(r1); !ok {
-				return nil, grammar.R_PrefixedName.Err(grammar.R_PN_LOCAL.Err(grammar.R_PERCENT.Err(grammar.R_HEX.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r1}, append(uncommitted[:], r0), []rune{r1})))))
+				return nil, grammar.R_PrefixedName.Err(grammar.R_PN_LOCAL.Err(grammar.R_PERCENT.Err(r.newOffsetError(err, append(uncommitted, r0).AsDecodedRunes(), cursorio.DecodedRunes{}))))
+			} else if _, ok := internal.HexDecode(r1.Rune); !ok {
+				return nil, grammar.R_PrefixedName.Err(grammar.R_PN_LOCAL.Err(grammar.R_PERCENT.Err(grammar.R_HEX.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r1.Rune}, append(uncommitted[:], r0).AsDecodedRunes(), r1.AsDecodedRunes())))))
 			}
 
 			r2, err := r.buf.NextRune()
 			if err != nil {
-				return nil, grammar.R_PrefixedName.Err(grammar.R_PN_LOCAL.Err(grammar.R_PERCENT.Err(r.newOffsetError(err, append(uncommitted, r0, r1), nil))))
-			} else if _, ok := internal.HexDecode(r2); !ok {
-				return nil, grammar.R_PrefixedName.Err(grammar.R_PN_LOCAL.Err(grammar.R_PERCENT.Err(grammar.R_HEX.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r2}, append(uncommitted[:], r0, r1), []rune{r2})))))
+				return nil, grammar.R_PrefixedName.Err(grammar.R_PN_LOCAL.Err(grammar.R_PERCENT.Err(r.newOffsetError(err, append(uncommitted, r0, r1).AsDecodedRunes(), cursorio.DecodedRunes{}))))
+			} else if _, ok := internal.HexDecode(r2.Rune); !ok {
+				return nil, grammar.R_PrefixedName.Err(grammar.R_PN_LOCAL.Err(grammar.R_PERCENT.Err(grammar.R_HEX.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r2.Rune}, append(uncommitted[:], r0, r1).AsDecodedRunes(), r2.AsDecodedRunes())))))
 			}
 
-			decodedLocal = append(decodedLocal, r0, r1, r2)
+			decodedLocal = append(decodedLocal, r0.Rune, r1.Rune, r2.Rune)
 			uncommitted = append(uncommitted, r0, r1, r2)
-		case r0 == '\\':
+		case r0.Rune == '\\':
 			r1, err := r.buf.NextRune()
 			if err != nil {
-				return nil, grammar.R_PrefixedName.Err(grammar.R_PN_LOCAL.Err(r.newOffsetError(err, append(uncommitted, r0), nil)))
+				return nil, grammar.R_PrefixedName.Err(grammar.R_PN_LOCAL.Err(r.newOffsetError(err, append(uncommitted, r0).AsDecodedRunes(), cursorio.DecodedRunes{})))
 			}
 
-			switch r1 {
+			switch r1.Rune {
 			case '_', '~', '.', '-', '!', '$', '&', '\'', '(', ')', '*', '+', ',', ';', '=', '/', '?', '#', '@', '%':
-				decodedLocal = append(decodedLocal, r1)
+				decodedLocal = append(decodedLocal, r1.Rune)
 				uncommitted = append(uncommitted, r0, r1)
 			default:
-				return nil, grammar.R_PrefixedName.Err(grammar.R_PN_LOCAL.Err(grammar.R_PN_LOCAL_ESC.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r1}, append(uncommitted[:], r0), []rune{r1}))))
+				return nil, grammar.R_PrefixedName.Err(grammar.R_PN_LOCAL.Err(grammar.R_PN_LOCAL_ESC.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r1.Rune}, append(uncommitted[:], r0).AsDecodedRunes(), r1.AsDecodedRunes()))))
 			}
 		default:
 			r.buf.BacktrackRunes(r0)
@@ -215,7 +215,7 @@ PN_LOCAL_DONE:
 
 DONE:
 
-	cr := r.commitForTextOffsetRange(uncommitted)
+	cr := r.commitForTextOffsetRange(uncommitted.AsDecodedRunes())
 
 	if cr != nil {
 		cr = &cursorio.TextOffsetRange{

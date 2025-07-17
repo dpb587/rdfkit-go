@@ -1,14 +1,15 @@
 package trig
 
 import (
+	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/rdfkit-go/encoding/trig/internal/grammar"
 )
 
-func reader_triples2_blankNodePropertyList(r *Decoder, ectx evaluationContext, r0 rune, err error) (readerStack, error) {
+func reader_triples2_blankNodePropertyList(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, err error) (readerStack, error) {
 	if err != nil {
 		return readerStack{}, grammar.R_subject.Err(err)
-	} else if r0 == ']' {
-		r.commit([]rune{r0})
+	} else if r0.Rune == ']' {
+		r.commit(r0.AsDecodedRunes())
 
 		r.pushState(ectx, reader_scan_triples_End)
 		r.pushState(ectx, reader_scan_PredicateObjectList_Continue)

@@ -9,13 +9,13 @@ import (
 )
 
 type DecoderConfig struct {
-	tokenizerOptions inspectjson.TokenizerOptionsApplier
+	tokenizerOptions []inspectjson.TokenizerOption
 
 	captureTextOffsets *bool
 	initialTextOffset  *cursorio.TextOffset
 }
 
-func (b DecoderConfig) SetTokenizerOptions(v inspectjson.TokenizerOptionsApplier) DecoderConfig {
+func (b DecoderConfig) SetTokenizerOptions(v ...inspectjson.TokenizerOption) DecoderConfig {
 	b.tokenizerOptions = v
 
 	return b
@@ -54,8 +54,8 @@ func (b DecoderConfig) newDecoder(r io.Reader) (*Decoder, error) {
 		buildTextOffsets: encodingutil.BuildTextOffsetsNil,
 	}
 
-	if b.tokenizerOptions != nil {
-		d.topts = append(d.topts, b.tokenizerOptions)
+	if len(b.tokenizerOptions) > 0 {
+		d.topts = append(d.topts, b.tokenizerOptions...)
 	}
 
 	if b.captureTextOffsets != nil && *b.captureTextOffsets {
@@ -65,7 +65,7 @@ func (b DecoderConfig) newDecoder(r io.Reader) (*Decoder, error) {
 			initialTextOffset = *b.initialTextOffset
 		}
 
-		d.topts = append(d.topts, inspectjson.TokenizerOptions{}.SourceInitialOffset(initialTextOffset))
+		d.topts = append(d.topts, inspectjson.TokenizerConfig{}.SetSourceInitialOffset(initialTextOffset))
 		d.buildTextOffsets = encodingutil.BuildTextOffsetsValue
 	}
 

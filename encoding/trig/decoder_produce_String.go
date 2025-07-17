@@ -19,37 +19,37 @@ type tokenString struct {
 // STRING_LITERAL_SINGLE_QUOTE      ::= "'" ([^#x27#x5C#xA#xD] | ECHAR | UCHAR)* "'"
 // STRING_LITERAL_LONG_SINGLE_QUOTE ::= "”'" (("'" | "”")? ([^'\] | ECHAR | UCHAR))* "”'"
 // STRING_LITERAL_LONG_QUOTE        ::= '"""' (('"' | '""')? ([^"\] | ECHAR | UCHAR))* '"""'
-func (r *Decoder) produceString(r0 rune) (*tokenString, error) {
+func (r *Decoder) produceString(r0 cursorio.DecodedRune) (*tokenString, error) {
 	var grammarRule grammar.R
 
-	switch r0 {
+	switch r0.Rune {
 	case '"':
 		grammarRule = grammar.R_STRING_LITERAL_QUOTE
 	case '\'':
 		grammarRule = grammar.R_STRING_LITERAL_SINGLE_QUOTE
 	default:
-		return nil, grammar.R_String.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0}, nil, []rune{r0}))
+		return nil, grammar.R_String.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0.Rune}, cursorio.DecodedRunes{}, r0.AsDecodedRunes()))
 	}
 
-	var uncommitted = []rune{r0}
-	var delimiterRune = r0
+	var uncommitted = cursorio.DecodedRuneList{r0}
+	var delimiterRune = r0.Rune
 	var delimiterTriple = false
 	var decoded []rune
 
 	r0, err := r.buf.NextRune()
 	if err != nil {
-		return nil, grammar.R_String.Err(grammarRule.Err(r.newOffsetError(err, uncommitted, nil)))
+		return nil, grammar.R_String.Err(grammarRule.Err(r.newOffsetError(err, uncommitted.AsDecodedRunes(), cursorio.DecodedRunes{})))
 	}
 
-	if r0 == delimiterRune {
+	if r0.Rune == delimiterRune {
 		r1, err := r.buf.NextRune()
 		if err != nil {
 			if errors.Is(err, io.EOF) {
 				goto DONE
 			}
 
-			return nil, grammar.R_String.Err(grammarRule.Err(r.newOffsetError(err, append(uncommitted, r0), nil)))
-		} else if r1 == delimiterRune {
+			return nil, grammar.R_String.Err(grammarRule.Err(r.newOffsetError(err, append(uncommitted, r0).AsDecodedRunes(), cursorio.DecodedRunes{})))
+		} else if r1.Rune == delimiterRune {
 			delimiterTriple = true
 
 			switch grammarRule {
@@ -67,7 +67,7 @@ func (r *Decoder) produceString(r0 rune) (*tokenString, error) {
 		r.buf.BacktrackRunes(r1)
 
 		return &tokenString{
-			Offsets: r.commitForTextOffsetRange(append(uncommitted, r0, r1)),
+			Offsets: r.commitForTextOffsetRange(append(uncommitted, r0, r1).AsDecodedRunes()),
 			Decoded: "",
 		}, nil
 	} else {
@@ -79,12 +79,12 @@ START_DELIMITER_DONE:
 	for {
 		r0, err := r.buf.NextRune()
 		if err != nil {
-			return nil, grammar.R_String.Err(grammarRule.Err(r.newOffsetError(err, uncommitted, nil)))
+			return nil, grammar.R_String.Err(grammarRule.Err(r.newOffsetError(err, uncommitted.AsDecodedRunes(), cursorio.DecodedRunes{})))
 		}
 
 		switch {
-		case r0 == '"' || r0 == '\'':
-			if r0 == delimiterRune {
+		case r0.Rune == '"' || r0.Rune == '\'':
+			if r0.Rune == delimiterRune {
 				if !delimiterTriple {
 					uncommitted = append(uncommitted, r0)
 
@@ -93,12 +93,12 @@ START_DELIMITER_DONE:
 
 				r1, err := r.buf.NextRune()
 				if err != nil {
-					return nil, grammar.R_String.Err(grammarRule.Err(r.newOffsetError(err, append(uncommitted, r0), nil)))
-				} else if r1 == delimiterRune {
+					return nil, grammar.R_String.Err(grammarRule.Err(r.newOffsetError(err, append(uncommitted, r0).AsDecodedRunes(), cursorio.DecodedRunes{})))
+				} else if r1.Rune == delimiterRune {
 					r2, err := r.buf.NextRune()
 					if err != nil {
-						return nil, grammar.R_String.Err(grammarRule.Err(r.newOffsetError(err, append(uncommitted, r0, r1), nil)))
-					} else if r2 == delimiterRune {
+						return nil, grammar.R_String.Err(grammarRule.Err(r.newOffsetError(err, append(uncommitted, r0, r1).AsDecodedRunes(), cursorio.DecodedRunes{})))
+					} else if r2.Rune == delimiterRune {
 						uncommitted = append(uncommitted, r0, r1, r2)
 
 						goto DONE
@@ -110,15 +110,15 @@ START_DELIMITER_DONE:
 				}
 			}
 
-			decoded = append(decoded, r0)
+			decoded = append(decoded, r0.Rune)
 			uncommitted = append(uncommitted, r0)
-		case r0 == '\\':
+		case r0.Rune == '\\':
 			r1, err := r.buf.NextRune()
 			if err != nil {
-				return nil, grammar.R_String.Err(grammarRule.Err(r.newOffsetError(err, uncommitted, nil)))
+				return nil, grammar.R_String.Err(grammarRule.Err(r.newOffsetError(err, uncommitted.AsDecodedRunes(), cursorio.DecodedRunes{})))
 			}
 
-			switch r1 {
+			switch r1.Rune {
 			case 'u':
 				decodedRune, nextUncommitted, err := r.decodeUCHAR4(append(uncommitted, r0, r1))
 				if err != nil {
@@ -160,10 +160,10 @@ START_DELIMITER_DONE:
 				decoded = append(decoded, '\\')
 				uncommitted = append(uncommitted, r0, r1)
 			default:
-				return nil, grammar.R_String.Err(grammarRule.Err(grammar.R_ECHAR.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r1}, append(uncommitted[:], r0), []rune{r1}))))
+				return nil, grammar.R_String.Err(grammarRule.Err(grammar.R_ECHAR.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r1.Rune}, append(uncommitted[:], r0).AsDecodedRunes(), r1.AsDecodedRunes()))))
 			}
 		default:
-			decoded = append(decoded, r0)
+			decoded = append(decoded, r0.Rune)
 			uncommitted = append(uncommitted, r0)
 		}
 	}
@@ -171,7 +171,7 @@ START_DELIMITER_DONE:
 DONE:
 
 	return &tokenString{
-		Offsets: r.commitForTextOffsetRange(uncommitted),
+		Offsets: r.commitForTextOffsetRange(uncommitted.AsDecodedRunes()),
 		Decoded: string(decoded),
 	}, nil
 }

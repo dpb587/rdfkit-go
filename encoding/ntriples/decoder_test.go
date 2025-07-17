@@ -4,6 +4,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/rdf"
 )
@@ -75,7 +76,7 @@ func TestDecoder_ScanIRIREF(t *testing.T) {
 
 			sr, _ := s.buf.NextRune()
 
-			outputIRI, _, err := s.captureOpenIRI([]rune{sr})
+			outputIRI, _, err := s.captureOpenIRI(cursorio.DecodedRuneList{sr})
 			if err == nil && len(tc.OutputError) > 0 {
 				t.Errorf("expected error, but got nil")
 			} else if err != nil && err.Error() != tc.OutputError {
@@ -176,7 +177,7 @@ func TestDecoder_ScanString(t *testing.T) {
 
 			sr, _ := s.buf.NextRune()
 
-			outputLiteral, _, err := s.captureOpenLiteral([]rune{sr})
+			outputLiteral, _, err := s.captureOpenLiteral(cursorio.DecodedRuneList{sr})
 			if err == nil && len(tc.OutputError) > 0 {
 				t.Errorf("expected error, but got nil")
 			} else if err != nil && err.Error() != tc.OutputError {

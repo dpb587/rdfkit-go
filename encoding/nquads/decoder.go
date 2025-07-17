@@ -67,12 +67,12 @@ func (r *Decoder) Next() bool {
 						return nil
 					}
 
-					return grammar.R_nquadsDoc.Err(r.newOffsetError(err, nil, nil))
+					return grammar.R_nquadsDoc.Err(r.newOffsetError(err, cursorio.DecodedRunes{}, cursorio.DecodedRunes{}))
 				}
 
 				switch {
-				case r0 == '#':
-					err = r.drainLine([]rune{r0})
+				case r0.Rune == '#':
+					err = r.drainLine(cursorio.DecodedRuneList{r0})
 					if err != nil {
 						if errors.Is(err, io.EOF) {
 							// TODO technically at least one triple must be present
@@ -81,19 +81,19 @@ func (r *Decoder) Next() bool {
 							return nil
 						}
 
-						return grammar.R_nquadsDoc.Err(r.newOffsetError(err, nil, nil))
+						return grammar.R_nquadsDoc.Err(r.newOffsetError(err, cursorio.DecodedRunes{}, cursorio.DecodedRunes{}))
 					}
 
 					goto QUAD_START
-				case r0 == 0xD || r0 == 0xA:
-					r.commit([]rune{r0})
+				case r0.Rune == 0xD || r0.Rune == 0xA:
+					r.commit(r0.AsDecodedRunes())
 
 					goto QUAD_START
 				default:
-					if unicode.IsSpace(r0) {
-						r.commit([]rune{r0})
+					if unicode.IsSpace(r0.Rune) {
+						r.commit(r0.AsDecodedRunes())
 					} else {
-						return grammar.R_nquadsDoc.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0}, nil, []rune{r0}))
+						return grammar.R_nquadsDoc.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0.Rune}, cursorio.DecodedRunes{}, r0.AsDecodedRunes()))
 					}
 				}
 			}
@@ -128,21 +128,21 @@ func (r *Decoder) Next() bool {
 		for {
 			r0, err := r.buf.NextRune()
 			if err != nil {
-				return grammar.R_statement.Err(r.newOffsetError(err, nil, nil))
+				return grammar.R_statement.Err(r.newOffsetError(err, cursorio.DecodedRunes{}, cursorio.DecodedRunes{}))
 			}
 
 			switch {
-			case r0 == '.':
-				r.commit([]rune{r0})
+			case r0.Rune == '.':
+				r.commit(r0.AsDecodedRunes())
 
 				goto QUAD_DONE
-			case r0 == '#':
-				err = r.drainLine([]rune{r0})
+			case r0.Rune == '#':
+				err = r.drainLine(cursorio.DecodedRuneList{r0})
 				if err != nil {
 					return err
 				}
-			case unicode.IsSpace(r0):
-				r.commit([]rune{r0})
+			case unicode.IsSpace(r0.Rune):
+				r.commit(r0.AsDecodedRunes())
 			default:
 				r.buf.BacktrackRunes(r0)
 
@@ -163,21 +163,21 @@ func (r *Decoder) Next() bool {
 		for {
 			r0, err := r.buf.NextRune()
 			if err != nil {
-				return grammar.R_statement.Err(r.newOffsetError(err, nil, nil))
+				return grammar.R_statement.Err(r.newOffsetError(err, cursorio.DecodedRunes{}, cursorio.DecodedRunes{}))
 			}
 
 			switch {
-			case r0 == '.':
+			case r0.Rune == '.':
 				goto QUAD_DONE
-			case r0 == '#':
-				err = r.drainLine([]rune{r0})
+			case r0.Rune == '#':
+				err = r.drainLine(cursorio.DecodedRuneList{r0})
 				if err != nil {
 					return err
 				}
-			case unicode.IsSpace(r0):
-				r.commit([]rune{r0})
+			case unicode.IsSpace(r0.Rune):
+				r.commit(r0.AsDecodedRunes())
 			default:
-				return grammar.R_statement.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0}, nil, []rune{r0}))
+				return grammar.R_statement.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0.Rune}, cursorio.DecodedRunes{}, r0.AsDecodedRunes()))
 			}
 		}
 

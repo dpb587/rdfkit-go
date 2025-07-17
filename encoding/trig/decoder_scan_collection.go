@@ -8,8 +8,8 @@ import (
 	"github.com/dpb587/rdfkit-go/rdf"
 )
 
-func reader_scan_collection(r *Decoder, ectx evaluationContext, r0 rune, openSubject rdf.SubjectValue, openSubjectRange *cursorio.TextOffsetRange) (readerStack, error) {
-	if r0 == ')' {
+func reader_scan_collection(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, openSubject rdf.SubjectValue, openSubjectRange *cursorio.TextOffsetRange) (readerStack, error) {
+	if r0.Rune == ')' {
 		return r.emit(&statement{
 			graphName: ectx.CurGraphName,
 			triple: rdf.Triple{
@@ -21,7 +21,7 @@ func reader_scan_collection(r *Decoder, ectx evaluationContext, r0 rune, openSub
 				encoding.GraphNameStatementOffsets, ectx.CurGraphNameLocation,
 				encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 				encoding.PredicateStatementOffsets, ectx.CurPredicateLocation,
-				encoding.ObjectStatementOffsets, r.commitForTextOffsetRange([]rune{r0}),
+				encoding.ObjectStatementOffsets, r.commitForTextOffsetRange(r0.AsDecodedRunes()),
 			),
 		})
 	}
@@ -60,12 +60,12 @@ func reader_scan_collection(r *Decoder, ectx evaluationContext, r0 rune, openSub
 	return readerStack{nectx, reader_scan_Object}, nil
 }
 
-func reader_scan_collection_Continue(r *Decoder, ectx evaluationContext, r0 rune, err error) (readerStack, error) {
+func reader_scan_collection_Continue(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, err error) (readerStack, error) {
 	if err != nil {
-		return readerStack{}, grammar.R_collection.Err(r.newOffsetError(err, nil, nil))
+		return readerStack{}, grammar.R_collection.Err(r.newOffsetError(err, cursorio.DecodedRunes{}, cursorio.DecodedRunes{}))
 	}
 
-	if r0 == ')' {
+	if r0.Rune == ')' {
 		return r.emit(&statement{
 			graphName: ectx.CurGraphName,
 			triple: rdf.Triple{
@@ -76,7 +76,7 @@ func reader_scan_collection_Continue(r *Decoder, ectx evaluationContext, r0 rune
 			offsets: r.buildTextOffsets(
 				encoding.GraphNameStatementOffsets, ectx.CurGraphNameLocation,
 				encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
-				encoding.ObjectStatementOffsets, r.commitForTextOffsetRange([]rune{r0}),
+				encoding.ObjectStatementOffsets, r.commitForTextOffsetRange(r0.AsDecodedRunes()),
 			),
 		})
 	}
