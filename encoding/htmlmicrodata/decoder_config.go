@@ -50,5 +50,9 @@ func (b DecoderConfig) newDecoder(doc *encodinghtml.Document) (*Decoder, error) 
 		w.buildTextOffsets = encodingutil.BuildTextOffsetsValue
 	}
 
+	if b.vocabularyResolver != nil {
+		w.vocabularyResolver = b.vocabularyResolver
+	}
+
 	return w, nil
 }
