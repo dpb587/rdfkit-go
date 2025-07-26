@@ -5,7 +5,7 @@ import (
 )
 
 var AlternateBaseList = []rdf.IRI{
-	"http://schema.org/",
+	"https://schema.org/",
 	"http://www.schema.org/",
 	"https://www.schema.org/",
 }
