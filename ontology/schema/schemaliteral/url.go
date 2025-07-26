@@ -30,15 +30,17 @@ func CastURL(t rdf.Term, opts CastOptions) (rdf.ObjectValue, bool) {
 			valueString = t.LexicalForm // ensure resolved
 		case rdfiri.LangString_Datatype,
 			xsdiri.String_Datatype:
-			normalizedValue := xsdutil.WhiteSpaceCollapse(t.LexicalForm)
+			valueString = xsdutil.WhiteSpaceCollapse(t.LexicalForm)
 
-			if len(normalizedValue) == 0 {
+			if len(valueString) == 0 {
 				// empty string more often used for empty value, not relative URL
 				return nil, false
-			} else if !textIsLikelyURL.MatchString(normalizedValue) {
+			} else if !textIsLikelyURL.MatchString(valueString) {
 				// URL data type will be preferred before Text data type, so trying to avoid non-URLs
 				return nil, false
 			}
+		default:
+			return nil, false
 		}
 	case rdf.IRI:
 		valueString = string(t)

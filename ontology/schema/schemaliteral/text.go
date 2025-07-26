@@ -32,11 +32,6 @@ func CastText(t rdf.Term, _ CastOptions) (rdf.ObjectValue, bool) {
 				LexicalForm: t.LexicalForm,
 			}, true
 		}
-	case rdf.IRI:
-		return rdf.Literal{
-			Datatype:    schemairi.Text_Class,
-			LexicalForm: string(t),
-		}, true
 	}
 
 	return nil, false
