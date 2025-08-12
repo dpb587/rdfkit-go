@@ -7,7 +7,6 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding"
 	encodinghtml "github.com/dpb587/rdfkit-go/encoding/html"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld"
-	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdfio"
 	"golang.org/x/net/html"
@@ -25,7 +24,7 @@ type Decoder struct {
 
 	nestedErrorListener func(err error)
 	parserOptions       []inspectjson.ParserOption
-	documentLoader      jsonldtype.DocumentLoader
+	decoderOptions      []jsonld.DecoderOption
 
 	err       error
 	readers   []*jsonld.Decoder
@@ -106,8 +105,7 @@ func (w *Decoder) walkNode(n *html.Node) {
 
 			dopt := jsonld.DecoderConfig{}.
 				SetDefaultBase(w.docProfile.BaseURL).
-				SetParserOptions(w.parserOptions...).
-				SetDocumentLoader(w.documentLoader)
+				SetParserOptions(w.parserOptions...)
 
 			if w.docProfile.HasNodeMetadata {
 				if nodeOffsets, ok := w.doc.GetNodeMetadata(n); ok {
@@ -117,7 +115,7 @@ func (w *Decoder) walkNode(n *html.Node) {
 				}
 			}
 
-			nodeReader, err := jsonld.NewDecoder(strings.NewReader(n.FirstChild.Data), dopt)
+			nodeReader, err := jsonld.NewDecoder(strings.NewReader(n.FirstChild.Data), append(w.decoderOptions, dopt)...)
 			if err != nil {
 				if w.nestedErrorListener != nil {
 					w.nestedErrorListener(err)

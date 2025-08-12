@@ -185,7 +185,9 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 		htmlJsonld, err := htmljsonld.NewDecoder(
 			htmlDocument,
 			htmljsonld.DecoderConfig{}.
-				SetDocumentLoader(f.DocumentLoaderJSONLD),
+				SetDecoderOptions(jsonld.DecoderConfig{}.
+					SetDocumentLoader(f.DocumentLoaderJSONLD),
+				),
 		)
 		if err != nil {
 			readCloser()
@@ -222,7 +224,10 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 		handle.Format = "htmljsonld"
 		handle.Decoder, err = htmljsonld.NewDecoder(
 			htmlDocument,
-			htmljsonld.DecoderConfig{}.SetDocumentLoader(f.DocumentLoaderJSONLD),
+			htmljsonld.DecoderConfig{}.
+				SetDecoderOptions(jsonld.DecoderConfig{}.
+					SetDocumentLoader(f.DocumentLoaderJSONLD),
+				),
 		)
 		if err != nil {
 			readCloser()
