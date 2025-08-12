@@ -462,6 +462,16 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 							typedResource = ectx.Global.BlankNodeFactory.NewBlankNode()
 							typedResourceAnno = nil
 
+							if v.captureOffsets {
+								if nodeProfile.EndTagTokenOffsets != nil {
+									typedResourceAnno = &cursorio.TextOffsetRange{
+										From:  nodeProfile.TokenOffsets.From,
+										Until: nodeProfile.EndTagTokenOffsets.Until,
+									}
+								} else {
+									typedResourceAnno = &nodeProfile.TokenOffsets
+								}
+							}
 						}
 
 						currentObjectResource = typedResource
