@@ -5,6 +5,8 @@ github.com/dpb587/cursorio-go v0.0.0-20250717044249-e1d8c928b30d h1:UxedKtdKz4vy
 github.com/dpb587/cursorio-go v0.0.0-20250717044249-e1d8c928b30d/go.mod h1:YokGb5i31XI0Z+4t8bZxvZecyKY3ddLlih9Rr7eBgW0=
 github.com/dpb587/inspecthtml-go v0.0.0-20250428215612-941e03ce935f h1:n5tj3irBEwcXDPeMXaGraVlg2c7CKJaYXwAPetgcK5o=
 github.com/dpb587/inspecthtml-go v0.0.0-20250428215612-941e03ce935f/go.mod h1:STz5Xq0b2UCumUEpt65TTy86vJuq+R5QUyCqGtUVH54=
+github.com/dpb587/inspecthtml-go v0.0.0-20250809131149-41b439560683 h1:kpBHiKzV6dHVCCmuLRU4FOC2r/sYhJUvmh6Jg+y/pK0=
+github.com/dpb587/inspecthtml-go v0.0.0-20250809131149-41b439560683/go.mod h1:STz5Xq0b2UCumUEpt65TTy86vJuq+R5QUyCqGtUVH54=
 github.com/dpb587/inspectjson-go v0.0.0-20250717044834-37533a58959e h1:5XejmRgKknWChyA3Un0dREf/9fDCJOoHttb8ks9ZLcw=
 github.com/dpb587/inspectjson-go v0.0.0-20250717044834-37533a58959e/go.mod h1:FTNc/N87Cz+dccpetYPiSsGpbl/CG7K26PeJSUwT2uQ=
 github.com/dpb587/inspectxml-go v0.0.0-20250415222439-71ac97da5967 h1:eDf5lVry/atdVqikH/ZC+b2uI6AeBdcOsoVaSOiNL/s=
