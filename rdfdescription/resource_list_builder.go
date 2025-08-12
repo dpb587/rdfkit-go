@@ -32,6 +32,10 @@ func (rb *ResourceListBuilder) AddTriple(t rdf.Triple) {
 	}
 }
 
+func (rb *ResourceListBuilder) GetBlankNodeReferences(bn rdf.BlankNode) int {
+	return rb.blankNodeReferences[bn.GetBlankNodeIdentifier()]
+}
+
 func (rb *ResourceListBuilder) GetResourceStatements(s rdf.SubjectValue) StatementList {
 	return rb.getResourceStatements(s)
 }

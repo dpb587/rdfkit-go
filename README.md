@@ -194,7 +194,7 @@ An *encoding* (or *file format*) is used to decode and encode RDF data. The foll
 |:------- |:------:|:------:|
 | [`htmljsonld`](encoding/htmljsonld) | Dataset | n/a |
 | [`htmlmicrodata`](encoding/htmlmicrodata) | Graph | n/a |
-| [`jsonld`](encoding/jsonld) | Dataset | n/a |
+| [`jsonld`](encoding/jsonld) | Dataset | Triple, Description |
 | [`nquads`](encoding/nquads) | Dataset | Triple, Quad |
 | [`ntriples`](encoding/ntriples) | Graph | Triple |
 | [`rdfa`](encoding/rdfa) | Graph | n/a |
