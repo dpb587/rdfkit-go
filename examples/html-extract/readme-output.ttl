@@ -24,6 +24,6 @@
 	og:url "https://www.microsoft.com/en-us"@en-US .
 _:b0
 	a schema:Organization ;
-	<logo> <https://uhf.microsoft.com/images/microsoft/RE1Mu3b.png> ;
-	<name> "Microsoft" ;
-	<url> <https://www.microsoft.com> .
+	schema:logo <https://uhf.microsoft.com/images/microsoft/RE1Mu3b.png> ;
+	schema:name "Microsoft" ;
+	schema:url <https://www.microsoft.com> .

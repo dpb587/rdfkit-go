@@ -14,7 +14,7 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil/rdfacontext"
-	"github.com/dpb587/rdfkit-go/rdfdescription"
+	"github.com/dpb587/rdfkit-go/rdfdescription/rdfdescriptionio"
 	"github.com/dpb587/rdfkit-go/rdfio/rdfioutil"
 )
 
@@ -79,18 +79,6 @@ func main() {
 
 	defer decoder.Close()
 
-	// Collect all the statements into subject-grouped statements.
-
-	resourcesBuilder := rdfdescription.NewResourceListBuilder()
-
-	for decoder.Next() {
-		resourcesBuilder.AddTriple(decoder.GetStatement().GetTriple())
-	}
-
-	if err := decoder.Err(); err != nil {
-		panic(fmt.Errorf("decode: %v", err))
-	}
-
 	// Prepare the Turtle encoder.
 
 	encoder, err := turtle.NewEncoder(
@@ -104,13 +92,17 @@ func main() {
 		panic(fmt.Errorf("turtle encoder: %v", err))
 	}
 
-	defer encoder.Close()
+	resourceEncoder := rdfdescriptionio.NewBufferedGraphEncoder(encoder)
 
-	// Output everything as resources since Turtle supports nested resource syntax.
+	defer resourceEncoder.Close()
 
-	for _, resource := range resourcesBuilder.GetResources() {
-		if err := encoder.PutResource(ctx, resource); err != nil {
-			panic(fmt.Errorf("encode: %v", err))
-		}
+	// Pipe everything
+
+	for decoder.Next() {
+		resourceEncoder.PutTriple(ctx, decoder.GetStatement().GetTriple())
+	}
+
+	if err := decoder.Err(); err != nil {
+		panic(fmt.Errorf("decode: %v", err))
 	}
 }
