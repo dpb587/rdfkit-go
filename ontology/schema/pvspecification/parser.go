@@ -4,27 +4,9 @@ import (
 	"regexp"
 )
 
-type ParseTextResult struct {
-	Data ShorthandText
-
-	// UnknownAttributeNameIndices contains any indices of Data.Attributes which did not have a valid mapping for name.
-	UnknownAttributeNameIndices []int
-}
-
-// Err will be non-nil if there were any unknown attribute names in the parsed text.
-func (r ParseTextResult) Err() error {
-	if len(r.UnknownAttributeNameIndices) > 0 {
-		return UnknownShorthandTextAttributeNameError{
-			Name: r.Data.Attributes[r.UnknownAttributeNameIndices[0]].Name,
-		}
-	}
-
-	return nil
-}
-
-func ParseText(v string) ParseTextResult {
-	var res ParseTextResult
+func ParseText(v string) ShorthandText {
 	var lex = v
+	var res ShorthandText
 
 	for len(lex) > 0 {
 		nextMatch := regexp.MustCompile(`\s*([^\s=]+)(=([^\s]+)?)?`).FindStringSubmatchIndex(lex)
@@ -48,7 +30,7 @@ func ParseText(v string) ParseTextResult {
 
 		lex = lex[nextMatch[1]:]
 
-		res.Data.Attributes = append(res.Data.Attributes, spec)
+		res.Attributes = append(res.Attributes, spec)
 	}
 
 	return res

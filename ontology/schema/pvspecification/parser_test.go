@@ -176,23 +176,12 @@ func TestParseText(t *testing.T) {
 	} {
 		t.Run(tc.Input, func(t *testing.T) {
 			result := ParseText(tc.Input)
-			if _a, _e := result.Err(), tc.ExpectedErr; _a != nil || _e != nil {
-				if _a != nil && _e != nil {
-					if _a.Error() != _e.Error() {
-						t.Fatalf("expected error %v, got %v", _e, _a)
-					}
-				}
 
-				t.Fatalf("expected %v, got %v", _e, _a)
-			}
-
-			resultData := result.Data
-
-			if _a, _e := len(resultData.Attributes), len(tc.Expected.Attributes); _a != _e {
+			if _a, _e := len(result.Attributes), len(tc.Expected.Attributes); _a != _e {
 				t.Fatalf("expected %d entries, got %d", _e, _a)
 			}
 
-			for entryIdx, entry := range resultData.Attributes {
+			for entryIdx, entry := range result.Attributes {
 				if _a, _e := entry.Name, tc.Expected.Attributes[entryIdx].Name; _a != _e {
 					t.Fatalf("entry %d: key: expected %s, got %s", entryIdx, _e, _a)
 				}
