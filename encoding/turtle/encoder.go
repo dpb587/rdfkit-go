@@ -117,28 +117,18 @@ func (w *Encoder) PutResource(ctx context.Context, r rdfdescription.Resource) er
 		return nil
 	}
 
-	if subject == nil {
-		subject = rdf.NewBlankNode()
-	}
+	buf := &bytes.Buffer{}
 
-	if len(statements) == 1 {
-		if sO, ok := statements[0].(rdfdescription.ObjectStatement); ok {
-			return w.PutTriple(ctx, rdf.Triple{
-				Subject:   subject,
-				Predicate: sO.Predicate,
-				Object:    sO.Object,
-			})
+	if subject == nil {
+		buf.WriteString("[]")
+	} else {
+		err := w.writeSubjectValue(buf, subject)
+		if err != nil {
+			return fmt.Errorf("subject: %v", err)
 		}
 	}
 
-	buf := &bytes.Buffer{}
-
-	err := w.writeSubjectValue(buf, subject)
-	if err != nil {
-		return fmt.Errorf("subject: %v", err)
-	}
-
-	err = w.putResourceStatements(ctx, buf, "\t", statements)
+	_, err := w.putResourceStatements(ctx, buf, "\t", statements)
 	if err != nil {
 		return fmt.Errorf("resource: %v", err)
 	}
@@ -157,7 +147,7 @@ func (w *Encoder) PutResource(ctx context.Context, r rdfdescription.Resource) er
 	return nil
 }
 
-func (w *Encoder) putResourceStatements(ctx context.Context, buf *bytes.Buffer, indent string, statements rdfdescription.StatementList) error {
+func (w *Encoder) putResourceStatements(ctx context.Context, buf *bytes.Buffer, indent string, statements rdfdescription.StatementList) (bool, error) {
 	statementsByPredicate := statements.GroupByPredicate()
 
 	var predicateList rdf.PredicateValueList
@@ -177,6 +167,8 @@ func (w *Encoder) putResourceStatements(ctx context.Context, buf *bytes.Buffer, 
 		}
 	}
 
+	var multiline = len(predicateList) > 1
+
 	for pIdx, p := range predicateList {
 		if pIdx > 0 {
 			buf.WriteString(" ;")
@@ -190,7 +182,7 @@ func (w *Encoder) putResourceStatements(ctx context.Context, buf *bytes.Buffer, 
 
 		pIRI, ok := p.(rdf.IRI)
 		if !ok {
-			return fmt.Errorf("predicate: invalid type: %T", p)
+			return false, fmt.Errorf("predicate: invalid type: %T", p)
 		}
 
 		if pIRI == rdfiri.Type_Property {
@@ -223,23 +215,25 @@ func (w *Encoder) putResourceStatements(ctx context.Context, buf *bytes.Buffer, 
 					buf.WriteString("[]")
 				} else {
 					buf.WriteString("[")
-					// buf.WriteString("[\n")
-					// buf.WriteString(indent + "\t")
 
-					err := w.putResourceStatements(ctx, buf, indent+"\t", statementT.AnonResource.Statements)
+					mm, err := w.putResourceStatements(ctx, buf, indent+"\t", statementT.AnonResource.Statements)
 					if err != nil {
-						return fmt.Errorf("resource: %v", err)
-					}
+						return false, fmt.Errorf("resource: %v", err)
+					} else if mm {
+						multiline = true
 
-					buf.WriteString("\n" + indent + "]")
+						buf.WriteString("\n" + indent + "]")
+					} else {
+						buf.WriteString(" ]")
+					}
 				}
 			default:
-				return fmt.Errorf("object: invalid type: %T", statement)
+				return false, fmt.Errorf("object: invalid type: %T", statement)
 			}
 		}
 	}
 
-	return nil
+	return multiline, nil
 }
 
 func (w *Encoder) PutTriple(ctx context.Context, t rdf.Triple) error {
