@@ -10,6 +10,9 @@ import (
 
 type DecoderConfig struct {
 	vocabularyResolver VocabularyResolver
+
+	laxContentAttributeUse  *bool
+	laxContentAttributeHook func(err DecoderError_LaxContentAttribute)
 }
 
 var _ DecoderOption = DecoderConfig{}
@@ -20,9 +23,21 @@ func (b DecoderConfig) SetVocabularyResolver(v VocabularyResolver) DecoderConfig
 	return b
 }
 
+func (b DecoderConfig) SetLaxContentAttribute(use bool, hook func(err DecoderError_LaxContentAttribute)) DecoderConfig {
+	b.laxContentAttributeUse = &use
+	b.laxContentAttributeHook = hook
+
+	return b
+}
+
 func (b DecoderConfig) apply(s *DecoderConfig) {
 	if b.vocabularyResolver != nil {
 		s.vocabularyResolver = b.vocabularyResolver
+	}
+
+	if b.laxContentAttributeUse != nil && b.laxContentAttributeHook != nil {
+		s.laxContentAttributeUse = b.laxContentAttributeUse
+		s.laxContentAttributeHook = b.laxContentAttributeHook
 	}
 }
 
@@ -52,6 +67,12 @@ func (b DecoderConfig) newDecoder(doc *encodinghtml.Document) (*Decoder, error) 
 
 	if b.vocabularyResolver != nil {
 		w.vocabularyResolver = b.vocabularyResolver
+	}
+
+	if b.laxContentAttributeUse != nil && b.laxContentAttributeHook != nil {
+		w.laxContentAttributeUse = *b.laxContentAttributeUse
+		w.laxContentAttributeHook = b.laxContentAttributeHook
+		w.laxContentAttribute = *b.laxContentAttributeUse || b.laxContentAttributeHook != nil
 	}
 
 	return w, nil

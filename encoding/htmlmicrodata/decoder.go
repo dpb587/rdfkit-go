@@ -34,6 +34,15 @@ type Decoder struct {
 	captureOffsets     bool
 	vocabularyResolver VocabularyResolver
 
+	// per spec, the @content attribute is only valid on meta elements.
+	// google and validator.schema.org (incorrectly) seem to prefer @content over inner text.
+	// yandex (correctly) seems to ignore the attribute.
+	// the usage of @content attribute is/was likely conflated by rdfa-html which introduces it as a global attribute (for rdfa purposes).
+	// given the widespread use, conditionally allow it
+	laxContentAttribute     bool
+	laxContentAttributeUse  bool
+	laxContentAttributeHook func(err DecoderError_LaxContentAttribute)
+
 	err          error
 	statements   []*statement
 	statementIdx int
@@ -449,6 +458,35 @@ func (w *Decoder) parseMicrodataItemvalue(ectx evaluationContext, n *html.Node) 
 		}
 
 		// fallthrough text content
+	}
+
+	if w.laxContentAttribute {
+		for attrIdx, attr := range n.Attr {
+			if attr.Namespace == "" && attr.Key == "content" {
+				if w.laxContentAttributeHook != nil {
+					w.laxContentAttributeHook(DecoderError_LaxContentAttribute{
+						Node:      n,
+						Attribute: attr,
+					})
+
+					if !w.laxContentAttributeUse {
+						break
+					}
+				}
+
+				var termCursorRange *cursorio.TextOffsetRange
+
+				if w.captureOffsets {
+					if nodeProfile, ok := w.doc.GetNodeMetadata(n); ok {
+						if attrProfile := nodeProfile.TagAttr[attrIdx]; attrProfile != nil && attrProfile.ValueOffsets != nil {
+							termCursorRange = attrProfile.ValueOffsets
+						}
+					}
+				}
+
+				return itempropAttrString(ectx, attr.Val), termCursorRange
+			}
+		}
 	}
 
 	buf := bytes.Buffer{}
