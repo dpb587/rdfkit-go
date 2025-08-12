@@ -7,7 +7,7 @@ import (
 )
 
 type GraphReader interface {
-	NewNodeIterator(ctx context.Context, matchers ...StatementMatcher) (GraphNodeIterator, error)
+	NewNodeIterator(ctx context.Context) (NodeIterator, error)
 	NewStatementIterator(ctx context.Context, matchers ...StatementMatcher) (GraphStatementIterator, error)
 }
 

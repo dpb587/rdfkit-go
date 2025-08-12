@@ -21,3 +21,7 @@ func (br *Node) GetDataset() rdfio.Dataset {
 func (br *Node) GetTerm() rdf.Term {
 	return br.t
 }
+
+//
+
+type nodeList []*Node

@@ -25,7 +25,7 @@ type Statement struct {
 var _ rdfio.Statement = &Statement{}
 
 func (tb *Statement) GetGraphName() rdf.GraphNameValue {
-	return tb.g.t.(rdf.GraphNameValue)
+	return tb.g.t
 }
 
 func (tb *Statement) GetTriple() rdf.Triple {

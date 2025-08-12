@@ -247,7 +247,7 @@ func (d *Dataset) getNode(_ context.Context, graph *Graph, s rdf.SubjectValue) (
 	return boundSubject, nil
 }
 
-func (d *Dataset) NewNodeIterator(ctx context.Context, matchers ...rdfio.StatementMatcher) (rdfio.DatasetNodeIterator, error) {
+func (d *Dataset) NewNodeIterator(ctx context.Context) (rdfio.NodeIterator, error) {
 	panic("TODO")
 }
 

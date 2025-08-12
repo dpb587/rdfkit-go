@@ -170,13 +170,13 @@ func (dp *datasetPartition) NewGraphNameIterator(ctx context.Context) (rdfio.Gra
 	return dp.dataset.NewGraphNameIterator(ctx)
 }
 
-func (dp *datasetPartition) NewNodeIterator(ctx context.Context, matchers ...rdfio.StatementMatcher) (rdfio.DatasetNodeIterator, error) {
+func (dp *datasetPartition) NewNodeIterator(ctx context.Context) (rdfio.NodeIterator, error) {
 	err := dp.requireLoad(ctx)
 	if err != nil {
 		return nil, err
 	}
 
-	return dp.dataset.NewNodeIterator(ctx, matchers...)
+	return dp.dataset.NewNodeIterator(ctx)
 }
 
 func (dp *datasetPartition) NewStatementIterator(ctx context.Context, matchers ...rdfio.StatementMatcher) (rdfio.DatasetStatementIterator, error) {

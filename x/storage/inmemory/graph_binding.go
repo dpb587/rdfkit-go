@@ -43,8 +43,8 @@ func (gb *Graph) NewStatementIterator(ctx context.Context, matchers ...rdfio.Sta
 	return iter, err
 }
 
-func (gb *Graph) NewNodeIterator(ctx context.Context, matchers ...rdfio.StatementMatcher) (rdfio.GraphNodeIterator, error) {
-	v, err := gb.d.NewNodeIterator(ctx, matchers...)
+func (gb *Graph) NewNodeIterator(ctx context.Context) (rdfio.NodeIterator, error) {
+	v, err := gb.newNodeIterator()
 
 	return v, err
 }
@@ -67,6 +67,19 @@ func (gb *Graph) DeleteTriple(ctx context.Context, triple rdf.Triple) error {
 
 func (gb *Graph) PutTriple(ctx context.Context, triple rdf.Triple) error {
 	return gb.d.graphPutTriple(ctx, gb, triple, nil)
+}
+
+func (gb *Graph) newNodeIterator() (rdfio.NodeIterator, error) {
+	nodes := make(nodeList, 0, len(gb.assertedBySubject))
+
+	for node := range gb.assertedBySubject {
+		nodes = append(nodes, node)
+	}
+
+	return &nodeIterator{
+		index: -1,
+		edges: nodes,
+	}, nil
 }
 
 func (gb *Graph) newStatementIterator(matchers ...rdfio.StatementMatcher) (*statementIterator, error) {

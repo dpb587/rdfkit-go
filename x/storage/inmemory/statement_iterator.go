@@ -35,7 +35,7 @@ func (i *statementIterator) Next() bool {
 }
 
 func (i *statementIterator) GetGraphName() rdf.GraphNameValue {
-	return i.edges[i.index].g.t.(rdf.GraphNameValue)
+	return i.edges[i.index].g.t
 }
 
 func (i *statementIterator) GetTriple() rdf.Triple {

@@ -14,13 +14,13 @@ type datasetPartitionGraph struct {
 
 var _ rdfio.Graph = &datasetPartitionGraph{}
 
-func (dpg *datasetPartitionGraph) NewNodeIterator(ctx context.Context, matchers ...rdfio.StatementMatcher) (rdfio.GraphNodeIterator, error) {
+func (dpg *datasetPartitionGraph) NewNodeIterator(ctx context.Context) (rdfio.NodeIterator, error) {
 	err := dpg.dp.requireLoad(ctx)
 	if err != nil {
 		return nil, err
 	}
 
-	return dpg.dp.dataset.GetGraph(ctx, dpg.graphName).NewNodeIterator(ctx, matchers...)
+	return dpg.dp.dataset.GetGraph(ctx, dpg.graphName).NewNodeIterator(ctx)
 }
 
 func (dpg *datasetPartitionGraph) NewStatementIterator(ctx context.Context, matchers ...rdfio.StatementMatcher) (rdfio.GraphStatementIterator, error) {

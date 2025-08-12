@@ -9,7 +9,7 @@ import (
 type DatasetReader interface {
 	NewGraphIterator(ctx context.Context) (GraphIterator, error)
 	NewGraphNameIterator(ctx context.Context) (GraphNameIterator, error)
-	NewNodeIterator(ctx context.Context, matchers ...StatementMatcher) (DatasetNodeIterator, error)
+	NewNodeIterator(ctx context.Context) (NodeIterator, error)
 	NewStatementIterator(ctx context.Context, matchers ...StatementMatcher) (DatasetStatementIterator, error)
 }
 
