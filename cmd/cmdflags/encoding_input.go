@@ -135,6 +135,12 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 			fType = "rdfxml"
 		} else if regexp.MustCompile(`<rdf:RDF `).Match(magicBytes) {
 			fType = "rdfxml"
+		} else if regexp.MustCompile(`(<[\w]+\s+[^/]*vocab=")`).Match(magicBytes) {
+			fType = "html"
+		} else if regexp.MustCompile(`(<[\w]+\s+[^/]*itemscope(\s|=""|>))`).Match(magicBytes) {
+			fType = "html"
+		} else if regexp.MustCompile(`<script[^>]+type="application/ld\+json(\s*;[^"]+)?"`).Match(magicBytes) {
+			fType = "html"
 		}
 
 		readReader = io.MultiReader(bytes.NewReader(magicBytes), readReader)
