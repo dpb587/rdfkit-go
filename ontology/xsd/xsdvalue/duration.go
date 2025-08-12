@@ -10,6 +10,7 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdutil"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/literalutil"
+	"github.com/dpb587/rdfkit-go/rdf/termutil"
 )
 
 var durationValidRE = regexp.MustCompile(`^(-)?P(((\d*(\.\d*)?)Y)?((\d*(\.\d*)?)M)?((\d*(\.\d*)?)D)?)?(T((\d*(\.\d*)?)H)?((\d*(\.\d*)?)M)?((\d*(\.\d*)?)S)?)?$`)
@@ -24,6 +25,7 @@ type Duration struct {
 	Negative bool
 }
 
+var _ termutil.CustomValue = Duration{}
 var _ literalutil.CustomValue = Duration{}
 
 func MapDuration(lexicalForm string) (Duration, error) {
@@ -82,6 +84,10 @@ func MapDuration(lexicalForm string) (Duration, error) {
 	}
 
 	return l, nil
+}
+
+func (v Duration) AsTerm() rdf.Term {
+	return v.AsLiteralTerm()
 }
 
 func (v Duration) AsLiteralTerm() rdf.Literal {

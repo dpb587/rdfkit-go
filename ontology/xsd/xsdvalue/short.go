@@ -8,10 +8,12 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdutil"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/literalutil"
+	"github.com/dpb587/rdfkit-go/rdf/termutil"
 )
 
 type Short int16
 
+var _ termutil.CustomValue = Short(0)
 var _ literalutil.CustomValue = Short(0)
 
 func MapShort(lexicalForm string) (Short, error) {
@@ -21,6 +23,10 @@ func MapShort(lexicalForm string) (Short, error) {
 	}
 
 	return Short(vInt64), nil
+}
+
+func (v Short) AsTerm() rdf.Term {
+	return v.AsLiteralTerm()
 }
 
 func (v Short) AsLiteralTerm() rdf.Literal {

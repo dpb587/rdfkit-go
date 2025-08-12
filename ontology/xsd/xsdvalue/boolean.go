@@ -5,6 +5,7 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdutil"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/literalutil"
+	"github.com/dpb587/rdfkit-go/rdf/termutil"
 )
 
 var (
@@ -23,6 +24,7 @@ var (
 
 type Boolean bool
 
+var _ termutil.CustomValue = Boolean(false)
 var _ literalutil.CustomValue = Boolean(false)
 
 func MapBoolean(lexicalForm string) (Boolean, error) {
@@ -34,6 +36,10 @@ func MapBoolean(lexicalForm string) (Boolean, error) {
 	}
 
 	return Boolean(false), rdf.ErrLiteralLexicalFormNotValid
+}
+
+func (v Boolean) AsTerm() rdf.Term {
+	return v.AsLiteralTerm()
 }
 
 func (v Boolean) AsLiteralTerm() rdf.Literal {

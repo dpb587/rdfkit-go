@@ -4,6 +4,7 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/literalutil"
+	"github.com/dpb587/rdfkit-go/rdf/termutil"
 )
 
 type LangString struct {
@@ -11,7 +12,12 @@ type LangString struct {
 	String string
 }
 
+var _ termutil.CustomValue = LangString{}
 var _ literalutil.CustomValue = LangString{}
+
+func (v LangString) AsTerm() rdf.Term {
+	return v.AsLiteralTerm()
+}
 
 func (v LangString) AsLiteralTerm() rdf.Literal {
 	return rdf.Literal{

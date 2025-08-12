@@ -7,6 +7,7 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdutil"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/literalutil"
+	"github.com/dpb587/rdfkit-go/rdf/termutil"
 )
 
 type GMonthDay struct {
@@ -14,6 +15,7 @@ type GMonthDay struct {
 	Layout string
 }
 
+var _ termutil.CustomValue = GMonthDay{}
 var _ literalutil.CustomValue = GMonthDay{}
 
 func MapGMonthDay(lexicalForm string) (GMonthDay, error) {
@@ -33,6 +35,10 @@ func MapGMonthDay(lexicalForm string) (GMonthDay, error) {
 	}
 
 	return GMonthDay{}, rdf.ErrLiteralLexicalFormNotValid
+}
+
+func (v GMonthDay) AsTerm() rdf.Term {
+	return v.AsLiteralTerm()
 }
 
 func (v GMonthDay) AsLiteralTerm() rdf.Literal {

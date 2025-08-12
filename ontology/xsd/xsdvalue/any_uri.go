@@ -5,14 +5,20 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdutil"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/literalutil"
+	"github.com/dpb587/rdfkit-go/rdf/termutil"
 )
 
 type AnyURI string
 
+var _ termutil.CustomValue = AnyURI("")
 var _ literalutil.CustomValue = AnyURI("")
 
 func MapAnyURI(lexicalForm string) (AnyURI, error) {
 	return AnyURI(xsdutil.WhiteSpaceCollapse(lexicalForm)), nil
+}
+
+func (v AnyURI) AsTerm() rdf.Term {
+	return v.AsLiteralTerm()
 }
 
 func (v AnyURI) AsLiteralTerm() rdf.Literal {

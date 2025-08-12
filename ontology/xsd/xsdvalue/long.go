@@ -8,10 +8,12 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdutil"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/literalutil"
+	"github.com/dpb587/rdfkit-go/rdf/termutil"
 )
 
 type Long int64
 
+var _ termutil.CustomValue = Long(0)
 var _ literalutil.CustomValue = Long(0)
 
 func MapLong(lexicalForm string) (Long, error) {
@@ -21,6 +23,10 @@ func MapLong(lexicalForm string) (Long, error) {
 	}
 
 	return Long(vInt64), nil
+}
+
+func (v Long) AsTerm() rdf.Term {
+	return v.AsLiteralTerm()
 }
 
 func (v Long) AsLiteralTerm() rdf.Literal {

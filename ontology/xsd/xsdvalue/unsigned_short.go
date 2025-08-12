@@ -8,10 +8,12 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdutil"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/literalutil"
+	"github.com/dpb587/rdfkit-go/rdf/termutil"
 )
 
 type UnsignedShort uint16
 
+var _ termutil.CustomValue = UnsignedShort(0)
 var _ literalutil.CustomValue = UnsignedShort(0)
 
 func MapUnsignedShort(lexicalForm string) (UnsignedShort, error) {
@@ -21,6 +23,10 @@ func MapUnsignedShort(lexicalForm string) (UnsignedShort, error) {
 	}
 
 	return UnsignedShort(vInt64), nil
+}
+
+func (v UnsignedShort) AsTerm() rdf.Term {
+	return v.AsLiteralTerm()
 }
 
 func (v UnsignedShort) AsLiteralTerm() rdf.Literal {

@@ -4,14 +4,20 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/literalutil"
+	"github.com/dpb587/rdfkit-go/rdf/termutil"
 )
 
 type HTML string
 
+var _ termutil.CustomValue = HTML("")
 var _ literalutil.CustomValue = HTML("")
 
 func MapHTML(s HTML) (HTML, error) {
 	return HTML(s), nil
+}
+
+func (v HTML) AsTerm() rdf.Term {
+	return v.AsLiteralTerm()
 }
 
 func (v HTML) AsLiteralTerm() rdf.Literal {

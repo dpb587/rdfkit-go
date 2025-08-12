@@ -5,14 +5,20 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdutil"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/literalutil"
+	"github.com/dpb587/rdfkit-go/rdf/termutil"
 )
 
 type Base64Binary []byte
 
+var _ termutil.CustomValue = Base64Binary{}
 var _ literalutil.CustomValue = Base64Binary{}
 
 func MapBase64Binary(lexicalForm string) (Base64Binary, error) {
 	return Base64Binary(xsdutil.WhiteSpaceCollapse(lexicalForm)), nil
+}
+
+func (v Base64Binary) AsTerm() rdf.Term {
+	return v.AsLiteralTerm()
 }
 
 func (v Base64Binary) AsLiteralTerm() rdf.Literal {

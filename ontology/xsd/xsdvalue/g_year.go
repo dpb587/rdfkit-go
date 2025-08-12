@@ -15,6 +15,7 @@ type GYear struct {
 }
 
 var _ literalutil.CustomValue = GYear{}
+var _ literalutil.CustomValue = GYear{}
 
 func MapGYear(lexicalForm string) (GYear, error) {
 	lexicalForm = xsdutil.WhiteSpaceCollapse(lexicalForm)
@@ -33,6 +34,10 @@ func MapGYear(lexicalForm string) (GYear, error) {
 	}
 
 	return GYear{}, rdf.ErrLiteralLexicalFormNotValid
+}
+
+func (v GYear) AsTerm() rdf.Term {
+	return v.AsLiteralTerm()
 }
 
 func (v GYear) AsLiteralTerm() rdf.Literal {

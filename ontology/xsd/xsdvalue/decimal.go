@@ -8,10 +8,12 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdutil"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/literalutil"
+	"github.com/dpb587/rdfkit-go/rdf/termutil"
 )
 
 type Decimal float64
 
+var _ termutil.CustomValue = Decimal(0)
 var _ literalutil.CustomValue = Decimal(0)
 
 func MapDecimal(lexicalForm string) (Decimal, error) {
@@ -21,6 +23,10 @@ func MapDecimal(lexicalForm string) (Decimal, error) {
 	}
 
 	return Decimal(vFloat64), nil
+}
+
+func (v Decimal) AsTerm() rdf.Term {
+	return v.AsLiteralTerm()
 }
 
 func (v Decimal) AsLiteralTerm() rdf.Literal {

@@ -7,6 +7,7 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdutil"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/literalutil"
+	"github.com/dpb587/rdfkit-go/rdf/termutil"
 )
 
 type Date struct {
@@ -14,6 +15,7 @@ type Date struct {
 	Layout string
 }
 
+var _ termutil.CustomValue = Date{}
 var _ literalutil.CustomValue = Date{}
 
 func MapDate(lexicalForm string) (Date, error) {
@@ -33,6 +35,10 @@ func MapDate(lexicalForm string) (Date, error) {
 	}
 
 	return Date{}, rdf.ErrLiteralLexicalFormNotValid
+}
+
+func (v Date) AsTerm() rdf.Term {
+	return v.AsLiteralTerm()
 }
 
 func (v Date) AsLiteralTerm() rdf.Literal {

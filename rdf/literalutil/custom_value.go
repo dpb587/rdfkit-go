@@ -1,13 +1,12 @@
 package literalutil
 
-import "github.com/dpb587/rdfkit-go/rdf"
+import (
+	"github.com/dpb587/rdfkit-go/rdf"
+	"github.com/dpb587/rdfkit-go/rdf/termutil"
+)
 
 type CustomValue interface {
-	// previously from rdf.TermBase; probably resurrect?
-	interface {
-		TermKind() rdf.TermKind
-		TermEquals(a rdf.Term) bool
-	}
+	termutil.CustomValue
 
 	AsLiteralTerm() rdf.Literal
 }
