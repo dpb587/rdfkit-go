@@ -46,6 +46,9 @@ type globalEvaluationContext struct {
 
 	HostDefaultVocabulary *string
 
+	// not enumerated as a host option by specifications? seems useful though
+	HostDefaultPrefixes iriutil.PrefixMap
+
 	// https://www.w3.org/TR/rdfa-in-html/
 	HtmlProcessing HtmlProcessingProfile
 	HtmlFoundBase  bool
@@ -54,12 +57,16 @@ type globalEvaluationContext struct {
 	BlankNodeFactory      rdf.BlankNodeFactory
 }
 
+type listMappingBuilder struct {
+	Objects rdf.ObjectValueList
+}
+
 type evaluationContext struct {
 	BaseURL           *iriutil.ParsedIRI
 	ParentSubject     rdf.SubjectValue
 	ParentObject      rdf.ObjectValue
 	IncompleteTriples []incompleteTriple
-	ListMapping       map[rdf.IRI]rdf.ObjectValueList
+	ListMapping       map[rdf.IRI]*listMappingBuilder
 	Language          *string
 	PrefixMapping     iriutil.PrefixMap
 	TermMappings      map[string]rdf.IRI
@@ -97,8 +104,7 @@ func resolveIRI(g *globalEvaluationContext, prefixes iriutil.PrefixMap, termMapp
 			return rdf.IRI(baseURL.String())
 		}
 
-		// TODO invalid vocab and ignored?
-		return rdf.IRI("")
+		return nil
 	}
 
 	var isSafe bool
@@ -150,7 +156,7 @@ func resolveIRI(g *globalEvaluationContext, prefixes iriutil.PrefixMap, termMapp
 			return rdf.IRI(*defaultVocabulary + value)
 		}
 
-		return rdf.IRI(value)
+		return nil
 	}
 
 	expanded, ok := prefixes.ExpandPrefix(valueSplit[0], valueSplit[1])

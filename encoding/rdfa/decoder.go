@@ -39,6 +39,7 @@ type Decoder struct {
 	captureOffsets        bool
 	htmlProcessingProfile HtmlProcessingProfile
 	defaultVocabulary     *string
+	defaultPrefixes       iriutil.PrefixMap
 	blankNodeStringMapper blanknodeutil.StringMapper
 	buildTextOffsets      encodingutil.TextOffsetsBuilderFunc
 
@@ -75,22 +76,27 @@ func (v *Decoder) Next() bool {
 
 		gectx := &globalEvaluationContext{
 			HostDefaultVocabulary: ptr.Value("http://www.w3.org/1999/xhtml/vocab#"),
+			HostDefaultPrefixes:   v.defaultPrefixes,
 			HtmlProcessing:        v.htmlProcessingProfile,
 			BlankNodeStringMapper: v.blankNodeStringMapper,
 			BlankNodeFactory:      blanknodeutil.NewFactory(),
 		}
 
+		if gectx.HostDefaultPrefixes == nil {
+			gectx.HostDefaultPrefixes = iriutil.NewPrefixMap(rdfacontext.WidelyUsedInitialContext()...)
+		}
+
 		ectx := evaluationContext{
-			Global:        gectx,
-			BaseURL:       v.docBaseURL,
-			PrefixMapping: iriutil.NewPrefixMap(rdfacontext.WidelyUsedInitialContext()...),
-			ListMapping:   map[rdf.IRI]rdf.ObjectValueList{},
+			Global:      gectx,
+			BaseURL:     v.docBaseURL,
+			ListMapping: map[rdf.IRI]*listMappingBuilder{},
 			TermMappings: map[string]rdf.IRI{
 				"describedby": "http://www.w3.org/2007/05/powder-s#describedby",
 				"license":     "http://www.w3.org/1999/xhtml/vocab#license",
 				"role":        "http://www.w3.org/1999/xhtml/vocab#role",
 			},
 			DefaultVocabulary: gectx.HostDefaultVocabulary,
+			PrefixMapping:     gectx.HostDefaultPrefixes,
 			XMLNS:             map[string]string{},
 			CurrentContainer:  &DocumentResource{},
 		}
@@ -403,8 +409,10 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 				// rdfa-core // 7.5 // Processing Rule 5, Option 1
 
 				if attrAbout != nil {
-					newSubject = resolveSubjectIRI(ectx.Global, localPrefixMappings, ectx.TermMappings, *attrAbout, localBaseURL)
-					newSubjectAnno = nil
+					if s := resolveSubjectIRI(ectx.Global, localPrefixMappings, ectx.TermMappings, *attrAbout, localBaseURL); s != nil {
+						newSubject = s
+						newSubjectAnno = nil
+					}
 
 					if v.captureOffsets {
 						if attrProfile := nodeProfile.TagAttr[attrAboutIdx]; attrProfile != nil && attrProfile.ValueOffsets != nil {
@@ -413,13 +421,15 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 					}
 				} else if ectx.Global.HtmlProcessing&ActiveHtmlProcessingProfile > 0 && (n.DataAtom == atom.Head || n.DataAtom == atom.Body) {
 					// rdfa-in-html // 3.1 // Additional Processing Rule 8
-					newSubject = ectx.ParentObject.(rdf.SubjectValue) // TODO unsafe?
+					newSubject = ectx.ParentObject.(rdf.SubjectValue)
 					newSubjectAnno = ectx.ParentObjectAnno
 				} else if isRootElement {
-					newSubject = resolveSubjectIRI(ectx.Global, localPrefixMappings, ectx.TermMappings, "", localBaseURL)
-					newSubjectAnno = nil
+					if s := resolveSubjectIRI(ectx.Global, localPrefixMappings, ectx.TermMappings, "", localBaseURL); s != nil {
+						newSubject = s
+						newSubjectAnno = nil
+					}
 				} else if ectx.ParentObject != nil {
-					newSubject = ectx.ParentObject.(rdf.SubjectValue) // TODO unsafe?
+					newSubject = ectx.ParentObject.(rdf.SubjectValue)
 					newSubjectAnno = ectx.ParentObjectAnno
 				}
 
@@ -482,49 +492,59 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 				// rdfa-core // 7.5 // Processing Rule 5, Option 2
 
 				if attrAbout != nil {
-					newSubject = resolveSubjectIRI(ectx.Global, localPrefixMappings, ectx.TermMappings, *attrAbout, localBaseURL)
-					newSubjectAnno = nil
+					if s := resolveSubjectIRI(ectx.Global, localPrefixMappings, ectx.TermMappings, *attrAbout, localBaseURL); s != nil {
+						newSubject = s
+						newSubjectAnno = nil
 
-					if v.captureOffsets {
-						if attrProfile := nodeProfile.TagAttr[attrAboutIdx]; attrProfile != nil && attrProfile.ValueOffsets != nil {
-							newSubjectAnno = attrProfile.ValueOffsets
+						if v.captureOffsets {
+							if attrProfile := nodeProfile.TagAttr[attrAboutIdx]; attrProfile != nil && attrProfile.ValueOffsets != nil {
+								newSubjectAnno = attrProfile.ValueOffsets
+							}
 						}
 					}
 				} else if attrResource != nil {
-					newSubject = resolveSubjectIRI(ectx.Global, localPrefixMappings, ectx.TermMappings, *attrResource, localBaseURL)
-					newSubjectAnno = nil
+					if s := resolveSubjectIRI(ectx.Global, localPrefixMappings, ectx.TermMappings, *attrResource, localBaseURL); s != nil {
+						newSubject = s
+						newSubjectAnno = nil
 
-					if v.captureOffsets {
-						if attrProfile := nodeProfile.TagAttr[attrResourceIdx]; attrProfile != nil && attrProfile.ValueOffsets != nil {
-							newSubjectAnno = attrProfile.ValueOffsets
+						if v.captureOffsets {
+							if attrProfile := nodeProfile.TagAttr[attrResourceIdx]; attrProfile != nil && attrProfile.ValueOffsets != nil {
+								newSubjectAnno = attrProfile.ValueOffsets
+							}
 						}
 					}
 				} else if attrHref != nil {
-					newSubject = resolveSubjectIRI(ectx.Global, localPrefixMappings, ectx.TermMappings, *attrHref, localBaseURL)
-					newSubjectAnno = nil
+					if s := resolveSubjectIRI(ectx.Global, localPrefixMappings, ectx.TermMappings, *attrHref, localBaseURL); s != nil {
+						newSubject = s
+						newSubjectAnno = nil
 
-					if v.captureOffsets {
-						if attrProfile := nodeProfile.TagAttr[attrHrefIdx]; attrProfile != nil && attrProfile.ValueOffsets != nil {
-							newSubjectAnno = attrProfile.ValueOffsets
+						if v.captureOffsets {
+							if attrProfile := nodeProfile.TagAttr[attrHrefIdx]; attrProfile != nil && attrProfile.ValueOffsets != nil {
+								newSubjectAnno = attrProfile.ValueOffsets
+							}
 						}
 					}
 				} else if attrSrc != nil {
-					newSubject = resolveSubjectIRI(ectx.Global, localPrefixMappings, ectx.TermMappings, *attrSrc, localBaseURL)
-					newSubjectAnno = nil
+					if s := resolveSubjectIRI(ectx.Global, localPrefixMappings, ectx.TermMappings, *attrSrc, localBaseURL); s != nil {
+						newSubject = s
+						newSubjectAnno = nil
 
-					if v.captureOffsets {
-						if attrProfile := nodeProfile.TagAttr[attrSrcIdx]; attrProfile != nil && attrProfile.ValueOffsets != nil {
-							newSubjectAnno = attrProfile.ValueOffsets
+						if v.captureOffsets {
+							if attrProfile := nodeProfile.TagAttr[attrSrcIdx]; attrProfile != nil && attrProfile.ValueOffsets != nil {
+								newSubjectAnno = attrProfile.ValueOffsets
+							}
 						}
 					}
 				} else if ectx.Global.HtmlProcessing&ActiveHtmlProcessingProfile > 0 && (n.DataAtom == atom.Head || n.DataAtom == atom.Body) {
 					// rdfa-in-html // 3.1 // Additional Processing Rule 8
-					newSubject = ectx.ParentObject.(rdf.SubjectValue) // TODO unsafe?
+					newSubject = ectx.ParentObject.(rdf.SubjectValue)
 					newSubjectAnno = ectx.ParentObjectAnno
 				} else {
 					if isRootElement {
-						newSubject = resolveSubjectIRI(ectx.Global, localPrefixMappings, ectx.TermMappings, "", localBaseURL)
-						newSubjectAnno = nil
+						if s := resolveSubjectIRI(ectx.Global, localPrefixMappings, ectx.TermMappings, "", localBaseURL); s != nil {
+							newSubject = s
+							newSubjectAnno = nil
+						}
 					} else if attrTypeof != nil {
 						newSubject = ectx.Global.BlankNodeFactory.NewBlankNode()
 						newSubjectAnno = nil
@@ -540,7 +560,7 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 							}
 						}
 					} else if ectx.ParentObject != nil {
-						newSubject = ectx.ParentObject.(rdf.SubjectValue) // TODO unsafe?
+						newSubject = ectx.ParentObject.(rdf.SubjectValue)
 						newSubjectAnno = ectx.ParentObjectAnno
 
 						skipElement = attrProperty == nil
@@ -559,25 +579,29 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 
 			if attrRel != nil || attrRev != nil {
 				if attrAbout != nil {
-					newSubject = resolveSubjectIRI(ectx.Global, localPrefixMappings, ectx.TermMappings, *attrAbout, localBaseURL)
-					newSubjectAnno = nil
+					if s := resolveSubjectIRI(ectx.Global, localPrefixMappings, ectx.TermMappings, *attrAbout, localBaseURL); s != nil {
+						newSubject = s
+						newSubjectAnno = nil
 
-					if v.captureOffsets {
-						if attrProfile := nodeProfile.TagAttr[attrAboutIdx]; attrProfile != nil && attrProfile.ValueOffsets != nil {
-							newSubjectAnno = attrProfile.ValueOffsets
+						if v.captureOffsets {
+							if attrProfile := nodeProfile.TagAttr[attrAboutIdx]; attrProfile != nil && attrProfile.ValueOffsets != nil {
+								newSubjectAnno = attrProfile.ValueOffsets
+							}
 						}
-					}
 
-					if attrTypeof != nil {
-						typedResource = newSubject
-						typedResourceAnno = newSubjectAnno
+						if attrTypeof != nil {
+							typedResource = newSubject
+							typedResourceAnno = newSubjectAnno
+						}
 					}
 				} else {
 					if isRootElement {
-						newSubject = resolveSubjectIRI(ectx.Global, localPrefixMappings, ectx.TermMappings, "", localBaseURL)
-						newSubjectAnno = nil
+						if s := resolveSubjectIRI(ectx.Global, localPrefixMappings, ectx.TermMappings, "", localBaseURL); s != nil {
+							newSubject = s
+							newSubjectAnno = nil
+						}
 					} else if ectx.ParentObject != nil {
-						newSubject = ectx.ParentObject.(rdf.SubjectValue) // TODO unsafe?
+						newSubject = ectx.ParentObject.(rdf.SubjectValue)
 						newSubjectAnno = ectx.ParentObjectAnno
 					}
 				}
@@ -685,7 +709,7 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 			// rdfa-core // 7.5 // Processing Rule 8
 
 			if newSubject != nil && (ectx.ParentObject == nil || !ectx.ParentObject.TermEquals(newSubject)) {
-				listMapping = map[rdf.IRI]rdf.ObjectValueList{}
+				listMapping = map[rdf.IRI]*listMappingBuilder{}
 			}
 		}
 
@@ -711,7 +735,11 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 						continue
 					}
 
-					listMapping[relValue] = append(listMapping[relValue], currentObjectResource)
+					if _, known := listMapping[relValue]; !known {
+						listMapping[relValue] = &listMappingBuilder{}
+					}
+
+					listMapping[relValue].Objects = append(listMapping[relValue].Objects, currentObjectResource)
 				}
 			}
 
@@ -1109,7 +1137,11 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 				}
 
 				if attrInlist != nil {
-					listMapping[propertyValue] = append(listMapping[propertyValue], currentPropertyValue)
+					if _, known := listMapping[propertyValue]; !known {
+						listMapping[propertyValue] = &listMappingBuilder{}
+					}
+
+					listMapping[propertyValue].Objects = append(listMapping[propertyValue].Objects, currentPropertyValue)
 				} else {
 					v.statements = append(v.statements, &statement{
 						triple: rdf.Triple{
@@ -1215,11 +1247,11 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 
 		{ // Processing, Step 14
 			for listPredicate, listItems := range listMapping {
-				if _, known := ectx.ListMapping[listPredicate]; !known {
+				if ectx.ListMapping[listPredicate] == listItems {
 					continue
 				}
 
-				if len(listItems) == 0 {
+				if len(listItems.Objects) == 0 {
 					v.statements = append(v.statements, &statement{
 						triple: rdf.Triple{
 							Subject:   newSubject, // "current subject" in spec
@@ -1235,13 +1267,13 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 					continue
 				}
 
-				var listBnodes = make([]rdf.BlankNode, len(listItems))
+				var listBnodes = make([]rdf.BlankNode, len(listItems.Objects))
 
-				for listItemIdx := range listItems {
+				for listItemIdx := range listItems.Objects {
 					listBnodes[listItemIdx] = ectx.Global.BlankNodeFactory.NewBlankNode()
 				}
 
-				for listItemIdx, listItem := range listItems {
+				for listItemIdx, listItem := range listItems.Objects {
 					v.statements = append(v.statements, &statement{
 						triple: rdf.Triple{
 							Subject:   listBnodes[listItemIdx],
@@ -1251,7 +1283,7 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 						containerResource: ectx.CurrentContainer,
 					})
 
-					if listItemIdx == len(listItems)-1 {
+					if listItemIdx == len(listItems.Objects)-1 {
 						v.statements = append(v.statements, &statement{
 							triple: rdf.Triple{
 								Subject:   listBnodes[listItemIdx],

@@ -12,6 +12,7 @@ import (
 type DecoderConfig struct {
 	htmlProcessingProfile *HtmlProcessingProfile
 	defaultVocabulary     *string
+	defaultPrefixes       iriutil.PrefixMap
 	blankNodeStringMapper blanknodeutil.StringMapper
 }
 
@@ -25,6 +26,12 @@ func (b DecoderConfig) SetHtmlProcessingProfile(v HtmlProcessingProfile) Decoder
 
 func (b DecoderConfig) SetDefaultVocabulary(v string) DecoderConfig {
 	b.defaultVocabulary = &v
+
+	return b
+}
+
+func (b DecoderConfig) SetDefaultPrefixes(v iriutil.PrefixMap) DecoderConfig {
+	b.defaultPrefixes = v
 
 	return b
 }
@@ -44,10 +51,23 @@ func (b DecoderConfig) apply(s *DecoderConfig) {
 		s.defaultVocabulary = b.defaultVocabulary
 	}
 
+	if b.defaultPrefixes != nil {
+		s.defaultPrefixes = b.defaultPrefixes
+	}
+
 	if b.blankNodeStringMapper != nil {
 		s.blankNodeStringMapper = b.blankNodeStringMapper
 	}
 }
+
+var emptyURL = (func() *iriutil.ParsedIRI {
+	iri, err := iriutil.ParseIRI("")
+	if err != nil {
+		panic(fmt.Sprintf("failed to parse empty IRI: %v", err))
+	}
+
+	return iri
+})()
 
 func (b DecoderConfig) newDecoder(doc *encodinghtml.Document) (*Decoder, error) {
 	docProfile := doc.GetInfo()
@@ -56,6 +76,7 @@ func (b DecoderConfig) newDecoder(doc *encodinghtml.Document) (*Decoder, error) 
 		doc:                   doc,
 		captureOffsets:        docProfile.HasNodeMetadata,
 		defaultVocabulary:     b.defaultVocabulary,
+		defaultPrefixes:       b.defaultPrefixes,
 		blankNodeStringMapper: b.blankNodeStringMapper,
 		buildTextOffsets:      encodingutil.BuildTextOffsetsNil,
 		statementIdx:          -1,
@@ -68,6 +89,8 @@ func (b DecoderConfig) newDecoder(doc *encodinghtml.Document) (*Decoder, error) 
 		}
 
 		w.docBaseURL = docBaseURL
+	} else {
+		w.docBaseURL = emptyURL
 	}
 
 	if b.htmlProcessingProfile != nil {
