@@ -35,8 +35,11 @@ func (b DecoderConfig) apply(s *DecoderConfig) {
 		s.vocabularyResolver = b.vocabularyResolver
 	}
 
-	if b.laxContentAttributeUse != nil && b.laxContentAttributeHook != nil {
+	if b.laxContentAttributeUse != nil {
 		s.laxContentAttributeUse = b.laxContentAttributeUse
+	}
+
+	if b.laxContentAttributeHook != nil {
 		s.laxContentAttributeHook = b.laxContentAttributeHook
 	}
 }
@@ -69,10 +72,14 @@ func (b DecoderConfig) newDecoder(doc *encodinghtml.Document) (*Decoder, error) 
 		w.vocabularyResolver = b.vocabularyResolver
 	}
 
-	if b.laxContentAttributeUse != nil && b.laxContentAttributeHook != nil {
+	if b.laxContentAttributeUse != nil {
 		w.laxContentAttributeUse = *b.laxContentAttributeUse
+		w.laxContentAttribute = *b.laxContentAttributeUse
+	}
+
+	if b.laxContentAttributeHook != nil {
 		w.laxContentAttributeHook = b.laxContentAttributeHook
-		w.laxContentAttribute = *b.laxContentAttributeUse || b.laxContentAttributeHook != nil
+		w.laxContentAttribute = true
 	}
 
 	return w, nil
