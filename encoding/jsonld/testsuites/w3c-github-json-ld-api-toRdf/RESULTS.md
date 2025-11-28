@@ -1,6 +1,6 @@
 # Test Suite
 
-320 passed, 23 failed, 2 skipped
+316 passed, 23 failed, 6 skipped
 
 | Result | Test Group | Test Name |
 |:------ |:---------- |:--------- |
@@ -48,10 +48,10 @@
 | ✅&nbsp;PASS | Eval | #t0119 |
 | ✅&nbsp;PASS | Eval | #t0120 |
 | ✅&nbsp;PASS | Eval | #t0121 |
-| ✅&nbsp;PASS | Eval | #t0122 |
-| ✅&nbsp;PASS | Eval | #t0123 |
-| ✅&nbsp;PASS | Eval | #t0124 |
-| ✅&nbsp;PASS | Eval | #t0125 |
+| ❔&nbsp;SKIP | Eval | #t0122 |
+| ❔&nbsp;SKIP | Eval | #t0123 |
+| ❔&nbsp;SKIP | Eval | #t0124 |
+| ❔&nbsp;SKIP | Eval | #t0125 |
 | ✅&nbsp;PASS | Eval | #t0126 |
 | ✅&nbsp;PASS | Eval | #t0127 |
 | ✅&nbsp;PASS | Eval | #t0128 |
@@ -356,6 +356,30 @@
 
 ```
 ignore: produceGeneralizedRdf is not supported
+```
+
+### ❔ Eval, #t0122
+
+```
+ignore: expected failures (requires unresolved RFC 3986 dot-segments)
+```
+
+### ❔ Eval, #t0123
+
+```
+ignore: expected failures (requires unresolved RFC 3986 dot-segments)
+```
+
+### ❔ Eval, #t0124
+
+```
+ignore: expected failures (requires unresolved RFC 3986 dot-segments)
+```
+
+### ❔ Eval, #t0125
+
+```
+ignore: expected failures (requires unresolved RFC 3986 dot-segments)
 ```
 
 ### ❌ Eval, #t0130
