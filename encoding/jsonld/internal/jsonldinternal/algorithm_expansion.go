@@ -6,6 +6,7 @@ import (
 	"slices"
 	"strings"
 
+	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/inspectjson-go/inspectjson"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
 )
@@ -32,6 +33,9 @@ type algorithmExpansion struct {
 
 	// [spec] used to control reverting previous term definitions in the active context associated with non-propagated contexts
 	fromMap bool
+
+	// [dpb] for tracking source offsets
+	activePropertySourceOffsets *cursorio.TextOffsetRange
 }
 
 func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
@@ -103,9 +107,10 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 		// [spec // 5.1.2 // 4.3] Return the result of the Value Expansion algorithm, passing the *active context*, *active property*, and *element* as *value*.
 
 		return algorithmValueExpansion{
-			activeContext:  vars.activeContext,
-			activeProperty: *vars.activeProperty,
-			value:          vars.element,
+			activeContext:               vars.activeContext,
+			activeProperty:              *vars.activeProperty,
+			activePropertySourceOffsets: vars.activePropertySourceOffsets,
+			value:                       vars.element,
 			//
 			processor: vars.activeContext._processor,
 		}.Call(), nil
@@ -126,10 +131,11 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 			// [spec // 5.1.2 // 5.2.1] Initialize *expanded item* to the result of using this algorithm recursively, passing *active context*, *active property*, *item* as *element*, *base URL*, the `frameExpansion` `ordered`, and *from map* flags.
 
 			expandedItem, err := algorithmExpansion{
-				activeContext:  vars.activeContext,
-				activeProperty: vars.activeProperty,
-				element:        elementItem,
-				baseURL:        vars.baseURL,
+				activeContext:               vars.activeContext,
+				activeProperty:              vars.activeProperty,
+				activePropertySourceOffsets: vars.activePropertySourceOffsets,
+				element:                     elementItem,
+				baseURL:                     vars.baseURL,
 				// frameExpansion: vars.frameExpansion,
 				ordered: vars.ordered,
 				fromMap: vars.fromMap,
@@ -357,6 +363,18 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 		Members: map[string]inspectjson.ObjectMember{},
 	}
 
+	// [dpb] propagate original property source offsets; hacky, inefficient
+	if vars.activePropertySourceOffsets != nil {
+		resultObject.ReplacedMembers = []inspectjson.ObjectMember{
+			{
+				Name: inspectjson.StringValue{
+					Value:         MagicKeywordPropertySourceOffsets,
+					SourceOffsets: vars.activePropertySourceOffsets,
+				},
+			},
+		}
+	}
+
 	// [dpb] nests moved inside recursive function
 
 	var inputType ExpandedIRI
@@ -559,10 +577,11 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 					var err error
 
 					expandedValue, err = algorithmExpansion{
-						activeContext:  vars.activeContext,
-						activeProperty: &key,
-						element:        value,
-						baseURL:        vars.baseURL,
+						activeContext:               vars.activeContext,
+						activeProperty:              &key,
+						activePropertySourceOffsets: elementObject.Members[key].Name.SourceOffsets,
+						element:                     value,
+						baseURL:                     vars.baseURL,
 						// frameExpansion: vars.frameExpansion,
 						ordered: vars.ordered,
 					}.Call()
@@ -591,10 +610,11 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 					var err error
 
 					expandedValue, err = algorithmExpansion{
-						activeContext:  vars.activeContext,
-						activeProperty: nil,
-						element:        value,
-						baseURL:        vars.baseURL,
+						activeContext:               vars.activeContext,
+						activeProperty:              nil,
+						activePropertySourceOffsets: nil,
+						element:                     value,
+						baseURL:                     vars.baseURL,
 						// frameExpansion: vars.frameExpansion,
 						ordered: vars.ordered,
 					}.Call()
@@ -771,10 +791,11 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 					var err error
 
 					expandedValue, err = algorithmExpansion{
-						activeContext:  vars.activeContext,
-						activeProperty: vars.activeProperty,
-						element:        value,
-						baseURL:        vars.baseURL,
+						activeContext:               vars.activeContext,
+						activeProperty:              vars.activeProperty,
+						activePropertySourceOffsets: vars.activePropertySourceOffsets,
+						element:                     value,
+						baseURL:                     vars.baseURL,
 						// frameExpansion: vars.frameExpansion,
 						ordered: vars.ordered,
 					}.Call()
@@ -795,10 +816,11 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 					var err error
 
 					expandedValue, err = algorithmExpansion{
-						activeContext:  vars.activeContext,
-						activeProperty: vars.activeProperty,
-						element:        value,
-						baseURL:        vars.baseURL,
+						activeContext:               vars.activeContext,
+						activeProperty:              vars.activeProperty,
+						activePropertySourceOffsets: vars.activePropertySourceOffsets,
+						element:                     value,
+						baseURL:                     vars.baseURL,
 						// frameExpansion: vars.frameExpansion,
 						ordered: vars.ordered,
 					}.Call()
@@ -825,10 +847,11 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 					var err error
 
 					expandedValue, err = algorithmExpansion{
-						activeContext:  vars.activeContext,
-						activeProperty: &key,
-						element:        valueObject,
-						baseURL:        vars.baseURL,
+						activeContext:               vars.activeContext,
+						activeProperty:              &key,
+						activePropertySourceOffsets: elementObject.Members[key].Name.SourceOffsets,
+						element:                     valueObject,
+						baseURL:                     vars.baseURL,
 						// frameExpansion: vars.frameExpansion,
 						ordered: vars.ordered,
 					}.Call()
@@ -1138,11 +1161,14 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 						// [spec // 5.1.2 // 13.8.2] Initialize *index key* to the *key*'s index mapping in active context, or `@index`, if it does not exist.
 
 						var indexKey ExpandedIRI
+						var indexKeySourceOffsets *cursorio.TextOffsetRange
 
 						if keyTermDefinition != nil && keyTermDefinition.IndexMapping != nil {
 							indexKey = keyTermDefinition.IndexMapping
+							indexKeySourceOffsets = keyTermDefinition.IndexMappingSourceOffsets
 						} else {
 							indexKey = ExpandedIRIasKeyword("@index")
+							// indexKeySourceOffsets remains nil for default @index keyword
 						}
 
 						// [spec // 5.1.2 // 13.8.3] For each key-value pair *index*-*index value* in *value*, ordered lexicographically by *index* if `ordered` is `true`:
@@ -1227,11 +1253,12 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 							var err error
 
 							indexValue, err = algorithmExpansion{
-								activeContext:  mapContext,
-								activeProperty: &key,
-								element:        indexValue,
-								baseURL:        vars.baseURL,
-								fromMap:        true,
+								activeContext:               mapContext,
+								activeProperty:              &key,
+								activePropertySourceOffsets: elementObject.Members[key].Name.SourceOffsets,
+								element:                     indexValue,
+								baseURL:                     vars.baseURL,
+								fromMap:                     true,
 								// frameExpansion: vars.frameExpansion,
 								ordered: vars.ordered,
 							}.Call()
@@ -1284,9 +1311,10 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 									// [spec // 5.1.2 // 13.8.3.7.2.1] Initialize *re-expanded index* to the result of calling the Value Expansion algorithm, passing the *active context*, *index key* as *active property*, and *index* as *value*.
 
 									reExpandedIndex := (algorithmValueExpansion{
-										activeContext:  mapContext,
-										activeProperty: indexKey.String(),
-										value:          valueObject.Members[index].Name,
+										activeContext:               mapContext,
+										activeProperty:              indexKey.String(),
+										activePropertySourceOffsets: indexKeySourceOffsets,
+										value:                       valueObject.Members[index].Name,
 									}).Call()
 
 									// [spec // 5.1.2 // 13.8.3.7.2.2] Initialize *expanded index key* to the result of IRI expanding *index key*.
@@ -1409,10 +1437,11 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 						var err error
 
 						expandedValue, err = algorithmExpansion{
-							activeContext:  vars.activeContext,
-							activeProperty: &key,
-							element:        value,
-							baseURL:        vars.baseURL,
+							activeContext:               vars.activeContext,
+							activeProperty:              &key,
+							activePropertySourceOffsets: elementObject.Members[key].Name.SourceOffsets,
+							element:                     value,
+							baseURL:                     vars.baseURL,
 							// frameExpansion: vars.frameExpansion,
 							ordered: vars.ordered,
 						}.Call()
@@ -1644,10 +1673,11 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 					// [dpb] doing only steps 13 and 14 seems insufficient when nesting key provides its own context which is otherwise not maintained; e.g. #tc037
 
 					expandedNestValue, err := algorithmExpansion{
-						activeContext:  vars.activeContext,
-						activeProperty: &nestingKey,
-						element:        nestedValue,
-						baseURL:        vars.baseURL,
+						activeContext:               vars.activeContext,
+						activeProperty:              &nestingKey,
+						activePropertySourceOffsets: elementObject.Members[nestingKey].Name.SourceOffsets,
+						element:                     nestedValue,
+						baseURL:                     vars.baseURL,
 						// frameExpansion: vars.frameExpansion,
 						ordered: vars.ordered,
 					}.Call()

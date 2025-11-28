@@ -250,7 +250,7 @@ for propertyType, propertyOffsets := range statement.(encoding.DecoderTextOffset
 When working with offsets, consider the following caveats.
 
 * Capturing and processing text offsets comes with a slight impact to performance and memory.
-* Offsets for some properties may not always be available due to decoding limitations. For example, `jsonld` does not always capture a predicate's offset, although this will likely be fixed in the future.
+* Offsets for some properties may not always be available due to decoding limitations.
 * Offsets for some properties may be "incomplete" due to stream processing. For example, `turtle` may only refer to the opening `[` token of an anonymous resource when the closing `]` token has not yet been read.
 
 ### Encoder

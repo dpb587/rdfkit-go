@@ -3,6 +3,7 @@ package jsonldinternal
 import (
 	"net/url"
 
+	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/inspectjson-go/inspectjson"
 )
 
@@ -38,7 +39,8 @@ type TermDefinition struct {
 	DirectionMappingValue inspectjson.Value // inspectjson.NullValue | inspectjson.StringValue
 
 	// [4.1] an optional index mapping (string),
-	IndexMapping *ExpandedIRIasIRI
+	IndexMapping              *ExpandedIRIasIRI
+	IndexMappingSourceOffsets *cursorio.TextOffsetRange
 
 	// [4.1] an optional language mapping (string),
 	// LanguageMapping      *string

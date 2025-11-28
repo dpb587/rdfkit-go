@@ -1,6 +1,7 @@
 package jsonldinternal
 
 import (
+	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/inspectjson-go/inspectjson"
 )
 
@@ -8,6 +9,9 @@ type algorithmValueExpansion struct {
 	activeContext  *Context
 	activeProperty string
 	value          inspectjson.Value
+
+	// [dpb] for tracking source offsets
+	activePropertySourceOffsets *cursorio.TextOffsetRange
 
 	processor *contextProcessor
 }
@@ -34,6 +38,14 @@ func (vars algorithmValueExpansion) Call() inspectjson.ObjectValue {
 						Value: rawValue.Value,
 					},
 				},
+				ReplacedMembers: []inspectjson.ObjectMember{
+					{
+						Name: inspectjson.StringValue{
+							Value:         MagicKeywordPropertySourceOffsets,
+							SourceOffsets: vars.activePropertySourceOffsets,
+						},
+					},
+				},
 			}
 		}
 
@@ -41,6 +53,14 @@ func (vars algorithmValueExpansion) Call() inspectjson.ObjectValue {
 			Members: map[string]inspectjson.ObjectMember{
 				"@id": inspectjson.ObjectMember{
 					Value: expandedValue.NewValue(vars.value.GetSourceOffsets()),
+				},
+			},
+			ReplacedMembers: []inspectjson.ObjectMember{
+				{
+					Name: inspectjson.StringValue{
+						Value:         MagicKeywordPropertySourceOffsets,
+						SourceOffsets: vars.activePropertySourceOffsets,
+					},
 				},
 			},
 		}
@@ -65,6 +85,14 @@ func (vars algorithmValueExpansion) Call() inspectjson.ObjectValue {
 						Value: rawValue.Value,
 					},
 				},
+				ReplacedMembers: []inspectjson.ObjectMember{
+					{
+						Name: inspectjson.StringValue{
+							Value:         MagicKeywordPropertySourceOffsets,
+							SourceOffsets: vars.activePropertySourceOffsets,
+						},
+					},
+				},
 			}
 		}
 
@@ -72,6 +100,14 @@ func (vars algorithmValueExpansion) Call() inspectjson.ObjectValue {
 			Members: map[string]inspectjson.ObjectMember{
 				"@id": {
 					Value: expandedValue.NewValue(vars.value.GetSourceOffsets()),
+				},
+			},
+			ReplacedMembers: []inspectjson.ObjectMember{
+				{
+					Name: inspectjson.StringValue{
+						Value:         MagicKeywordPropertySourceOffsets,
+						SourceOffsets: vars.activePropertySourceOffsets,
+					},
 				},
 			},
 		}
@@ -83,6 +119,14 @@ func (vars algorithmValueExpansion) Call() inspectjson.ObjectValue {
 		Members: map[string]inspectjson.ObjectMember{
 			"@value": {
 				Value: vars.value,
+			},
+		},
+		ReplacedMembers: []inspectjson.ObjectMember{
+			{
+				Name: inspectjson.StringValue{
+					Value:         MagicKeywordPropertySourceOffsets,
+					SourceOffsets: vars.activePropertySourceOffsets,
+				},
 			},
 		},
 	}

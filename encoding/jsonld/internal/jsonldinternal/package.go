@@ -12,6 +12,8 @@ import (
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 )
 
+const MagicKeywordPropertySourceOffsets = "@rdfkit.property.sourceOffsets"
+
 var (
 	tokenStringDirection = inspectjson.StringValue{
 		Value: "@direction",

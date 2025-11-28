@@ -816,6 +816,11 @@ func (vars algorithmCreateTermDefinition) Call() error {
 		// [spec // 4.2.2 // 20.3] Set the index mapping of *definition* to *index*
 
 		definition.IndexMapping = &expandedIndexIRI
+
+		// [dpb] capture source offsets
+		if indexMemberValue, ok := indexMember.Value.(inspectjson.StringValue); ok {
+			definition.IndexMappingSourceOffsets = indexMemberValue.SourceOffsets
+		}
 	}
 
 	// [spec // 4.2.2 // 21] If *value* contains the entry `@context`:
