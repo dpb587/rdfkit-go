@@ -193,6 +193,12 @@ func (e *Encoder) buildResource(resource rdfdescription.Resource, root bool) map
 							"@type":  string(obj.Datatype),
 						}
 					}
+
+					if obj.Datatype == rdfiri.LangString_Datatype {
+						if v, ok := obj.Tags[rdf.LanguageLiteralTag]; ok {
+							statementObject.(map[string]any)["@language"] = v
+						}
+					}
 				}
 			}
 		default:
