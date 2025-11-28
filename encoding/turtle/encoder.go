@@ -128,7 +128,7 @@ func (w *Encoder) PutResource(ctx context.Context, r rdfdescription.Resource) er
 		}
 	}
 
-	_, err := w.putResourceStatements(ctx, buf, "\t", statements)
+	_, err := w.putResourceStatements(ctx, buf, "", statements)
 	if err != nil {
 		return fmt.Errorf("resource: %v", err)
 	}
@@ -147,7 +147,7 @@ func (w *Encoder) PutResource(ctx context.Context, r rdfdescription.Resource) er
 	return nil
 }
 
-func (w *Encoder) putResourceStatements(ctx context.Context, buf *bytes.Buffer, indent string, statements rdfdescription.StatementList) (bool, error) {
+func (w *Encoder) putResourceStatements(ctx context.Context, buf *bytes.Buffer, linePrefix string, statements rdfdescription.StatementList) (bool, error) {
 	statementsByPredicate := statements.GroupByPredicate()
 
 	var predicateList rdf.PredicateValueList
@@ -167,15 +167,20 @@ func (w *Encoder) putResourceStatements(ctx context.Context, buf *bytes.Buffer, 
 		}
 	}
 
-	var multiline = len(predicateList) > 1
+	var multiline bool
+
+	if len(predicateList) > 1 {
+		multiline = true
+		linePrefix += "\t"
+	}
 
 	for pIdx, p := range predicateList {
 		if pIdx > 0 {
 			buf.WriteString(" ;")
 		}
 
-		if len(predicateList) > 1 {
-			buf.WriteString("\n" + indent)
+		if multiline {
+			buf.WriteString("\n" + linePrefix)
 		} else {
 			buf.WriteString(" ")
 		}
@@ -192,45 +197,71 @@ func (w *Encoder) putResourceStatements(ctx context.Context, buf *bytes.Buffer, 
 		}
 
 		pStatements := statementsByPredicate[p]
+		pMultiline := false
+		pLinePrefix := linePrefix
+
+		if len(pStatements) > 1 {
+			pMultiline = true
+			pLinePrefix += "\t"
+		}
 
 		for statementIdx, statement := range pStatements {
-			indent := indent
-
 			if statementIdx > 0 {
 				buf.WriteString(" ,")
 			}
 
-			if len(pStatements) > 1 {
-				indent += "\t"
-				buf.WriteString("\n" + indent)
+			if pMultiline {
+				buf.WriteString("\n" + pLinePrefix)
 			} else {
 				buf.WriteString(" ")
 			}
 
-			switch statementT := statement.(type) {
-			case rdfdescription.ObjectStatement:
-				w.writeObjectValue(buf, statementT.Object)
-			case rdfdescription.AnonResourceStatement:
-				if len(statementT.AnonResource.Statements) == 0 {
-					buf.WriteString("[]")
-				} else {
-					buf.WriteString("[")
-
-					mm, err := w.putResourceStatements(ctx, buf, indent+"\t", statementT.AnonResource.Statements)
-					if err != nil {
-						return false, fmt.Errorf("resource: %v", err)
-					} else if mm {
-						multiline = true
-
-						buf.WriteString("\n" + indent + "]")
-					} else {
-						buf.WriteString(" ]")
-					}
-				}
-			default:
-				return false, fmt.Errorf("object: invalid type: %T", statement)
+			mm, err := w.writeResourceStatement(ctx, buf, pLinePrefix, statement)
+			if err != nil {
+				return false, fmt.Errorf("statement: %v", err)
+			} else if mm {
+				multiline = true
 			}
 		}
+
+		multiline = multiline || pMultiline
+	}
+
+	return multiline, nil
+}
+
+func (w *Encoder) writeResourceStatement(ctx context.Context, buf *bytes.Buffer, linePrefix string, statement rdfdescription.Statement) (bool, error) {
+	var multiline bool
+
+	switch statementT := statement.(type) {
+	case rdfdescription.ObjectStatement:
+		w.writeObjectValue(buf, statementT.Object)
+	case rdfdescription.AnonResourceStatement:
+		if len(statementT.AnonResource.Statements) == 0 {
+			buf.WriteString("[]")
+		} else if entries, ok := w.tryResourceCompactList(statementT.AnonResource); ok {
+			mm, err := w.writeResourceCompactList(ctx, buf, linePrefix, entries)
+			if err != nil {
+				return false, fmt.Errorf("list: %v", err)
+			} else if mm {
+				multiline = true
+			}
+		} else {
+			buf.WriteString("[")
+
+			mm, err := w.putResourceStatements(ctx, buf, linePrefix, statementT.AnonResource.Statements)
+			if err != nil {
+				return false, fmt.Errorf("resource: %v", err)
+			} else if mm {
+				multiline = true
+
+				buf.WriteString("\n" + linePrefix + "]")
+			} else {
+				buf.WriteString("]")
+			}
+		}
+	default:
+		return false, fmt.Errorf("object: invalid type: %T", statement)
 	}
 
 	return multiline, nil
@@ -354,4 +385,106 @@ func (e *Encoder) writeObjectValue(w *bytes.Buffer, v rdf.ObjectValue) error {
 	}
 
 	return fmt.Errorf("invalid type: %T", v)
+}
+
+func (e *Encoder) tryResourceCompactList(resource rdfdescription.AnonResource) (rdfdescription.StatementList, bool) {
+	statements := resource.GetResourceStatements()
+	if len(statements) == 0 {
+		return nil, false
+	}
+
+	var entries rdfdescription.StatementList
+	nextStatements := resource.GetResourceStatements()
+
+	for {
+		statementsByPredicate := nextStatements.GroupByPredicate()
+
+		var hasFirst rdfdescription.Statement
+		var hasRest rdfdescription.Statement
+
+		for predicate, statements := range statementsByPredicate {
+			switch predicate {
+			case rdfiri.Type_Property:
+				if len(statements) != 1 {
+					return nil, false
+				}
+
+				s0, ok := statements[0].(rdfdescription.ObjectStatement)
+				if !ok {
+					return nil, false
+				} else if s0.Object != rdfiri.List_Class {
+					return nil, false
+				}
+			case rdfiri.First_Property:
+				if len(statements) != 1 {
+					return nil, false
+				}
+
+				hasFirst = statements[0]
+			case rdfiri.Rest_Property:
+				if len(statements) != 1 {
+					return nil, false
+				}
+
+				hasRest = statements[0]
+			default:
+				return nil, false
+			}
+		}
+
+		if hasFirst == nil || hasRest == nil {
+			return nil, false
+		}
+
+		entries = append(entries, hasFirst)
+
+		switch restStmt := hasRest.(type) {
+		case rdfdescription.ObjectStatement:
+			switch oT := restStmt.Object.(type) {
+			case rdf.IRI:
+				if oT == rdfiri.Nil_List {
+					return entries, true
+				}
+			}
+
+			return nil, false
+		case rdfdescription.AnonResourceStatement:
+			nextStatements = restStmt.AnonResource.GetResourceStatements()
+		default:
+			panic(fmt.Errorf("invalid type: %T", restStmt))
+		}
+	}
+}
+
+func (e *Encoder) writeResourceCompactList(ctx context.Context, buf *bytes.Buffer, linePrefix string, entries rdfdescription.StatementList) (bool, error) {
+	if len(entries) == 0 {
+		buf.WriteString("()")
+
+		return false, nil
+	}
+
+	var multiline bool
+
+	buf.WriteString("(")
+
+	if len(entries) > 0 {
+		multiline = true
+
+		itemLinePrefix := linePrefix + "\t"
+
+		for _, statement := range entries {
+			buf.WriteString("\n" + itemLinePrefix)
+
+			_, err := e.writeResourceStatement(ctx, buf, itemLinePrefix, statement)
+			if err != nil {
+				return false, fmt.Errorf("statement: %v", err)
+			}
+		}
+
+		buf.WriteString("\n" + linePrefix)
+	}
+
+	buf.WriteString(")")
+
+	return multiline, nil
 }
