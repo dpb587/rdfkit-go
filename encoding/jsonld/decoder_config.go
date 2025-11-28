@@ -138,7 +138,11 @@ func (b DecoderConfig) newDecoder(r io.Reader) (*Decoder, error) {
 
 	if b.captureTextOffsets != nil {
 		d.captureTextOffsets = *b.captureTextOffsets
-		d.initialTextOffset = *b.initialTextOffset
+
+		if b.initialTextOffset != nil {
+			d.initialTextOffset = *b.initialTextOffset
+		}
+
 		d.buildTextOffsets = encodingutil.BuildTextOffsetsValue
 	}
 
