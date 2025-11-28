@@ -214,3 +214,33 @@ func TestParsedIRI_CoverageParseAbs(t *testing.T) {
 		t.Fatalf("iri string: expected %v, got %v", _e, _a)
 	}
 }
+
+func TestParsedIRI_ResolvePathFromEmpty(t *testing.T) {
+	base := ""
+
+	{
+		vv, err := url.Parse(base)
+		if err != nil {
+			t.Fatalf("unexpected error: %v", err)
+		}
+
+		vv, err = vv.Parse("Muse1.jpg")
+		if err != nil {
+			t.Fatalf("unexpected error: %v", err)
+		} else if _a, _e := vv.String(), "/Muse1.jpg"; _a != _e {
+			t.Fatalf("url string: expected %v, got %v", _e, _a)
+		}
+	}
+
+	vv, err := ParseIRI(base)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	vv, err = vv.Parse("Muse1.jpg")
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	} else if _a, _e := vv.String(), "Muse1.jpg"; _a != _e {
+		t.Fatalf("iri string: expected %v, got %v", _e, _a)
+	}
+}

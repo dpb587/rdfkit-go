@@ -73,7 +73,7 @@ func (iri *ParsedIRI) ResolveReference(ref *ParsedIRI) *ParsedIRI {
 
 	forceFragment := iri.forceFragment || ref.forceFragment
 
-	// [dpb] below fully duplicated from stdlib
+	// [dpb] below mostly duplicated from stdlib
 
 	if ref.u.Scheme == "" {
 		url.Scheme = u.Scheme
@@ -117,7 +117,24 @@ func (iri *ParsedIRI) ResolveReference(ref *ParsedIRI) *ParsedIRI {
 	// The "abs_path" or "rel_path" cases.
 	url.Host = u.Host
 	url.User = u.User
-	badSetPath(&url, resolvePath(uPath, refuPath))
+
+	if uPath == "" {
+		// [dpb] handle empty base with relative ref - don't force absolute path
+
+		if len(refuPath) > 0 {
+			// force dot-segment resolution
+			resolved := resolvePath(refuPath, "")
+
+			if refuPath[0] != '/' {
+				resolved = resolved[1:]
+			}
+
+			badSetPath(&url, resolved)
+		}
+	} else {
+		badSetPath(&url, resolvePath(uPath, refuPath))
+	}
+
 	return &ParsedIRI{
 		u:             &url,
 		forceFragment: forceFragment,
