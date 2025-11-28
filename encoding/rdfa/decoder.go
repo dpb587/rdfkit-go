@@ -528,6 +528,17 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 					} else if attrTypeof != nil {
 						newSubject = ectx.Global.BlankNodeFactory.NewBlankNode()
 						newSubjectAnno = nil
+
+						if v.captureOffsets {
+							if nodeProfile.EndTagTokenOffsets != nil {
+								newSubjectAnno = &cursorio.TextOffsetRange{
+									From:  nodeProfile.TokenOffsets.From,
+									Until: nodeProfile.EndTagTokenOffsets.Until,
+								}
+							} else {
+								newSubjectAnno = &nodeProfile.TokenOffsets
+							}
+						}
 					} else if ectx.ParentObject != nil {
 						newSubject = ectx.ParentObject.(rdf.SubjectValue) // TODO unsafe?
 						newSubjectAnno = ectx.ParentObjectAnno
@@ -784,6 +795,19 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 			// Processing, Step 10
 
 			currentObjectResource = ectx.Global.BlankNodeFactory.NewBlankNode()
+			currentObjectResourceAnno = nil
+
+			if v.captureOffsets {
+				if attrRel != nil {
+					if attrProfile := nodeProfile.TagAttr[attrRelIdx]; attrProfile != nil && attrProfile.ValueOffsets != nil {
+						currentObjectResourceAnno = attrProfile.ValueOffsets
+					}
+				} else {
+					if attrProfile := nodeProfile.TagAttr[attrRevIdx]; attrProfile != nil && attrProfile.ValueOffsets != nil {
+						currentObjectResourceAnno = attrProfile.ValueOffsets
+					}
+				}
+			}
 
 			if attrRel != nil {
 				var predicateRange *cursorio.TextOffsetRange
