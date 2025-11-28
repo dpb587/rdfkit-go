@@ -121,7 +121,9 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 
 		magicBytes := magicRead[:magicReadN]
 
-		if regexp.MustCompile(`^\s*\{`).Match(magicBytes) {
+		if regexp.MustCompile(`^\s*\[\s*\{`).Match(magicBytes) {
+			fType = "jsonld"
+		} else if regexp.MustCompile(`^\s*\{`).Match(magicBytes) {
 			if regexp.MustCompile(`[^\\]"@[a-z]+"\s*:`).Match(magicBytes) {
 				fType = "jsonld"
 			} else if regexp.MustCompile(`^\s*\{\s*"[^"]+"\s*:\s*\{\s*"[^"]+"\s*:\s*\[\s*\{\s*"(datatype|lang|type|value)"`).Match(magicBytes) {
@@ -135,9 +137,9 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 			fType = "rdfxml"
 		} else if regexp.MustCompile(`<rdf:RDF `).Match(magicBytes) {
 			fType = "rdfxml"
-		} else if regexp.MustCompile(`(<[\w]+\s+[^/]*vocab=")`).Match(magicBytes) {
+		} else if regexp.MustCompile(`(<[\w]+\s+[^>]*vocab=")`).Match(magicBytes) {
 			fType = "html"
-		} else if regexp.MustCompile(`(<[\w]+\s+[^/]*itemscope(\s|=""|>))`).Match(magicBytes) {
+		} else if regexp.MustCompile(`(<[\w]+\s+[^>]*itemscope(\s|=""|>))`).Match(magicBytes) {
 			fType = "html"
 		} else if regexp.MustCompile(`<script[^>]+type="application/ld\+json(\s*;[^"]+)?"`).Match(magicBytes) {
 			fType = "html"
