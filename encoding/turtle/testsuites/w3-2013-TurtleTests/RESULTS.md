@@ -175,7 +175,7 @@
 | ✅&nbsp;PASS | NegativeSyntax | turtle-syntax-bad-num-03 |
 | ✅&nbsp;PASS | NegativeSyntax | turtle-syntax-bad-num-04 |
 | ✅&nbsp;PASS | NegativeSyntax | turtle-syntax-bad-num-05 |
-| ✅&nbsp;PASS | NegativeSyntax | turtle-syntax-bad-num-05#01 |
+| ✅&nbsp;PASS | NegativeSyntax | turtle-syntax-bad-num-05 |
 | ✅&nbsp;PASS | NegativeSyntax | turtle-syntax-bad-number-dot-in-anon |
 | ✅&nbsp;PASS | NegativeSyntax | turtle-syntax-bad-pname-01 |
 | ✅&nbsp;PASS | NegativeSyntax | turtle-syntax-bad-pname-02 |
@@ -525,13 +525,13 @@ error: token (triples): offset 0x4f: unexpected rune ('x')
 ### ✅ NegativeSyntax, turtle-syntax-bad-num-05
 
 ```
-error: token (triples): offset 0x42: unexpected rune ('^')
-```
-
-### ✅ NegativeSyntax, turtle-syntax-bad-num-05#01
-
-```
 error: token (object): token (literal): token (NumericLiteral): token (NumericLiteral): offset 0x4e: unexpected rune ('+')
+```
+
+### ✅ NegativeSyntax, turtle-syntax-bad-num-05
+
+```
+error: token (triples): offset 0x42: unexpected rune ('^')
 ```
 
 ### ✅ NegativeSyntax, turtle-syntax-bad-number-dot-in-anon

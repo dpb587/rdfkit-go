@@ -2,6 +2,8 @@ package testsuite
 
 import (
 	"bytes"
+	"crypto/sha256"
+	"encoding/base64"
 	"fmt"
 	"os"
 	"strings"
@@ -53,6 +55,15 @@ func Test(t *testing.T) {
 					testResult = oIRI
 				}
 			}
+		}
+
+		if testName == "turtle-syntax-bad-num-05" {
+			// duplicate naming; disambiguate
+
+			h := sha256.New()
+			h.Write(archiveEntries[string(testAction)])
+
+			testName += fmt.Sprintf("/%s", base64.RawStdEncoding.EncodeToString(h.Sum(nil))[0:8])
 		}
 
 		decodeAction := func() (rdfio.StatementList, error) {

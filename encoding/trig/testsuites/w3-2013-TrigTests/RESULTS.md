@@ -199,7 +199,7 @@
 | ✅&nbsp;PASS | NegativeSyntax | trig-syntax-bad-num-03 |
 | ✅&nbsp;PASS | NegativeSyntax | trig-syntax-bad-num-04 |
 | ✅&nbsp;PASS | NegativeSyntax | trig-syntax-bad-num-05 |
-| ✅&nbsp;PASS | NegativeSyntax | trig-syntax-bad-num-05#01 |
+| ✅&nbsp;PASS | NegativeSyntax | trig-syntax-bad-num-05 |
 | ✅&nbsp;PASS | NegativeSyntax | trig-syntax-bad-number-dot-in-anon |
 | ✅&nbsp;PASS | NegativeSyntax | trig-syntax-bad-pname-01 |
 | ✅&nbsp;PASS | NegativeSyntax | trig-syntax-bad-pname-02 |
@@ -689,13 +689,13 @@ error: token (triples): token (subject): token (PrefixedName): offset 0x2c: unex
 ### ✅ NegativeSyntax, trig-syntax-bad-num-05
 
 ```
-error: token (object): token (literal): token (NumericLiteral): token (NumericLiteral): offset 0x27: unexpected rune ('+')
-```
-
-### ✅ NegativeSyntax, trig-syntax-bad-num-05#01
-
-```
 error: token (block): offset 0x43: unexpected rune ('^')
+```
+
+### ✅ NegativeSyntax, trig-syntax-bad-num-05
+
+```
+error: token (object): token (literal): token (NumericLiteral): token (NumericLiteral): offset 0x27: unexpected rune ('+')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-number-dot-in-anon
