@@ -1,4 +1,4 @@
-package rdfioutil
+package discard
 
 import (
 	"context"
