@@ -190,13 +190,17 @@ func (b *builder) GetGoIdent(t rdf.IRI) string {
 }
 
 func (b *builder) safeIdent(ident string) string {
-	ident = regexp.MustCompile(`(\s+)(\w)`).ReplaceAllStringFunc(
+	ident = regexp.MustCompile(`(\s+|_)(\w)`).ReplaceAllStringFunc(
 		strings.NewReplacer(
-			"-", " ",
-			"_", " ",
-		).Replace(ident),
+			":", "_",
+		).Replace(
+			strings.NewReplacer(
+				"-", " ",
+				"_", " ",
+			).Replace(ident),
+		),
 		func(s string) string {
-			return strings.ToUpper(s[len(s)-1:])
+			return s[0:len(s)-1] + strings.ToUpper(s[len(s)-1:])
 		},
 	)
 
