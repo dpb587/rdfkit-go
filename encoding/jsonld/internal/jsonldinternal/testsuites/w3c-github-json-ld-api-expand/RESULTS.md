@@ -1,6 +1,6 @@
 # Test Suite
 
-372 passed, 13 failed, 0 skipped
+374 passed, 11 failed, 0 skipped
 
 | Result | Test Group | Test Name |
 |:------ |:---------- |:--------- |
@@ -327,7 +327,7 @@
 | ✅&nbsp;PASS | NegativeSyntax | ter26 |
 | ✅&nbsp;PASS | NegativeSyntax | ter27 |
 | ✅&nbsp;PASS | NegativeSyntax | ter28 |
-| ❌&nbsp;FAIL | NegativeSyntax | ter29 |
+| ✅&nbsp;PASS | NegativeSyntax | ter29 |
 | ✅&nbsp;PASS | NegativeSyntax | ter30 |
 | ✅&nbsp;PASS | NegativeSyntax | ter31 |
 | ❌&nbsp;FAIL | NegativeSyntax | ter32 |
@@ -346,7 +346,7 @@
 | ❌&nbsp;FAIL | NegativeSyntax | ter48 |
 | ✅&nbsp;PASS | NegativeSyntax | ter49 |
 | ❌&nbsp;FAIL | NegativeSyntax | ter50 |
-| ❌&nbsp;FAIL | NegativeSyntax | ter51 |
+| ✅&nbsp;PASS | NegativeSyntax | ter51 |
 | ❌&nbsp;FAIL | NegativeSyntax | ter52 |
 | ✅&nbsp;PASS | NegativeSyntax | ter53 |
 | ✅&nbsp;PASS | NegativeSyntax | ter54 |
@@ -729,10 +729,10 @@ error: invalid @id value: invalid type: boolean
 error: invalid type value: invalid type: boolean
 ```
 
-### ❌ NegativeSyntax, ter29
+### ✅ NegativeSyntax, ter29
 
 ```
-expected error, but got none
+error: invalid value object value: invalid type: array
 ```
 
 ### ✅ NegativeSyntax, ter30
@@ -843,10 +843,10 @@ error: invalid term definition: invalid @prefix entry: term contains colon or sl
 expected error, but got none
 ```
 
-### ❌ NegativeSyntax, ter51
+### ✅ NegativeSyntax, ter51
 
 ```
-expected error, but got none
+error: invalid value object value: invalid type: array
 ```
 
 ### ❌ NegativeSyntax, ter52

@@ -34,7 +34,7 @@ func (vars algorithmValueExpansion) Call() inspectjson.ObjectValue {
 		if rawValue, ok := expandedValue.(ExpandedIRIasRawValue); ok {
 			return inspectjson.ObjectValue{
 				Members: map[string]inspectjson.ObjectMember{
-					"@value": inspectjson.ObjectMember{
+					"@value": {
 						Value: rawValue.Value,
 					},
 				},
@@ -51,7 +51,7 @@ func (vars algorithmValueExpansion) Call() inspectjson.ObjectValue {
 
 		return inspectjson.ObjectValue{
 			Members: map[string]inspectjson.ObjectMember{
-				"@id": inspectjson.ObjectMember{
+				"@id": {
 					Value: expandedValue.NewValue(vars.value.GetSourceOffsets()),
 				},
 			},

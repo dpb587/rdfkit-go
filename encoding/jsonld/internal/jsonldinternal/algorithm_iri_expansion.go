@@ -53,7 +53,7 @@ func (opts algorithmIRIExpansion) Call() ExpandedIRI {
 	if isValueString && opts.localContext != nil {
 		valueString := valueString.Value
 
-		if _, ok := opts.localContext.Members[valueString]; ok && opts.defined[valueString] != true {
+		if _, ok := opts.localContext.Members[valueString]; ok && !opts.defined[valueString] {
 			// TODO error handling?
 			_ = algorithmCreateTermDefinition{
 				activeContext: opts.activeContext,
@@ -118,7 +118,7 @@ func (opts algorithmIRIExpansion) Call() ExpandedIRI {
 			// [spec // 5.2.2 // 6.3] If *local context* is not `null`, it contains a *prefix* entry, and the value of the *prefix* entry in *defined* is not true, invoke the Create Term Definition algorithm, passing *active context*, *local context*, *prefix* as *term*, and *defined*. This will ensure that a term definition is created for prefix in active context during Context Processing.
 
 			if opts.localContext != nil {
-				if _, ok := opts.localContext.Members[valuePrefixSuffix[0]]; ok && opts.defined[valuePrefixSuffix[0]] != true {
+				if _, ok := opts.localContext.Members[valuePrefixSuffix[0]]; ok && !opts.defined[valuePrefixSuffix[0]] {
 					// TODO error handling?
 					_ = algorithmCreateTermDefinition{
 						activeContext: opts.activeContext,

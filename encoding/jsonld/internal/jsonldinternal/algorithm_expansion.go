@@ -405,8 +405,7 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 	// [dpb] scoped function to support recursion from [spec 14]
 	// TODO this func-based recursion of just the two steps ended up seeming insufficient; remove?
-	var steps_13_14 func(elementObject inspectjson.ObjectValue, orderedElementKeys []string) error
-	steps_13_14 = func(elementObject inspectjson.ObjectValue, orderedElementKeys []string) error {
+	steps_13_14 := func(elementObject inspectjson.ObjectValue, orderedElementKeys []string) error {
 
 		// [dpb] could probably be a simple map
 		var nests = map[string]inspectjson.ObjectMember{}
@@ -687,10 +686,10 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 						// [spec // 5.1.2 // 13.4.7.2] Otherwise, if *value* is not a scalar or `null`, an `invalid value object value` error has been detected and processing is aborted. When the `frameExpansion` flag is set, *value* *MAY* be an empty map or an array of scalar values.
 
-						if _, ok := value.(inspectjson.Value); !ok {
+						if elementGrammarName := value.GetGrammarName(); elementGrammarName != "boolean" && elementGrammarName != "string" && elementGrammarName != "number" && elementGrammarName != "null" {
 							return jsonldtype.Error{
 								Code: jsonldtype.InvalidValueObjectValue,
-								Err:  fmt.Errorf("invalid type: %s", value.GetGrammarName()),
+								Err:  fmt.Errorf("invalid type: %s", elementGrammarName),
 							}
 						}
 
@@ -1892,7 +1891,9 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 						hasDirection = true
 					default:
 						isEmptyishMap = false
+					}
 
+					if !isEmptyishMap {
 						break
 					}
 				}

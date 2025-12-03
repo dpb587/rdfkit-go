@@ -430,12 +430,13 @@ func (vars algorithmCreateTermDefinition) Call() error {
 
 			switch t := expandedID.(type) {
 			case ExpandedIRIasKeyword:
-				if t == "@context" {
+				switch t {
+				case "@context":
 					return jsonldtype.Error{
 						Code: jsonldtype.InvalidKeywordAlias,
 						Err:  fmt.Errorf("invalid value: %s", t),
 					}
-				} else if t == "@type" {
+				case "@type":
 					if !simpleTerm && definition.TypeMapping == ExpandedIRIasKeyword("@id") && vars.activeContext._processor.processingMode == ProcessingMode_JSON_LD_1_1 {
 						return jsonldtype.Error{
 							Code: jsonldtype.InvalidIRIMapping,
@@ -1010,7 +1011,7 @@ func (vars algorithmCreateTermDefinition) Call() error {
 
 	// [spec // 4.2.2 // 27] If *override protected* is `false` and *previous definition* exists and is protected;
 
-	if vars.overrideProtected == false && previousDefinition != nil && previousDefinition.Protected {
+	if !vars.overrideProtected && previousDefinition != nil && previousDefinition.Protected {
 
 		// [spec // 4.2.2 // 27.1] If *definition* is not the same as *previous definition* (other than the value of protected), a `protected term redefinition` error has been detected, and processing is aborted.
 

@@ -97,7 +97,7 @@ func Expand(input inspectjson.Value, opts jsonldtype.ProcessorOptions) (inspectj
 
 		expandedContext, err := algorithmContextProcessing{
 			ActiveContext: activeContext,
-			LocalContext:  opts.ExpandContext,
+			LocalContext:  localContext,
 			BaseURL:       activeContext.BaseURL,
 			// defaults
 			RemoteContexts:        nil,
