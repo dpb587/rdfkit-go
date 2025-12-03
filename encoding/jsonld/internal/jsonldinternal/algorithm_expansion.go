@@ -38,7 +38,7 @@ type algorithmExpansion struct {
 	activePropertySourceOffsets *cursorio.TextOffsetRange
 }
 
-func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
+func (vars algorithmExpansion) Call() (ExpandedValue, error) {
 
 	// [spec // 5.1.2 // 1] If element is `null`, return `null`.
 
@@ -122,7 +122,7 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 		// [spec // 5.1.2 // 5.1] Initialize an empty array, *result*.
 
-		result := inspectjson.ArrayValue{}
+		result := &ExpandedArray{}
 
 		// [spec // 5.1.2 // 5.2] For each *item* in *element*:
 
@@ -146,17 +146,15 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 			// [spec // 5.1.2 // 5.2.2] If the container mapping of *active property* includes `@list`, and *expanded item* is an array, set *expanded item* to a new map containing the entry `@list` where the value is the original *expanded item*.
 
-			if expandedItemArray, ok := expandedItem.(inspectjson.ArrayValue); ok && termDefinition != nil && len(termDefinition.ContainerMapping) > 0 {
+			if expandedItemArray, ok := expandedItem.(*ExpandedArray); ok && termDefinition != nil && len(termDefinition.ContainerMapping) > 0 {
 
 				for _, containerMapping := range termDefinition.ContainerMapping {
 					if containerMapping == "@list" {
-						expandedItem = inspectjson.ObjectValue{
-							Members: map[string]inspectjson.ObjectMember{
-								"@list": {
-									Name:  tokenStringList,
-									Value: expandedItemArray,
-								},
+						expandedItem = &ExpandedObject{
+							Members: map[string]ExpandedValue{
+								"@list": expandedItemArray,
 							},
+							PropertySourceOffsets: vars.activePropertySourceOffsets,
 						}
 
 						break
@@ -166,7 +164,7 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 			// [spec // 5.1.2 // 5.2.3] If *expanded item* is an array, append each of its items to *result*. Otherwise, if expanded item is not null, append it to result.
 
-			if expandedItemArray, ok := expandedItem.(inspectjson.ArrayValue); ok {
+			if expandedItemArray, ok := expandedItem.(*ExpandedArray); ok {
 				result.Values = append(result.Values, expandedItemArray.Values...)
 			} else if expandedItem == nil {
 				// skip
@@ -359,20 +357,10 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 	// [spec // 5.1.2 // 12] Initialize two empty maps, *result* and *nests*. Initialize *input type* to expansion of the last value of the first entry in *element* expanding to `@type` (if any), ordering entries lexicographically by key. Both the key and value of the matched entry are IRI expanded.
 
-	var resultObject = inspectjson.ObjectValue{
-		Members: map[string]inspectjson.ObjectMember{},
-	}
-
-	// [dpb] propagate original property source offsets; hacky, inefficient
-	if vars.activePropertySourceOffsets != nil {
-		resultObject.ReplacedMembers = []inspectjson.ObjectMember{
-			{
-				Name: inspectjson.StringValue{
-					Value:         MagicKeywordPropertySourceOffsets,
-					SourceOffsets: vars.activePropertySourceOffsets,
-				},
-			},
-		}
+	var resultObject = &ExpandedObject{
+		Members:               map[string]ExpandedValue{},
+		SourceOffsets:         vars.element.GetSourceOffsets(),
+		PropertySourceOffsets: vars.activePropertySourceOffsets,
 	}
 
 	// [dpb] nests moved inside recursive function
@@ -449,7 +437,7 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 			// [dpb] scope vars
 
-			var expandedValue inspectjson.Value
+			var expandedValue ExpandedValue
 
 			// [spec // 5.1.2 // 13.4] If *expanded property* is a keyword:
 
@@ -499,7 +487,10 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 						vocab:            false,
 						// implicit
 						activeContext: vars.activeContext,
-					}.Call().NewValue(valueString.SourceOffsets)
+					}.Call().NewPropertyValue(
+						elementObject.Members[key].Name.SourceOffsets,
+						valueString.SourceOffsets,
+					)
 
 				// [spec // 5.1.2 // 13.4.4] If *expanded property* is `@type`:
 
@@ -527,7 +518,7 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 					// [spec // 5.1.2 // 13.4.4.4] Otherwise, set *expanded value* to the result of IRI expanding each of its values using *type-scoped context* for *active context*, and `true` for *document relative*.
 
-					var expandedValueArray []inspectjson.Value
+					var expandedValueArray []ExpandedValue
 
 					for _, value := range valueArray {
 						valueString, ok := value.(inspectjson.StringValue)
@@ -545,7 +536,10 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 							vocab: true,
 							// implicit
 							activeContext: typeScopedContext,
-						}.Call().NewValue(valueString.SourceOffsets))
+						}.Call().NewPropertyValue(
+							elementObject.Members[key].Name.SourceOffsets,
+							valueString.SourceOffsets,
+						))
 					}
 
 					// [spec // 5.1.2 // 13.4.4.5] If *result* already has an entry for `@type`, prepend the value of `@type` in *result* to *expanded value*, transforming it into an array, if necessary.
@@ -553,16 +547,16 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 					if existingType, ok := resultObject.Members["@type"]; ok {
 						expandTypeAsArray = true
-						existingTypeArray, ok := existingType.Value.(inspectjson.ArrayValue)
+						existingTypeArray, ok := existingType.(*ExpandedArray)
 						if ok {
 							expandedValueArray = append(existingTypeArray.Values, expandedValueArray...)
 						} else {
-							expandedValueArray = append([]inspectjson.Value{existingType.Value}, expandedValueArray...)
+							expandedValueArray = append([]ExpandedValue{existingType}, expandedValueArray...)
 						}
 					}
 
 					if expandTypeAsArray {
-						expandedValue = inspectjson.ArrayValue{
+						expandedValue = &ExpandedArray{
 							Values: expandedValueArray,
 						}
 					} else {
@@ -588,9 +582,9 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 						return err
 					}
 
-					if _, ok := expandedValue.(inspectjson.ArrayValue); !ok {
-						expandedValue = inspectjson.ArrayValue{
-							Values: []inspectjson.Value{expandedValue},
+					if _, ok := expandedValue.(*ExpandedArray); !ok {
+						expandedValue = &ExpandedArray{
+							Values: []ExpandedValue{expandedValue},
 						}
 					}
 
@@ -621,16 +615,16 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 						return err
 					}
 
-					if _, ok := expandedValue.(inspectjson.ArrayValue); !ok {
-						expandedValue = inspectjson.ArrayValue{
-							Values: []inspectjson.Value{expandedValue},
+					if _, ok := expandedValue.(*ExpandedArray); !ok {
+						expandedValue = &ExpandedArray{
+							Values: []ExpandedValue{expandedValue},
 						}
 					}
 
 					// [spec // 5.1.2 // 13.4.6.3] If any element of *expanded value* is not a node object, an `invalid @included value` error has been detected and processing is aborted.
 
-					for _, expandedValueItem := range expandedValue.(inspectjson.ArrayValue).Values {
-						itemObject, ok := expandedValueItem.(inspectjson.ObjectValue)
+					for _, expandedValueItem := range expandedValue.(*ExpandedArray).Values {
+						itemObject, ok := expandedValueItem.(*ExpandedObject)
 						if !ok {
 							return jsonldtype.Error{
 								Code: jsonldtype.InvalidAtIncludedValue,
@@ -658,9 +652,9 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 					// [spec // 5.1.2 // 13.4.6.4] If *result* already has an entry for `@included`, prepend the value of `@included` in *result* to *expanded value*.
 
 					if existingIncluded, ok := resultObject.Members["@included"]; ok {
-						expandedValueArray := expandedValue.(inspectjson.ArrayValue)
+						expandedValueArray := expandedValue.(*ExpandedArray)
 						expandedValueArray.Values = append(
-							existingIncluded.Value.(inspectjson.ArrayValue).Values,
+							existingIncluded.(*ExpandedArray).Values,
 							expandedValueArray.Values...,
 						)
 
@@ -681,7 +675,9 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 							}
 						}
 
-						expandedValue = value
+						expandedValue = &ExpandedScalarPrimitive{
+							Value: value,
+						}
 					} else {
 
 						// [spec // 5.1.2 // 13.4.7.2] Otherwise, if *value* is not a scalar or `null`, an `invalid value object value` error has been detected and processing is aborted. When the `frameExpansion` flag is set, *value* *MAY* be an empty map or an array of scalar values.
@@ -695,15 +691,14 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 						// [spec // 5.1.2 // 13.4.7.3] Otherwise, set *expanded value* to *value*. When the `frameExpansion` flag is set, *expanded value* will be an array of one or more string values or an array containing an empty map.
 
-						expandedValue = value
+						expandedValue = &ExpandedScalarPrimitive{
+							Value: value,
+						}
 
 						// [spec // 5.1.2 // 13.4.7.4] If *expanded value* is `null`, set the `@value` entry of *result* to `null` and continue with the next *key* from *element*. Null values need to be preserved in this case as the meaning of an `@type` entry depends on the existence of an `@value` entry.
 
-						if _, ok := expandedValue.(inspectjson.NullValue); ok {
-							resultObject.Members["@value"] = inspectjson.ObjectMember{
-								Name:  tokenStringValue,
-								Value: expandedValue,
-							}
+						if _, ok := expandedValue.(*ExpandedScalarPrimitive).Value.(inspectjson.NullValue); ok {
+							resultObject.Members["@value"] = expandedValue
 
 							continue
 						}
@@ -727,7 +722,9 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 					// TODO warning
 
-					expandedValue = value
+					expandedValue = &ExpandedScalarPrimitive{
+						Value: value,
+					}
 
 				// [spec // 5.1.2 // 13.4.9] If *expanded property* is `@direction`:
 
@@ -756,7 +753,9 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 					// [spec // 5.1.2 // 13.4.9.3] Otherwise, set *expanded value* to *value*. When the `frameExpansion` flag is set, *expanded value* will be an array of one or more string values or an array containing an empty map.
 
-					expandedValue = value
+					expandedValue = &ExpandedScalarPrimitive{
+						Value: value,
+					}
 
 				// [spec // 5.1.2 // 13.4.10] If *expanded property* is `@index`:
 
@@ -773,7 +772,9 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 					// [spec // 5.1.2 // 13.4.10.2] Otherwise, set *expanded value* to *value*.
 
-					expandedValue = value
+					expandedValue = &ExpandedScalarPrimitive{
+						Value: value,
+					}
 
 				// [spec // 5.1.2 // 13.4.11] If *expanded property* is `@list`:
 
@@ -802,9 +803,9 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 						return err
 					}
 
-					if _, ok := expandedValue.(inspectjson.ArrayValue); !ok {
-						expandedValue = inspectjson.ArrayValue{
-							Values: []inspectjson.Value{expandedValue},
+					if _, ok := expandedValue.(*ExpandedArray); !ok {
+						expandedValue = &ExpandedArray{
+							Values: []ExpandedValue{expandedValue},
 						}
 					}
 
@@ -860,21 +861,21 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 					// [spec // 5.1.2 // 13.4.13.3] If *expanded value* contains an `@reverse` entry, i.e., properties that are reversed twice, execute for each of its *property* and *item* the following steps:
 
-					expandedValueObject := expandedValue.(inspectjson.ObjectValue)
+					expandedValueObject := expandedValue.(*ExpandedObject)
 					hasAtReverse := false
 
 					if atReverseMember, ok := expandedValueObject.Members["@reverse"]; ok {
 
 						hasAtReverse = true
 
-						for property, item := range atReverseMember.Value.(inspectjson.ObjectValue).Members {
+						for property, item := range atReverseMember.(*ExpandedObject).Members {
 
 							// [spec // 5.1.2 // 13.4.13.3.1] Use add value to add *item* to the *property* entry in *result* using `true` for *as array*.
 
 							macroAddValue{
-								Object:  &resultObject,
+								Object:  resultObject,
 								Key:     property,
-								Value:   item.Value,
+								Value:   item,
 								AsArray: true,
 							}.Call()
 
@@ -890,17 +891,14 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 						reverseMapMember, ok := resultObject.Members["@reverse"]
 						if !ok {
-							reverseMapMember = inspectjson.ObjectMember{
-								Name: tokenStringReverse,
-								Value: inspectjson.ObjectValue{
-									Members: map[string]inspectjson.ObjectMember{},
-								},
+							reverseMapMember = &ExpandedObject{
+								Members: map[string]ExpandedValue{},
 							}
 
 							resultObject.Members["@reverse"] = reverseMapMember
 						}
 
-						reverseMap := reverseMapMember.Value.(inspectjson.ObjectValue)
+						reverseMap := reverseMapMember.(*ExpandedObject)
 
 						// [spec // 5.1.2 // 13.4.13.4.2] For each *property* and *items* in *expanded value* other than `@reverse`:
 
@@ -911,12 +909,11 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 							// [spec // 5.1.2 // 13.4.13.4.2.1] For each *item* in *items*:
 
-							for _, item := range item.Value.(inspectjson.ArrayValue).Values {
+							for _, item := range item.(*ExpandedArray).Values {
 
 								// [spec // 5.1.2 // 13.4.13.4.2.1.1] If *item* is a value object or list object, an `invalid reverse property value` has been detected and processing is aborted.
 
-								itemObject, ok := item.(inspectjson.ObjectValue)
-								if ok {
+								if itemObject, ok := item.(*ExpandedObject); ok {
 									if _, ok := itemObject.Members["@value"]; ok {
 										return jsonldtype.Error{
 											Code: jsonldtype.InvalidReversePropertyValue,
@@ -933,7 +930,7 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 								// [spec // 5.1.2 // 13.4.13.4.2.1.2] Use add value to add *item* to the *property* entry in *reverse map* using `true` for *as array*.
 
 								macroAddValue{
-									Object:  &reverseMap,
+									Object:  reverseMap,
 									Key:     property,
 									Value:   item,
 									AsArray: true,
@@ -994,12 +991,7 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 				// [spec // 5.1.2 // 13.4.16] Unless *expanded value* is `null`, *expanded property* is `@value`, and *input type* is not `@json`, set the *expanded property* entry of *result* to *expanded value*.
 
 				if !(expandedValue == nil && expandedPropertyKeyword == "@value" && inputType != ExpandedIRIasKeyword("@json")) {
-					resultObject.Members[string(expandedPropertyKeyword)] = inspectjson.ObjectMember{
-						Name: inspectjson.StringValue{
-							Value: string(expandedPropertyKeyword),
-						},
-						Value: expandedValue,
-					}
+					resultObject.Members[string(expandedPropertyKeyword)] = expandedValue
 				}
 
 				// [spec // 5.1.2 // 13.4.17] Continue with the next *key* from *element*.
@@ -1020,14 +1012,12 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 			// [spec // 5.1.2 // 13.6] If *key*'s term definition in *active context* has a type mapping of `@json`, set *expanded value* to a new map, set the entry `@value` to *value*, and set the entry `@type` to `@json`.
 
 			if keyTermDefinition != nil && keyTermDefinition.TypeMapping == ExpandedIRIasKeyword("@json") {
-				expandedValue = inspectjson.ObjectValue{
-					Members: map[string]inspectjson.ObjectMember{
-						"@value": {
-							Name:  tokenStringValue,
+				expandedValue = &ExpandedObject{
+					Members: map[string]ExpandedValue{
+						"@value": &ExpandedScalarPrimitive{
 							Value: value,
 						},
-						"@type": {
-							Name:  tokenStringType,
+						"@type": &ExpandedScalarPrimitive{
 							Value: tokenStringJson,
 						},
 					},
@@ -1040,7 +1030,7 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 					// [spec // 5.1.2 // 13.7.1] Initialize *expanded value* to an empty array.
 
-					expandedValue = inspectjson.ArrayValue{}
+					expandedValue = &ExpandedArray{}
 
 					// [spec // 5.1.2 // 13.7.2] Initialize *direction* to the default base direction from *active context*.
 
@@ -1099,14 +1089,12 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 							// [spec // 5.1.2 // 13.7.4.2.3] Initialize a new map v consisting of two key-value pairs: (`@value`-*item*) and (`@language`-*language*). If *item* is neither `@none` nor well-formed according to section 2.2.9 of [BCP47], processors SHOULD issue a warning.
 							// [spec // 5.1.2 // 13.7.4.2.3] NOTE Processors MAY normalize language tags to lower case.
 
-							v := inspectjson.ObjectValue{
-								Members: map[string]inspectjson.ObjectMember{
-									"@value": {
-										Name:  tokenStringValue,
+							v := &ExpandedObject{
+								Members: map[string]ExpandedValue{
+									"@value": &ExpandedScalarPrimitive{
 										Value: item,
 									},
-									"@language": {
-										Name: tokenStringLanguage,
+									"@language": &ExpandedScalarPrimitive{
 										Value: inspectjson.StringValue{
 											Value: language,
 										},
@@ -1130,15 +1118,14 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 							// [spec // 5.1.2 // 13.7.4.2.5] If *direction* is not `null`, add an entry for `@direction` to *v* with *direction*.
 
 							if _, ok := direction.(inspectjson.StringValue); ok {
-								v.Members["@direction"] = inspectjson.ObjectMember{
-									Name:  tokenStringDirection,
+								v.Members["@direction"] = &ExpandedScalarPrimitive{
 									Value: direction,
 								}
 							}
 
 							// [spec // 5.1.2 // 13.7.4.2.6] Append *v* to *expanded value*.
 
-							expandedValueArray := expandedValue.(inspectjson.ArrayValue)
+							expandedValueArray := expandedValue.(*ExpandedArray)
 							expandedValueArray.Values = append(
 								expandedValueArray.Values,
 								v,
@@ -1155,7 +1142,7 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 						// [spec // 5.1.2 // 13.8.1] Initialize *expanded value* to an empty array.
 
-						expandedValue = inspectjson.ArrayValue{}
+						expandedValue = &ExpandedArray{}
 
 						// [spec // 5.1.2 // 13.8.2] Initialize *index key* to the *key*'s index mapping in active context, or `@index`, if it does not exist.
 
@@ -1251,7 +1238,7 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 							var err error
 
-							indexValue, err = algorithmExpansion{
+							expandedIndexValue, err := algorithmExpansion{
 								activeContext:               mapContext,
 								activeProperty:              &key,
 								activePropertySourceOffsets: elementObject.Members[key].Name.SourceOffsets,
@@ -1265,13 +1252,13 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 								return err
 							}
 
-							indexValueArray := indexValue.(inspectjson.ArrayValue)
+							indexValueArray := expandedIndexValue.(*ExpandedArray)
 
 							// [spec // 5.1.2 // 13.8.3.7] For each *item* in *index value*:
 
 							for itemIdx, item := range indexValueArray.Values {
 
-								itemObject := item.(inspectjson.ObjectValue)
+								itemObject := item.(*ExpandedObject)
 
 								// [spec // 5.1.2 // 13.8.3.7.1] If *container mapping* includes `@graph`, and *item* is not a graph object, set *item* to a new map containing the key-value pair `@graph`-*item*, ensuring that the value is represented using an array.
 
@@ -1283,18 +1270,15 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 									}
 
 									if needsGraphObject {
-										if _, ok := item.(inspectjson.ArrayValue); !ok {
-											item = inspectjson.ArrayValue{
-												Values: []inspectjson.Value{item},
+										if _, ok := item.(*ExpandedArray); !ok {
+											item = &ExpandedArray{
+												Values: []ExpandedValue{item},
 											}
 										}
 
-										itemObject = inspectjson.ObjectValue{
-											Members: map[string]inspectjson.ObjectMember{
-												"@graph": {
-													Name:  tokenStringGraph,
-													Value: item,
-												},
+										itemObject = &ExpandedObject{
+											Members: map[string]ExpandedValue{
+												"@graph": item,
 											},
 										}
 
@@ -1319,7 +1303,7 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 									// [spec // 5.1.2 // 13.8.3.7.2.2] Initialize *expanded index key* to the result of IRI expanding *index key*.
 
 									expandedIndexKey := (algorithmIRIExpansion{
-										value:         indexKey.NewValue(nil),
+										value:         indexKey.NewPropertyValue(nil, nil).Value,
 										activeContext: mapContext,
 										// implied by #tpi06
 										vocab: true,
@@ -1327,27 +1311,22 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 									// [spec // 5.1.2 // 13.8.3.7.2.3] Initialize *index property values* to an array consisting of *re-expanded index* followed by the existing values of the concatenation of *expanded index key* in *item*, if any.
 
-									var indexPropertyValues = []inspectjson.Value{
+									var indexPropertyValues = []ExpandedValue{
 										reExpandedIndex,
 									}
 
 									if expandedIndexMember, ok := itemObject.Members[expandedIndexKey.String()]; ok {
-										if expandedIndexArray, ok := expandedIndexMember.Value.(inspectjson.ArrayValue); ok {
+										if expandedIndexArray, ok := expandedIndexMember.(*ExpandedArray); ok {
 											indexPropertyValues = append(indexPropertyValues, expandedIndexArray.Values...)
 										} else {
-											indexPropertyValues = append(indexPropertyValues, expandedIndexMember.Value)
+											indexPropertyValues = append(indexPropertyValues, expandedIndexMember)
 										}
 									}
 
 									// [spec // 5.1.2 // 13.8.3.7.2.4] Add the key-value pair (*expanded index key*-*index property values*) to item.
 
-									itemObject.Members[expandedIndexKey.String()] = inspectjson.ObjectMember{
-										Name: inspectjson.StringValue{
-											Value: expandedIndexKey.String(),
-										},
-										Value: inspectjson.ArrayValue{
-											Values: indexPropertyValues,
-										},
+									itemObject.Members[expandedIndexKey.String()] = &ExpandedArray{
+										Values: indexPropertyValues,
 									}
 
 									// [spec // 5.1.2 // 13.8.3.7.2.5] If *item* is a value object, it *MUST NOT* contain any extra properties; an *invalid value object* error has been detected and processing is aborted.
@@ -1369,8 +1348,7 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 									_, hasAtIndex := itemObject.Members["@index"]
 
 									if slices.Contains(containerMapping, "@index") && !hasAtIndex && expandedIndex != ExpandedIRIasKeyword("@none") {
-										itemObject.Members["@index"] = inspectjson.ObjectMember{
-											Name:  tokenStringIndex,
+										itemObject.Members["@index"] = &ExpandedScalarPrimitive{
 											Value: valueObject.Members[index].Name,
 										}
 									} else {
@@ -1380,38 +1358,35 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 										_, hasAtID := itemObject.Members["@id"]
 
 										if slices.Contains(containerMapping, "@id") && !hasAtID && expandedIndex != ExpandedIRIasKeyword("@none") {
-											itemObject.Members["@id"] = inspectjson.ObjectMember{
-												Name: tokenStringId,
-												Value: algorithmIRIExpansion{
-													value:            valueObject.Members[index].Name,
-													activeContext:    mapContext,
-													documentRelative: true,
-													vocab:            false,
-												}.Call().NewValue(valueObject.Members[index].Name.SourceOffsets),
-											}
+											itemObject.Members["@id"] = algorithmIRIExpansion{
+												value:            valueObject.Members[index].Name,
+												activeContext:    mapContext,
+												documentRelative: true,
+												vocab:            false,
+											}.Call().NewPropertyValue(
+												nil,
+												valueObject.Members[index].Name.SourceOffsets,
+											)
 										} else {
 
 											// [spec // 5.1.2 // 13.8.3.7.5] Otherwise, if *container mapping* includes `@type` and *expanded index* is not `@none`, initialize *types* to a new array consisting of *expanded index* followed by any existing values of `@type` in *item*. Add the key-value pair (`@type`-*types*) to *item*.
 
 											if slices.Contains(containerMapping, "@type") && expandedIndex != ExpandedIRIasKeyword("@none") {
 
-												var types = []inspectjson.Value{
-													expandedIndex.NewValue(nil),
+												var types = []ExpandedValue{
+													expandedIndex.NewPropertyValue(nil, nil),
 												}
 
 												if expandedTypeMember, ok := itemObject.Members["@type"]; ok {
-													if expandedTypeArray, ok := expandedTypeMember.Value.(inspectjson.ArrayValue); ok {
+													if expandedTypeArray, ok := expandedTypeMember.(*ExpandedArray); ok {
 														types = append(types, expandedTypeArray.Values...)
 													} else {
-														types = append(types, expandedTypeMember.Value)
+														types = append(types, expandedTypeMember)
 													}
 												}
 
-												itemObject.Members["@type"] = inspectjson.ObjectMember{
-													Name: tokenStringType,
-													Value: inspectjson.ArrayValue{
-														Values: types,
-													},
+												itemObject.Members["@type"] = &ExpandedArray{
+													Values: types,
 												}
 											}
 										}
@@ -1420,7 +1395,7 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 								// [spec // 5.1.2 // 13.8.3.7.6] Append *item* to *expanded value*.
 
-								expandedValueArray := expandedValue.(inspectjson.ArrayValue)
+								expandedValueArray := expandedValue.(*ExpandedArray)
 								expandedValueArray.Values = append(
 									expandedValueArray.Values,
 									item,
@@ -1435,10 +1410,12 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 						var err error
 
+						propertySourceOffsets := elementObject.Members[key].Name.SourceOffsets
+
 						expandedValue, err = algorithmExpansion{
 							activeContext:               vars.activeContext,
 							activeProperty:              &key,
-							activePropertySourceOffsets: elementObject.Members[key].Name.SourceOffsets,
+							activePropertySourceOffsets: propertySourceOffsets,
 							element:                     value,
 							baseURL:                     vars.baseURL,
 							// frameExpansion: vars.frameExpansion,
@@ -1446,6 +1423,16 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 						}.Call()
 						if err != nil {
 							return err
+						}
+
+						// [dpb] hacky; ensure propertySourceOffsets get correctly attributed in this case
+						if needsListWrap, ok := expandedValue.(*ExpandedArray); containerMapping != nil && slices.Contains(containerMapping, "@list") && ok {
+							expandedValue = &ExpandedObject{
+								Members: map[string]ExpandedValue{
+									"@list": needsListWrap,
+								},
+								PropertySourceOffsets: propertySourceOffsets,
+							}
 						}
 					}
 				}
@@ -1455,8 +1442,10 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 			if expandedValue == nil {
 				continue
-			} else if _, ok := expandedValue.(inspectjson.NullValue); ok {
-				continue
+			} else if valuePrimitive, ok := expandedValue.(*ExpandedScalarPrimitive); ok {
+				if _, ok := valuePrimitive.Value.(inspectjson.NullValue); ok {
+					continue
+				}
 			}
 
 			// [spec // 5.1.2 // 13.11] If *container mapping* includes `@list` and *expanded value* is not already a list object, convert *expanded value* to a list object by first setting it to an array containing only *expanded value* if it is not already an array, and then by setting it to a map containing the key-value pair `@list`-*expanded value*.
@@ -1464,7 +1453,7 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 			if slices.Contains(containerMapping, "@list") {
 				var needsListObject bool
 
-				expandedValueObject, ok := expandedValue.(inspectjson.ObjectValue)
+				expandedValueObject, ok := expandedValue.(*ExpandedObject)
 				if !ok {
 					needsListObject = true
 				} else if _, ok := expandedValueObject.Members["@list"]; !ok {
@@ -1472,19 +1461,17 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 				}
 
 				if needsListObject {
-					if _, ok := expandedValue.(inspectjson.ArrayValue); !ok {
-						expandedValue = inspectjson.ArrayValue{
-							Values: []inspectjson.Value{expandedValue},
+					if _, ok := expandedValue.(*ExpandedArray); !ok {
+						expandedValue = &ExpandedArray{
+							Values: []ExpandedValue{expandedValue},
 						}
 					}
 
-					expandedValue = inspectjson.ObjectValue{
-						Members: map[string]inspectjson.ObjectMember{
-							"@list": {
-								Name:  tokenStringList,
-								Value: expandedValue,
-							},
+					expandedValue = &ExpandedObject{
+						Members: map[string]ExpandedValue{
+							"@list": expandedValue,
 						},
+						PropertySourceOffsets: vars.activePropertySourceOffsets,
 					}
 				}
 			}
@@ -1493,10 +1480,10 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 			if slices.Contains(containerMapping, "@graph") && !slices.Contains(containerMapping, "@id") && !slices.Contains(containerMapping, "@index") {
 
-				expandedValueArray, ok := expandedValue.(inspectjson.ArrayValue)
+				expandedValueArray, ok := expandedValue.(*ExpandedArray)
 				if !ok {
-					expandedValueArray = inspectjson.ArrayValue{
-						Values: []inspectjson.Value{expandedValue},
+					expandedValueArray = &ExpandedArray{
+						Values: []ExpandedValue{expandedValue},
 					}
 
 					expandedValue = expandedValueArray
@@ -1507,13 +1494,10 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 					// [spec // 5.1.2 // 13.12.1] Convert *ev* into a graph object by creating a map containing the key-value pair `@graph`-*ev* where *ev* is represented as an array.
 					// [spec // 5.1.2 // 13.12.1] This may lead to a graph object including another graph object, if *ev* was already in the form of a graph object.
 
-					expandedValueArray.Values[evIdx] = inspectjson.ObjectValue{
-						Members: map[string]inspectjson.ObjectMember{
-							"@graph": {
-								Name: tokenStringGraph,
-								Value: inspectjson.ArrayValue{
-									Values: []inspectjson.Value{ev},
-								},
+					expandedValueArray.Values[evIdx] = &ExpandedObject{
+						Members: map[string]ExpandedValue{
+							"@graph": &ExpandedArray{
+								Values: []ExpandedValue{ev},
 							},
 						},
 					}
@@ -1527,24 +1511,21 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 				// [spec // 5.1.2 // 13.13.1] If *result* has no `@reverse` entry, create one and initialize its value to an empty map.
 
 				if _, ok := resultObject.Members["@reverse"]; !ok {
-					resultObject.Members["@reverse"] = inspectjson.ObjectMember{
-						Name: tokenStringReverse,
-						Value: inspectjson.ObjectValue{
-							Members: map[string]inspectjson.ObjectMember{},
-						},
+					resultObject.Members["@reverse"] = &ExpandedObject{
+						Members: map[string]ExpandedValue{},
 					}
 				}
 
 				// [spec // 5.1.2 // 13.13.2] Reference the value of the `@reverse` entry in *result* using the variable *reverse map*.
 
-				reverseMap := resultObject.Members["@reverse"].Value.(inspectjson.ObjectValue) // TODO unsafe assertion?
+				reverseMap := resultObject.Members["@reverse"].(*ExpandedObject) // TODO unsafe assertion?
 
 				// [spec // 5.1.2 // 13.13.3] If *expanded value* is not an array, set it to an array containing *expanded value*.
 
-				expandedValueArray, ok := expandedValue.(inspectjson.ArrayValue)
+				expandedValueArray, ok := expandedValue.(*ExpandedArray)
 				if !ok {
-					expandedValueArray = inspectjson.ArrayValue{
-						Values: []inspectjson.Value{expandedValue},
+					expandedValueArray = &ExpandedArray{
+						Values: []ExpandedValue{expandedValue},
 					}
 
 					expandedValue = expandedValueArray
@@ -1558,7 +1539,7 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 					// [spec // 5.1.2 // 13.13.4.1] If *item* is a value object or list object, an `invalid reverse property value` has been detected and processing is aborted.
 
-					if itemObject, ok := item.(inspectjson.ObjectValue); ok {
+					if itemObject, ok := item.(*ExpandedObject); ok {
 						if _, ok := itemObject.Members["@value"]; ok {
 							return jsonldtype.Error{
 								Code: jsonldtype.InvalidReversePropertyValue,
@@ -1575,13 +1556,8 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 					// [spec // 5.1.2 // 13.13.4.2] If *reverse map* has no *expanded property* entry, create one and initialize its value to an empty array.
 
 					if _, ok := reverseMap.Members[expandedPropertyString]; !ok {
-						reverseMap.Members[expandedPropertyString] = inspectjson.ObjectMember{
-							Name: inspectjson.StringValue{
-								Value: expandedPropertyString,
-							},
-							Value: inspectjson.ArrayValue{
-								Values: []inspectjson.Value{},
-							},
+						reverseMap.Members[expandedPropertyString] = &ExpandedArray{
+							Values: []ExpandedValue{},
 						}
 					}
 
@@ -1590,7 +1566,7 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 					macroAddValue{
 						Value:   item,
 						Key:     expandedPropertyString,
-						Object:  &reverseMap,
+						Object:  reverseMap,
 						AsArray: true,
 					}.Call()
 				}
@@ -1601,7 +1577,7 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 				macroAddValue{
 					Value:   expandedValue,
 					Key:     expandedProperty.String(),
-					Object:  &resultObject,
+					Object:  resultObject,
 					AsArray: true,
 				}.Call()
 			}
@@ -1684,13 +1660,13 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 						return err
 					}
 
-					for _, expandedNestValueItem := range expandedNestValue.(inspectjson.ObjectValue).Members {
+					for key, expandedNestValueItem := range expandedNestValue.(*ExpandedObject).Members {
 						macroAddValue{
-							Value:  expandedNestValueItem.Value,
-							Key:    expandedNestValueItem.Name.Value,
-							Object: &resultObject,
+							Value:  expandedNestValueItem,
+							Key:    key,
+							Object: resultObject,
 							// [dpb] this was previously false, but added @id check for #tin06
-							AsArray: expandedNestValueItem.Name.Value != "@id",
+							AsArray: key != "@id",
 						}.Call()
 					}
 				}
@@ -1706,7 +1682,7 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 	// [dpb] done with treating it as an object
 
-	var result inspectjson.Value = resultObject
+	var result ExpandedValue = resultObject
 
 	// [spec // 5.1.2 // 15] If *result* contains the entry `@value`:
 
@@ -1725,25 +1701,37 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 			case "@index", "@value":
 				// nop
 			case "@type":
-				switch vT := value.Value.(type) {
-				case inspectjson.StringValue:
-					if vT.Value == "@json" {
-						hasTypeJSON = true
+				var badGrammarName inspectjson.GrammarName
+
+				if valuePrimitive, ok := value.(*ExpandedScalarPrimitive); ok {
+					switch vT := valuePrimitive.Value.(type) {
+					case inspectjson.StringValue:
+						if vT.Value == "@json" {
+							hasTypeJSON = true
+						}
+
+						typeValue = vT
+					case inspectjson.NullValue:
+						typeValue = vT
+					default:
+						badGrammarName = valuePrimitive.Value.GetGrammarName()
 					}
-
-					typeValue = vT
-
-					continue
-				case inspectjson.NullValue:
-					typeValue = vT
-
-					continue
+				} else if _, ok := value.(*ExpandedArray); ok {
+					badGrammarName = "array"
+				} else if _, ok := value.(*ExpandedObject); ok {
+					badGrammarName = "object"
+				} else {
+					badGrammarName = "unknown"
 				}
 
-				return nil, jsonldtype.Error{
-					Code: jsonldtype.InvalidValueObject,
-					Err:  fmt.Errorf("invalid @type type: %s", value.Value.GetGrammarName()),
+				if len(badGrammarName) > 0 {
+					return nil, jsonldtype.Error{
+						Code: jsonldtype.InvalidValueObject,
+						Err:  fmt.Errorf("invalid @type type: %s", badGrammarName),
+					}
 				}
+
+				break
 			default:
 				return nil, jsonldtype.Error{
 					Code: jsonldtype.InvalidValueObject,
@@ -1767,19 +1755,25 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 			// [spec // 5.1.2 // 15.3] Otherwise, if the value of *result*'s `@value` entry is `null`, or an empty array, return `null`.
 
-			if _, ok := resultValueMember.Value.(inspectjson.NullValue); ok {
-				return nil, nil
-			} else if memberArray, ok := resultValueMember.Value.(inspectjson.ArrayValue); ok && len(memberArray.Values) == 0 {
+			if valuePrimitive, ok := resultValueMember.(*ExpandedScalarPrimitive); ok {
+				if _, ok := valuePrimitive.Value.(inspectjson.NullValue); ok {
+					return nil, nil
+				}
+			}
+
+			if memberArray, ok := resultValueMember.(*ExpandedArray); ok && len(memberArray.Values) == 0 {
 				return nil, nil
 			}
 
 			// [spec // 5.1.2 // 15.4] Otherwise, if the value of *result*'s `@value` entry is not a string and *result* contains the entry `@language`, an `invalid language-tagged value` error has been detected (only strings can be language-tagged) and processing is aborted.
 
-			if _, ok := resultValueMember.Value.(inspectjson.StringValue); !ok {
-				if _, ok := resultObject.Members["@language"]; ok {
-					return nil, jsonldtype.Error{
-						Code: jsonldtype.InvalidLanguageTaggedValue,
-						Err:  fmt.Errorf("invalid @value type: %s", resultValueMember.Value.GetGrammarName()),
+			if valuePrimitive, ok := resultValueMember.(*ExpandedScalarPrimitive); ok {
+				if _, ok := valuePrimitive.Value.(inspectjson.StringValue); !ok {
+					if _, ok := resultObject.Members["@language"]; ok {
+						return nil, jsonldtype.Error{
+							Code: jsonldtype.InvalidLanguageTaggedValue,
+							Err:  fmt.Errorf("invalid @value type: %s", valuePrimitive.Value.GetGrammarName()),
+						}
 					}
 				}
 			}
@@ -1810,17 +1804,14 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 		resultType, ok := resultObject.Members["@type"]
 		if ok {
-			if _, ok := resultType.Value.(inspectjson.ArrayValue); !ok {
+			if _, ok := resultType.(*ExpandedArray); !ok {
 				hasScalarType = true
 			}
 		}
 
 		if hasScalarType {
-			resultObject.Members["@type"] = inspectjson.ObjectMember{
-				Name: resultType.Name,
-				Value: inspectjson.ArrayValue{
-					Values: []inspectjson.Value{resultType.Value},
-				},
+			resultObject.Members["@type"] = &ExpandedArray{
+				Values: []ExpandedValue{resultType},
 			}
 		} else {
 
@@ -1846,7 +1837,7 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 				if hasSet {
 					// TODO unsafe assertion?
-					result = resultObject.Members["@set"].Value
+					result = resultObject.Members["@set"]
 				}
 			}
 		}
@@ -1854,7 +1845,7 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 	// [spec // 5.1.2 // 18] If *result* is a map that contains only the entry `@language`, return `null`.
 
-	if resultObject, ok := result.(inspectjson.ObjectValue); ok && len(resultObject.Members) == 1 {
+	if resultObject, ok := result.(*ExpandedObject); ok && len(resultObject.Members) == 1 {
 		if _, ok := resultObject.Members["@language"]; ok {
 			return nil, nil
 		}
@@ -1869,7 +1860,7 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 		var isEmptyishMap bool
 
-		if resultObject, ok := result.(inspectjson.ObjectValue); ok {
+		if resultObject, ok := result.(*ExpandedObject); ok {
 			if len(resultObject.Members) == 0 {
 				isEmptyishMap = true
 			} else {
@@ -1915,7 +1906,7 @@ func (vars algorithmExpansion) Call() (inspectjson.Value, error) {
 
 			// [spec // 5.1.2 // 19.2] Otherwise, if *result* is a map whose only entry is @id, set result to null. When the frameExpansion flag is set, a map containing only the @id entry is retained.
 
-			if resultObject, ok := result.(inspectjson.ObjectValue); ok && len(resultObject.Members) == 1 {
+			if resultObject, ok := result.(*ExpandedObject); ok && len(resultObject.Members) == 1 {
 				if _, ok := resultObject.Members["@id"]; ok {
 					result = nil
 				}

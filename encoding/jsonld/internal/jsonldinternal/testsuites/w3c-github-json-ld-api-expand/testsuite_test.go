@@ -26,7 +26,7 @@ func Test(t *testing.T) {
 	archiveEntries, manifestResources := requireTestdata(t)
 
 	for _, sequence := range manifestResources.Sequence {
-		decodeAction := func() (inspectjson.Value, error) {
+		decodeAction := func() (jsonldinternal.ExpandedValue, error) {
 			dopt := jsonldtype.ProcessorOptions{
 				BaseURL: manifestPrefix + sequence.Input,
 				DocumentLoader: jsonldtype.DocumentLoaderFunc(func(ctx context.Context, u string, opts jsonldtype.DocumentLoaderOptions) (jsonldtype.RemoteDocument, error) {

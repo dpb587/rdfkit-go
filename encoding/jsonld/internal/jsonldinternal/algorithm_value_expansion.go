@@ -16,7 +16,7 @@ type algorithmValueExpansion struct {
 	processor *contextProcessor
 }
 
-func (vars algorithmValueExpansion) Call() inspectjson.ObjectValue {
+func (vars algorithmValueExpansion) Call() *ExpandedObject {
 	// [spec // 5.3.2 // 1] If the *active property* has a type mapping in *active context* that is `@id`, and the value is a string, return a new map containing a single entry where the key is @id and the value is the result IRI expanding value using true for document relative and false for vocab.
 
 	activePropertyTermDefinition := vars.activeContext.TermDefinitions[vars.activeProperty]
@@ -32,37 +32,21 @@ func (vars algorithmValueExpansion) Call() inspectjson.ObjectValue {
 
 		// [dpb] this is not defined by the spec, but supports test case #t0088
 		if rawValue, ok := expandedValue.(ExpandedIRIasRawValue); ok {
-			return inspectjson.ObjectValue{
-				Members: map[string]inspectjson.ObjectMember{
-					"@value": {
+			return &ExpandedObject{
+				Members: map[string]ExpandedValue{
+					"@value": &ExpandedScalarPrimitive{
 						Value: rawValue.Value,
 					},
 				},
-				ReplacedMembers: []inspectjson.ObjectMember{
-					{
-						Name: inspectjson.StringValue{
-							Value:         MagicKeywordPropertySourceOffsets,
-							SourceOffsets: vars.activePropertySourceOffsets,
-						},
-					},
-				},
+				PropertySourceOffsets: vars.activePropertySourceOffsets,
 			}
 		}
 
-		return inspectjson.ObjectValue{
-			Members: map[string]inspectjson.ObjectMember{
-				"@id": {
-					Value: expandedValue.NewValue(vars.value.GetSourceOffsets()),
-				},
+		return &ExpandedObject{
+			Members: map[string]ExpandedValue{
+				"@id": expandedValue.NewPropertyValue(nil, vars.value.GetSourceOffsets()),
 			},
-			ReplacedMembers: []inspectjson.ObjectMember{
-				{
-					Name: inspectjson.StringValue{
-						Value:         MagicKeywordPropertySourceOffsets,
-						SourceOffsets: vars.activePropertySourceOffsets,
-					},
-				},
-			},
+			PropertySourceOffsets: vars.activePropertySourceOffsets,
 		}
 	}
 
@@ -79,56 +63,33 @@ func (vars algorithmValueExpansion) Call() inspectjson.ObjectValue {
 
 		// [dpb] this is not defined by the spec, but supports test case #t0088
 		if rawValue, ok := expandedValue.(ExpandedIRIasRawValue); ok {
-			return inspectjson.ObjectValue{
-				Members: map[string]inspectjson.ObjectMember{
-					"@value": {
+			return &ExpandedObject{
+				Members: map[string]ExpandedValue{
+					"@value": &ExpandedScalarPrimitive{
 						Value: rawValue.Value,
 					},
 				},
-				ReplacedMembers: []inspectjson.ObjectMember{
-					{
-						Name: inspectjson.StringValue{
-							Value:         MagicKeywordPropertySourceOffsets,
-							SourceOffsets: vars.activePropertySourceOffsets,
-						},
-					},
-				},
+				PropertySourceOffsets: vars.activePropertySourceOffsets,
 			}
 		}
 
-		return inspectjson.ObjectValue{
-			Members: map[string]inspectjson.ObjectMember{
-				"@id": {
-					Value: expandedValue.NewValue(vars.value.GetSourceOffsets()),
-				},
+		return &ExpandedObject{
+			Members: map[string]ExpandedValue{
+				"@id": expandedValue.NewPropertyValue(nil, vars.value.GetSourceOffsets()),
 			},
-			ReplacedMembers: []inspectjson.ObjectMember{
-				{
-					Name: inspectjson.StringValue{
-						Value:         MagicKeywordPropertySourceOffsets,
-						SourceOffsets: vars.activePropertySourceOffsets,
-					},
-				},
-			},
+			PropertySourceOffsets: vars.activePropertySourceOffsets,
 		}
 	}
 
 	// [spec // 5.3.2 // 3] Otherwise, initialize *result* to a map with an `@value` entry whose value is set to *value*.
 
-	result := inspectjson.ObjectValue{
-		Members: map[string]inspectjson.ObjectMember{
-			"@value": {
+	result := &ExpandedObject{
+		Members: map[string]ExpandedValue{
+			"@value": &ExpandedScalarPrimitive{
 				Value: vars.value,
 			},
 		},
-		ReplacedMembers: []inspectjson.ObjectMember{
-			{
-				Name: inspectjson.StringValue{
-					Value:         MagicKeywordPropertySourceOffsets,
-					SourceOffsets: vars.activePropertySourceOffsets,
-				},
-			},
-		},
+		PropertySourceOffsets: vars.activePropertySourceOffsets,
 	}
 
 	// [spec // 5.3.2 // 4] If *active property* has a type mapping in *active context*, other than `@id`, `@vocab`, or `@none`, add `@type` to *result* and set its value to the value associated with the type mapping.
@@ -137,11 +98,10 @@ func (vars algorithmValueExpansion) Call() inspectjson.ObjectValue {
 		activePropertyTermDefinition.TypeMapping != ExpandedIRIasKeyword("@vocab") &&
 		activePropertyTermDefinition.TypeMapping != ExpandedIRIasKeyword("@none")) {
 
-		result.Members["@type"] = inspectjson.ObjectMember{
-			Value: activePropertyTermDefinition.TypeMapping.NewValue(
-				activePropertyTermDefinition.TypeMappingValue.GetSourceOffsets(),
-			),
-		}
+		result.Members["@type"] = activePropertyTermDefinition.TypeMapping.NewPropertyValue(
+			nil,
+			activePropertyTermDefinition.TypeMappingValue.GetSourceOffsets(),
+		)
 	} else {
 
 		// [spec // 5.3.2 // 5] Otherwise, if *value* is a string:
@@ -161,7 +121,7 @@ func (vars algorithmValueExpansion) Call() inspectjson.ObjectValue {
 			// [spec // 5.3.2 // 5.3] If language is not null, add @language to result with the value language.
 
 			if _, ok := language.(inspectjson.StringValue); ok {
-				result.Members["@language"] = inspectjson.ObjectMember{
+				result.Members["@language"] = &ExpandedScalarPrimitive{
 					Value: language,
 				}
 			}
@@ -179,7 +139,7 @@ func (vars algorithmValueExpansion) Call() inspectjson.ObjectValue {
 			// [spec // 5.3.2 // 5.4] If direction is not null, add @direction to result with the value direction.
 
 			if _, ok := direction.(inspectjson.StringValue); ok {
-				result.Members["@direction"] = inspectjson.ObjectMember{
+				result.Members["@direction"] = &ExpandedScalarPrimitive{
 					Value: direction,
 				}
 			}

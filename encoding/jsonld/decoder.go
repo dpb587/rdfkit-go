@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"maps"
+	"slices"
 	"strconv"
 	"strings"
 
@@ -130,8 +132,8 @@ func (r *Decoder) parseRoot() error {
 	return r.decodeElement(ectx, ets, false)
 }
 
-func (r *Decoder) decodeElement(ectx evaluationContext, element inspectjson.Value, dropValuePropertyRange bool) error {
-	if elementArray, ok := element.(inspectjson.ArrayValue); ok {
+func (r *Decoder) decodeElement(ectx evaluationContext, element jsonldinternal.ExpandedValue, dropValuePropertyRange bool) error {
+	if elementArray, ok := element.(*jsonldinternal.ExpandedArray); ok {
 		for _, item := range elementArray.Values {
 			err := r.decodeElement(ectx, item, dropValuePropertyRange)
 			if err != nil {
@@ -142,7 +144,7 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element inspectjson.Valu
 		return nil
 	}
 
-	elementObject := element.(inspectjson.ObjectValue)
+	elementObject := element.(*jsonldinternal.ExpandedObject)
 
 	if _, ok := elementObject.Members["@value"]; ok {
 		return r.decodeValueNode(ectx, elementObject, dropValuePropertyRange)
@@ -154,7 +156,7 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element inspectjson.Valu
 	}
 
 	if atList, ok := elementObject.Members["@list"]; ok {
-		listArray := atList.Value.(inspectjson.ArrayValue)
+		listArray := atList.(*jsonldinternal.ExpandedArray)
 
 		if len(listArray.Values) == 0 {
 			r.statements = append(r.statements, &statement{
@@ -167,7 +169,7 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element inspectjson.Valu
 				offsets: r.buildTextOffsets(
 					encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
 					encoding.SubjectStatementOffsets, ectx.ActiveSubjectRange,
-					encoding.PredicateStatementOffsets, ectx.ActivePropertyRange,
+					encoding.PredicateStatementOffsets, elementObject.PropertySourceOffsets,
 					// TODO range iff BeginToken/EndToken known
 					// Object,    atList.Value.BeginToken.OffsetRange.NewUntilOffset(atListArray.EndToken.OffsetRange.UntilOffset()),
 				),
@@ -176,11 +178,7 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element inspectjson.Valu
 		} else {
 			listSubject := ectx.global.BlankNodeFactory.NewBlankNode()
 
-			var propagatePropertyRange *cursorio.TextOffsetRange
-
-			if vObject, ok := listArray.Values[0].(inspectjson.ObjectValue); ok {
-				propagatePropertyRange = r.tryReplacedMember(vObject)
-			}
+			propagatePropertyRange := elementObject.PropertySourceOffsets
 
 			r.statements = append(r.statements, &statement{
 				graphName: ectx.ActiveGraph,
@@ -250,11 +248,13 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element inspectjson.Valu
 	var selfSubjectRange *cursorio.TextOffsetRange
 
 	if atID, ok := elementObject.Members["@id"]; ok {
-		if _, ok := atID.Value.(inspectjson.NullValue); ok {
+		valuePrimitive := atID.(*jsonldinternal.ExpandedScalarPrimitive)
+
+		if _, ok := valuePrimitive.Value.(inspectjson.NullValue); ok {
 			return nil
 		}
 
-		idString := atID.Value.(inspectjson.StringValue).Value
+		idString := valuePrimitive.Value.(inspectjson.StringValue).Value
 
 		if strings.HasPrefix(idString, "_:") {
 			selfSubject = ectx.global.BlankNodeStringMapper.MapBlankNodeIdentifier(idString[2:])
@@ -262,9 +262,10 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element inspectjson.Valu
 			selfSubject = rdf.IRI(idString)
 		}
 
-		selfSubjectRange = atID.Value.GetSourceOffsets()
+		selfSubjectRange = valuePrimitive.Value.GetSourceOffsets()
 	} else {
 		selfSubject = ectx.global.BlankNodeFactory.NewBlankNode()
+		selfSubjectRange = elementObject.SourceOffsets
 	}
 
 	if ectx.ActiveProperty != nil {
@@ -297,7 +298,7 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element inspectjson.Valu
 				offsets: r.buildTextOffsets(
 					encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
 					encoding.SubjectStatementOffsets, ectx.ActiveSubjectRange,
-					encoding.PredicateStatementOffsets, r.tryReplacedMember(elementObject),
+					encoding.PredicateStatementOffsets, elementObject.PropertySourceOffsets,
 					encoding.ObjectStatementOffsets, selfSubjectRange,
 				),
 				containerResource: ectx.CurrentContainer,
@@ -311,19 +312,23 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element inspectjson.Valu
 	if atReverse, ok := elementObject.Members["@reverse"]; ok {
 		// TODO double reverse
 
-		reverseObject := atReverse.Value.(inspectjson.ObjectValue)
+		reverseObject := atReverse.(*jsonldinternal.ExpandedObject)
 
-		for key, member := range reverseObject.Members {
-			// if len(key) > 1 && key[0] == '@' {
-			// 	continue
-			// }
+		// [dpb] sort keys for deterministic iteration; not found in spec?
+		reverseKeys := slices.Collect(maps.Keys(reverseObject.Members))
+		slices.SortFunc(reverseKeys, strings.Compare)
+
+		for _, key := range reverseKeys {
+			if len(key) > 1 && key[0] == '@' {
+				continue
+			}
 
 			nectx := ectx
 			nectx.ActiveProperty = rdf.IRI(key)
-			nectx.ActivePropertyRange = member.Name.SourceOffsets
+			// nectx.ActivePropertyRange = member.Name.SourceOffsets
 			nectx.Reverse = true
 
-			for _, item := range member.Value.(inspectjson.ArrayValue).Values {
+			for _, item := range reverseObject.Members[key].(*jsonldinternal.ExpandedArray).Values {
 				err := r.decodeElement(nectx, item, false)
 				if err != nil {
 					return err
@@ -333,23 +338,22 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element inspectjson.Valu
 	}
 
 	if atType, ok := elementObject.Members["@type"]; ok {
-		for _, typeValue := range atType.Value.(inspectjson.ArrayValue).Values {
-			typePrimitive := typeValue.(inspectjson.StringValue)
+		for _, typeValue := range atType.(*jsonldinternal.ExpandedArray).Values {
+			typePrimitive := typeValue.(*jsonldinternal.ExpandedScalarPrimitive)
+			typeString := typePrimitive.Value.(inspectjson.StringValue)
 
 			r.statements = append(r.statements, &statement{
 				graphName: ectx.ActiveGraph,
 				triple: rdf.Triple{
 					Subject:   ectx.ActiveSubject,
 					Predicate: rdfiri.Type_Property,
-					Object:    rdf.IRI(typePrimitive.Value),
+					Object:    rdf.IRI(typeString.Value),
 				},
 				offsets: r.buildTextOffsets(
 					encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
 					encoding.SubjectStatementOffsets, ectx.ActiveSubjectRange,
-					// TODO need an alternative approach for propagating object types
-					// i.e. value is always a string, so no equivalent to ReplacedMembers hack
-					// encoding.PredicateStatementOffsets, atType.Name.SourceOffsets,
-					encoding.ObjectStatementOffsets, typePrimitive.SourceOffsets,
+					encoding.PredicateStatementOffsets, typePrimitive.PropertySourceOffsets,
+					encoding.ObjectStatementOffsets, typePrimitive.Value.GetSourceOffsets(),
 				),
 				containerResource: ectx.CurrentContainer,
 			})
@@ -366,7 +370,7 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element inspectjson.Valu
 		nectx.ActivePropertyRange = nil
 		nectx.CurrentContainer = nil
 
-		for _, item := range atGraph.Value.(inspectjson.ArrayValue).Values {
+		for _, item := range atGraph.(*jsonldinternal.ExpandedArray).Values {
 			err := r.decodeElement(nectx, item, false)
 			if err != nil {
 				return err
@@ -374,16 +378,20 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element inspectjson.Valu
 		}
 	}
 
-	for key, member := range elementObject.Members {
+	// [dpb] Sort keys for deterministic iteration; not found in spec?
+	memberKeys := slices.Collect(maps.Keys(elementObject.Members))
+	slices.Sort(memberKeys)
+
+	for _, key := range memberKeys {
 		if len(key) > 1 && key[0] == '@' {
 			continue
 		}
 
 		nectx := ectx
 		nectx.ActiveProperty = rdf.IRI(key)
-		nectx.ActivePropertyRange = member.Name.SourceOffsets
+		// nectx.ActivePropertyRange = member.Name.SourceOffsets // TODO
 
-		for _, item := range member.Value.(inspectjson.ArrayValue).Values {
+		for _, item := range elementObject.Members[key].(*jsonldinternal.ExpandedArray).Values {
 			err := r.decodeElement(nectx, item, false)
 			if err != nil {
 				return err
@@ -394,15 +402,17 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element inspectjson.Valu
 	return nil
 }
 
-func (r *Decoder) decodeValueNode(ectx evaluationContext, v inspectjson.ObjectValue, dropPropertyRange bool) error {
+func (r *Decoder) decodeValueNode(ectx evaluationContext, v *jsonldinternal.ExpandedObject, dropPropertyRange bool) error {
 	var lit rdf.Literal
 
 	if atType, ok := v.Members["@type"]; ok {
-		lit.Datatype = rdf.IRI(atType.Value.(inspectjson.StringValue).Value)
+		lit.Datatype = rdf.IRI(atType.(*jsonldinternal.ExpandedScalarPrimitive).Value.(inspectjson.StringValue).Value)
 	}
 
+	atValuePrimitive := v.Members["@value"].(*jsonldinternal.ExpandedScalarPrimitive)
+
 	if lit.Datatype == "@json" {
-		buf, err := json.Marshal(v.Members["@value"].Value.AsBuiltin())
+		buf, err := json.Marshal(atValuePrimitive.Value.AsBuiltin())
 		if err != nil {
 			return fmt.Errorf("marshal for @json: %v", err)
 		}
@@ -410,7 +420,7 @@ func (r *Decoder) decodeValueNode(ectx evaluationContext, v inspectjson.ObjectVa
 		lit.Datatype = rdfiri.JSON_Datatype
 		lit.LexicalForm = string(buf)
 	} else {
-		switch valuePrimitive := v.Members["@value"].Value.(type) {
+		switch valuePrimitive := atValuePrimitive.Value.(type) {
 		case inspectjson.StringValue:
 			lit.LexicalForm = valuePrimitive.Value
 
@@ -421,11 +431,11 @@ func (r *Decoder) decodeValueNode(ectx evaluationContext, v inspectjson.ObjectVa
 				lit.Tags = map[rdf.LiteralTag]string{}
 
 				if atLangageKnown {
-					lit.Tags[rdf.LanguageLiteralTag] = atLanguage.Value.(inspectjson.StringValue).Value
+					lit.Tags[rdf.LanguageLiteralTag] = atLanguage.(*jsonldinternal.ExpandedScalarPrimitive).Value.(inspectjson.StringValue).Value
 				}
 
 				if atDirectionKnown {
-					lit.Tags[rdf.BaseDirectionLiteralTag] = atDirection.Value.(inspectjson.StringValue).Value
+					lit.Tags[rdf.BaseDirectionLiteralTag] = atDirection.(*jsonldinternal.ExpandedScalarPrimitive).Value.(inspectjson.StringValue).Value
 				}
 
 				if len(lit.Datatype) == 0 {
@@ -452,7 +462,7 @@ func (r *Decoder) decodeValueNode(ectx evaluationContext, v inspectjson.ObjectVa
 									offsets: r.buildTextOffsets(
 										encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
 										encoding.SubjectStatementOffsets, ectx.ActiveSubjectRange,
-										encoding.PredicateStatementOffsets, r.tryReplacedMember(v),
+										encoding.PredicateStatementOffsets, v.SourceOffsets,
 									),
 									containerResource: ectx.CurrentContainer,
 								},
@@ -468,7 +478,7 @@ func (r *Decoder) decodeValueNode(ectx evaluationContext, v inspectjson.ObjectVa
 									},
 									offsets: r.buildTextOffsets(
 										encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
-										encoding.ObjectStatementOffsets, v.Members["@value"].Value.GetSourceOffsets(),
+										encoding.ObjectStatementOffsets, valuePrimitive.SourceOffsets,
 									),
 									containerResource: ectx.CurrentContainer,
 								},
@@ -484,7 +494,7 @@ func (r *Decoder) decodeValueNode(ectx evaluationContext, v inspectjson.ObjectVa
 									},
 									offsets: r.buildTextOffsets(
 										encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
-										encoding.ObjectStatementOffsets, atDirection.Value.GetSourceOffsets(),
+										encoding.ObjectStatementOffsets, atDirection.(*jsonldinternal.ExpandedScalarPrimitive).Value.GetSourceOffsets(),
 									),
 									containerResource: ectx.CurrentContainer,
 								},
@@ -504,7 +514,7 @@ func (r *Decoder) decodeValueNode(ectx evaluationContext, v inspectjson.ObjectVa
 										},
 										offsets: r.buildTextOffsets(
 											encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
-											encoding.ObjectStatementOffsets, atLanguage.Value.GetSourceOffsets(),
+											encoding.ObjectStatementOffsets, atLanguage.(*jsonldinternal.ExpandedScalarPrimitive).Value.GetSourceOffsets(),
 										),
 										containerResource: ectx.CurrentContainer,
 									},
@@ -562,7 +572,7 @@ func (r *Decoder) decodeValueNode(ectx evaluationContext, v inspectjson.ObjectVa
 	var predicateOffsets *cursorio.TextOffsetRange
 
 	if !dropPropertyRange {
-		predicateOffsets = r.tryReplacedMember(v)
+		predicateOffsets = v.PropertySourceOffsets
 	}
 
 	r.statements = append(r.statements, &statement{
@@ -576,24 +586,10 @@ func (r *Decoder) decodeValueNode(ectx evaluationContext, v inspectjson.ObjectVa
 			encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
 			encoding.SubjectStatementOffsets, ectx.ActiveSubjectRange,
 			encoding.PredicateStatementOffsets, predicateOffsets,
-			encoding.ObjectStatementOffsets, v.Members["@value"].Value.GetSourceOffsets(),
+			encoding.ObjectStatementOffsets, atValuePrimitive.Value.GetSourceOffsets(),
 		),
 		containerResource: ectx.CurrentContainer,
 	})
-
-	return nil
-}
-
-func (r *Decoder) tryReplacedMember(v inspectjson.ObjectValue) *cursorio.TextOffsetRange {
-	if len(v.ReplacedMembers) == 0 {
-		return nil
-	}
-
-	rm := v.ReplacedMembers[len(v.ReplacedMembers)-1].Name
-
-	if rm.Value == jsonldinternal.MagicKeywordPropertySourceOffsets {
-		return rm.SourceOffsets
-	}
 
 	return nil
 }

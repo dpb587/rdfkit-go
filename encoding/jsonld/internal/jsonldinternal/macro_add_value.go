@@ -1,12 +1,8 @@
 package jsonldinternal
 
-import (
-	"github.com/dpb587/inspectjson-go/inspectjson"
-)
-
 type macroAddValue struct {
-	Value   inspectjson.Value
-	Object  *inspectjson.ObjectValue
+	Value   ExpandedValue
+	Object  *ExpandedObject
 	Key     string
 	AsArray bool
 }
@@ -17,19 +13,11 @@ func (m macroAddValue) Call() {
 	if m.AsArray {
 		originalValue, ok := m.Object.Members[m.Key]
 		if !ok {
-			m.Object.Members[m.Key] = inspectjson.ObjectMember{
-				Name: inspectjson.StringValue{
-					Value: m.Key,
-				},
-				Value: inspectjson.ArrayValue{},
-			}
-		} else if _, ok := originalValue.Value.(inspectjson.ArrayValue); !ok {
-			m.Object.Members[m.Key] = inspectjson.ObjectMember{
-				Name: originalValue.Name,
-				Value: inspectjson.ArrayValue{
-					Values: []inspectjson.Value{
-						originalValue.Value,
-					},
+			m.Object.Members[m.Key] = &ExpandedArray{}
+		} else if _, ok := originalValue.(*ExpandedArray); !ok {
+			m.Object.Members[m.Key] = &ExpandedArray{
+				Values: []ExpandedValue{
+					originalValue,
 				},
 			}
 		}
@@ -37,7 +25,7 @@ func (m macroAddValue) Call() {
 
 	// [spec // 2] If *value* is an array, then for each element *v* in *value*, use add value recursively to add *v* to *key* in *entry*.
 
-	if arrayValue, ok := m.Value.(inspectjson.ArrayValue); ok {
+	if arrayValue, ok := m.Value.(*ExpandedArray); ok {
 		for _, v := range arrayValue.Values {
 			macroAddValue{
 				Value:   v,
@@ -54,41 +42,28 @@ func (m macroAddValue) Call() {
 
 		originalValue, ok := m.Object.Members[m.Key]
 		if !ok {
-			m.Object.Members[m.Key] = inspectjson.ObjectMember{
-				Name: inspectjson.StringValue{
-					Value: m.Key,
-				},
-				Value: m.Value,
-			}
+			m.Object.Members[m.Key] = m.Value
 		} else {
 
 			// [spec // 3.2] Otherwise:
 
 			// [spec // 3.2.1] If the *value* of the *key* entry in *object* is not an array, set it to a new array containing the original value.
 
-			if _, ok := originalValue.Value.(inspectjson.ArrayValue); !ok {
-				m.Object.Members[m.Key] = inspectjson.ObjectMember{
-					Name: originalValue.Name,
-					Value: inspectjson.ArrayValue{
-						Values: []inspectjson.Value{
-							originalValue.Value,
-						},
+			if _, ok := originalValue.(*ExpandedArray); !ok {
+				m.Object.Members[m.Key] = &ExpandedArray{
+					Values: []ExpandedValue{
+						originalValue,
 					},
 				}
 			}
 
 			// [spec // 3.2.2] Append *value* to the value of the *key* entry in *object*.
 
-			objectMembersKeyValueArray := m.Object.Members[m.Key].Value.(inspectjson.ArrayValue)
+			objectMembersKeyValueArray := m.Object.Members[m.Key].(*ExpandedArray)
 			objectMembersKeyValueArray.Values = append(
 				objectMembersKeyValueArray.Values,
 				m.Value,
 			)
-
-			objectMembersKey := m.Object.Members[m.Key]
-			objectMembersKey.Value = objectMembersKeyValueArray
-
-			m.Object.Members[m.Key] = objectMembersKey
 		}
 	}
 }

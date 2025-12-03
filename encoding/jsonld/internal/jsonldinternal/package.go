@@ -49,7 +49,7 @@ var (
 
 var reKeywordABNF = regexp.MustCompile(`^@[a-zA-Z]+$`)
 
-func Expand(input inspectjson.Value, opts jsonldtype.ProcessorOptions) (inspectjson.Value, error) {
+func Expand(input inspectjson.Value, opts jsonldtype.ProcessorOptions) (ExpandedValue, error) {
 	// [spec // 9.1 // expand // 9] Set *expanded output* to the result of using the Expansion algorithm, passing the *active context*, `document` from *remote document* or input if there is no *remote document* as *element*, `null` as *active property*, `documentUrl` as *base URL*, if available, otherwise to the `base` option from options, and the `frameExpansion` and and `ordered` flags from options.
 
 	if len(opts.ProcessingMode) == 0 {
@@ -125,10 +125,10 @@ func Expand(input inspectjson.Value, opts jsonldtype.ProcessorOptions) (inspectj
 	// [spec // 9.1 // expand // 8.1] If *expanded output* is a map that contains only an `@graph` entry, set *expanded output* that value.
 
 	if expandedOutput != nil {
-		if expandedOutputMap, ok := expandedOutput.(inspectjson.ObjectValue); ok {
+		if expandedOutputMap, ok := expandedOutput.(*ExpandedObject); ok {
 			if len(expandedOutputMap.Members) == 1 {
 				if graphMember, ok := expandedOutputMap.Members["@graph"]; ok {
-					expandedOutput = graphMember.Value
+					expandedOutput = graphMember
 				}
 			}
 		}
@@ -136,12 +136,12 @@ func Expand(input inspectjson.Value, opts jsonldtype.ProcessorOptions) (inspectj
 
 		// [spec // 9.1 // expand // 8.2] If *expanded output* is `null`, set *expanded output* to an empty array.
 
-		expandedOutput = inspectjson.ArrayValue{}
+		expandedOutput = &ExpandedArray{}
 	}
 
-	if _, ok := expandedOutput.(inspectjson.ArrayValue); !ok {
-		expandedOutput = inspectjson.ArrayValue{
-			Values: []inspectjson.Value{expandedOutput},
+	if _, ok := expandedOutput.(*ExpandedArray); !ok {
+		expandedOutput = &ExpandedArray{
+			Values: []ExpandedValue{expandedOutput},
 		}
 	}
 

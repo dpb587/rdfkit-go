@@ -8,7 +8,7 @@ import (
 type ExpandedIRI interface {
 	ExpandedType() string
 	Equals(e ExpandedIRI) bool
-	NewValue(offsetRange *cursorio.TextOffsetRange) inspectjson.Value
+	NewPropertyValue(propertyOffsets, valueOffsets *cursorio.TextOffsetRange) *ExpandedScalarPrimitive
 	String() string
 }
 
@@ -27,8 +27,11 @@ func (e ExpandedIRIasRawValue) Equals(e2 ExpandedIRI) bool {
 	return ok && ee2.Value == e.Value
 }
 
-func (e ExpandedIRIasRawValue) NewValue(offsetRange *cursorio.TextOffsetRange) inspectjson.Value {
-	return e.Value
+func (e ExpandedIRIasRawValue) NewPropertyValue(propertyOffsets, valueOffsets *cursorio.TextOffsetRange) *ExpandedScalarPrimitive {
+	return &ExpandedScalarPrimitive{
+		Value:                 e.Value,
+		PropertySourceOffsets: propertyOffsets,
+	}
 }
 
 func (ExpandedIRIasRawValue) String() string {
@@ -48,9 +51,12 @@ func (ExpandedIRIasNil) Equals(e ExpandedIRI) bool {
 	return ok
 }
 
-func (ExpandedIRIasNil) NewValue(offsetRange *cursorio.TextOffsetRange) inspectjson.Value {
-	return inspectjson.NullValue{
-		SourceOffsets: offsetRange,
+func (ExpandedIRIasNil) NewPropertyValue(propertyOffsets, valueOffsets *cursorio.TextOffsetRange) *ExpandedScalarPrimitive {
+	return &ExpandedScalarPrimitive{
+		Value: inspectjson.NullValue{
+			SourceOffsets: valueOffsets,
+		},
+		PropertySourceOffsets: propertyOffsets,
 	}
 }
 
@@ -70,10 +76,13 @@ func (e ExpandedIRIasIRI) Equals(e2 ExpandedIRI) bool {
 	return ok && e == e2IRI
 }
 
-func (e ExpandedIRIasIRI) NewValue(offsetRange *cursorio.TextOffsetRange) inspectjson.Value {
-	return inspectjson.StringValue{
-		SourceOffsets: offsetRange,
-		Value:         string(e),
+func (e ExpandedIRIasIRI) NewPropertyValue(propertyOffsets, valueOffsets *cursorio.TextOffsetRange) *ExpandedScalarPrimitive {
+	return &ExpandedScalarPrimitive{
+		Value: inspectjson.StringValue{
+			SourceOffsets: valueOffsets,
+			Value:         string(e),
+		},
+		PropertySourceOffsets: propertyOffsets,
 	}
 }
 
@@ -93,10 +102,13 @@ func (e ExpandedIRIasBlankNode) Equals(e2 ExpandedIRI) bool {
 	return ok && e == e2t
 }
 
-func (e ExpandedIRIasBlankNode) NewValue(offsetRange *cursorio.TextOffsetRange) inspectjson.Value {
-	return inspectjson.StringValue{
-		SourceOffsets: offsetRange,
-		Value:         string(e),
+func (e ExpandedIRIasBlankNode) NewPropertyValue(propertyOffsets, valueOffsets *cursorio.TextOffsetRange) *ExpandedScalarPrimitive {
+	return &ExpandedScalarPrimitive{
+		Value: inspectjson.StringValue{
+			SourceOffsets: valueOffsets,
+			Value:         string(e),
+		},
+		PropertySourceOffsets: propertyOffsets,
 	}
 }
 
@@ -116,10 +128,13 @@ func (e ExpandedIRIasKeyword) Equals(e2 ExpandedIRI) bool {
 	return ok && string(e) == string(e2t)
 }
 
-func (e ExpandedIRIasKeyword) NewValue(offsetRange *cursorio.TextOffsetRange) inspectjson.Value {
-	return inspectjson.StringValue{
-		SourceOffsets: offsetRange,
-		Value:         string(e),
+func (e ExpandedIRIasKeyword) NewPropertyValue(propertyOffsets, valueOffsets *cursorio.TextOffsetRange) *ExpandedScalarPrimitive {
+	return &ExpandedScalarPrimitive{
+		Value: inspectjson.StringValue{
+			SourceOffsets: valueOffsets,
+			Value:         string(e),
+		},
+		PropertySourceOffsets: propertyOffsets,
 	}
 }
 
