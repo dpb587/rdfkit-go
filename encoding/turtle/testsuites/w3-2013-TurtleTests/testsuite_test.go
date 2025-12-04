@@ -5,12 +5,14 @@ import (
 	"crypto/sha256"
 	"encoding/base64"
 	"fmt"
+	"io"
 	"os"
 	"strings"
 	"testing"
 
 	"github.com/dpb587/rdfkit-go/encoding/nquads"
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
+	"github.com/dpb587/rdfkit-go/internal/devencoding/rdfioutil"
 	"github.com/dpb587/rdfkit-go/internal/devtest"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/rdf"
@@ -23,6 +25,23 @@ const manifestPrefix = "http://www.w3.org/2013/TurtleTests/"
 func Test(t *testing.T) {
 	archiveEntries, manifestResources := requireTestdata(t)
 	oxigraphExec := os.Getenv("TESTING_OXIGRAPH_EXEC")
+
+	var debugWriter = io.Discard
+	var debugBundle *rdfioutil.BundleEncoder
+
+	if fhPath := os.Getenv("TESTING_DEBUG_DUMPFILE"); len(fhPath) > 0 {
+		fh, err := os.OpenFile(fhPath, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
+		if err != nil {
+			t.Fatalf("open debug file: %v", err)
+		}
+
+		defer fh.Close()
+
+		debugWriter = fh
+	}
+
+	debugBundle = rdfioutil.NewBundleEncoder(debugWriter)
+	defer debugBundle.Close()
 
 	for _, manifestResource := range manifestResources.GetResources() {
 		var isEval, isNegativeSyntax, isPositiveSyntax bool
@@ -70,7 +89,8 @@ func Test(t *testing.T) {
 			return rdfio.CollectStatementsErr(turtle.NewDecoder(
 				bytes.NewReader(archiveEntries[string(testAction)]),
 				turtle.DecoderConfig{}.
-					SetDefaultBase(string(testAction)),
+					SetDefaultBase(string(testAction)).
+					SetCaptureTextOffsets(true),
 			))
 		}
 
@@ -90,19 +110,21 @@ func Test(t *testing.T) {
 
 				err = devtest.AssertStatementEquals(expectedStatements, actualStatements)
 				if err == nil {
-					return
+					// good
 				} else if len(oxigraphExec) == 0 {
 					t.Log("eval: processor required, but TESTING_OXIGRAPH_EXEC is empty")
 					t.Log(err.Error())
 					t.SkipNow()
+				} else {
+					oxigraphErr := devtest.AssertOxigraphAsk(t.Context(), oxigraphExec, testAction, bytes.NewReader(archiveEntries[string(testResult)]), actualStatements)
+					if oxigraphErr != nil {
+						t.Logf("eval: %v", oxigraphErr)
+						t.Log(err.Error())
+						t.FailNow()
+					}
 				}
 
-				oxigraphErr := devtest.AssertOxigraphAsk(t.Context(), oxigraphExec, testAction, bytes.NewReader(archiveEntries[string(testResult)]), actualStatements)
-				if oxigraphErr != nil {
-					t.Logf("eval: %v", oxigraphErr)
-					t.Log(err.Error())
-					t.FailNow()
-				}
+				debugBundle.PutBundle(t.Name(), actualStatements)
 			})
 		} else if isNegativeSyntax {
 			t.Run("NegativeSyntax/"+testName, func(t *testing.T) {

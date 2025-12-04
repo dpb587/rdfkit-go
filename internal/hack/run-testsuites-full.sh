@@ -52,8 +52,11 @@ while read -r dir
 do
   echo "$dir"
   pushd "$dir" > /dev/null
+  
+  export TESTING_DEBUG_DUMPFILE="RESULTS.rdfio.txt"
   run
+
   popd > /dev/null
 done < <(
-  find . -type f -name testsuite_test.go -exec dirname {} \;
+  find "${1:-.}" -type f -name testsuite_test.go -exec dirname {} \;
 )

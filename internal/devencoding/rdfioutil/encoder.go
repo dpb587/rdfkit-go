@@ -4,7 +4,9 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"maps"
 	"regexp"
+	"slices"
 	"strings"
 	"unicode"
 
@@ -140,10 +142,30 @@ func (w *Encoder) PutStatement(_ context.Context, s rdfio.Statement) error {
 					fmt.Fprintf(w.w, "\t\t\t\tDatatype: rdf.IRI(%q),\n", object.Datatype)
 
 					if len(object.Tags) > 0 {
-						fmt.Fprintf(w.w, "\t\t\t\tQualifiers: map[rdf.IRI]string{\n")
+						fmt.Fprintf(w.w, "\t\t\t\tQualifiers: map[rdf.LiteralTag]string{\n")
 
-						for k, v := range object.Tags {
-							fmt.Fprintf(w.w, "\t\t\t\t\t%q: %q,\n", k, v)
+						tagKeys := slices.Collect(maps.Keys(object.Tags))
+						slices.SortFunc(tagKeys, func(i, j rdf.LiteralTag) int {
+							if i < j {
+								return -1
+							}
+
+							return 1
+						})
+
+						for _, k := range tagKeys {
+							var kString string
+
+							switch k {
+							case rdf.BaseDirectionLiteralTag:
+								kString = "rdf.BaseDirectionLiteralTag"
+							case rdf.LanguageLiteralTag:
+								kString = "rdf.LanguageLiteralTag"
+							default:
+								kString = fmt.Sprintf("%v", k)
+							}
+
+							fmt.Fprintf(w.w, "\t\t\t\t\t%s: %q,\n", kString, object.Tags[k])
 						}
 
 						fmt.Fprintf(w.w, "\t\t\t\t},\n")

@@ -172,31 +172,31 @@
 ### ✅ NegativeSyntax, rdf-containers-syntax-vs-schema-error001
 
 ```
-error: rdf: description: attribute not allowed: li (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+error: rdf: description: offset L26C12:L26C18;0x30b:0x311: attribute not allowed: li (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 ```
 
 ### ✅ NegativeSyntax, rdf-containers-syntax-vs-schema-error002
 
 ```
-error: rdf: element not allowed: li (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+error: rdf: offset L29C4:L29C11;0x369:0x370: element not allowed: li (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 ```
 
 ### ✅ NegativeSyntax, rdfms-abouteach-error001
 
 ```
-error: rdf: description: attribute not allowed: aboutEach (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+error: rdf: description: offset L31C20:L31C33;0x32c:0x339: attribute not allowed: aboutEach (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 ```
 
 ### ✅ NegativeSyntax, rdfms-abouteach-error002
 
 ```
-error: rdf: description: attribute not allowed: aboutEachPrefix (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+error: rdf: description: offset L31C20:L31C39;0x345:0x358: attribute not allowed: aboutEachPrefix (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 ```
 
 ### ✅ NegativeSyntax, rdfms-difference-between-ID-and-about-error1
 
 ```
-error: rdf: description: duplicate name found in scope: http://www.w3.org/2013/RDFXMLTests/rdfms-difference-between-ID-and-about/error1.rdf#foo
+error: rdf: description: offset L22C18:L22C24;0x2b5:0x2bb: duplicate name found in scope: http://www.w3.org/2013/RDFXMLTests/rdfms-difference-between-ID-and-about/error1.rdf#foo
 ```
 
 ### ✅ NegativeSyntax, rdfms-empty-property-elements-error001
@@ -214,181 +214,181 @@ error: rdf: description: propertyEltList: property: rdf:resource cannot be used 
 ### ✅ NegativeSyntax, rdfms-rdf-id-error001
 
 ```
-error: rdf: description: invalid name: 333-555-666
+error: rdf: description: offset L1C1:L1C1;0x0:0x0: invalid name: 333-555-666
 ```
 
 ### ✅ NegativeSyntax, rdfms-rdf-id-error002
 
 ```
-error: rdf: description: invalid name: _:xx
+error: rdf: description: offset L24C19:L24C25;0x248:0x24e: invalid name: _:xx
 ```
 
 ### ✅ NegativeSyntax, rdfms-rdf-id-error003
 
 ```
-error: rdf: description: propertyEltList: property: invalid name: q:name
+error: rdf: description: propertyEltList: property: offset L26C13:L26C19;0x27d:0x283: invalid name: q:name
 ```
 
 ### ✅ NegativeSyntax, rdfms-rdf-id-error004
 
 ```
-error: rdf: description: invalid name: a/b
+error: rdf: description: offset L25C19:L25C25;0x270:0x276: invalid name: a/b
 ```
 
 ### ✅ NegativeSyntax, rdfms-rdf-id-error005
 
 ```
-error: rdf: description: invalid name: ́bb
+error: rdf: description: offset L29C19:L29C25;0x2f2:0x2f8: invalid name: ́bb
 ```
 
 ### ✅ NegativeSyntax, rdfms-rdf-id-error006
 
 ```
-error: rdf: description: attribute not allowed: bagID (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+error: rdf: description: offset L1C1:L1C1;0x0:0x0: attribute not allowed: bagID (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 ```
 
 ### ✅ NegativeSyntax, rdfms-rdf-id-error007
 
 ```
-error: rdf: description: propertyEltList: property: attribute not allowed: bagID (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+error: rdf: description: propertyEltList: property: offset L26C13:L26C22;0x280:0x289: attribute not allowed: bagID (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 ```
 
 ### ✅ NegativeSyntax, rdfms-rdf-names-use-error-001
 
 ```
-error: rdf: element not allowed: RDF (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+error: rdf: offset L22C4:L22C12;0x28e:0x296: element not allowed: RDF (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 ```
 
 ### ✅ NegativeSyntax, rdfms-rdf-names-use-error-002
 
 ```
-error: rdf: element not allowed: ID (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+error: rdf: offset L22C4:L22C11;0x28d:0x294: element not allowed: ID (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 ```
 
 ### ✅ NegativeSyntax, rdfms-rdf-names-use-error-003
 
 ```
-error: rdf: element not allowed: about (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+error: rdf: offset L22C4:L22C14;0x290:0x29a: element not allowed: about (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 ```
 
 ### ✅ NegativeSyntax, rdfms-rdf-names-use-error-004
 
 ```
-error: rdf: element not allowed: bagID (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+error: rdf: offset L22C4:L22C14;0x290:0x29a: element not allowed: bagID (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 ```
 
 ### ✅ NegativeSyntax, rdfms-rdf-names-use-error-005
 
 ```
-error: rdf: element not allowed: parseType (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+error: rdf: offset L22C4:L22C18;0x294:0x2a2: element not allowed: parseType (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 ```
 
 ### ✅ NegativeSyntax, rdfms-rdf-names-use-error-006
 
 ```
-error: rdf: element not allowed: resource (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+error: rdf: offset L22C4:L22C17;0x293:0x2a0: element not allowed: resource (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 ```
 
 ### ✅ NegativeSyntax, rdfms-rdf-names-use-error-007
 
 ```
-error: rdf: element not allowed: nodeID (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+error: rdf: offset L22C4:L22C15;0x291:0x29c: element not allowed: nodeID (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 ```
 
 ### ✅ NegativeSyntax, rdfms-rdf-names-use-error-008
 
 ```
-error: rdf: element not allowed: li (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+error: rdf: offset L22C4:L22C11;0x28d:0x294: element not allowed: li (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 ```
 
 ### ✅ NegativeSyntax, rdfms-rdf-names-use-error-009
 
 ```
-error: rdf: element not allowed: aboutEach (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+error: rdf: offset L22C4:L22C18;0x294:0x2a2: element not allowed: aboutEach (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 ```
 
 ### ✅ NegativeSyntax, rdfms-rdf-names-use-error-010
 
 ```
-error: rdf: element not allowed: aboutEachPrefix (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+error: rdf: offset L22C4:L22C24;0x29a:0x2ae: element not allowed: aboutEachPrefix (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 ```
 
 ### ✅ NegativeSyntax, rdfms-rdf-names-use-error-011
 
 ```
-error: rdf: description: propertyEltList: element not allowed: Description (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+error: rdf: description: propertyEltList: offset L23C6:L23C21;0x2d5:0x2e4: element not allowed: Description (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 ```
 
 ### ✅ NegativeSyntax, rdfms-rdf-names-use-error-012
 
 ```
-error: rdf: description: propertyEltList: element not allowed: RDF (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+error: rdf: description: propertyEltList: offset L23C6:L23C13;0x2cd:0x2d4: element not allowed: RDF (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 ```
 
 ### ✅ NegativeSyntax, rdfms-rdf-names-use-error-013
 
 ```
-error: rdf: description: propertyEltList: element not allowed: ID (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+error: rdf: description: propertyEltList: offset L23C6:L23C12;0x2cc:0x2d2: element not allowed: ID (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 ```
 
 ### ✅ NegativeSyntax, rdfms-rdf-names-use-error-014
 
 ```
-error: rdf: description: propertyEltList: element not allowed: about (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+error: rdf: description: propertyEltList: offset L23C6:L23C15;0x2cf:0x2d8: element not allowed: about (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 ```
 
 ### ✅ NegativeSyntax, rdfms-rdf-names-use-error-015
 
 ```
-error: rdf: description: propertyEltList: element not allowed: bagID (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+error: rdf: description: propertyEltList: offset L23C6:L23C15;0x2cf:0x2d8: element not allowed: bagID (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 ```
 
 ### ✅ NegativeSyntax, rdfms-rdf-names-use-error-016
 
 ```
-error: rdf: description: propertyEltList: element not allowed: parseType (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+error: rdf: description: propertyEltList: offset L23C6:L23C19;0x2d3:0x2e0: element not allowed: parseType (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 ```
 
 ### ✅ NegativeSyntax, rdfms-rdf-names-use-error-017
 
 ```
-error: rdf: description: propertyEltList: element not allowed: resource (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+error: rdf: description: propertyEltList: offset L23C6:L23C18;0x2d2:0x2de: element not allowed: resource (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 ```
 
 ### ✅ NegativeSyntax, rdfms-rdf-names-use-error-018
 
 ```
-error: rdf: description: propertyEltList: element not allowed: nodeID (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+error: rdf: description: propertyEltList: offset L23C6:L23C16;0x2d0:0x2da: element not allowed: nodeID (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 ```
 
 ### ✅ NegativeSyntax, rdfms-rdf-names-use-error-019
 
 ```
-error: rdf: description: propertyEltList: element not allowed: aboutEach (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+error: rdf: description: propertyEltList: offset L23C6:L23C19;0x2d3:0x2e0: element not allowed: aboutEach (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 ```
 
 ### ✅ NegativeSyntax, rdfms-rdf-names-use-error-020
 
 ```
-error: rdf: description: propertyEltList: element not allowed: aboutEachPrefix (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
+error: rdf: description: propertyEltList: offset L23C6:L23C25;0x2d9:0x2ec: element not allowed: aboutEachPrefix (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 ```
 
 ### ✅ NegativeSyntax, rdfms-syntax-incomplete-error001
 
 ```
-error: rdf: description: invalid name: 333-555-666
+error: rdf: description: offset L1C1:L1C1;0x0:0x0: invalid name: 333-555-666
 ```
 
 ### ✅ NegativeSyntax, rdfms-syntax-incomplete-error002
 
 ```
-error: rdf: description: invalid name: _:bnode
+error: rdf: description: offset L24C19:L24C29;0x24c:0x256: invalid name: _:bnode
 ```
 
 ### ✅ NegativeSyntax, rdfms-syntax-incomplete-error003
 
 ```
-error: rdf: description: propertyEltList: property: invalid name: q:name
+error: rdf: description: propertyEltList: property: offset L26C13:L26C23;0x281:0x28b: invalid name: q:name
 ```
 
 ### ✅ NegativeSyntax, rdfms-syntax-incomplete-error004

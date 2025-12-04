@@ -95,192 +95,192 @@
 ### ✅ NegativeSyntax, nq-syntax-bad-literal-01
 
 ```
-error: token (statement): token (graphLabel): offset 0x39: unexpected rune ('"')
+error: token (statement): token (graphLabel): offset L1C58;0x39: unexpected rune ('"')
 ```
 
 ### ✅ NegativeSyntax, nq-syntax-bad-literal-02
 
 ```
-error: token (statement): token (graphLabel): offset 0x39: unexpected rune ('"')
+error: token (statement): token (graphLabel): offset L1C58;0x39: unexpected rune ('"')
 ```
 
 ### ✅ NegativeSyntax, nq-syntax-bad-literal-03
 
 ```
-error: token (statement): token (graphLabel): offset 0x39: unexpected rune ('"')
+error: token (statement): token (graphLabel): offset L1C58;0x39: unexpected rune ('"')
 ```
 
 ### ✅ NegativeSyntax, nq-syntax-bad-quint-01
 
 ```
-error: token (statement): offset 0x66: unexpected rune ('<')
+error: token (statement): offset L2C77;0x66: unexpected rune ('<')
 ```
 
 ### ✅ NegativeSyntax, nq-syntax-bad-uri-01
 
 ```
-error: token (statement): token (graphLabel): %!v(PANIC=Error method: value method github.com/dpb587/cursorio-go/cursorio.TextOffsetRange.OffsetRangeString called using nil *TextOffsetRange pointer)
+error: token (statement): token (graphLabel): token (IRIREF; offset=L2C58:L2C61;0x57:0x5a): relative urls are not allowed
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-base-01
 
 ```
-error: token (statement): token (subject): offset 0x0: unexpected rune ('@')
+error: token (statement): token (subject): offset L1C1;0x0: unexpected rune ('@')
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-esc-01
 
 ```
-error: token (statement): token (object): token (literal): token (STRING_LITERAL_QUOTE): offset 0x3d: unexpected rune ('z')
+error: token (statement): token (object): token (literal): token (STRING_LITERAL_QUOTE): offset L2C42;0x3d: unexpected rune ('z')
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-esc-02
 
 ```
-error: token (statement): token (object): token (literal): token (STRING_LITERAL_QUOTE): token (UCHAR): offset 0x3d: unexpected rune ('W')
+error: token (statement): token (object): token (literal): token (STRING_LITERAL_QUOTE): token (UCHAR): offset L2C42;0x3d: unexpected rune ('W')
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-esc-03
 
 ```
-error: token (statement): token (object): token (literal): token (STRING_LITERAL_QUOTE): token (UCHAR): offset 0x41: unexpected rune ('W')
+error: token (statement): token (object): token (literal): token (STRING_LITERAL_QUOTE): token (UCHAR): offset L2C46;0x41: unexpected rune ('W')
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-lang-01
 
 ```
-error: token (statement): token (graphLabel): offset 0x3e: unexpected rune ('1')
+error: token (statement): token (graphLabel): offset L2C48;0x3e: unexpected rune ('1')
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-num-01
 
 ```
-error: token (statement): token (object): offset 0x26: unexpected rune ('1')
+error: token (statement): token (object): offset L1C39;0x26: unexpected rune ('1')
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-num-02
 
 ```
-error: token (statement): token (object): offset 0x26: unexpected rune ('1')
+error: token (statement): token (object): offset L1C39;0x26: unexpected rune ('1')
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-num-03
 
 ```
-error: token (statement): token (object): offset 0x26: unexpected rune ('1')
+error: token (statement): token (object): offset L1C39;0x26: unexpected rune ('1')
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-prefix-01
 
 ```
-error: token (statement): token (subject): offset 0x0: unexpected rune ('@')
+error: token (statement): token (subject): offset L1C1;0x0: unexpected rune ('@')
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-string-01
 
 ```
-error: token (statement): token (object): token (literal): token (STRING_LITERAL_QUOTE): offset 0x2e: EOF
+error: token (statement): token (object): token (literal): token (STRING_LITERAL_QUOTE): offset L2C1;0x2e: EOF
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-string-02
 
 ```
-error: token (statement): token (object): offset 0x26: unexpected rune ('1')
+error: token (statement): token (object): offset L1C39;0x26: unexpected rune ('1')
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-string-03
 
 ```
-error: token (statement): token (object): offset 0x26: unexpected rune ('1')
+error: token (statement): token (object): offset L1C39;0x26: unexpected rune ('1')
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-string-04
 
 ```
-error: token (statement): token (object): offset 0x26: unexpected rune ('\'')
+error: token (statement): token (object): offset L1C39;0x26: unexpected rune ('\'')
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-string-05
 
 ```
-error: token (statement): token (graphLabel): offset 0x28: unexpected rune ('"')
+error: token (statement): token (graphLabel): offset L1C41;0x28: unexpected rune ('"')
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-string-06
 
 ```
-error: token (statement): token (object): token (literal): token (STRING_LITERAL_QUOTE): offset 0x2d: EOF
+error: token (statement): token (object): token (literal): token (STRING_LITERAL_QUOTE): offset L2C1;0x2d: EOF
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-string-07
 
 ```
-error: token (statement): token (object): offset 0x26: unexpected rune ('a')
+error: token (statement): token (object): offset L1C39;0x26: unexpected rune ('a')
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-struct-01
 
 ```
-error: token (statement): token (graphLabel): offset 0x38: unexpected rune (',')
+error: token (statement): token (graphLabel): offset L1C57;0x38: unexpected rune (',')
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-struct-02
 
 ```
-error: token (statement): token (graphLabel): offset 0x38: unexpected rune (';')
+error: token (statement): token (graphLabel): offset L1C57;0x38: unexpected rune (';')
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-uri-01
 
 ```
-error: token (statement): token (subject): token (IRIREF): offset 0x23: unexpected rune (' ')
+error: token (statement): token (subject): token (IRIREF): offset L2C17;0x23: unexpected rune (' ')
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-uri-02
 
 ```
-error: token (statement): token (subject): token (IRIREF): token (UCHAR): offset 0x2b: unexpected rune ('Z')
+error: token (statement): token (subject): token (IRIREF): token (UCHAR): offset L2C21;0x2b: unexpected rune ('Z')
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-uri-03
 
 ```
-error: token (statement): token (subject): token (IRIREF): token (UCHAR): offset 0x2b: unexpected rune ('Z')
+error: token (statement): token (subject): token (IRIREF): token (UCHAR): offset L2C21;0x2b: unexpected rune ('Z')
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-uri-04
 
 ```
-error: token (statement): token (subject): token (IRIREF): offset 0x3c: unexpected rune ('n')
+error: token (statement): token (subject): token (IRIREF): offset L2C18;0x3c: unexpected rune ('n')
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-uri-05
 
 ```
-error: token (statement): token (subject): token (IRIREF): offset 0x3c: unexpected rune ('/')
+error: token (statement): token (subject): token (IRIREF): offset L2C18;0x3c: unexpected rune ('/')
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-uri-06
 
 ```
-error: token (statement): token (subject): %!v(PANIC=Error method: value method github.com/dpb587/cursorio-go/cursorio.TextOffsetRange.OffsetRangeString called using nil *TextOffsetRange pointer)
+error: token (statement): token (subject): token (IRIREF; offset=L2C1:L2C4;0x20:0x23): relative urls are not allowed
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-uri-07
 
 ```
-error: token (statement): token (predicate): %!v(PANIC=Error method: value method github.com/dpb587/cursorio-go/cursorio.TextOffsetRange.OffsetRangeString called using nil *TextOffsetRange pointer)
+error: token (statement): token (predicate): token (IRIREF; offset=L2C20:L2C23;0x33:0x36): relative urls are not allowed
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-uri-08
 
 ```
-error: token (statement): token (object): %!v(PANIC=Error method: value method github.com/dpb587/cursorio-go/cursorio.TextOffsetRange.OffsetRangeString called using nil *TextOffsetRange pointer)
+error: token (statement): token (object): token (IRIREF; offset=L2C39:L2C42;0x46:0x49): relative urls are not allowed
 ```
 
 ### ✅ NegativeSyntax, nt-syntax-bad-uri-09
 
 ```
-error: token (statement): token (object): token (literal): %!v(PANIC=Error method: value method github.com/dpb587/cursorio-go/cursorio.TextOffsetRange.OffsetRangeString called using nil *TextOffsetRange pointer)
+error: token (statement): token (object): token (literal): token (IRIREF; offset=L2C46:L2C50;0x4d:0x51): relative urls are not allowed
 ```
 

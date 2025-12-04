@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/url"
 	"os"
 	"slices"
@@ -15,6 +16,7 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding/jsonld"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
 	"github.com/dpb587/rdfkit-go/encoding/nquads"
+	"github.com/dpb587/rdfkit-go/internal/devencoding/rdfioutil"
 	"github.com/dpb587/rdfkit-go/internal/devtest"
 	"github.com/dpb587/rdfkit-go/rdfio"
 )
@@ -24,6 +26,23 @@ const manifestPrefix = "https://w3c.github.io/json-ld-api/tests/"
 func Test(t *testing.T) {
 	archiveEntries, manifestResources := requireTestdata(t)
 	oxigraphExec := os.Getenv("TESTING_OXIGRAPH_EXEC")
+
+	var debugWriter = io.Discard
+	var debugBundle *rdfioutil.BundleEncoder
+
+	if fhPath := os.Getenv("TESTING_DEBUG_DUMPFILE"); len(fhPath) > 0 {
+		fh, err := os.OpenFile(fhPath, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
+		if err != nil {
+			t.Fatalf("open debug file: %v", err)
+		}
+
+		defer fh.Close()
+
+		debugWriter = fh
+	}
+
+	debugBundle = rdfioutil.NewBundleEncoder(debugWriter)
+	defer debugBundle.Close()
 
 	for _, sequence := range manifestResources.Sequence {
 		decodeAction := func() (rdfio.StatementList, error) {
@@ -52,7 +71,8 @@ func Test(t *testing.T) {
 						Document:    doc,
 						DocumentURL: docURL,
 					}, nil
-				}))
+				})).
+				SetCaptureTextOffsets(true)
 
 			if len(sequence.Option.Base) > 0 {
 				dopt = dopt.SetDefaultBase(sequence.Option.Base)
@@ -133,19 +153,21 @@ func Test(t *testing.T) {
 
 				err = devtest.AssertStatementEquals(expectedStatements, actualStatements)
 				if err == nil {
-					return
+					// good
 				} else if len(oxigraphExec) == 0 {
 					t.Log("eval: processor required, but TESTING_OXIGRAPH_EXEC is empty")
 					t.Log(err.Error())
 					t.SkipNow()
+				} else {
+					oxigraphErr := devtest.AssertOxigraphAsk(t.Context(), oxigraphExec, manifestPrefix, bytes.NewReader(archiveEntries[manifestPrefix+sequence.Expect]), actualStatements)
+					if oxigraphErr != nil {
+						t.Logf("eval: %v", oxigraphErr)
+						t.Log(err.Error())
+						t.FailNow()
+					}
 				}
 
-				oxigraphErr := devtest.AssertOxigraphAsk(t.Context(), oxigraphExec, manifestPrefix, bytes.NewReader(archiveEntries[manifestPrefix+sequence.Expect]), actualStatements)
-				if oxigraphErr != nil {
-					t.Logf("eval: %v", oxigraphErr)
-					t.Log(err.Error())
-					t.FailNow()
-				}
+				debugBundle.PutBundle(t.Name(), actualStatements)
 			})
 		}
 	}

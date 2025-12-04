@@ -341,115 +341,115 @@
 ### ✅ NegativeSyntax, trig-bnodeplist-graph-bad-01
 
 ```
-error: token (triples): offset 0x4c: unexpected rune ('{')
+error: token (triples): offset L4C11;0x4d: unexpected rune ('{')
 ```
 
 ### ✅ NegativeSyntax, trig-collection-graph-bad-01
 
 ```
-error: token (triples): offset 0x3a: unexpected rune ('{')
+error: token (triples): offset L4C4;0x3b: unexpected rune ('{')
 ```
 
 ### ✅ NegativeSyntax, trig-collection-graph-bad-02
 
 ```
-error: token (triples): offset 0x3d: unexpected rune ('{')
+error: token (triples): offset L4C7;0x3e: unexpected rune ('{')
 ```
 
 ### ✅ NegativeSyntax, trig-graph-bad-01
 
 ```
-error: token (block): token (labelOrSubject): token (iri): token (PrefixedName): token (PNAME_NS): offset 0x70: unexpected rune ('{')
+error: token (block): token (labelOrSubject): token (iri): token (PrefixedName): token (PNAME_NS): offset L5C7;0x70: unexpected rune ('{')
 ```
 
 ### ✅ NegativeSyntax, trig-graph-bad-02
 
 ```
-error: token (block): offset 0x5e: unexpected rune ('.')
+error: token (block): offset L5C24;0x5e: unexpected rune ('.')
 ```
 
 ### ✅ NegativeSyntax, trig-graph-bad-03
 
 ```
-error: token (wrappedGraph): offset 0x47: unexpected rune (':')
+error: token (wrappedGraph): offset L6C3;0x48: unexpected rune (':')
 ```
 
 ### ✅ NegativeSyntax, trig-graph-bad-04
 
 ```
-error: token (wrappedGraph): offset 0x44: unexpected rune (':')
+error: token (wrappedGraph): offset L5C10;0x45: unexpected rune (':')
 ```
 
 ### ✅ NegativeSyntax, trig-graph-bad-05
 
 ```
-error: token (wrappedGraph): offset 0x55: unexpected rune (':')
+error: token (wrappedGraph): offset L5C11;0x56: unexpected rune (':')
 ```
 
 ### ✅ NegativeSyntax, trig-graph-bad-06
 
 ```
-error: token (objectList): offset 0x59: EOF
+error: token (objectList): offset L5C20;0x56: EOF
 ```
 
 ### ✅ NegativeSyntax, trig-graph-bad-07
 
 ```
-error: token (triples): token (subject): token (PrefixedName): offset 0x6a: unexpected rune (' ')
+error: token (triples): token (subject): token (PrefixedName): offset L7C9;0x6a: unexpected rune (' ')
 ```
 
 ### ✅ NegativeSyntax, trig-graph-bad-08
 
 ```
-error: token (directive): offset 0x49: unexpected rune ('g')
+error: token (directive): offset L5C2;0x49: unexpected rune ('g')
 ```
 
 ### ✅ NegativeSyntax, trig-graph-bad-09
 
 ```
-error: token (triples): token (subject): token (PrefixedName): offset 0x61: unexpected rune (' ')
+error: token (triples): token (subject): token (PrefixedName): offset L7C7;0x61: unexpected rune (' ')
 ```
 
 ### ✅ NegativeSyntax, trig-graph-bad-10
 
 ```
-error: token (block): token (labelOrSubject): token (iri): token (PrefixedName): token (PNAME_NS): offset 0x44: unexpected rune ('(')
+error: token (block): token (labelOrSubject): token (iri): token (PrefixedName): token (PNAME_NS): offset L5C7;0x44: unexpected rune ('(')
 ```
 
 ### ✅ NegativeSyntax, trig-graph-bad-11
 
 ```
-error: token (block): token (labelOrSubject): token (iri): token (PrefixedName): token (PNAME_NS): offset 0x44: unexpected rune ('(')
+error: token (block): token (labelOrSubject): token (iri): token (PrefixedName): token (PNAME_NS): offset L5C7;0x44: unexpected rune ('(')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-base-01
 
 ```
-error: token (directive): token (base): token (IRIREF): offset 0x1b: unexpected rune ('.')
+error: token (directive): token (base): token (IRIREF): offset L2C7;0x1b: unexpected rune ('.')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-base-02
 
 ```
-error: token (directive): offset 0x18: unexpected rune ('B')
+error: token (directive): offset L2C2;0x18: unexpected rune ('B')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-base-03
 
 ```
-error: token (block): offset 0x3a: unexpected rune ('.')
+error: token (block): offset L2C24;0x3a: unexpected rune ('.')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-base-04
 
 ```
-error: token (block): offset 0x19: unexpected rune ('@')
+error: token (block): offset L3C3;0x19: unexpected rune ('@')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-base-05
 
 ```
-error: token (triples): token (subject): token (PrefixedName): offset 0x1c: unexpected rune (' ')
+error: token (triples): token (subject): token (PrefixedName): offset L3C7;0x1c: unexpected rune (' ')
 ```
 
 ### ❌ NegativeSyntax, trig-syntax-bad-blank-label-dot-end
@@ -461,61 +461,61 @@ expected error, but got none
 ### ✅ NegativeSyntax, trig-syntax-bad-esc-01
 
 ```
-error: token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_QUOTE): token (ECHAR): offset 0x3e: unexpected rune ('z')
+error: token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_QUOTE): token (ECHAR): offset L2C43;0x3e: unexpected rune ('z')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-esc-02
 
 ```
-error: token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_QUOTE): token (UCHAR): offset 0x3e: unexpected rune ('W')
+error: token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_QUOTE): token (UCHAR): offset L2C43;0x3e: unexpected rune ('W')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-esc-03
 
 ```
-error: token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_QUOTE): token (UCHAR): offset 0x42: unexpected rune ('W')
+error: token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_QUOTE): token (UCHAR): offset L2C47;0x42: unexpected rune ('W')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-esc-04
 
 ```
-error: token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_QUOTE): token (UCHAR): offset 0x42: unexpected rune ('W')
+error: token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_QUOTE): token (UCHAR): offset L2C47;0x42: unexpected rune ('W')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-kw-01
 
 ```
-error: token (predicateObjectList): token (verb): token (PrefixedName): offset 0x23: unexpected rune (' ')
+error: token (predicateObjectList): token (verb): token (PrefixedName): offset L2C6;0x23: unexpected rune (' ')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-kw-02
 
 ```
-error: token (triples): token (subject): token (PrefixedName): offset 0x20: unexpected rune (' ')
+error: token (triples): token (subject): token (PrefixedName): offset L2C3;0x20: unexpected rune (' ')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-kw-03
 
 ```
-error: token (object): token (PrefixedName): offset 0x26: unexpected rune (' ')
+error: token (object): token (PrefixedName): offset L2C9;0x26: unexpected rune (' ')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-kw-04
 
 ```
-error: token (triples): token (subject): token (PrefixedName): offset 0x23: unexpected rune (' ')
+error: token (triples): token (subject): token (PrefixedName): offset L2C6;0x23: unexpected rune (' ')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-kw-05
 
 ```
-error: token (predicateObjectList): token (verb): token (PrefixedName): offset 0x26: unexpected rune (' ')
+error: token (predicateObjectList): token (verb): token (PrefixedName): offset L2C9;0x26: unexpected rune (' ')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-lang-01
 
 ```
-error: token (block): offset 0x3f: unexpected rune ('1')
+error: token (block): offset L2C49;0x3f: unexpected rune ('1')
 ```
 
 ### ❌ NegativeSyntax, trig-syntax-bad-list-01
@@ -545,31 +545,31 @@ expected error, but got none
 ### ✅ NegativeSyntax, trig-syntax-bad-ln-dash-start
 
 ```
-error: token (block): offset 0x26: unexpected rune ('-')
+error: token (block): offset L2C9;0x26: unexpected rune ('-')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-ln-escape
 
 ```
-error: token (object): token (PrefixedName): token (PN_LOCAL): token (PERCENT): token (HEX): offset 0x29: unexpected rune (' ')
+error: token (object): token (PrefixedName): token (PN_LOCAL): token (PERCENT): token (HEX): offset L2C12;0x29: unexpected rune (' ')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-ln-escape-start
 
 ```
-error: token (object): token (PrefixedName): token (PN_LOCAL): token (PERCENT): token (HEX): offset 0x28: unexpected rune ('o')
+error: token (object): token (PrefixedName): token (PN_LOCAL): token (PERCENT): token (HEX): offset L2C11;0x28: unexpected rune ('o')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-missing-ns-dot-end
 
 ```
-error: token (triples): token (subject): %!v(PANIC=Error method: value method github.com/dpb587/cursorio-go/cursorio.TextOffsetRange.OffsetRangeString called using nil *TextOffsetRange pointer)
+error: token (triples): token (subject): token (PrefixedName; offset=L1C2:L1C9;0x1:0x8): unknown prefix: valid
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-missing-ns-dot-start
 
 ```
-error: token (block): offset 0x1: unexpected rune ('.')
+error: token (block): offset L1C2;0x1: unexpected rune ('.')
 ```
 
 ### ❌ NegativeSyntax, trig-syntax-bad-n3-extras-01
@@ -581,7 +581,7 @@ expected error, but got none
 ### ✅ NegativeSyntax, trig-syntax-bad-n3-extras-02
 
 ```
-error: token (block): offset 0x35: unexpected rune ('=')
+error: token (block): offset L4C5;0x35: unexpected rune ('=')
 ```
 
 ### ❌ NegativeSyntax, trig-syntax-bad-n3-extras-03
@@ -593,13 +593,13 @@ expected error, but got none
 ### ✅ NegativeSyntax, trig-syntax-bad-n3-extras-04
 
 ```
-error: token (block): offset 0x4f: unexpected rune ('^')
+error: token (block): offset L5C4;0x4f: unexpected rune ('^')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-n3-extras-05
 
 ```
-error: token (predicateObjectList): token (verb): token (PrefixedName): offset 0x32: unexpected rune (' ')
+error: token (predicateObjectList): token (verb): token (PrefixedName): offset L4C7;0x32: unexpected rune (' ')
 ```
 
 ### ❌ NegativeSyntax, trig-syntax-bad-n3-extras-06
@@ -611,223 +611,223 @@ expected error, but got none
 ### ✅ NegativeSyntax, trig-syntax-bad-n3-extras-07
 
 ```
-error: token (directive): offset 0x1b: unexpected rune ('k')
+error: token (directive): offset L2C2;0x1b: unexpected rune ('k')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-n3-extras-08
 
 ```
-error: token (directive): offset 0x1b: unexpected rune ('k')
+error: token (directive): offset L2C2;0x1b: unexpected rune ('k')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-n3-extras-09
 
 ```
-error: token (block): offset 0x35: unexpected rune ('=')
+error: token (block): offset L3C5;0x35: unexpected rune ('=')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-n3-extras-10
 
 ```
-error: token (predicateObjectList): token (verb): token (IRIREF): offset 0x37: unexpected rune (' ')
+error: token (predicateObjectList): token (verb): token (IRIREF): offset L3C7;0x37: unexpected rune (' ')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-n3-extras-11
 
 ```
-error: token (directive): offset 0x38: unexpected rune ('f')
+error: token (directive): offset L3C2;0x38: unexpected rune ('f')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-n3-extras-12
 
 ```
-error: token (directive): offset 0x37: unexpected rune ('f')
+error: token (directive): offset L3C2;0x37: unexpected rune ('f')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-n3-extras-13
 
 ```
-error: token (directive): offset 0x1b: unexpected rune ('k')
+error: token (directive): offset L2C2;0x1b: unexpected rune ('k')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-ns-dot-end
 
 ```
-error: token (directive): token (prefixID): offset 0xb: unexpected rune (' ')
+error: token (directive): token (prefixID): offset L1C12;0xb: unexpected rune (' ')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-ns-dot-start
 
 ```
-error: token (directive): token (prefixID): token (PNAME_NS): offset 0x8: unexpected rune ('.')
+error: token (directive): token (prefixID): token (PNAME_NS): offset L1C9;0x8: unexpected rune ('.')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-num-01
 
 ```
-error: token (triples): token (subject): token (PrefixedName): offset 0x2e: unexpected rune (' ')
+error: token (triples): token (subject): token (PrefixedName): offset L1C47;0x2e: unexpected rune (' ')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-num-02
 
 ```
-error: token (object): token (literal): token (NumericLiteral): token (DOUBLE): token (EXPONENT): offset 0x2b: unexpected rune (' ')
+error: token (object): token (literal): token (NumericLiteral): token (DOUBLE): token (EXPONENT): offset L1C44;0x2b: unexpected rune (' ')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-num-03
 
 ```
-error: token (triples): token (subject): token (PrefixedName): offset 0x2d: unexpected rune (' ')
+error: token (triples): token (subject): token (PrefixedName): offset L1C46;0x2d: unexpected rune (' ')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-num-04
 
 ```
-error: token (triples): token (subject): token (PrefixedName): offset 0x2c: unexpected rune (' ')
+error: token (triples): token (subject): token (PrefixedName): offset L1C45;0x2c: unexpected rune (' ')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-num-05
 
 ```
-error: token (block): offset 0x43: unexpected rune ('^')
+error: token (block): offset L1C68;0x43: unexpected rune ('^')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-num-05
 
 ```
-error: token (object): token (literal): token (NumericLiteral): token (NumericLiteral): offset 0x27: unexpected rune ('+')
+error: token (object): token (literal): token (NumericLiteral): token (NumericLiteral): offset L1C40;0x27: unexpected rune ('+')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-number-dot-in-anon
 
 ```
-error: token (blankNodePropertyList): offset 0x32: unexpected rune ('.')
+error: token (blankNodePropertyList): offset L6C9;0x32: unexpected rune ('.')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-pname-01
 
 ```
-error: token (block): offset 0x36: unexpected rune ('~')
+error: token (block): offset L3C4;0x36: unexpected rune ('~')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-pname-02
 
 ```
-error: token (triples): token (subject): token (PrefixedName): token (PN_LOCAL): token (PERCENT): token (HEX): offset 0x34: unexpected rune (' ')
+error: token (triples): token (subject): token (PrefixedName): token (PN_LOCAL): token (PERCENT): token (HEX): offset L3C6;0x34: unexpected rune (' ')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-pname-03
 
 ```
-error: token (triples): token (subject): token (PrefixedName): token (PN_LOCAL): token (PN_LOCAL_ESC): offset 0x37: unexpected rune ('u')
+error: token (triples): token (subject): token (PrefixedName): token (PN_LOCAL): token (PN_LOCAL_ESC): offset L3C5;0x37: unexpected rune ('u')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-prefix-01
 
 ```
-error: token (triples): token (subject): %!v(PANIC=Error method: value method github.com/dpb587/cursorio-go/cursorio.TextOffsetRange.OffsetRangeString called using nil *TextOffsetRange pointer)
+error: token (triples): token (subject): token (PrefixedName; offset=L2C2:L2C4;0xd:0xf): unknown prefix: 
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-prefix-02
 
 ```
-error: token (object): %!v(PANIC=Error method: value method github.com/dpb587/cursorio-go/cursorio.TextOffsetRange.OffsetRangeString called using nil *TextOffsetRange pointer)
+error: token (object): token (PrefixedName; offset=L3C30:L3C32;0x6a:0x6c): unknown prefix: 
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-prefix-03
 
 ```
-error: token (directive): token (prefixID): token (IRIREF): offset 0x23: unexpected rune ('.')
+error: token (directive): token (prefixID): token (IRIREF): offset L2C13;0x23: unexpected rune ('.')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-prefix-04
 
 ```
-error: token (directive): token (prefixID): token (PNAME_NS): offset 0x28: unexpected rune ('<')
+error: token (directive): token (prefixID): token (PNAME_NS): offset L2C9;0x28: unexpected rune ('<')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-prefix-05
 
 ```
-error: token (directive): token (prefixID): offset 0x1d: unexpected rune (' ')
+error: token (directive): token (prefixID): offset L2C10;0x1d: unexpected rune (' ')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-prefix-06
 
 ```
-error: token (block): offset 0x1b: unexpected rune ('@')
+error: token (block): offset L3C3;0x1b: unexpected rune ('@')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-prefix-07
 
 ```
-error: token (triples): token (subject): token (PrefixedName): offset 0x20: unexpected rune (' ')
+error: token (triples): token (subject): token (PrefixedName): offset L3C9;0x20: unexpected rune (' ')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-string-01
 
 ```
-error: token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_QUOTE): offset 0x2e: EOF
+error: token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_QUOTE): offset L3C1;0x2e: EOF
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-string-02
 
 ```
-error: token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_SINGLE_QUOTE): offset 0x2e: EOF
+error: token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_SINGLE_QUOTE): offset L3C1;0x2e: EOF
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-string-03
 
 ```
-error: token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_LONG_SINGLE_QUOTE): offset 0x30: EOF
+error: token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_LONG_SINGLE_QUOTE): offset L3C1;0x30: EOF
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-string-04
 
 ```
-error: token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_LONG_QUOTE): offset 0x32: EOF
+error: token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_LONG_QUOTE): offset L3C1;0x32: EOF
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-string-05
 
 ```
-error: token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_LONG_QUOTE): offset 0x52: EOF
+error: token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_LONG_QUOTE): offset L6C2;0x52: EOF
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-string-06
 
 ```
-error: token (block): offset 0x45: unexpected rune ('"')
+error: token (block): offset L3C17;0x45: unexpected rune ('"')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-string-07
 
 ```
-error: token (block): offset 0x45: unexpected rune ('\'')
+error: token (block): offset L3C17;0x45: unexpected rune ('\'')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-struct-02
 
 ```
-error: token (triples): offset 0x23: unexpected rune ('=')
+error: token (triples): offset L2C20;0x24: unexpected rune ('=')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-struct-03
 
 ```
-error: token (triples): offset 0x4d: unexpected rune ('<')
+error: token (triples): offset L2C58;0x4e: unexpected rune ('<')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-struct-04
 
 ```
-error: token (block): offset 0x2c: unexpected rune ('"')
+error: token (block): offset L2C2;0x2c: unexpected rune ('"')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-struct-05
 
 ```
-error: token (block): offset 0x41: unexpected rune ('"')
+error: token (block): offset L2C21;0x41: unexpected rune ('"')
 ```
 
 ### ❌ NegativeSyntax, trig-syntax-bad-struct-06
@@ -845,13 +845,13 @@ expected error, but got none
 ### ✅ NegativeSyntax, trig-syntax-bad-struct-09
 
 ```
-error: token (block): offset 0x4c: unexpected rune ('.')
+error: token (block): offset L2C61;0x4c: unexpected rune ('.')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-struct-10
 
 ```
-error: token (block): offset 0x4d: unexpected rune ('.')
+error: token (block): offset L3C60;0x4d: unexpected rune ('.')
 ```
 
 ### ❌ NegativeSyntax, trig-syntax-bad-struct-12
@@ -863,19 +863,19 @@ expected error, but got none
 ### ✅ NegativeSyntax, trig-syntax-bad-struct-13
 
 ```
-error: token (object): offset 0x27: unexpected rune ('}')
+error: token (object): offset L1C40;0x27: unexpected rune ('}')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-struct-14
 
 ```
-error: token (block): offset 0x16: unexpected rune ('"')
+error: token (block): offset L2C2;0x16: unexpected rune ('"')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-struct-15
 
 ```
-error: token (block): offset 0x2b: unexpected rune ('"')
+error: token (block): offset L2C21;0x2b: unexpected rune ('"')
 ```
 
 ### ❌ NegativeSyntax, trig-syntax-bad-struct-16
@@ -893,42 +893,42 @@ expected error, but got none
 ### ✅ NegativeSyntax, trig-syntax-bad-uri-01
 
 ```
-error: token (triples): token (subject): token (IRIREF): offset 0x24: unexpected rune (' ')
+error: token (triples): token (subject): token (IRIREF): offset L2C18;0x24: unexpected rune (' ')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-uri-02
 
 ```
-error: token (triples): token (subject): token (IRIREF): token (UCHAR): offset 0x2c: unexpected rune ('Z')
+error: token (triples): token (subject): token (IRIREF): token (UCHAR): offset L2C22;0x2c: unexpected rune ('Z')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-uri-03
 
 ```
-error: token (triples): token (subject): token (IRIREF): token (UCHAR): offset 0x2c: unexpected rune ('Z')
+error: token (triples): token (subject): token (IRIREF): token (UCHAR): offset L2C22;0x2c: unexpected rune ('Z')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-uri-04
 
 ```
-error: token (triples): token (subject): token (IRIREF): offset 0x3d: unexpected rune ('n')
+error: token (triples): token (subject): token (IRIREF): offset L2C19;0x3d: unexpected rune ('n')
 ```
 
 ### ✅ NegativeSyntax, trig-syntax-bad-uri-05
 
 ```
-error: token (triples): token (subject): token (IRIREF): offset 0x3d: unexpected rune ('/')
+error: token (triples): token (subject): token (IRIREF): offset L2C19;0x3d: unexpected rune ('/')
 ```
 
 ### ✅ NegativeSyntax, trig-turtle-bad-01
 
 ```
-error: token (triples): token (subject): %!v(PANIC=Error method: value method github.com/dpb587/cursorio-go/cursorio.TextOffsetRange.OffsetRangeString called using nil *TextOffsetRange pointer)
+error: token (triples): token (subject): token (PrefixedName; offset=L5C1:L5C3;0x3c:0x3e): unknown prefix: 
 ```
 
 ### ✅ NegativeSyntax, trig-turtle-bad-02
 
 ```
-error: token (triples): token (subject): %!v(PANIC=Error method: value method github.com/dpb587/cursorio-go/cursorio.TextOffsetRange.OffsetRangeString called using nil *TextOffsetRange pointer)
+error: token (triples): token (subject): token (PrefixedName; offset=L5C1:L5C3;0x1e:0x20): unknown prefix: 
 ```
 
