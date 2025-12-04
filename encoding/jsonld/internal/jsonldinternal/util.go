@@ -4,19 +4,21 @@ import (
 	"errors"
 	"net/url"
 	"strings"
+
+	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
 var errEmptyURL = errors.New("empty URL")
 
 // TODO refactor; does this require a resolved, absolute url?
-func resolveURL(base *url.URL, r string) (*url.URL, error) {
+func resolveURL(base *iriutil.ParsedIRI, r string) (*iriutil.ParsedIRI, error) {
 	if r == "" && base == nil {
 		return nil, errEmptyURL
 	} else if r == "" {
 		return base, nil
 	}
 
-	rURL, err := url.Parse(r)
+	rURL, err := iriutil.ParseIRI(r)
 	if err != nil {
 		return nil, err
 	} else if rURL.IsAbs() || base == nil {
@@ -27,7 +29,7 @@ func resolveURL(base *url.URL, r string) (*url.URL, error) {
 }
 
 // TODO attempting to solve spec passing baseURL from term definitions where it is empty
-func coalesceBaseURL(bb ...*url.URL) *url.URL {
+func coalesceBaseURL(bb ...*iriutil.ParsedIRI) *iriutil.ParsedIRI {
 	for _, b := range bb {
 		if b != nil {
 			return b

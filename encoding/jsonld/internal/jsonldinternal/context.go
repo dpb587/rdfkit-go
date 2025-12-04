@@ -1,9 +1,8 @@
 package jsonldinternal
 
 import (
-	"net/url"
-
 	"github.com/dpb587/inspectjson-go/inspectjson"
+	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
 type Context struct {
@@ -11,11 +10,11 @@ type Context struct {
 	TermDefinitions map[string]*TermDefinition
 
 	// [4.1] the current base IRI (IRI),
-	BaseURL      *url.URL // TODO BaseURL as rdf.Term and BaseURLURL
+	BaseURL      *iriutil.ParsedIRI
 	BaseURLValue inspectjson.Value
 
 	// [4.1] the original base URL (IRI),
-	OriginalBaseURL *url.URL
+	OriginalBaseURL *iriutil.ParsedIRI
 
 	// [4.1] an inverse context (inverse context),
 	InverseContext *Context

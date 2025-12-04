@@ -146,57 +146,61 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element jsonldinternal.E
 
 	elementObject := element.(*jsonldinternal.ExpandedObject)
 
-	if _, ok := elementObject.Members["@value"]; ok {
-		return r.decodeValueNode(ectx, elementObject, dropValuePropertyRange)
-	}
-
 	if ectx.ActiveProperty != nil {
 		// hacky to drop outer document container
 		ectx.CurrentContainer = nil
+
+		if _, ok := elementObject.Members["@value"]; ok {
+			return r.decodeValueNode(ectx, elementObject, dropValuePropertyRange)
+		}
 	}
 
 	if atList, ok := elementObject.Members["@list"]; ok {
 		listArray := atList.(*jsonldinternal.ExpandedArray)
 
 		if len(listArray.Values) == 0 {
-			r.statements = append(r.statements, &statement{
-				graphName: ectx.ActiveGraph,
-				triple: rdf.Triple{
-					Subject:   ectx.ActiveSubject,
-					Predicate: ectx.ActiveProperty,
-					Object:    rdfiri.Nil_List,
-				},
-				offsets: r.buildTextOffsets(
-					encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
-					encoding.SubjectStatementOffsets, ectx.ActiveSubjectRange,
-					encoding.PredicateStatementOffsets, elementObject.PropertySourceOffsets,
-					// TODO range iff BeginToken/EndToken known
-					// Object,    atList.Value.BeginToken.OffsetRange.NewUntilOffset(atListArray.EndToken.OffsetRange.UntilOffset()),
-				),
-				containerResource: ectx.CurrentContainer,
-			})
+			if ectx.ActiveProperty != nil {
+				r.statements = append(r.statements, &statement{
+					graphName: ectx.ActiveGraph,
+					triple: rdf.Triple{
+						Subject:   ectx.ActiveSubject,
+						Predicate: ectx.ActiveProperty,
+						Object:    rdfiri.Nil_List,
+					},
+					offsets: r.buildTextOffsets(
+						encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
+						encoding.SubjectStatementOffsets, ectx.ActiveSubjectRange,
+						encoding.PredicateStatementOffsets, elementObject.PropertySourceOffsets,
+						// TODO range iff BeginToken/EndToken known
+						// Object,    atList.Value.BeginToken.OffsetRange.NewUntilOffset(atListArray.EndToken.OffsetRange.UntilOffset()),
+					),
+					containerResource: ectx.CurrentContainer,
+				})
+			}
 		} else {
 			listSubject := ectx.global.BlankNodeFactory.NewBlankNode()
 
 			propagatePropertyRange := elementObject.PropertySourceOffsets
 
-			r.statements = append(r.statements, &statement{
-				graphName: ectx.ActiveGraph,
-				triple: rdf.Triple{
-					Subject:   ectx.ActiveSubject,
-					Predicate: ectx.ActiveProperty,
-					Object:    listSubject,
-				},
-				offsets: r.buildTextOffsets(
-					encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
-					encoding.SubjectStatementOffsets, ectx.ActiveSubjectRange,
-					encoding.PredicateStatementOffsets, propagatePropertyRange,
-				),
-				containerResource: ectx.CurrentContainer,
-			})
+			if ectx.ActiveProperty != nil {
+				r.statements = append(r.statements, &statement{
+					graphName: ectx.ActiveGraph,
+					triple: rdf.Triple{
+						Subject:   ectx.ActiveSubject,
+						Predicate: ectx.ActiveProperty,
+						Object:    listSubject,
+					},
+					offsets: r.buildTextOffsets(
+						encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
+						encoding.SubjectStatementOffsets, ectx.ActiveSubjectRange,
+						encoding.PredicateStatementOffsets, propagatePropertyRange,
+					),
+					containerResource: ectx.CurrentContainer,
+				})
+			}
 
 			for listIdx, listValue := range listArray.Values {
-				if listIdx > 0 {
+				if listIdx > 0 && ectx.ActiveProperty != nil {
 					nextListSubject := ectx.global.BlankNodeFactory.NewBlankNode()
 
 					r.statements = append(r.statements, &statement{
@@ -227,18 +231,20 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element jsonldinternal.E
 				}
 			}
 
-			r.statements = append(r.statements, &statement{
-				graphName: ectx.ActiveGraph,
-				triple: rdf.Triple{
-					Subject:   listSubject,
-					Predicate: rdfiri.Rest_Property,
-					Object:    rdfiri.Nil_List,
-				},
-				offsets: r.buildTextOffsets(
-					encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
-				),
-				containerResource: ectx.CurrentContainer,
-			})
+			if ectx.ActiveProperty != nil {
+				r.statements = append(r.statements, &statement{
+					graphName: ectx.ActiveGraph,
+					triple: rdf.Triple{
+						Subject:   listSubject,
+						Predicate: rdfiri.Rest_Property,
+						Object:    rdfiri.Nil_List,
+					},
+					offsets: r.buildTextOffsets(
+						encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
+					),
+					containerResource: ectx.CurrentContainer,
+				})
+			}
 		}
 
 		return nil
@@ -324,8 +330,14 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element jsonldinternal.E
 			}
 
 			nectx := ectx
-			nectx.ActiveProperty = rdf.IRI(key)
-			// nectx.ActivePropertyRange = member.Name.SourceOffsets
+
+			if len(key) > 2 && key[:2] == "_:" {
+				nectx.ActiveProperty = nil // not supported
+			} else {
+				nectx.ActiveProperty = rdf.IRI(key)
+				// nectx.ActivePropertyRange = member.Name.SourceOffsets
+			}
+
 			nectx.Reverse = true
 
 			for _, item := range reverseObject.Members[key].(*jsonldinternal.ExpandedArray).Values {
@@ -342,12 +354,20 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element jsonldinternal.E
 			typePrimitive := typeValue.(*jsonldinternal.ExpandedScalarPrimitive)
 			typeString := typePrimitive.Value.(inspectjson.StringValue)
 
+			var effectiveObject rdf.ObjectValue
+
+			if len(typeString.Value) > 2 && typeString.Value[:2] == "_:" {
+				effectiveObject = ectx.global.BlankNodeStringMapper.MapBlankNodeIdentifier(typeString.Value[2:])
+			} else {
+				effectiveObject = rdf.IRI(typeString.Value)
+			}
+
 			r.statements = append(r.statements, &statement{
 				graphName: ectx.ActiveGraph,
 				triple: rdf.Triple{
 					Subject:   ectx.ActiveSubject,
 					Predicate: rdfiri.Type_Property,
-					Object:    rdf.IRI(typeString.Value),
+					Object:    effectiveObject,
 				},
 				offsets: r.buildTextOffsets(
 					encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
@@ -378,6 +398,21 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element jsonldinternal.E
 		}
 	}
 
+	if atIncluded, ok := elementObject.Members["@included"]; ok {
+		nectx := ectx
+		nectx.ActiveSubject = nil
+		nectx.ActiveSubjectRange = nil
+		nectx.ActiveProperty = nil
+		nectx.ActivePropertyRange = nil
+
+		for _, item := range atIncluded.(*jsonldinternal.ExpandedArray).Values {
+			err := r.decodeElement(nectx, item, false)
+			if err != nil {
+				return err
+			}
+		}
+	}
+
 	// [dpb] Sort keys for deterministic iteration; not found in spec?
 	memberKeys := slices.Collect(maps.Keys(elementObject.Members))
 	slices.Sort(memberKeys)
@@ -388,8 +423,13 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element jsonldinternal.E
 		}
 
 		nectx := ectx
-		nectx.ActiveProperty = rdf.IRI(key)
-		// nectx.ActivePropertyRange = member.Name.SourceOffsets // TODO
+
+		if len(key) > 2 && key[:2] == "_:" {
+			nectx.ActiveProperty = nil // not supported
+		} else {
+			nectx.ActiveProperty = rdf.IRI(key)
+			// nectx.ActivePropertyRange = member.Name.SourceOffsets
+		}
 
 		for _, item := range elementObject.Members[key].(*jsonldinternal.ExpandedArray).Values {
 			err := r.decodeElement(nectx, item, false)

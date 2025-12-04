@@ -1,10 +1,9 @@
 package jsonldinternal
 
 import (
-	"net/url"
-
 	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/inspectjson-go/inspectjson"
+	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
 type TermDefinition struct {
@@ -24,7 +23,7 @@ type TermDefinition struct {
 	ReverseProperty bool
 
 	// [4.1] an optional base URL (IRI),
-	BaseURL *url.URL
+	BaseURL *iriutil.ParsedIRI
 
 	// [4.1] an optional context (context),
 	// [dpb] sometimes referred to as "local context"?
@@ -39,7 +38,7 @@ type TermDefinition struct {
 	DirectionMappingValue inspectjson.Value // inspectjson.NullValue | inspectjson.StringValue
 
 	// [4.1] an optional index mapping (string),
-	IndexMapping              *ExpandedIRIasIRI
+	IndexMapping              *string
 	IndexMappingSourceOffsets *cursorio.TextOffsetRange
 
 	// [4.1] an optional language mapping (string),
@@ -113,7 +112,7 @@ func (d *TermDefinition) Equals(d2 *TermDefinition) bool {
 	if d.IndexMapping == nil && d2.IndexMapping == nil {
 		// equal
 	} else if d.IndexMapping != nil && d2.IndexMapping != nil {
-		if !d.IndexMapping.Equals(d2.IndexMapping) {
+		if *d.IndexMapping != *d2.IndexMapping {
 			return false
 		}
 	} else {

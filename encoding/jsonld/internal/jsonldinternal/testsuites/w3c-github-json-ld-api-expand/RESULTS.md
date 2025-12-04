@@ -1,6 +1,6 @@
 # Test Suite
 
-374 passed, 11 failed, 0 skipped
+385 passed, 0 failed, 0 skipped
 
 | Result | Test Group | Test Name |
 |:------ |:---------- |:--------- |
@@ -169,7 +169,7 @@
 | ✅&nbsp;PASS | Eval | tdi01 |
 | ✅&nbsp;PASS | Eval | tdi02 |
 | ✅&nbsp;PASS | Eval | tdi03 |
-| ❌&nbsp;FAIL | Eval | tdi04 |
+| ✅&nbsp;PASS | Eval | tdi04 |
 | ✅&nbsp;PASS | Eval | tdi05 |
 | ✅&nbsp;PASS | Eval | tdi06 |
 | ✅&nbsp;PASS | Eval | tdi07 |
@@ -280,8 +280,8 @@
 | ✅&nbsp;PASS | Eval | tso09 |
 | ✅&nbsp;PASS | Eval | tso11 |
 | ✅&nbsp;PASS | Eval | ttn02 |
-| ❌&nbsp;FAIL | NegativeSyntax | t0115 |
-| ❌&nbsp;FAIL | NegativeSyntax | t0116 |
+| ✅&nbsp;PASS | NegativeSyntax | t0115 |
+| ✅&nbsp;PASS | NegativeSyntax | t0116 |
 | ✅&nbsp;PASS | NegativeSyntax | t0123 |
 | ✅&nbsp;PASS | NegativeSyntax | tc029 |
 | ✅&nbsp;PASS | NegativeSyntax | tc030 |
@@ -309,7 +309,7 @@
 | ✅&nbsp;PASS | NegativeSyntax | ter07 |
 | ✅&nbsp;PASS | NegativeSyntax | ter08 |
 | ✅&nbsp;PASS | NegativeSyntax | ter09 |
-| ❌&nbsp;FAIL | NegativeSyntax | ter10 |
+| ✅&nbsp;PASS | NegativeSyntax | ter10 |
 | ✅&nbsp;PASS | NegativeSyntax | ter11 |
 | ✅&nbsp;PASS | NegativeSyntax | ter12 |
 | ✅&nbsp;PASS | NegativeSyntax | ter13 |
@@ -321,8 +321,8 @@
 | ✅&nbsp;PASS | NegativeSyntax | ter20 |
 | ✅&nbsp;PASS | NegativeSyntax | ter21 |
 | ✅&nbsp;PASS | NegativeSyntax | ter22 |
-| ❌&nbsp;FAIL | NegativeSyntax | ter23 |
-| ❌&nbsp;FAIL | NegativeSyntax | ter24 |
+| ✅&nbsp;PASS | NegativeSyntax | ter23 |
+| ✅&nbsp;PASS | NegativeSyntax | ter24 |
 | ✅&nbsp;PASS | NegativeSyntax | ter25 |
 | ✅&nbsp;PASS | NegativeSyntax | ter26 |
 | ✅&nbsp;PASS | NegativeSyntax | ter27 |
@@ -330,7 +330,7 @@
 | ✅&nbsp;PASS | NegativeSyntax | ter29 |
 | ✅&nbsp;PASS | NegativeSyntax | ter30 |
 | ✅&nbsp;PASS | NegativeSyntax | ter31 |
-| ❌&nbsp;FAIL | NegativeSyntax | ter32 |
+| ✅&nbsp;PASS | NegativeSyntax | ter32 |
 | ✅&nbsp;PASS | NegativeSyntax | ter33 |
 | ✅&nbsp;PASS | NegativeSyntax | ter34 |
 | ✅&nbsp;PASS | NegativeSyntax | ter35 |
@@ -342,12 +342,12 @@
 | ✅&nbsp;PASS | NegativeSyntax | ter41 |
 | ✅&nbsp;PASS | NegativeSyntax | ter42 |
 | ✅&nbsp;PASS | NegativeSyntax | ter43 |
-| ❌&nbsp;FAIL | NegativeSyntax | ter44 |
-| ❌&nbsp;FAIL | NegativeSyntax | ter48 |
+| ✅&nbsp;PASS | NegativeSyntax | ter44 |
+| ✅&nbsp;PASS | NegativeSyntax | ter48 |
 | ✅&nbsp;PASS | NegativeSyntax | ter49 |
-| ❌&nbsp;FAIL | NegativeSyntax | ter50 |
+| ✅&nbsp;PASS | NegativeSyntax | ter50 |
 | ✅&nbsp;PASS | NegativeSyntax | ter51 |
-| ❌&nbsp;FAIL | NegativeSyntax | ter52 |
+| ✅&nbsp;PASS | NegativeSyntax | ter52 |
 | ✅&nbsp;PASS | NegativeSyntax | ter53 |
 | ✅&nbsp;PASS | NegativeSyntax | ter54 |
 | ✅&nbsp;PASS | NegativeSyntax | ter55 |
@@ -392,71 +392,16 @@
 
 ## Output
 
-### ❌ Eval, tdi04
+### ✅ NegativeSyntax, t0115
 
 ```
-error: unexpected result
-
-=== ACTUAL
-
-[
-  {
-    "@id": "http://example.com/queen",
-    "http://example.com/vocab/label": [
-      {
-        "@language": "de",
-        "@value": "Die Königin"
-      },
-      {
-        "@language": "de",
-        "@value": "Ihre Majestät"
-      },
-      {
-        "@language": "en",
-        "@value": "The Queen"
-      }
-    ]
-  }
-]
-
-
-=== EXPECTED
-
-[
-  {
-    "@id": "http://example.com/queen",
-    "http://example.com/vocab/label": [
-      {
-        "@direction": "ltr",
-        "@language": "de",
-        "@value": "Die Königin"
-      },
-      {
-        "@direction": "ltr",
-        "@language": "de",
-        "@value": "Ihre Majestät"
-      },
-      {
-        "@direction": "ltr",
-        "@language": "en",
-        "@value": "The Queen"
-      }
-    ]
-  }
-]
-
+error: invalid vocab mapping: @vocab must be an absolute IRI in JSON-LD 1.0
 ```
 
-### ❌ NegativeSyntax, t0115
+### ✅ NegativeSyntax, t0116
 
 ```
-expected error, but got none
-```
-
-### ❌ NegativeSyntax, t0116
-
-```
-expected error, but got none
+error: invalid vocab mapping: @vocab must be an absolute IRI in JSON-LD 1.0
 ```
 
 ### ✅ NegativeSyntax, t0123
@@ -621,10 +566,10 @@ error: invalid vocab mapping: invalid type: boolean
 error: invalid default language: invalid type: boolean
 ```
 
-### ❌ NegativeSyntax, ter10
+### ✅ NegativeSyntax, ter10
 
 ```
-expected error, but got none
+error: cyclic IRI mapping
 ```
 
 ### ✅ NegativeSyntax, ter11
@@ -693,16 +638,16 @@ error: invalid container mapping: invalid value (processing mode json-ld-1.0): @
 error: invalid language mapping: invalid type: boolean
 ```
 
-### ❌ NegativeSyntax, ter23
+### ✅ NegativeSyntax, ter23
 
 ```
-expected error, but got none
+error: invalid type mapping: expected absolute iri: found "relative/iri"
 ```
 
-### ❌ NegativeSyntax, ter24
+### ✅ NegativeSyntax, ter24
 
 ```
-expected error, but got none
+error: invalid set or list object: invalid structure (processing mode json-ld-1.0): list of lists
 ```
 
 ### ✅ NegativeSyntax, ter25
@@ -747,10 +692,10 @@ error: invalid language-tagged string: invalid type: boolean
 error: invalid @index value: invalid type: boolean
 ```
 
-### ❌ NegativeSyntax, ter32
+### ✅ NegativeSyntax, ter32
 
 ```
-expected error, but got none
+error: invalid set or list object: invalid structure (processing mode json-ld-1.0): list of lists
 ```
 
 ### ✅ NegativeSyntax, ter33
@@ -819,16 +764,16 @@ error: keyword redefinition: invalid @type entry (processing mode json-ld-1.0)
 error: invalid IRI mapping: invalid value (processing mode json-ld-1.1): @type
 ```
 
-### ❌ NegativeSyntax, ter44
+### ✅ NegativeSyntax, ter44
 
 ```
-expected error, but got none
+error: invalid IRI mapping: expanded term does not match expanded iri (http://example.com/vocab#term != http://example.com/vocab#somethingElse)
 ```
 
-### ❌ NegativeSyntax, ter48
+### ✅ NegativeSyntax, ter48
 
 ```
-expected error, but got none
+error: invalid IRI mapping: expanded term does not match expanded iri (./something != http://example.com/vocab#somethingElse)
 ```
 
 ### ✅ NegativeSyntax, ter49
@@ -837,10 +782,10 @@ expected error, but got none
 error: invalid term definition: invalid @prefix entry: term contains colon or slash
 ```
 
-### ❌ NegativeSyntax, ter50
+### ✅ NegativeSyntax, ter50
 
 ```
-expected error, but got none
+error: invalid IRI mapping: @reverse value is not a valid IRI
 ```
 
 ### ✅ NegativeSyntax, ter51
@@ -849,10 +794,10 @@ expected error, but got none
 error: invalid value object value: invalid type: array
 ```
 
-### ❌ NegativeSyntax, ter52
+### ✅ NegativeSyntax, ter52
 
 ```
-expected error, but got none
+error: invalid term definition: term cannot be the empty string
 ```
 
 ### ✅ NegativeSyntax, ter53
@@ -936,7 +881,7 @@ error: invalid term definition: invalid expanded type: keyword
 ### ✅ NegativeSyntax, tpi04
 
 ```
-error: invalid term definition: invalid expanded type: value
+error: invalid term definition: invalid index type: boolean
 ```
 
 ### ✅ NegativeSyntax, tpi05

@@ -13,6 +13,7 @@ import (
 type ParsedIRI struct {
 	u             *url.URL
 	forceFragment bool
+	isOpaque      bool // true if this is a non-hierarchical URI (uses Opaque field)
 }
 
 func ParseIRI(s string) (*ParsedIRI, error) {
@@ -21,9 +22,31 @@ func ParseIRI(s string) (*ParsedIRI, error) {
 		return nil, err
 	}
 
+	isOpaque := false
+
+	// For non-hierarchical schemes (not http/https), use Opaque to avoid '//' authority
+	if u.Scheme != "" && u.Scheme != "http" && u.Scheme != "https" && u.Scheme != "file" && u.Host == "" && u.Opaque == "" {
+		isOpaque = true
+		// url.Parse puts everything after scheme: into Path with leading '/'
+		// Move it to Opaque without the leading '/'
+		if u.Path != "" {
+			if u.Path[0] == '/' {
+				u.Opaque = u.Path[1:]
+			} else {
+				u.Opaque = u.Path
+			}
+			u.Path = ""
+			u.RawPath = ""
+		} else {
+			// Empty path - set Opaque to empty string to mark as non-hierarchical
+			u.Opaque = ""
+		}
+	}
+
 	return &ParsedIRI{
 		u:             u,
 		forceFragment: strings.HasSuffix(s, "#"),
+		isOpaque:      isOpaque,
 	}, nil
 }
 
@@ -86,6 +109,7 @@ func (iri *ParsedIRI) ResolveReference(ref *ParsedIRI) *ParsedIRI {
 		return &ParsedIRI{
 			u:             &url,
 			forceFragment: forceFragment,
+			isOpaque:      ref.isOpaque,
 		}
 	}
 	if ref.u.Opaque != "" {
@@ -95,6 +119,7 @@ func (iri *ParsedIRI) ResolveReference(ref *ParsedIRI) *ParsedIRI {
 		return &ParsedIRI{
 			u:             &url,
 			forceFragment: forceFragment,
+			isOpaque:      true,
 		}
 	}
 	if ref.u.Path == "" && !ref.u.ForceQuery && ref.u.RawQuery == "" {
@@ -112,8 +137,47 @@ func (iri *ParsedIRI) ResolveReference(ref *ParsedIRI) *ParsedIRI {
 		return &ParsedIRI{
 			u:             &url,
 			forceFragment: forceFragment,
+			isOpaque:      true,
 		}
 	}
+
+	// Handle resolving relative refs against opaque (non-hierarchical) base URIs
+	if u.Opaque != "" || iri.isOpaque {
+		// For opaque URIs, resolve the reference path-like
+		var resolved string
+		if refuPath != "" {
+			if refuPath[0] == '/' {
+				// Absolute path reference
+				resolved = refuPath
+			} else {
+				// Relative path reference - merge with opaque part
+				base := u.Opaque
+				i := strings.LastIndex(base, "/")
+				if i >= 0 {
+					resolved = resolvePath(base[:i+1]+refuPath, "")
+				} else {
+					resolved = resolvePath(refuPath, "")
+				}
+				// Remove leading '/' from resolvePath result for opaque
+				if len(resolved) > 0 && resolved[0] == '/' {
+					resolved = resolved[1:]
+				}
+			}
+		} else {
+			resolved = u.Opaque
+		}
+		url.Opaque = resolved
+		url.User = nil
+		url.Host = ""
+		url.Path = ""
+		url.RawPath = ""
+		return &ParsedIRI{
+			u:             &url,
+			forceFragment: forceFragment,
+			isOpaque:      true,
+		}
+	}
+
 	// The "abs_path" or "rel_path" cases.
 	url.Host = u.Host
 	url.User = u.User
@@ -138,6 +202,7 @@ func (iri *ParsedIRI) ResolveReference(ref *ParsedIRI) *ParsedIRI {
 	return &ParsedIRI{
 		u:             &url,
 		forceFragment: forceFragment,
+		isOpaque:      false,
 	}
 }
 

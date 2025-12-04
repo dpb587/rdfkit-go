@@ -80,6 +80,8 @@ func Test(t *testing.T) {
 
 			if len(sequence.Option.ProcessingMode) > 0 {
 				dopt = dopt.SetProcessingMode(sequence.Option.ProcessingMode)
+			} else if len(sequence.Option.SpecVersion) > 0 {
+				dopt = dopt.SetProcessingMode(sequence.Option.SpecVersion)
 			}
 
 			if len(sequence.Option.RDFDirection) > 0 {

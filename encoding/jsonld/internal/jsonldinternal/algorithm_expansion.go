@@ -2,13 +2,13 @@ package jsonldinternal
 
 import (
 	"fmt"
-	"net/url"
 	"slices"
 	"strings"
 
 	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/inspectjson-go/inspectjson"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
+	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
 type algorithmExpansion struct {
@@ -22,7 +22,7 @@ type algorithmExpansion struct {
 	// [spec] If not passed, the optional flags are set to false.
 
 	// [spec] base URL associated with the documentUrl of the original document to expand
-	baseURL *url.URL
+	baseURL *iriutil.ParsedIRI
 
 	// [spec] frameExpansion flag allowing special forms of input used for frame expansion
 	// [dpb] not implemented
@@ -192,13 +192,14 @@ func (vars algorithmExpansion) Call() (ExpandedValue, error) {
 
 			if len(elementObject.Members) == 1 {
 				for _, member := range elementObject.Members {
-					expandedKey := algorithmIRIExpansion{
+					expandedKey, err := algorithmIRIExpansion{
 						activeContext: vars.activeContext.PreviousContext,
 						value:         member.Name,
 						vocab:         true,
 					}.Call()
-
-					if keyKeyword, ok := expandedKey.(ExpandedIRIasKeyword); ok && keyKeyword == "@id" {
+					if err != nil {
+						return nil, err
+					} else if keyKeyword, ok := expandedKey.(ExpandedIRIasKeyword); ok && keyKeyword == "@id" {
 						revert = false
 					}
 				}
@@ -208,13 +209,14 @@ func (vars algorithmExpansion) Call() (ExpandedValue, error) {
 				var expandedKeywords = map[string]struct{}{}
 
 				for _, member := range elementObject.Members {
-					expandedKey := algorithmIRIExpansion{
+					expandedKey, err := algorithmIRIExpansion{
 						activeContext: vars.activeContext,
 						value:         member.Name,
 						vocab:         true,
 					}.Call()
-
-					if keyKeyword, ok := expandedKey.(ExpandedIRIasKeyword); ok {
+					if err != nil {
+						return nil, err
+					} else if keyKeyword, ok := expandedKey.(ExpandedIRIasKeyword); ok {
 						expandedKeywords[string(keyKeyword)] = struct{}{}
 					}
 				}
@@ -282,12 +284,17 @@ func (vars algorithmExpansion) Call() (ExpandedValue, error) {
 	for key, member := range elementObject.Members {
 		orderedElementKeys = append(orderedElementKeys, key)
 
-		expandedElementKeys[key] = algorithmIRIExpansion{
+		expandedKey, err := algorithmIRIExpansion{
 			activeContext: vars.activeContext,
 			value:         member.Name,
 			// assumed: not explicitly documented
 			vocab: true,
 		}.Call()
+		if err != nil {
+			return nil, err
+		}
+
+		expandedElementKeys[key] = expandedKey
 	}
 
 	slices.SortFunc(orderedElementKeys, strings.Compare)
@@ -370,22 +377,30 @@ func (vars algorithmExpansion) Call() (ExpandedValue, error) {
 	for _, key := range orderedElementKeys {
 		if key == "@context" {
 			continue
-		} else if (algorithmIRIExpansion{
+		}
+
+		expandedKey, err := algorithmIRIExpansion{
 			activeContext: vars.activeContext,
 			value:         elementObject.Members[key].Name,
 			vocab:         true,
-		}.Call()) != ExpandedIRIasKeyword("@type") {
+		}.Call()
+		if err != nil {
+			return nil, err
+		} else if expandedKey != ExpandedIRIasKeyword("@type") {
 			continue
 		}
 
 		value := elementObject.Members[key].Value
 
 		if valueString, ok := value.(inspectjson.StringValue); ok {
-			inputType = algorithmIRIExpansion{
+			inputType, err = algorithmIRIExpansion{
 				activeContext: vars.activeContext,
 				value:         valueString,
 				vocab:         true,
 			}.Call()
+			if err != nil {
+				return nil, err
+			}
 		}
 
 		break
@@ -411,12 +426,15 @@ func (vars algorithmExpansion) Call() (ExpandedValue, error) {
 
 			// [spec // 5.1.2 // 13.2] Initialize *expanded property* to the result of IRI expanding *key*.
 
-			expandedProperty := algorithmIRIExpansion{
+			expandedProperty, err := algorithmIRIExpansion{
 				activeContext: vars.activeContext,
 				value:         elementObject.Members[key].Name,
 				// assumed: not explicitly documented
 				vocab: true,
 			}.Call()
+			if err != nil {
+				return err
+			}
 
 			// [spec // 5.1.2 // 13.3] If *expanded property* is `null` or it neither contains a colon (`:`) nor it is a keyword, drop *key* by continuing to the next *key*.
 
@@ -481,13 +499,18 @@ func (vars algorithmExpansion) Call() (ExpandedValue, error) {
 
 					// [spec // 5.1.2 // 13.4.3.2] Otherwise, set *expanded value* to the result of IRI expanding *value* using `true` for *document relative* and `false` for *vocab*. When the `frameExpansion` flag is set, *expanded value* will be an array of one or more of the values, with string values expanded using the IRI Expansion algorithm as above.
 
-					expandedValue = algorithmIRIExpansion{
+					expandedIRI, err := algorithmIRIExpansion{
 						value:            valueString,
 						documentRelative: true,
 						vocab:            false,
 						// implicit
 						activeContext: vars.activeContext,
-					}.Call().NewPropertyValue(
+					}.Call()
+					if err != nil {
+						return err
+					}
+
+					expandedValue = expandedIRI.NewPropertyValue(
 						elementObject.Members[key].Name.SourceOffsets,
 						valueString.SourceOffsets,
 					)
@@ -529,14 +552,19 @@ func (vars algorithmExpansion) Call() (ExpandedValue, error) {
 							}
 						}
 
-						expandedValueArray = append(expandedValueArray, algorithmIRIExpansion{
+						expandedIRI, err := algorithmIRIExpansion{
 							value:            valueString,
 							documentRelative: true,
 							// assumed although not explicitly mentioned
 							vocab: true,
 							// implicit
 							activeContext: typeScopedContext,
-						}.Call().NewPropertyValue(
+						}.Call()
+						if err != nil {
+							return err
+						}
+
+						expandedValueArray = append(expandedValueArray, expandedIRI.NewPropertyValue(
 							elementObject.Members[key].Name.SourceOffsets,
 							valueString.SourceOffsets,
 						))
@@ -580,9 +608,7 @@ func (vars algorithmExpansion) Call() (ExpandedValue, error) {
 					}.Call()
 					if err != nil {
 						return err
-					}
-
-					if _, ok := expandedValue.(*ExpandedArray); !ok {
+					} else if _, ok := expandedValue.(*ExpandedArray); !ok {
 						expandedValue = &ExpandedArray{
 							Values: []ExpandedValue{expandedValue},
 						}
@@ -613,9 +639,7 @@ func (vars algorithmExpansion) Call() (ExpandedValue, error) {
 					}.Call()
 					if err != nil {
 						return err
-					}
-
-					if _, ok := expandedValue.(*ExpandedArray); !ok {
+					} else if _, ok := expandedValue.(*ExpandedArray); !ok {
 						expandedValue = &ExpandedArray{
 							Values: []ExpandedValue{expandedValue},
 						}
@@ -801,11 +825,26 @@ func (vars algorithmExpansion) Call() (ExpandedValue, error) {
 					}.Call()
 					if err != nil {
 						return err
-					}
-
-					if _, ok := expandedValue.(*ExpandedArray); !ok {
+					} else if _, ok := expandedValue.(*ExpandedArray); !ok {
 						expandedValue = &ExpandedArray{
 							Values: []ExpandedValue{expandedValue},
+						}
+					}
+
+					if vars.activeContext._processor.processingMode == ProcessingMode_JSON_LD_1_0 {
+						// [dpb] fixes #ter32
+
+						if expandedArray, ok := expandedValue.(*ExpandedArray); ok {
+							for _, item := range expandedArray.Values {
+								if itemObject, ok := item.(*ExpandedObject); ok {
+									if _, hasAtList := itemObject.Members["@list"]; hasAtList {
+										return jsonldtype.Error{
+											Code: jsonldtype.InvalidSetOrListObject,
+											Err:  fmt.Errorf("invalid structure (processing mode %s): list of lists", vars.activeContext._processor.processingMode),
+										}
+									}
+								}
+							}
 						}
 					}
 
@@ -1034,7 +1073,11 @@ func (vars algorithmExpansion) Call() (ExpandedValue, error) {
 
 					// [spec // 5.1.2 // 13.7.2] Initialize *direction* to the default base direction from *active context*.
 
-					var direction inspectjson.Value = vars.activeContext.DefaultDirectionValue
+					var direction inspectjson.Value
+
+					if vars.activeContext.DefaultDirectionValue != nil {
+						direction = *vars.activeContext.DefaultDirectionValue
+					}
 
 					// [spec // 5.1.2 // 13.7.3] If *key*'s term definition in active context has a direction mapping, update *direction* with that value.
 
@@ -1108,11 +1151,16 @@ func (vars algorithmExpansion) Call() (ExpandedValue, error) {
 
 							if language == "@none" {
 								delete(v.Members, "@language")
-							} else if (algorithmIRIExpansion{
-								value:         valueObject.Members[language].Name,
-								activeContext: vars.activeContext,
-							}).Call() == ExpandedIRIasKeyword("@none") {
-								delete(v.Members, "@language")
+							} else {
+								expandedLang, err := algorithmIRIExpansion{
+									value:         valueObject.Members[language].Name,
+									activeContext: vars.activeContext,
+								}.Call()
+								if err != nil {
+									return err
+								} else if expandedLang == ExpandedIRIasKeyword("@none") {
+									delete(v.Members, "@language")
+								}
 							}
 
 							// [spec // 5.1.2 // 13.7.4.2.5] If *direction* is not `null`, add an entry for `@direction` to *v* with *direction*.
@@ -1146,14 +1194,14 @@ func (vars algorithmExpansion) Call() (ExpandedValue, error) {
 
 						// [spec // 5.1.2 // 13.8.2] Initialize *index key* to the *key*'s index mapping in active context, or `@index`, if it does not exist.
 
-						var indexKey ExpandedIRI
+						var indexKey string
 						var indexKeySourceOffsets *cursorio.TextOffsetRange
 
 						if keyTermDefinition != nil && keyTermDefinition.IndexMapping != nil {
-							indexKey = keyTermDefinition.IndexMapping
+							indexKey = *keyTermDefinition.IndexMapping
 							indexKeySourceOffsets = keyTermDefinition.IndexMappingSourceOffsets
 						} else {
-							indexKey = ExpandedIRIasKeyword("@index")
+							indexKey = "@index"
 							// indexKeySourceOffsets remains nil for default @index keyword
 						}
 
@@ -1213,12 +1261,16 @@ func (vars algorithmExpansion) Call() (ExpandedValue, error) {
 
 							// [spec // 5.1.2 // 13.8.3.4] Initialize *expanded index* to the result of IRI expanding *index*.
 
-							expandedIndex := (algorithmIRIExpansion{
+							var err error
+							expandedIndex, err := algorithmIRIExpansion{
 								value:         valueObject.Members[index].Name,
 								activeContext: mapContext,
 								// implied by #tm006
 								vocab: true,
-							}).Call()
+							}.Call()
+							if err != nil {
+								return err
+							}
 
 							// [spec // 5.1.2 // 13.8.3.5] If *index value* is not an array set *index value* to an array containing only *index value*.
 
@@ -1235,8 +1287,6 @@ func (vars algorithmExpansion) Call() (ExpandedValue, error) {
 							}
 
 							// [spec // 5.1.2 // 13.8.3.6] Initialize *index value* to the result of using this algorithm recursively, passing *map context* as *active context*, *key* as *active property*, *index value* as *element*, *base URL*, `true` for *from map*, and the `frameExpansion` and `ordered` flags.
-
-							var err error
 
 							expandedIndexValue, err := algorithmExpansion{
 								activeContext:               mapContext,
@@ -1289,25 +1339,30 @@ func (vars algorithmExpansion) Call() (ExpandedValue, error) {
 
 								// [spec // 5.1.2 // 13.8.3.7.2] If *container mapping* includes `@index`, *index key* is not `@index`, and *expanded index* is not `@none`:
 
-								if slices.Contains(containerMapping, "@index") && indexKey != ExpandedIRIasKeyword("@index") && expandedIndex != ExpandedIRIasKeyword("@none") {
+								if slices.Contains(containerMapping, "@index") && indexKey != "@index" && expandedIndex != ExpandedIRIasKeyword("@none") {
 
 									// [spec // 5.1.2 // 13.8.3.7.2.1] Initialize *re-expanded index* to the result of calling the Value Expansion algorithm, passing the *active context*, *index key* as *active property*, and *index* as *value*.
 
 									reExpandedIndex := (algorithmValueExpansion{
 										activeContext:               mapContext,
-										activeProperty:              indexKey.String(),
+										activeProperty:              indexKey,
 										activePropertySourceOffsets: indexKeySourceOffsets,
 										value:                       valueObject.Members[index].Name,
 									}).Call()
 
 									// [spec // 5.1.2 // 13.8.3.7.2.2] Initialize *expanded index key* to the result of IRI expanding *index key*.
 
-									expandedIndexKey := (algorithmIRIExpansion{
-										value:         indexKey.NewPropertyValue(nil, nil).Value,
+									expandedIndexKey, err := algorithmIRIExpansion{
+										value: inspectjson.StringValue{
+											Value: indexKey,
+										},
 										activeContext: mapContext,
 										// implied by #tpi06
 										vocab: true,
-									}).Call()
+									}.Call()
+									if err != nil {
+										return err
+									}
 
 									// [spec // 5.1.2 // 13.8.3.7.2.3] Initialize *index property values* to an array consisting of *re-expanded index* followed by the existing values of the concatenation of *expanded index key* in *item*, if any.
 
@@ -1358,12 +1413,17 @@ func (vars algorithmExpansion) Call() (ExpandedValue, error) {
 										_, hasAtID := itemObject.Members["@id"]
 
 										if slices.Contains(containerMapping, "@id") && !hasAtID && expandedIndex != ExpandedIRIasKeyword("@none") {
-											itemObject.Members["@id"] = algorithmIRIExpansion{
+											expandedIndexForID, err := algorithmIRIExpansion{
 												value:            valueObject.Members[index].Name,
 												activeContext:    mapContext,
 												documentRelative: true,
 												vocab:            false,
-											}.Call().NewPropertyValue(
+											}.Call()
+											if err != nil {
+												return err
+											}
+
+											itemObject.Members["@id"] = expandedIndexForID.NewPropertyValue(
 												nil,
 												valueObject.Members[index].Name.SourceOffsets,
 											)
@@ -1472,6 +1532,15 @@ func (vars algorithmExpansion) Call() (ExpandedValue, error) {
 							"@list": expandedValue,
 						},
 						PropertySourceOffsets: vars.activePropertySourceOffsets,
+					}
+				} else {
+					// [dpb] not supported in 1.0, apparently; fixes #ter24
+
+					if vars.activeContext._processor.processingMode == ProcessingMode_JSON_LD_1_0 {
+						return jsonldtype.Error{
+							Code: jsonldtype.InvalidSetOrListObject,
+							Err:  fmt.Errorf("invalid structure (processing mode %s): list of lists", vars.activeContext._processor.processingMode),
+						}
 					}
 				}
 			}
@@ -1625,10 +1694,13 @@ func (vars algorithmExpansion) Call() (ExpandedValue, error) {
 					var orderedNestedValueKeys []string
 
 					for key := range nestedValueObject.Members {
-						if (algorithmIRIExpansion{
+						expandedNestedKey, err := algorithmIRIExpansion{
 							value:         nestedValueObject.Members[key].Name,
 							activeContext: vars.activeContext,
-						}.Call()) == ExpandedIRIasKeyword("@value") {
+						}.Call()
+						if err != nil {
+							return err
+						} else if expandedNestedKey == ExpandedIRIasKeyword("@value") {
 							return jsonldtype.Error{
 								Code: jsonldtype.InvalidAtNestValue,
 								Err:  fmt.Errorf("invalid entry key: %s", key),

@@ -2,11 +2,11 @@ package jsonldinternal
 
 import (
 	"context"
-	"net/url"
 
 	"github.com/dpb587/inspectjson-go/inspectjson"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
 var ProcessorRemoteContextsLimit = 128
@@ -29,6 +29,6 @@ type contextProcessor struct {
 }
 
 type dereferencedDocument struct {
-	documentURL          *url.URL
+	documentURL          *iriutil.ParsedIRI
 	documentContextValue inspectjson.Value
 }

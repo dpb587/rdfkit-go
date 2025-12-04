@@ -244,3 +244,93 @@ func TestParsedIRI_ResolvePathFromEmpty(t *testing.T) {
 		t.Fatalf("iri string: expected %v, got %v", _e, _a)
 	}
 }
+
+func TestParsedIRI_NonHttp(t *testing.T) {
+	base := "tag:example"
+
+	{
+		vv, err := url.Parse(base)
+		if err != nil {
+			t.Fatalf("unexpected error: %v", err)
+		}
+
+		vv, err = vv.Parse("a")
+		if err != nil {
+			t.Fatalf("unexpected error: %v", err)
+		} else if _a, _e := vv.String(), "tag:///a"; _a != _e {
+			t.Fatalf("url string: expected %v, got %v", _e, _a)
+		}
+	}
+
+	vv, err := ParseIRI(base)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	vv, err = vv.Parse("a")
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	} else if _a, _e := vv.String(), "tag:a"; _a != _e {
+		t.Fatalf("iri string: expected %v, got %v", _e, _a)
+	}
+}
+
+func TestParsedIRI_NonHttpPath(t *testing.T) {
+	base := "tag:example/foo"
+
+	{
+		vv, err := url.Parse(base)
+		if err != nil {
+			t.Fatalf("unexpected error: %v", err)
+		}
+
+		vv, err = vv.Parse("a")
+		if err != nil {
+			t.Fatalf("unexpected error: %v", err)
+		} else if _a, _e := vv.String(), "tag:///a"; _a != _e {
+			t.Fatalf("url string: expected %v, got %v", _e, _a)
+		}
+	}
+
+	vv, err := ParseIRI(base)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	vv, err = vv.Parse("a")
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	} else if _a, _e := vv.String(), "tag:example/a"; _a != _e {
+		t.Fatalf("iri string: expected %v, got %v", _e, _a)
+	}
+}
+
+func TestParsedIRI_NonHttpEmpty(t *testing.T) {
+	base := "tag:"
+
+	{
+		vv, err := url.Parse(base)
+		if err != nil {
+			t.Fatalf("unexpected error: %v", err)
+		}
+
+		vv, err = vv.Parse("a")
+		if err != nil {
+			t.Fatalf("unexpected error: %v", err)
+		} else if _a, _e := vv.String(), "tag:///a"; _a != _e {
+			t.Fatalf("url string: expected %v, got %v", _e, _a)
+		}
+	}
+
+	vv, err := ParseIRI(base)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	vv, err = vv.Parse("a")
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	} else if _a, _e := vv.String(), "tag:a"; _a != _e {
+		t.Fatalf("iri string: expected %v, got %v", _e, _a)
+	}
+}

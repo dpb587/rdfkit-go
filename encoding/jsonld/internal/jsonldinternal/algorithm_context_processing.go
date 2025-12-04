@@ -4,9 +4,11 @@ import (
 	"errors"
 	"fmt"
 	"net/url"
+	"strings"
 
 	"github.com/dpb587/inspectjson-go/inspectjson"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
+	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
 type algorithmContextProcessing struct {
@@ -14,7 +16,7 @@ type algorithmContextProcessing struct {
 	LocalContext  inspectjson.Value
 
 	// [spec // 4.1.2] used when resolving relative context URLs
-	BaseURL *url.URL
+	BaseURL *iriutil.ParsedIRI
 
 	// Optional
 
@@ -180,11 +182,11 @@ func (vars algorithmContextProcessing) Call() (*Context, error) {
 
 			// [spec // 4.1.2 // 5.2.4] If *context* was previously dereferenced, then the processor *MUST NOT* do a further dereference, and context is set to the previously established internal representation: set *context document* to the previously dereferenced document, and set *loaded context* to the value of the `@context` entry from the document in *context document*.
 
-			var contextDocumentURL *url.URL
+			var contextDocumentIRI *iriutil.ParsedIRI
 			var loadedContext inspectjson.Value
 
 			if dereferenced, ok := result._processor.dereferencedDocumentByIRI[_contextURLString]; ok {
-				contextDocumentURL = dereferenced.documentURL
+				contextDocumentIRI = dereferenced.documentURL
 				loadedContext = dereferenced.documentContextValue
 			} else {
 
@@ -227,13 +229,20 @@ func (vars algorithmContextProcessing) Call() (*Context, error) {
 					}
 				}
 
-				contextDocumentURL = contextDocument.DocumentURL
+				contextDocumentIRI, err = iriutil.ParseIRI(contextDocument.DocumentURL.String())
+				if err != nil {
+					return nil, jsonldtype.Error{
+						Code: jsonldtype.InvalidRemoteContext,
+						Err:  fmt.Errorf("invalid document URL: %v", err),
+					}
+				}
+
 				loadedContext = objectAtContext.Value
 
 				// [dpb] a step to store dereferenced not mentioned in spec
 
 				result._processor.dereferencedDocumentByIRI[_contextURLString] = dereferencedDocument{
-					documentURL:          contextDocumentURL,
+					documentURL:          contextDocumentIRI,
 					documentContextValue: loadedContext,
 				}
 			}
@@ -244,7 +253,7 @@ func (vars algorithmContextProcessing) Call() (*Context, error) {
 			nextResult, err := algorithmContextProcessing{
 				ActiveContext:         result,
 				LocalContext:          loadedContext,
-				BaseURL:               contextDocumentURL,
+				BaseURL:               contextDocumentIRI,
 				RemoteContexts:        vars.RemoteContexts[:],
 				ValidateScopedContext: vars.ValidateScopedContext,
 				// defaults
@@ -413,7 +422,7 @@ func (vars algorithmContextProcessing) Call() (*Context, error) {
 
 				// [spec // 4.1.2 // 5.7.3] Otherwise, if *value* is an IRI, the base IRI of *result* is set to *value*.
 			} else if valueString, ok := value.(inspectjson.StringValue); ok {
-				valueIRI, err := url.Parse(valueString.Value)
+				valueIRI, err := iriutil.ParseIRI(valueString.Value)
 				if err != nil {
 					return nil, jsonldtype.Error{
 						Code: jsonldtype.InvalidBaseIRI, // per 5.7.5
@@ -461,13 +470,27 @@ func (vars algorithmContextProcessing) Call() (*Context, error) {
 				// [spec // 4.1.2 // 5.8.3] Otherwise, if *value* is an IRI or blank node identifier, the vocabulary mapping of *result* is set to the result of IRI expanding *value* using `true` for *document relative* . If it is not an IRI, or a blank node identifier, an `invalid vocab mapping` error has been detected and processing is aborted.
 				// [spec // 4.1.2 // 5.8.3] NOTE The use of blank node identifiers to value for @vocab is obsolete, and may be removed in a future version of JSON-LD.
 			} else if valueString, ok := value.(inspectjson.StringValue); ok {
-				expandedVocab := algorithmIRIExpansion{
+				// [dpb] additional validation fixes #t0115
+				if result._processor.processingMode == ProcessingMode_JSON_LD_1_0 && !strings.HasPrefix(valueString.Value, "_:") {
+					valueIRI, err := url.Parse(valueString.Value)
+					if err != nil || !valueIRI.IsAbs() {
+						return nil, jsonldtype.Error{
+							Code: jsonldtype.InvalidVocabMapping,
+							Err:  errors.New("@vocab must be an absolute IRI in JSON-LD 1.0"),
+						}
+					}
+				}
+
+				expandedVocab, err := algorithmIRIExpansion{
 					value:            valueString,
 					activeContext:    result,
 					documentRelative: true,
 					// assumed by t0125
 					vocab: true,
 				}.Call()
+				if err != nil {
+					return nil, err
+				}
 
 				switch t := expandedVocab.(type) {
 				case ExpandedIRIasNil:

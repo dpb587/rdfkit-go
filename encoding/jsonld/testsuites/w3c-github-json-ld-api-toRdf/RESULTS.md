@@ -1,6 +1,6 @@
 # Test Suite
 
-316 passed, 23 failed, 6 skipped
+330 passed, 9 failed, 6 skipped
 
 | Result | Test Group | Test Name |
 |:------ |:---------- |:--------- |
@@ -56,9 +56,9 @@
 | ✅&nbsp;PASS | Eval | #t0127 |
 | ✅&nbsp;PASS | Eval | #t0128 |
 | ✅&nbsp;PASS | Eval | #t0129 |
-| ❌&nbsp;FAIL | Eval | #t0130 |
-| ❌&nbsp;FAIL | Eval | #t0131 |
-| ❌&nbsp;FAIL | Eval | #t0132 |
+| ✅&nbsp;PASS | Eval | #t0130 |
+| ✅&nbsp;PASS | Eval | #t0131 |
+| ✅&nbsp;PASS | Eval | #t0132 |
 | ✅&nbsp;PASS | Eval | #t0133 |
 | ✅&nbsp;PASS | Eval | #tc001 |
 | ✅&nbsp;PASS | Eval | #tc002 |
@@ -130,7 +130,7 @@
 | ✅&nbsp;PASS | Eval | #te023 |
 | ✅&nbsp;PASS | Eval | #te024 |
 | ✅&nbsp;PASS | Eval | #te025 |
-| ❌&nbsp;FAIL | Eval | #te026 |
+| ✅&nbsp;PASS | Eval | #te026 |
 | ✅&nbsp;PASS | Eval | #te027 |
 | ✅&nbsp;PASS | Eval | #te028 |
 | ✅&nbsp;PASS | Eval | #te029 |
@@ -142,7 +142,7 @@
 | ✅&nbsp;PASS | Eval | #te035 |
 | ✅&nbsp;PASS | Eval | #te036 |
 | ✅&nbsp;PASS | Eval | #te037 |
-| ❌&nbsp;FAIL | Eval | #te038 |
+| ✅&nbsp;PASS | Eval | #te038 |
 | ✅&nbsp;PASS | Eval | #te039 |
 | ✅&nbsp;PASS | Eval | #te040 |
 | ✅&nbsp;PASS | Eval | #te041 |
@@ -172,7 +172,7 @@
 | ✅&nbsp;PASS | Eval | #te065 |
 | ✅&nbsp;PASS | Eval | #te066 |
 | ✅&nbsp;PASS | Eval | #te067 |
-| ❌&nbsp;FAIL | Eval | #te068 |
+| ✅&nbsp;PASS | Eval | #te068 |
 | ✅&nbsp;PASS | Eval | #te069 |
 | ✅&nbsp;PASS | Eval | #te070 |
 | ✅&nbsp;PASS | Eval | #te071 |
@@ -232,12 +232,12 @@
 | ✅&nbsp;PASS | Eval | #te128 |
 | ✅&nbsp;PASS | Eval | #te129 |
 | ✅&nbsp;PASS | Eval | #te130 |
-| ❌&nbsp;FAIL | Eval | #tin01 |
-| ❌&nbsp;FAIL | Eval | #tin02 |
-| ❌&nbsp;FAIL | Eval | #tin03 |
-| ❌&nbsp;FAIL | Eval | #tin04 |
-| ❌&nbsp;FAIL | Eval | #tin05 |
-| ❌&nbsp;FAIL | Eval | #tin06 |
+| ✅&nbsp;PASS | Eval | #tin01 |
+| ✅&nbsp;PASS | Eval | #tin02 |
+| ✅&nbsp;PASS | Eval | #tin03 |
+| ✅&nbsp;PASS | Eval | #tin04 |
+| ✅&nbsp;PASS | Eval | #tin05 |
+| ✅&nbsp;PASS | Eval | #tin06 |
 | ✅&nbsp;PASS | Eval | #tjs01 |
 | ✅&nbsp;PASS | Eval | #tjs02 |
 | ✅&nbsp;PASS | Eval | #tjs03 |
@@ -271,14 +271,14 @@
 | ✅&nbsp;PASS | Eval | #tli08 |
 | ✅&nbsp;PASS | Eval | #tli09 |
 | ✅&nbsp;PASS | Eval | #tli10 |
-| ❌&nbsp;FAIL | Eval | #tli11 |
-| ✅&nbsp;PASS | Eval | #tli12 |
+| ✅&nbsp;PASS | Eval | #tli11 |
+| ❌&nbsp;FAIL | Eval | #tli12 |
 | ✅&nbsp;PASS | Eval | #tli13 |
 | ❌&nbsp;FAIL | Eval | #tli14 |
 | ✅&nbsp;PASS | Eval | #tm001 |
 | ✅&nbsp;PASS | Eval | #tm002 |
-| ❌&nbsp;FAIL | Eval | #tm003 |
-| ❌&nbsp;FAIL | Eval | #tm004 |
+| ✅&nbsp;PASS | Eval | #tm003 |
+| ✅&nbsp;PASS | Eval | #tm004 |
 | ✅&nbsp;PASS | Eval | #tm005 |
 | ✅&nbsp;PASS | Eval | #tm006 |
 | ✅&nbsp;PASS | Eval | #tm007 |
@@ -382,86 +382,6 @@ ignore: expected failures (requires unresolved RFC 3986 dot-segments)
 ignore: expected failures (requires unresolved RFC 3986 dot-segments)
 ```
 
-### ❌ Eval, #t0130
-
-```
-eval: query did not match
-expected does not match actual
-
-=== EXPECTED
-
-<urn:ex:s307> <urn:ex:p> <tag:a> .
-
-=== ACTUAL
-
-<urn:ex:s307> <urn:ex:p> <tag:///a> .
-```
-
-### ❌ Eval, #t0131
-
-```
-eval: query did not match
-expected does not match actual
-
-=== EXPECTED
-
-<urn:ex:s308> <urn:ex:p> <tag:example/a> .
-
-=== ACTUAL
-
-<urn:ex:s308> <urn:ex:p> <tag:///a> .
-```
-
-### ❌ Eval, #t0132
-
-```
-eval: query did not match
-expected does not match actual
-
-=== EXPECTED
-
-<urn:ex:s309> <urn:ex:p> <tag:example/foo/a> .
-
-=== ACTUAL
-
-<urn:ex:s309> <urn:ex:p> <tag:///a> .
-```
-
-### ❌ Eval, #te026
-
-```
-error: expand: invalid IRI mapping: invalid value (processing mode json-ld-1.1): @type
-```
-
-### ❌ Eval, #te038
-
-```
-eval: query did not match
-expected does not match actual
-
-=== EXPECTED
-
-_:b0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> _:b0 .
-
-=== ACTUAL
-
-_:b0 <_:term> "plain value" .
-_:b0 <_:term> <https://w3c.github.io/json-ld-api/tests/toRdf/relativeIri> .
-_:b0 <_:term> _:b0 .
-_:b0 <_:term> _:b0 .
-_:b0 <_:term> _:b0 .
-_:b0 <_:term> _:b0 .
-_:b0 <_:term> _:b1 .
-_:b0 <_:term> _:b2 .
-_:b0 <_:term> _:b3 .
-_:b0 <_:term> _:b3 .
-_:b0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <_:term> .
-_:b0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <_:term> .
-_:b0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <_:term> .
-_:b1 <_:term> "term" .
-_:b2 <_:term> "termId" .
-```
-
 ### ❌ Eval, #te060
 
 ```
@@ -485,22 +405,6 @@ expected does not match actual
 <https://w3c.github.io/json-ld-api/tests/document-relative> <http://example.com/vocab#property> <http://example.org/document-base-overwritten> .
 <https://w3c.github.io/json-ld-api/tests/document-relative> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3c.github.io/json-ld-api/tests/toRdf/e060-in.jsonld#document-relative> .
 <https://w3c.github.io/json-ld-api/tests/document-relative> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3c.github.io/json-ld-api/tests/toRdf/e060-in.jsonld#document-relative> .
-```
-
-### ❌ Eval, #te068
-
-```
-eval: query did not match
-expected does not match actual
-
-=== EXPECTED
-
-_:b0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> _:b1 .
-
-=== ACTUAL
-
-_:b0 <_:property> "all these IRIs remain unchanged because they are interpreted as blank node identifiers" .
-_:b0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <_:type> .
 ```
 
 ### ❔ Eval, #te075
@@ -598,134 +502,6 @@ expected does not match actual
 <http://example.com/some/deep/directory/and/file/relativePropertyIris> <http://example.com/rel1./rel2#link> "link" .
 ```
 
-### ❌ Eval, #tin01
-
-```
-eval: query did not match
-expected does not match actual
-
-=== EXPECTED
-
-_:b0 <http://example.org/prop> "value" .
-_:b1 <http://example.org/prop> "value2" .
-
-=== ACTUAL
-
-_:b0 <http://example.org/prop> "value" .
-```
-
-### ❌ Eval, #tin02
-
-```
-eval: query did not match
-expected does not match actual
-
-=== EXPECTED
-
-_:b0 <http://example.org/prop> "value" .
-_:b1 <http://example.org/prop> "value2" .
-
-=== ACTUAL
-
-_:b0 <http://example.org/prop> "value" .
-```
-
-### ❌ Eval, #tin03
-
-```
-eval: query did not match
-expected does not match actual
-
-=== EXPECTED
-
-_:b0 <http://example.org/prop> "value1" .
-_:b1 <http://example.org/prop> "value2" .
-
-=== ACTUAL
-
-```
-
-### ❌ Eval, #tin04
-
-```
-eval: query did not match
-expected does not match actual
-
-=== EXPECTED
-
-_:b0 <http://example.org/prop> "value" .
-_:b1 <http://example.org/prop> "value2" .
-_:b2 <http://example.org/prop> "value3" .
-
-=== ACTUAL
-
-_:b0 <http://example.org/prop> "value" .
-```
-
-### ❌ Eval, #tin05
-
-```
-eval: query did not match
-expected does not match actual
-
-=== EXPECTED
-
-_:b0 <http://example.org/prop> _:b1 .
-_:b1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/Foo> .
-_:b2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/Bar> .
-
-=== ACTUAL
-
-_:b0 <http://example.org/prop> _:b1 .
-_:b1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/Foo> .
-```
-
-### ❌ Eval, #tin06
-
-```
-eval: query did not match
-expected does not match actual
-
-=== EXPECTED
-
-<http://example.org/base/12> <http://example.org/vocab#author> <http://example.org/base/9> .
-<http://example.org/base/12> <http://example.org/vocab#body> "I like XML better" .
-<http://example.org/base/12> <http://example.org/vocab#self> <http://example.com/comments/12> .
-<http://example.org/base/12> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/vocab#comments> .
-<http://example.org/base/1> <http://example.org/vocab#author> <http://example.org/base/9> .
-<http://example.org/base/1> <http://example.org/vocab#comments> _:b0 .
-<http://example.org/base/1> <http://example.org/vocab#self> <http://example.com/articles/1> .
-<http://example.org/base/1> <http://example.org/vocab#title> "JSON:API paints my bikeshed!" .
-<http://example.org/base/1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/vocab#articles> .
-<http://example.org/base/2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/vocab#people> .
-<http://example.org/base/5> <http://example.org/vocab#author> <http://example.org/base/2> .
-<http://example.org/base/5> <http://example.org/vocab#body> "First!" .
-<http://example.org/base/5> <http://example.org/vocab#self> <http://example.com/comments/5> .
-<http://example.org/base/5> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/vocab#comments> .
-<http://example.org/base/9> <http://example.org/vocab#first-name> "Dan" .
-<http://example.org/base/9> <http://example.org/vocab#last-name> "Gebhardt" .
-<http://example.org/base/9> <http://example.org/vocab#related> <http://example.com/articles/1/author> .
-<http://example.org/base/9> <http://example.org/vocab#self> <http://example.com/articles/1/relationships/author> .
-<http://example.org/base/9> <http://example.org/vocab#self> <http://example.com/people/9> .
-<http://example.org/base/9> <http://example.org/vocab#twitter> "dgeb" .
-<http://example.org/base/9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/vocab#people> .
-_:b0 <http://example.org/vocab#related> <http://example.com/articles/1/comments> .
-_:b0 <http://example.org/vocab#self> <http://example.com/articles/1/relationships/comments> .
-
-=== ACTUAL
-
-<http://example.org/base/1> <http://example.org/vocab#author> <http://example.org/base/9> .
-<http://example.org/base/1> <http://example.org/vocab#comments> _:b0 .
-<http://example.org/base/1> <http://example.org/vocab#self> <http://example.com/articles/1> .
-<http://example.org/base/1> <http://example.org/vocab#title> "JSON:API paints my bikeshed!" .
-<http://example.org/base/1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/vocab#articles> .
-<http://example.org/base/9> <http://example.org/vocab#related> <http://example.com/articles/1/author> .
-<http://example.org/base/9> <http://example.org/vocab#self> <http://example.com/articles/1/relationships/author> .
-<http://example.org/base/9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/vocab#people> .
-_:b0 <http://example.org/vocab#related> <http://example.com/articles/1/comments> .
-_:b0 <http://example.org/vocab#self> <http://example.com/articles/1/relationships/comments> .
-```
-
 ### ❌ Eval, #tjs13
 
 ```
@@ -741,7 +517,7 @@ _:b0 <http://example.org/vocab#c14n> "{\"\\n\":\"Newline\",\"\\r\":\"Carriage Re
 _:b0 <http://example.org/vocab#c14n> "{\"\\n\":\"Newline\",\"\\r\":\"Carriage Return\",\"1\":\"One\",\"\\u003c/script\\u003e\":\"Browser Challenge\",\"\":\"Control\",\"ö\":\"Latin Small Letter O With Diaeresis\",\"€\":\"Euro Sign\",\"😂\":\"Smiley\"}"^^<http://www.w3.org/1999/02/22-rdf-syntax-ns#JSON> .
 ```
 
-### ❌ Eval, #tli11
+### ❌ Eval, #tli12
 
 ```
 eval: query did not match
@@ -750,13 +526,12 @@ expected does not match actual
 === EXPECTED
 
 _:b0 <foo:bar> _:b1 .
-_:b1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <ex:test> .
 _:b1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
 
 === ACTUAL
 
 _:b0 <foo:bar> _:b1 .
-_:b1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <ex:///test> .
+_:b1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://invalid/\u003C\u003E/test> .
 _:b1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
 ```
 
@@ -776,60 +551,6 @@ _:b1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/0
 _:b0 <foo:bar> _:b1 .
 _:b1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <test> .
 _:b1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
-```
-
-### ❌ Eval, #tm003
-
-```
-eval: query did not match
-expected does not match actual
-
-=== EXPECTED
-
-_:b0 <http://example/label> "Object with @type <foo>" .
-_:b0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/foo> .
-_:b1 <http://example/label> "Object with @type _:bar" .
-_:b1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> _:b2 .
-_:b3 <http://example/typemap> _:b0 .
-_:b3 <http://example/typemap> _:b1 .
-
-=== ACTUAL
-
-_:b0 <http://example/typemap> _:b1 .
-_:b0 <http://example/typemap> _:b2 .
-_:b1 <http://example/label> "Object with @type _:bar" .
-_:b1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <_:bar> .
-_:b2 <http://example/label> "Object with @type <foo>" .
-_:b2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/foo> .
-```
-
-### ❌ Eval, #tm004
-
-```
-eval: query did not match
-expected does not match actual
-
-=== EXPECTED
-
-_:b0 <http://example/label> "Object with @type <foo>" .
-_:b0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/bar> .
-_:b0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/foo> .
-_:b1 <http://example/label> "Object with @type _:bar" .
-_:b1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> _:b2 .
-_:b1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> _:b3 .
-_:b4 <http://example/typemap> _:b0 .
-_:b4 <http://example/typemap> _:b1 .
-
-=== ACTUAL
-
-_:b0 <http://example/typemap> _:b1 .
-_:b0 <http://example/typemap> _:b2 .
-_:b1 <http://example/label> "Object with @type _:bar" .
-_:b1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <_:bar> .
-_:b1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <_:foo> .
-_:b2 <http://example/label> "Object with @type <foo>" .
-_:b2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/bar> .
-_:b2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/foo> .
 ```
 
 ### ❌ Eval, #trt01

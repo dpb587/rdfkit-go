@@ -22,13 +22,16 @@ func (vars algorithmValueExpansion) Call() *ExpandedObject {
 	activePropertyTermDefinition := vars.activeContext.TermDefinitions[vars.activeProperty]
 
 	if activePropertyTermDefinition != nil && activePropertyTermDefinition.TypeMapping == ExpandedIRIasKeyword("@id") {
-		expandedValue := algorithmIRIExpansion{
+		expandedValue, err := algorithmIRIExpansion{
 			value:            vars.value,
 			documentRelative: true,
 			vocab:            false,
 			//
 			activeContext: vars.activeContext,
 		}.Call()
+		if err != nil {
+			panic(err)
+		}
 
 		// [dpb] this is not defined by the spec, but supports test case #t0088
 		if rawValue, ok := expandedValue.(ExpandedIRIasRawValue); ok {
@@ -53,13 +56,16 @@ func (vars algorithmValueExpansion) Call() *ExpandedObject {
 	// [spec // 5.3.2 // 2] If *active property* has a type mapping in *active context* that is `@vocab`, and the *value* is a string, return a new map containing a single entry where the key is `@id` and the value is the result of IRI expanding *value* using `true` for *document relative*.
 
 	if activePropertyTermDefinition != nil && activePropertyTermDefinition.TypeMapping == ExpandedIRIasKeyword("@vocab") {
-		expandedValue := algorithmIRIExpansion{
+		expandedValue, err := algorithmIRIExpansion{
 			value:            vars.value,
 			documentRelative: true,
 			vocab:            true, // not explicitly mentioned by spec?
 			//
 			activeContext: vars.activeContext,
 		}.Call()
+		if err != nil {
+			panic(err)
+		}
 
 		// [dpb] this is not defined by the spec, but supports test case #t0088
 		if rawValue, ok := expandedValue.(ExpandedIRIasRawValue); ok {

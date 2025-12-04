@@ -3,12 +3,12 @@ package jsonldinternal
 import (
 	"errors"
 	"fmt"
-	"net/url"
 	"slices"
 	"strings"
 
 	"github.com/dpb587/inspectjson-go/inspectjson"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
+	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
 type algorithmCreateTermDefinition struct {
@@ -18,7 +18,7 @@ type algorithmCreateTermDefinition struct {
 	defined       map[string]bool
 
 	// [spec // 4.2.2] *base URL* defaulting to `null``
-	baseURL *url.URL
+	baseURL *iriutil.ParsedIRI
 
 	// [spec // 4.2.2] protected which defaults to `false`
 	protected bool
@@ -49,6 +49,13 @@ func (vars algorithmCreateTermDefinition) Call() error {
 	}
 
 	// [spec // 4.2.2 // 2] If *term* is the empty string (`""`), an `invalid term definition` error has been detected and processing is aborted. Otherwise, set the value associated with *defined*'s *term* entry to `false`. This indicates that the term definition is now being created but is not yet complete.
+
+	if vars.term == "" {
+		return jsonldtype.Error{
+			Code: jsonldtype.InvalidTermDefinition,
+			Err:  errors.New("term cannot be the empty string"),
+		}
+	}
 
 	vars.defined[vars.term] = false
 
@@ -210,7 +217,7 @@ func (vars algorithmCreateTermDefinition) Call() error {
 
 		// [spec // 4.2.2 // 12.2] Set *type* to the result of IRI expanding *type*, using *local context*, and *defined*.
 
-		expandedType := algorithmIRIExpansion{
+		expandedType, err := algorithmIRIExpansion{
 			value:        typeString,
 			localContext: vars.localContext,
 			defined:      vars.defined,
@@ -218,6 +225,9 @@ func (vars algorithmCreateTermDefinition) Call() error {
 			vocab:         true,
 			activeContext: vars.activeContext,
 		}.Call()
+		if err != nil {
+			return err
+		}
 
 		// [spec // 4.2.2 // 12.3] If the expanded *type* is `@json` or `@none`, and processing mode is `json-ld-1.0`, an `invalid type mapping` error has been detected and processing is aborted.
 
@@ -243,7 +253,12 @@ func (vars algorithmCreateTermDefinition) Call() error {
 				}
 			}
 		case ExpandedIRIasIRI:
-			// valid
+			if !isIRI(vars.activeContext._processor.processingMode, string(t)) {
+				return jsonldtype.Error{
+					Code: jsonldtype.InvalidTypeMapping,
+					Err:  fmt.Errorf("expected absolute iri: found %q", t),
+				}
+			}
 		default:
 			return jsonldtype.Error{
 				Code: jsonldtype.InvalidTypeMapping,
@@ -295,7 +310,7 @@ func (vars algorithmCreateTermDefinition) Call() error {
 
 		// [spec // 4.2.2 // 13.4] Otherwise, set the IRI mapping of *definition* to the result of IRI expanding the value associated with the `@reverse` entry, using *local context*, and *defined*. If the result does not have the form of an IRI or a blank node identifier, an `invalid IRI mapping` error has been detected and processing is aborted.
 
-		expandedReverse := algorithmIRIExpansion{
+		expandedReverse, err := algorithmIRIExpansion{
 			value:        reverseString,
 			localContext: vars.localContext,
 			defined:      vars.defined,
@@ -304,10 +319,18 @@ func (vars algorithmCreateTermDefinition) Call() error {
 			// vocab
 			vocab: true,
 		}.Call()
+		if err != nil {
+			return err
+		}
 
-		switch expandedReverse.(type) {
+		switch expandedReverseT := expandedReverse.(type) {
 		case ExpandedIRIasIRI:
-			// valid
+			if !isIRI(vars.activeContext._processor.processingMode, string(expandedReverseT)) {
+				return jsonldtype.Error{
+					Code: jsonldtype.InvalidIRIMapping,
+					Err:  errors.New("@reverse value is not a valid IRI"),
+				}
+			}
 		case ExpandedIRIasBlankNode:
 			// valid
 		default:
@@ -359,13 +382,27 @@ func (vars algorithmCreateTermDefinition) Call() error {
 
 			// [spec // 4.2.2 // 20.2] Initialize *index* to the value associated with the `@index` entry. If the result of IRI expanding that value is not an IRI, an `invalid term definition` has been detected and processing is aborted.
 
-			expandedIndex := algorithmIRIExpansion{
-				value: indexMember.Value,
+			index, ok := indexMember.Value.(inspectjson.StringValue)
+			if !ok {
+				// [dpb] pessimistic type check?
+				return jsonldtype.Error{
+					Code: jsonldtype.InvalidTermDefinition,
+					Err:  fmt.Errorf("invalid index type: %s", indexMember.Value.GetGrammarName()),
+				}
+			}
+
+			expandedIndex, err := algorithmIRIExpansion{
+				value: index,
 				// spec doesn't describe propagation like other descriptions
 				activeContext: vars.activeContext,
 				localContext:  vars.localContext,
 				defined:       vars.defined,
+				//
+				vocab: true,
 			}.Call()
+			if err != nil {
+				return err
+			}
 
 			expandedIndexIRI, ok := expandedIndex.(ExpandedIRIasIRI)
 			if !ok {
@@ -373,11 +410,16 @@ func (vars algorithmCreateTermDefinition) Call() error {
 					Code: jsonldtype.InvalidTermDefinition,
 					Err:  fmt.Errorf("invalid expanded type: %s", expandedIndex.ExpandedType()),
 				}
+			} else if !isIRI(vars.activeContext._processor.processingMode, string(expandedIndexIRI)) {
+				return jsonldtype.Error{
+					Code: jsonldtype.InvalidTermDefinition,
+					Err:  errors.New("@index value is not a valid IRI"),
+				}
 			}
 
 			// [spec // 4.2.2 // 20.3] Set the index mapping of *definition* to *index*
 
-			definition.IndexMapping = &expandedIndexIRI
+			definition.IndexMapping = &index.Value
 		}
 
 		return nil
@@ -418,7 +460,7 @@ func (vars algorithmCreateTermDefinition) Call() error {
 
 			// [spec // 4.2.2 // 14.2.3] Otherwise, set the IRI mapping of *definition* to the result of IRI expanding the value associated with the `@id` entry, using *local context*, and *defined*. If the resulting IRI mapping is neither a keyword, nor an IRI, nor a blank node identifier, an `invalid IRI mapping` error has been detected and processing is aborted; if it equals `@context`, an `invalid keyword alias` error has been detected and processing is aborted.
 
-			expandedID := algorithmIRIExpansion{
+			expandedID, err := algorithmIRIExpansion{
 				value:        idMember.Value,
 				localContext: vars.localContext,
 				defined:      vars.defined,
@@ -427,6 +469,9 @@ func (vars algorithmCreateTermDefinition) Call() error {
 				// assumed via testsuites
 				vocab: true,
 			}.Call()
+			if err != nil {
+				return err
+			}
 
 			switch t := expandedID.(type) {
 			case ExpandedIRIasKeyword:
@@ -473,21 +518,26 @@ func (vars algorithmCreateTermDefinition) Call() error {
 				vars.defined[vars.term] = true
 
 				// [spec // 4.2.2 // 14.2.4.2] If the result of IRI expanding *term* using *local context*, and *defined*, is not the same as the IRI mapping of *definition*, an `invalid IRI mapping` error has been detected and processing is aborted.
-				// [dpb] spec refers to expanding *term*, but that is expected to be different; seems the original id value was intended to validate rewrites?
+				// [dpb] seems this does not apply to json-ld-1.0
 
-				expandedTerm := algorithmIRIExpansion{
-					value:        idMember.Value,
-					localContext: vars.localContext,
-					defined:      vars.defined,
-					// assumed
-					activeContext: vars.activeContext,
-					// assumed as vocab?
-				}.Call()
-
-				if !expandedTerm.Equals(definition.IRI) {
-					return jsonldtype.Error{
-						Code: jsonldtype.InvalidIRIMapping,
-						Err:  fmt.Errorf("expanded term does not match expanded iri (%s != %s)", expandedTerm, definition.IRI),
+				if _, isKeyword := definition.IRI.(ExpandedIRIasKeyword); !isKeyword && vars.activeContext._processor.processingMode != ProcessingMode_JSON_LD_1_0 {
+					expandedTerm, err := algorithmIRIExpansion{
+						value: inspectjson.StringValue{
+							Value: vars.term,
+						},
+						localContext: nil,
+						defined:      vars.defined,
+						// assumed
+						activeContext: vars.activeContext,
+						vocab:         false,
+					}.Call()
+					if err != nil {
+						return err
+					} else if !expandedTerm.Equals(definition.IRI) {
+						return jsonldtype.Error{
+							Code: jsonldtype.InvalidIRIMapping,
+							Err:  fmt.Errorf("expanded term does not match expanded iri (%s != %s)", expandedTerm, definition.IRI),
+						}
 					}
 				}
 			}
@@ -570,7 +620,7 @@ func (vars algorithmCreateTermDefinition) Call() error {
 
 				// [spec // 4.2.2 // 16.2] Set the IRI mapping of *definition* to the result of IRI expanding *term*. If the resulting IRI mapping is not an IRI, an `invalid IRI mapping` error has been detected and processing is aborted.
 
-				expandedTerm := algorithmIRIExpansion{
+				expandedTerm, err := algorithmIRIExpansion{
 					value: inspectjson.StringValue{
 						Value: vars.term,
 					},
@@ -579,6 +629,9 @@ func (vars algorithmCreateTermDefinition) Call() error {
 					localContext:  vars.localContext,
 					defined:       vars.defined,
 				}.Call()
+				if err != nil {
+					return err
+				}
 
 				if t, ok := expandedTerm.(ExpandedIRIasIRI); ok {
 					definition.IRI = t
@@ -798,13 +851,27 @@ func (vars algorithmCreateTermDefinition) Call() error {
 
 		// [spec // 4.2.2 // 20.2] Initialize *index* to the value associated with the `@index` entry. If the result of IRI expanding that value is not an IRI, an `invalid term definition` has been detected and processing is aborted.
 
-		expandedIndex := algorithmIRIExpansion{
-			value: indexMember.Value,
+		index, ok := indexMember.Value.(inspectjson.StringValue)
+		if !ok {
+			// [dpb] pessimistic type check?
+			return jsonldtype.Error{
+				Code: jsonldtype.InvalidTermDefinition,
+				Err:  fmt.Errorf("invalid index type: %s", indexMember.Value.GetGrammarName()),
+			}
+		}
+
+		expandedIndex, err := algorithmIRIExpansion{
+			value: index,
 			// spec doesn't describe propagation like other descriptions
 			activeContext: vars.activeContext,
 			localContext:  vars.localContext,
 			defined:       vars.defined,
+			// implied by #tpi06 - #tpi11
+			vocab: true,
 		}.Call()
+		if err != nil {
+			return err
+		}
 
 		expandedIndexIRI, ok := expandedIndex.(ExpandedIRIasIRI)
 		if !ok {
@@ -812,11 +879,16 @@ func (vars algorithmCreateTermDefinition) Call() error {
 				Code: jsonldtype.InvalidTermDefinition,
 				Err:  fmt.Errorf("invalid expanded type: %s", expandedIndex.ExpandedType()),
 			}
+		} else if !isIRI(vars.activeContext._processor.processingMode, string(expandedIndexIRI)) {
+			return jsonldtype.Error{
+				Code: jsonldtype.InvalidTermDefinition,
+				Err:  errors.New("@index value is not a valid IRI"),
+			}
 		}
 
 		// [spec // 4.2.2 // 20.3] Set the index mapping of *definition* to *index*
 
-		definition.IndexMapping = &expandedIndexIRI
+		definition.IndexMapping = &index.Value
 
 		// [dpb] capture source offsets
 		if indexMemberValue, ok := indexMember.Value.(inspectjson.StringValue); ok {

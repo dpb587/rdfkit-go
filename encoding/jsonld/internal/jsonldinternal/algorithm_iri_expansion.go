@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/dpb587/inspectjson-go/inspectjson"
+	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
 )
 
 type algorithmIRIExpansion struct {
@@ -23,18 +24,18 @@ type algorithmIRIExpansion struct {
 	defined      map[string]bool
 }
 
-func (opts algorithmIRIExpansion) Call() ExpandedIRI {
+func (opts algorithmIRIExpansion) Call() (ExpandedIRI, error) {
 
 	// [spec // 5.2.2 // 1] If *value* is a keyword or `null`, return `value` as is.
 
 	if _, ok := opts.value.(inspectjson.NullValue); ok {
-		return ExpandedIRIasNil{}
+		return ExpandedIRIasNil{}, nil
 	}
 
 	valueString, isValueString := opts.value.(inspectjson.StringValue)
 	if isValueString {
 		if _, known := definedKeywords[valueString.Value]; known {
-			return ExpandedIRIasKeyword(valueString.Value)
+			return ExpandedIRIasKeyword(valueString.Value), nil
 		}
 	}
 
@@ -45,7 +46,7 @@ func (opts algorithmIRIExpansion) Call() ExpandedIRI {
 	if isValueString && reKeywordABNF.MatchString(valueString.Value) {
 		// TODO warning
 
-		return ExpandedIRIasNil{}
+		return ExpandedIRIasNil{}, nil
 	}
 
 	// [spec // 5.2.2 // 3] If *local context* is not `null`, it contains an entry with a key that equals *value*, and the *value* of the entry for *value* in *defined* is not `true`, invoke the Create Term Definition algorithm, passing *active context*, *local context*, *value* as *term*, and *defined*. This will ensure that a term definition is created for *value* in *active context* during Context Processing.
@@ -54,8 +55,7 @@ func (opts algorithmIRIExpansion) Call() ExpandedIRI {
 		valueString := valueString.Value
 
 		if _, ok := opts.localContext.Members[valueString]; ok && !opts.defined[valueString] {
-			// TODO error handling?
-			_ = algorithmCreateTermDefinition{
+			err := algorithmCreateTermDefinition{
 				activeContext: opts.activeContext,
 				localContext:  opts.localContext,
 				term:          valueString,
@@ -67,6 +67,19 @@ func (opts algorithmIRIExpansion) Call() ExpandedIRI {
 				remoteContexts:        nil,
 				validateScopedContext: true,
 			}.Call()
+			if err != nil {
+				termDefinedValue, termInDefinedMap := opts.defined[valueString]
+				termCurrentlyBeingDefined := termInDefinedMap && !termDefinedValue
+
+				// If this is a cyclic error and we're defining this exact term, suppress it
+				// This allows self-referential definitions like "prefix:foo": "prefix:foo"
+				// to fall through to compact IRI processing (step 6)
+				if jsonldErr, ok := err.(jsonldtype.Error); ok && jsonldErr.Code == jsonldtype.CyclicIRIMapping && termCurrentlyBeingDefined {
+					// try as compact IRI later
+				} else {
+					return nil, err
+				}
+			}
 		}
 	}
 
@@ -82,10 +95,10 @@ func (opts algorithmIRIExpansion) Call() ExpandedIRI {
 		if termDefinition.IRI != nil {
 			switch termDefinition.IRI.(type) {
 			case ExpandedIRIasKeyword:
-				return termDefinition.IRI
+				return termDefinition.IRI, nil
 			case ExpandedIRIasNil:
 				// [dpb] unofficial method explicitly null'd values are ignored
-				return termDefinition.IRI
+				return termDefinition.IRI, nil
 			}
 		}
 	}
@@ -93,7 +106,7 @@ func (opts algorithmIRIExpansion) Call() ExpandedIRI {
 	// [spec // 5.2.2 // 5] If *vocab* is `true` and the *active context* has a term definition for *value*, return the associated IRI mapping.
 
 	if opts.vocab && termDefinition != nil && termDefinition.IRI != nil {
-		return termDefinition.IRI
+		return termDefinition.IRI, nil
 	}
 
 	// [spec // 5.2.2 // 6] If *value* contains a colon (`:`) anywhere after the first character, it is either an IRI, a compact IRI, or a blank node identifier:
@@ -110,17 +123,16 @@ func (opts algorithmIRIExpansion) Call() ExpandedIRI {
 			// [spec // 5.2.2 // 6.2] If *prefix* is underscore (`_`) or *suffix* begins with double-forward-slash (`//`), return *value* as it is already an IRI or a blank node identifier.
 
 			if valuePrefixSuffix[0] == "_" {
-				return ExpandedIRIasBlankNode(valueString)
+				return ExpandedIRIasBlankNode(valueString), nil
 			} else if len(valuePrefixSuffix[1]) > 2 && valuePrefixSuffix[1][:2] == "//" {
-				return ExpandedIRIasIRI(valueString)
+				return ExpandedIRIasIRI(valueString), nil
 			}
 
 			// [spec // 5.2.2 // 6.3] If *local context* is not `null`, it contains a *prefix* entry, and the value of the *prefix* entry in *defined* is not true, invoke the Create Term Definition algorithm, passing *active context*, *local context*, *prefix* as *term*, and *defined*. This will ensure that a term definition is created for prefix in active context during Context Processing.
 
 			if opts.localContext != nil {
 				if _, ok := opts.localContext.Members[valuePrefixSuffix[0]]; ok && !opts.defined[valuePrefixSuffix[0]] {
-					// TODO error handling?
-					_ = algorithmCreateTermDefinition{
+					err := algorithmCreateTermDefinition{
 						activeContext: opts.activeContext,
 						localContext:  opts.localContext,
 						term:          valuePrefixSuffix[0],
@@ -132,6 +144,19 @@ func (opts algorithmIRIExpansion) Call() ExpandedIRI {
 						remoteContexts:        nil,
 						validateScopedContext: true,
 					}.Call()
+					if err != nil {
+						prefixDefinedValue, prefixInDefinedMap := opts.defined[valuePrefixSuffix[0]]
+						prefixCurrentlyBeingDefined := prefixInDefinedMap && !prefixDefinedValue
+
+						// Only suppress cyclic IRI mapping errors when the prefix is not currently being defined
+						// If defined[prefix] = false, we're in the middle of defining it (true cycle)
+						// If defined[prefix] is not set, it's a forward reference that might resolve
+						if jsonldErr, ok := err.(jsonldtype.Error); ok && jsonldErr.Code == jsonldtype.CyclicIRIMapping && !prefixCurrentlyBeingDefined {
+							// Suppress the error and continue - step 6.4 will check if expansion is possible
+						} else {
+							return nil, err
+						}
+					}
 				}
 			}
 
@@ -140,9 +165,9 @@ func (opts algorithmIRIExpansion) Call() ExpandedIRI {
 			if termDefinition := opts.activeContext.TermDefinitions[valuePrefixSuffix[0]]; termDefinition != nil && termDefinition.IRI != nil && termDefinition.Prefix {
 				switch t := termDefinition.IRI.(type) {
 				case ExpandedIRIasIRI:
-					return t + ExpandedIRIasIRI(valuePrefixSuffix[1])
+					return t + ExpandedIRIasIRI(valuePrefixSuffix[1]), nil
 				case ExpandedIRIasBlankNode:
-					return t + ExpandedIRIasBlankNode(valuePrefixSuffix[1])
+					return t + ExpandedIRIasBlankNode(valuePrefixSuffix[1]), nil
 				}
 
 				panic(fmt.Errorf("unexpected term definition IRI type: %T", termDefinition.IRI))
@@ -153,7 +178,7 @@ func (opts algorithmIRIExpansion) Call() ExpandedIRI {
 			// [dpb] following seems hacky; #t0118, #tc022, t0109
 
 			if !strings.Contains(valueString, "/") && !strings.Contains(valueString, "#") && !strings.Contains(valueString, "?") {
-				return ExpandedIRIasIRI(valueString)
+				return ExpandedIRIasIRI(valueString), nil
 			}
 		}
 
@@ -163,9 +188,9 @@ func (opts algorithmIRIExpansion) Call() ExpandedIRI {
 			// TODO unsafe assertion; possible BlankNode?
 			switch t := opts.activeContext.VocabularyMapping.(type) {
 			case ExpandedIRIasIRI:
-				return t + ExpandedIRIasIRI(valueString)
+				return t + ExpandedIRIasIRI(valueString), nil
 			case ExpandedIRIasBlankNode:
-				return t + ExpandedIRIasBlankNode(valueString)
+				return t + ExpandedIRIasBlankNode(valueString), nil
 			}
 		}
 
@@ -175,7 +200,7 @@ func (opts algorithmIRIExpansion) Call() ExpandedIRI {
 			resolvedURL, err := opts.activeContext.BaseURL.Parse(valueString)
 			if err == nil {
 				// [dpb] early return, but should be assigning to value
-				return ExpandedIRIasIRI(resolvedURL.String())
+				return ExpandedIRIasIRI(resolvedURL.String()), nil
 			}
 		}
 	}
@@ -185,8 +210,8 @@ func (opts algorithmIRIExpansion) Call() ExpandedIRI {
 
 	if isValueString {
 		// TODO only cast to iri if value qualifies as IRI? always false by this point?
-		return ExpandedIRIasIRI(valueString.Value)
+		return ExpandedIRIasIRI(valueString.Value), nil
 	}
 
-	return ExpandedIRIasRawValue{opts.value}
+	return ExpandedIRIasRawValue{opts.value}, nil
 }

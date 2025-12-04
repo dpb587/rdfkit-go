@@ -4,12 +4,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"net/url"
 	"regexp"
 
 	"github.com/dpb587/inspectjson-go/inspectjson"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
 const MagicKeywordPropertySourceOffsets = "@rdfkit.property.sourceOffsets"
@@ -62,20 +62,20 @@ func Expand(input inspectjson.Value, opts jsonldtype.ProcessorOptions) (Expanded
 		})
 	}
 
-	var baseURL *url.URL
+	var baseIRI *iriutil.ParsedIRI
 
 	if len(opts.BaseURL) > 0 {
 		var err error
 
-		baseURL, err = url.Parse(opts.BaseURL)
+		baseIRI, err = iriutil.ParseIRI(opts.BaseURL)
 		if err != nil {
 			return nil, fmt.Errorf("parse base url: %v", err)
 		}
 	}
 
 	activeContext := &Context{
-		BaseURL:         baseURL,
-		OriginalBaseURL: baseURL,
+		BaseURL:         baseIRI,
+		OriginalBaseURL: baseIRI,
 		TermDefinitions: map[string]*TermDefinition{},
 		_processor: &contextProcessor{
 			ctx:                       context.Background(),
@@ -115,7 +115,7 @@ func Expand(input inspectjson.Value, opts jsonldtype.ProcessorOptions) (Expanded
 	expandedOutput, err := algorithmExpansion{
 		activeContext: activeContext,
 		element:       input,
-		baseURL:       baseURL,
+		baseURL:       baseIRI,
 		ordered:       true,
 	}.Call()
 	if err != nil {
