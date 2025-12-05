@@ -32,7 +32,7 @@ func reader_scan_Triples_Subject_IRIREF(r *Decoder, ectx evaluationContext, r0 c
 
 	resolvedIRI, err := ectx.ResolveIRI(token.Decoded)
 	if err != nil {
-		return readerStack{}, grammar.R_triples.Err(grammar.R_subject.Err(grammar.R_IRIREF.ErrCursorRange(err, token.Offsets)))
+		return readerStack{}, grammar.R_triples.Err(grammar.R_subject.Err(grammar.R_IRIREF.ErrWithTextOffsetRange(err, token.Offsets)))
 	}
 
 	ectx.CurSubject = resolvedIRI
@@ -55,7 +55,7 @@ func reader_scan_Triples_Subject_PrefixedName(r *Decoder, ectx evaluationContext
 
 	expanded, ok := ectx.Global.Prefixes.ExpandPrefix(token.NamespaceDecoded, token.LocalDecoded)
 	if !ok {
-		return readerStack{}, grammar.R_triples.Err(grammar.R_subject.Err(grammar.R_PrefixedName.ErrCursorRange(iriutil.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets)))
+		return readerStack{}, grammar.R_triples.Err(grammar.R_subject.Err(grammar.R_PrefixedName.ErrWithTextOffsetRange(iriutil.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets)))
 	}
 
 	ectx.CurSubject = rdf.IRI(expanded)

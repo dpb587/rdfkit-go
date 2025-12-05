@@ -29,7 +29,7 @@ func reader_scan_PredicateObjectList(r *Decoder, ectx evaluationContext, r0 curs
 
 		resolvedIRI, err := ectx.ResolveIRI(token.Decoded)
 		if err != nil {
-			return readerStack{}, grammar.R_predicateObjectList.Err(grammar.R_verb.Err(grammar.R_IRIREF.ErrCursorRange(err, token.Offsets)))
+			return readerStack{}, grammar.R_predicateObjectList.Err(grammar.R_verb.Err(grammar.R_IRIREF.ErrWithTextOffsetRange(err, token.Offsets)))
 		}
 
 		ectx.CurPredicate = resolvedIRI
@@ -54,7 +54,7 @@ func reader_scan_PredicateObjectList(r *Decoder, ectx evaluationContext, r0 curs
 
 			expanded, ok := ectx.Global.Prefixes.ExpandPrefix(token.NamespaceDecoded, token.LocalDecoded)
 			if !ok {
-				return readerStack{}, grammar.R_predicateObjectList.Err(grammar.R_verb.Err(grammar.R_PrefixedName.ErrCursorRange(iriutil.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets)))
+				return readerStack{}, grammar.R_predicateObjectList.Err(grammar.R_verb.Err(grammar.R_PrefixedName.ErrWithTextOffsetRange(iriutil.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets)))
 			}
 
 			ectx.CurPredicate = rdf.IRI(expanded)
@@ -77,7 +77,7 @@ func reader_scan_PredicateObjectList(r *Decoder, ectx evaluationContext, r0 curs
 
 		expanded, ok := ectx.Global.Prefixes.ExpandPrefix(token.NamespaceDecoded, token.LocalDecoded)
 		if !ok {
-			return readerStack{}, grammar.R_predicateObjectList.Err(grammar.R_verb.Err(grammar.R_PrefixedName.ErrCursorRange(iriutil.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets)))
+			return readerStack{}, grammar.R_predicateObjectList.Err(grammar.R_verb.Err(grammar.R_PrefixedName.ErrWithTextOffsetRange(iriutil.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets)))
 		}
 
 		ectx.CurPredicate = rdf.IRI(expanded)

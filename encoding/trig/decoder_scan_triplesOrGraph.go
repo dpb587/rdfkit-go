@@ -44,7 +44,7 @@ func reader_scan_triplesOrGraph_labelOrSubject_IRIREF(r *Decoder, ectx evaluatio
 
 	resolvedIRI, err := ectx.ResolveIRI(token.Decoded)
 	if err != nil {
-		return readerStack{}, grammar.R_triples.Err(grammar.R_subject.Err(grammar.R_IRIREF.ErrCursorRange(err, token.Offsets)))
+		return readerStack{}, grammar.R_triples.Err(grammar.R_subject.Err(grammar.R_IRIREF.ErrWithTextOffsetRange(err, token.Offsets)))
 	}
 
 	return readerStack{ectx, reader_scan_triplesOrGraph_E1(resolvedIRI, token.Offsets)}, nil
@@ -62,7 +62,7 @@ func reader_scan_triplesOrGraph_labelOrSubject_PrefixedName(r *Decoder, ectx eva
 
 	expanded, ok := ectx.Global.Prefixes.ExpandPrefix(token.NamespaceDecoded, token.LocalDecoded)
 	if !ok {
-		return readerStack{}, grammar.R_triples.Err(grammar.R_subject.Err(grammar.R_PrefixedName.ErrCursorRange(iriutil.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets)))
+		return readerStack{}, grammar.R_triples.Err(grammar.R_subject.Err(grammar.R_PrefixedName.ErrWithTextOffsetRange(iriutil.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets)))
 	}
 
 	return readerStack{ectx, reader_scan_triplesOrGraph_E1(rdf.IRI(expanded), token.Offsets)}, nil

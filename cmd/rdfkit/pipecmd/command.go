@@ -163,6 +163,7 @@ func New() *cobra.Command {
 	f.StringVarP(&fIn.Path, "in", "i", fIn.Path, "")
 	f.StringVar(&fIn.Type, "in-type", fIn.Type, "")
 	f.StringVar(&fIn.DefaultBase, "in-default-base", fIn.DefaultBase, "")
+	f.BoolVar(&fIn.SkipTextOffsets, "in-skip-text-offsets", fIn.SkipTextOffsets, "")
 	f.StringVar(&fGraphAction, "graph-action", fGraphAction, "")
 	f.StringVarP(&fOut.Path, "out", "o", fOut.Path, "")
 	f.StringVar(&fOut.Type, "out-type", fOut.Type, "")

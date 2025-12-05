@@ -142,9 +142,9 @@ DONE:
 		// apparently we should validate these are absolute according to the w3 test suite
 		urlParsed, err := url.Parse(urlString)
 		if err != nil {
-			return "", nil, grammar.R_IRIREF.ErrCursorRange(fmt.Errorf("parse url: %v", err), cr)
+			return "", nil, grammar.R_IRIREF.ErrWithTextOffsetRange(fmt.Errorf("parse url: %v", err), cr)
 		} else if !urlParsed.IsAbs() {
-			return "", nil, grammar.R_IRIREF.ErrCursorRange(errors.New("relative urls are not allowed"), cr)
+			return "", nil, grammar.R_IRIREF.ErrWithTextOffsetRange(errors.New("relative urls are not allowed"), cr)
 		}
 	}
 

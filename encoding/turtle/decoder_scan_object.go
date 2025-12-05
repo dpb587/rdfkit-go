@@ -26,7 +26,7 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedR
 
 		resolvedIRI, err := ectx.ResolveIRI(token.Decoded)
 		if err != nil {
-			return readerStack{}, grammar.R_object.Err(grammar.R_IRIREF.ErrCursorRange(err, token.Offsets))
+			return readerStack{}, grammar.R_object.Err(grammar.R_IRIREF.ErrWithTextOffsetRange(err, token.Offsets))
 		}
 
 		return r.emit(&statement{
@@ -150,7 +150,7 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedR
 
 					resolvedIRI, err := ectx.ResolveIRI(datatypeToken.Decoded)
 					if err != nil {
-						return readerStack{}, grammar.R_object.Err(grammar.R_literal.Err(grammar.R_RDFLiteral.Err(grammar.R_IRIREF.ErrCursorRange(err, datatypeToken.Offsets))))
+						return readerStack{}, grammar.R_object.Err(grammar.R_literal.Err(grammar.R_RDFLiteral.Err(grammar.R_IRIREF.ErrWithTextOffsetRange(err, datatypeToken.Offsets))))
 					}
 
 					literal.Datatype = resolvedIRI
@@ -162,7 +162,7 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedR
 
 					expanded, ok := ectx.Global.Prefixes.ExpandPrefix(datatypeToken.NamespaceDecoded, datatypeToken.LocalDecoded)
 					if !ok {
-						return readerStack{}, grammar.R_object.Err(grammar.R_literal.Err(grammar.R_RDFLiteral.Err(grammar.R_PrefixedName.ErrCursorRange(iriutil.NewUnknownPrefixError(datatypeToken.NamespaceDecoded), datatypeToken.Offsets))))
+						return readerStack{}, grammar.R_object.Err(grammar.R_literal.Err(grammar.R_RDFLiteral.Err(grammar.R_PrefixedName.ErrWithTextOffsetRange(iriutil.NewUnknownPrefixError(datatypeToken.NamespaceDecoded), datatypeToken.Offsets))))
 					}
 
 					literal.Datatype = rdf.IRI(expanded)
@@ -351,7 +351,7 @@ func reader_scan_object_PrefixedName(r *Decoder, ectx evaluationContext, r0 curs
 
 	expanded, ok := ectx.Global.Prefixes.ExpandPrefix(token.NamespaceDecoded, token.LocalDecoded)
 	if !ok {
-		return readerStack{}, grammar.R_object.Err(grammar.R_PrefixedName.ErrCursorRange(iriutil.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets))
+		return readerStack{}, grammar.R_object.Err(grammar.R_PrefixedName.ErrWithTextOffsetRange(iriutil.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets))
 	}
 
 	return r.emit(&statement{

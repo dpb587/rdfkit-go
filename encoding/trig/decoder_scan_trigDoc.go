@@ -73,7 +73,7 @@ func reader_scan_trigDoc(r *Decoder, ectx evaluationContext, r0 cursorio.Decoded
 
 					resolvedBase, err := ectx.ResolveURL(baseToken.Decoded)
 					if err != nil {
-						return readerStack{}, grammar.R_directive.Err(grammar.R_base.Err(grammar.R_IRIREF.ErrCursorRange(err, baseToken.Offsets)))
+						return readerStack{}, grammar.R_directive.Err(grammar.R_base.Err(grammar.R_IRIREF.ErrWithTextOffsetRange(err, baseToken.Offsets)))
 					}
 
 					return readerStack{
@@ -167,7 +167,7 @@ func reader_scan_trigDoc(r *Decoder, ectx evaluationContext, r0 cursorio.Decoded
 
 							resolvedExpanded, err := ectx.ResolveURL(expandedToken.Decoded)
 							if err != nil {
-								return readerStack{}, grammar.R_directive.Err(grammar.R_prefixID.Err(grammar.R_IRIREF.ErrCursorRange(err, expandedToken.Offsets)))
+								return readerStack{}, grammar.R_directive.Err(grammar.R_prefixID.Err(grammar.R_IRIREF.ErrWithTextOffsetRange(err, expandedToken.Offsets)))
 							}
 
 							return readerStack{
@@ -260,7 +260,7 @@ func reader_scan_trigDoc(r *Decoder, ectx evaluationContext, r0 cursorio.Decoded
 
 				resolvedBase, err := ectx.ResolveURL(token.Decoded)
 				if err != nil {
-					return readerStack{}, grammar.R_block.Err(grammar.R_sparqlBase.Err(grammar.R_IRIREF.ErrCursorRange(err, token.Offsets)))
+					return readerStack{}, grammar.R_block.Err(grammar.R_sparqlBase.Err(grammar.R_IRIREF.ErrWithTextOffsetRange(err, token.Offsets)))
 				}
 
 				ectx.Global.Base = resolvedBase
@@ -360,7 +360,7 @@ func reader_scan_trigDoc(r *Decoder, ectx evaluationContext, r0 cursorio.Decoded
 
 						resolvedExpanded, err := ectx.ResolveURL(expandedToken.Decoded)
 						if err != nil {
-							return readerStack{}, grammar.R_block.Err(grammar.R_sparqlPrefix.Err(grammar.R_IRIREF.ErrCursorRange(err, expandedToken.Offsets)))
+							return readerStack{}, grammar.R_block.Err(grammar.R_sparqlPrefix.Err(grammar.R_IRIREF.ErrWithTextOffsetRange(err, expandedToken.Offsets)))
 						}
 
 						ectx.Global.Prefixes[prefixToken.DecodedString] = rdf.IRI(resolvedExpanded.String())
@@ -481,7 +481,7 @@ func reader_scan_trigDoc(r *Decoder, ectx evaluationContext, r0 cursorio.Decoded
 
 					resolvedIRI, err := ectx.ResolveIRI(token.Decoded)
 					if err != nil {
-						return readerStack{}, grammar.R_block.Err(grammar.R_labelOrSubject.Err(grammar.R_iri.Err(grammar.R_IRIREF.ErrCursorRange(err, token.Offsets))))
+						return readerStack{}, grammar.R_block.Err(grammar.R_labelOrSubject.Err(grammar.R_iri.Err(grammar.R_IRIREF.ErrWithTextOffsetRange(err, token.Offsets))))
 					}
 
 					graphRef = rdf.IRI(resolvedIRI)
@@ -494,7 +494,7 @@ func reader_scan_trigDoc(r *Decoder, ectx evaluationContext, r0 cursorio.Decoded
 
 					expanded, ok := ectx.Global.Prefixes.ExpandPrefix(token.NamespaceDecoded, token.LocalDecoded)
 					if !ok {
-						return readerStack{}, grammar.R_block.Err(grammar.R_labelOrSubject.Err(grammar.R_PrefixedName.ErrCursorRange(iriutil.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets)))
+						return readerStack{}, grammar.R_block.Err(grammar.R_labelOrSubject.Err(grammar.R_PrefixedName.ErrWithTextOffsetRange(iriutil.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets)))
 					}
 
 					graphRef = expanded

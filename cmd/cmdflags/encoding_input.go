@@ -31,8 +31,9 @@ import (
 )
 
 type EncodingInput struct {
-	Type string
-	Path string
+	Type            string
+	Path            string
+	SkipTextOffsets bool
 
 	FallbackOpener RemoteOpenerFunc
 
@@ -161,7 +162,8 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 	}
 
 	parseHtmlDocument := func() (*html.Document, error) {
-		htmlOptions := html.DocumentConfig{}.SetCaptureTextOffsets(true)
+		htmlOptions := html.DocumentConfig{}.
+			SetCaptureTextOffsets(!f.SkipTextOffsets)
 
 		if len(f.DefaultBase) > 0 {
 			htmlOptions = htmlOptions.SetLocation(f.DefaultBase)
@@ -255,7 +257,7 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 		}
 	case "jsonld", "json-ld":
 		jsonldOptions := jsonld.DecoderConfig{}.
-			SetCaptureTextOffsets(true).
+			SetCaptureTextOffsets(!f.SkipTextOffsets).
 			SetParserOptions(inspectjson.TokenizerConfig{}.SetLax(true)).
 			SetDocumentLoader(jsonldtype.NewDefaultDocumentLoader(http.DefaultClient))
 
@@ -278,7 +280,7 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 		handle.Decoder, err = nquads.NewDecoder(
 			handle.reader,
 			nquads.DecoderConfig{}.
-				SetCaptureTextOffsets(true),
+				SetCaptureTextOffsets(!f.SkipTextOffsets),
 		)
 		if err != nil {
 			readCloser()
@@ -290,7 +292,7 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 		handle.Decoder, err = ntriples.NewDecoder(
 			handle.reader,
 			ntriples.DecoderConfig{}.
-				SetCaptureTextOffsets(true),
+				SetCaptureTextOffsets(!f.SkipTextOffsets),
 		)
 		if err != nil {
 			readCloser()
@@ -315,7 +317,7 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 		handle.Decoder, err = rdfjson.NewDecoder(
 			handle.reader,
 			rdfjson.DecoderConfig{}.
-				SetCaptureTextOffsets(true),
+				SetCaptureTextOffsets(!f.SkipTextOffsets),
 		)
 		if err != nil {
 			readCloser()
@@ -324,7 +326,7 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 		}
 	case "rdfxml":
 		rdfxmlOptions := rdfxml.DecoderConfig{}.
-			SetCaptureTextOffsets(true)
+			SetCaptureTextOffsets(!f.SkipTextOffsets)
 
 		if len(f.DefaultBase) > 0 {
 			rdfxmlOptions = rdfxmlOptions.SetBaseURL(f.DefaultBase)
@@ -342,7 +344,7 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 		}
 	case "trig":
 		trigOptions := trig.DecoderConfig{}.
-			SetCaptureTextOffsets(true).
+			SetCaptureTextOffsets(!f.SkipTextOffsets).
 			SetBaseDirectiveListener(func(data trig.DecoderEvent_BaseDirective_Data) {
 				handle.DecodedBase = append(handle.DecodedBase, data.Value)
 			}).
@@ -369,7 +371,7 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 		}
 	case "turtle", "ttl":
 		turtleOptions := turtle.DecoderConfig{}.
-			SetCaptureTextOffsets(true).
+			SetCaptureTextOffsets(!f.SkipTextOffsets).
 			SetBaseDirectiveListener(func(data turtle.DecoderEvent_BaseDirective_Data) {
 				handle.DecodedBase = append(handle.DecodedBase, data.Value)
 			}).
