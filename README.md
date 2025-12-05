@@ -229,10 +229,10 @@ Most are stream processors, so valid statements may be produced before a syntax 
 
 #### Text Offsets
 
-Most decoders can capture the exact byte and line+column offsets where a statement's graph name, subject, predicate, and object value was decoded from the source. To include this metadata in the decoded statements, enable `CaptureTextOffsets` via the decoder's options. A map of property-offsets can be accessed through the `encoding.DecoderTextOffsetsStatement` interface.
+Most decoders can capture the exact byte and line+column offsets where a statement's graph name, subject, predicate, and object value was decoded from the source. To include this metadata in the decoded statements, enable `CaptureTextOffsets` via the decoder's options. A map of property-offsets can be accessed through the `encoding.TextOffsetsStatement` interface.
 
 ```go
-for propertyType, propertyOffsets := range statement.(encoding.DecoderTextOffsetsStatement).GetDecoderTextOffsets() {
+for propertyType, propertyOffsets := range statement.(encoding.TextOffsetsStatement).GetStatementTextOffsets() {
   fmt.Fprintf(
     os.Stderr,
     "> found %s from L%dC%d (byte %d) until %s (byte %d)\n",

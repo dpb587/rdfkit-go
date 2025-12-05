@@ -237,8 +237,8 @@ func New() *cobra.Command {
 					}
 				}
 
-				if sourceRangesProvider, ok := statement.(encoding.DecoderTextOffsetsStatement); ok {
-					if sourceRanges := sourceRangesProvider.GetDecoderTextOffsets(); len(sourceRanges) > 0 {
+				if sourceRangesProvider, ok := statement.(encoding.TextOffsetsStatement); ok {
+					if sourceRanges := sourceRangesProvider.GetStatementTextOffsets(); len(sourceRanges) > 0 {
 						if v, ok := sourceRanges[encoding.SubjectStatementOffsets]; ok {
 							pr.SubjectRange = v.OffsetRangeString()
 						}

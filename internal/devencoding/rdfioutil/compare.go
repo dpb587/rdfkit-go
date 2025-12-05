@@ -6,18 +6,18 @@ import (
 )
 
 func CompareStatementsDeterministic(i, j rdfio.Statement) int {
-	iop, ok := i.(encoding.DecoderTextOffsetsStatement)
+	iop, ok := i.(encoding.TextOffsetsStatement)
 	if !ok {
 		return 0
 	}
 
-	jop, ok := j.(encoding.DecoderTextOffsetsStatement)
+	jop, ok := j.(encoding.TextOffsetsStatement)
 	if !ok {
 		return 0
 	}
 
-	io := iop.GetDecoderTextOffsets()
-	jo := jop.GetDecoderTextOffsets()
+	io := iop.GetStatementTextOffsets()
+	jo := jop.GetStatementTextOffsets()
 
 	if io == nil && jo == nil {
 		return 0

@@ -13,14 +13,14 @@ type statement struct {
 }
 
 var _ rdfio.Statement = &statement{}
-var _ encoding.DecoderTextOffsetsStatement = &statement{}
+var _ encoding.TextOffsetsStatement = &statement{}
 var _ encoding.ContainerProvider = &statement{}
 
 func (tb *statement) GetGraphName() rdf.GraphNameValue {
 	return rdf.DefaultGraph
 }
 
-func (tb *statement) GetDecoderTextOffsets() encoding.StatementTextOffsets {
+func (tb *statement) GetStatementTextOffsets() encoding.StatementTextOffsets {
 	return tb.offsets
 }
 

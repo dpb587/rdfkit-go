@@ -183,8 +183,8 @@ func (w *Encoder) PutStatement(_ context.Context, s rdfio.Statement) error {
 		w.w.Write([]byte("\t\t},\n"))
 	}
 
-	if sourceRangesProvider, ok := s.(encoding.DecoderTextOffsetsStatement); ok {
-		if offsets := sourceRangesProvider.GetDecoderTextOffsets(); len(offsets) > 0 {
+	if sourceRangesProvider, ok := s.(encoding.TextOffsetsStatement); ok {
+		if offsets := sourceRangesProvider.GetStatementTextOffsets(); len(offsets) > 0 {
 			w.w.Write([]byte("\t\tTextOffsets: encoding.StatementTextOffsets{\n"))
 
 			if v, ok := offsets[encoding.GraphNameStatementOffsets]; ok {
