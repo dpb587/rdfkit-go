@@ -42,20 +42,15 @@ Some sample use cases and starter snippets can be found in the [`examples` direc
 	] ;
 	schema:url </> .
 <>
-	<SHORTCUT> </favicon.ico?v2> ;
-	<canonical>
-		</en-us> ,
-		</en-us> ;
 	og:description "Explore Microsoft products and services and support for your home or business. Shop Microsoft 365, Copilot, Teams, Xbox, Windows, Azure, Surface and more."@en-US ;
 	og:title "Microsoft – AI, Cloud, Productivity, Computing, Gaming & Apps"@en-US ;
 	og:type "website"@en-US ;
 	og:url "https://www.microsoft.com/en-us"@en-US .
 _:b0
 	a schema:Organization ;
-	<logo> <https://uhf.microsoft.com/images/microsoft/RE1Mu3b.png> ;
-	<name> "Microsoft" ;
-	<url> <https://www.microsoft.com> .
-
+	schema:logo <https://uhf.microsoft.com/images/microsoft/RE1Mu3b.png> ;
+	schema:name "Microsoft" ;
+	schema:url <https://www.microsoft.com> .
 ```
 
 </details>

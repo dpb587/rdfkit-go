@@ -14,10 +14,6 @@
 	] ;
 	schema:url </> .
 <>
-	<SHORTCUT> </favicon.ico?v2> ;
-	<canonical>
-		</en-us> ,
-		</en-us> ;
 	og:description "Explore Microsoft products and services and support for your home or business. Shop Microsoft 365, Copilot, Teams, Xbox, Windows, Azure, Surface and more."@en-US ;
 	og:title "Microsoft – AI, Cloud, Productivity, Computing, Gaming & Apps"@en-US ;
 	og:type "website"@en-US ;

@@ -9,6 +9,7 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding/html"
 	"github.com/dpb587/rdfkit-go/encoding/htmljsonld"
 	"github.com/dpb587/rdfkit-go/encoding/htmlmicrodata"
+	"github.com/dpb587/rdfkit-go/encoding/jsonld"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
 	"github.com/dpb587/rdfkit-go/encoding/rdfa"
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
@@ -53,9 +54,11 @@ func main() {
 	htmlJsonld, err := htmljsonld.NewDecoder(
 		htmlDocument,
 		htmljsonld.DecoderConfig{}.
-			SetDocumentLoader(jsonldtype.NewCachingDocumentLoader(
-				jsonldtype.NewDefaultDocumentLoader(http.DefaultClient),
-			)),
+			SetDecoderOptions(jsonld.DecoderConfig{}.
+				SetDocumentLoader(jsonldtype.NewCachingDocumentLoader(
+					jsonldtype.NewDefaultDocumentLoader(http.DefaultClient),
+				)),
+			),
 	)
 	if err != nil {
 		panic(fmt.Errorf("prepare htmljsonld: %v", err))
