@@ -51,15 +51,15 @@ func (f EncodingInput) openReader() (string, io.ReadCloser, http.Header, error) 
 	inFile, err := os.OpenFile(f.Path, os.O_RDONLY, 0)
 	if err != nil {
 		if errors.Is(err, os.ErrNotExist) && f.FallbackOpener != nil {
-			f1, f2, f3 := f.FallbackOpener(f.Path, err)
+			f1, f2, f3, f4 := f.FallbackOpener(f.Path, err)
 
-			return f.Path, f1, f2, f3
+			return f3, f1, f2, f4
 		}
 
 		return "", nil, nil, fmt.Errorf("open: %v", err)
 	}
 
-	return f.Path, inFile, nil, nil
+	return "file://" + f.Path, inFile, nil, nil
 }
 
 func (f EncodingInput) Open() (*EncodingInputHandle, error) {
@@ -158,7 +158,7 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 
 	if len(f.DefaultBase) == 0 {
 		if len(rcPath) > 0 {
-			f.DefaultBase = fmt.Sprintf("file://%s", rcPath)
+			f.DefaultBase = rcPath
 		}
 	}
 
