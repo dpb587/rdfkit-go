@@ -57,6 +57,17 @@ func (rb *ResourceListBuilder) GetResources() ResourceList {
 	return resources
 }
 
+func (rb *ResourceListBuilder) GetResource(s rdf.SubjectValue) (Resource, bool) {
+	if _, ok := rb.resourceBySubject[s]; !ok {
+		return nil, false
+	}
+
+	return SubjectResource{
+		Subject:    s,
+		Statements: rb.getResourceStatements(s),
+	}, true
+}
+
 func (rb *ResourceListBuilder) getResourceStatements(subject rdf.SubjectValue) StatementList {
 	var statements StatementList
 

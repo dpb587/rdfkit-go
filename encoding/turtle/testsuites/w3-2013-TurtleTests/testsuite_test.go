@@ -13,17 +13,17 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
 	"github.com/dpb587/rdfkit-go/internal/devencoding/rdfioutil"
 	"github.com/dpb587/rdfkit-go/internal/devtest"
-	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
 	"github.com/dpb587/rdfkit-go/rdfio"
 	"github.com/dpb587/rdfkit-go/testing/testingarchive"
+	"github.com/dpb587/rdfkit-go/x/rdfdescriptionstruct"
 )
 
 const manifestPrefix = "http://www.w3.org/2013/TurtleTests/"
 
 func Test(t *testing.T) {
-	testdata, manifestResources := requireTestdata(t)
+	testdata, manifest := requireTestdata(t)
 	oxigraphExec := os.Getenv("TESTING_OXIGRAPH_EXEC")
 
 	var debugWriter = io.Discard
@@ -43,61 +43,30 @@ func Test(t *testing.T) {
 	debugBundle = rdfioutil.NewBundleEncoder(debugWriter)
 	defer debugBundle.Close()
 
-	for _, manifestResource := range manifestResources.GetResources() {
-		var isEval, isNegativeSyntax, isPositiveSyntax bool
-		var testName string
-		var testAction, testResult rdf.IRI
-
-		for _, triple := range manifestResource.AsTriples() {
-			switch triple.Predicate.(rdf.IRI) {
-			case rdfiri.Type_Property:
-				if oIRI, ok := triple.Object.(rdf.IRI); ok {
-					switch oIRI {
-					case "http://www.w3.org/ns/rdftest#TestTurtleEval":
-						isEval = true
-					case "http://www.w3.org/ns/rdftest#TestTurtleNegativeSyntax":
-						isNegativeSyntax = true
-					case "http://www.w3.org/ns/rdftest#TestTurtlePositiveSyntax":
-						isPositiveSyntax = true
-					}
-				}
-			case "http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#name":
-				if oLiteral, ok := triple.Object.(rdf.Literal); ok {
-					testName = oLiteral.LexicalForm
-				}
-			case "http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#action":
-				if oIRI, ok := triple.Object.(rdf.IRI); ok {
-					testAction = oIRI
-				}
-			case "http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#result":
-				if oIRI, ok := triple.Object.(rdf.IRI); ok {
-					testResult = oIRI
-				}
-			}
-		}
-
-		if testName == "turtle-syntax-bad-num-05" {
+	for _, entry := range manifest.Entries {
+		if entry.Name == "turtle-syntax-bad-num-05" {
 			// duplicate naming; disambiguate
 
 			h := sha256.New()
-			h.Write(testdata.GetFileBytes(t, string(testAction)))
+			h.Write(testdata.GetFileBytes(t, string(entry.Action)))
 
-			testName += fmt.Sprintf("/%s", base64.RawStdEncoding.EncodeToString(h.Sum(nil))[0:8])
+			entry.Name += fmt.Sprintf("/%s", base64.RawStdEncoding.EncodeToString(h.Sum(nil))[0:8])
 		}
 
 		decodeAction := func() (rdfio.StatementList, error) {
 			return rdfio.CollectStatementsErr(turtle.NewDecoder(
-				testdata.NewFileByteReader(t, string(testAction)),
+				testdata.NewFileByteReader(t, string(entry.Action)),
 				turtle.DecoderConfig{}.
-					SetDefaultBase(string(testAction)).
+					SetDefaultBase(string(entry.Action)).
 					SetCaptureTextOffsets(true),
 			))
 		}
 
-		if isEval {
-			t.Run("Eval/"+testName, func(t *testing.T) {
+		switch entry.Type {
+		case "http://www.w3.org/ns/rdftest#TestTurtleEval":
+			t.Run("Eval/"+entry.Name, func(t *testing.T) {
 				expectedStatements, err := rdfio.CollectStatementsErr(nquads.NewDecoder(
-					testdata.NewFileByteReader(t, string(testResult)),
+					testdata.NewFileByteReader(t, string(entry.Result)),
 				))
 				if err != nil {
 					t.Fatalf("setup error: decode result: %v", err)
@@ -116,7 +85,7 @@ func Test(t *testing.T) {
 					t.Log(err.Error())
 					t.SkipNow()
 				} else {
-					oxigraphErr := devtest.AssertOxigraphAsk(t.Context(), oxigraphExec, testAction, testdata.NewFileByteReader(t, string(testResult)), actualStatements)
+					oxigraphErr := devtest.AssertOxigraphAsk(t.Context(), oxigraphExec, entry.Action, testdata.NewFileByteReader(t, string(entry.Result)), actualStatements)
 					if oxigraphErr != nil {
 						t.Logf("eval: %v", oxigraphErr)
 						t.Log(err.Error())
@@ -126,8 +95,17 @@ func Test(t *testing.T) {
 
 				debugBundle.PutBundle(t.Name(), actualStatements)
 			})
-		} else if isNegativeSyntax {
-			t.Run("NegativeSyntax/"+testName, func(t *testing.T) {
+		case "http://www.w3.org/ns/rdftest#TestTurtleNegativeEval":
+			// TODO
+		case "http://www.w3.org/ns/rdftest#TestTurtlePositiveSyntax":
+			t.Run("PositiveSyntax/"+entry.Name, func(t *testing.T) {
+				_, err := decodeAction()
+				if err != nil {
+					t.Fatalf("error: %v", err)
+				}
+			})
+		case "http://www.w3.org/ns/rdftest#TestTurtleNegativeSyntax":
+			t.Run("NegativeSyntax/"+entry.Name, func(t *testing.T) {
 				_, err := decodeAction()
 				if err != nil {
 					t.Logf("error: %v", err)
@@ -135,18 +113,13 @@ func Test(t *testing.T) {
 					t.Fatal("expected error, but got none")
 				}
 			})
-		} else if isPositiveSyntax {
-			t.Run("PositiveSyntax/"+testName, func(t *testing.T) {
-				_, err := decodeAction()
-				if err != nil {
-					t.Fatalf("error: %v", err)
-				}
-			})
+		default:
+			t.Fatalf("unsupported test type: %s", entry.Type)
 		}
 	}
 }
 
-func requireTestdata(t *testing.T) (testingarchive.Archive, *rdfdescription.ResourceListBuilder) {
+func requireTestdata(t *testing.T) (testingarchive.Archive, *Manifest) {
 	testdata := testingarchive.OpenTarGz(
 		t,
 		"testdata.tar.gz",
@@ -161,7 +134,7 @@ func requireTestdata(t *testing.T) (testingarchive.Archive, *rdfdescription.Reso
 		manifestDecoder, err := turtle.NewDecoder(
 			testdata.NewFileByteReader(t, manifestPrefix+"manifest.ttl"),
 			turtle.DecoderConfig{}.
-				SetDefaultBase(manifestPrefix),
+				SetDefaultBase(manifestPrefix+"manifest.ttl"),
 		)
 		if err != nil {
 			t.Fatal(fmt.Errorf("decode: %v", err))
@@ -178,5 +151,26 @@ func requireTestdata(t *testing.T) (testingarchive.Archive, *rdfdescription.Reso
 		}
 	}
 
-	return testdata, manifestResources
+	manifest := &Manifest{}
+
+	manifestResource, ok := manifestResources.GetResource(rdf.IRI(manifestPrefix + "manifest.ttl"))
+	if !ok {
+		t.Fatalf("manifest resource not found")
+	} else if err := rdfdescriptionstruct.Unmarshal(manifestResources, manifestResource, manifest); err != nil {
+		t.Fatalf("unmarshal manifest: %v", err)
+	}
+
+	return testdata, manifest
+}
+
+type Manifest struct {
+	Entries rdfdescriptionstruct.Collection[ManifestEntry] `rdf:"o,p=http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#entries"`
+}
+
+type ManifestEntry struct {
+	ID     rdf.IRI `rdf:"s"`
+	Type   rdf.IRI `rdf:"o,p=http://www.w3.org/1999/02/22-rdf-syntax-ns#type"`
+	Name   string  `rdf:"o,p=http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#name"`
+	Action rdf.IRI `rdf:"o,p=http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#action"`
+	Result rdf.IRI `rdf:"o,p=http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#result"`
 }
