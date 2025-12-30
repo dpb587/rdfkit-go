@@ -3,7 +3,8 @@
 Work with RDF-related concepts, datasets, and files in Go.
  
 * Decode TriG, N-Quads, XML, JSON-LD, HTML, and other RDF-based sources.
-* Reference IRI constants generated from vocabulary definitions.
+* Reference common IRI constants generated from vocabularies.
+* Canonicalize datasets with RDFC-1.0.
 * Track data lineage for RDF properties within source files.
 * Build higher-level abstractions based on RDF primitives.
 
@@ -67,11 +68,11 @@ An *IRI* records a URL-based identity as a `string` value.
 resourceIRI := rdf.IRI("http://example.com/resource")
 ```
 
-The [`iriutil` package](rdf/iriutil) provides additional support for mapping IRIs from prefixes and CURIEs. Some well-known IRIs are defined in subpackages such as `rdfiri` and `xsdiri` - see [Ontologies](#ontologies) for more details.
+Some well-known IRIs are defined in subpackages such as `rdfiri` and `xsdiri` - see [Ontologies](#ontologies) for more details. The [`iriutil` package](rdf/iriutil) provides additional support for mapping IRIs from prefixes and CURIEs.
 
 ### Literal
 
-A *literal* records more traditional data values, such as booleans and strings. It *must* include both a datatype (IRI) and its string-encoded, lexical form. The lexical form should always follow the datatype-specific recommendations for what a valid form looks like.
+A *literal* records more traditional data values, such as booleans and strings. It *must* include both a datatype (IRI) and its string-encoded data. The lexical form should always follow the datatype-specific recommendations for valid data.
 
 ```go
 trueLiteral := rdf.Literal{
@@ -80,7 +81,23 @@ trueLiteral := rdf.Literal{
 }
 ```
 
-Literals can be tedious to work with, so some well-known data types have factory-style functions. See [Ontologies](#ontologies) for utilities and other methods using Go primitives.
+A `Tag` field is supported for limited datatypes, namely `rdf:langString`, where additional properties are required for the literal.
+
+```go
+helloWorldLiteral := rdf.Literal{
+  Datatype:    rdfiri.LangString_Datatype,
+  LexicalForm: "Hello World",
+  Tag: rdf.LanguageLiteralTag{
+    Language: "en",
+  },
+}
+```
+
+Literals can be tedious to work with, so some well-known data types have Go primitives and utility functions - see [Ontologies](#ontologies) for more details.
+
+```go
+helloWorldLiteral == rdfobject.NewLangString("en", "Hello World")
+```
 
 ### Blank Node
 
@@ -100,11 +117,11 @@ A *triple* is used to describe some sort of statement about the world. Within th
 nameTriple := rdf.Triple{
   Subject:   rdf.NewBlankNode("b0"),
   Predicate: schemairi.Name_Property,
-  Object:    xsdliteral.NewString("Web Vocab"),
+  Object:    helloWorldLiteral,
 }
 ```
 
-The fields of a triple are restricted to the normative value types they support, described by the table below. Using a triple as a triple term is not yet supported.
+The fields of a triple are restricted to the normative value types they support, described by the table below.
 
 | Field | IRI | Literal | Blank Node |
 | ----- |:---:|:-------:|:----------:|
@@ -112,68 +129,44 @@ The fields of a triple are restricted to the normative value types they support,
 | Predicate | Valid | Invalid | Invalid |
 | Object | Valid | Valid | Valid |
 
-## Graphs
+The `rdf` package includes other supporting types (e.g. `TripleList`, `TripleIterator`, and `TripleMatcher`), and the [`triples` package](rdf/triples) offers additional interfaces and utilities for working with triple types.
 
-A *graph* is a set of triples, all of which collectively describe the state of a world. An `rdfio.Graph*` interface supports basic operations, such as working with triples.
+### Quad
+
+A *quad* is used to describe a triple with an optional graph name. A graph name may be an IRI, Blank Node, or `nil` which indicates the default graph.
 
 ```go
-err := storage.PutTriple(ctx, nameTriple)
+nameQuad := rdf.Quad{
+  Triple:    nameTriple,
+  GraphName: rdf.IRI("http://example.com/graph"),
+}
+```
+
+Similar to triples, the `rdf` and [`quads` package](rdf/quads) offers additional interfaces and utilities.
+
+## Graphs
+
+A *graph* is a set of triples, all of which collectively describe the state of a world. The `triples.Graph*` interfaces describe basic operations, such as adding or iterating triples.
+
+```go
+err := graph.AddTriple(ctx, nameTriple)
+iter, err := graph.NewTripleIterator(ctx)
 ```
 
 ### Datasets
 
-A *dataset* is a set of graphs (is a set of triples). By convention, when a graph-agnostic function is invoked, such as `PutTriple`, it will be executed against the default graph if the underlying storage is a dataset. The following is equivalent to the previous example, assuming `storage` is a dataset.
+A *dataset* is a set of graphs (is a set of triples). The `quads.Dataset*` interfaces describe basic operations, such as adding or iterating quads.
 
 ```go
-err := storage.PutGraphTriple(ctx, rdf.DefaultGraph, nameTriple)
+err := dataset.AddQuad(ctx, nameQuad)
+iter, err := dataset.NewQuadIterator(ctx)
 ```
 
-The usage of a dataset vs graph vs dataset graphs is very application-specific. Within Go, interfaces are defined for datasets and graphs, but can be used interchangeably for some use cases. For broader discussion on the semantics and logical considerations of datasets, review [this W3C Note](https://www.w3.org/TR/2014/NOTE-rdf11-datasets-20140225/).
+The usage of a dataset vs graph vs dataset graphs is very application-specific. For broader discussion on the semantics and logical considerations of datasets, review [this W3C Note](https://www.w3.org/TR/2014/NOTE-rdf11-datasets-20140225/).
 
-### Statements
+### Implementations
 
-A *statement* is the representation of a triple within a graph, and it is described by the `rdfio.Statement` interface.
-
-```go
-iter := storage.NewStatementIterator(ctx)
-
-defer iter.Close()
-
-for iter.Next() {
-  statement := iter.GetStatement()
-  statementTriple := statement.GetTriple()
-
-  fmt.Fprintf(os.Stderr, "%v\t%v\t%v\n", statementTriple.Subject, statementTriple.Predicate, statementTriple.Object)
-}
-
-if err := iter.Err(); err != nil {
-  panic(err)
-}
-```
-
-As an interface, storage implementations may offer additional capabilities for statements.
-
-### Nodes
-
-A *node* is the representation of a resource (i.e. blank node or IRI) within a graph. Similar to statements, implementations of the `rdfio.Node` interface may offer additional capabilities.
-
-```go
-iter := storage.NewNodeIterator(ctx)
-
-for iter.Next() {
-  node := iter.GetNode()
-
-  fmt.Fprintf(os.Stderr, "%v\n", node.GetTerm())
-}
-
-if err := iter.Err(); err != nil {
-  panic(err)
-}
-```
-
-### Storage
-
-The [`inmemory` experimental package](x/storage/inmemory) currently offers a single, in-memory dataset which may be useful for small collections and labeled property graph conventions.
+The [`inmemory` experimental package](x/storage/inmemory) offers a dataset implementation which may be useful for small collections and labeled property graph features.
 
 ```go
 storage := inmemory.NewDataset()
@@ -183,38 +176,37 @@ Better-supported storage or alternative, remote service clients will likely be a
 
 ## Encodings
 
-An *encoding* (or *file format*) is used to decode and encode RDF data. The following encodings are available under the `encoding` package.
+An *encoding* (or *file format*) is used to decode and encode RDF data. The following encodings are available under the [`encoding` package](encoding).
 
 | Package | Decode | Encode |
 |:------- |:------:|:------:|
-| [`htmljsonld`](encoding/htmljsonld) | Dataset | n/a |
-| [`htmlmicrodata`](encoding/htmlmicrodata) | Graph | n/a |
-| [`jsonld`](encoding/jsonld) | Dataset | Triple, Description |
-| [`nquads`](encoding/nquads) | Dataset | Triple, Quad |
-| [`ntriples`](encoding/ntriples) | Graph | Triple |
-| [`rdfa`](encoding/rdfa) | Graph | n/a |
-| [`rdfjson`](encoding/rdfjson) | Graph | Triple |
-| [`rdfxml`](encoding/rdfxml) | Graph | n/a |
-| [`trig`](encoding/trig) | Dataset | n/a |
-| [`turtle`](encoding/turtle) | Graph | Triple, Description |
+| [`htmljsonld`](encoding/htmljsonld) | Quad | n/a |
+| [`htmlmicrodata`](encoding/htmlmicrodata) | Triple | n/a |
+| [`jsonld`](encoding/jsonld) | Quad | Quad |
+| [`nquads`](encoding/nquads) | Quad | Quad |
+| [`ntriples`](encoding/ntriples) | Triple | Triple |
+| [`rdfa`](encoding/rdfa) | Triple | n/a |
+| [`rdfjson`](encoding/rdfjson) | Triple | Triple |
+| [`rdfxml`](encoding/rdfxml) | Triple | n/a |
+| [`trig`](encoding/trig) | Quad | n/a |
+| [`turtle`](encoding/turtle) | Triple | Triple, Description |
 
-Some encodings do not yet support all syntactic features defined by their official specification, though they should cover common practices. Most are tested against some sort of test suite (such as the ones published by W3C), and the latest results can be found in their `testsuites/*/RESULTS.md` files.
+Some encodings do not yet support all syntactic features defined by their official specification, though they should cover common practices. Most are tested against some sort of test suite (such as the ones published by W3C), and the latest results can be found in their `testsuites/*/testresults` directory.
 
 Broader support for encoders will likely be added in the future.
 
 ### Decoder
 
-Encodings provide a `NewDecoder` function which require an `io.Reader` and optional `DecoderConfig` options. It can be used as an iterator for all statements found in the encoding. Depending on the capabilities of the encoding format, the decoder fulfills either the `encoding.DatasetDecoder` or `encoding.GraphDecoder` interface.
+Encodings provide a `NewDecoder` function which require an `io.Reader` and optional `DecoderConfig` options. It can be used as an iterator for all statements found in the encoding. Depending on the capabilities of the encoding format, the decoder fulfills either the `encoding.TripleDecoder` or `encoding.QuadDecoder` interface.
 
 ```go
 decoder := nquads.NewDecoder(os.Stdin)
 defer decoder.Close()
 
 for decoder.Next() {
-  statement := decoder.GetStatement()
-  triple := statement.GetTriple()
+  quad := statement.Quad()
 
-  fmt.Fprintf(os.Stdout, "[%v] %v\t%v\t%v\n", statement.GetGraphName(), triple.Subject, triple.Predicate, triple.Object)
+  fmt.Fprintf(os.Stdout, "%v\t%v\t%v\t%v\n", quad.Triple.Subject, quad.Triple.Predicate, quad.Triple.Object, quad.GraphName)
 }
 
 err := decoder.Err()
@@ -224,21 +216,23 @@ Most are stream processors, so valid statements may be produced before a syntax 
 
 #### Text Offsets
 
-Most decoders can capture the exact byte and line+column offsets where a statement's graph name, subject, predicate, and object value was decoded from the source. To include this metadata in the decoded statements, enable `CaptureTextOffsets` via the decoder's options. A map of property-offsets can be accessed through the `encoding.TextOffsetsStatement` interface.
+Most decoders can capture the exact byte and line+column offsets where a statement's subject, predicate, object, and graph name was decoded from the source. The `encoding.StatementTextOffsetsProvider` interface supports accessing a `StatementTextOffsets` map of property-offsets. To enable capturing this metadata, use the decoder's `CaptureTextOffsets` option.
 
 ```go
-for propertyType, propertyOffsets := range statement.(encoding.TextOffsetsStatement).GetStatementTextOffsets() {
-  fmt.Fprintf(
-    os.Stderr,
-    "> found %s from L%dC%d (byte %d) until %s (byte %d)\n",
-    encoding.StatementOffsetsTypeName(propertyType),
-    propertyOffsets.From.LineColumn[0],
-    propertyOffsets.From.LineColumn[1],
-    propertyOffsets.From.Byte,
-    // same as L%dC%d
-    propertyOffsets.Until.LineColumn.TextOffsetRangeString(),
-    propertyOffsets.Until.Byte,
-  )
+for decoder.Next() {
+  for propertyType, propertyOffsets := range decoder.StatementTextOffsets() {
+    fmt.Fprintf(
+      os.Stderr,
+      "> found %s from L%dC%d (byte %d) until %s (byte %d)\n",
+      encoding.StatementOffsetsTypeName(propertyType),
+      propertyOffsets.From.LineColumn[0],
+      propertyOffsets.From.LineColumn[1],
+      propertyOffsets.From.Byte,
+      // same as L%dC%d
+      propertyOffsets.Until.LineColumn.TextOffsetRangeString(),
+      propertyOffsets.Until.Byte,
+    )
+  }
 }
 ```
 
@@ -250,20 +244,22 @@ When working with offsets, consider the following caveats.
 
 ### Encoder
 
-A few encodings similarly provide a `NewEncoder` requiring an `io.Writer` and `EncoderConfig` options.
+A few encodings similarly provide a `NewEncoder` requiring an `io.Writer` and `EncoderConfig` options. At a minimum, encoders fulfill the `encoding.TripleEncoder` or `encoding.QuadEncoder` interfaces.
 
 ```go
 encoder := nquads.NewWriter(os.Stdout)
 defer encoder.Close()
 
-for _, triple := range tripleList {
-  err := encoder.PutGraphTriple(ctx, rdf.DefaultGraph, triple)
+for _, quad := range quadList {
+  err := encoder.AddQuad(ctx, quad)
 }
 ```
 
+When encoding data, the `Close` method *must* be called before the data can be successfully decoded.
+
 ## Resource Descriptions
 
-The [`rdfdescription` package](rdfdescription) offers an alternative method for describing a resource with statements.
+The [`rdfdescription` package](rdfdescription) offers an alternative method for describing nested resources and statements.
 
 ```go
 resource := rdfdescription.SubjectResource{
@@ -283,11 +279,11 @@ resource := rdfdescription.SubjectResource{
           },
           rdfdescription.ObjectStatement{
             Predicate: schemairi.Price_Property,
-            Object:    schemaliteral.NewNumber(55.00),
+            Object:    schemaobject.Number(55),
           },
           rdfdescription.ObjectStatement{
             Predicate: schemairi.PriceCurrency_Property,
-            Object:    schemaliteral.NewText("USD"),
+            Object:    schemaobject.Text("USD"),
           },
         },
       },
@@ -296,41 +292,78 @@ resource := rdfdescription.SubjectResource{
 }
 ```
 
-A description can be converted to triples by calling its `AsTriples` function.
+A description can be converted to triples by calling its `NewTriples` function. Each invocation creates new blank nodes for anonymous resources, so the triples returned from separate invocations may be non-isomorphic.
 
 ```go
-err := rdfioutil.GraphPutTriples(ctx, storage, resource.AsTriples())
+resourceTriples := resource.NewTriples()
 ```
 
-Some encodings support syntax for structured statements, such as Turtle, and implement the `rdfdescriptionio.DatasetEncoder` or `rdfdescriptionio.GraphEncoder` interface.
+### Encoding Support
+
+Some encodings support a syntax for structured statements (e.g. JSON-LD, Turtle) and implement the `rdfdescriptionutil.Encoder` or `rdfdescriptionutil.DatasetEncoder` interface.
 
 ```go
-err := resourceEncoder.PutResource(ctx, resource)
+err := turtleEncoder.AddResource(ctx, resource)
+```
+
+### Resource List Builder
+
+The `ResourceListBuilder` may be used to construct resources from their triples. Once constructed, they can be enumerated with `GetResources()` or sent directly to supported encoders.
+
+```go
+builder := rdfdescription.NewResourceListBuilder()
+// builder.Add(rdf.Triple{...}, ...)
+err := builder.AddTo(ctx, turtleEncoder, true)
+```
+
+## Canonicalization
+
+The [`rdfcanon` package](rdfcanon) implements the RDFC-1.0 algorithm based on [RDF Dataset Canonicalization](https://www.w3.org/TR/rdf-canon/).
+
+```go
+canonicalized, err := rdfcanon.Canonicalize(quadIterator)
+```
+
+Once canonicalized, the encoded N-Quads form can be directly written to an `io.Writer`.
+
+```go
+_, err := canonicalized.WriteTo(os.Stdout)
+```
+
+Alternatively, use `NewIterator` to manually iterate over the results containing its encoded form. If the `BuildCanonicalQuad` option was enabled, use `NewQuadIterator` for a standard `rdf.QuadIterator` of quads including the canonicalized blank nodes.
+
+```go
+canonicalized, err := rdfcanon.Canonicalize(quadIterator, rdfcanon.CanonicalizeConfig{}.
+  SetBuildCanonicalQuad(true),
+)
+iter := canonicalized.NewQuadIterator()
 ```
 
 ## Ontologies
 
 An *ontology* (or *vocabulary*) offers domain-specific conventions for working with data. Several well-known ontologies are within the [`ontology` package](./ontology) and offer IRI constants, helpers for literals, and other data utilities.
 
+* earl - [`earliri`](ontology/earl/earliri), [`earltesting`](ontology/earl/earltesting)
+* foaf - [`foafiri`](ontology/foaf/foafiri)
 * owl - [`owliri`](ontology/owl/owliri)
 * rdf - [`rdfiri`](ontology/rdf/rdfiri), [`rdfliteral`](ontology/rdf/rdfliteral), and [`rdfvalue`](ontology/rdf/rdfvalue)
 * rdfa - [`rdfairi`](ontology/rdfa/rdfairi)
 * rdfs - [`rdfsiri`](ontology/rdfs/rdfsiri)
-* schema - [`schemairi`](ontology/schema/schemairi), [`schemaliteral`](ontology/schema/schemaliteral), and other utilities
-* xsd - [`xsdiri`](ontology/xsd/xsdiri), [`xsdliteral`](ontology/xsd/xsdliteral), [`xsdvalue`](ontology/xsd/xsdvalue), and other utilities
+* schema - [`schemairi`](ontology/schema/schemairi), [`schemaobject`](ontology/schema/schemaobject), and other utilities
+* xsd - [`xsdiri`](ontology/xsd/xsdiri), [`xsdobject`](ontology/xsd/xsdobject), [`xsdtype`](ontology/xsd/xsdtype), and other utilities
 
 To help maintain consistency, the following practices are used for the naming and implementations.
 
 * The `{prefix}` should be based on [RDFa Core Initial Context](https://www.w3.org/2011/rdfa-context/rdfa-1.1), [vann:preferredNamespacePrefix](https://vocab.org/vann/#preferredNamespacePrefix), or similarly-defined term.
-* `{prefix}iri` package - constants for resource IRIs defined in the vocabulary. The `irigen` command is used for most of these.
+* `{prefix}iri` package - constants for resource IRIs defined in the vocabulary. The `irigen` command can be used for most of these.
   * `const Base rdf.IRI` - the preferred base IRI. For example, `http://www.w3.org/1999/02/22-rdf-syntax-ns#`.
   * `const {Name}_{Type} rdf.IRI` - For example, the statement `rdf:type a rdf:Property` becomes the constant `rdfiri.Type_Property` with a value of `Base + "type"`. If a resource is defined with multiple types, the first type listed in the vocabulary should be used.
-* `{prefix}literal` package - utility functions for working with literal datatypes, such as the following.
-  * `func New{Datatype}(...) rdf.Literal` - requiring any necessary parameters of Go types, returns a valid `rdf.Literal` value.
-  * `func Map{Datatype}(v string) (literalutil.CustomValue, error)` - map the lexical form of a literal value into a Go-native type.
-* `{prefix}value` package - Go-native types which represent a literal datatype.
-  * `type {Datatype} {any}` - any builtin that can natively represent the datatype and satisfies the `literalutil.CustomValue` interface.
-  * `func Map{Datatype}(v string) ({Datatype}, error)` - same as `{prefix}literal.Map{Datatype}`, but returning the custom, concrete type.
+* `{prefix}object` package - convenience functions wrapping `{prefix}type` for `rdf.ObjectValue`-related types.
+  * `func {Datatype}(...) rdf.ObjectValue` - factory-style functions for returning a canonical `rdf.ObjectValue` value.
+  * `func Map{Datatype}(lexicalForm string) (rdf.ObjectValue, error)` - for mapping a lexical form into a canonical `rdf.ObjectValue` value.
+* `{prefix}type` package - Go-native types and utilities for working with defined datatypes.
+  * `type {Datatype} {any}` - a Go-native type representing canonical value forms, satisfying the `objecttypes.Value` interface.
+  * `func Map{Datatype}(lexicalForm string) ({Datatype}, error)` - for mapping a lexical form into its Go-native type.
 
 ### Literal Mapping
 
@@ -343,11 +376,9 @@ bool(trueValue) == true
 trueValue.AsLiteralTerm() == trueLiteral
 ```
 
-## Utilities
+## IRIs
 
-### IRI Utilities
-
-#### Prefixes
+### Prefixes
 
 A common practice with IRIs is defining prefixes that may be used to expand and compact IRIs. These prefixes are often used in encoding formats.
 
@@ -372,11 +403,7 @@ _, _, ok = prefixes.CompactPrefix(rdf.IRI("https://example.com/secure"))
 !ok
 ```
 
-#### RDFa Core Initial Context
-
-The [`rdfacontext` package](rdf/iriutil/rdfacontext/) provides a list of prefix mappings defined by the W3C at [RDFa Core Initial Context](https://www.w3.org/2011/rdfa-context/rdfa-1.1). This includes prefixes such as `owl:`, `rdfa:`, and `xsd:`. The list of widely-used prefixes is included as well, which includes prefixes such as `dc:` and `schema:`.
-
-#### CURIE Syntax
+### CURIE Syntax
 
 The [`curie` package](rdf/iriutil/curie/) provides several functions for working with CURIE syntax based on [CURIE Syntax](https://www.w3.org/TR/curie/).
 
@@ -392,12 +419,22 @@ rIRI, ok := mappings.ExpandCURIE(parsed)
 ok && rIRI == "http://example.com/resource"
 ```
 
+### RDFa Core Initial Context
+
+The [`rdfacontext` package](rdf/iriutil/rdfacontext/) provides a list of prefix mappings defined by the W3C at [RDFa Core Initial Context](https://www.w3.org/2011/rdfa-context/rdfa-1.1). This includes prefixes such as `owl:`, `rdfa:`, and `xsd:`. The list of widely-used prefixes is included as well, which includes prefixes such as `dc:` and `schema:`.
+
 ## Command Line
 
-The `cmd/rdfkit` package offers a command line interface for some development utilities. Most notably:
+The `cmd/rdfkit` package offers a command line interface with a few utilities. Most notably:
 
-* `irigen` - generate Go constants from an RDF vocabulary. Used for most of the `*iri` packages.
+* `irigen` - generate Go constants from an RDF vocabulary. Used internally for most of the `*iri` packages.
 * `pipe` - decode local files or remote URLs, and then re-encode using any of the supported RDF formats.
+
+## Notes
+
+* **RDF 1.2** (i.e. RDF-star) - not currently supported; waiting for more stability in the draft specification and definitions.
+* **Generalized RDF** - not currently supported; may be introduced in the future as a breaking change or via build tag.
+* This is a periodically updated fork based on private usage. There may still be some breaking changes before starting to version this module.
 
 ## License
 
