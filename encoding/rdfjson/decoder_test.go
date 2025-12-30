@@ -9,7 +9,7 @@ import (
 	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/ntriples"
-	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdliteral"
+	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 	"github.com/dpb587/rdfkit-go/rdfio"
@@ -242,7 +242,7 @@ func TestExamples(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
-						Object:    xsdliteral.NewString("Anna"),
+						Object:    xsdobject.String("Anna"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -308,7 +308,7 @@ func TestExamples(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
-						Object:    xsdliteral.NewString("Anna"),
+						Object:    xsdobject.String("Anna"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{

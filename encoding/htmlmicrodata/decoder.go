@@ -12,7 +12,7 @@ import (
 	encodinghtml "github.com/dpb587/rdfkit-go/encoding/html"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
-	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdvalue"
+	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
@@ -521,18 +521,18 @@ func itempropAttrString(ectx evaluationContext, v string) rdf.ObjectValue {
 }
 
 func itempropAttrTime(ectx evaluationContext, v string) rdf.ObjectValue {
-	if mapped, err := xsdvalue.MapDate(v); err == nil {
-		return mapped.AsLiteralTerm()
-	} else if mapped, err := xsdvalue.MapTime(v); err == nil {
-		return mapped.AsLiteralTerm()
-	} else if mapped, err := xsdvalue.MapDateTime(v); err == nil {
-		return mapped.AsLiteralTerm()
-	} else if mapped, err := xsdvalue.MapGYearMonth(v); err == nil {
-		return mapped.AsLiteralTerm()
-	} else if mapped, err := xsdvalue.MapGYear(v); err == nil {
-		return mapped.AsLiteralTerm()
-	} else if mapped, err := xsdvalue.MapDuration(v); err == nil {
-		return mapped.AsLiteralTerm()
+	if mapped, err := xsdobject.MapDate(v); err == nil {
+		return mapped
+	} else if mapped, err := xsdobject.MapTime(v); err == nil {
+		return mapped
+	} else if mapped, err := xsdobject.MapDateTime(v); err == nil {
+		return mapped
+	} else if mapped, err := xsdobject.MapGYearMonth(v); err == nil {
+		return mapped
+	} else if mapped, err := xsdobject.MapGYear(v); err == nil {
+		return mapped
+	} else if mapped, err := xsdobject.MapDuration(v); err == nil {
+		return mapped
 	}
 
 	return rdf.Literal{
@@ -543,16 +543,16 @@ func itempropAttrTime(ectx evaluationContext, v string) rdf.ObjectValue {
 
 func itempropAttrMeter(ectx evaluationContext, v string) rdf.ObjectValue {
 	{
-		vv, err := xsdvalue.MapInteger(v)
+		vv, err := xsdobject.MapInteger(v)
 		if err == nil {
-			return vv.AsLiteralTerm()
+			return vv
 		}
 	}
 
 	{
-		vv, err := xsdvalue.MapDecimal(v)
+		vv, err := xsdobject.MapDecimal(v)
 		if err == nil {
-			return vv.AsLiteralTerm()
+			return vv
 		}
 	}
 

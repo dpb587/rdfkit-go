@@ -8,8 +8,8 @@ import (
 	"testing"
 
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
-	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfliteral"
-	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdliteral"
+	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfobject"
+	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
@@ -171,7 +171,7 @@ func TestSpecNonNormative(t *testing.T) {
 								Statements: rdfdescription.StatementList{
 									rdfdescription.ObjectStatement{
 										Predicate: rdf.IRI("http://example.org/stuff/1.0/fullName"),
-										Object:    xsdliteral.NewString("Dave Beckett"),
+										Object:    xsdobject.String("Dave Beckett"),
 									},
 								},
 							},
@@ -183,7 +183,7 @@ func TestSpecNonNormative(t *testing.T) {
 					Statements: rdfdescription.StatementList{
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://purl.org/dc/elements/1.1/title"),
-							Object:    xsdliteral.NewString("RDF 1.1 XML Syntax"),
+							Object:    xsdobject.String("RDF 1.1 XML Syntax"),
 						},
 					},
 				},
@@ -217,14 +217,14 @@ func TestSpecNonNormative(t *testing.T) {
 									},
 									rdfdescription.ObjectStatement{
 										Predicate: rdf.IRI("http://example.org/stuff/1.0/fullName"),
-										Object:    xsdliteral.NewString("Dave Beckett"),
+										Object:    xsdobject.String("Dave Beckett"),
 									},
 								},
 							},
 						},
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://purl.org/dc/elements/1.1/title"),
-							Object:    xsdliteral.NewString("RDF 1.1 XML Syntax"),
+							Object:    xsdobject.String("RDF 1.1 XML Syntax"),
 						},
 					},
 				},
@@ -255,14 +255,14 @@ func TestSpecNonNormative(t *testing.T) {
 									},
 									rdfdescription.ObjectStatement{
 										Predicate: rdf.IRI("http://example.org/stuff/1.0/fullName"),
-										Object:    xsdliteral.NewString("Dave Beckett"),
+										Object:    xsdobject.String("Dave Beckett"),
 									},
 								},
 							},
 						},
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://purl.org/dc/elements/1.1/title"),
-							Object:    xsdliteral.NewString("RDF 1.1 XML Syntax"),
+							Object:    xsdobject.String("RDF 1.1 XML Syntax"),
 						},
 					},
 				},
@@ -284,7 +284,7 @@ func TestSpecNonNormative(t *testing.T) {
 					Statements: rdfdescription.StatementList{
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://purl.org/dc/elements/1.1/title"),
-							Object:    xsdliteral.NewString("RDF 1.1 XML Syntax"),
+							Object:    xsdobject.String("RDF 1.1 XML Syntax"),
 						},
 						rdfdescription.AnonResourceStatement{
 							Predicate: rdf.IRI("http://example.org/stuff/1.0/editor"),
@@ -292,7 +292,7 @@ func TestSpecNonNormative(t *testing.T) {
 								Statements: rdfdescription.StatementList{
 									rdfdescription.ObjectStatement{
 										Predicate: rdf.IRI("http://example.org/stuff/1.0/fullName"),
-										Object:    xsdliteral.NewString("Dave Beckett"),
+										Object:    xsdobject.String("Dave Beckett"),
 									},
 									rdfdescription.ObjectStatement{
 										Predicate: rdf.IRI("http://example.org/stuff/1.0/homePage"),
@@ -329,7 +329,7 @@ func TestSpecNonNormative(t *testing.T) {
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://purl.org/dc/elements/1.1/title"),
 							// https://www.w3.org/TR/2004/REC-rdf-syntax-grammar-20040210/example07.nt has incorrect value
-							Object: xsdliteral.NewString("RDF1.1 XML Syntax"),
+							Object: xsdobject.String("RDF1.1 XML Syntax"),
 						},
 					},
 				},
@@ -338,7 +338,7 @@ func TestSpecNonNormative(t *testing.T) {
 					Statements: rdfdescription.StatementList{
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://example.org/stuff/1.0/fullName"),
-							Object:    xsdliteral.NewString("Dave Beckett"),
+							Object:    xsdobject.String("Dave Beckett"),
 						},
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://example.org/stuff/1.0/homePage"),
@@ -382,15 +382,15 @@ func TestSpecNonNormative(t *testing.T) {
 					Statements: rdfdescription.StatementList{
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://purl.org/dc/elements/1.1/title"),
-							Object:    xsdliteral.NewString("RDF 1.1 XML Syntax"),
+							Object:    xsdobject.String("RDF 1.1 XML Syntax"),
 						},
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://purl.org/dc/elements/1.1/title"),
-							Object:    rdfliteral.NewLangString("en", "RDF 1.1 XML Syntax"),
+							Object:    rdfobject.LangString("en", "RDF 1.1 XML Syntax"),
 						},
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://purl.org/dc/elements/1.1/title"),
-							Object:    rdfliteral.NewLangString("en-US", "RDF 1.1 XML Syntax"),
+							Object:    rdfobject.LangString("en-US", "RDF 1.1 XML Syntax"),
 						},
 					},
 				},
@@ -399,15 +399,15 @@ func TestSpecNonNormative(t *testing.T) {
 					Statements: rdfdescription.StatementList{
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://purl.org/dc/elements/1.1/title"),
-							Object:    rdfliteral.NewLangString("de", "Der Baum"),
+							Object:    rdfobject.LangString("de", "Der Baum"),
 						},
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://purl.org/dc/elements/1.1/description"),
-							Object:    rdfliteral.NewLangString("de", "Das Buch ist außergewöhnlich"),
+							Object:    rdfobject.LangString("de", "Das Buch ist außergewöhnlich"),
 						},
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://purl.org/dc/elements/1.1/title"),
-							Object:    rdfliteral.NewLangString("en", "The Tree"),
+							Object:    rdfobject.LangString("en", "The Tree"),
 						},
 					},
 				},
@@ -502,7 +502,7 @@ func TestSpecNonNormative(t *testing.T) {
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://purl.org/dc/elements/1.1/title"),
 							// example11.nt has incorrect value
-							Object: xsdliteral.NewString("RDF 1.1 XML Syntax"),
+							Object: xsdobject.String("RDF 1.1 XML Syntax"),
 						},
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://example.org/stuff/1.0/editor"),
@@ -515,7 +515,7 @@ func TestSpecNonNormative(t *testing.T) {
 					Statements: rdfdescription.StatementList{
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://example.org/stuff/1.0/fullName"),
-							Object:    xsdliteral.NewString("Dave Beckett"),
+							Object:    xsdobject.String("Dave Beckett"),
 						},
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://example.org/stuff/1.0/homePage"),
@@ -546,7 +546,7 @@ func TestSpecNonNormative(t *testing.T) {
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://purl.org/dc/elements/1.1/title"),
 							// example12.nt has incorrect value
-							Object: xsdliteral.NewString("RDF 1.1 XML Syntax"),
+							Object: xsdobject.String("RDF 1.1 XML Syntax"),
 						},
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://example.org/stuff/1.0/editor"),
@@ -559,7 +559,7 @@ func TestSpecNonNormative(t *testing.T) {
 					Statements: rdfdescription.StatementList{
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://example.org/stuff/1.0/fullName"),
-							Object:    xsdliteral.NewString("Dave Beckett"),
+							Object:    xsdobject.String("Dave Beckett"),
 						},
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://example.org/stuff/1.0/homePage"),
@@ -590,7 +590,7 @@ func TestSpecNonNormative(t *testing.T) {
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://purl.org/dc/elements/1.1/title"),
 							// example13.nt has incorrect value
-							Object: xsdliteral.NewString("RDF 1.1 XML Syntax"),
+							Object: xsdobject.String("RDF 1.1 XML Syntax"),
 						},
 						rdfdescription.AnonResourceStatement{
 							Predicate: rdf.IRI("http://example.org/stuff/1.0/editor"),
@@ -598,7 +598,7 @@ func TestSpecNonNormative(t *testing.T) {
 								Statements: rdfdescription.StatementList{
 									rdfdescription.ObjectStatement{
 										Predicate: rdf.IRI("http://example.org/stuff/1.0/fullName"),
-										Object:    xsdliteral.NewString("Dave Beckett"),
+										Object:    xsdobject.String("Dave Beckett"),
 									},
 								},
 							},
@@ -629,7 +629,7 @@ func TestSpecNonNormative(t *testing.T) {
 						},
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://purl.org/dc/elements/1.1/title"),
-							Object:    xsdliteral.NewString("A marvelous thing"),
+							Object:    xsdobject.String("A marvelous thing"),
 						},
 					},
 				},
@@ -657,7 +657,7 @@ func TestSpecNonNormative(t *testing.T) {
 						},
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://purl.org/dc/elements/1.1/title"),
-							Object:    xsdliteral.NewString("A marvelous thing"),
+							Object:    xsdobject.String("A marvelous thing"),
 						},
 					},
 				},
@@ -842,7 +842,7 @@ func TestSpecNonNormative(t *testing.T) {
 					Statements: rdfdescription.StatementList{
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://example.org/stuff/1.0/prop"),
-							Object:    xsdliteral.NewString("blah"),
+							Object:    xsdobject.String("blah"),
 							// BindingLocation: encoding.TripleLocation{
 							// 	Object: &cursorutil.CursorRange{
 							// 		From: cursorutil.CursorPosition{
@@ -875,7 +875,7 @@ func TestSpecNonNormative(t *testing.T) {
 						},
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#object"),
-							Object:    xsdliteral.NewString("blah"),
+							Object:    xsdobject.String("blah"),
 						},
 					},
 				},
@@ -974,7 +974,7 @@ func TestSpecTestcase(t *testing.T) {
 					Statements: rdfdescription.StatementList{
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://example.org/value"),
-							Object:    xsdliteral.NewString("v"),
+							Object:    xsdobject.String("v"),
 						},
 					},
 				},
@@ -1059,7 +1059,7 @@ func TestSpecTestcase(t *testing.T) {
 					Statements: rdfdescription.StatementList{
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://example.org/value"),
-							Object:    xsdliteral.NewString("v"),
+							Object:    xsdobject.String("v"),
 						},
 					},
 				},
@@ -1080,7 +1080,7 @@ func TestSpecTestcase(t *testing.T) {
 						},
 						rdfdescription.ObjectStatement{
 							Predicate: rdfiri.Object_Property,
-							Object:    xsdliteral.NewString("v"),
+							Object:    xsdobject.String("v"),
 						},
 					},
 				},
@@ -1299,7 +1299,7 @@ func TestSpecTestcase(t *testing.T) {
 					Statements: rdfdescription.StatementList{
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://example.org/value"),
-							Object:    xsdliteral.NewString("v"),
+							Object:    xsdobject.String("v"),
 						},
 					},
 				},
@@ -1308,7 +1308,7 @@ func TestSpecTestcase(t *testing.T) {
 					Statements: rdfdescription.StatementList{
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://example.org/value"),
-							Object:    xsdliteral.NewString("v"),
+							Object:    xsdobject.String("v"),
 						},
 					},
 				},

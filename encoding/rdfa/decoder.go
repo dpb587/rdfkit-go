@@ -15,7 +15,7 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/rdfa/rdfairi"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
-	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdliteral"
+	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
@@ -1036,18 +1036,18 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 
 				// rdfa-in-html // 3.1 // Additional Processing Rule 9
 
-				if mapped, err := xsdliteral.MapDuration(*attrDatetime); err == nil {
-					currentPropertyValue = mapped.AsLiteralTerm()
-				} else if mapped, err := xsdliteral.MapDateTime(*attrDatetime); err == nil {
-					currentPropertyValue = mapped.AsLiteralTerm()
-				} else if mapped, err := xsdliteral.MapDate(*attrDatetime); err == nil {
-					currentPropertyValue = mapped.AsLiteralTerm()
-				} else if mapped, err := xsdliteral.MapTime(*attrDatetime); err == nil {
-					currentPropertyValue = mapped.AsLiteralTerm()
-				} else if mapped, err := xsdliteral.MapGYearMonth(*attrDatetime); err == nil {
-					currentPropertyValue = mapped.AsLiteralTerm()
-				} else if mapped, err := xsdliteral.MapGYear(*attrDatetime); err == nil {
-					currentPropertyValue = mapped.AsLiteralTerm()
+				if mapped, err := xsdobject.MapDuration(*attrDatetime); err == nil {
+					currentPropertyValue = mapped
+				} else if mapped, err := xsdobject.MapDateTime(*attrDatetime); err == nil {
+					currentPropertyValue = mapped
+				} else if mapped, err := xsdobject.MapDate(*attrDatetime); err == nil {
+					currentPropertyValue = mapped
+				} else if mapped, err := xsdobject.MapTime(*attrDatetime); err == nil {
+					currentPropertyValue = mapped
+				} else if mapped, err := xsdobject.MapGYearMonth(*attrDatetime); err == nil {
+					currentPropertyValue = mapped
+				} else if mapped, err := xsdobject.MapGYear(*attrDatetime); err == nil {
+					currentPropertyValue = mapped
 				} else {
 					// TODO warning
 

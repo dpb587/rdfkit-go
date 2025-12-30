@@ -10,7 +10,7 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/html"
 	"github.com/dpb587/rdfkit-go/encoding/ntriples"
-	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdliteral"
+	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 	"github.com/dpb587/rdfkit-go/rdfio"
@@ -76,7 +76,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("name"),
-						Object:    xsdliteral.NewString("Elizabeth"),
+						Object:    xsdobject.String("Elizabeth"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -97,7 +97,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("name"),
-						Object:    xsdliteral.NewString("Daniel"),
+						Object:    xsdobject.String("Daniel"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -134,7 +134,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("name"),
-						Object:    xsdliteral.NewString("Elizabeth"),
+						Object:    xsdobject.String("Elizabeth"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -155,7 +155,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("name"),
-						Object:    xsdliteral.NewString("Daniel"),
+						Object:    xsdobject.String("Daniel"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -186,7 +186,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("name"),
-						Object:    xsdliteral.NewString("Neil"),
+						Object:    xsdobject.String("Neil"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -207,7 +207,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("band"),
-						Object:    xsdliteral.NewString("Four Parts Water"),
+						Object:    xsdobject.String("Four Parts Water"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -228,7 +228,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("nationality"),
-						Object:    xsdliteral.NewString("British"),
+						Object:    xsdobject.String("British"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -286,7 +286,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("product-id"),
-						Object:    xsdliteral.NewString("9678AOU879"),
+						Object:    xsdobject.String("9678AOU879"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -342,7 +342,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("name"),
-						Object:    xsdliteral.NewString("Panasonic White 60L Refrigerator"),
+						Object:    xsdobject.String("Panasonic White 60L Refrigerator"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -430,7 +430,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("reviewCount"),
-						Object:    xsdliteral.NewString("11"),
+						Object:    xsdobject.String("11"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -492,7 +492,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("name"),
-						Object:    xsdliteral.NewString("Amanda"),
+						Object:    xsdobject.String("Amanda"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -534,7 +534,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("name"),
-						Object:    xsdliteral.NewString("Jazz Band"),
+						Object:    xsdobject.String("Jazz Band"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -555,7 +555,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("size"),
-						Object:    xsdliteral.NewString("12"),
+						Object:    xsdobject.String("12"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -588,7 +588,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("name"),
-						Object:    xsdliteral.NewString("Amanda"),
+						Object:    xsdobject.String("Amanda"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -630,7 +630,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("name"),
-						Object:    xsdliteral.NewString("Jazz Band"),
+						Object:    xsdobject.String("Jazz Band"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -651,7 +651,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("size"),
-						Object:    xsdliteral.NewString("12"),
+						Object:    xsdobject.String("12"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -684,7 +684,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("flavor"),
-						Object:    xsdliteral.NewString("Lemon sorbet"),
+						Object:    xsdobject.String("Lemon sorbet"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -705,7 +705,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("flavor"),
-						Object:    xsdliteral.NewString("Apricot sorbet"),
+						Object:    xsdobject.String("Apricot sorbet"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -734,7 +734,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("favorite-color"),
-						Object:    xsdliteral.NewString("orange"),
+						Object:    xsdobject.String("orange"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -755,7 +755,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("favorite-fruit"),
-						Object:    xsdliteral.NewString("orange"),
+						Object:    xsdobject.String("orange"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -785,7 +785,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("name"),
-						Object:    xsdliteral.NewString("The Castle"),
+						Object:    xsdobject.String("The Castle"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -816,7 +816,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("name"),
-						Object:    xsdliteral.NewString("The Castle"),
+						Object:    xsdobject.String("The Castle"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -869,7 +869,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("name"),
-						Object:    xsdliteral.NewString("Hedral"),
+						Object:    xsdobject.String("Hedral"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -890,7 +890,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("desc"),
-						Object:    xsdliteral.NewString("Hedral is a male american domestic\n shorthair, with a fluffy black fur with white paws and belly."),
+						Object:    xsdobject.String("Hedral is a male american domestic\n shorthair, with a fluffy black fur with white paws and belly."),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -968,7 +968,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("urn:isbn:0-330-34032-8"),
 						Predicate: rdf.IRI("title"),
-						Object:    xsdliteral.NewString("The Reality Dysfunction\n "),
+						Object:    xsdobject.String("The Reality Dysfunction\n "),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -989,7 +989,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("urn:isbn:0-330-34032-8"),
 						Predicate: rdf.IRI("author"),
-						Object:    xsdliteral.NewString("Peter F. Hamilton\n "),
+						Object:    xsdobject.String("Peter F. Hamilton\n "),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1068,7 +1068,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("name"),
-						Object:    xsdliteral.NewString("Hedral"),
+						Object:    xsdobject.String("Hedral"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1089,7 +1089,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("https://example.com/fn"),
-						Object:    xsdliteral.NewString("Hedral"),
+						Object:    xsdobject.String("Hedral"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1110,7 +1110,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("desc"),
-						Object:    xsdliteral.NewString("Hedral is a male American domestic\n shorthair, with a fluffy black fur with white paws and belly."),
+						Object:    xsdobject.String("Hedral is a male American domestic\n shorthair, with a fluffy black fur with white paws and belly."),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1131,7 +1131,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("https://example.com/color"),
-						Object:    xsdliteral.NewString("black"),
+						Object:    xsdobject.String("black"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1152,7 +1152,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("https://example.com/color"),
-						Object:    xsdliteral.NewString("white"),
+						Object:    xsdobject.String("white"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1252,7 +1252,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("name"),
-						Object:    xsdliteral.NewString("Tank Locomotive (DB 80)\n "),
+						Object:    xsdobject.String("Tank Locomotive (DB 80)\n "),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1273,7 +1273,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("product-code"),
-						Object:    xsdliteral.NewString("33041\n "),
+						Object:    xsdobject.String("33041\n "),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1294,7 +1294,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("scale"),
-						Object:    xsdliteral.NewString("HO\n "),
+						Object:    xsdobject.String("HO\n "),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1315,7 +1315,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("digital"),
-						Object:    xsdliteral.NewString("Delta\n"),
+						Object:    xsdobject.String("Delta\n"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1393,7 +1393,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("name"),
-						Object:    xsdliteral.NewString("Turnout Lantern Kit\n "),
+						Object:    xsdobject.String("Turnout Lantern Kit\n "),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1414,7 +1414,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("product-code"),
-						Object:    xsdliteral.NewString("74470\n "),
+						Object:    xsdobject.String("74470\n "),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1435,7 +1435,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("track-type"),
-						Object:    xsdliteral.NewString("C"),
+						Object:    xsdobject.String("C"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1456,7 +1456,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("scale"),
-						Object:    xsdliteral.NewString("HO"),
+						Object:    xsdobject.String("HO"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1511,7 +1511,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("name"),
-						Object:    xsdliteral.NewString("Express Train Passenger Car (DB Am 203)\n "),
+						Object:    xsdobject.String("Express Train Passenger Car (DB Am 203)\n "),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1532,7 +1532,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("product-code"),
-						Object:    xsdliteral.NewString("8710\n "),
+						Object:    xsdobject.String("8710\n "),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1553,7 +1553,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("scale"),
-						Object:    xsdliteral.NewString("Z\n"),
+						Object:    xsdobject.String("Z\n"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1584,7 +1584,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("a"),
-						Object:    xsdliteral.NewString("1"),
+						Object:    xsdobject.String("1"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1605,7 +1605,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("a"),
-						Object:    xsdliteral.NewString("2"),
+						Object:    xsdobject.String("2"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1626,7 +1626,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("b"),
-						Object:    xsdliteral.NewString("test"),
+						Object:    xsdobject.String("test"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1657,7 +1657,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("b"),
-						Object:    xsdliteral.NewString("test"),
+						Object:    xsdobject.String("test"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1678,7 +1678,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("a"),
-						Object:    xsdliteral.NewString("1"),
+						Object:    xsdobject.String("1"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1699,7 +1699,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("a"),
-						Object:    xsdliteral.NewString("2"),
+						Object:    xsdobject.String("2"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1730,7 +1730,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("a"),
-						Object:    xsdliteral.NewString("1"),
+						Object:    xsdobject.String("1"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1751,7 +1751,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("b"),
-						Object:    xsdliteral.NewString("test"),
+						Object:    xsdobject.String("test"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1772,7 +1772,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("a"),
-						Object:    xsdliteral.NewString("2"),
+						Object:    xsdobject.String("2"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1805,7 +1805,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("a"),
-						Object:    xsdliteral.NewString("1"),
+						Object:    xsdobject.String("1"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1826,7 +1826,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("b"),
-						Object:    xsdliteral.NewString("test"),
+						Object:    xsdobject.String("test"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1847,7 +1847,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("a"),
-						Object:    xsdliteral.NewString("2"),
+						Object:    xsdobject.String("2"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1958,7 +1958,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("title"),
-						Object:    xsdliteral.NewString("The house I found."),
+						Object:    xsdobject.String("The house I found."),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2042,7 +2042,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("title"),
-						Object:    xsdliteral.NewString("The mailbox."),
+						Object:    xsdobject.String("The mailbox."),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2141,7 +2141,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("fn"),
-						Object:    xsdliteral.NewString("\n  \n   Jack\n   Bauer\n  \n "),
+						Object:    xsdobject.String("\n  \n   Jack\n   Bauer\n  \n "),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2183,7 +2183,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("given-name"),
-						Object:    xsdliteral.NewString("Jack"),
+						Object:    xsdobject.String("Jack"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2204,7 +2204,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("family-name"),
-						Object:    xsdliteral.NewString("Bauer"),
+						Object:    xsdobject.String("Bauer"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2267,7 +2267,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
 						Predicate: rdf.IRI("organization-name"),
-						Object:    xsdliteral.NewString("Counter-Terrorist Unit"),
+						Object:    xsdobject.String("Counter-Terrorist Unit"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2288,7 +2288,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
 						Predicate: rdf.IRI("organization-unit"),
-						Object:    xsdliteral.NewString("Los Angeles Division"),
+						Object:    xsdobject.String("Los Angeles Division"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2330,7 +2330,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
 						Predicate: rdf.IRI("street-address"),
-						Object:    xsdliteral.NewString("10201 W. Pico Blvd."),
+						Object:    xsdobject.String("10201 W. Pico Blvd."),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2351,7 +2351,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
 						Predicate: rdf.IRI("locality"),
-						Object:    xsdliteral.NewString("Los Angeles"),
+						Object:    xsdobject.String("Los Angeles"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2372,7 +2372,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
 						Predicate: rdf.IRI("region"),
-						Object:    xsdliteral.NewString("CA"),
+						Object:    xsdobject.String("CA"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2393,7 +2393,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
 						Predicate: rdf.IRI("postal-code"),
-						Object:    xsdliteral.NewString("90064"),
+						Object:    xsdobject.String("90064"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2414,7 +2414,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
 						Predicate: rdf.IRI("country-name"),
-						Object:    xsdliteral.NewString("United States"),
+						Object:    xsdobject.String("United States"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2435,7 +2435,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("geo"),
-						Object:    xsdliteral.NewString("34.052339;-118.410623"),
+						Object:    xsdobject.String("34.052339;-118.410623"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2477,7 +2477,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b4"),
 						Predicate: rdf.IRI("value"),
-						Object:    xsdliteral.NewString("+1 (310) 597 3781"),
+						Object:    xsdobject.String("+1 (310) 597 3781"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2498,7 +2498,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b4"),
 						Predicate: rdf.IRI("type"),
-						Object:    xsdliteral.NewString("work"),
+						Object:    xsdobject.String("work"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2519,7 +2519,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b4"),
 						Predicate: rdf.IRI("type"),
-						Object:    xsdliteral.NewString("voice"),
+						Object:    xsdobject.String("voice"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2582,7 +2582,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("email"),
-						Object:    xsdliteral.NewString("j.bauer@la.ctu.gov.invalid"),
+						Object:    xsdobject.String("j.bauer@la.ctu.gov.invalid"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2624,7 +2624,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b5"),
 						Predicate: rdf.IRI("value"),
-						Object:    xsdliteral.NewString("+1 (310) 555 3781"),
+						Object:    xsdobject.String("+1 (310) 555 3781"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2645,7 +2645,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b5"),
 						Predicate: rdf.IRI("type"),
-						Object:    xsdliteral.NewString("cell"),
+						Object:    xsdobject.String("cell"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2666,7 +2666,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("rev"),
-						Object:    xsdliteral.NewString("2008-07-20 21:00:00+01:00"),
+						Object:    xsdobject.String("2008-07-20 21:00:00+01:00"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2708,7 +2708,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b6"),
 						Predicate: rdf.IRI("type"),
-						Object:    xsdliteral.NewString("home"),
+						Object:    xsdobject.String("home"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2729,7 +2729,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b6"),
 						Predicate: rdf.IRI("value"),
-						Object:    xsdliteral.NewString("01632 960 123"),
+						Object:    xsdobject.String("01632 960 123"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2786,7 +2786,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("fn"),
-						Object:    xsdliteral.NewString("Alfred\n Person"),
+						Object:    xsdobject.String("Alfred\n Person"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2828,7 +2828,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("given-name"),
-						Object:    xsdliteral.NewString("Alfred"),
+						Object:    xsdobject.String("Alfred"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2849,7 +2849,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("family-name"),
-						Object:    xsdliteral.NewString("Person"),
+						Object:    xsdobject.String("Person"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2891,7 +2891,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
 						Predicate: rdf.IRI("street-address"),
-						Object:    xsdliteral.NewString("1600 Amphitheatre Parkway"),
+						Object:    xsdobject.String("1600 Amphitheatre Parkway"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2912,7 +2912,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
 						Predicate: rdf.IRI("street-address"),
-						Object:    xsdliteral.NewString("Building 43, Second Floor"),
+						Object:    xsdobject.String("Building 43, Second Floor"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2933,7 +2933,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
 						Predicate: rdf.IRI("locality"),
-						Object:    xsdliteral.NewString("Mountain View"),
+						Object:    xsdobject.String("Mountain View"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2954,7 +2954,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
 						Predicate: rdf.IRI("region"),
-						Object:    xsdliteral.NewString("CA"),
+						Object:    xsdobject.String("CA"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2975,7 +2975,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
 						Predicate: rdf.IRI("postal-code"),
-						Object:    xsdliteral.NewString("94043"),
+						Object:    xsdobject.String("94043"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -3026,7 +3026,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("fn"),
-						Object:    xsdliteral.NewString("George Washington"),
+						Object:    xsdobject.String("George Washington"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -3068,7 +3068,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("given-name"),
-						Object:    xsdliteral.NewString("George"),
+						Object:    xsdobject.String("George"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -3089,7 +3089,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("family-name"),
-						Object:    xsdliteral.NewString("Washington"),
+						Object:    xsdobject.String("Washington"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -3153,7 +3153,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("summary"),
-						Object:    xsdliteral.NewString("Bluesday Tuesday: Money Road"),
+						Object:    xsdobject.String("Bluesday Tuesday: Money Road"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -3243,7 +3243,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("location"),
-						Object:    xsdliteral.NewString("The RoadHouse"),
+						Object:    xsdobject.String("The RoadHouse"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -3264,7 +3264,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("description"),
-						Object:    xsdliteral.NewString("via livebrum.co.uk"),
+						Object:    xsdobject.String("via livebrum.co.uk"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -3321,7 +3321,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("summary"),
-						Object:    xsdliteral.NewString("Bluesday Tuesday: Money Road"),
+						Object:    xsdobject.String("Bluesday Tuesday: Money Road"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -3390,7 +3390,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("location"),
-						Object:    xsdliteral.NewString("The RoadHouse"),
+						Object:    xsdobject.String("The RoadHouse"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -3432,7 +3432,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("description"),
-						Object:    xsdliteral.NewString("via livebrum.co.uk"),
+						Object:    xsdobject.String("via livebrum.co.uk"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -3512,7 +3512,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("title"),
-						Object:    xsdliteral.NewString("My Pond"),
+						Object:    xsdobject.String("My Pond"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -3636,7 +3636,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("headline"),
-						Object:    xsdliteral.NewString("Progress report"),
+						Object:    xsdobject.String("Progress report"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -3807,7 +3807,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
 						Predicate: rdf.IRI("name"),
-						Object:    xsdliteral.NewString("Greg"),
+						Object:    xsdobject.String("Greg"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -3957,7 +3957,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b4"),
 						Predicate: rdf.IRI("name"),
-						Object:    xsdliteral.NewString("Charlotte"),
+						Object:    xsdobject.String("Charlotte"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{

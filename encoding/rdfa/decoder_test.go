@@ -11,9 +11,9 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding/html"
 	"github.com/dpb587/rdfkit-go/encoding/ntriples"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
-	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfliteral"
+	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfobject"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
-	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdliteral"
+	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
@@ -214,7 +214,7 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://schema.org/name"),
-						Object:    xsdliteral.NewString("Muse"),
+						Object:    xsdobject.String("Muse"),
 					},
 				},
 				rdfioutil.Statement{
@@ -242,7 +242,7 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("http://schema.org/name"),
-						Object:    xsdliteral.NewString("Muse"),
+						Object:    xsdobject.String("Muse"),
 					},
 				},
 			},
@@ -279,7 +279,7 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://schema.org/name"),
-						Object:    xsdliteral.NewString("John Lennon"),
+						Object:    xsdobject.String("John Lennon"),
 					},
 				},
 				rdfioutil.Statement{
@@ -300,14 +300,14 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("http://schema.org/name"),
-						Object:    xsdliteral.NewString("The Beatles"),
+						Object:    xsdobject.String("The Beatles"),
 					},
 				},
 				rdfioutil.Statement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("http://schema.org/size"),
-						Object:    xsdliteral.NewString("4"),
+						Object:    xsdobject.String("4"),
 					},
 				},
 			},
@@ -363,7 +363,7 @@ func TestW3trRdfaCoreNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI(""),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/creator"),
-						Object:    xsdliteral.NewString("Jo"),
+						Object:    xsdobject.String("Jo"),
 					},
 				},
 			},
@@ -386,7 +386,7 @@ func TestW3trRdfaCoreNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI(""),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/creator"),
-						Object:    xsdliteral.NewString("Jo"),
+						Object:    xsdobject.String("Jo"),
 					},
 				},
 			},
@@ -417,7 +417,7 @@ func TestW3trRdfaCoreNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://www.example.org/jo/blog"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/creator"),
-						Object:    xsdliteral.NewString("Jo"),
+						Object:    xsdobject.String("Jo"),
 					},
 				},
 			},
@@ -457,7 +457,7 @@ func TestW3trRdfaCoreNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI(""),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/creator"),
-						Object:    xsdliteral.NewString("Jo"),
+						Object:    xsdobject.String("Jo"),
 					},
 				},
 				rdfioutil.Statement{
@@ -471,7 +471,7 @@ func TestW3trRdfaCoreNonNormative(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("#bbq"),
 						Predicate: rdf.IRI("http://www.w3.org/2002/12/cal/ical#summary"),
-						Object:    xsdliteral.NewString("\n        one last summer barbecue\n      "),
+						Object:    xsdobject.String("\n        one last summer barbecue\n      "),
 					},
 				},
 				rdfioutil.Statement{
@@ -523,7 +523,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("photo1.jpg"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/creator"),
-						Object:    xsdliteral.NewString("Mark Birbeck"),
+						Object:    xsdobject.String("Mark Birbeck"),
 					},
 				},
 			},
@@ -546,14 +546,14 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Albert_Einstein"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
-						Object:    xsdliteral.NewString("Albert Einstein"),
+						Object:    xsdobject.String("Albert Einstein"),
 					},
 				},
 				rdfioutil.Statement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Albert_Einstein"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/givenName"),
-						Object:    xsdliteral.NewString("Albert"),
+						Object:    xsdobject.String("Albert"),
 					},
 				},
 			},
@@ -601,14 +601,14 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
-						Object:    xsdliteral.NewString("Albert Einstein"),
+						Object:    xsdobject.String("Albert Einstein"),
 					},
 				},
 				rdfioutil.Statement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/givenName"),
-						Object:    xsdliteral.NewString("Albert"),
+						Object:    xsdobject.String("Albert"),
 					},
 				},
 			},
@@ -631,14 +631,14 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
-						Object:    xsdliteral.NewString("Albert Einstein"),
+						Object:    xsdobject.String("Albert Einstein"),
 					},
 				},
 				rdfioutil.Statement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/givenName"),
-						Object:    xsdliteral.NewString("Albert"),
+						Object:    xsdobject.String("Albert"),
 					},
 				},
 			},
@@ -669,7 +669,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/conventionalLongName"),
-						Object:    xsdliteral.NewString("the German Empire"),
+						Object:    xsdobject.String("the German Empire"),
 					},
 				},
 			},
@@ -688,7 +688,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Albert_Einstein"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
-						Object:    xsdliteral.NewString("Albert Einstein"),
+						Object:    xsdobject.String("Albert Einstein"),
 					},
 				},
 				rdfioutil.Statement{
@@ -712,7 +712,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/German_Empire"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/conventionalLongName"),
-						Object:    xsdliteral.NewString("the German Empire"),
+						Object:    xsdobject.String("the German Empire"),
 					},
 				},
 			},
@@ -732,7 +732,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Albert_Einstein"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
-						Object:    xsdliteral.NewString("Albert Einstein"),
+						Object:    xsdobject.String("Albert Einstein"),
 					},
 				},
 				rdfioutil.Statement{
@@ -756,7 +756,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/German_Empire"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/conventionalLongName"),
-						Object:    xsdliteral.NewString("the German Empire"),
+						Object:    xsdobject.String("the German Empire"),
 					},
 				},
 				rdfioutil.Statement{
@@ -788,7 +788,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Albert_Einstein"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
-						Object:    xsdliteral.NewString("Albert Einstein"),
+						Object:    xsdobject.String("Albert Einstein"),
 					},
 				},
 				rdfioutil.Statement{
@@ -816,7 +816,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
-						Object:    xsdliteral.NewString("Albert Einstein"),
+						Object:    xsdobject.String("Albert Einstein"),
 					},
 				},
 				rdfioutil.Statement{
@@ -857,7 +857,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
-						Object:    xsdliteral.NewString("Albert Einstein"),
+						Object:    xsdobject.String("Albert Einstein"),
 					},
 				},
 				rdfioutil.Statement{
@@ -900,7 +900,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
-						Object:    xsdliteral.NewString("Albert Einstein"),
+						Object:    xsdobject.String("Albert Einstein"),
 					},
 				},
 				rdfioutil.Statement{
@@ -987,7 +987,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
-						Object:    xsdliteral.NewString("Albert Einstein"),
+						Object:    xsdobject.String("Albert Einstein"),
 					},
 				},
 				rdfioutil.Statement{
@@ -1018,7 +1018,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
-						Object:    xsdliteral.NewString("Arthur Schopenhauer"),
+						Object:    xsdobject.String("Arthur Schopenhauer"),
 					},
 				},
 				rdfioutil.Statement{
@@ -1049,7 +1049,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
-						Object:    xsdliteral.NewString("Albert Einstein"),
+						Object:    xsdobject.String("Albert Einstein"),
 					},
 				},
 				rdfioutil.Statement{
@@ -1101,7 +1101,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://internet-apps.blogspot.com/"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/creator"),
-						Object:    xsdliteral.NewString("Mark Birbeck"),
+						Object:    xsdobject.String("Mark Birbeck"),
 					},
 				},
 			},
@@ -1115,7 +1115,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://internet-apps.blogspot.com/"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/creator"),
-						Object:    xsdliteral.NewString("Mark Birbeck"),
+						Object:    xsdobject.String("Mark Birbeck"),
 					},
 				},
 			},
@@ -1129,7 +1129,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://internet-apps.blogspot.com/"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/creator"),
-						Object:    xsdliteral.NewString("Mark Birbeck"),
+						Object:    xsdobject.String("Mark Birbeck"),
 					},
 				},
 			},
@@ -1143,7 +1143,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://example.org/node"),
 						Predicate: rdf.IRI("http://example.org/property"),
-						Object:    rdfliteral.NewLangString("fr", "chat"),
+						Object:    rdfobject.LangString("fr", "chat"),
 					},
 				},
 			},
@@ -1165,7 +1165,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://example.org/node"),
 						Predicate: rdf.IRI("http://www.example.com/ns/property"),
-						Object:    rdfliteral.NewLangString("fr", "chat"),
+						Object:    rdfobject.LangString("fr", "chat"),
 					},
 				},
 			},
@@ -1221,7 +1221,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Albert_Einstein"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
-						Object:    xsdliteral.NewString("Albert Einstein"),
+						Object:    xsdobject.String("Albert Einstein"),
 					},
 				},
 			},
@@ -1310,7 +1310,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/title"),
-						Object:    xsdliteral.NewString("Semantic Annotation and Retrieval"),
+						Object:    xsdobject.String("Semantic Annotation and Retrieval"),
 					},
 				},
 				rdfioutil.Statement{
@@ -1384,7 +1384,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/title"),
-						Object:    xsdliteral.NewString("Semantic Annotation and Retrieval"),
+						Object:    xsdobject.String("Semantic Annotation and Retrieval"),
 					},
 				},
 				rdfioutil.Statement{
@@ -1412,7 +1412,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
-						Object:    xsdliteral.NewString("Mark Birbeck"),
+						Object:    xsdobject.String("Mark Birbeck"),
 					},
 				},
 				rdfioutil.Statement{
@@ -1458,7 +1458,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/title"),
-						Object:    xsdliteral.NewString("Semantic Annotation and Retrieval"),
+						Object:    xsdobject.String("Semantic Annotation and Retrieval"),
 					},
 				},
 				rdfioutil.Statement{
@@ -1486,7 +1486,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
-						Object:    xsdliteral.NewString("Mark Birbeck"),
+						Object:    xsdobject.String("Mark Birbeck"),
 					},
 				},
 				rdfioutil.Statement{

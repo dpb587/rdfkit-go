@@ -14,7 +14,7 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/foaf/foafiri"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
-	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdliteral"
+	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
@@ -67,24 +67,24 @@ func NewReportFromEnv(t *testing.T) ReportScope {
 		releaseStatements := rdfdescription.StatementList{
 			rdfdescription.ObjectStatement{
 				Predicate: rdf.IRI("http://usefulinc.com/ns/doap#name"),
-				Object:    xsdliteral.NewString("jelly-rdf-go"),
+				Object:    xsdobject.String("jelly-rdf-go"),
 			},
 			rdfdescription.ObjectStatement{
 				Predicate: rdf.IRI("http://usefulinc.com/ns/doap#revision"),
-				Object:    xsdliteral.NewString(v),
+				Object:    xsdobject.String(v),
 			},
 		}
 
 		if v := os.Getenv("TESTING_EARL_SUBJECT_RELEASE_DATE"); len(v) > 0 {
-			if value, err := xsdliteral.MapDateTime(v); err == nil {
+			if value, err := xsdobject.MapDateTime(v); err == nil {
 				releaseStatements = append(releaseStatements, rdfdescription.ObjectStatement{
 					Predicate: rdf.IRI("http://purl.org/dc/terms/created"),
-					Object:    value.AsLiteralTerm(),
+					Object:    value,
 				})
-			} else if value, err := xsdliteral.MapDate(v); err == nil {
+			} else if value, err := xsdobject.MapDate(v); err == nil {
 				releaseStatements = append(releaseStatements, rdfdescription.ObjectStatement{
 					Predicate: rdf.IRI("http://purl.org/dc/terms/created"),
-					Object:    value.AsLiteralTerm(),
+					Object:    value,
 				})
 			} else {
 				t.Fatalf("configure: TESTING_EARL_SUBJECT_RELEASE_DATE: %v", err)
