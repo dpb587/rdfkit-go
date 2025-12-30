@@ -1,7 +1,6 @@
 package testsuite
 
 import (
-	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
@@ -19,12 +18,13 @@ import (
 	"github.com/dpb587/rdfkit-go/internal/devencoding/rdfioutil"
 	"github.com/dpb587/rdfkit-go/internal/devtest"
 	"github.com/dpb587/rdfkit-go/rdfio"
+	"github.com/dpb587/rdfkit-go/testing/testingarchive"
 )
 
 const manifestPrefix = "https://w3c.github.io/json-ld-api/tests/"
 
 func Test(t *testing.T) {
-	archiveEntries, manifestResources := requireTestdata(t)
+	testdata, manifestResources := requireTestdata(t)
 	oxigraphExec := os.Getenv("TESTING_OXIGRAPH_EXEC")
 
 	var debugWriter = io.Discard
@@ -51,12 +51,11 @@ func Test(t *testing.T) {
 			dopt := jsonld.DecoderConfig{}.
 				SetDefaultBase(manifestPrefix + sequence.Input).
 				SetDocumentLoader(jsonldtype.DocumentLoaderFunc(func(ctx context.Context, u string, opts jsonldtype.DocumentLoaderOptions) (jsonldtype.RemoteDocument, error) {
-					buf, ok := archiveEntries[u]
-					if !ok {
+					if !testdata.HasFile(u) {
 						return jsonldtype.RemoteDocument{}, fmt.Errorf("unknown url: %s", u)
 					}
 
-					doc, err := inspectjson.Parse(bytes.NewReader(buf))
+					doc, err := inspectjson.Parse(testdata.NewFileByteReader(t, u))
 					if err != nil {
 						return jsonldtype.RemoteDocument{}, fmt.Errorf("parse: %v", err)
 					}
@@ -89,7 +88,7 @@ func Test(t *testing.T) {
 			}
 
 			r, err := jsonld.NewDecoder(
-				bytes.NewReader(archiveEntries[manifestPrefix+sequence.Input]),
+				testdata.NewFileByteReader(t, manifestPrefix+sequence.Input),
 				dopt,
 			)
 			if err != nil {
@@ -142,7 +141,7 @@ func Test(t *testing.T) {
 				}
 
 				expectedStatements, err := rdfio.CollectStatementsErr(nquads.NewDecoder(
-					bytes.NewReader(archiveEntries[manifestPrefix+sequence.Expect]),
+					testdata.NewFileByteReader(t, manifestPrefix+sequence.Expect),
 				))
 				if err != nil {
 					t.Fatalf("setup error: decode result: %v", err)
@@ -161,7 +160,7 @@ func Test(t *testing.T) {
 					t.Log(err.Error())
 					t.SkipNow()
 				} else {
-					oxigraphErr := devtest.AssertOxigraphAsk(t.Context(), oxigraphExec, manifestPrefix, bytes.NewReader(archiveEntries[manifestPrefix+sequence.Expect]), actualStatements)
+					oxigraphErr := devtest.AssertOxigraphAsk(t.Context(), oxigraphExec, manifestPrefix, testdata.NewFileByteReader(t, manifestPrefix+sequence.Expect), actualStatements)
 					if oxigraphErr != nil {
 						t.Logf("eval: %v", oxigraphErr)
 						t.Log(err.Error())
@@ -175,23 +174,20 @@ func Test(t *testing.T) {
 	}
 }
 
-func requireTestdata(t *testing.T) (map[string][]byte, manifestSchema) {
-	archiveEntries, err := devtest.OpenArchiveTarGz(
+func requireTestdata(t *testing.T) (testingarchive.Archive, manifestSchema) {
+	testdata := testingarchive.OpenTarGz(
+		t,
 		"testdata.tar.gz",
 		func(v string) string {
 			return manifestPrefix + strings.TrimPrefix(v, "./")
 		},
 	)
-	if err != nil {
-		t.Fatal(fmt.Errorf("testdata: %v", err))
-	}
 
 	var loadedManifest manifestSchema
 
-	err = json.Unmarshal(archiveEntries[manifestPrefix+"manifest.jsonld"], &loadedManifest)
-	if err != nil {
+	if err := json.Unmarshal(testdata.GetFileBytes(t, manifestPrefix+"manifest.jsonld"), &loadedManifest); err != nil {
 		t.Fatalf("unmarshal: %v", err)
 	}
 
-	return archiveEntries, loadedManifest
+	return testdata, loadedManifest
 }

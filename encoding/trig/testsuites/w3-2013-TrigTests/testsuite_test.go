@@ -1,7 +1,6 @@
 package testsuite
 
 import (
-	"bytes"
 	"crypto/sha256"
 	"encoding/base64"
 	"fmt"
@@ -19,12 +18,13 @@ import (
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
 	"github.com/dpb587/rdfkit-go/rdfio"
+	"github.com/dpb587/rdfkit-go/testing/testingarchive"
 )
 
 const manifestPrefix = "http://www.w3.org/2013/TriGTests/"
 
 func Test(t *testing.T) {
-	archiveEntries, manifestResources := requireTestdata(t)
+	testdata, manifestResources := requireTestdata(t)
 	oxigraphExec := os.Getenv("TESTING_OXIGRAPH_EXEC")
 
 	var debugWriter = io.Discard
@@ -81,14 +81,14 @@ func Test(t *testing.T) {
 			// duplicate naming; disambiguate
 
 			h := sha256.New()
-			h.Write(archiveEntries[string(testAction)])
+			h.Write(testdata.GetFileBytes(t, string(testAction)))
 
 			testName += fmt.Sprintf("/%s", base64.RawStdEncoding.EncodeToString(h.Sum(nil))[0:8])
 		}
 
 		decodeAction := func() (rdfio.StatementList, error) {
 			r, err := trig.NewDecoder(
-				bytes.NewReader(archiveEntries[string(testAction)]),
+				testdata.NewFileByteReader(t, string(testAction)),
 				trig.DecoderConfig{}.
 					SetDefaultBase(string(testAction)).
 					SetCaptureTextOffsets(true),
@@ -105,7 +105,7 @@ func Test(t *testing.T) {
 		if isEval {
 			t.Run("Eval/"+testName, func(t *testing.T) {
 				expectedStatements, err := rdfio.CollectStatementsErr(nquads.NewDecoder(
-					bytes.NewReader(archiveEntries[string(testResult)]),
+					testdata.NewFileByteReader(t, string(testResult)),
 				))
 				if err != nil {
 					t.Fatalf("setup error: decode result: %v", err)
@@ -124,7 +124,7 @@ func Test(t *testing.T) {
 					t.Log(err.Error())
 					t.SkipNow()
 				} else {
-					oxigraphErr := devtest.AssertOxigraphAsk(t.Context(), oxigraphExec, testAction, bytes.NewReader(archiveEntries[string(testResult)]), actualStatements)
+					oxigraphErr := devtest.AssertOxigraphAsk(t.Context(), oxigraphExec, testAction, testdata.NewFileByteReader(t, string(testResult)), actualStatements)
 					if oxigraphErr != nil {
 						t.Logf("eval: %v", oxigraphErr)
 						t.Log(err.Error())
@@ -154,22 +154,20 @@ func Test(t *testing.T) {
 	}
 }
 
-func requireTestdata(t *testing.T) (map[string][]byte, *rdfdescription.ResourceListBuilder) {
-	archiveEntries, err := devtest.OpenArchiveTarGz(
+func requireTestdata(t *testing.T) (testingarchive.Archive, *rdfdescription.ResourceListBuilder) {
+	testdata := testingarchive.OpenTarGz(
+		t,
 		"testdata.tar.gz",
 		func(v string) string {
 			return manifestPrefix + strings.TrimPrefix(v, "./")
 		},
 	)
-	if err != nil {
-		t.Fatal(fmt.Errorf("testdata: %v", err))
-	}
 
 	manifestResources := rdfdescription.NewResourceListBuilder()
 
 	{
 		manifestDecoder, err := turtle.NewDecoder(
-			bytes.NewReader(archiveEntries[manifestPrefix+"manifest.ttl"]),
+			testdata.NewFileByteReader(t, manifestPrefix+"manifest.ttl"),
 			turtle.DecoderConfig{}.
 				SetDefaultBase(manifestPrefix),
 		)
@@ -188,5 +186,5 @@ func requireTestdata(t *testing.T) (map[string][]byte, *rdfdescription.ResourceL
 		}
 	}
 
-	return archiveEntries, manifestResources
+	return testdata, manifestResources
 }

@@ -1,25 +1,25 @@
-package devtest
+package testingarchive
 
 import (
 	"archive/tar"
 	"compress/gzip"
 	"errors"
-	"fmt"
 	"io"
 	"os"
+	"testing"
 )
 
-func OpenArchiveTarGz(fp string, fpMap func(v string) string) (map[string][]byte, error) {
+func OpenTarGz(t *testing.T, fp string, fpMap func(v string) string) Archive {
 	fh, err := os.OpenFile(fp, os.O_RDONLY, 0)
 	if err != nil {
-		return nil, fmt.Errorf("open: %v", err)
+		t.Fatalf("open: %v", err)
 	}
 
 	defer fh.Close()
 
 	fhGzip, err := gzip.NewReader(fh)
 	if err != nil {
-		return nil, fmt.Errorf("gunzip: %v", err)
+		t.Fatalf("gunzip: %v", err)
 	}
 
 	defer fhGzip.Close()
@@ -35,12 +35,12 @@ func OpenArchiveTarGz(fp string, fpMap func(v string) string) (map[string][]byte
 				break
 			}
 
-			return nil, fmt.Errorf("next: %v", err)
+			t.Fatalf("next: %v", err)
 		}
 
 		data, err := io.ReadAll(fhTar)
 		if err != nil {
-			return nil, fmt.Errorf("read: %v", err)
+			t.Fatalf("read: %v", err)
 		}
 
 		entriesKey := header.Name
@@ -52,5 +52,5 @@ func OpenArchiveTarGz(fp string, fpMap func(v string) string) (map[string][]byte
 		entries[entriesKey] = data
 	}
 
-	return entries, nil
+	return Archive{entries: entries}
 }

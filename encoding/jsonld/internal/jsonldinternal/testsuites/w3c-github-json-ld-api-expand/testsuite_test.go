@@ -14,8 +14,8 @@ import (
 	"github.com/dpb587/inspectjson-go/inspectjson"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/internal/jsonldinternal"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
-	"github.com/dpb587/rdfkit-go/internal/devtest"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
+	"github.com/dpb587/rdfkit-go/testing/testingarchive"
 )
 
 const manifestPrefix = "https://w3c.github.io/json-ld-api/tests/"
@@ -23,19 +23,18 @@ const manifestPrefix = "https://w3c.github.io/json-ld-api/tests/"
 var manifestPrefixURL, _ = iriutil.ParseIRI(manifestPrefix)
 
 func Test(t *testing.T) {
-	archiveEntries, manifestResources := requireTestdata(t)
+	testdata, manifestResources := requireTestdata(t)
 
 	for _, sequence := range manifestResources.Sequence {
 		decodeAction := func() (jsonldinternal.ExpandedValue, error) {
 			dopt := jsonldtype.ProcessorOptions{
 				BaseURL: manifestPrefix + sequence.Input,
 				DocumentLoader: jsonldtype.DocumentLoaderFunc(func(ctx context.Context, u string, opts jsonldtype.DocumentLoaderOptions) (jsonldtype.RemoteDocument, error) {
-					buf, ok := archiveEntries[u]
-					if !ok {
+					if !testdata.HasFile(u) {
 						return jsonldtype.RemoteDocument{}, fmt.Errorf("unknown url: %s", u)
 					}
 
-					doc, err := inspectjson.Parse(bytes.NewReader(buf))
+					doc, err := inspectjson.Parse(testdata.NewFileByteReader(t, u))
 					if err != nil {
 						return jsonldtype.RemoteDocument{}, fmt.Errorf("parse: %v", err)
 					}
@@ -74,7 +73,7 @@ func Test(t *testing.T) {
 				}
 			}
 
-			parsedInput, err := inspectjson.Parse(bytes.NewReader(archiveEntries[manifestPrefix+sequence.Input]))
+			parsedInput, err := inspectjson.Parse(testdata.NewFileByteReader(t, manifestPrefix+sequence.Input))
 			if err != nil {
 				return nil, fmt.Errorf("parse: %v", err)
 			}
@@ -95,7 +94,7 @@ func Test(t *testing.T) {
 			t.Run("Eval/"+strings.TrimPrefix(sequence.ID, "#"), func(t *testing.T) {
 				var expectedBuiltin any
 
-				err := json.NewDecoder(bytes.NewReader(archiveEntries[manifestPrefix+sequence.Expect])).Decode(&expectedBuiltin)
+				err := json.NewDecoder(testdata.NewFileByteReader(t, manifestPrefix+sequence.Expect)).Decode(&expectedBuiltin)
 				if err != nil {
 					t.Fatalf("unmarshal: %v", err)
 				}
@@ -145,23 +144,20 @@ func Test(t *testing.T) {
 	}
 }
 
-func requireTestdata(t *testing.T) (map[string][]byte, manifestSchema) {
-	archiveEntries, err := devtest.OpenArchiveTarGz(
+func requireTestdata(t *testing.T) (testingarchive.Archive, manifestSchema) {
+	testdata := testingarchive.OpenTarGz(
+		t,
 		"testdata.tar.gz",
 		func(v string) string {
 			return manifestPrefix + strings.TrimPrefix(v, "./")
 		},
 	)
-	if err != nil {
-		t.Fatal(fmt.Errorf("testdata: %v", err))
-	}
 
 	var loadedManifest manifestSchema
 
-	err = json.Unmarshal(archiveEntries[manifestPrefix+"manifest.jsonld"], &loadedManifest)
-	if err != nil {
+	if err := json.Unmarshal(testdata.GetFileBytes(t, manifestPrefix+"manifest.jsonld"), &loadedManifest); err != nil {
 		t.Fatalf("unmarshal: %v", err)
 	}
 
-	return archiveEntries, loadedManifest
+	return testdata, loadedManifest
 }
