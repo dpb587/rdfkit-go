@@ -45,7 +45,7 @@ func (s *Dataset) querySimpleWhere(ctx context.Context, q simplequery.Query, sel
 
 	var found int
 
-	for _, edge := range iter.(*StatementIterator).edges {
+	for _, edge := range iter.(*QuadIterator).edges {
 		if oValuesFound {
 			var matched bool
 

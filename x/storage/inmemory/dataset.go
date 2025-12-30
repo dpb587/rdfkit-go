@@ -7,6 +7,7 @@ import (
 
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/quads"
+	"github.com/dpb587/rdfkit-go/rdf/triples"
 )
 
 var ErrNoStatement = fmt.Errorf("no statement")
@@ -70,6 +71,15 @@ func (d *Dataset) Close() error {
 	return nil
 }
 
+func (d *Dataset) GetGraph(ctx context.Context, graphName rdf.GraphNameValue) (triples.Graph, error) {
+	graph, ok := d.graphs[graphName]
+	if !ok {
+		graph = d.createGraph(graphName)
+	}
+
+	return graph, nil
+}
+
 func (d *Dataset) createGraph(graphName rdf.GraphNameValue) *Graph {
 	var tNode *Node
 
@@ -97,14 +107,10 @@ func (d *Dataset) createGraph(graphName rdf.GraphNameValue) *Graph {
 }
 
 func (d *Dataset) AddQuad(ctx context.Context, quad rdf.Quad) error {
-	return d.addQuad(ctx, quad, nil)
+	return d.addQuad(ctx, quad)
 }
 
-func (d *Dataset) AddQuadStatement(ctx context.Context, quad rdf.Quad, f StatementHook) error {
-	return d.addQuad(ctx, quad, f)
-}
-
-func (d *Dataset) addQuad(ctx context.Context, quad rdf.Quad, f StatementHook) error {
+func (d *Dataset) addQuad(ctx context.Context, quad rdf.Quad) error {
 	graph, ok := d.graphs[quad.GraphName]
 	if !ok {
 		graph = d.createGraph(quad.GraphName)
@@ -113,34 +119,25 @@ func (d *Dataset) addQuad(ctx context.Context, quad rdf.Quad, f StatementHook) e
 	statement, exists, err := d.bindStatement(graph, quad)
 	if err != nil {
 		return fmt.Errorf("bind quad: %v", err)
-	} else if exists {
-		if f != nil {
-			f(ctx, statement)
+	} else if !exists {
+		if d.hooks.InitStatement != nil {
+			d.hooks.InitStatement(graph, statement)
 		}
 
-		return nil
+		graph.assertedBySubject[statement.s] = append(graph.assertedBySubject[statement.s], statement)
+
+		// graph.assertedByPredicate[statement.p] = append(graph.assertedByPredicate[statement.p], statement)
+
+		// switch t := statement.o.t.(type) {
+		// case rdf.BlankNode, rdf.IRI:
+		// 	graph.assertedByObjectSubject[statement.o] = append(graph.assertedByObjectSubject[statement.o], statement)
+		// case rdf.Literal:
+		// 	graph.assertedByObjectLiteralDatatype[t.Datatype] = append(graph.assertedByObjectLiteralDatatype[t.Datatype], statement)
+		// }
 	}
-
-	if d.hooks.InitStatement != nil {
-		d.hooks.InitStatement(graph, statement)
-	}
-
-	graph.assertedBySubject[statement.s] = append(graph.assertedBySubject[statement.s], statement)
-	// graph.assertedByPredicate[statement.p] = append(graph.assertedByPredicate[statement.p], statement)
-
-	// switch t := statement.o.t.(type) {
-	// case rdf.BlankNode, rdf.IRI:
-	// 	graph.assertedByObjectSubject[statement.o] = append(graph.assertedByObjectSubject[statement.o], statement)
-	// case rdf.Literal:
-	// 	graph.assertedByObjectLiteralDatatype[t.Datatype] = append(graph.assertedByObjectLiteralDatatype[t.Datatype], statement)
-	// }
 
 	if d.hooks.StatementAdded != nil {
 		d.hooks.StatementAdded(ctx, graph, statement)
-	}
-
-	if f != nil {
-		f(ctx, statement)
 	}
 
 	return nil
@@ -159,10 +156,6 @@ func (d *Dataset) DeleteQuad(ctx context.Context, quad rdf.Quad) error {
 		return nil
 	}
 
-	if d.hooks.StatementDeleted != nil {
-		d.hooks.StatementDeleted(ctx, graph, statement)
-	}
-
 	graph.assertedBySubject[statement.s] = graph.assertedBySubject[statement.s].Exclude(statement)
 	// graph.assertedByPredicate[statement.p] = graph.assertedByPredicate[statement.p].Exclude(statement)
 
@@ -173,11 +166,15 @@ func (d *Dataset) DeleteQuad(ctx context.Context, quad rdf.Quad) error {
 	// 	graph.assertedByObjectLiteralDatatype[t.Datatype] = graph.assertedByObjectLiteralDatatype[t.Datatype].Exclude(statement)
 	// }
 
+	if d.hooks.StatementDeleted != nil {
+		d.hooks.StatementDeleted(ctx, graph, statement)
+	}
+
 	return nil
 }
 
 func (d *Dataset) HasQuad(ctx context.Context, quad rdf.Quad) (bool, error) {
-	_, err := d.GetStatement(ctx, quad)
+	_, err := d.GetQuadStatement(ctx, quad)
 	if err != nil {
 		if err == ErrNoStatement {
 			return false, nil
@@ -189,7 +186,7 @@ func (d *Dataset) HasQuad(ctx context.Context, quad rdf.Quad) (bool, error) {
 	return true, nil
 }
 
-func (d *Dataset) GetStatement(ctx context.Context, quad rdf.Quad) (*Statement, error) {
+func (d *Dataset) GetQuadStatement(ctx context.Context, quad rdf.Quad) (*Statement, error) {
 	graph, ok := d.graphs[quad.GraphName]
 	if !ok {
 		return nil, ErrNoStatement
@@ -209,7 +206,7 @@ func (d *Dataset) NewQuadIterator(ctx context.Context, matchers ...rdf.QuadMatch
 	var all statementList
 
 	for _, g := range d.graphs {
-		iter, err := g.newStatementIterator(matchers...)
+		iter, err := g.newQuadIterator(matchers...)
 		if err != nil {
 			return nil, fmt.Errorf("create graph statement iterator: %v", err)
 		}
@@ -217,7 +214,7 @@ func (d *Dataset) NewQuadIterator(ctx context.Context, matchers ...rdf.QuadMatch
 		all = append(all, iter.edges...)
 	}
 
-	return &StatementIterator{
+	return &QuadIterator{
 		edges: all,
 		index: -1,
 	}, nil
