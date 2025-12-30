@@ -17,12 +17,17 @@ import (
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
-	"github.com/dpb587/rdfkit-go/rdfio"
 )
 
 type DecoderOption interface {
 	apply(s *DecoderConfig)
 	newDecoder(r io.Reader) (*Decoder, error)
+}
+
+type statement struct {
+	triple            rdf.Triple
+	textOffsets       encoding.StatementTextOffsets
+	containerResource encoding.ContainerResource
 }
 
 type Decoder struct {
@@ -41,7 +46,7 @@ type Decoder struct {
 
 	buildTextOffsets encodingutil.TextOffsetsBuilderFunc
 
-	statements    []*statement
+	statements    []statement
 	statementsIdx int
 	err           error
 
@@ -49,7 +54,8 @@ type Decoder struct {
 	tokenMetadata func() (*inspectxml.TokenMetadata, bool)
 }
 
-var _ encoding.GraphDecoder = &Decoder{}
+var _ rdf.TripleIterator = &Decoder{}
+var _ encoding.StatementTextOffsetsProvider = &Decoder{}
 
 func NewDecoder(r io.Reader, opts ...DecoderOption) (*Decoder, error) {
 	compiledOpts := DecoderConfig{}
@@ -83,12 +89,16 @@ func (d *Decoder) Next() bool {
 	return d.statementsIdx < len(d.statements)
 }
 
-func (d *Decoder) GetTriple() rdf.Triple {
-	return d.statements[d.statementsIdx].triple
+func (r *Decoder) Triple() rdf.Triple {
+	return r.statements[r.statementsIdx].triple
 }
 
-func (d *Decoder) GetStatement() rdfio.Statement {
-	return d.statements[d.statementsIdx]
+func (r *Decoder) Statement() rdf.Statement {
+	return r.Triple()
+}
+
+func (r *Decoder) StatementTextOffsets() encoding.StatementTextOffsets {
+	return r.statements[r.statementsIdx].textOffsets
 }
 
 func (d *Decoder) parseAll() {
@@ -362,7 +372,7 @@ func (d *Decoder) processNodeElt(ectx evaluationContext, startElement xml.StartE
 	}
 
 	if startElement.Name != (xml.Name{Space: internal.Space, Local: internal.Local_Description_Syntax}) {
-		t := &statement{
+		t := statement{
 			triple: rdf.Triple{
 				Subject:   eSubject,
 				Predicate: rdfiri.Type_Property,
@@ -372,14 +382,14 @@ func (d *Decoder) processNodeElt(ectx evaluationContext, startElement xml.StartE
 		}
 
 		if d.captureTextOffsets {
-			t.offsets = encoding.StatementTextOffsets{}
+			t.textOffsets = encoding.StatementTextOffsets{}
 
 			if eSubjectLocation != nil {
-				t.offsets[encoding.SubjectStatementOffsets] = *eSubjectLocation
+				t.textOffsets[encoding.SubjectStatementOffsets] = *eSubjectLocation
 			}
 
 			if tokenMetadata, ok := d.tokenMetadata(); ok && tokenMetadata.TagName != nil {
-				t.offsets[encoding.ObjectStatementOffsets] = *tokenMetadata.TagName
+				t.textOffsets[encoding.ObjectStatementOffsets] = *tokenMetadata.TagName
 			}
 		}
 
@@ -392,7 +402,7 @@ func (d *Decoder) processNodeElt(ectx evaluationContext, startElement xml.StartE
 			continue // already handled
 
 		case internal.Local_Type_Property:
-			t := &statement{
+			t := statement{
 				triple: rdf.Triple{
 					Subject:   eSubject,
 					Predicate: rdfiri.Type_Property,
@@ -402,17 +412,17 @@ func (d *Decoder) processNodeElt(ectx evaluationContext, startElement xml.StartE
 			}
 
 			if d.captureTextOffsets {
-				t.offsets = encoding.StatementTextOffsets{}
+				t.textOffsets = encoding.StatementTextOffsets{}
 
 				if eSubjectLocation != nil {
-					t.offsets[encoding.SubjectStatementOffsets] = *eSubjectLocation
+					t.textOffsets[encoding.SubjectStatementOffsets] = *eSubjectLocation
 				}
 
 				if attr.Metadata != nil {
-					t.offsets[encoding.PredicateStatementOffsets] = attr.Metadata.Name
+					t.textOffsets[encoding.PredicateStatementOffsets] = attr.Metadata.Name
 
 					if attr.Metadata.Value != nil {
-						t.offsets[encoding.ObjectStatementOffsets] = *attr.Metadata.Value
+						t.textOffsets[encoding.ObjectStatementOffsets] = *attr.Metadata.Value
 					}
 				}
 			}
@@ -446,7 +456,7 @@ func (d *Decoder) processNodeElt(ectx evaluationContext, startElement xml.StartE
 			}
 		}
 
-		t := &statement{
+		t := statement{
 			triple: rdf.Triple{
 				Subject:   eSubject,
 				Predicate: rdf.IRI(attr.Name.Space + attr.Name.Local),
@@ -456,17 +466,17 @@ func (d *Decoder) processNodeElt(ectx evaluationContext, startElement xml.StartE
 		}
 
 		if d.captureTextOffsets {
-			t.offsets = encoding.StatementTextOffsets{}
+			t.textOffsets = encoding.StatementTextOffsets{}
 
 			if eSubjectLocation != nil {
-				t.offsets[encoding.SubjectStatementOffsets] = *eSubjectLocation
+				t.textOffsets[encoding.SubjectStatementOffsets] = *eSubjectLocation
 			}
 
 			if attr.Metadata != nil {
-				t.offsets[encoding.PredicateStatementOffsets] = attr.Metadata.Name
+				t.textOffsets[encoding.PredicateStatementOffsets] = attr.Metadata.Name
 
 				if attr.Metadata.Value != nil {
-					t.offsets[encoding.ObjectStatementOffsets] = *attr.Metadata.Value
+					t.textOffsets[encoding.ObjectStatementOffsets] = *attr.Metadata.Value
 				}
 			}
 		}
@@ -668,7 +678,7 @@ func (d *Decoder) processPropertyElt(ectx evaluationContext, startElement xml.St
 					}
 				}
 
-				t := &statement{
+				t := statement{
 					triple: rdf.Triple{
 						Subject:   ectx.ParentSubject,
 						Predicate: ectx.ParentPredicate,
@@ -678,18 +688,18 @@ func (d *Decoder) processPropertyElt(ectx evaluationContext, startElement xml.St
 				}
 
 				if d.captureTextOffsets {
-					t.offsets = encoding.StatementTextOffsets{}
+					t.textOffsets = encoding.StatementTextOffsets{}
 
 					if ectx.ParentSubjectLocation != nil {
-						t.offsets[encoding.SubjectStatementOffsets] = *ectx.ParentSubjectLocation
+						t.textOffsets[encoding.SubjectStatementOffsets] = *ectx.ParentSubjectLocation
 					}
 
 					if ectx.ParentPredicateLocation != nil {
-						t.offsets[encoding.PredicateStatementOffsets] = *ectx.ParentPredicateLocation
+						t.textOffsets[encoding.PredicateStatementOffsets] = *ectx.ParentPredicateLocation
 					}
 
 					if endTokenMetadata, ok := d.tokenMetadata(); ok && startElementMetadata != nil {
-						t.offsets[encoding.ObjectStatementOffsets] = cursorio.TextOffsetRange{
+						t.textOffsets[encoding.ObjectStatementOffsets] = cursorio.TextOffsetRange{
 							From:  startElementMetadata.Token.Until,
 							Until: endTokenMetadata.Token.From,
 						}
@@ -747,7 +757,7 @@ func (d *Decoder) processPropertyElt(ectx evaluationContext, startElement xml.St
 				return fmt.Errorf("multiple name attributes found: %s", strings.Join(usedNameAttributes, ", "))
 			}
 
-			ot := &statement{
+			ot := statement{
 				triple: rdf.Triple{
 					Subject:   ectx.ParentSubject,
 					Predicate: ectx.ParentPredicate,
@@ -756,14 +766,14 @@ func (d *Decoder) processPropertyElt(ectx evaluationContext, startElement xml.St
 			}
 
 			if d.captureTextOffsets {
-				ot.offsets = encoding.StatementTextOffsets{}
+				ot.textOffsets = encoding.StatementTextOffsets{}
 
 				if ectx.ParentSubjectLocation != nil {
-					ot.offsets[encoding.SubjectStatementOffsets] = *ectx.ParentSubjectLocation
+					ot.textOffsets[encoding.SubjectStatementOffsets] = *ectx.ParentSubjectLocation
 				}
 
 				if ectx.ParentPredicateLocation != nil {
-					ot.offsets[encoding.PredicateStatementOffsets] = *ectx.ParentPredicateLocation
+					ot.textOffsets[encoding.PredicateStatementOffsets] = *ectx.ParentPredicateLocation
 				}
 			}
 
@@ -777,13 +787,13 @@ func (d *Decoder) processPropertyElt(ectx evaluationContext, startElement xml.St
 					ot.triple.Object = ectx.ResolveIRI((*resourceAttr).Value)
 
 					if d.captureTextOffsets && (*resourceAttr).Metadata.Value != nil {
-						ot.offsets[encoding.ObjectStatementOffsets] = *(*resourceAttr).Metadata.Value
+						ot.textOffsets[encoding.ObjectStatementOffsets] = *(*resourceAttr).Metadata.Value
 					}
 				} else if nodeIdAttr != nil {
 					ot.triple.Object = ectx.Global.BlankNodeStringMapper.MapBlankNodeIdentifier((*nodeIdAttr).Value)
 
 					if d.captureTextOffsets && (*nodeIdAttr).Metadata.Value != nil {
-						ot.offsets[encoding.ObjectStatementOffsets] = *(*nodeIdAttr).Metadata.Value
+						ot.textOffsets[encoding.ObjectStatementOffsets] = *(*nodeIdAttr).Metadata.Value
 					}
 				} else {
 					ot.triple.Object = ectx.Global.BlankNodeFactory.NewBlankNode()
@@ -796,7 +806,7 @@ func (d *Decoder) processPropertyElt(ectx evaluationContext, startElement xml.St
 						case internal.Local_ID_Syntax, internal.Local_Resource_Syntax, internal.Local_NodeID_Syntax, internal.Local_Datatype_Syntax:
 							// already handled
 						case internal.Local_Type_Property:
-							t := &statement{
+							t := statement{
 								triple: rdf.Triple{
 									Subject:   ot.triple.Object.(rdf.SubjectValue), // definitely iri or blank node
 									Predicate: rdfiri.Type_Property,
@@ -806,17 +816,17 @@ func (d *Decoder) processPropertyElt(ectx evaluationContext, startElement xml.St
 							}
 
 							if d.captureTextOffsets {
-								t.offsets = encoding.StatementTextOffsets{}
+								t.textOffsets = encoding.StatementTextOffsets{}
 
-								if otv, ok := ot.offsets[encoding.ObjectStatementOffsets]; ok {
-									t.offsets[encoding.SubjectStatementOffsets] = otv
+								if otv, ok := ot.textOffsets[encoding.ObjectStatementOffsets]; ok {
+									t.textOffsets[encoding.SubjectStatementOffsets] = otv
 								}
 
 								if attr.Metadata != nil {
-									t.offsets[encoding.PredicateStatementOffsets] = attr.Metadata.Name
+									t.textOffsets[encoding.PredicateStatementOffsets] = attr.Metadata.Name
 
 									if attr.Metadata.Value != nil {
-										t.offsets[encoding.ObjectStatementOffsets] = *attr.Metadata.Value
+										t.textOffsets[encoding.ObjectStatementOffsets] = *attr.Metadata.Value
 									}
 								}
 							}
@@ -860,7 +870,7 @@ func (d *Decoder) processPropertyElt(ectx evaluationContext, startElement xml.St
 							}
 						}
 
-						t := &statement{
+						t := statement{
 							triple: rdf.Triple{
 								Subject:   ot.triple.Object.(rdf.SubjectValue), // definitely iri or blank node
 								Predicate: ectx.ResolveIRI(attr.Name.Space + attr.Name.Local),
@@ -870,17 +880,17 @@ func (d *Decoder) processPropertyElt(ectx evaluationContext, startElement xml.St
 						}
 
 						if d.captureTextOffsets {
-							t.offsets = encoding.StatementTextOffsets{}
+							t.textOffsets = encoding.StatementTextOffsets{}
 
-							if otv, ok := ot.offsets[encoding.ObjectStatementOffsets]; ok {
-								t.offsets[encoding.SubjectStatementOffsets] = otv
+							if otv, ok := ot.textOffsets[encoding.ObjectStatementOffsets]; ok {
+								t.textOffsets[encoding.SubjectStatementOffsets] = otv
 							}
 
 							if attr.Metadata != nil {
-								t.offsets[encoding.PredicateStatementOffsets] = attr.Metadata.Name
+								t.textOffsets[encoding.PredicateStatementOffsets] = attr.Metadata.Name
 
 								if attr.Metadata.Value != nil {
-									t.offsets[encoding.ObjectStatementOffsets] = *attr.Metadata.Value
+									t.textOffsets[encoding.ObjectStatementOffsets] = *attr.Metadata.Value
 								}
 							}
 						}
@@ -939,7 +949,7 @@ func (d *Decoder) processPropertyElt(ectx evaluationContext, startElement xml.St
 				return fmt.Errorf("nodeElement: %w", err)
 			}
 
-			t := &statement{
+			t := statement{
 				triple: rdf.Triple{
 					Subject:   ectx.ParentSubject,
 					Predicate: ectx.ParentPredicate,
@@ -949,7 +959,7 @@ func (d *Decoder) processPropertyElt(ectx evaluationContext, startElement xml.St
 			}
 
 			if d.captureTextOffsets {
-				t.offsets = d.buildTextOffsets(
+				t.textOffsets = d.buildTextOffsets(
 					encoding.SubjectStatementOffsets, ectx.ParentSubjectLocation,
 					encoding.PredicateStatementOffsets, ectx.ParentPredicateLocation,
 				)
@@ -981,7 +991,7 @@ func (d *Decoder) processParseTypeLiteralPropertyElt(ectx evaluationContext, sta
 		return fmt.Errorf("render xml: %w", err)
 	}
 
-	t := &statement{
+	t := statement{
 		triple: rdf.Triple{
 			Subject:   ectx.ParentSubject,
 			Predicate: ectx.ParentPredicate,
@@ -994,7 +1004,7 @@ func (d *Decoder) processParseTypeLiteralPropertyElt(ectx evaluationContext, sta
 	}
 
 	if d.captureTextOffsets {
-		t.offsets = d.buildTextOffsets(
+		t.textOffsets = d.buildTextOffsets(
 			encoding.SubjectStatementOffsets, ectx.ParentSubjectLocation,
 			encoding.PredicateStatementOffsets, ectx.ParentPredicateLocation,
 		)
@@ -1032,7 +1042,7 @@ func (d *Decoder) processParseTypeResourcePropertyElt(ectx evaluationContext, st
 
 	n := ectx.Global.BlankNodeFactory.NewBlankNode()
 
-	t := &statement{
+	t := statement{
 		triple: rdf.Triple{
 			Subject:   ectx.ParentSubject,
 			Predicate: ectx.ParentPredicate,
@@ -1042,7 +1052,7 @@ func (d *Decoder) processParseTypeResourcePropertyElt(ectx evaluationContext, st
 	}
 
 	if d.captureTextOffsets {
-		t.offsets = d.buildTextOffsets(
+		t.textOffsets = d.buildTextOffsets(
 			encoding.SubjectStatementOffsets, ectx.ParentSubjectLocation,
 			encoding.PredicateStatementOffsets, ectx.ParentPredicateLocation,
 		)
@@ -1156,7 +1166,7 @@ func (d *Decoder) processParseTypeCollectionPropertyElt(ectx evaluationContext, 
 
 			if lastContainer == nil {
 				d.statements = append(d.statements,
-					&statement{
+					statement{
 						triple: rdf.Triple{
 							Subject:   ectx.ParentSubject,
 							Predicate: ectx.ParentPredicate,
@@ -1164,7 +1174,7 @@ func (d *Decoder) processParseTypeCollectionPropertyElt(ectx evaluationContext, 
 						},
 						containerResource: ectx.CurrentContainer,
 					},
-					&statement{
+					statement{
 						triple: rdf.Triple{
 							Subject:   nextContainer,
 							Predicate: rdfiri.First_Property,
@@ -1179,7 +1189,7 @@ func (d *Decoder) processParseTypeCollectionPropertyElt(ectx evaluationContext, 
 				}
 			} else {
 				d.statements = append(d.statements,
-					&statement{
+					statement{
 						triple: rdf.Triple{
 							Subject:   lastContainer,
 							Predicate: rdfiri.Rest_Property,
@@ -1187,7 +1197,7 @@ func (d *Decoder) processParseTypeCollectionPropertyElt(ectx evaluationContext, 
 						},
 						containerResource: ectx.CurrentContainer,
 					},
-					&statement{
+					statement{
 						triple: rdf.Triple{
 							Subject:   nextContainer,
 							Predicate: rdfiri.First_Property,
@@ -1201,7 +1211,7 @@ func (d *Decoder) processParseTypeCollectionPropertyElt(ectx evaluationContext, 
 			lastContainer = nextContainer
 		case xml.EndElement:
 			if lastContainer == nil {
-				d.statements = append(d.statements, &statement{
+				d.statements = append(d.statements, statement{
 					triple: rdf.Triple{
 						Subject:   ectx.ParentSubject,
 						Predicate: ectx.ParentPredicate,
@@ -1214,7 +1224,7 @@ func (d *Decoder) processParseTypeCollectionPropertyElt(ectx evaluationContext, 
 					d.addReify(ectx, *rdfID, d.statements[len(d.statements)-1])
 				}
 			} else {
-				d.statements = append(d.statements, &statement{
+				d.statements = append(d.statements, statement{
 					triple: rdf.Triple{
 						Subject:   lastContainer,
 						Predicate: rdfiri.Rest_Property,
@@ -1229,11 +1239,11 @@ func (d *Decoder) processParseTypeCollectionPropertyElt(ectx evaluationContext, 
 	}
 }
 
-func (d *Decoder) addReify(ectx evaluationContext, id string, t *statement) {
+func (d *Decoder) addReify(ectx evaluationContext, id string, t statement) {
 	idr := ectx.ResolveIRI("#" + id)
 
 	d.statements = append(d.statements,
-		&statement{
+		statement{
 			triple: rdf.Triple{
 				Subject:   idr,
 				Predicate: rdfiri.Type_Property,
@@ -1241,36 +1251,36 @@ func (d *Decoder) addReify(ectx evaluationContext, id string, t *statement) {
 			},
 			containerResource: ectx.CurrentContainer,
 		},
-		&statement{
+		statement{
 			triple: rdf.Triple{
 				Subject:   idr,
 				Predicate: rdfiri.Subject_Property,
 				Object:    t.triple.Subject,
 			},
-			offsets: encoding.StatementTextOffsets{
-				encoding.ObjectStatementOffsets: t.offsets[encoding.SubjectStatementOffsets],
+			textOffsets: encoding.StatementTextOffsets{
+				encoding.ObjectStatementOffsets: t.textOffsets[encoding.SubjectStatementOffsets],
 			},
 			containerResource: ectx.CurrentContainer,
 		},
-		&statement{
+		statement{
 			triple: rdf.Triple{
 				Subject:   idr,
 				Predicate: rdfiri.Predicate_Property,
 				Object:    t.triple.Predicate,
 			},
-			offsets: encoding.StatementTextOffsets{
-				encoding.ObjectStatementOffsets: t.offsets[encoding.PredicateStatementOffsets],
+			textOffsets: encoding.StatementTextOffsets{
+				encoding.ObjectStatementOffsets: t.textOffsets[encoding.PredicateStatementOffsets],
 			},
 			containerResource: ectx.CurrentContainer,
 		},
-		&statement{
+		statement{
 			triple: rdf.Triple{
 				Subject:   idr,
 				Predicate: rdfiri.Object_Property,
 				Object:    t.triple.Object,
 			},
-			offsets: encoding.StatementTextOffsets{
-				encoding.ObjectStatementOffsets: t.offsets[encoding.ObjectStatementOffsets],
+			textOffsets: encoding.StatementTextOffsets{
+				encoding.ObjectStatementOffsets: t.textOffsets[encoding.ObjectStatementOffsets],
 			},
 			containerResource: ectx.CurrentContainer,
 		},

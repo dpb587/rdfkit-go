@@ -2,7 +2,6 @@ package simplequery
 
 import (
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdfio"
 )
 
 type QueryResult interface {
@@ -49,39 +48,27 @@ func (i *queryResultBindingIterator) GetBinding() QueryResultBinding {
 }
 
 type QueryResultBinding struct {
-	termsByVar          map[string]rdf.Term
-	tripleBindingsByVar map[string]rdfio.Statement
+	termsByVar map[string]rdf.Term
 }
 
-func NewQueryResultBinding(termsByVar map[string]rdf.Term, tripleBindingsByVar map[string]rdfio.Statement) QueryResultBinding {
+func NewQueryResultBinding(termsByVar map[string]rdf.Term) QueryResultBinding {
 	return QueryResultBinding{
-		termsByVar:          termsByVar,
-		tripleBindingsByVar: tripleBindingsByVar,
+		termsByVar: termsByVar,
 	}
 }
 
 func (b QueryResultBinding) Clone() QueryResultBinding {
 	termsByVar := map[string]rdf.Term{}
-	tripleBindingsByVar := map[string]rdfio.Statement{}
 
 	for k, v := range b.termsByVar {
 		termsByVar[k] = v
 	}
 
-	for k, v := range b.tripleBindingsByVar {
-		tripleBindingsByVar[k] = v
-	}
-
 	return QueryResultBinding{
-		termsByVar:          termsByVar,
-		tripleBindingsByVar: tripleBindingsByVar,
+		termsByVar: termsByVar,
 	}
 }
 
 func (b QueryResultBinding) Get(v string) rdf.Term {
 	return b.termsByVar[v]
-}
-
-func (b QueryResultBinding) GetTripleBinding(v string) rdfio.Statement {
-	return b.tripleBindingsByVar[v]
 }

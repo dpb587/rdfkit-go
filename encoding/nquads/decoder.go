@@ -12,7 +12,6 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding/nquads/internal/grammar"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
-	"github.com/dpb587/rdfkit-go/rdfio"
 )
 
 type DecoderOption interface {
@@ -26,11 +25,14 @@ type Decoder struct {
 	blankNodeStringMapper blanknodeutil.StringMapper
 	buildTextOffsets      encodingutil.TextOffsetsBuilderFunc
 
-	err              error
-	currentStatement *statement
+	err error
+
+	currentQuad        rdf.Quad
+	currentTextOffsets encoding.StatementTextOffsets
 }
 
-var _ rdfio.DatasetStatementIterator = &Decoder{}
+var _ rdf.QuadIterator = &Decoder{}
+var _ encoding.StatementTextOffsetsProvider = &Decoder{}
 
 func NewDecoder(r io.Reader, opts ...DecoderOption) (*Decoder, error) {
 	compiledOpts := DecoderConfig{}
@@ -56,13 +58,13 @@ func (r *Decoder) Next() bool {
 	}
 
 	err := (func() error {
-		if r.currentStatement != nil {
+		if r.currentQuad.Triple.Subject != nil {
 			for {
 				r0, err := r.buf.NextRune()
 				if err != nil {
 					if errors.Is(err, io.EOF) {
 						// TODO technically at least one triple must be present
-						r.currentStatement = nil
+						r.currentQuad = rdf.Quad{}
 
 						return nil
 					}
@@ -76,7 +78,7 @@ func (r *Decoder) Next() bool {
 					if err != nil {
 						if errors.Is(err, io.EOF) {
 							// TODO technically at least one triple must be present
-							r.currentStatement = nil
+							r.currentQuad = rdf.Quad{}
 
 							return nil
 						}
@@ -104,7 +106,7 @@ func (r *Decoder) Next() bool {
 		subject, subjectRange, err := r.captureSubjectOrGraphValue(grammar.R_subject)
 		if err != nil {
 			if errors.Is(err, io.EOF) {
-				r.currentStatement = nil
+				r.currentQuad = rdf.Quad{}
 
 				return nil
 			}
@@ -183,20 +185,21 @@ func (r *Decoder) Next() bool {
 
 	QUAD_DONE:
 
-		r.currentStatement = &statement{
-			graphName: graphName,
-			triple: rdf.Triple{
+		r.currentQuad = rdf.Quad{
+			Triple: rdf.Triple{
 				Subject:   subject,
 				Predicate: predicate,
 				Object:    object,
 			},
-			offsets: r.buildTextOffsets(
-				encoding.GraphNameStatementOffsets, graphNameRange,
-				encoding.SubjectStatementOffsets, subjectRange,
-				encoding.PredicateStatementOffsets, predicateRange,
-				encoding.ObjectStatementOffsets, objectRange,
-			),
+			GraphName: graphName,
 		}
+
+		r.currentTextOffsets = r.buildTextOffsets(
+			encoding.GraphNameStatementOffsets, graphNameRange,
+			encoding.SubjectStatementOffsets, subjectRange,
+			encoding.PredicateStatementOffsets, predicateRange,
+			encoding.ObjectStatementOffsets, objectRange,
+		)
 
 		return nil
 	})()
@@ -206,17 +209,17 @@ func (r *Decoder) Next() bool {
 		return false
 	}
 
-	return r.currentStatement != nil
+	return r.currentQuad.Triple.Subject != nil
 }
 
-func (r *Decoder) GetGraphName() rdf.GraphNameValue {
-	return r.currentStatement.graphName
+func (r *Decoder) Quad() rdf.Quad {
+	return r.currentQuad
 }
 
-func (r *Decoder) GetTriple() rdf.Triple {
-	return r.currentStatement.triple
+func (r *Decoder) Statement() rdf.Statement {
+	return r.Quad()
 }
 
-func (r *Decoder) GetStatement() rdfio.Statement {
-	return r.currentStatement
+func (r *Decoder) StatementTextOffsets() encoding.StatementTextOffsets {
+	return r.currentTextOffsets
 }

@@ -10,13 +10,13 @@ import (
 
 func reader_scan_collection(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, openSubject rdf.SubjectValue, openSubjectRange *cursorio.TextOffsetRange) (readerStack, error) {
 	if r0.Rune == ')' {
-		return r.emit(&statement{
+		return r.emit(statement{
 			triple: rdf.Triple{
 				Subject:   ectx.CurSubject,
 				Predicate: ectx.CurPredicate,
 				Object:    rdfiri.Nil_List,
 			},
-			offsets: r.buildTextOffsets(
+			textOffsets: r.buildTextOffsets(
 				encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 				encoding.PredicateStatementOffsets, ectx.CurPredicateLocation,
 				encoding.ObjectStatementOffsets, r.commitForTextOffsetRange(r0.AsDecodedRunes()),
@@ -40,13 +40,13 @@ func reader_scan_collection(r *Decoder, ectx evaluationContext, r0 cursorio.Deco
 	}
 
 	// TODO should emit immediately; but reader_scan_Object doesn't currently pop itself off the stack
-	r.emit(&statement{
+	r.emit(statement{
 		triple: rdf.Triple{
 			Subject:   ectx.CurSubject,
 			Predicate: ectx.CurPredicate,
 			Object:    openSubject,
 		},
-		offsets: r.buildTextOffsets(
+		textOffsets: r.buildTextOffsets(
 			encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 			encoding.PredicateStatementOffsets, ectx.CurPredicateLocation,
 			encoding.ObjectStatementOffsets, openSubjectRange,
@@ -62,13 +62,13 @@ func reader_scan_collection_Continue(r *Decoder, ectx evaluationContext, r0 curs
 	}
 
 	if r0.Rune == ')' {
-		return r.emit(&statement{
+		return r.emit(statement{
 			triple: rdf.Triple{
 				Subject:   ectx.CurSubject,
 				Predicate: rdfiri.Rest_Property,
 				Object:    rdfiri.Nil_List,
 			},
-			offsets: r.buildTextOffsets(
+			textOffsets: r.buildTextOffsets(
 				encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 				encoding.ObjectStatementOffsets, r.commitForTextOffsetRange(r0.AsDecodedRunes()),
 			),
@@ -84,13 +84,13 @@ func reader_scan_collection_Continue(r *Decoder, ectx evaluationContext, r0 curs
 	r.pushState(nectx, reader_scan_collection_Continue)
 
 	// TODO should emit immediately; but reader_scan_Object doesn't currently pop itself off the stack
-	r.emit(&statement{
+	r.emit(statement{
 		triple: rdf.Triple{
 			Subject:   ectx.CurSubject,
 			Predicate: rdfiri.Rest_Property,
 			Object:    nectx.CurSubject,
 		},
-		offsets: r.buildTextOffsets(
+		textOffsets: r.buildTextOffsets(
 			encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 		),
 	})

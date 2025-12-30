@@ -12,6 +12,7 @@ import (
 	"strings"
 
 	"github.com/dpb587/inspectjson-go/inspectjson"
+	"github.com/dpb587/rdfkit-go/encoding/encodingutil"
 	"github.com/dpb587/rdfkit-go/encoding/html"
 	"github.com/dpb587/rdfkit-go/encoding/htmljsonld"
 	"github.com/dpb587/rdfkit-go/encoding/htmlmicrodata"
@@ -27,7 +28,7 @@ import (
 	"github.com/dpb587/rdfkit-go/internal/ioutil"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
-	"github.com/dpb587/rdfkit-go/rdfio/rdfioutil"
+	"github.com/dpb587/rdfkit-go/rdf/quads"
 )
 
 type EncodingInput struct {
@@ -218,7 +219,15 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 		}
 
 		handle.Format = "html"
-		handle.Decoder = rdfioutil.NewStatementIteratorIterator(htmlJsonld, htmlMicrodata, htmlRdfa)
+		handle.Decoder = quads.NewIteratorIterator(
+			htmlJsonld,
+			encodingutil.TripleAsQuadDecoder{
+				TriplesDecoder: htmlMicrodata,
+			},
+			encodingutil.TripleAsQuadDecoder{
+				TriplesDecoder: htmlRdfa,
+			},
+		)
 	case "htmljsonld":
 		htmlDocument, err := parseHtmlDocument()
 		if err != nil {
@@ -245,7 +254,7 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 		}
 
 		handle.Format = "htmlmicrodata"
-		handle.Decoder, err = htmlmicrodata.NewDecoder(
+		decoder, err := htmlmicrodata.NewDecoder(
 			htmlDocument,
 			htmlmicrodata.DecoderConfig{}.
 				SetVocabularyResolver(htmlmicrodata.ItemtypeVocabularyResolver),
@@ -254,6 +263,10 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 			readCloser()
 
 			return nil, fmt.Errorf("htmlmicrodata: %v", err)
+		}
+
+		handle.Decoder = encodingutil.TripleAsQuadDecoder{
+			TriplesDecoder: decoder,
 		}
 	case "jsonld", "json-ld":
 		jsonldOptions := jsonld.DecoderConfig{}.
@@ -289,7 +302,7 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 		}
 	case "ntriples", "nt":
 		handle.Format = "ntriples"
-		handle.Decoder, err = ntriples.NewDecoder(
+		decoder, err := ntriples.NewDecoder(
 			handle.reader,
 			ntriples.DecoderConfig{}.
 				SetCaptureTextOffsets(!f.SkipTextOffsets),
@@ -299,6 +312,10 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 
 			return nil, fmt.Errorf("ntriples: %v", err)
 		}
+
+		handle.Decoder = encodingutil.TripleAsQuadDecoder{
+			TriplesDecoder: decoder,
+		}
 	case "rdfa":
 		htmlDocument, err := parseHtmlDocument()
 		if err != nil {
@@ -306,15 +323,19 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 		}
 
 		handle.Format = "rdfa"
-		handle.Decoder, err = rdfa.NewDecoder(htmlDocument)
+		decoder, err := rdfa.NewDecoder(htmlDocument)
 		if err != nil {
 			readCloser()
 
 			return nil, fmt.Errorf("rdfa: %v", err)
 		}
+
+		handle.Decoder = encodingutil.TripleAsQuadDecoder{
+			TriplesDecoder: decoder,
+		}
 	case "rdfjson", "rj":
 		handle.Format = "rdfjson"
-		handle.Decoder, err = rdfjson.NewDecoder(
+		decoder, err := rdfjson.NewDecoder(
 			handle.reader,
 			rdfjson.DecoderConfig{}.
 				SetCaptureTextOffsets(!f.SkipTextOffsets),
@@ -323,6 +344,10 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 			readCloser()
 
 			return nil, fmt.Errorf("rdfjson: %v", err)
+		}
+
+		handle.Decoder = encodingutil.TripleAsQuadDecoder{
+			TriplesDecoder: decoder,
 		}
 	case "rdfxml":
 		rdfxmlOptions := rdfxml.DecoderConfig{}.
@@ -333,7 +358,7 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 		}
 
 		handle.Format = "rdfxml"
-		handle.Decoder, err = rdfxml.NewDecoder(
+		decoder, err := rdfxml.NewDecoder(
 			handle.reader,
 			rdfxmlOptions,
 		)
@@ -341,6 +366,10 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 			readCloser()
 
 			return nil, fmt.Errorf("rdfxml: %v", err)
+		}
+
+		handle.Decoder = encodingutil.TripleAsQuadDecoder{
+			TriplesDecoder: decoder,
 		}
 	case "trig":
 		trigOptions := trig.DecoderConfig{}.
@@ -387,7 +416,7 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 		}
 
 		handle.Format = "turtle"
-		handle.Decoder, err = turtle.NewDecoder(
+		decoder, err := turtle.NewDecoder(
 			handle.reader,
 			turtleOptions,
 		)
@@ -395,6 +424,10 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 			readCloser()
 
 			return nil, fmt.Errorf("turtle: %v", err)
+		}
+
+		handle.Decoder = encodingutil.TripleAsQuadDecoder{
+			TriplesDecoder: decoder,
 		}
 	default:
 		rc.Close()

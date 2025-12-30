@@ -15,7 +15,6 @@ import (
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
-	"github.com/dpb587/rdfkit-go/rdfdescription/rdfdescriptionio"
 )
 
 type EncoderOption interface {
@@ -31,11 +30,10 @@ type Encoder struct {
 	blankNodeStringer blanknodeutil.Stringer
 
 	err     error
-	builder *rdfdescription.ResourceListBuilder
+	builder *rdfdescription.DatasetResourceListBuilder
 }
 
-var _ encoding.GraphEncoder = &Encoder{}
-var _ rdfdescriptionio.GraphEncoder = &Encoder{}
+var _ encoding.QuadsEncoder = &Encoder{}
 
 func NewEncoder(w io.Writer, opts ...EncoderOption) (*Encoder, error) {
 	compiledOpts := EncoderConfig{}
@@ -61,8 +59,16 @@ func (e *Encoder) Close() error {
 
 	var graphItems = []any{}
 
-	for _, resource := range e.builder.GetResources() {
-		graphItems = append(graphItems, e.buildResource(resource, true))
+	for _, graphName := range e.builder.GetGraphNames() {
+		if graphName != nil {
+			continue // TODO multi-graph support
+		}
+
+		builder := e.builder.GetResourceListBuilder(graphName)
+
+		for _, resource := range builder.GetResources() {
+			graphItems = append(graphItems, e.buildResource(builder, resource, true))
+		}
 	}
 
 	if e.buffered && len(graphItems) > 1 {
@@ -112,7 +118,17 @@ func (e *Encoder) Close() error {
 	return nil
 }
 
-func (e *Encoder) buildResource(resource rdfdescription.Resource, root bool) map[string]any {
+func (w *Encoder) AddQuad(ctx context.Context, t rdf.Quad) error {
+	if w.err != nil {
+		return w.err
+	}
+
+	w.builder.Add(t)
+
+	return nil
+}
+
+func (e *Encoder) buildResource(builder *rdfdescription.ResourceListBuilder, resource rdfdescription.Resource, root bool) map[string]any {
 	graphProperties := make(map[string][]any)
 
 	for _, statement := range resource.GetResourceStatements() {
@@ -122,7 +138,7 @@ func (e *Encoder) buildResource(resource rdfdescription.Resource, root bool) map
 		switch statementT := statement.(type) {
 		case rdfdescription.AnonResourceStatement:
 			predicate = statementT.Predicate.(rdf.IRI)
-			statementObject = e.buildResource(statementT.AnonResource, false)
+			statementObject = e.buildResource(builder, statementT.AnonResource, false)
 		case rdfdescription.ObjectStatement:
 			predicate = statementT.Predicate.(rdf.IRI)
 
@@ -233,10 +249,10 @@ func (e *Encoder) buildResource(resource rdfdescription.Resource, root bool) map
 		}
 	case rdf.BlankNode:
 		if root {
-			if e.builder.GetBlankNodeReferences(v) > 0 {
+			if builder.GetBlankNodeReferences(v) > 0 {
 				graphItem["@id"] = "_:" + e.blankNodeStringer.GetBlankNodeIdentifier(v)
 			}
-		} else if e.builder.GetBlankNodeReferences(v) > 1 {
+		} else if builder.GetBlankNodeReferences(v) > 1 {
 			graphItem["@id"] = "_:" + e.blankNodeStringer.GetBlankNodeIdentifier(v)
 		}
 	case nil:
@@ -265,26 +281,4 @@ func (e *Encoder) buildResource(resource rdfdescription.Resource, root bool) map
 	}
 
 	return graphItem
-}
-
-func (w *Encoder) PutTriple(ctx context.Context, t rdf.Triple) error {
-	if w.err != nil {
-		return w.err
-	}
-
-	w.builder.AddTriple(t)
-
-	return nil
-}
-
-func (w *Encoder) PutResource(ctx context.Context, r rdfdescription.Resource) error {
-	if w.err != nil {
-		return w.err
-	}
-
-	for _, triple := range r.AsTriples() {
-		w.builder.AddTriple(triple)
-	}
-
-	return nil
 }

@@ -12,7 +12,6 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/rdfs/rdfsiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdfio"
 )
 
 type builder struct {
@@ -82,15 +81,13 @@ func (b *builder) FilterBase(base rdf.IRI) *builder {
 	return b2
 }
 
-func (b *builder) AddStatement(s rdfio.Statement) {
-	triple := s.GetTriple()
-
-	sIRI, ok := triple.Subject.(rdf.IRI)
+func (b *builder) AddStatement(quad rdf.Quad) {
+	sIRI, ok := quad.Triple.Subject.(rdf.IRI)
 	if !ok {
 		return
 	}
 
-	pIRI, ok := triple.Predicate.(rdf.IRI)
+	pIRI, ok := quad.Triple.Predicate.(rdf.IRI)
 	if !ok {
 		return
 	}
@@ -103,11 +100,11 @@ func (b *builder) AddStatement(s rdfio.Statement) {
 
 	switch pIRI {
 	case rdfiri.Type_Property:
-		if oIRI, ok := triple.Object.(rdf.IRI); ok {
+		if oIRI, ok := quad.Triple.Object.(rdf.IRI); ok {
 			b.statementsBySubject[sIRI].Types = append(b.statementsBySubject[sIRI].Types, oIRI)
 		}
 	case rdfsiri.Comment_Property:
-		if oLiteral, ok := triple.Object.(rdf.Literal); ok {
+		if oLiteral, ok := quad.Triple.Object.(rdf.Literal); ok {
 			if len(oLiteral.LexicalForm) == 0 {
 				return
 			}

@@ -21,7 +21,7 @@ type Encoder struct {
 	ascii             bool
 }
 
-var _ encoding.GraphEncoder = &Encoder{}
+var _ encoding.TriplesEncoder = &Encoder{}
 
 func NewEncoder(w io.Writer, opts ...EncoderOption) (*Encoder, error) {
 	compiledOpts := EncoderConfig{}
@@ -45,7 +45,7 @@ func (w *Encoder) Close() error {
 	return nil
 }
 
-func (w *Encoder) PutTriple(ctx context.Context, t rdf.Triple) error {
+func (w *Encoder) AddTriple(ctx context.Context, t rdf.Triple) error {
 	var err error
 
 	switch s := t.Subject.(type) {

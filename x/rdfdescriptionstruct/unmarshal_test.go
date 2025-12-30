@@ -280,7 +280,7 @@ func TestUnmarshal_ResourceRecursive(t *testing.T) {
 		builder := rdfdescription.NewResourceListBuilder()
 
 		// Add triples for the main resource
-		builder.AddTriple(rdf.Triple{
+		builder.Add(rdf.Triple{
 			Subject:   rdf.IRI("http://example.com/person1"),
 			Predicate: rdf.IRI("http://example.com/name"),
 			Object: rdf.Literal{
@@ -288,14 +288,14 @@ func TestUnmarshal_ResourceRecursive(t *testing.T) {
 				LexicalForm: "Alice",
 			},
 		})
-		builder.AddTriple(rdf.Triple{
+		builder.Add(rdf.Triple{
 			Subject:   rdf.IRI("http://example.com/person1"),
 			Predicate: rdf.IRI("http://example.com/knows"),
 			Object:    rdf.IRI("http://example.com/person2"),
 		})
 
 		// Add triples for the nested resource
-		builder.AddTriple(rdf.Triple{
+		builder.Add(rdf.Triple{
 			Subject:   rdf.IRI("http://example.com/person2"),
 			Predicate: rdf.IRI("http://example.com/name"),
 			Object: rdf.Literal{
@@ -590,73 +590,73 @@ func TestUnmarshal_JellyExample(t *testing.T) {
 	dummyPredicate := rdf.IRI("urn:dummy:ref")
 	mainSubject := rdf.IRI("https://w3id.org/jelly/dev/tests/rdf/from_jelly/triples_rdf_1_1/pos_015")
 
-	builder.AddTriple(rdf.Triple{Subject: mainSubject, Predicate: dummyPredicate, Object: listNode2})
-	builder.AddTriple(rdf.Triple{Subject: mainSubject, Predicate: dummyPredicate, Object: listNode3})
-	builder.AddTriple(rdf.Triple{Subject: mainSubject, Predicate: dummyPredicate, Object: listNode4})
+	builder.Add(rdf.Triple{Subject: mainSubject, Predicate: dummyPredicate, Object: listNode2})
+	builder.Add(rdf.Triple{Subject: mainSubject, Predicate: dummyPredicate, Object: listNode3})
+	builder.Add(rdf.Triple{Subject: mainSubject, Predicate: dummyPredicate, Object: listNode4})
 
 	// List node 1: first item, rest -> listNode2
-	builder.AddTriple(rdf.Triple{
+	builder.Add(rdf.Triple{
 		Subject:   listNode1,
 		Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 		Object:    rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#List"),
 	})
-	builder.AddTriple(rdf.Triple{
+	builder.Add(rdf.Triple{
 		Subject:   listNode1,
 		Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 		Object:    rdf.IRI("https://w3id.org/jelly/dev/tests/rdf/from_jelly/triples_rdf_1_1/pos_015/out_000.nt"),
 	})
-	builder.AddTriple(rdf.Triple{
+	builder.Add(rdf.Triple{
 		Subject:   listNode1,
 		Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 		Object:    listNode2,
 	})
 
 	// List node 2
-	builder.AddTriple(rdf.Triple{
+	builder.Add(rdf.Triple{
 		Subject:   listNode2,
 		Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 		Object:    rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#List"),
 	})
-	builder.AddTriple(rdf.Triple{
+	builder.Add(rdf.Triple{
 		Subject:   listNode2,
 		Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 		Object:    rdf.IRI("https://w3id.org/jelly/dev/tests/rdf/from_jelly/triples_rdf_1_1/pos_015/out_001.nt"),
 	})
-	builder.AddTriple(rdf.Triple{
+	builder.Add(rdf.Triple{
 		Subject:   listNode2,
 		Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 		Object:    listNode3,
 	})
 
 	// List node 3
-	builder.AddTriple(rdf.Triple{
+	builder.Add(rdf.Triple{
 		Subject:   listNode3,
 		Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 		Object:    rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#List"),
 	})
-	builder.AddTriple(rdf.Triple{
+	builder.Add(rdf.Triple{
 		Subject:   listNode3,
 		Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 		Object:    rdf.IRI("https://w3id.org/jelly/dev/tests/rdf/from_jelly/triples_rdf_1_1/pos_015/out_002.nt"),
 	})
-	builder.AddTriple(rdf.Triple{
+	builder.Add(rdf.Triple{
 		Subject:   listNode3,
 		Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 		Object:    listNode4,
 	})
 
 	// List node 4 (last node)
-	builder.AddTriple(rdf.Triple{
+	builder.Add(rdf.Triple{
 		Subject:   listNode4,
 		Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 		Object:    rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#List"),
 	})
-	builder.AddTriple(rdf.Triple{
+	builder.Add(rdf.Triple{
 		Subject:   listNode4,
 		Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 		Object:    rdf.IRI("https://w3id.org/jelly/dev/tests/rdf/from_jelly/triples_rdf_1_1/pos_015/out_003.nt"),
 	})
-	builder.AddTriple(rdf.Triple{
+	builder.Add(rdf.Triple{
 		Subject:   listNode4,
 		Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 		Object:    rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
@@ -803,7 +803,7 @@ func TestUnmarshal_ListsValue_BlankNodeNotList(t *testing.T) {
 	bn := rdf.NewBlankNode()
 
 	// Add some properties to the blank node (but not rdf:List type)
-	builder.AddTriple(rdf.Triple{
+	builder.Add(rdf.Triple{
 		Subject:   bn,
 		Predicate: rdf.IRI("http://example.com/prop"),
 		Object:    rdf.IRI("http://example.com/value"),
@@ -811,7 +811,7 @@ func TestUnmarshal_ListsValue_BlankNodeNotList(t *testing.T) {
 
 	// Add dummy reference to prevent it from being converted to anonymous resource
 	mainSubject := rdf.IRI("https://example.com/test")
-	builder.AddTriple(rdf.Triple{
+	builder.Add(rdf.Triple{
 		Subject:   mainSubject,
 		Predicate: rdf.IRI("urn:dummy"),
 		Object:    bn,
@@ -857,36 +857,36 @@ func TestUnmarshal_ListsValue_MixedListAndNonList(t *testing.T) {
 	mainSubject := rdf.IRI("https://example.com/test")
 
 	// Add dummy references to prevent conversion to anonymous resources
-	builder.AddTriple(rdf.Triple{Subject: mainSubject, Predicate: rdf.IRI("urn:dummy"), Object: listNode2})
+	builder.Add(rdf.Triple{Subject: mainSubject, Predicate: rdf.IRI("urn:dummy"), Object: listNode2})
 
 	// Build a 2-element list
-	builder.AddTriple(rdf.Triple{
+	builder.Add(rdf.Triple{
 		Subject:   listNode1,
 		Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 		Object:    rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#List"),
 	})
-	builder.AddTriple(rdf.Triple{
+	builder.Add(rdf.Triple{
 		Subject:   listNode1,
 		Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 		Object:    rdf.IRI("https://example.com/list_item_1.nt"),
 	})
-	builder.AddTriple(rdf.Triple{
+	builder.Add(rdf.Triple{
 		Subject:   listNode1,
 		Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 		Object:    listNode2,
 	})
 
-	builder.AddTriple(rdf.Triple{
+	builder.Add(rdf.Triple{
 		Subject:   listNode2,
 		Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 		Object:    rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#List"),
 	})
-	builder.AddTriple(rdf.Triple{
+	builder.Add(rdf.Triple{
 		Subject:   listNode2,
 		Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 		Object:    rdf.IRI("https://example.com/list_item_2.nt"),
 	})
-	builder.AddTriple(rdf.Triple{
+	builder.Add(rdf.Triple{
 		Subject:   listNode2,
 		Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 		Object:    rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
@@ -1064,7 +1064,7 @@ func TestUnmarshaler_CustomPrefixesWithNestedResources(t *testing.T) {
 	builder := rdfdescription.NewResourceListBuilder()
 
 	nestedSubject := rdf.IRI("http://example.com/nested")
-	builder.AddTriple(rdf.Triple{
+	builder.Add(rdf.Triple{
 		Subject:   nestedSubject,
 		Predicate: rdf.IRI("http://example.com/vocab#nestedProp"),
 		Object: rdf.Literal{
@@ -1074,7 +1074,7 @@ func TestUnmarshaler_CustomPrefixesWithNestedResources(t *testing.T) {
 	})
 
 	mainSubject := rdf.IRI("http://example.com/main")
-	builder.AddTriple(rdf.Triple{
+	builder.Add(rdf.Triple{
 		Subject:   mainSubject,
 		Predicate: rdf.IRI("http://example.com/vocab#mainProp"),
 		Object: rdf.Literal{
@@ -1082,7 +1082,7 @@ func TestUnmarshaler_CustomPrefixesWithNestedResources(t *testing.T) {
 			LexicalForm: "Main Value",
 		},
 	})
-	builder.AddTriple(rdf.Triple{
+	builder.Add(rdf.Triple{
 		Subject:   mainSubject,
 		Predicate: rdf.IRI("http://example.com/vocab#nested"),
 		Object:    nestedSubject,

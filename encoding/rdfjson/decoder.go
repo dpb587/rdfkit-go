@@ -14,7 +14,6 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
-	"github.com/dpb587/rdfkit-go/rdfio"
 )
 
 type DecoderOption interface {
@@ -22,17 +21,24 @@ type DecoderOption interface {
 	newDecoder(r io.Reader) (*Decoder, error)
 }
 
+type statement struct {
+	triple      rdf.Triple
+	textOffsets encoding.StatementTextOffsets
+}
+
 type Decoder struct {
 	r                io.Reader
 	topts            []inspectjson.TokenizerOption
 	buildTextOffsets encodingutil.TextOffsetsBuilderFunc
 
-	statements    []*statement
+	err error
+
+	statements    []statement
 	statementsIdx int
-	err           error
 }
 
-var _ encoding.GraphDecoder = &Decoder{}
+var _ rdf.TripleIterator = &Decoder{}
+var _ encoding.StatementTextOffsetsProvider = &Decoder{}
 
 func NewDecoder(r io.Reader, opts ...DecoderOption) (*Decoder, error) {
 	compiledOpts := DecoderConfig{}
@@ -64,16 +70,16 @@ func (d *Decoder) Next() bool {
 	return d.statementsIdx < len(d.statements)
 }
 
-func (d *Decoder) GetGraphName() rdf.GraphNameValue {
-	return rdf.DefaultGraph
+func (r *Decoder) Triple() rdf.Triple {
+	return r.statements[r.statementsIdx].triple
 }
 
-func (d *Decoder) GetTriple() rdf.Triple {
-	return d.statements[d.statementsIdx].triple
+func (r *Decoder) Statement() rdf.Statement {
+	return r.Triple()
 }
 
-func (d *Decoder) GetStatement() rdfio.Statement {
-	return d.statements[d.statementsIdx]
+func (r *Decoder) StatementTextOffsets() encoding.StatementTextOffsets {
+	return r.statements[r.statementsIdx].textOffsets
 }
 
 func (r *Decoder) parseRoot() error {
@@ -255,7 +261,7 @@ func (r *Decoder) parseRoot() error {
 				switch objectMembers.Type.Content {
 				case "literal":
 					if objectMembers.Datatype != nil {
-						r.statements = append(r.statements, &statement{
+						r.statements = append(r.statements, statement{
 							triple: rdf.Triple{
 								Subject:   subjectValue,
 								Predicate: predicateValue,
@@ -264,14 +270,14 @@ func (r *Decoder) parseRoot() error {
 									Datatype:    rdf.IRI(objectMembers.Datatype.Content),
 								},
 							},
-							offsets: r.buildTextOffsets(
+							textOffsets: r.buildTextOffsets(
 								encoding.SubjectStatementOffsets, subjectOffset,
 								encoding.PredicateStatementOffsets, predicateOffset,
 								encoding.ObjectStatementOffsets, objectOffsetRange,
 							),
 						})
 					} else if objectMembers.Lang != nil {
-						r.statements = append(r.statements, &statement{
+						r.statements = append(r.statements, statement{
 							triple: rdf.Triple{
 								Subject:   subjectValue,
 								Predicate: predicateValue,
@@ -283,14 +289,14 @@ func (r *Decoder) parseRoot() error {
 									},
 								},
 							},
-							offsets: r.buildTextOffsets(
+							textOffsets: r.buildTextOffsets(
 								encoding.SubjectStatementOffsets, subjectOffset,
 								encoding.PredicateStatementOffsets, predicateOffset,
 								encoding.ObjectStatementOffsets, objectOffsetRange,
 							),
 						})
 					} else {
-						r.statements = append(r.statements, &statement{
+						r.statements = append(r.statements, statement{
 							triple: rdf.Triple{
 								Subject:   subjectValue,
 								Predicate: predicateValue,
@@ -299,7 +305,7 @@ func (r *Decoder) parseRoot() error {
 									Datatype:    xsdiri.String_Datatype,
 								},
 							},
-							offsets: r.buildTextOffsets(
+							textOffsets: r.buildTextOffsets(
 								encoding.SubjectStatementOffsets, subjectOffset,
 								encoding.PredicateStatementOffsets, predicateOffset,
 								encoding.ObjectStatementOffsets, objectOffsetRange,
@@ -307,13 +313,13 @@ func (r *Decoder) parseRoot() error {
 						})
 					}
 				case "uri":
-					r.statements = append(r.statements, &statement{
+					r.statements = append(r.statements, statement{
 						triple: rdf.Triple{
 							Subject:   subjectValue,
 							Predicate: predicateValue,
 							Object:    rdf.IRI(objectMembers.Value.Content),
 						},
-						offsets: r.buildTextOffsets(
+						textOffsets: r.buildTextOffsets(
 							encoding.SubjectStatementOffsets, subjectOffset,
 							encoding.PredicateStatementOffsets, predicateOffset,
 							encoding.ObjectStatementOffsets, objectOffsetRange,
@@ -325,13 +331,13 @@ func (r *Decoder) parseRoot() error {
 						return fmt.Errorf("invalid bnode value: %s", v)
 					}
 
-					r.statements = append(r.statements, &statement{
+					r.statements = append(r.statements, statement{
 						triple: rdf.Triple{
 							Subject:   subjectValue,
 							Predicate: predicateValue,
 							Object:    bnodeMap.MapBlankNodeIdentifier(v[2:]),
 						},
-						offsets: r.buildTextOffsets(
+						textOffsets: r.buildTextOffsets(
 							encoding.SubjectStatementOffsets, subjectOffset,
 							encoding.PredicateStatementOffsets, predicateOffset,
 							encoding.ObjectStatementOffsets, objectOffsetRange,

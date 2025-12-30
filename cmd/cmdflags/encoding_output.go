@@ -6,12 +6,12 @@ import (
 	"io"
 	"os"
 
+	"github.com/dpb587/rdfkit-go/encoding/encodingtest"
+	"github.com/dpb587/rdfkit-go/encoding/encodingutil"
 	"github.com/dpb587/rdfkit-go/encoding/nquads"
 	"github.com/dpb587/rdfkit-go/encoding/ntriples"
 	"github.com/dpb587/rdfkit-go/encoding/rdfjson"
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
-	devencodingdiscard "github.com/dpb587/rdfkit-go/internal/devencoding/discard"
-	devencodingrdfioutil "github.com/dpb587/rdfkit-go/internal/devencoding/rdfioutil"
 	"github.com/dpb587/rdfkit-go/internal/ioutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil/rdfacontext"
@@ -56,13 +56,20 @@ func (f EncodingOutput) NewStatementWriter() (*EncodingOutputHandle, error) {
 	var err error
 
 	switch f.Type {
-	case "devdiscard":
-		b.Encoder = devencodingdiscard.Encoder
-	case "devrdfioutil":
-		b.Encoder = devencodingrdfioutil.NewEncoder(
+	case "discard":
+		b.Encoder = encodingtest.DiscardEncoder
+	case "encodingtest/quads":
+		b.Encoder = encodingtest.NewQuadsEncoder(
 			writeWriter,
-			devencodingrdfioutil.EncoderOptions{},
+			encodingtest.QuadsEncoderOptions{},
 		)
+	case "encodingtest/triples":
+		b.Encoder = encodingutil.QuadAsTripleEncoder{
+			TriplesEncoder: encodingtest.NewTriplesEncoder(
+				writeWriter,
+				encodingtest.TriplesEncoderOptions{},
+			),
+		}
 	case "nquads", "nq":
 		b.Encoder, err = nquads.NewEncoder(
 			writeWriter,
@@ -84,7 +91,7 @@ func (f EncodingOutput) NewStatementWriter() (*EncodingOutputHandle, error) {
 			return nil, fmt.Errorf("nquads: %v", err)
 		}
 	case "ntriples", "nt":
-		b.Encoder, err = ntriples.NewEncoder(
+		encoder, err := ntriples.NewEncoder(
 			writeWriter,
 			ntriples.EncoderConfig{},
 		)
@@ -93,8 +100,12 @@ func (f EncodingOutput) NewStatementWriter() (*EncodingOutputHandle, error) {
 
 			return nil, fmt.Errorf("ntriples: %v", err)
 		}
+
+		b.Encoder = encodingutil.QuadAsTripleEncoder{
+			TriplesEncoder: encoder,
+		}
 	case "ntriples/ascii":
-		b.Encoder, err = ntriples.NewEncoder(
+		encoder, err := ntriples.NewEncoder(
 			writeWriter,
 			ntriples.EncoderConfig{}.
 				SetASCII(true),
@@ -104,8 +115,12 @@ func (f EncodingOutput) NewStatementWriter() (*EncodingOutputHandle, error) {
 
 			return nil, fmt.Errorf("ntriples: %v", err)
 		}
+
+		b.Encoder = encodingutil.QuadAsTripleEncoder{
+			TriplesEncoder: encoder,
+		}
 	case "rdfjson", "rj":
-		b.Encoder, err = rdfjson.NewEncoder(
+		encoder, err := rdfjson.NewEncoder(
 			writeWriter,
 		)
 		if err != nil {
@@ -113,8 +128,12 @@ func (f EncodingOutput) NewStatementWriter() (*EncodingOutputHandle, error) {
 
 			return nil, fmt.Errorf("rdfjson: %v", err)
 		}
+
+		b.Encoder = encodingutil.QuadAsTripleEncoder{
+			TriplesEncoder: encoder,
+		}
 	case "turtle", "ttl":
-		b.Encoder, err = turtle.NewEncoder(
+		encoder, err := turtle.NewEncoder(
 			writeWriter,
 			turtle.EncoderConfig{}.
 				SetBase(f.DefaultBase).
@@ -124,6 +143,10 @@ func (f EncodingOutput) NewStatementWriter() (*EncodingOutputHandle, error) {
 			writeCloser()
 
 			return nil, fmt.Errorf("turtle: %v", err)
+		}
+
+		b.Encoder = encodingutil.QuadAsTripleEncoder{
+			TriplesEncoder: encoder,
 		}
 	default:
 		return nil, fmt.Errorf("unknown format: %s", f.Type)

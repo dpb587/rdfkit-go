@@ -16,7 +16,6 @@ import (
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
-	"github.com/dpb587/rdfkit-go/rdfio"
 	"golang.org/x/net/html"
 	"golang.org/x/net/html/atom"
 )
@@ -24,6 +23,12 @@ import (
 type DecoderOption interface {
 	apply(s *DecoderConfig)
 	newDecoder(doc *encodinghtml.Document) (*Decoder, error)
+}
+
+type statement struct {
+	triple            rdf.Triple
+	textOffsets       encoding.StatementTextOffsets
+	containerResource encoding.ContainerResource
 }
 
 type Decoder struct {
@@ -43,12 +48,14 @@ type Decoder struct {
 	laxContentAttributeUse  bool
 	laxContentAttributeHook func(err DecoderError_LaxContentAttribute)
 
-	err          error
-	statements   []*statement
-	statementIdx int
+	err error
+
+	statements    []statement
+	statementsIdx int
 }
 
-var _ encoding.GraphDecoder = &Decoder{}
+var _ rdf.TripleIterator = &Decoder{}
+var _ encoding.StatementTextOffsetsProvider = &Decoder{}
 
 func NewDecoder(doc *encodinghtml.Document, opts ...DecoderOption) (*Decoder, error) {
 	compiledOpts := DecoderConfig{}
@@ -71,7 +78,7 @@ func (w *Decoder) Err() error {
 func (w *Decoder) Next() bool {
 	if w.err != nil {
 		return false
-	} else if w.statementIdx == -1 {
+	} else if w.statementsIdx == -1 {
 		documentContainer := &DocumentResource{}
 		ectx := evaluationContext{
 			Global: &globalEvaluationContext{
@@ -87,17 +94,21 @@ func (w *Decoder) Next() bool {
 		w.walk(ectx, w.doc.GetRoot())
 	}
 
-	w.statementIdx++
+	w.statementsIdx++
 
-	return w.statementIdx < len(w.statements)
+	return w.statementsIdx < len(w.statements)
 }
 
-func (w *Decoder) GetTriple() rdf.Triple {
-	return w.statements[w.statementIdx].triple
+func (r *Decoder) Triple() rdf.Triple {
+	return r.statements[r.statementsIdx].triple
 }
 
-func (w *Decoder) GetStatement() rdfio.Statement {
-	return w.statements[w.statementIdx]
+func (r *Decoder) Statement() rdf.Statement {
+	return r.Triple()
+}
+
+func (r *Decoder) StatementTextOffsets() encoding.StatementTextOffsets {
+	return r.statements[r.statementsIdx].textOffsets
 }
 
 func (w *Decoder) walk(ectx evaluationContext, n *html.Node) {
@@ -183,13 +194,13 @@ func (w *Decoder) walk(ectx evaluationContext, n *html.Node) {
 						}
 
 						w.iterateItemprops(ectx, attrItemprop, attrCursorRange, func(p string, pCursorRange *cursorio.TextOffsetRange) {
-							w.statements = append(w.statements, &statement{
+							w.statements = append(w.statements, statement{
 								triple: rdf.Triple{
 									Subject:   ectx.CurrentSubject,
 									Predicate: rdf.IRI(p),
 									Object:    nextSubject,
 								},
-								offsets: w.buildTextOffsets(
+								textOffsets: w.buildTextOffsets(
 									encoding.SubjectStatementOffsets, ectx.CurrentSubjectRange,
 									encoding.PredicateStatementOffsets, pCursorRange,
 									encoding.ObjectStatementOffsets, nextSubjectRange,
@@ -247,13 +258,13 @@ func (w *Decoder) walk(ectx evaluationContext, n *html.Node) {
 							}
 						}
 
-						w.statements = append(w.statements, &statement{
+						w.statements = append(w.statements, statement{
 							triple: rdf.Triple{
 								Subject:   nextSubject,
 								Predicate: rdfiri.Type_Property,
 								Object:    rdf.IRI(oValue),
 							},
-							offsets: w.buildTextOffsets(
+							textOffsets: w.buildTextOffsets(
 								encoding.SubjectStatementOffsets, nextSubjectRange,
 								encoding.PredicateStatementOffsets, attrItemtypeKeyCursorRange,
 								encoding.ObjectStatementOffsets, attrCursorRange,
@@ -334,13 +345,13 @@ func (w *Decoder) walk(ectx evaluationContext, n *html.Node) {
 				}
 
 				w.iterateItemprops(ectx, attrItemprop, attrCursorRange, func(p string, pCursorRange *cursorio.TextOffsetRange) {
-					w.statements = append(w.statements, &statement{
+					w.statements = append(w.statements, statement{
 						triple: rdf.Triple{
 							Subject:   ectx.CurrentSubject,
 							Predicate: rdf.IRI(p),
 							Object:    objectValue,
 						},
-						offsets: w.buildTextOffsets(
+						textOffsets: w.buildTextOffsets(
 							encoding.SubjectStatementOffsets, ectx.CurrentSubjectRange,
 							encoding.PredicateStatementOffsets, pCursorRange,
 							encoding.ObjectStatementOffsets, objectValueCursorRange,

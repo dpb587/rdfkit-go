@@ -110,28 +110,24 @@ func (rs ReportScope) AddSubjectStatements(s rdf.SubjectValue, statements ...rdf
 	rs.report.mu.Lock()
 	defer rs.report.mu.Unlock()
 
-	for _, t := range (rdfdescription.SubjectResource{
+	rs.report.builder.Add(rdfdescription.SubjectResource{
 		Subject:    s,
 		Statements: statements,
-	}.AsTriples()) {
-		rs.report.builder.AddTriple(t)
-	}
+	}.NewTriples()...)
 }
 
 func (rs ReportScope) WithAssertor(subjectValue rdf.SubjectValue, statements ...rdfdescription.Statement) ReportScope {
 	rs.report.mu.Lock()
 	defer rs.report.mu.Unlock()
 
-	rs.report.builder.AddTriple(rdf.Triple{
+	rs.report.builder.Add(rdf.Triple{
 		Subject:   subjectValue,
 		Predicate: rdfiri.Type_Property,
 		Object:    earliri.Assertor_Class,
 	})
 
 	if len(statements) > 0 {
-		for _, t := range rdfdescription.StatementList(statements).NewTriples(subjectValue) {
-			rs.report.builder.AddTriple(t)
-		}
+		rs.report.builder.Add(rdfdescription.StatementList(statements).NewTriples(subjectValue)...)
 	}
 
 	return ReportScope{
@@ -145,16 +141,14 @@ func (rs ReportScope) WithSubject(subjectValue rdf.SubjectValue, statements ...r
 	rs.report.mu.Lock()
 	defer rs.report.mu.Unlock()
 
-	rs.report.builder.AddTriple(rdf.Triple{
+	rs.report.builder.Add(rdf.Triple{
 		Subject:   subjectValue,
 		Predicate: rdfiri.Type_Property,
 		Object:    earliri.TestSubject_Class,
 	})
 
 	if len(statements) > 0 {
-		for _, t := range rdfdescription.StatementList(statements).NewTriples(subjectValue) {
-			rs.report.builder.AddTriple(t)
-		}
+		rs.report.builder.Add(rdfdescription.StatementList(statements).NewTriples(subjectValue)...)
 	}
 
 	return ReportScope{
@@ -216,7 +210,7 @@ func (r *Report) writeOutput() error {
 	for _, assertionSubject := range r.assertionSubjects {
 		for _, resource := range resources {
 			if resource.GetResourceSubject() == assertionSubject {
-				if err := encoder.PutResource(ctx, resource); err != nil {
+				if err := encoder.AddResource(ctx, resource); err != nil {
 					return fmt.Errorf("failed to add resource: %w", err)
 				}
 
@@ -230,7 +224,7 @@ func (r *Report) writeOutput() error {
 			continue
 		}
 
-		if err := encoder.PutResource(ctx, resource); err != nil {
+		if err := encoder.AddResource(ctx, resource); err != nil {
 			return fmt.Errorf("failed to add resource: %w", err)
 		}
 	}

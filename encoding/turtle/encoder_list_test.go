@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/dpb587/rdfkit-go/rdfdescription/rdfdescriptionio"
+	"github.com/dpb587/rdfkit-go/rdfdescription"
 )
 
 func TestEncoder_Basic(t *testing.T) {
@@ -83,20 +83,17 @@ func TestEncoder_Basic(t *testing.T) {
 				t.Fatal(err)
 			}
 
-			resources := rdfdescriptionio.NewBufferedGraphEncoder(encoder)
+			resources := rdfdescription.NewResourceListBuilder()
 
 			for decoder.Next() {
-				err := resources.PutTriple(ctx, decoder.GetTriple())
-				if err != nil {
-					t.Fatal(err)
-				}
+				resources.AddTriple(t.Context(), decoder.Triple())
 			}
 
 			if err := decoder.Err(); err != nil {
 				t.Fatal(err)
 			}
 
-			err = resources.Close()
+			err = resources.AddTo(ctx, encoder, true)
 			if err != nil {
 				t.Fatal(err)
 			}

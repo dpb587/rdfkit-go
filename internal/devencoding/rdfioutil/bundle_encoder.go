@@ -9,7 +9,7 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/dpb587/rdfkit-go/rdfio"
+	"github.com/dpb587/rdfkit-go/encoding/encodingtest"
 )
 
 type BundleEncoder struct {
@@ -42,16 +42,36 @@ func (be *BundleEncoder) Close() error {
 	return nil
 }
 
-func (be *BundleEncoder) PutBundle(name string, statements rdfio.StatementList) error {
+func (be *BundleEncoder) PutQuadsBundle(name string, statements encodingtest.QuadStatementList) error {
 	ctx := context.Background()
+
 	buf := &bytes.Buffer{}
 
-	e := NewEncoder(buf, EncoderOptions{})
+	e := encodingtest.NewQuadsEncoder(buf, encodingtest.QuadsEncoderOptions{})
 
-	slices.SortStableFunc(statements, CompareStatementsDeterministic)
+	for _, statement := range statements {
+		err := e.AddQuadStatement(ctx, statement)
+		if err != nil {
+			return err
+		}
+	}
 
-	for _, s := range statements {
-		err := e.PutStatement(ctx, s)
+	e.Close()
+
+	be.bufferByName[name] = buf.Bytes()
+
+	return nil
+}
+
+func (be *BundleEncoder) PutTriplesBundle(name string, statements encodingtest.TripleStatementList) error {
+	ctx := context.Background()
+
+	buf := &bytes.Buffer{}
+
+	e := encodingtest.NewTriplesEncoder(buf, encodingtest.TriplesEncoderOptions{})
+
+	for _, statement := range statements {
+		err := e.AddTripleStatement(ctx, statement)
 		if err != nil {
 			return err
 		}

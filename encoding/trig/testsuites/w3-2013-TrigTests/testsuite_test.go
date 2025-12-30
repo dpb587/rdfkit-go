@@ -9,14 +9,15 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/dpb587/rdfkit-go/encoding/encodingtest"
 	"github.com/dpb587/rdfkit-go/encoding/nquads"
 	"github.com/dpb587/rdfkit-go/encoding/trig"
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
 	"github.com/dpb587/rdfkit-go/internal/devencoding/rdfioutil"
 	"github.com/dpb587/rdfkit-go/internal/devtest"
 	"github.com/dpb587/rdfkit-go/rdf"
+	"github.com/dpb587/rdfkit-go/rdf/quads"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
-	"github.com/dpb587/rdfkit-go/rdfio"
 	"github.com/dpb587/rdfkit-go/testing/testingarchive"
 	"github.com/dpb587/rdfkit-go/x/rdfdescriptionstruct"
 )
@@ -54,26 +55,19 @@ func Test(t *testing.T) {
 			entry.Name += fmt.Sprintf("/%s", base64.RawStdEncoding.EncodeToString(h.Sum(nil))[0:8])
 		}
 
-		decodeAction := func() (rdfio.StatementList, error) {
-			r, err := trig.NewDecoder(
+		decodeAction := func() (encodingtest.QuadStatementList, error) {
+			return encodingtest.CollectQuadStatementsErr(trig.NewDecoder(
 				testdata.NewFileByteReader(t, string(entry.Action)),
 				trig.DecoderConfig{}.
 					SetDefaultBase(string(entry.Action)).
 					SetCaptureTextOffsets(true),
-			)
-			if err != nil {
-				return nil, fmt.Errorf("decode action: %v", err)
-			}
-
-			defer r.Close()
-
-			return rdfio.CollectStatements(r)
+			))
 		}
 
 		switch entry.Type {
 		case "http://www.w3.org/ns/rdftest#TestTrigEval":
 			t.Run("Eval/"+entry.Name, func(t *testing.T) {
-				expectedStatements, err := rdfio.CollectStatementsErr(nquads.NewDecoder(
+				expectedStatements, err := quads.CollectErr(nquads.NewDecoder(
 					testdata.NewFileByteReader(t, string(entry.Result)),
 				))
 				if err != nil {
@@ -85,7 +79,7 @@ func Test(t *testing.T) {
 					t.Fatalf("error: %v", err)
 				}
 
-				err = devtest.AssertStatementEquals(expectedStatements, actualStatements)
+				err = devtest.AssertStatementEquals(expectedStatements, actualStatements.AsQuads())
 				if err == nil {
 					// good
 				} else if len(oxigraphExec) == 0 {
@@ -93,7 +87,7 @@ func Test(t *testing.T) {
 					t.Log(err.Error())
 					t.SkipNow()
 				} else {
-					oxigraphErr := devtest.AssertOxigraphAsk(t.Context(), oxigraphExec, entry.Action, testdata.NewFileByteReader(t, string(entry.Result)), actualStatements)
+					oxigraphErr := devtest.AssertOxigraphAsk(t.Context(), oxigraphExec, entry.Action, testdata.NewFileByteReader(t, string(entry.Result)), actualStatements.AsQuads())
 					if oxigraphErr != nil {
 						t.Logf("eval: %v", oxigraphErr)
 						t.Log(err.Error())
@@ -101,7 +95,7 @@ func Test(t *testing.T) {
 					}
 				}
 
-				debugBundle.PutBundle(t.Name(), actualStatements)
+				debugBundle.PutQuadsBundle(t.Name(), actualStatements)
 			})
 		case "http://www.w3.org/ns/rdftest#TestTrigNegativeEval":
 			// TODO
@@ -151,7 +145,7 @@ func requireTestdata(t *testing.T) (testingarchive.Archive, *Manifest) {
 		defer manifestDecoder.Close()
 
 		for manifestDecoder.Next() {
-			manifestResources.AddTriple(manifestDecoder.GetTriple())
+			manifestResources.Add(manifestDecoder.Triple())
 		}
 
 		if err := manifestDecoder.Err(); err != nil {

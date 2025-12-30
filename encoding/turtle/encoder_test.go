@@ -20,7 +20,7 @@ func TestEncoder_Buffered_Base(t *testing.T) {
 		t.Fatalf("unexpected error: %v", err)
 	}
 
-	err = e.PutTriple(context.Background(), rdf.Triple{
+	err = e.AddTriple(context.Background(), rdf.Triple{
 		Subject:   rdf.IRI("http://example.com/path/subject"),
 		Predicate: rdfiri.Type_Property,
 		Object:    rdfiri.Property_Class,
@@ -62,7 +62,7 @@ func TestEncoder_Buffered_Prefixes(t *testing.T) {
 		t.Fatalf("unexpected error: %v", err)
 	}
 
-	err = e.PutTriple(context.Background(), rdf.Triple{
+	err = e.AddTriple(context.Background(), rdf.Triple{
 		Subject:   rdf.IRI("http://example.com/path/subject"),
 		Predicate: rdfiri.Type_Property,
 		Object:    rdfiri.Property_Class,
@@ -104,7 +104,7 @@ func TestEncoder_Unbuffered_Header(t *testing.T) {
 		t.Fatalf("unexpected error: %v", err)
 	}
 
-	err = e.PutTriple(context.Background(), rdf.Triple{
+	err = e.AddTriple(context.Background(), rdf.Triple{
 		Subject:   rdf.IRI("http://example.com/path/subject"),
 		Predicate: rdfiri.Type_Property,
 		Object:    rdfiri.Property_Class,
@@ -144,7 +144,7 @@ func TestEncoder_Prefix_LocalNameEscapes(t *testing.T) {
 		t.Fatalf("unexpected error: %v", err)
 	}
 
-	err = e.PutTriple(context.Background(), rdf.Triple{
+	err = e.AddTriple(context.Background(), rdf.Triple{
 		Subject:   rdf.IRI("http://example.com/path/nested/subject"),
 		Predicate: rdfiri.Type_Property,
 		Object:    rdfiri.Property_Class,

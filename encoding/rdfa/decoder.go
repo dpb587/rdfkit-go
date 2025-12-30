@@ -20,7 +20,6 @@ import (
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil/rdfacontext"
-	"github.com/dpb587/rdfkit-go/rdfio"
 	"github.com/dpb587/rdfkit-go/x/storage/inmemory"
 	"github.com/dpb587/rdfkit-go/x/storage/inmemory/simplequery"
 	"golang.org/x/net/html"
@@ -30,6 +29,12 @@ import (
 type DecoderOption interface {
 	apply(s *DecoderConfig)
 	newDecoder(doc *encodinghtml.Document) (*Decoder, error)
+}
+
+type statement struct {
+	triple            rdf.Triple
+	textOffsets       encoding.StatementTextOffsets
+	containerResource encoding.ContainerResource
 }
 
 type Decoder struct {
@@ -43,12 +48,14 @@ type Decoder struct {
 	blankNodeStringMapper blanknodeutil.StringMapper
 	buildTextOffsets      encodingutil.TextOffsetsBuilderFunc
 
-	err          error
-	statements   []*statement
-	statementIdx int
+	err error
+
+	statements    []statement
+	statementsIdx int
 }
 
-var _ encoding.GraphDecoder = &Decoder{}
+var _ rdf.TripleIterator = &Decoder{}
+var _ encoding.StatementTextOffsetsProvider = &Decoder{}
 
 func NewDecoder(doc *encodinghtml.Document, opts ...DecoderOption) (*Decoder, error) {
 	compiledOpts := DecoderConfig{}
@@ -71,7 +78,7 @@ func (v *Decoder) Err() error {
 func (v *Decoder) Next() bool {
 	if v.err != nil {
 		return false
-	} else if v.statementIdx == -1 {
+	} else if v.statementsIdx == -1 {
 		rootNode := v.doc.GetRoot()
 
 		gectx := &globalEvaluationContext{
@@ -113,17 +120,21 @@ func (v *Decoder) Next() bool {
 		}
 	}
 
-	v.statementIdx++
+	v.statementsIdx++
 
-	return v.statementIdx < len(v.statements)
+	return v.statementsIdx < len(v.statements)
 }
 
-func (v *Decoder) GetTriple() rdf.Triple {
-	return v.statements[v.statementIdx].triple
+func (r *Decoder) Triple() rdf.Triple {
+	return r.statements[r.statementsIdx].triple
 }
 
-func (v *Decoder) GetStatement() rdfio.Statement {
-	return v.statements[v.statementIdx]
+func (r *Decoder) Statement() rdf.Statement {
+	return r.Triple()
+}
+
+func (r *Decoder) StatementTextOffsets() encoding.StatementTextOffsets {
+	return r.statements[r.statementsIdx].textOffsets
 }
 
 func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
@@ -684,13 +695,13 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 							}
 						}
 
-						v.statements = append(v.statements, &statement{
+						v.statements = append(v.statements, statement{
 							triple: rdf.Triple{
 								Subject:   typedResource.(rdf.SubjectValue),
 								Predicate: rdfiri.Type_Property,
 								Object:    fieldIRI,
 							},
-							offsets: v.buildTextOffsets(
+							textOffsets: v.buildTextOffsets(
 								encoding.SubjectStatementOffsets, typedResourceAnno,
 								encoding.PredicateStatementOffsets, predicateRange,
 								encoding.ObjectStatementOffsets, anno,
@@ -771,13 +782,13 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 							continue
 						}
 
-						v.statements = append(v.statements, &statement{
+						v.statements = append(v.statements, statement{
 							triple: rdf.Triple{
 								Subject:   newSubject,
 								Predicate: relValue,
 								Object:    currentObjectResource,
 							},
-							offsets: v.buildTextOffsets(
+							textOffsets: v.buildTextOffsets(
 								encoding.SubjectStatementOffsets, newSubjectAnno,
 								encoding.PredicateStatementOffsets, predicateRange,
 								encoding.ObjectStatementOffsets, currentObjectResourceAnno,
@@ -803,13 +814,13 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 							continue
 						}
 
-						v.statements = append(v.statements, &statement{
+						v.statements = append(v.statements, statement{
 							triple: rdf.Triple{
 								Subject:   currentObjectResource.(rdf.SubjectValue),
 								Predicate: revValue,
 								Object:    newSubject,
 							},
-							offsets: v.buildTextOffsets(
+							textOffsets: v.buildTextOffsets(
 								encoding.SubjectStatementOffsets, currentObjectResourceAnno,
 								encoding.PredicateStatementOffsets, predicateRange,
 								encoding.ObjectStatementOffsets, newSubjectAnno,
@@ -1143,13 +1154,13 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 
 					listMapping[propertyValue].Objects = append(listMapping[propertyValue].Objects, currentPropertyValue)
 				} else {
-					v.statements = append(v.statements, &statement{
+					v.statements = append(v.statements, statement{
 						triple: rdf.Triple{
 							Subject:   newSubject,
 							Predicate: propertyValue,
 							Object:    currentPropertyValue,
 						},
-						offsets: v.buildTextOffsets(
+						textOffsets: v.buildTextOffsets(
 							encoding.SubjectStatementOffsets, newSubjectAnno,
 							encoding.PredicateStatementOffsets, predicateRange,
 							encoding.ObjectStatementOffsets, currentPropertyValueAnno,
@@ -1167,13 +1178,13 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 					case incompleteTripleDirectionNone:
 						// TODO
 					case incompleteTripleDirectionForward:
-						v.statements = append(v.statements, &statement{
+						v.statements = append(v.statements, statement{
 							triple: rdf.Triple{
 								Subject:   ectx.ParentSubject,
 								Predicate: incompleteTriple.Predicate,
 								Object:    newSubject,
 							},
-							offsets: v.buildTextOffsets(
+							textOffsets: v.buildTextOffsets(
 								encoding.SubjectStatementOffsets, ectx.ParentSubjectAnno,
 								encoding.PredicateStatementOffsets, incompleteTriple.PredicateRange,
 								encoding.ObjectStatementOffsets, newSubjectAnno,
@@ -1181,13 +1192,13 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 							containerResource: ectx.CurrentContainer,
 						})
 					case incompleteTripleDirectionReverse:
-						v.statements = append(v.statements, &statement{
+						v.statements = append(v.statements, statement{
 							triple: rdf.Triple{
 								Subject:   newSubject,
 								Predicate: incompleteTriple.Predicate,
 								Object:    ectx.ParentSubject,
 							},
-							offsets: v.buildTextOffsets(
+							textOffsets: v.buildTextOffsets(
 								encoding.SubjectStatementOffsets, newSubjectAnno,
 								encoding.PredicateStatementOffsets, incompleteTriple.PredicateRange,
 								encoding.ObjectStatementOffsets, ectx.ParentSubjectAnno,
@@ -1252,13 +1263,13 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 				}
 
 				if len(listItems.Objects) == 0 {
-					v.statements = append(v.statements, &statement{
+					v.statements = append(v.statements, statement{
 						triple: rdf.Triple{
 							Subject:   newSubject, // "current subject" in spec
 							Predicate: listPredicate,
 							Object:    rdfiri.Nil_List,
 						},
-						offsets: v.buildTextOffsets(
+						textOffsets: v.buildTextOffsets(
 							encoding.SubjectStatementOffsets, newSubjectAnno,
 						),
 						containerResource: ectx.CurrentContainer,
@@ -1274,7 +1285,7 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 				}
 
 				for listItemIdx, listItem := range listItems.Objects {
-					v.statements = append(v.statements, &statement{
+					v.statements = append(v.statements, statement{
 						triple: rdf.Triple{
 							Subject:   listBnodes[listItemIdx],
 							Predicate: rdfiri.First_Property,
@@ -1284,7 +1295,7 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 					})
 
 					if listItemIdx == len(listItems.Objects)-1 {
-						v.statements = append(v.statements, &statement{
+						v.statements = append(v.statements, statement{
 							triple: rdf.Triple{
 								Subject:   listBnodes[listItemIdx],
 								Predicate: rdfiri.Rest_Property,
@@ -1293,7 +1304,7 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 							containerResource: ectx.CurrentContainer,
 						})
 					} else {
-						v.statements = append(v.statements, &statement{
+						v.statements = append(v.statements, statement{
 							triple: rdf.Triple{
 								Subject:   listBnodes[listItemIdx],
 								Predicate: rdfiri.Rest_Property,
@@ -1304,13 +1315,13 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 					}
 				}
 
-				v.statements = append(v.statements, &statement{
+				v.statements = append(v.statements, statement{
 					triple: rdf.Triple{
 						Subject:   newSubject, // "current subject" in spec
 						Predicate: listPredicate,
 						Object:    listBnodes[0],
 					},
-					offsets: v.buildTextOffsets(
+					textOffsets: v.buildTextOffsets(
 						encoding.SubjectStatementOffsets, newSubjectAnno,
 					),
 					containerResource: ectx.CurrentContainer,
@@ -1331,8 +1342,8 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 		{
 			ctx := context.Background()
 
-			for _, tuple := range v.statements {
-				err := propertyCopyGraph.PutTriple(ctx, tuple.triple)
+			for _, stmt := range v.statements {
+				err := propertyCopyGraph.AddQuad(ctx, stmt.triple.AsQuad(nil))
 				if err != nil {
 					return fmt.Errorf("add: %v", err)
 				}
@@ -1384,7 +1395,7 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 				// ambiguous: this exception is not described by the spec
 				// exclusion matches spec output graph example, though
 			} else {
-				v.statements = append(v.statements, &statement{
+				v.statements = append(v.statements, statement{
 					triple: rdf.Triple{
 						Subject:   subject.(rdf.SubjectValue),
 						Predicate: predicate.(rdf.PredicateValue),
@@ -1405,7 +1416,7 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 			return fmt.Errorf("iter: %v", iter.Err())
 		}
 
-		var nextTuples []*statement
+		var nextTuples []statement
 
 		for _, tuple := range v.statements {
 			if tuple.triple.Predicate == rdfairi.Copy_Property {

@@ -12,11 +12,9 @@ import (
 	"github.com/dpb587/rdfkit-go/internal/oxigraph"
 	"github.com/dpb587/rdfkit-go/internal/oxigraph/nquadsutil"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdfio"
-	"github.com/dpb587/rdfkit-go/rdfio/rdfioutil"
 )
 
-func AssertOxigraphAsk(ctx context.Context, exec string, expectedBase rdf.IRI, expectedNquads io.Reader, actual rdfio.StatementList) error {
+func AssertOxigraphAsk(ctx context.Context, exec string, expectedBase rdf.IRI, expectedNquads io.Reader, actual rdf.QuadList) error {
 	actualEncoded, err := func() ([]byte, error) {
 		buf := bytes.NewBuffer(nil)
 		encoder, err := nquads.NewEncoder(buf)
@@ -25,7 +23,7 @@ func AssertOxigraphAsk(ctx context.Context, exec string, expectedBase rdf.IRI, e
 		}
 
 		for _, statement := range actual {
-			if err := encoder.PutGraphTriple(ctx, statement.GetGraphName(), statement.GetTriple()); err != nil {
+			if err := encoder.AddQuad(ctx, statement); err != nil {
 				return nil, fmt.Errorf("unexpected error: %v", err)
 			}
 		}
@@ -84,13 +82,13 @@ func AssertOxigraphAsk(ctx context.Context, exec string, expectedBase rdf.IRI, e
 }
 
 // eventually should be a proper, isomorphic comparison
-func AssertStatementEquals(expected, actual rdfio.StatementList) error {
+func AssertStatementEquals(expected, actual rdf.QuadList) error {
 	var encodedStatements = [2]*bytes.Buffer{
 		bytes.NewBuffer(nil),
 		bytes.NewBuffer(nil),
 	}
 
-	for i, statements := range [2]rdfio.StatementList{expected, actual} {
+	for i, statements := range [2]rdf.QuadList{expected, actual} {
 		ctx := context.Background()
 		encoder, err := nquads.NewEncoder(encodedStatements[i])
 		if err != nil {
@@ -98,7 +96,7 @@ func AssertStatementEquals(expected, actual rdfio.StatementList) error {
 		}
 
 		for _, statement := range statements {
-			if err := encoder.PutGraphTriple(ctx, statement.GetGraphName(), statement.GetTriple()); err != nil {
+			if err := encoder.AddQuad(ctx, statement); err != nil {
 				return fmt.Errorf("unexpected error: %v", err)
 			}
 		}
@@ -124,20 +122,5 @@ func AssertStatementEquals(expected, actual rdfio.StatementList) error {
 }
 
 func AssertTripleEquals(expected, actual rdf.TripleList) error {
-	var expectedStatements rdfio.StatementList
-	var actualStatements rdfio.StatementList
-
-	for _, triple := range expected {
-		expectedStatements = append(expectedStatements, rdfioutil.Statement{
-			Triple: triple,
-		})
-	}
-
-	for _, triple := range actual {
-		actualStatements = append(actualStatements, rdfioutil.Statement{
-			Triple: triple,
-		})
-	}
-
-	return AssertStatementEquals(expectedStatements, actualStatements)
+	return AssertStatementEquals(expected.AsQuads(nil), actual.AsQuads(nil))
 }

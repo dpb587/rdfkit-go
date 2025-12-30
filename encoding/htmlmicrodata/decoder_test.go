@@ -8,38 +8,36 @@ import (
 
 	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/rdfkit-go/encoding"
+	"github.com/dpb587/rdfkit-go/encoding/encodingtest"
 	"github.com/dpb587/rdfkit-go/encoding/html"
 	"github.com/dpb587/rdfkit-go/encoding/ntriples"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
-	"github.com/dpb587/rdfkit-go/rdfio"
-	"github.com/dpb587/rdfkit-go/rdfio/rdfioutil"
+	"github.com/dpb587/rdfkit-go/rdf/triples"
 )
 
 var testingBnode = blanknodeutil.NewStringMapper()
 
-func microdataLivingAssertEquals(t *testing.T, expected, actual rdfio.StatementList) {
+func microdataLivingAssertEquals(t *testing.T, expected, actual rdf.TripleList) {
 	var lazyCompare = [2]*bytes.Buffer{
 		bytes.NewBuffer(nil),
 		bytes.NewBuffer(nil),
 	}
 
-	for i, entities := range [2]rdfio.StatementList{expected, actual} {
+	for i, entities := range [2]rdf.TripleList{expected, actual} {
 		ctx := context.Background()
 		encoder, err := ntriples.NewEncoder(lazyCompare[i])
 		if err != nil {
 			t.Fatalf("unexpected error: %v", err)
 		}
 
-		for eIdx, e := range entities {
-			triple := e.GetTriple()
-
+		for eIdx, triple := range entities {
 			if triple.Subject == nil {
 				triple.Subject = testingBnode.MapBlankNodeIdentifier(fmt.Sprintf("b%d", eIdx))
 			}
 
-			if err := encoder.PutTriple(ctx, triple); err != nil {
+			if err := encoder.AddTriple(ctx, triple); err != nil {
 				t.Fatalf("unexpected error: %v", err)
 			}
 		}
@@ -60,7 +58,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 	for _, testcase := range []struct {
 		Name     string
 		Snippet  string
-		Expected rdfio.StatementList
+		Expected encodingtest.TripleStatementList
 	}{
 		{
 			Name: "5.1.2/1",
@@ -71,8 +69,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 <div itemscope>
  <p>My name is <span itemprop="name">Daniel</span>.</p>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("name"),
@@ -93,7 +91,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("name"),
@@ -129,8 +127,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
   </aside>
  </div>
 </section>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("name"),
@@ -151,7 +149,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("name"),
@@ -181,8 +179,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
  <p>My band is called <span itemprop="band">Four Parts Water</span>.</p>
  <p>I am <span itemprop="nationality">British</span>.</p>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("name"),
@@ -203,7 +201,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("band"),
@@ -224,7 +222,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("nationality"),
@@ -252,8 +250,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Snippet: `<div itemscope>
  <img itemprop="image" src="google-logo.png" alt="Google">
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("image"),
@@ -281,8 +279,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Snippet: `<h1 itemscope>
  <data itemprop="product-id" value="9678AOU879">The Instigator 2000</data>
 </h1>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("product-id"),
@@ -316,8 +314,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
    (based on <span itemprop="reviewCount">11</span> customer reviews)
   </div>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
@@ -338,7 +336,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("name"),
@@ -359,7 +357,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("aggregateRating"),
@@ -380,7 +378,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
@@ -401,7 +399,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("ratingValue"),
@@ -426,7 +424,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("reviewCount"),
@@ -454,8 +452,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Snippet: `<div itemscope>
  I was born on <time itemprop="birthday" datetime="2009-05-10">May 10th 2009</time>.
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("birthday"),
@@ -487,8 +485,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
  <p>Name: <span itemprop="name">Amanda</span></p>
  <p>Band: <span itemprop="band" itemscope> <span itemprop="name">Jazz Band</span> (<span itemprop="size">12</span> players)</span></p>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("name"),
@@ -509,7 +507,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("band"),
@@ -530,7 +528,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("name"),
@@ -551,7 +549,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("size"),
@@ -583,8 +581,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
  <p>Band: <span itemprop="name">Jazz Band</span></p>
  <p>Size: <span itemprop="size">12</span> players</p>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("name"),
@@ -605,7 +603,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("band"),
@@ -626,7 +624,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("name"),
@@ -647,7 +645,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("size"),
@@ -679,8 +677,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
   <li itemprop="flavor">Apricot sorbet</li>
  </ul>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("flavor"),
@@ -701,7 +699,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("flavor"),
@@ -729,8 +727,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Snippet: `<div itemscope>
  <span itemprop="favorite-color favorite-fruit">orange</span>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("favorite-color"),
@@ -751,7 +749,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("favorite-fruit"),
@@ -780,8 +778,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
  <img src="castle.jpeg">
  <figcaption><span itemscope><span itemprop="name">The Castle</span></span> (1986)</figcaption>
 </figure>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("name"),
@@ -811,8 +809,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
  <img src="castle.jpeg">
  <figcaption>The Castle (1986)</figcaption>
 </figure>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("name"),
@@ -843,8 +841,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
  shorthair, with a fluffy black fur with white paws and belly.</p>
  <img itemprop="img" src="hedral.jpeg" alt="" title="Hedral, age 18 months">
 </section>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
@@ -865,7 +863,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("name"),
@@ -886,7 +884,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("desc"),
@@ -907,7 +905,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("img"),
@@ -942,8 +940,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
  <dt>Publication date
  <dd><time itemprop="pubdate" datetime="1996-01-26">26 January 1996</time>
 </dl>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("urn:isbn:0-330-34032-8"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
@@ -964,7 +962,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("urn:isbn:0-330-34032-8"),
 						Predicate: rdf.IRI("title"),
@@ -985,7 +983,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("urn:isbn:0-330-34032-8"),
 						Predicate: rdf.IRI("author"),
@@ -1006,7 +1004,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("urn:isbn:0-330-34032-8"),
 						Predicate: rdf.IRI("pubdate"),
@@ -1042,8 +1040,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
  itemprop="https://example.com/color">white</span> paws and belly.</p>
  <img itemprop="img" src="hedral.jpeg" alt="" title="Hedral, age 18 months">
 </section>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
@@ -1064,7 +1062,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("name"),
@@ -1085,7 +1083,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("https://example.com/fn"),
@@ -1106,7 +1104,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("desc"),
@@ -1127,7 +1125,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("https://example.com/color"),
@@ -1148,7 +1146,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("https://example.com/color"),
@@ -1169,7 +1167,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("img"),
@@ -1205,8 +1203,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
  <dt>Digital:
  <dd itemprop="digital">Delta
 </dl>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
@@ -1227,7 +1225,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
@@ -1248,7 +1246,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("name"),
@@ -1269,7 +1267,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("product-code"),
@@ -1290,7 +1288,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("scale"),
@@ -1311,7 +1309,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("digital"),
@@ -1346,8 +1344,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
  <dd>For retrofitting 2 <span itemprop="track-type">C</span> Track
  turnouts. <meta itemprop="scale" content="HO">
 </dl>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
@@ -1368,7 +1366,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
@@ -1389,7 +1387,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("name"),
@@ -1410,7 +1408,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("product-code"),
@@ -1431,7 +1429,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("track-type"),
@@ -1452,7 +1450,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("scale"),
@@ -1485,8 +1483,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
  <dt>Scale:
  <dd itemprop="scale">Z
 </dl>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
@@ -1507,7 +1505,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("name"),
@@ -1528,7 +1526,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("product-code"),
@@ -1549,7 +1547,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("scale"),
@@ -1579,8 +1577,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
  <p itemprop="a">2</p>
  <p itemprop="b">test</p>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("a"),
@@ -1601,7 +1599,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("a"),
@@ -1622,7 +1620,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("b"),
@@ -1652,8 +1650,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
  <p itemprop="a">1</p>
  <p itemprop="a">2</p>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("b"),
@@ -1674,7 +1672,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("a"),
@@ -1695,7 +1693,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("a"),
@@ -1725,8 +1723,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
  <p itemprop="b">test</p>
  <p itemprop="a">2</p>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("a"),
@@ -1747,7 +1745,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("b"),
@@ -1768,7 +1766,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("a"),
@@ -1800,8 +1798,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
  <p itemprop="b">test</p>
  <p itemprop="a">2</p>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("a"),
@@ -1822,7 +1820,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("b"),
@@ -1843,7 +1841,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("a"),
@@ -1890,8 +1888,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
   </footer>
  </body>
 </html>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
@@ -1912,7 +1910,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("license"),
@@ -1933,7 +1931,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("work"),
@@ -1954,7 +1952,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("title"),
@@ -1975,7 +1973,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
@@ -1996,7 +1994,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("license"),
@@ -2017,7 +2015,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("work"),
@@ -2038,7 +2036,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("title"),
@@ -2065,7 +2063,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Name: "5.2.6/1",
 			Snippet: `<p itemscope></p> <!-- this is an item (with no properties and no type) -->
 <svg itemscope></svg> <!-- this is not, it's just an SVG svg element with an invalid unknown attribute -->`,
-			Expected: rdfio.StatementList{
+			Expected: encodingtest.TripleStatementList{
 				// TODO possible to differentiate property-less item?
 			},
 		},
@@ -2115,8 +2113,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
   <span itemprop="value">01632 960 123</span>.</p>
  </ins>
 </section>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
@@ -2137,7 +2135,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("fn"),
@@ -2158,7 +2156,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("n"),
@@ -2179,7 +2177,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("given-name"),
@@ -2200,7 +2198,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("family-name"),
@@ -2221,7 +2219,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("photo"),
@@ -2242,7 +2240,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("org"),
@@ -2263,7 +2261,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
 						Predicate: rdf.IRI("organization-name"),
@@ -2284,7 +2282,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
 						Predicate: rdf.IRI("organization-unit"),
@@ -2305,7 +2303,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("adr"),
@@ -2326,7 +2324,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
 						Predicate: rdf.IRI("street-address"),
@@ -2347,7 +2345,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
 						Predicate: rdf.IRI("locality"),
@@ -2368,7 +2366,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
 						Predicate: rdf.IRI("region"),
@@ -2389,7 +2387,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
 						Predicate: rdf.IRI("postal-code"),
@@ -2410,7 +2408,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
 						Predicate: rdf.IRI("country-name"),
@@ -2431,7 +2429,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("geo"),
@@ -2452,7 +2450,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("tel"),
@@ -2473,7 +2471,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b4"),
 						Predicate: rdf.IRI("value"),
@@ -2494,7 +2492,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b4"),
 						Predicate: rdf.IRI("type"),
@@ -2515,7 +2513,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b4"),
 						Predicate: rdf.IRI("type"),
@@ -2536,7 +2534,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("url"),
@@ -2557,7 +2555,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("url"),
@@ -2578,7 +2576,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("email"),
@@ -2599,7 +2597,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("tel"),
@@ -2620,7 +2618,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b5"),
 						Predicate: rdf.IRI("value"),
@@ -2641,7 +2639,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b5"),
 						Predicate: rdf.IRI("type"),
@@ -2662,7 +2660,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("rev"),
@@ -2683,7 +2681,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("tel"),
@@ -2704,7 +2702,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b6"),
 						Predicate: rdf.IRI("type"),
@@ -2725,7 +2723,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b6"),
 						Predicate: rdf.IRI("value"),
@@ -2760,8 +2758,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
    <span itemprop="region">CA</span> <span itemprop="postal-code">94043</span>
  </span>
 </address>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
@@ -2782,7 +2780,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("fn"),
@@ -2803,7 +2801,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("n"),
@@ -2824,7 +2822,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("given-name"),
@@ -2845,7 +2843,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("family-name"),
@@ -2866,7 +2864,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("adr"),
@@ -2887,7 +2885,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
 						Predicate: rdf.IRI("street-address"),
@@ -2908,7 +2906,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
 						Predicate: rdf.IRI("street-address"),
@@ -2929,7 +2927,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
 						Predicate: rdf.IRI("locality"),
@@ -2950,7 +2948,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
 						Predicate: rdf.IRI("region"),
@@ -2971,7 +2969,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
 						Predicate: rdf.IRI("postal-code"),
@@ -3000,8 +2998,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 ><span itemprop=fn><span itemprop="n" itemscope><span itemprop="given-name"
 >George</span> <span itemprop="family-name">Washington</span></span
 ></span></span>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
@@ -3022,7 +3020,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("fn"),
@@ -3043,7 +3041,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("n"),
@@ -3064,7 +3062,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("given-name"),
@@ -3085,7 +3083,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("family-name"),
@@ -3127,8 +3125,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
  ...
  <meta itemprop="description" content="via livebrum.co.uk">
 </body>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
@@ -3149,7 +3147,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("summary"),
@@ -3170,7 +3168,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("dtstart"),
@@ -3194,7 +3192,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("dtend"),
@@ -3218,7 +3216,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("url"),
@@ -3239,7 +3237,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("location"),
@@ -3260,7 +3258,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("description"),
@@ -3295,8 +3293,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
        itemprop="url">See this event on livebrum.co.uk</a>.</p>
  <meta itemprop="description" content="via livebrum.co.uk">
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
@@ -3317,7 +3315,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("summary"),
@@ -3338,7 +3336,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("dtstart"),
@@ -3362,7 +3360,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("dtend"),
@@ -3386,7 +3384,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("location"),
@@ -3407,7 +3405,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("url"),
@@ -3428,7 +3426,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("description"),
@@ -3465,8 +3463,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
   license</a>.</small>
  </figcaption>
 </figure>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
@@ -3487,7 +3485,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("work"),
@@ -3508,7 +3506,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("title"),
@@ -3529,7 +3527,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("license"),
@@ -3550,7 +3548,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("license"),
@@ -3610,8 +3608,8 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
   </article>
  </section>
 </article>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
@@ -3632,7 +3630,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("headline"),
@@ -3653,7 +3651,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("datePublished"),
@@ -3677,7 +3675,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("url"),
@@ -3698,7 +3696,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("comment"),
@@ -3719,7 +3717,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
@@ -3740,7 +3738,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("url"),
@@ -3761,7 +3759,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("creator"),
@@ -3782,7 +3780,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
@@ -3803,7 +3801,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
 						Predicate: rdf.IRI("name"),
@@ -3824,7 +3822,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("commentTime"),
@@ -3848,7 +3846,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("comment"),
@@ -3869,7 +3867,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
@@ -3890,7 +3888,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
 						Predicate: rdf.IRI("url"),
@@ -3911,7 +3909,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
 						Predicate: rdf.IRI("creator"),
@@ -3932,7 +3930,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b4"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
@@ -3953,7 +3951,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b4"),
 						Predicate: rdf.IRI("name"),
@@ -3974,7 +3972,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
 						Predicate: rdf.IRI("commentTime"),
@@ -4010,7 +4008,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				t.Fatalf("unexpected error: %v", err)
 			}
 
-			out, err := rdfio.CollectStatementsErr(NewDecoder(htmlDocument))
+			out, err := triples.CollectErr(NewDecoder(htmlDocument))
 			if err != nil {
 				t.Fatalf("unexpected error: %v", err)
 			}
@@ -4031,7 +4029,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			// 	}
 			// }
 
-			microdataLivingAssertEquals(t, testcase.Expected, out)
+			microdataLivingAssertEquals(t, testcase.Expected.AsTriples(), out)
 		})
 	}
 }

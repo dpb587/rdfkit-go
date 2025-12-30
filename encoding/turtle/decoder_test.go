@@ -32,7 +32,7 @@ func TestDecoder(t *testing.T) {
 	}
 
 	for r.Next() {
-		fmt.Fprintf(os.Stderr, "%v\n", r.GetTriple())
+		fmt.Fprintf(os.Stderr, "%v\n", r.Triple())
 	}
 
 	if err := r.Err(); err != nil {

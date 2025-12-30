@@ -4,7 +4,6 @@ import (
 	"context"
 
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdfio"
 	"github.com/dpb587/rdfkit-go/x/storage/inmemory/simplequery"
 )
 
@@ -17,7 +16,7 @@ func (s *Dataset) QuerySimple(ctx context.Context, q simplequery.Query, opts sim
 		ctx,
 		q,
 		&selectBindings,
-		simplequery.NewQueryResultBinding(map[string]rdf.Term{}, map[string]rdfio.Statement{}),
+		simplequery.NewQueryResultBinding(map[string]rdf.Term{}),
 		first,
 		remaining,
 	)
@@ -29,7 +28,7 @@ func (s *Dataset) QuerySimple(ctx context.Context, q simplequery.Query, opts sim
 }
 
 func (s *Dataset) querySimpleWhere(ctx context.Context, q simplequery.Query, selectBindings *[]simplequery.QueryResultBinding, currentBindings simplequery.QueryResultBinding, whereStatement simplequery.WhereTriple, remaining simplequery.WhereTripleList) error {
-	iter, err := s.NewStatementIterator(ctx, whereStatement)
+	iter, err := s.NewQuadIterator(ctx, whereStatement)
 	if err != nil {
 		return err
 	}
@@ -46,12 +45,12 @@ func (s *Dataset) querySimpleWhere(ctx context.Context, q simplequery.Query, sel
 
 	var found int
 
-	for _, edge := range iter.(*statementIterator).edges {
+	for _, edge := range iter.(*StatementIterator).edges {
 		if oValuesFound {
 			var matched bool
 
 			for _, oValueTerm := range oValues {
-				if oValueTerm.TermEquals(edge.GetTriple().Object) {
+				if oValueTerm.TermEquals(edge.GetQuad().Triple.Object) {
 					matched = true
 
 					break
@@ -65,18 +64,16 @@ func (s *Dataset) querySimpleWhere(ctx context.Context, q simplequery.Query, sel
 
 		found++
 
-		nextBindings := whereStatement.UpdateBindings(currentBindings, edge)
+		nextBindings := whereStatement.UpdateBindings(currentBindings, edge.GetQuad())
 
 		if len(remaining) == 0 {
 			finalTermsByVar := map[string]rdf.Term{}
-			finalTermValuesByVar := map[string]rdfio.Statement{}
 
 			for _, v := range q.Select {
 				finalTermsByVar[string(v)] = nextBindings.Get(string(v))
-				finalTermValuesByVar[string(v)] = nextBindings.GetTripleBinding(string(v))
 			}
 
-			*selectBindings = append(*selectBindings, simplequery.NewQueryResultBinding(finalTermsByVar, finalTermValuesByVar))
+			*selectBindings = append(*selectBindings, simplequery.NewQueryResultBinding(finalTermsByVar))
 
 			continue
 		} else {
@@ -92,14 +89,12 @@ func (s *Dataset) querySimpleWhere(ctx context.Context, q simplequery.Query, sel
 	if found == 0 && whereStatement.Optional {
 		if len(remaining) == 0 {
 			finalTermsByVar := map[string]rdf.Term{}
-			finalTermValuesByVar := map[string]rdfio.Statement{}
 
 			for _, v := range q.Select {
 				finalTermsByVar[string(v)] = currentBindings.Get(string(v))
-				finalTermValuesByVar[string(v)] = currentBindings.GetTripleBinding(string(v))
 			}
 
-			*selectBindings = append(*selectBindings, simplequery.NewQueryResultBinding(finalTermsByVar, finalTermValuesByVar))
+			*selectBindings = append(*selectBindings, simplequery.NewQueryResultBinding(finalTermsByVar))
 		} else {
 			nextStatement, nextRemaining := remaining.Shift()
 

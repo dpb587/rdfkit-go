@@ -6,6 +6,14 @@ type Triple struct {
 	Object    ObjectValue
 }
 
+var _ Statement = Triple{}
+
+func (Triple) isStatement() {}
+
+func (t Triple) StatementType() StatementType {
+	return TripleStatementType
+}
+
 // TODO needs more research; subject+object? wait for next version of the spec?
 // in the meantime, standalone struct is meaningful elsewhere and unlikely to change with new spec
 
@@ -32,6 +40,37 @@ type Triple struct {
 // 	return t.Object.TermEquals(dTriple.Object)
 // }
 
+func (t Triple) AsQuad(g GraphNameValue) Quad {
+	return Quad{
+		Triple:    t,
+		GraphName: g,
+	}
+}
+
+//
+
+type TripleMatcher interface {
+	MatchTriple(t Triple) bool
+}
+
 //
 
 type TripleList []Triple
+
+func (tl TripleList) AsQuads(g GraphNameValue) QuadList {
+	quads := make(QuadList, 0, len(tl))
+
+	for _, t := range tl {
+		quads = append(quads, t.AsQuad(g))
+	}
+
+	return quads
+}
+
+//
+
+type TripleIterator interface {
+	StatementIterator
+
+	Triple() Triple
+}

@@ -10,12 +10,16 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/encodingutil"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdfio"
 )
 
 type DecoderOption interface {
 	apply(s *DecoderConfig)
 	newDecoder(r io.Reader) (*Decoder, error)
+}
+
+type statement struct {
+	quad        rdf.Quad
+	textOffsets encoding.StatementTextOffsets
 }
 
 type Decoder struct {
@@ -26,12 +30,15 @@ type Decoder struct {
 	prefixDirectiveListener DecoderEvent_PrefixDirective_ListenerFunc
 	buildTextOffsets        encodingutil.TextOffsetsBuilderFunc
 
-	stack      []readerStack
-	err        error
-	statements []*statement
+	stack []readerStack
+
+	err error
+
+	statements []statement
 }
 
-var _ encoding.DatasetDecoder = (*Decoder)(nil)
+var _ rdf.QuadIterator = &Decoder{}
+var _ encoding.StatementTextOffsetsProvider = &Decoder{}
 
 func NewDecoder(r io.Reader, opts ...DecoderOption) (*Decoder, error) {
 	compiledOpts := DecoderConfig{}
@@ -80,22 +87,16 @@ func (r *Decoder) Next() bool {
 	}
 }
 
-func (r *Decoder) GetGraphName() rdf.GraphNameValue {
-	graphName := r.statements[0].graphName
-
-	if graphName == nil {
-		return rdf.DefaultGraph
-	}
-
-	return graphName
+func (r *Decoder) Quad() rdf.Quad {
+	return r.statements[0].quad
 }
 
-func (r *Decoder) GetTriple() rdf.Triple {
-	return r.statements[0].triple
+func (r *Decoder) Statement() rdf.Statement {
+	return r.Quad()
 }
 
-func (r *Decoder) GetStatement() rdfio.Statement {
-	return r.statements[0]
+func (r *Decoder) StatementTextOffsets() encoding.StatementTextOffsets {
+	return r.statements[0].textOffsets
 }
 
 type readerStack struct {
@@ -164,7 +165,7 @@ func (r *Decoder) terminate() (readerStack, error) {
 	return readerStack{}, nil
 }
 
-func (r *Decoder) emit(bl ...*statement) (readerStack, error) {
+func (r *Decoder) emit(bl ...statement) (readerStack, error) {
 	r.statements = append(r.statements, bl...)
 
 	return readerStack{}, nil

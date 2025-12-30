@@ -12,12 +12,13 @@ import (
 	"testing"
 
 	"github.com/dpb587/inspectjson-go/inspectjson"
+	"github.com/dpb587/rdfkit-go/encoding/encodingtest"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
 	"github.com/dpb587/rdfkit-go/encoding/nquads"
 	"github.com/dpb587/rdfkit-go/internal/devencoding/rdfioutil"
 	"github.com/dpb587/rdfkit-go/internal/devtest"
-	"github.com/dpb587/rdfkit-go/rdfio"
+	"github.com/dpb587/rdfkit-go/rdf/quads"
 	"github.com/dpb587/rdfkit-go/testing/testingarchive"
 )
 
@@ -45,7 +46,7 @@ func Test(t *testing.T) {
 	defer debugBundle.Close()
 
 	for _, sequence := range manifestResources.Sequence {
-		decodeAction := func() (rdfio.StatementList, error) {
+		decodeAction := func() (encodingtest.QuadStatementList, error) {
 			// var testInputURL, _ = urlutil.Parse()
 
 			dopt := jsonld.DecoderConfig{}.
@@ -87,17 +88,10 @@ func Test(t *testing.T) {
 				dopt = dopt.SetRDFDirection(sequence.Option.RDFDirection)
 			}
 
-			r, err := jsonld.NewDecoder(
+			return encodingtest.CollectQuadStatementsErr(jsonld.NewDecoder(
 				testdata.NewFileByteReader(t, manifestPrefix+sequence.Input),
 				dopt,
-			)
-			if err != nil {
-				return nil, fmt.Errorf("decode: %v", err)
-			}
-
-			defer r.Close()
-
-			return rdfio.CollectStatements(r)
+			))
 		}
 
 		if slices.Contains(sequence.Type, "jld:PositiveEvaluationTest") {
@@ -140,7 +134,7 @@ func Test(t *testing.T) {
 					t.Skip("ignore: expected failures (requires unresolved RFC 3986 dot-segments)")
 				}
 
-				expectedStatements, err := rdfio.CollectStatementsErr(nquads.NewDecoder(
+				expectedStatements, err := quads.CollectErr(nquads.NewDecoder(
 					testdata.NewFileByteReader(t, manifestPrefix+sequence.Expect),
 				))
 				if err != nil {
@@ -152,7 +146,7 @@ func Test(t *testing.T) {
 					t.Fatalf("error: %v", err)
 				}
 
-				err = devtest.AssertStatementEquals(expectedStatements, actualStatements)
+				err = devtest.AssertStatementEquals(expectedStatements, actualStatements.AsQuads())
 				if err == nil {
 					// good
 				} else if len(oxigraphExec) == 0 {
@@ -160,7 +154,7 @@ func Test(t *testing.T) {
 					t.Log(err.Error())
 					t.SkipNow()
 				} else {
-					oxigraphErr := devtest.AssertOxigraphAsk(t.Context(), oxigraphExec, manifestPrefix, testdata.NewFileByteReader(t, manifestPrefix+sequence.Expect), actualStatements)
+					oxigraphErr := devtest.AssertOxigraphAsk(t.Context(), oxigraphExec, manifestPrefix, testdata.NewFileByteReader(t, manifestPrefix+sequence.Expect), actualStatements.AsQuads())
 					if oxigraphErr != nil {
 						t.Logf("eval: %v", oxigraphErr)
 						t.Log(err.Error())
@@ -168,7 +162,7 @@ func Test(t *testing.T) {
 					}
 				}
 
-				debugBundle.PutBundle(t.Name(), actualStatements)
+				debugBundle.PutQuadsBundle(t.Name(), actualStatements)
 			})
 		}
 	}
@@ -183,6 +177,7 @@ func requireTestdata(t *testing.T) (testingarchive.Archive, manifestSchema) {
 		},
 	)
 
+	// avoiding cyclical usage of jsonld for testing
 	var loadedManifest manifestSchema
 
 	if err := json.Unmarshal(testdata.GetFileBytes(t, manifestPrefix+"manifest.jsonld"), &loadedManifest); err != nil {

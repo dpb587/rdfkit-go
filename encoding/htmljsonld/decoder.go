@@ -8,7 +8,6 @@ import (
 	encodinghtml "github.com/dpb587/rdfkit-go/encoding/html"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdfio"
 	"golang.org/x/net/html"
 	"golang.org/x/net/html/atom"
 )
@@ -26,12 +25,16 @@ type Decoder struct {
 	parserOptions       []inspectjson.ParserOption
 	decoderOptions      []jsonld.DecoderOption
 
-	err       error
-	readers   []*jsonld.Decoder
-	statement rdfio.Statement
+	readers []*jsonld.Decoder
+
+	err error
+
+	currentQuad        rdf.Quad
+	currentTextOffsets encoding.StatementTextOffsets
 }
 
-var _ encoding.DatasetDecoder = &Decoder{}
+var _ rdf.QuadIterator = &Decoder{}
+var _ encoding.StatementTextOffsetsProvider = &Decoder{}
 
 func NewDecoder(doc *encodinghtml.Document, opts ...DecoderOption) (*Decoder, error) {
 	compiledOpts := DecoderConfig{}
@@ -62,7 +65,8 @@ func (w *Decoder) Next() bool {
 
 	for len(w.readers) > 0 {
 		if w.readers[0].Next() {
-			w.statement = w.readers[0].GetStatement()
+			w.currentQuad = w.readers[0].Quad()
+			w.currentTextOffsets = w.readers[0].StatementTextOffsets()
 
 			return true
 		} else if err := w.readers[0].Err(); err != nil {
@@ -81,16 +85,16 @@ func (w *Decoder) Next() bool {
 	return false
 }
 
-func (w *Decoder) GetGraphName() rdf.GraphNameValue {
-	return w.statement.GetGraphName()
+func (r *Decoder) Quad() rdf.Quad {
+	return r.currentQuad
 }
 
-func (w *Decoder) GetTriple() rdf.Triple {
-	return w.statement.GetTriple()
+func (r *Decoder) Statement() rdf.Statement {
+	return r.Quad()
 }
 
-func (w *Decoder) GetStatement() rdfio.Statement {
-	return w.statement
+func (r *Decoder) StatementTextOffsets() encoding.StatementTextOffsets {
+	return r.currentTextOffsets
 }
 
 func (w *Decoder) walkNode(n *html.Node) {

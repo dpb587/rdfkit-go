@@ -10,14 +10,16 @@ import (
 
 func reader_scan_collection(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, openSubject rdf.SubjectValue, openSubjectRange *cursorio.TextOffsetRange) (readerStack, error) {
 	if r0.Rune == ')' {
-		return r.emit(&statement{
-			graphName: ectx.CurGraphName,
-			triple: rdf.Triple{
-				Subject:   ectx.CurSubject,
-				Predicate: ectx.CurPredicate,
-				Object:    rdfiri.Nil_List,
+		return r.emit(statement{
+			quad: rdf.Quad{
+				Triple: rdf.Triple{
+					Subject:   ectx.CurSubject,
+					Predicate: ectx.CurPredicate,
+					Object:    rdfiri.Nil_List,
+				},
+				GraphName: ectx.CurGraphName,
 			},
-			offsets: r.buildTextOffsets(
+			textOffsets: r.buildTextOffsets(
 				encoding.GraphNameStatementOffsets, ectx.CurGraphNameLocation,
 				encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 				encoding.PredicateStatementOffsets, ectx.CurPredicateLocation,
@@ -42,14 +44,16 @@ func reader_scan_collection(r *Decoder, ectx evaluationContext, r0 cursorio.Deco
 	}
 
 	// TODO should emit immediately; but reader_scan_Object doesn't currently pop itself off the stack
-	r.emit(&statement{
-		graphName: ectx.CurGraphName,
-		triple: rdf.Triple{
-			Subject:   ectx.CurSubject,
-			Predicate: ectx.CurPredicate,
-			Object:    openSubject,
+	r.emit(statement{
+		quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject:   ectx.CurSubject,
+				Predicate: ectx.CurPredicate,
+				Object:    openSubject,
+			},
+			GraphName: ectx.CurGraphName,
 		},
-		offsets: r.buildTextOffsets(
+		textOffsets: r.buildTextOffsets(
 			encoding.GraphNameStatementOffsets, ectx.CurGraphNameLocation,
 			encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 			encoding.PredicateStatementOffsets, ectx.CurPredicateLocation,
@@ -66,14 +70,16 @@ func reader_scan_collection_Continue(r *Decoder, ectx evaluationContext, r0 curs
 	}
 
 	if r0.Rune == ')' {
-		return r.emit(&statement{
-			graphName: ectx.CurGraphName,
-			triple: rdf.Triple{
-				Subject:   ectx.CurSubject,
-				Predicate: rdfiri.Rest_Property,
-				Object:    rdfiri.Nil_List,
+		return r.emit(statement{
+			quad: rdf.Quad{
+				Triple: rdf.Triple{
+					Subject:   ectx.CurSubject,
+					Predicate: rdfiri.Rest_Property,
+					Object:    rdfiri.Nil_List,
+				},
+				GraphName: ectx.CurGraphName,
 			},
-			offsets: r.buildTextOffsets(
+			textOffsets: r.buildTextOffsets(
 				encoding.GraphNameStatementOffsets, ectx.CurGraphNameLocation,
 				encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 				encoding.ObjectStatementOffsets, r.commitForTextOffsetRange(r0.AsDecodedRunes()),
@@ -90,14 +96,16 @@ func reader_scan_collection_Continue(r *Decoder, ectx evaluationContext, r0 curs
 	r.pushState(nectx, reader_scan_collection_Continue)
 
 	// TODO should emit immediately; but reader_scan_Object doesn't currently pop itself off the stack
-	r.emit(&statement{
-		graphName: ectx.CurGraphName,
-		triple: rdf.Triple{
-			Subject:   ectx.CurSubject,
-			Predicate: rdfiri.Rest_Property,
-			Object:    nectx.CurSubject,
+	r.emit(statement{
+		quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject:   ectx.CurSubject,
+				Predicate: rdfiri.Rest_Property,
+				Object:    nectx.CurSubject,
+			},
+			GraphName: ectx.CurGraphName,
 		},
-		offsets: r.buildTextOffsets(
+		textOffsets: r.buildTextOffsets(
 			encoding.GraphNameStatementOffsets, ectx.CurGraphNameLocation,
 			encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 		),

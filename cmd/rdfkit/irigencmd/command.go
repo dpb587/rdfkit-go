@@ -68,7 +68,7 @@ func New() *cobra.Command {
 			}
 
 			for bfIn.Decoder.Next() {
-				b.AddStatement(bfIn.Decoder.GetStatement())
+				b.AddStatement(bfIn.Decoder.Quad())
 			}
 
 			if err := bfIn.Decoder.Err(); err != nil {

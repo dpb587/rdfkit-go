@@ -15,7 +15,7 @@ type FactoryOptions struct {
 	DecoderOptions []DecoderOption
 }
 
-var _ encoding.GraphFactory = &Factory{}
+var _ encoding.TriplesFactory = &Factory{}
 
 func NewFactory(opts FactoryOptions) *Factory {
 	return &Factory{
@@ -23,15 +23,15 @@ func NewFactory(opts FactoryOptions) *Factory {
 	}
 }
 
-func (e *Factory) NewGraphEncoder(w io.Writer) (encoding.GraphEncoder, error) {
+func (e *Factory) NewEncoder(w io.Writer) (encoding.TriplesEncoder, error) {
 	return NewEncoder(w, e.opts.EncoderOptions...)
 }
 
-func (e *Factory) NewGraphDecoder(r io.Reader) (encoding.GraphDecoder, error) {
+func (e *Factory) NewDecoder(r io.Reader) (encoding.TriplesDecoder, error) {
 	return NewDecoder(r, e.opts.DecoderOptions...)
 }
 
-func (e *Factory) GetGraphEncoderContentMetadata() encoding.ContentMetadata {
+func (e *Factory) GetContentMetadata() encoding.ContentMetadata {
 	return encoding.ContentMetadata{
 		FileExt:   ".ttl",
 		MediaType: "text/turtle",

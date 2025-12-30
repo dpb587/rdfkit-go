@@ -4,7 +4,6 @@ import (
 	"sort"
 
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdfio"
 )
 
 type QueryScope int
@@ -48,7 +47,7 @@ type WhereTriple struct {
 	Optional  bool
 }
 
-var _ rdfio.StatementMatcher = WhereTriple{}
+var _ rdf.QuadMatcher = WhereTriple{}
 
 func (wt WhereTriple) staticEfficiency() int {
 	var offset int
@@ -82,23 +81,21 @@ func (wt WhereTriple) ResolveBindings(res QueryResultBinding) WhereTriple {
 	return wt
 }
 
-func (wt WhereTriple) MatchStatement(e rdfio.Statement) bool {
-	et := e.GetTriple()
-
+func (wt WhereTriple) MatchQuad(q rdf.Quad) bool {
 	if s, ok := wt.Subject.(Term); ok {
-		if !s.Term.TermEquals(et.Subject) {
+		if !s.Term.TermEquals(q.Triple.Subject) {
 			return false
 		}
 	}
 
 	if p, ok := wt.Predicate.(Term); ok {
-		if !p.Term.TermEquals(et.Predicate) {
+		if !p.Term.TermEquals(q.Triple.Predicate) {
 			return false
 		}
 	}
 
 	if o, ok := wt.Object.(Term); ok {
-		if !o.Term.TermEquals(et.Object) {
+		if !o.Term.TermEquals(q.Triple.Object) {
 			return false
 		}
 	}
@@ -106,24 +103,19 @@ func (wt WhereTriple) MatchStatement(e rdfio.Statement) bool {
 	return true
 }
 
-func (wt WhereTriple) UpdateBindings(res QueryResultBinding, e rdfio.Statement) QueryResultBinding {
+func (wt WhereTriple) UpdateBindings(res QueryResultBinding, et rdf.Quad) QueryResultBinding {
 	res = res.Clone()
 
-	et := e.GetTriple()
-
 	if s, ok := wt.Subject.(Var); ok {
-		res.termsByVar[string(s)] = et.Subject
-		res.tripleBindingsByVar[string(s)] = e
+		res.termsByVar[string(s)] = et.Triple.Subject
 	}
 
 	if p, ok := wt.Predicate.(Var); ok {
-		res.termsByVar[string(p)] = et.Predicate
-		res.tripleBindingsByVar[string(p)] = e
+		res.termsByVar[string(p)] = et.Triple.Predicate
 	}
 
 	if o, ok := wt.Object.(Var); ok {
-		res.termsByVar[string(o)] = et.Object
-		res.tripleBindingsByVar[string(o)] = e
+		res.termsByVar[string(o)] = et.Triple.Object
 	}
 
 	return res

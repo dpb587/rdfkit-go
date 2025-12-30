@@ -29,13 +29,13 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedR
 			return readerStack{}, grammar.R_object.Err(grammar.R_IRIREF.ErrWithTextOffsetRange(err, token.Offsets))
 		}
 
-		return r.emit(&statement{
+		return r.emit(statement{
 			triple: rdf.Triple{
 				Subject:   ectx.CurSubject,
 				Predicate: ectx.CurPredicate,
 				Object:    resolvedIRI,
 			},
-			offsets: r.buildTextOffsets(
+			textOffsets: r.buildTextOffsets(
 				encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 				encoding.PredicateStatementOffsets, ectx.CurPredicateLocation,
 				encoding.ObjectStatementOffsets, token.Offsets,
@@ -49,13 +49,13 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedR
 
 		blankNode := ectx.Global.BlankNodeStringMapper.MapBlankNodeIdentifier(token.Decoded)
 
-		return r.emit(&statement{
+		return r.emit(statement{
 			triple: rdf.Triple{
 				Subject:   ectx.CurSubject,
 				Predicate: ectx.CurPredicate,
 				Object:    blankNode,
 			},
-			offsets: r.buildTextOffsets(
+			textOffsets: r.buildTextOffsets(
 				encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 				encoding.PredicateStatementOffsets, ectx.CurPredicateLocation,
 				encoding.ObjectStatementOffsets, token.Offsets,
@@ -87,13 +87,13 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedR
 		r.pushState(nectx, reader_scan_PredicateObjectList_Continue)
 		r.pushState(nectx, reader_scan_PredicateObjectList)
 
-		return r.emit(&statement{
+		return r.emit(statement{
 			triple: rdf.Triple{
 				Subject:   ectx.CurSubject,
 				Predicate: ectx.CurPredicate,
 				Object:    blankNode,
 			},
-			offsets: r.buildTextOffsets(
+			textOffsets: r.buildTextOffsets(
 				encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 				encoding.PredicateStatementOffsets, ectx.CurPredicateLocation,
 				encoding.ObjectStatementOffsets, blankNodeRange,
@@ -172,13 +172,13 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedR
 			}
 		}
 
-		return r.emit(&statement{
+		return r.emit(statement{
 			triple: rdf.Triple{
 				Subject:   ectx.CurSubject,
 				Predicate: ectx.CurPredicate,
 				Object:    literal,
 			},
-			offsets: r.buildTextOffsets(
+			textOffsets: r.buildTextOffsets(
 				encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 				encoding.PredicateStatementOffsets, ectx.CurPredicateLocation,
 				encoding.ObjectStatementOffsets, token.Offsets,
@@ -219,13 +219,13 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedR
 			panic("unreachable")
 		}
 
-		return r.emit(&statement{
+		return r.emit(statement{
 			triple: rdf.Triple{
 				Subject:   ectx.CurSubject,
 				Predicate: ectx.CurPredicate,
 				Object:    literal,
 			},
-			offsets: r.buildTextOffsets(
+			textOffsets: r.buildTextOffsets(
 				encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 				encoding.PredicateStatementOffsets, ectx.CurPredicateLocation,
 				encoding.ObjectStatementOffsets, token.Offsets,
@@ -261,7 +261,7 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedR
 
 		// TODO verify next rune? avoid trueprefix:localname; need to figure out delimiters?
 
-		return r.emit(&statement{
+		return r.emit(statement{
 			triple: rdf.Triple{
 				Subject:   ectx.CurSubject,
 				Predicate: ectx.CurPredicate,
@@ -270,7 +270,7 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedR
 					LexicalForm: "true",
 				},
 			},
-			offsets: r.buildTextOffsets(
+			textOffsets: r.buildTextOffsets(
 				encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 				encoding.PredicateStatementOffsets, ectx.CurPredicateLocation,
 				encoding.ObjectStatementOffsets, r.commitForTextOffsetRange(cursorio.NewDecodedRunes(r0, r1, r2, r3)),
@@ -315,7 +315,7 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedR
 
 		// TODO verify next rune? avoid trueprefix:localname; need to figure out delimiters?
 
-		return r.emit(&statement{
+		return r.emit(statement{
 			triple: rdf.Triple{
 				Subject:   ectx.CurSubject,
 				Predicate: ectx.CurPredicate,
@@ -324,7 +324,7 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedR
 					LexicalForm: "false",
 				},
 			},
-			offsets: r.buildTextOffsets(
+			textOffsets: r.buildTextOffsets(
 				encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 				encoding.PredicateStatementOffsets, ectx.CurPredicateLocation,
 				encoding.ObjectStatementOffsets, r.commitForTextOffsetRange(cursorio.NewDecodedRunes(r0, r1, r2, r3, r4)),
@@ -354,13 +354,13 @@ func reader_scan_object_PrefixedName(r *Decoder, ectx evaluationContext, r0 curs
 		return readerStack{}, grammar.R_object.Err(grammar.R_PrefixedName.ErrWithTextOffsetRange(iriutil.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets))
 	}
 
-	return r.emit(&statement{
+	return r.emit(statement{
 		triple: rdf.Triple{
 			Subject:   ectx.CurSubject,
 			Predicate: ectx.CurPredicate,
 			Object:    expanded,
 		},
-		offsets: r.buildTextOffsets(
+		textOffsets: r.buildTextOffsets(
 			encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 			encoding.PredicateStatementOffsets, ectx.CurPredicateLocation,
 			encoding.ObjectStatementOffsets, token.Offsets,

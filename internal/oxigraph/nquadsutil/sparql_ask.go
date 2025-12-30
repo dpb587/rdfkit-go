@@ -22,10 +22,9 @@ func NewSpaqlAsk(r io.Reader) ([]byte, error) {
 	bygraph := map[rdf.GraphNameValue][]rdf.Triple{}
 
 	for rr.Next() {
-		s := rr.GetStatement()
-		graphName := s.GetGraphName()
+		quad := rr.Quad()
 
-		bygraph[graphName] = append(bygraph[graphName], s.GetTriple())
+		bygraph[quad.GraphName] = append(bygraph[quad.GraphName], quad.Triple)
 	}
 
 	if err := rr.Err(); err != nil {

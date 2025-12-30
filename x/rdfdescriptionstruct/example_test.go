@@ -71,7 +71,7 @@ func Example_recursive() {
 	// Create a builder and add triples
 	builder := rdfdescription.NewResourceListBuilder()
 
-	builder.AddTriple(rdf.Triple{
+	builder.Add(rdf.Triple{
 		Subject:   rdf.IRI("http://example.com/person1"),
 		Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
 		Object: rdf.Literal{
@@ -79,12 +79,12 @@ func Example_recursive() {
 			LexicalForm: "Bob",
 		},
 	})
-	builder.AddTriple(rdf.Triple{
+	builder.Add(rdf.Triple{
 		Subject:   rdf.IRI("http://example.com/person1"),
 		Predicate: rdf.IRI("http://schema.org/address"),
 		Object:    rdf.IRI("http://example.com/addr1"),
 	})
-	builder.AddTriple(rdf.Triple{
+	builder.Add(rdf.Triple{
 		Subject:   rdf.IRI("http://example.com/addr1"),
 		Predicate: rdf.IRI("http://schema.org/addressLocality"),
 		Object: rdf.Literal{

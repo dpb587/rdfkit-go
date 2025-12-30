@@ -3,7 +3,7 @@ package rdf
 // BlankNode does not identify a specific resource and is disjoint from an [IRI] and a [Literal]. Two BlankNode values
 // are equal if and only if they have the same internal [BlankNodeIdentifier].
 //
-// [NewBlankNode] must be used to create a blank node.
+// [NewBlankNode] (or [BlankNodeFactory]) must be used to create a blank node.
 type BlankNode interface {
 	Term
 	SubjectValue

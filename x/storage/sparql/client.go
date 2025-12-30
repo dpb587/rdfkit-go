@@ -9,8 +9,7 @@ import (
 	"strconv"
 
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
-	"github.com/dpb587/rdfkit-go/rdfio"
-	"github.com/dpb587/rdfkit-go/x/storage/inmemory"
+	"github.com/dpb587/rdfkit-go/rdf"
 )
 
 type Client struct {
@@ -58,7 +57,7 @@ func (c *Client) Query(ctx context.Context, query string) (*QueryResponse, error
 	return DecodeQueryResponse(res)
 }
 
-func (c *Client) Construct(ctx context.Context, query string) (rdfio.GraphStatementIterator, error) {
+func (c *Client) Construct(ctx context.Context, query string) (rdf.TripleIterator, error) {
 	formValues := url.Values{}
 	formValues.Set("query", query)
 	formEncoded := formValues.Encode()
@@ -88,25 +87,12 @@ func (c *Client) Construct(ctx context.Context, query string) (rdfio.GraphStatem
 		return nil, fmt.Errorf("unexpected status code: %d", res.StatusCode)
 	}
 
-	repo := inmemory.NewDataset()
-
 	reader, err := turtle.NewDecoder(res.Body)
 	if err != nil {
 		return nil, fmt.Errorf("decoder: %v", err)
 	}
 
-	for reader.Next() {
-		err := repo.PutTriple(ctx, reader.GetTriple())
-		if err != nil {
-			return nil, err
-		}
-	}
-
-	if err := reader.Err(); err != nil {
-		return nil, fmt.Errorf("decode response: %v", err)
-	}
-
-	return repo.NewStatementIterator(ctx) // TODO leaking repo.Close
+	return reader, nil
 }
 
 func (c *Client) Do(req *http.Request) (*http.Response, error) {

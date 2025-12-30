@@ -7,12 +7,12 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/dpb587/rdfkit-go/encoding/nquads"
+	"github.com/dpb587/rdfkit-go/encoding/encodingtest"
+	"github.com/dpb587/rdfkit-go/encoding/ntriples"
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
 	"github.com/dpb587/rdfkit-go/internal/devencoding/rdfioutil"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
-	"github.com/dpb587/rdfkit-go/rdfio"
 	"github.com/dpb587/rdfkit-go/testing/testingarchive"
 	"github.com/dpb587/rdfkit-go/x/rdfdescriptionstruct"
 )
@@ -40,14 +40,12 @@ func Test(t *testing.T) {
 	defer debugBundle.Close()
 
 	for _, entry := range manifest.Entries {
-		decodeAction := func() (rdfio.StatementList, error) {
-			return rdfio.CollectStatementsErr(
-				nquads.NewDecoder(
-					testdata.NewFileByteReader(t, string(entry.Action)),
-					nquads.DecoderConfig{}.
-						SetCaptureTextOffsets(true),
-				),
-			)
+		decodeAction := func() (encodingtest.TripleStatementList, error) {
+			return encodingtest.CollectTripleStatementsErr(ntriples.NewDecoder(
+				testdata.NewFileByteReader(t, string(entry.Action)),
+				ntriples.DecoderConfig{}.
+					SetCaptureTextOffsets(true),
+			))
 		}
 
 		switch entry.Type {
@@ -67,7 +65,7 @@ func Test(t *testing.T) {
 					t.Fatalf("error: %v", err)
 				}
 
-				debugBundle.PutBundle(t.Name(), actualStatements)
+				debugBundle.PutTriplesBundle(t.Name(), actualStatements)
 			})
 		default:
 			t.Fatalf("unsupported test type: %s", entry.Type)
@@ -99,7 +97,7 @@ func requireTestdata(t *testing.T) (testingarchive.Archive, *Manifest) {
 		defer manifestDecoder.Close()
 
 		for manifestDecoder.Next() {
-			manifestResources.AddTriple(manifestDecoder.GetTriple())
+			manifestResources.Add(manifestDecoder.Triple())
 		}
 
 		if err := manifestDecoder.Err(); err != nil {

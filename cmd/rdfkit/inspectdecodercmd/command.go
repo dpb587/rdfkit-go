@@ -158,13 +158,14 @@ func New() *cobra.Command {
 
 			b := &bytes.Buffer{}
 
+			decoderTextOffsets, _ := bfIn.Decoder.(encoding.StatementTextOffsetsProvider)
+
 			for bfIn.Decoder.Next() {
-				statement := bfIn.Decoder.GetStatement()
-				triple := statement.GetTriple()
+				quad := bfIn.Decoder.Quad()
 
 				pr := parseRow{}
 
-				switch s := triple.Subject.(type) {
+				switch s := quad.Triple.Subject.(type) {
 				case rdf.BlankNode:
 					pr.Subject = fmt.Sprintf("_:%s", blankNodeIdentifierFactory.GetBlankNodeIdentifier(s))
 				case rdf.IRI:
@@ -180,7 +181,7 @@ func New() *cobra.Command {
 					return fmt.Errorf("subject: invalid type: %T", s)
 				}
 
-				switch p := triple.Predicate.(type) {
+				switch p := quad.Triple.Predicate.(type) {
 				case rdf.IRI:
 					b.Reset()
 
@@ -194,7 +195,7 @@ func New() *cobra.Command {
 					return fmt.Errorf("predicate: invalid type: %T", p)
 				}
 
-				switch o := triple.Object.(type) {
+				switch o := quad.Triple.Object.(type) {
 				case rdf.BlankNode:
 					pr.Object = fmt.Sprintf("_:%s", blankNodeIdentifierFactory.GetBlankNodeIdentifier(o))
 				case rdf.IRI:
@@ -219,26 +220,26 @@ func New() *cobra.Command {
 					return fmt.Errorf("object: invalid type: %T", o)
 				}
 
-				if gn := statement.GetGraphName(); gn != rdf.DefaultGraph {
-					switch gn := statement.GetGraphName().(type) {
+				if quad.GraphName != nil {
+					switch g := quad.GraphName.(type) {
 					case rdf.BlankNode:
-						pr.GraphName = fmt.Sprintf("_:%s", blankNodeIdentifierFactory.GetBlankNodeIdentifier(gn))
+						pr.GraphName = fmt.Sprintf("_:%s", blankNodeIdentifierFactory.GetBlankNodeIdentifier(g))
 					case rdf.IRI:
 						b.Reset()
 
-						_, err = nquads.WriteIRI(b, gn, false)
+						_, err = nquads.WriteIRI(b, g, false)
 						if err != nil {
 							return fmt.Errorf("write: %v", err)
 						}
 
 						pr.GraphName = b.String()
 					default:
-						return fmt.Errorf("graphName: invalid type: %T", gn)
+						return fmt.Errorf("graphName: invalid type: %T", g)
 					}
 				}
 
-				if sourceRangesProvider, ok := statement.(encoding.TextOffsetsStatement); ok {
-					if sourceRanges := sourceRangesProvider.GetStatementTextOffsets(); len(sourceRanges) > 0 {
+				if decoderTextOffsets != nil {
+					if sourceRanges := decoderTextOffsets.StatementTextOffsets(); len(sourceRanges) > 0 {
 						if v, ok := sourceRanges[encoding.SubjectStatementOffsets]; ok {
 							pr.SubjectRange = v.OffsetRangeString()
 						}

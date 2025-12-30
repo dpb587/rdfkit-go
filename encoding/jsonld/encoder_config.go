@@ -102,7 +102,7 @@ func (s EncoderConfig) newEncoder(w io.Writer) (*Encoder, error) {
 		w:                 json.NewEncoder(w),
 		prefixes:          iriutil.NewPrefixTracker(prefixes),
 		blankNodeStringer: s.blankNodeStringer,
-		builder:           rdfdescription.NewResourceListBuilder(),
+		builder:           rdfdescription.NewDatasetResourceListBuilder(),
 	}
 
 	if s.base != nil {

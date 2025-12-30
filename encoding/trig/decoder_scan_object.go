@@ -29,14 +29,16 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedR
 			return readerStack{}, grammar.R_object.Err(grammar.R_IRIREF.ErrWithTextOffsetRange(err, token.Offsets))
 		}
 
-		return r.emit(&statement{
-			graphName: ectx.CurGraphName,
-			triple: rdf.Triple{
-				Subject:   ectx.CurSubject,
-				Predicate: ectx.CurPredicate,
-				Object:    resolvedIRI,
+		return r.emit(statement{
+			quad: rdf.Quad{
+				Triple: rdf.Triple{
+					Subject:   ectx.CurSubject,
+					Predicate: ectx.CurPredicate,
+					Object:    resolvedIRI,
+				},
+				GraphName: ectx.CurGraphName,
 			},
-			offsets: r.buildTextOffsets(
+			textOffsets: r.buildTextOffsets(
 				encoding.GraphNameStatementOffsets, ectx.CurGraphNameLocation,
 				encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 				encoding.PredicateStatementOffsets, ectx.CurPredicateLocation,
@@ -51,14 +53,16 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedR
 
 		blankNode := ectx.Global.BlankNodeStringMapper.MapBlankNodeIdentifier(token.Decoded)
 
-		return r.emit(&statement{
-			graphName: ectx.CurGraphName,
-			triple: rdf.Triple{
-				Subject:   ectx.CurSubject,
-				Predicate: ectx.CurPredicate,
-				Object:    blankNode,
+		return r.emit(statement{
+			quad: rdf.Quad{
+				Triple: rdf.Triple{
+					Subject:   ectx.CurSubject,
+					Predicate: ectx.CurPredicate,
+					Object:    blankNode,
+				},
+				GraphName: ectx.CurGraphName,
 			},
-			offsets: r.buildTextOffsets(
+			textOffsets: r.buildTextOffsets(
 				encoding.GraphNameStatementOffsets, ectx.CurGraphNameLocation,
 				encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 				encoding.PredicateStatementOffsets, ectx.CurPredicateLocation,
@@ -91,14 +95,16 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedR
 		r.pushState(nectx, reader_scan_PredicateObjectList_Continue)
 		r.pushState(nectx, reader_scan_PredicateObjectList)
 
-		return r.emit(&statement{
-			graphName: ectx.CurGraphName,
-			triple: rdf.Triple{
-				Subject:   ectx.CurSubject,
-				Predicate: ectx.CurPredicate,
-				Object:    blankNode,
+		return r.emit(statement{
+			quad: rdf.Quad{
+				Triple: rdf.Triple{
+					Subject:   ectx.CurSubject,
+					Predicate: ectx.CurPredicate,
+					Object:    blankNode,
+				},
+				GraphName: ectx.CurGraphName,
 			},
-			offsets: r.buildTextOffsets(
+			textOffsets: r.buildTextOffsets(
 				encoding.GraphNameStatementOffsets, ectx.CurGraphNameLocation,
 				encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 				encoding.PredicateStatementOffsets, ectx.CurPredicateLocation,
@@ -178,14 +184,16 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedR
 			}
 		}
 
-		return r.emit(&statement{
-			graphName: ectx.CurGraphName,
-			triple: rdf.Triple{
-				Subject:   ectx.CurSubject,
-				Predicate: ectx.CurPredicate,
-				Object:    literal,
+		return r.emit(statement{
+			quad: rdf.Quad{
+				Triple: rdf.Triple{
+					Subject:   ectx.CurSubject,
+					Predicate: ectx.CurPredicate,
+					Object:    literal,
+				},
+				GraphName: ectx.CurGraphName,
 			},
-			offsets: r.buildTextOffsets(
+			textOffsets: r.buildTextOffsets(
 				encoding.GraphNameStatementOffsets, ectx.CurGraphNameLocation,
 				encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 				encoding.PredicateStatementOffsets, ectx.CurPredicateLocation,
@@ -228,14 +236,16 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedR
 			panic("unreachable")
 		}
 
-		return r.emit(&statement{
-			graphName: ectx.CurGraphName,
-			triple: rdf.Triple{
-				Subject:   ectx.CurSubject,
-				Predicate: ectx.CurPredicate,
-				Object:    literal,
+		return r.emit(statement{
+			quad: rdf.Quad{
+				Triple: rdf.Triple{
+					Subject:   ectx.CurSubject,
+					Predicate: ectx.CurPredicate,
+					Object:    literal,
+				},
+				GraphName: ectx.CurGraphName,
 			},
-			offsets: r.buildTextOffsets(
+			textOffsets: r.buildTextOffsets(
 				encoding.GraphNameStatementOffsets, ectx.CurGraphNameLocation,
 				encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 				encoding.PredicateStatementOffsets, ectx.CurPredicateLocation,
@@ -272,17 +282,19 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedR
 
 		// TODO verify next rune? avoid trueprefix:localname; need to figure out delimiters?
 
-		return r.emit(&statement{
-			graphName: ectx.CurGraphName,
-			triple: rdf.Triple{
-				Subject:   ectx.CurSubject,
-				Predicate: ectx.CurPredicate,
-				Object: rdf.Literal{
-					Datatype:    xsdiri.Boolean_Datatype,
-					LexicalForm: "true",
+		return r.emit(statement{
+			quad: rdf.Quad{
+				Triple: rdf.Triple{
+					Subject:   ectx.CurSubject,
+					Predicate: ectx.CurPredicate,
+					Object: rdf.Literal{
+						Datatype:    xsdiri.Boolean_Datatype,
+						LexicalForm: "true",
+					},
 				},
+				GraphName: ectx.CurGraphName,
 			},
-			offsets: r.buildTextOffsets(
+			textOffsets: r.buildTextOffsets(
 				encoding.GraphNameStatementOffsets, ectx.CurGraphNameLocation,
 				encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 				encoding.PredicateStatementOffsets, ectx.CurPredicateLocation,
@@ -328,17 +340,19 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedR
 
 		// TODO verify next rune? avoid trueprefix:localname; need to figure out delimiters?
 
-		return r.emit(&statement{
-			graphName: ectx.CurGraphName,
-			triple: rdf.Triple{
-				Subject:   ectx.CurSubject,
-				Predicate: ectx.CurPredicate,
-				Object: rdf.Literal{
-					Datatype:    xsdiri.Boolean_Datatype,
-					LexicalForm: "false",
+		return r.emit(statement{
+			quad: rdf.Quad{
+				Triple: rdf.Triple{
+					Subject:   ectx.CurSubject,
+					Predicate: ectx.CurPredicate,
+					Object: rdf.Literal{
+						Datatype:    xsdiri.Boolean_Datatype,
+						LexicalForm: "false",
+					},
 				},
+				GraphName: ectx.CurGraphName,
 			},
-			offsets: r.buildTextOffsets(
+			textOffsets: r.buildTextOffsets(
 				encoding.GraphNameStatementOffsets, ectx.CurGraphNameLocation,
 				encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 				encoding.PredicateStatementOffsets, ectx.CurPredicateLocation,
@@ -369,14 +383,16 @@ func reader_scan_object_PrefixedName(r *Decoder, ectx evaluationContext, r0 curs
 		return readerStack{}, grammar.R_object.Err(grammar.R_PrefixedName.ErrWithTextOffsetRange(iriutil.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets))
 	}
 
-	return r.emit(&statement{
-		graphName: ectx.CurGraphName,
-		triple: rdf.Triple{
-			Subject:   ectx.CurSubject,
-			Predicate: ectx.CurPredicate,
-			Object:    expanded,
+	return r.emit(statement{
+		quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject:   ectx.CurSubject,
+				Predicate: ectx.CurPredicate,
+				Object:    expanded,
+			},
+			GraphName: ectx.CurGraphName,
 		},
-		offsets: r.buildTextOffsets(
+		textOffsets: r.buildTextOffsets(
 			encoding.GraphNameStatementOffsets, ectx.CurGraphNameLocation,
 			encoding.SubjectStatementOffsets, ectx.CurSubjectLocation,
 			encoding.PredicateStatementOffsets, ectx.CurPredicateLocation,

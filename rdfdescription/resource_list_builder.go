@@ -1,15 +1,18 @@
 package rdfdescription
 
 import (
-	"github.com/dpb587/rdfkit-go/rdf"
-)
+	"context"
 
-// TODO rdfdescriptionutil?
+	"github.com/dpb587/rdfkit-go/rdf"
+	"github.com/dpb587/rdfkit-go/rdf/triples"
+)
 
 type ResourceListBuilder struct {
 	resourceBySubject   map[rdf.SubjectValue][]ObjectStatement
 	blankNodeReferences map[rdf.BlankNodeIdentifier]int
 }
+
+var _ triples.GraphWriter = &ResourceListBuilder{}
 
 func NewResourceListBuilder() *ResourceListBuilder {
 	return &ResourceListBuilder{
@@ -18,17 +21,24 @@ func NewResourceListBuilder() *ResourceListBuilder {
 	}
 }
 
-func (rb *ResourceListBuilder) AddTriple(t rdf.Triple) {
-	var rs = ObjectStatement{
-		Predicate: t.Predicate,
-		Object:    t.Object,
-	}
+// AddTriple is a wrapper for Add to satisfy the triples.StorageWriter interface.
+func (rb *ResourceListBuilder) AddTriple(_ context.Context, t rdf.Triple) error {
+	rb.Add(t)
 
-	rb.resourceBySubject[t.Subject] = append(rb.resourceBySubject[t.Subject], rs)
+	return nil
+}
 
-	switch objectSubject := t.Object.(type) {
-	case rdf.BlankNode:
-		rb.blankNodeReferences[objectSubject.GetBlankNodeIdentifier()]++
+func (rb *ResourceListBuilder) Add(triples ...rdf.Triple) {
+	for _, t := range triples {
+		rb.resourceBySubject[t.Subject] = append(rb.resourceBySubject[t.Subject], ObjectStatement{
+			Predicate: t.Predicate,
+			Object:    t.Object,
+		})
+
+		switch objectSubject := t.Object.(type) {
+		case rdf.BlankNode:
+			rb.blankNodeReferences[objectSubject.GetBlankNodeIdentifier()]++
+		}
 	}
 }
 
@@ -85,4 +95,38 @@ func (rb *ResourceListBuilder) getResourceStatements(subject rdf.SubjectValue) S
 	}
 
 	return statements
+}
+
+func (rb *ResourceListBuilder) AddTo(ctx context.Context, e ResourceWriter, preferAnon bool) error {
+	var err error
+
+	for _, r := range rb.GetResources() {
+		if preferAnon {
+			err = e.AddResource(ctx, PreferAnonResource(rb, r))
+		} else {
+			err = e.AddResource(ctx, r)
+		}
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (rb *ResourceListBuilder) AddToDataset(ctx context.Context, e DatasetResourceWriter, g rdf.GraphNameValue, preferAnon bool) error {
+	var err error
+
+	for _, r := range rb.GetResources() {
+		if preferAnon {
+			err = e.AddDatasetResource(ctx, PreferAnonResource(rb, r), g)
+		} else {
+			err = e.AddDatasetResource(ctx, r, g)
+		}
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }

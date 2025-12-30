@@ -8,6 +8,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/dpb587/rdfkit-go/encoding/encodingtest"
 	"github.com/dpb587/rdfkit-go/encoding/html"
 	"github.com/dpb587/rdfkit-go/encoding/ntriples"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
@@ -17,33 +18,30 @@ import (
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
-	"github.com/dpb587/rdfkit-go/rdfio"
-	"github.com/dpb587/rdfkit-go/rdfio/rdfioutil"
+	"github.com/dpb587/rdfkit-go/rdf/triples"
 )
 
 var testingBnode = blanknodeutil.NewStringMapper()
 
-func lazyAssertEquals(t *testing.T, expected, actual rdfio.StatementList) {
+func lazyAssertEquals(t *testing.T, expected, actual rdf.TripleList) {
 	var lazyCompare = [2]*bytes.Buffer{
 		bytes.NewBuffer(nil),
 		bytes.NewBuffer(nil),
 	}
 
-	for i, entities := range [2]rdfio.StatementList{expected, actual} {
+	for i, entities := range [2]rdf.TripleList{expected, actual} {
 		ctx := context.Background()
 		encoder, err := ntriples.NewEncoder(lazyCompare[i])
 		if err != nil {
 			t.Fatalf("unexpected error: %v", err)
 		}
 
-		for eIdx, e := range entities {
-			triple := e.GetTriple()
-
+		for eIdx, triple := range entities {
 			if triple.Subject == nil {
 				triple.Subject = testingBnode.MapBlankNodeIdentifier(fmt.Sprintf("b%d", eIdx))
 			}
 
-			if err := encoder.PutTriple(ctx, triple); err != nil {
+			if err := encoder.AddTriple(ctx, triple); err != nil {
 				t.Fatalf("unexpected error: %v", err)
 			}
 		}
@@ -69,7 +67,7 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
 	for _, testcase := range []struct {
 		Name     string
 		Snippet  string
-		Expected rdfio.StatementList
+		Expected encodingtest.TripleStatementList
 	}{
 		{
 			Name: "3.4/Example 3",
@@ -78,8 +76,8 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
  Two rectangles (the example markup for them are stored in a triple):
  <svg xmlns="http://www.w3.org/2000/svg" property="ex:markup" datatype="rdf:XMLLiteral"><rect width="300" height="100" style="fill:rgb(0,0,255);stroke-width:1; stroke:rgb(0,0,0)"/><rect width="50" height="50" style="fill:rgb(255,0,0);stroke-width:2;stroke:rgb(0,0,0)"/></svg>
 </p>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI(""),
 						Predicate: rdf.IRI("http://example.org/vocab#markup"),
@@ -100,8 +98,8 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
  This is how you markup a user in FBML:
  <span property="ex:markup" datatype="rdf:XMLLiteral"><span><fb:user uid="12345">The User</fb:user></span></span>
 </p>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI(""),
 						Predicate: rdf.IRI("http://example.org/vocab#markup"),
@@ -139,15 +137,15 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
     ...
   </p>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://schema.org/MusicEvent"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://schema.org/startDate"),
@@ -157,21 +155,21 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://schema.org/location"),
 						Object:    rdf.IRI("#united"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://schema.org/MusicEvent"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("http://schema.org/startDate"),
@@ -181,7 +179,7 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("http://schema.org/location"),
@@ -189,56 +187,56 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
 					},
 				},
 				// pattern
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://schema.org/image"),
 						Object:    rdf.IRI("Muse1.jpg"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://schema.org/image"),
 						Object:    rdf.IRI("Muse2.jpg"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://schema.org/image"),
 						Object:    rdf.IRI("Muse3.jpg"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://schema.org/name"),
 						Object:    xsdobject.String("Muse"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("http://schema.org/image"),
 						Object:    rdf.IRI("Muse1.jpg"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("http://schema.org/image"),
 						Object:    rdf.IRI("Muse2.jpg"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("http://schema.org/image"),
 						Object:    rdf.IRI("Muse3.jpg"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("http://schema.org/name"),
@@ -267,43 +265,43 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
     <p>Size: <span property="size">4</span> players</p>
   </div>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://schema.org/Person"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://schema.org/name"),
 						Object:    xsdobject.String("John Lennon"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://schema.org/band"),
 						Object:    testingBnode.MapBlankNodeIdentifier("b1"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://schema.org/MusicGroup"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("http://schema.org/name"),
 						Object:    xsdobject.String("The Beatles"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("http://schema.org/size"),
@@ -322,12 +320,12 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
 				t.Fatalf("unexpected error: %v", err)
 			}
 
-			out, err := rdfio.CollectStatementsErr(NewDecoder(htmlDocument))
+			out, err := triples.CollectErr(NewDecoder(htmlDocument))
 			if err != nil {
 				t.Fatalf("unexpected error: %v", err)
 			}
 
-			lazyAssertEquals(t, testcase.Expected, out)
+			lazyAssertEquals(t, testcase.Expected.AsTriples(), out)
 		})
 	}
 }
@@ -337,7 +335,7 @@ func TestW3trRdfaCoreNonNormative(t *testing.T) {
 	for _, testcase := range []struct {
 		Name     string
 		Snippet  string
-		Expected rdfio.StatementList
+		Expected encodingtest.TripleStatementList
 	}{
 		{
 			Name: "8.1.1.1/Example 47",
@@ -351,15 +349,15 @@ func TestW3trRdfaCoreNonNormative(t *testing.T) {
     ...
   </body>
 </html>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI(""),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/primaryTopic"),
 						Object:    rdf.IRI("#bbq"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI(""),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/creator"),
@@ -381,8 +379,8 @@ func TestW3trRdfaCoreNonNormative(t *testing.T) {
     </p>
   </body>
 </html>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI(""),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/creator"),
@@ -405,15 +403,15 @@ func TestW3trRdfaCoreNonNormative(t *testing.T) {
     ...
   </body>
 </html>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://www.example.org/jo/blog"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/primaryTopic"),
 						Object:    rdf.IRI("http://www.example.org/jo/blog#bbq"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://www.example.org/jo/blog"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/creator"),
@@ -445,36 +443,36 @@ func TestW3trRdfaCoreNonNormative(t *testing.T) {
     </p>
   </body>
 </html>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI(""),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/primaryTopic"),
 						Object:    rdf.IRI("#bbq"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI(""),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/creator"),
 						Object:    xsdobject.String("Jo"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("#bbq"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://www.w3.org/2002/12/cal/ical#Vevent"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("#bbq"),
 						Predicate: rdf.IRI("http://www.w3.org/2002/12/cal/ical#summary"),
 						Object:    xsdobject.String("\n        one last summer barbecue\n      "),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("#bbq"),
 						Predicate: rdf.IRI("http://www.w3.org/2002/12/cal/ical#dtstart"),
@@ -495,15 +493,15 @@ func TestW3trRdfaCoreNonNormative(t *testing.T) {
 Sue knows
 <a about="mailto:sue@example.org"
   rel="foaf:knows" href="mailto:jim@example.org">Jim</a>.`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("mailto:john@example.org"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/knows"),
 						Object:    rdf.IRI("mailto:sue@example.org"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("mailto:sue@example.org"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/knows"),
@@ -518,8 +516,8 @@ Sue knows
   this photo was taken by
   <span property="dc:creator">Mark Birbeck</span>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("photo1.jpg"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/creator"),
@@ -534,22 +532,22 @@ Sue knows
   <span property="foaf:name">Albert Einstein</span>
   <span property="foaf:givenName">Albert</span>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Albert_Einstein"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://xmlns.com/foaf/0.1/Person"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Albert_Einstein"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
 						Object:    xsdobject.String("Albert Einstein"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Albert_Einstein"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/givenName"),
@@ -566,15 +564,15 @@ Sue knows
       typeof="http://schema.org/Country">
   </div>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Albert_Einstein"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/birthPlace"),
 						Object:    rdf.IRI("http://dbpedia.org/resource/German_Empire"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/German_Empire"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
@@ -589,22 +587,22 @@ Sue knows
   <span property="foaf:name">Albert Einstein</span>
   <span property="foaf:givenName">Albert</span>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://xmlns.com/foaf/0.1/Person"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
 						Object:    xsdobject.String("Albert Einstein"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/givenName"),
@@ -619,22 +617,22 @@ Sue knows
   <span property="foaf:name">Albert Einstein</span>
   <span property="foaf:givenName">Albert</span>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://xmlns.com/foaf/0.1/Person"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
 						Object:    xsdobject.String("Albert Einstein"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/givenName"),
@@ -650,22 +648,22 @@ Sue knows
     <span property="dbp:conventionalLongName">the German Empire</span>
   </div>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Albert_Einstein"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/birthPlace"),
 						Object:    testingBnode.MapBlankNodeIdentifier("b0"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://schema.org/Country"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/conventionalLongName"),
@@ -683,15 +681,15 @@ Sue knows
     <span property="dbp:conventionalLongName">the German Empire</span>
   </div>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Albert_Einstein"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
 						Object:    xsdobject.String("Albert Einstein"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Albert_Einstein"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/dateOfBirth"),
@@ -701,14 +699,14 @@ Sue knows
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Albert_Einstein"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/birthPlace"),
 						Object:    rdf.IRI("http://dbpedia.org/resource/German_Empire"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/German_Empire"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/conventionalLongName"),
@@ -727,15 +725,15 @@ Sue knows
     <span rel="dbp-owl:capital" resource="http://dbpedia.org/resource/Berlin" />
   </div>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Albert_Einstein"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
 						Object:    xsdobject.String("Albert Einstein"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Albert_Einstein"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/dateOfBirth"),
@@ -745,21 +743,21 @@ Sue knows
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Albert_Einstein"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/birthPlace"),
 						Object:    rdf.IRI("http://dbpedia.org/resource/German_Empire"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/German_Empire"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/conventionalLongName"),
 						Object:    xsdobject.String("the German Empire"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/German_Empire"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/capital"),
@@ -776,22 +774,22 @@ Sue knows
     <span property="dbp:dateOfBirth" datatype="xsd:date">1879-03-14</span>
   </div>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Baruch_Spinoza"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/influenced"),
 						Object:    rdf.IRI("http://dbpedia.org/resource/Albert_Einstein"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Albert_Einstein"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
 						Object:    xsdobject.String("Albert Einstein"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Albert_Einstein"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/dateOfBirth"),
@@ -811,22 +809,22 @@ Sue knows
     <span property="dbp:dateOfBirth" datatype="xsd:date">1879-03-14</span>
   </div>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
 						Object:    xsdobject.String("Albert Einstein"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Baruch_Spinoza"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/influenced"),
 						Object:    testingBnode.MapBlankNodeIdentifier("b0"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/dateOfBirth"),
@@ -837,7 +835,7 @@ Sue knows
 					},
 				},
 				// TODO: decoder currently generates duplicate influenced triple
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Baruch_Spinoza"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/influenced"),
@@ -852,22 +850,22 @@ Sue knows
   <span property="foaf:name">Albert Einstein</span>
   <span property="dbp:dateOfBirth" datatype="xsd:date">1879-03-14</span>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
 						Object:    xsdobject.String("Albert Einstein"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Baruch_Spinoza"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/influenced"),
 						Object:    testingBnode.MapBlankNodeIdentifier("b0"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/dateOfBirth"),
@@ -878,7 +876,7 @@ Sue knows
 					},
 				},
 				// TODO: decoder currently generates duplicate influenced triple
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Baruch_Spinoza"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/influenced"),
@@ -895,22 +893,22 @@ Sue knows
     <span property="dbp:dateOfBirth" datatype="xsd:date">1879-03-14</span>
   </div>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
 						Object:    xsdobject.String("Albert Einstein"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Baruch_Spinoza"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/influenced"),
 						Object:    testingBnode.MapBlankNodeIdentifier("b0"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/dateOfBirth"),
@@ -921,7 +919,7 @@ Sue knows
 					},
 				},
 				// TODO: decoder currently generates duplicate influenced triple
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Baruch_Spinoza"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/influenced"),
@@ -936,8 +934,8 @@ Sue knows
   <span about="http://dbpedia.org/resource/German_Empire" />
   <span about="http://dbpedia.org/resource/Switzerland" />
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Albert_Einstein"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/residence"),
@@ -945,7 +943,7 @@ Sue knows
 					},
 				},
 				// TODO: decoder should also complete incomplete triple for second @about
-				// rdfioutil.Statement{
+				// encodingtest.TripleStatement{
 				// 	Triple: rdf.Triple{
 				// 		Subject:   rdf.IRI("http://dbpedia.org/resource/Albert_Einstein"),
 				// 		Predicate: rdf.IRI("http://dbpedia.org/ontology/residence"),
@@ -968,29 +966,29 @@ Sue knows
     </div>          
   </div>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Baruch_Spinoza"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/influenced"),
 						Object:    testingBnode.MapBlankNodeIdentifier("b0"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://xmlns.com/foaf/0.1/Person"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
 						Object:    xsdobject.String("Albert Einstein"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/dateOfBirth"),
@@ -1000,28 +998,28 @@ Sue knows
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Baruch_Spinoza"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/influenced"),
 						Object:    testingBnode.MapBlankNodeIdentifier("b1"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://xmlns.com/foaf/0.1/Person"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
 						Object:    xsdobject.String("Arthur Schopenhauer"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/dateOfBirth"),
@@ -1044,22 +1042,22 @@ Sue knows
     <span about="http://dbpedia.org/resource/Switzerland" />
   </div>
 </div>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
 						Object:    xsdobject.String("Albert Einstein"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Baruch_Spinoza"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/influenced"),
 						Object:    testingBnode.MapBlankNodeIdentifier("b0"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/dateOfBirth"),
@@ -1069,21 +1067,21 @@ Sue knows
 						},
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Baruch_Spinoza"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/influenced"),
 						Object:    testingBnode.MapBlankNodeIdentifier("b0"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Baruch_Spinoza"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/influenced"),
 						Object:    testingBnode.MapBlankNodeIdentifier("b0"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/residence"),
@@ -1096,8 +1094,8 @@ Sue knows
 			Name: "8.3.1.1/Example 101",
 			Snippet: `<meta about="http://internet-apps.blogspot.com/"
       property="dc:creator" content="Mark Birbeck" />`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://internet-apps.blogspot.com/"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/creator"),
@@ -1110,8 +1108,8 @@ Sue knows
 			Name: "8.3.1.1/Example 102",
 			Snippet: `<span about="http://internet-apps.blogspot.com/"
       property="dc:creator">Mark Birbeck</span>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://internet-apps.blogspot.com/"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/creator"),
@@ -1124,8 +1122,8 @@ Sue knows
 			Name: "8.3.1.1/Example 104",
 			Snippet: `<span about="http://internet-apps.blogspot.com/"
       property="dc:creator" content="Mark Birbeck">John Doe</span>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://internet-apps.blogspot.com/"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/creator"),
@@ -1138,8 +1136,8 @@ Sue knows
 			Name: "8.3.1.1.1/Example 106",
 			Snippet: `<meta about="http://example.org/node"
   property="ex:property" xml:lang="fr" content="chat" />`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://example.org/node"),
 						Predicate: rdf.IRI("http://example.org/property"),
@@ -1160,8 +1158,8 @@ Sue knows
   </head>
   ...
 </html>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://example.org/node"),
 						Predicate: rdf.IRI("http://www.example.com/ns/property"),
@@ -1176,8 +1174,8 @@ Sue knows
       datatype="xsd:dateTime">
   September 16th at 4pm
 </span>.`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI(""),
 						Predicate: rdf.IRI("http://www.w3.org/2002/12/cal/ical#dtstart"),
@@ -1195,8 +1193,8 @@ Sue knows
 			Snippet: `<h2 property="dc:title" datatype="rdf:XMLLiteral">
   E = mc<sup>2</sup>: The Most Urgent Problem of Our Time
 </h2>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI(""),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/title"),
@@ -1216,8 +1214,8 @@ Sue knows
   <span property="foaf:name" datatype="">Albert <strong>Einstein</strong></span>
   (b. March 14, 1879, d. April 18, 1955) was a German-born theoretical physicist.
 </p>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Albert_Einstein"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
@@ -1242,8 +1240,8 @@ Sue knows
     </blockquote>
   </body>
 </html>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://www.example.com/candp.xhtml#q1"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/source"),
@@ -1256,8 +1254,8 @@ Sue knows
 			Name: "8.3.2.2/Example 117",
 			Snippet: `<link about="mailto:john@example.org"
       rel="foaf:knows" href="mailto:sue@example.org" />`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("mailto:john@example.org"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/knows"),
@@ -1270,15 +1268,15 @@ Sue knows
 			Name: "8.3.2.2/Example 118",
 			Snippet: `<img about="http://www.blogger.com/profile/1109404"
     src="photo1.jpg" rev="dc:creator" rel="foaf:img"/>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("photo1.jpg"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/creator"),
 						Object:    rdf.IRI("http://www.blogger.com/profile/1109404"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://www.blogger.com/profile/1109404"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/img"),
@@ -1298,64 +1296,64 @@ Sue knows
    <a inlist="" property="dc:creator" 
                 href="http://www.ivan-herman.net/foaf#me">Ivan Herman</a>. 
 </p>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://purl.org/ontology/bibo/Chapter"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/title"),
 						Object:    xsdobject.String("Semantic Annotation and Retrieval"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/creator"),
 						Object:    testingBnode.MapBlankNodeIdentifier("b1"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 						Object:    rdf.IRI("http://ben.adida.net/#me"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 						Object:    testingBnode.MapBlankNodeIdentifier("b2"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 						Object:    rdf.IRI("http://twitter.com/markbirbeck"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 						Object:    testingBnode.MapBlankNodeIdentifier("b3"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 						Object:    rdf.IRI("http://www.ivan-herman.net/foaf#me"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
@@ -1372,64 +1370,64 @@ Sue knows
   <span inlist="" property="dc:creator">Mark Birbeck</span>, and
   <span inlist="" property="dc:creator" resource="http://www.ivan-herman.net/foaf#me">Ivan Herman</span>.
 </p>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://purl.org/ontology/bibo/Chapter"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/title"),
 						Object:    xsdobject.String("Semantic Annotation and Retrieval"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/creator"),
 						Object:    testingBnode.MapBlankNodeIdentifier("b1"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 						Object:    rdf.IRI("http://ben.adida.net/#me"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 						Object:    testingBnode.MapBlankNodeIdentifier("b2"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 						Object:    xsdobject.String("Mark Birbeck"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 						Object:    testingBnode.MapBlankNodeIdentifier("b3"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 						Object:    rdf.IRI("http://www.ivan-herman.net/foaf#me"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
@@ -1446,64 +1444,64 @@ Sue knows
   <span inlist="" property="dc:creator">Mark Birbeck</span>, and
   <span inlist="" rel="dc:creator" resource="http://www.ivan-herman.net/foaf#me">Ivan Herman</span>.
 </p>`,
-			Expected: rdfio.StatementList{
-				rdfioutil.Statement{
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://purl.org/ontology/bibo/Chapter"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/title"),
 						Object:    xsdobject.String("Semantic Annotation and Retrieval"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/creator"),
 						Object:    testingBnode.MapBlankNodeIdentifier("b1"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 						Object:    rdf.IRI("http://ben.adida.net/#me"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 						Object:    testingBnode.MapBlankNodeIdentifier("b2"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 						Object:    xsdobject.String("Mark Birbeck"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 						Object:    testingBnode.MapBlankNodeIdentifier("b3"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 						Object:    rdf.IRI("http://www.ivan-herman.net/foaf#me"),
 					},
 				},
-				rdfioutil.Statement{
+				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
@@ -1523,7 +1521,7 @@ Sue knows
 				t.Fatalf("unexpected error: %v", err)
 			}
 
-			out, err := rdfio.CollectStatementsErr(NewDecoder(htmlDocument, DecoderConfig{}.
+			out, err := triples.CollectErr(NewDecoder(htmlDocument, DecoderConfig{}.
 				SetDefaultPrefixes(iriutil.NewPrefixMap(
 					iriutil.PrefixMapping{
 						Prefix:   "bibo",
@@ -1590,7 +1588,7 @@ Sue knows
 				t.Fatalf("unexpected error: %v", err)
 			}
 
-			lazyAssertEquals(t, testcase.Expected, out)
+			lazyAssertEquals(t, testcase.Expected.AsTriples(), out)
 		})
 	}
 }

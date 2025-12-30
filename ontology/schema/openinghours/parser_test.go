@@ -385,7 +385,7 @@ func TestParseText(t *testing.T) {
 				t.Fatalf("expected %v, got %v", _e, _a)
 			}
 
-			if _a := devtest.AssertTripleEquals(tc.ExpectedOpeningHoursSpecification.AsTriples(), resultData.AsOpeningHoursSpecification().AsTriples()); _a != nil {
+			if _a := devtest.AssertTripleEquals(tc.ExpectedOpeningHoursSpecification.NewTriples(), resultData.AsOpeningHoursSpecification().NewTriples()); _a != nil {
 				t.Fatalf("unexpected error: %v", _a)
 			}
 		})

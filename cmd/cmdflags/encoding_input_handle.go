@@ -11,7 +11,7 @@ import (
 type EncodingInputHandle struct {
 	Format   string
 	ReadPath string
-	Decoder  encoding.Decoder
+	Decoder  encoding.QuadsDecoder
 
 	DecodedBase           []string
 	DecodedPrefixMappings iriutil.PrefixMappingList

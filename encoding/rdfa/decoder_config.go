@@ -79,7 +79,7 @@ func (b DecoderConfig) newDecoder(doc *encodinghtml.Document) (*Decoder, error) 
 		defaultPrefixes:       b.defaultPrefixes,
 		blankNodeStringMapper: b.blankNodeStringMapper,
 		buildTextOffsets:      encodingutil.BuildTextOffsetsNil,
-		statementIdx:          -1,
+		statementsIdx:         -1,
 	}
 
 	if len(docProfile.BaseURL) > 0 {

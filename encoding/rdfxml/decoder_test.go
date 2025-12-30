@@ -12,26 +12,22 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/triples"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
-	"github.com/dpb587/rdfkit-go/rdfio"
-	"github.com/dpb587/rdfkit-go/rdfio/rdfioutil"
 )
 
 var testBnode = blanknodeutil.NewStringMapper()
 
-func assertEqual(t *testing.T, expectedList, actualList rdfio.StatementList) {
+func assertEqual(t *testing.T, expectedList, actualList rdf.TripleList) {
 	bnEtoA := map[rdf.BlankNode]rdf.BlankNode{}
 	bnAtoE := map[rdf.BlankNode]rdf.BlankNode{}
 
-	for idx, expected := range expectedList {
+	for idx, expectedTriple := range expectedList {
 		if len(actualList) <= idx {
 			t.Fatalf("expected %dth triple, but got %d", idx, len(actualList))
 		}
 
-		actual := actualList[idx]
-
-		expectedTriple := expected.GetTriple()
-		actualTriple := actual.GetTriple()
+		actualTriple := actualList[idx]
 
 		switch expectedTripleSubject := expectedTriple.Subject.(type) {
 		case rdf.BlankNode:
@@ -887,21 +883,13 @@ func TestSpecNonNormative(t *testing.T) {
 			// 	return
 			// }
 
-			out, err := rdfio.CollectStatementsErr(NewDecoder(
+			out, err := triples.CollectErr(NewDecoder(
 				bytes.NewBufferString(testcase.Snippet),
 				DecoderConfig{}.
 					SetCaptureTextOffsets(true),
 			))
 			if err != nil {
 				t.Fatalf("unexpected error: %v", err)
-			}
-
-			expected := rdfio.StatementList{}
-
-			for _, e := range testcase.Expected.AsTriples() {
-				expected = append(expected, rdfioutil.Statement{
-					Triple: e,
-				})
 			}
 
 			var success bool
@@ -914,17 +902,17 @@ func TestSpecNonNormative(t *testing.T) {
 				fmt.Fprintf(os.Stderr, "### ACTUAL\n")
 
 				for _, stmt := range out {
-					fmt.Fprintf(os.Stderr, "%s\n", stmt.GetTriple())
+					fmt.Fprintf(os.Stderr, "%s\n", stmt)
 				}
 
 				fmt.Fprintf(os.Stderr, "### EXPECTED\n")
 
-				for _, stmt := range expected {
-					fmt.Fprintf(os.Stderr, "%s\n", stmt.GetTriple())
+				for _, stmt := range testcase.Expected.NewTriples() {
+					fmt.Fprintf(os.Stderr, "%s\n", stmt)
 				}
 			})
 
-			assertEqual(t, expected, out)
+			assertEqual(t, testcase.Expected.NewTriples(), out)
 
 			success = true
 		})
@@ -1322,7 +1310,7 @@ func TestSpecTestcase(t *testing.T) {
 				dopt = dopt.SetBaseURL(testcase.OptionBaseURL)
 			}
 
-			out, err := rdfio.CollectStatementsErr(NewDecoder(
+			out, err := triples.CollectErr(NewDecoder(
 				bytes.NewBufferString(testcase.Snippet),
 				dopt,
 			))
@@ -1330,15 +1318,7 @@ func TestSpecTestcase(t *testing.T) {
 				t.Fatalf("unexpected error: %v", err)
 			}
 
-			expected := rdfio.StatementList{}
-
-			for _, e := range testcase.Expected.AsTriples() {
-				expected = append(expected, rdfioutil.Statement{
-					Triple: e,
-				})
-			}
-
-			assertEqual(t, expected, out)
+			assertEqual(t, testcase.Expected.NewTriples(), out)
 		})
 	}
 }

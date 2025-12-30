@@ -36,12 +36,10 @@ func (a *Assertion) AddTestResultDescription(description string) {
 }
 
 func (a *Assertion) AddTestResultStatement(statements ...rdfdescription.Statement) {
-	for _, t := range (rdfdescription.SubjectResource{
+	a.rs.report.builder.Add(rdfdescription.SubjectResource{
 		Subject:    a.resultNode,
 		Statements: statements,
-	}.AsTriples()) {
-		a.rs.report.builder.AddTriple(t)
-	}
+	}.NewTriples()...)
 }
 
 func (a *Assertion) TSkip(t *testing.T, outcome rdf.IRI, description string) {
@@ -56,7 +54,7 @@ func (a *Assertion) finalize() {
 	a.rs.report.mu.Lock()
 	defer a.rs.report.mu.Unlock()
 
-	for _, t := range (rdf.TripleList{
+	a.rs.report.builder.Add(rdf.TripleList{
 		{
 			Subject:   a.assertionNode,
 			Predicate: rdfiri.Type_Property,
@@ -95,12 +93,10 @@ func (a *Assertion) finalize() {
 				Datatype:    rdf.IRI("http://www.w3.org/2001/XMLSchema#dateTime"),
 			},
 		},
-	}) {
-		a.rs.report.builder.AddTriple(t)
-	}
+	}...)
 
 	if a.rs.assertor != nil {
-		a.rs.report.builder.AddTriple(rdf.Triple{
+		a.rs.report.builder.Add(rdf.Triple{
 			Subject:   a.assertionNode,
 			Predicate: earliri.AssertedBy_ObjectProperty,
 			Object:    a.rs.assertor,
@@ -108,7 +104,7 @@ func (a *Assertion) finalize() {
 	}
 
 	if a.rs.subject != nil {
-		a.rs.report.builder.AddTriple(rdf.Triple{
+		a.rs.report.builder.Add(rdf.Triple{
 			Subject:   a.assertionNode,
 			Predicate: earliri.Subject_ObjectProperty,
 			Object:    a.rs.subject,

@@ -12,7 +12,6 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding/ntriples/internal/grammar"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
-	"github.com/dpb587/rdfkit-go/rdfio"
 )
 
 type DecoderOption interface {
@@ -26,11 +25,14 @@ type Decoder struct {
 	blankNodeStringMapper blanknodeutil.StringMapper
 	buildTextOffsets      encodingutil.TextOffsetsBuilderFunc
 
-	err              error
-	currentStatement *statement
+	err error
+
+	currentTriple      rdf.Triple
+	currentTextOffsets encoding.StatementTextOffsets
 }
 
-var _ rdfio.GraphStatementIterator = &Decoder{}
+var _ rdf.TripleIterator = &Decoder{}
+var _ encoding.StatementTextOffsetsProvider = &Decoder{}
 
 func NewDecoder(r io.Reader, opts ...DecoderOption) (*Decoder, error) {
 	compiledOpts := DecoderConfig{}
@@ -56,13 +58,13 @@ func (r *Decoder) Next() bool {
 	}
 
 	err := (func() error {
-		if r.currentStatement != nil {
+		if r.currentTriple.Subject != nil {
 			for {
 				r0, err := r.buf.NextRune()
 				if err != nil {
 					if errors.Is(err, io.EOF) {
 						// TODO technically at least one triple must be present
-						r.currentStatement = nil
+						r.currentTriple = rdf.Triple{}
 
 						return nil
 					}
@@ -76,7 +78,7 @@ func (r *Decoder) Next() bool {
 					if err != nil {
 						if errors.Is(err, io.EOF) {
 							// TODO technically at least one triple must be present
-							r.currentStatement = nil
+							r.currentTriple = rdf.Triple{}
 
 							return nil
 						}
@@ -104,7 +106,7 @@ func (r *Decoder) Next() bool {
 		subject, subjectRange, err := r.captureSubject()
 		if err != nil {
 			if errors.Is(err, io.EOF) {
-				r.currentStatement = nil
+				r.currentTriple = rdf.Triple{}
 
 				return nil
 			}
@@ -147,18 +149,17 @@ func (r *Decoder) Next() bool {
 
 	TRIPLE_DONE:
 
-		r.currentStatement = &statement{
-			triple: rdf.Triple{
-				Subject:   subject,
-				Predicate: predicate,
-				Object:    object,
-			},
-			offsets: r.buildTextOffsets(
-				encoding.SubjectStatementOffsets, subjectRange,
-				encoding.PredicateStatementOffsets, predicateRange,
-				encoding.ObjectStatementOffsets, objectRange,
-			),
+		r.currentTriple = rdf.Triple{
+			Subject:   subject,
+			Predicate: predicate,
+			Object:    object,
 		}
+
+		r.currentTextOffsets = r.buildTextOffsets(
+			encoding.SubjectStatementOffsets, subjectRange,
+			encoding.PredicateStatementOffsets, predicateRange,
+			encoding.ObjectStatementOffsets, objectRange,
+		)
 
 		return nil
 	})()
@@ -168,13 +169,17 @@ func (r *Decoder) Next() bool {
 		return false
 	}
 
-	return r.currentStatement != nil
+	return r.currentTriple.Subject != nil
 }
 
-func (r *Decoder) GetTriple() rdf.Triple {
-	return r.currentStatement.triple
+func (r *Decoder) Triple() rdf.Triple {
+	return r.currentTriple
 }
 
-func (r *Decoder) GetStatement() rdfio.Statement {
-	return r.currentStatement
+func (r *Decoder) Statement() rdf.Statement {
+	return r.Triple()
+}
+
+func (r *Decoder) StatementTextOffsets() encoding.StatementTextOffsets {
+	return r.currentTextOffsets
 }

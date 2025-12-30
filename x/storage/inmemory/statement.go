@@ -2,7 +2,6 @@ package inmemory
 
 import (
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdfio"
 )
 
 // type StatementKind uint8
@@ -22,17 +21,14 @@ type Statement struct {
 	Baggage map[any]any
 }
 
-var _ rdfio.Statement = &Statement{}
-
-func (tb *Statement) GetGraphName() rdf.GraphNameValue {
-	return tb.g.t
-}
-
-func (tb *Statement) GetTriple() rdf.Triple {
-	return rdf.Triple{
-		Subject:   tb.s.t.(rdf.SubjectValue),
-		Predicate: tb.p.t.(rdf.PredicateValue),
-		Object:    tb.o.t.(rdf.ObjectValue),
+func (tb *Statement) GetQuad() rdf.Quad {
+	return rdf.Quad{
+		Triple: rdf.Triple{
+			Subject:   tb.s.t.(rdf.SubjectValue),
+			Predicate: tb.p.t.(rdf.PredicateValue),
+			Object:    tb.o.t.(rdf.ObjectValue),
+		},
+		GraphName: tb.g.t,
 	}
 }
 

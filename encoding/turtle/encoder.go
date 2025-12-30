@@ -17,7 +17,7 @@ import (
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
-	"github.com/dpb587/rdfkit-go/rdfdescription/rdfdescriptionio"
+	"github.com/dpb587/rdfkit-go/rdfdescription/rdfdescriptionutil"
 )
 
 type EncoderOption interface {
@@ -36,8 +36,8 @@ type Encoder struct {
 	bufferedSections [][]byte
 }
 
-var _ encoding.GraphEncoder = &Encoder{}
-var _ rdfdescriptionio.GraphEncoder = &Encoder{}
+var _ encoding.TriplesEncoder = &Encoder{}
+var _ rdfdescriptionutil.ResourceEncoder = &Encoder{}
 
 func NewEncoder(w io.Writer, opts ...EncoderOption) (*Encoder, error) {
 	compiledOpts := EncoderConfig{}
@@ -105,7 +105,7 @@ func (w *Encoder) Close() error {
 	return nil
 }
 
-func (w *Encoder) PutResource(ctx context.Context, r rdfdescription.Resource) error {
+func (w *Encoder) AddResource(ctx context.Context, r rdfdescription.Resource) error {
 	if w.err != nil {
 		return w.err
 	}
@@ -267,7 +267,7 @@ func (w *Encoder) writeResourceStatement(ctx context.Context, buf *bytes.Buffer,
 	return multiline, nil
 }
 
-func (w *Encoder) PutTriple(ctx context.Context, t rdf.Triple) error {
+func (w *Encoder) AddTriple(ctx context.Context, t rdf.Triple) error {
 	if w.err != nil {
 		return w.err
 	}

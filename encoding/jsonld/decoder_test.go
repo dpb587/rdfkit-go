@@ -8,13 +8,13 @@ import (
 	"testing"
 
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
-	"github.com/dpb587/rdfkit-go/rdfio"
+	"github.com/dpb587/rdfkit-go/rdf/quads"
 )
 
 var documentLoader = jsonldtype.NewCachingDocumentLoader(jsonldtype.NewDefaultDocumentLoader(http.DefaultClient))
 
 func TestOne(t *testing.T) {
-	statements, err := rdfio.CollectStatementsErr(
+	statements, err := quads.CollectErr(
 		NewDecoder(
 			strings.NewReader(`
 {
@@ -37,7 +37,7 @@ func TestOne(t *testing.T) {
 }
 
 func TestTwo(t *testing.T) {
-	statements, err := rdfio.CollectStatementsErr(
+	statements, err := quads.CollectErr(
 		NewDecoder(
 			strings.NewReader(`
 {

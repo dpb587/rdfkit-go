@@ -7,14 +7,15 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/dpb587/rdfkit-go/encoding/nquads"
+	"github.com/dpb587/rdfkit-go/encoding/encodingtest"
+	"github.com/dpb587/rdfkit-go/encoding/ntriples"
 	"github.com/dpb587/rdfkit-go/encoding/rdfxml"
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
 	"github.com/dpb587/rdfkit-go/internal/devencoding/rdfioutil"
 	"github.com/dpb587/rdfkit-go/internal/devtest"
 	"github.com/dpb587/rdfkit-go/rdf"
+	"github.com/dpb587/rdfkit-go/rdf/triples"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
-	"github.com/dpb587/rdfkit-go/rdfio"
 	"github.com/dpb587/rdfkit-go/testing/testingarchive"
 	"github.com/dpb587/rdfkit-go/x/rdfdescriptionstruct"
 )
@@ -43,8 +44,8 @@ func Test(t *testing.T) {
 	defer debugBundle.Close()
 
 	for _, entry := range manifest.Entries {
-		decodeAction := func() (rdfio.StatementList, error) {
-			return rdfio.CollectStatementsErr(rdfxml.NewDecoder(
+		decodeAction := func() (encodingtest.TripleStatementList, error) {
+			return encodingtest.CollectTripleStatementsErr(rdfxml.NewDecoder(
 				testdata.NewFileByteReader(t, string(entry.Action)),
 				rdfxml.DecoderConfig{}.
 					SetBaseURL(string(entry.Action)).
@@ -58,8 +59,9 @@ func Test(t *testing.T) {
 		switch entry.Type {
 		case "http://www.w3.org/ns/rdftest#TestXMLEval":
 			t.Run("Eval/"+entry.Name, func(t *testing.T) {
-				expectedStatements, err := rdfio.CollectStatementsErr(nquads.NewDecoder(
+				expectedStatements, err := triples.CollectErr(ntriples.NewDecoder(
 					testdata.NewFileByteReader(t, string(entry.Result)),
+					ntriples.DecoderConfig{},
 				))
 				if err != nil {
 					t.Fatalf("setup error: decode result: %v", err)
@@ -70,7 +72,7 @@ func Test(t *testing.T) {
 					t.Fatalf("error: %v", err)
 				}
 
-				err = devtest.AssertStatementEquals(expectedStatements, actualStatements)
+				err = devtest.AssertStatementEquals(expectedStatements.AsQuads(nil), actualStatements.AsTriples().AsQuads(nil))
 				if err == nil {
 					// good
 				} else if len(oxigraphExec) == 0 {
@@ -78,7 +80,7 @@ func Test(t *testing.T) {
 					t.Log(err.Error())
 					t.SkipNow()
 				} else {
-					oxigraphErr := devtest.AssertOxigraphAsk(t.Context(), oxigraphExec, entry.Action, testdata.NewFileByteReader(t, string(entry.Result)), actualStatements)
+					oxigraphErr := devtest.AssertOxigraphAsk(t.Context(), oxigraphExec, entry.Action, testdata.NewFileByteReader(t, string(entry.Result)), actualStatements.AsTriples().AsQuads(nil))
 					if oxigraphErr != nil {
 						t.Logf("eval: %v", oxigraphErr)
 						t.Log(err.Error())
@@ -86,7 +88,7 @@ func Test(t *testing.T) {
 					}
 				}
 
-				debugBundle.PutBundle(t.Name(), actualStatements)
+				debugBundle.PutTriplesBundle(t.Name(), actualStatements)
 			})
 		case "http://www.w3.org/ns/rdftest#TestXMLNegativeSyntax":
 			t.Run("NegativeSyntax/"+entry.Name, func(t *testing.T) {
@@ -127,7 +129,7 @@ func requireTestdata(t *testing.T) (testingarchive.Archive, *Manifest) {
 		defer manifestDecoder.Close()
 
 		for manifestDecoder.Next() {
-			manifestResources.AddTriple(manifestDecoder.GetTriple())
+			manifestResources.Add(manifestDecoder.Triple())
 		}
 
 		if err := manifestDecoder.Err(); err != nil {

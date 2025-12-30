@@ -52,7 +52,7 @@ func (b DecoderConfig) newDecoder(doc *encodinghtml.Document) (*Decoder, error) 
 		captureOffsets:     docProfile.HasNodeMetadata,
 		vocabularyResolver: LiteralVocabularyResolver,
 		buildTextOffsets:   encodingutil.BuildTextOffsetsNil,
-		statementIdx:       -1,
+		statementsIdx:      -1,
 	}
 
 	if len(docProfile.BaseURL) > 0 {

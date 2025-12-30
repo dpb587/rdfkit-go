@@ -27,7 +27,7 @@ type Encoder struct {
 	buf map[string]map[string][]any
 }
 
-var _ encoding.GraphEncoder = &Encoder{}
+var _ encoding.TriplesEncoder = &Encoder{}
 
 func NewEncoder(w io.Writer, opts ...EncoderOption) (*Encoder, error) {
 	compiledOpts := EncoderConfig{}
@@ -53,7 +53,7 @@ func (w *Encoder) Close() error {
 	return e.Encode(w.buf)
 }
 
-func (w *Encoder) PutTriple(ctx context.Context, t rdf.Triple) error {
+func (w *Encoder) AddTriple(ctx context.Context, t rdf.Triple) error {
 	var sData string
 
 	switch s := t.Subject.(type) {

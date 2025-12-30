@@ -10,7 +10,7 @@ import (
 type EncodingOutputHandle struct {
 	Format    string
 	WritePath string
-	Encoder   encoding.Encoder
+	Encoder   encoding.QuadsEncoder
 
 	writeHasher hash.Hash
 	writer      io.WriteCloser

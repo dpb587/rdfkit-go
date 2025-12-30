@@ -2,7 +2,6 @@ package inmemory
 
 import (
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdfio"
 )
 
 type Node struct {
@@ -12,9 +11,7 @@ type Node struct {
 	Baggage map[any]any
 }
 
-var _ rdfio.Node = &Node{}
-
-func (br *Node) GetDataset() rdfio.Dataset {
+func (br *Node) GetDataset() *Dataset {
 	return br.d
 }
 

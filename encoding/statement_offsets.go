@@ -34,6 +34,6 @@ type StatementTextOffsets map[StatementOffsetsType]cursorio.TextOffsetRange
 
 //
 
-type TextOffsetsStatement interface {
-	GetStatementTextOffsets() StatementTextOffsets
+type StatementTextOffsetsProvider interface {
+	StatementTextOffsets() StatementTextOffsets
 }

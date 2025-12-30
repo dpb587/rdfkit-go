@@ -1,12 +1,5 @@
 #!/bin/bash
 
-# version should not matter for these tests; documenting for consistency
-export TESTING_OXIGRAPH_EXEC="${PWD}/tmp/bin/oxigraph-v0.4.11"
-
-if ! [ -x "$TESTING_OXIGRAPH_EXEC" ]; then
-  unset TESTING_OXIGRAPH_EXEC
-fi
-
 run() {
   go test -json . | jq -rs \
     --argjson resultEmojis '{ "pass": "✅", "fail": "❌", "skip": "❔" }' \

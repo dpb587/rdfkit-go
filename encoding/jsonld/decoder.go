@@ -19,8 +19,13 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
-	"github.com/dpb587/rdfkit-go/rdfio"
 )
+
+type statement struct {
+	quad              rdf.Quad
+	textOffsets       encoding.StatementTextOffsets
+	containerResource encoding.ContainerResource
+}
 
 type DecoderOption interface {
 	apply(s *DecoderConfig)
@@ -45,12 +50,14 @@ type Decoder struct {
 	prefixDirectiveListener DecoderEvent_PrefixDirective_ListenerFunc
 	buildTextOffsets        encodingutil.TextOffsetsBuilderFunc
 
-	statements    []*statement
+	err error
+
+	statements    []statement
 	statementsIdx int
-	err           error
 }
 
-var _ encoding.DatasetDecoder = &Decoder{}
+var _ rdf.QuadIterator = &Decoder{}
+var _ encoding.StatementTextOffsetsProvider = &Decoder{}
 
 func NewDecoder(r io.Reader, opts ...DecoderOption) (*Decoder, error) {
 	compiledOpts := DecoderConfig{}
@@ -82,16 +89,16 @@ func (d *Decoder) Next() bool {
 	return d.statementsIdx < len(d.statements)
 }
 
-func (d *Decoder) GetGraphName() rdf.GraphNameValue {
-	return d.statements[d.statementsIdx].graphName
+func (r *Decoder) Quad() rdf.Quad {
+	return r.statements[r.statementsIdx].quad
 }
 
-func (d *Decoder) GetTriple() rdf.Triple {
-	return d.statements[d.statementsIdx].triple
+func (r *Decoder) Statement() rdf.Statement {
+	return r.Quad()
 }
 
-func (d *Decoder) GetStatement() rdfio.Statement {
-	return d.statements[d.statementsIdx]
+func (r *Decoder) StatementTextOffsets() encoding.StatementTextOffsets {
+	return r.statements[r.statementsIdx].textOffsets
 }
 
 func (r *Decoder) parseRoot() error {
@@ -126,7 +133,6 @@ func (r *Decoder) parseRoot() error {
 			BlankNodeFactory:      blanknodeutil.NewFactory(),
 		},
 		CurrentContainer: &DocumentResource{},
-		ActiveGraph:      rdf.DefaultGraph,
 	}
 
 	return r.decodeElement(ectx, ets, false)
@@ -160,14 +166,16 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element jsonldinternal.E
 
 		if len(listArray.Values) == 0 {
 			if ectx.ActiveProperty != nil {
-				r.statements = append(r.statements, &statement{
-					graphName: ectx.ActiveGraph,
-					triple: rdf.Triple{
-						Subject:   ectx.ActiveSubject,
-						Predicate: ectx.ActiveProperty,
-						Object:    rdfiri.Nil_List,
+				r.statements = append(r.statements, statement{
+					quad: rdf.Quad{
+						Triple: rdf.Triple{
+							Subject:   ectx.ActiveSubject,
+							Predicate: ectx.ActiveProperty,
+							Object:    rdfiri.Nil_List,
+						},
+						GraphName: ectx.ActiveGraph,
 					},
-					offsets: r.buildTextOffsets(
+					textOffsets: r.buildTextOffsets(
 						encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
 						encoding.SubjectStatementOffsets, ectx.ActiveSubjectRange,
 						encoding.PredicateStatementOffsets, elementObject.PropertySourceOffsets,
@@ -183,14 +191,16 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element jsonldinternal.E
 			propagatePropertyRange := elementObject.PropertySourceOffsets
 
 			if ectx.ActiveProperty != nil {
-				r.statements = append(r.statements, &statement{
-					graphName: ectx.ActiveGraph,
-					triple: rdf.Triple{
-						Subject:   ectx.ActiveSubject,
-						Predicate: ectx.ActiveProperty,
-						Object:    listSubject,
+				r.statements = append(r.statements, statement{
+					quad: rdf.Quad{
+						Triple: rdf.Triple{
+							Subject:   ectx.ActiveSubject,
+							Predicate: ectx.ActiveProperty,
+							Object:    listSubject,
+						},
+						GraphName: ectx.ActiveGraph,
 					},
-					offsets: r.buildTextOffsets(
+					textOffsets: r.buildTextOffsets(
 						encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
 						encoding.SubjectStatementOffsets, ectx.ActiveSubjectRange,
 						encoding.PredicateStatementOffsets, propagatePropertyRange,
@@ -203,14 +213,16 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element jsonldinternal.E
 				if listIdx > 0 && ectx.ActiveProperty != nil {
 					nextListSubject := ectx.global.BlankNodeFactory.NewBlankNode()
 
-					r.statements = append(r.statements, &statement{
-						graphName: ectx.ActiveGraph,
-						triple: rdf.Triple{
-							Subject:   listSubject,
-							Predicate: rdfiri.Rest_Property,
-							Object:    nextListSubject,
+					r.statements = append(r.statements, statement{
+						quad: rdf.Quad{
+							Triple: rdf.Triple{
+								Subject:   listSubject,
+								Predicate: rdfiri.Rest_Property,
+								Object:    nextListSubject,
+							},
+							GraphName: ectx.ActiveGraph,
 						},
-						offsets: r.buildTextOffsets(
+						textOffsets: r.buildTextOffsets(
 							encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
 						),
 						containerResource: ectx.CurrentContainer,
@@ -232,14 +244,16 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element jsonldinternal.E
 			}
 
 			if ectx.ActiveProperty != nil {
-				r.statements = append(r.statements, &statement{
-					graphName: ectx.ActiveGraph,
-					triple: rdf.Triple{
-						Subject:   listSubject,
-						Predicate: rdfiri.Rest_Property,
-						Object:    rdfiri.Nil_List,
+				r.statements = append(r.statements, statement{
+					quad: rdf.Quad{
+						Triple: rdf.Triple{
+							Subject:   listSubject,
+							Predicate: rdfiri.Rest_Property,
+							Object:    rdfiri.Nil_List,
+						},
+						GraphName: ectx.ActiveGraph,
 					},
-					offsets: r.buildTextOffsets(
+					textOffsets: r.buildTextOffsets(
 						encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
 					),
 					containerResource: ectx.CurrentContainer,
@@ -276,14 +290,16 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element jsonldinternal.E
 
 	if ectx.ActiveProperty != nil {
 		if ectx.Reverse {
-			r.statements = append(r.statements, &statement{
-				graphName: ectx.ActiveGraph,
-				triple: rdf.Triple{
-					Subject:   selfSubject,
-					Predicate: ectx.ActiveProperty,
-					Object:    ectx.ActiveSubject,
+			r.statements = append(r.statements, statement{
+				quad: rdf.Quad{
+					Triple: rdf.Triple{
+						Subject:   selfSubject,
+						Predicate: ectx.ActiveProperty,
+						Object:    ectx.ActiveSubject,
+					},
+					GraphName: ectx.ActiveGraph,
 				},
-				offsets: r.buildTextOffsets(
+				textOffsets: r.buildTextOffsets(
 					encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
 					encoding.SubjectStatementOffsets, selfSubjectRange,
 					encoding.PredicateStatementOffsets, ectx.ActivePropertyRange,
@@ -294,14 +310,16 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element jsonldinternal.E
 
 			ectx.Reverse = false
 		} else {
-			r.statements = append(r.statements, &statement{
-				graphName: ectx.ActiveGraph,
-				triple: rdf.Triple{
-					Subject:   ectx.ActiveSubject,
-					Predicate: ectx.ActiveProperty,
-					Object:    selfSubject,
+			r.statements = append(r.statements, statement{
+				quad: rdf.Quad{
+					Triple: rdf.Triple{
+						Subject:   ectx.ActiveSubject,
+						Predicate: ectx.ActiveProperty,
+						Object:    selfSubject,
+					},
+					GraphName: ectx.ActiveGraph,
 				},
-				offsets: r.buildTextOffsets(
+				textOffsets: r.buildTextOffsets(
 					encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
 					encoding.SubjectStatementOffsets, ectx.ActiveSubjectRange,
 					encoding.PredicateStatementOffsets, elementObject.PropertySourceOffsets,
@@ -362,14 +380,16 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element jsonldinternal.E
 				effectiveObject = rdf.IRI(typeString.Value)
 			}
 
-			r.statements = append(r.statements, &statement{
-				graphName: ectx.ActiveGraph,
-				triple: rdf.Triple{
-					Subject:   ectx.ActiveSubject,
-					Predicate: rdfiri.Type_Property,
-					Object:    effectiveObject,
+			r.statements = append(r.statements, statement{
+				quad: rdf.Quad{
+					Triple: rdf.Triple{
+						Subject:   ectx.ActiveSubject,
+						Predicate: rdfiri.Type_Property,
+						Object:    effectiveObject,
+					},
+					GraphName: ectx.ActiveGraph,
 				},
-				offsets: r.buildTextOffsets(
+				textOffsets: r.buildTextOffsets(
 					encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
 					encoding.SubjectStatementOffsets, ectx.ActiveSubjectRange,
 					encoding.PredicateStatementOffsets, typePrimitive.PropertySourceOffsets,
@@ -492,47 +512,53 @@ func (r *Decoder) decodeValueNode(ectx evaluationContext, v *jsonldinternal.Expa
 							lit.Datatype = xsdiri.String_Datatype
 
 							r.statements = append(r.statements,
-								&statement{
-									graphName: ectx.ActiveGraph,
-									triple: rdf.Triple{
-										Subject:   ectx.ActiveSubject,
-										Predicate: ectx.ActiveProperty,
-										Object:    compoundNode,
+								statement{
+									quad: rdf.Quad{
+										Triple: rdf.Triple{
+											Subject:   ectx.ActiveSubject,
+											Predicate: ectx.ActiveProperty,
+											Object:    compoundNode,
+										},
+										GraphName: ectx.ActiveGraph,
 									},
-									offsets: r.buildTextOffsets(
+									textOffsets: r.buildTextOffsets(
 										encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
 										encoding.SubjectStatementOffsets, ectx.ActiveSubjectRange,
 										encoding.PredicateStatementOffsets, v.SourceOffsets,
 									),
 									containerResource: ectx.CurrentContainer,
 								},
-								&statement{
-									graphName: ectx.ActiveGraph,
-									triple: rdf.Triple{
-										Subject:   compoundNode,
-										Predicate: rdfiri.Value_Property,
-										Object: rdf.Literal{
-											Datatype:    xsdiri.String_Datatype,
-											LexicalForm: lit.LexicalForm,
+								statement{
+									quad: rdf.Quad{
+										Triple: rdf.Triple{
+											Subject:   compoundNode,
+											Predicate: rdfiri.Value_Property,
+											Object: rdf.Literal{
+												Datatype:    xsdiri.String_Datatype,
+												LexicalForm: lit.LexicalForm,
+											},
 										},
+										GraphName: ectx.ActiveGraph,
 									},
-									offsets: r.buildTextOffsets(
+									textOffsets: r.buildTextOffsets(
 										encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
 										encoding.ObjectStatementOffsets, valuePrimitive.SourceOffsets,
 									),
 									containerResource: ectx.CurrentContainer,
 								},
-								&statement{
-									graphName: ectx.ActiveGraph,
-									triple: rdf.Triple{
-										Subject:   compoundNode,
-										Predicate: rdfiri.Direction_Property,
-										Object: rdf.Literal{
-											Datatype:    xsdiri.String_Datatype,
-											LexicalForm: lit.Tags[rdf.BaseDirectionLiteralTag],
+								statement{
+									quad: rdf.Quad{
+										Triple: rdf.Triple{
+											Subject:   compoundNode,
+											Predicate: rdfiri.Direction_Property,
+											Object: rdf.Literal{
+												Datatype:    xsdiri.String_Datatype,
+												LexicalForm: lit.Tags[rdf.BaseDirectionLiteralTag],
+											},
 										},
+										GraphName: ectx.ActiveGraph,
 									},
-									offsets: r.buildTextOffsets(
+									textOffsets: r.buildTextOffsets(
 										encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
 										encoding.ObjectStatementOffsets, atDirection.(*jsonldinternal.ExpandedScalarPrimitive).Value.GetSourceOffsets(),
 									),
@@ -542,17 +568,19 @@ func (r *Decoder) decodeValueNode(ectx evaluationContext, v *jsonldinternal.Expa
 
 							if atLangageKnown {
 								r.statements = append(r.statements,
-									&statement{
-										graphName: ectx.ActiveGraph,
-										triple: rdf.Triple{
-											Subject:   compoundNode,
-											Predicate: rdfiri.Language_Property,
-											Object: rdf.Literal{
-												Datatype:    xsdiri.String_Datatype,
-												LexicalForm: strings.ToLower(lit.Tags[rdf.LanguageLiteralTag]),
+									statement{
+										quad: rdf.Quad{
+											Triple: rdf.Triple{
+												Subject:   compoundNode,
+												Predicate: rdfiri.Language_Property,
+												Object: rdf.Literal{
+													Datatype:    xsdiri.String_Datatype,
+													LexicalForm: strings.ToLower(lit.Tags[rdf.LanguageLiteralTag]),
+												},
 											},
+											GraphName: ectx.ActiveGraph,
 										},
-										offsets: r.buildTextOffsets(
+										textOffsets: r.buildTextOffsets(
 											encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
 											encoding.ObjectStatementOffsets, atLanguage.(*jsonldinternal.ExpandedScalarPrimitive).Value.GetSourceOffsets(),
 										),
@@ -615,14 +643,16 @@ func (r *Decoder) decodeValueNode(ectx evaluationContext, v *jsonldinternal.Expa
 		predicateOffsets = v.PropertySourceOffsets
 	}
 
-	r.statements = append(r.statements, &statement{
-		graphName: ectx.ActiveGraph,
-		triple: rdf.Triple{
-			Subject:   ectx.ActiveSubject,
-			Predicate: ectx.ActiveProperty,
-			Object:    lit,
+	r.statements = append(r.statements, statement{
+		quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject:   ectx.ActiveSubject,
+				Predicate: ectx.ActiveProperty,
+				Object:    lit,
+			},
+			GraphName: ectx.ActiveGraph,
 		},
-		offsets: r.buildTextOffsets(
+		textOffsets: r.buildTextOffsets(
 			encoding.GraphNameStatementOffsets, ectx.ActiveGraphRange,
 			encoding.SubjectStatementOffsets, ectx.ActiveSubjectRange,
 			encoding.PredicateStatementOffsets, predicateOffsets,

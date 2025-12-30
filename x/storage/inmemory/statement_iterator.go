@@ -2,29 +2,26 @@ package inmemory
 
 import (
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdfio"
 )
 
-type statementIterator struct {
+type StatementIterator struct {
 	index int
 	edges statementList
 }
 
-var _ rdfio.StatementIterator = &statementIterator{}
-var _ rdfio.GraphStatementIterator = &statementIterator{}
-var _ rdfio.DatasetStatementIterator = &statementIterator{}
+var _ rdf.QuadIterator = &StatementIterator{}
 
-func (i *statementIterator) Close() error {
+func (i *StatementIterator) Close() error {
 	i.edges = nil
 
 	return nil
 }
 
-func (i *statementIterator) Err() error {
+func (i *StatementIterator) Err() error {
 	return nil
 }
 
-func (i *statementIterator) Next() bool {
+func (i *StatementIterator) Next() bool {
 	if i.index >= len(i.edges)-1 {
 		return false
 	}
@@ -34,14 +31,14 @@ func (i *statementIterator) Next() bool {
 	return true
 }
 
-func (i *statementIterator) GetGraphName() rdf.GraphNameValue {
-	return i.edges[i.index].g.t
+func (i *StatementIterator) Quad() rdf.Quad {
+	return i.edges[i.index].GetQuad()
 }
 
-func (i *statementIterator) GetTriple() rdf.Triple {
-	return i.edges[i.index].GetTriple()
+func (i *StatementIterator) Statement() rdf.Statement {
+	return i.Quad()
 }
 
-func (i *statementIterator) GetStatement() rdfio.Statement {
+func (i *StatementIterator) GetStatement() *Statement {
 	return i.edges[i.index]
 }

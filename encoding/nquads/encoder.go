@@ -21,7 +21,7 @@ type Encoder struct {
 	ascii             bool
 }
 
-var _ encoding.DatasetEncoder = &Encoder{}
+var _ encoding.QuadsEncoder = &Encoder{}
 
 func NewEncoder(w io.Writer, opts ...EncoderOption) (*Encoder, error) {
 	compiledOpts := EncoderConfig{}
@@ -45,60 +45,10 @@ func (w *Encoder) Close() error {
 	return nil
 }
 
-func (w *Encoder) PutGraphTriple(ctx context.Context, g rdf.GraphNameValue, t rdf.Triple) error {
-	err := w.writeTriple(t)
-	if err != nil {
-		return err
-	}
-
-	if g != rdf.DefaultGraph {
-		_, err = w.w.Write([]byte(" "))
-		if err != nil {
-			return err
-		}
-
-		switch g := g.(type) {
-		case rdf.BlankNode:
-			_, err = w.w.Write([]byte("_:" + w.blankNodeStringer.GetBlankNodeIdentifier(g)))
-			if err != nil {
-				return err
-			}
-		case rdf.IRI:
-			_, err = WriteIRI(w.w, g, w.ascii)
-			if err != nil {
-				return err
-			}
-		default:
-			return fmt.Errorf("graph: invalid type: %T", g)
-		}
-	}
-
-	_, err = w.w.Write([]byte(" .\n"))
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (w *Encoder) PutTriple(ctx context.Context, t rdf.Triple) error {
-	err := w.writeTriple(t)
-	if err != nil {
-		return err
-	}
-
-	_, err = w.w.Write([]byte(" .\n"))
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (w *Encoder) writeTriple(t rdf.Triple) error {
+func (w *Encoder) AddQuad(ctx context.Context, t rdf.Quad) error {
 	var err error
 
-	switch s := t.Subject.(type) {
+	switch s := t.Triple.Subject.(type) {
 	case rdf.BlankNode:
 		_, err = w.w.Write([]byte("_:" + w.blankNodeStringer.GetBlankNodeIdentifier(s)))
 		if err != nil {
@@ -118,7 +68,7 @@ func (w *Encoder) writeTriple(t rdf.Triple) error {
 		return err
 	}
 
-	switch p := t.Predicate.(type) {
+	switch p := t.Triple.Predicate.(type) {
 	case rdf.IRI:
 		_, err = WriteIRI(w.w, p, w.ascii)
 		if err != nil {
@@ -133,7 +83,7 @@ func (w *Encoder) writeTriple(t rdf.Triple) error {
 		return err
 	}
 
-	switch o := t.Object.(type) {
+	switch o := t.Triple.Object.(type) {
 	case rdf.BlankNode:
 		_, err = w.w.Write([]byte("_:" + w.blankNodeStringer.GetBlankNodeIdentifier(o)))
 		if err != nil {
@@ -151,6 +101,33 @@ func (w *Encoder) writeTriple(t rdf.Triple) error {
 		}
 	default:
 		return fmt.Errorf("object: invalid type: %T", o)
+	}
+
+	if t.GraphName != nil {
+		_, err = w.w.Write([]byte(" "))
+		if err != nil {
+			return err
+		}
+
+		switch g := t.GraphName.(type) {
+		case rdf.BlankNode:
+			_, err = w.w.Write([]byte("_:" + w.blankNodeStringer.GetBlankNodeIdentifier(g)))
+			if err != nil {
+				return err
+			}
+		case rdf.IRI:
+			_, err = WriteIRI(w.w, g, w.ascii)
+			if err != nil {
+				return err
+			}
+		default:
+			return fmt.Errorf("graph: invalid type: %T", g)
+		}
+	}
+
+	_, err = w.w.Write([]byte(" .\n"))
+	if err != nil {
+		return err
 	}
 
 	return nil

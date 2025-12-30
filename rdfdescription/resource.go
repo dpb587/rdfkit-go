@@ -11,16 +11,16 @@ type Resource interface {
 	// GetResourceStatements returns the statements associated with the resource.
 	GetResourceStatements() StatementList
 
-	AsTriples() rdf.TripleList
+	NewTriples() rdf.TripleList
 }
 
 type ResourceList []Resource
 
-func (rl ResourceList) AsTriples() rdf.TripleList {
+func (rl ResourceList) NewTriples() rdf.TripleList {
 	var triples rdf.TripleList
 
 	for _, r := range rl {
-		triples = append(triples, r.AsTriples()...)
+		triples = append(triples, r.NewTriples()...)
 	}
 
 	return triples
@@ -44,7 +44,7 @@ func (d SubjectResource) GetResourceStatements() StatementList {
 	return d.Statements
 }
 
-func (d SubjectResource) AsTriples() rdf.TripleList {
+func (d SubjectResource) NewTriples() rdf.TripleList {
 	_, tb := d.statementList()
 
 	return tb
@@ -76,7 +76,7 @@ func (d AnonResource) GetResourceStatements() StatementList {
 	return d.Statements
 }
 
-func (r AnonResource) AsTriples() rdf.TripleList {
+func (r AnonResource) NewTriples() rdf.TripleList {
 	_, tb := r.statementList()
 
 	return tb
