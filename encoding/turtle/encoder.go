@@ -369,7 +369,9 @@ func (e *Encoder) writeObjectValue(w *bytes.Buffer, v rdf.ObjectValue) error {
 		case rdfiri.LangString_Datatype:
 			w.WriteString(formatLiteralLexicalForm(literal.LexicalForm, false))
 
-			fmt.Fprintf(w, "@%s", literal.Tags[rdf.LanguageLiteralTag])
+			if langTag, ok := literal.Tag.(rdf.LanguageLiteralTag); ok {
+				fmt.Fprintf(w, "@%s", langTag.Language)
+			}
 
 			return nil
 		}

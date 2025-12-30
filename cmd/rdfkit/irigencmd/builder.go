@@ -190,12 +190,7 @@ func (b *builder) safeIdent(ident string) string {
 	ident = regexp.MustCompile(`(\s+|_)(\w)`).ReplaceAllStringFunc(
 		strings.NewReplacer(
 			":", "_",
-		).Replace(
-			strings.NewReplacer(
-				"-", " ",
-				"_", " ",
-			).Replace(ident),
-		),
+		).Replace(ident),
 		func(s string) string {
 			return s[0:len(s)-1] + strings.ToUpper(s[len(s)-1:])
 		},
@@ -220,7 +215,11 @@ func (b builder) WriteGoComment(w io.Writer, t rdf.IRI, linePrefix string, skipN
 	for _, v := range s.Comments {
 		if v.Datatype != rdfiri.LangString_Datatype {
 			continue
-		} else if !strings.HasPrefix(v.Tags[rdf.LanguageLiteralTag], "en") {
+		} else if tag, ok := v.Tag.(rdf.LanguageLiteralTag); ok {
+			if !strings.HasPrefix(tag.Language, "en") {
+				continue
+			}
+		} else {
 			continue
 		}
 

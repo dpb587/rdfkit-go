@@ -99,12 +99,16 @@ func WriteLiteral(w io.Writer, t rdf.Literal, ascii bool) (int, error) {
 		wlen += wwlen
 	}
 
-	if t.Datatype == xsdiri.String_Datatype {
+	switch t.Datatype {
+	case xsdiri.String_Datatype:
 		return wlen, nil
-	} else if t.Datatype == rdfiri.LangString_Datatype {
-		wwlen, err := w.Write([]byte("@" + t.Tags[rdf.LanguageLiteralTag]))
+	case rdfiri.LangString_Datatype:
+		if langTag, ok := t.Tag.(rdf.LanguageLiteralTag); ok {
+			wwlen, err := w.Write([]byte("@" + langTag.Language))
+			return wlen + wwlen, err
+		}
 
-		return wlen + wwlen, err
+		return wlen, nil
 	}
 
 	wwlen, err := w.Write([]byte("^^"))

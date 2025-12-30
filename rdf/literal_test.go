@@ -44,8 +44,8 @@ func TestLiteral_TermEquals_NotQualifiersOmitted(t *testing.T) {
 	v := Literal{
 		Datatype:    "LangString",
 		LexicalForm: "hello",
-		Tags: map[LiteralTag]string{
-			LanguageLiteralTag: "en",
+		Tag: LanguageLiteralTag{
+			Language: "en",
 		},
 	}.TermEquals(Literal{
 		Datatype:    "LangString",
@@ -60,8 +60,8 @@ func TestLiteral_TermEquals_NotQualifiersOmittedEmpty(t *testing.T) {
 	v := Literal{
 		Datatype:    "LangString",
 		LexicalForm: "hello",
-		Tags: map[LiteralTag]string{
-			LanguageLiteralTag: "",
+		Tag: LanguageLiteralTag{
+			Language: "",
 		},
 	}.TermEquals(Literal{
 		Datatype:    "LangString",
@@ -76,14 +76,14 @@ func TestLiteral_TermEquals_NotQualifiers(t *testing.T) {
 	v := Literal{
 		Datatype:    "LangString",
 		LexicalForm: "hello",
-		Tags: map[LiteralTag]string{
-			LanguageLiteralTag: "en",
+		Tag: LanguageLiteralTag{
+			Language: "en",
 		},
 	}.TermEquals(Literal{
 		Datatype:    "LangString",
 		LexicalForm: "hello",
-		Tags: map[LiteralTag]string{
-			LanguageLiteralTag: "de",
+		Tag: LanguageLiteralTag{
+			Language: "de",
 		},
 	})
 	if _e, _a := false, v; _e != _a {

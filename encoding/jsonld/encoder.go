@@ -211,8 +211,8 @@ func (e *Encoder) buildResource(builder *rdfdescription.ResourceListBuilder, res
 					}
 
 					if obj.Datatype == rdfiri.LangString_Datatype {
-						if v, ok := obj.Tags[rdf.LanguageLiteralTag]; ok {
-							statementObject.(map[string]any)["@language"] = v
+						if tag, ok := obj.Tag.(rdf.LanguageLiteralTag); ok {
+							statementObject.(map[string]any)["@language"] = tag.Language
 						}
 					}
 				}

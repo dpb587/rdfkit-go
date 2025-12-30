@@ -4,15 +4,12 @@ import (
 	"context"
 	"fmt"
 	"io"
-	"maps"
 	"regexp"
-	"slices"
 	"strings"
 	"unicode"
 
 	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/rdfkit-go/encoding"
-	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 )
@@ -133,48 +130,25 @@ func (w *QuadsEncoder) AddQuadStatement(_ context.Context, s QuadStatement) erro
 				case rdf.IRI:
 					fmt.Fprintf(w.w, "rdf.IRI(%q)", object)
 				case rdf.Literal:
-					switch object.Datatype {
-					case xsdiri.String_Datatype:
-						fmt.Fprintf(w.w, "xsdliteral.NewString(%q)", object.LexicalForm)
-					case xsdiri.Boolean_Datatype:
-						fmt.Fprintf(w.w, "xsdliteral.NewBoolean(%t)", object.LexicalForm == "true")
-					default:
-						fmt.Fprintf(w.w, "rdf.Literal{\n")
-						fmt.Fprintf(w.w, "\t\t\t\t\tLexicalForm: %q,\n", object.LexicalForm)
-						fmt.Fprintf(w.w, "\t\t\t\t\tDatatype: rdf.IRI(%q),\n", object.Datatype)
+					fmt.Fprintf(w.w, "rdf.Literal{\n")
+					fmt.Fprintf(w.w, "\t\t\t\t\tLexicalForm: %q,\n", object.LexicalForm)
+					fmt.Fprintf(w.w, "\t\t\t\t\tDatatype: rdf.IRI(%q),\n", object.Datatype)
 
-						if len(object.Tags) > 0 {
-							fmt.Fprintf(w.w, "\t\t\t\t\tQualifiers: map[rdf.LiteralTag]string{\n")
-
-							tagKeys := slices.Collect(maps.Keys(object.Tags))
-							slices.SortFunc(tagKeys, func(i, j rdf.LiteralTag) int {
-								if i < j {
-									return -1
-								}
-
-								return 1
-							})
-
-							for _, k := range tagKeys {
-								var kString string
-
-								switch k {
-								case rdf.BaseDirectionLiteralTag:
-									kString = "rdf.BaseDirectionLiteralTag"
-								case rdf.LanguageLiteralTag:
-									kString = "rdf.LanguageLiteralTag"
-								default:
-									kString = fmt.Sprintf("%v", k)
-								}
-
-								fmt.Fprintf(w.w, "\t\t\t\t\t\t%s: %q,\n", kString, object.Tags[k])
-							}
-
+					if object.Tag != nil {
+						switch tag := object.Tag.(type) {
+						case rdf.LanguageLiteralTag:
+							fmt.Fprintf(w.w, "\t\t\t\t\tTag: rdf.LanguageLiteralTag{\n")
+							fmt.Fprintf(w.w, "\t\t\t\t\t\tLanguage: %q,\n", tag.Language)
+							fmt.Fprintf(w.w, "\t\t\t\t\t},\n")
+						case rdf.DirectionalLanguageLiteralTag:
+							fmt.Fprintf(w.w, "\t\t\t\t\tTag: rdf.DirectionalLanguageLiteralTag{\n")
+							fmt.Fprintf(w.w, "\t\t\t\t\t\tLanguage: %q,\n", tag.Language)
+							fmt.Fprintf(w.w, "\t\t\t\t\t\tBaseDirection: %q,\n", tag.BaseDirection)
 							fmt.Fprintf(w.w, "\t\t\t\t\t},\n")
 						}
-
-						w.w.Write([]byte("\t\t\t\t}"))
 					}
+
+					w.w.Write([]byte("\t\t\t\t}"))
 				default:
 					return fmt.Errorf("unsupported object type: %T", object)
 				}

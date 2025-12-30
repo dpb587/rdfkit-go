@@ -1124,8 +1124,8 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 			if currentLanguage != nil {
 				if cpvLiteral, ok := currentPropertyValue.(rdf.Literal); ok && cpvLiteral.Datatype == xsdiri.String_Datatype {
 					cpvLiteral.Datatype = rdfiri.LangString_Datatype
-					cpvLiteral.Tags = map[rdf.LiteralTag]string{
-						rdf.LanguageLiteralTag: *currentLanguage,
+					cpvLiteral.Tag = rdf.LanguageLiteralTag{
+						Language: *currentLanguage,
 					}
 
 					currentPropertyValue = cpvLiteral

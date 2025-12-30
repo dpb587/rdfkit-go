@@ -488,14 +488,14 @@ func (r *Decoder) decodeValueNode(ectx evaluationContext, v *jsonldinternal.Expa
 			atDirection, atDirectionKnown := v.Members["@direction"]
 
 			if atLangageKnown || atDirectionKnown {
-				lit.Tags = map[rdf.LiteralTag]string{}
+				var litTagLanguage, litTagBaseDirection string
 
 				if atLangageKnown {
-					lit.Tags[rdf.LanguageLiteralTag] = atLanguage.(*jsonldinternal.ExpandedScalarPrimitive).Value.(inspectjson.StringValue).Value
+					litTagLanguage = atLanguage.(*jsonldinternal.ExpandedScalarPrimitive).Value.(inspectjson.StringValue).Value
 				}
 
 				if atDirectionKnown {
-					lit.Tags[rdf.BaseDirectionLiteralTag] = atDirection.(*jsonldinternal.ExpandedScalarPrimitive).Value.(inspectjson.StringValue).Value
+					litTagBaseDirection = atDirection.(*jsonldinternal.ExpandedScalarPrimitive).Value.(inspectjson.StringValue).Value
 				}
 
 				if len(lit.Datatype) == 0 {
@@ -503,8 +503,8 @@ func (r *Decoder) decodeValueNode(ectx evaluationContext, v *jsonldinternal.Expa
 						if r.rdfDirection == "i18n-datatype" {
 							lit.Datatype = rdf.IRI(fmt.Sprintf(
 								"https://www.w3.org/ns/i18n#%s_%s",
-								strings.ToLower(lit.Tags[rdf.LanguageLiteralTag]),
-								lit.Tags[rdf.BaseDirectionLiteralTag],
+								strings.ToLower(litTagLanguage),
+								litTagBaseDirection,
 							))
 						} else if r.rdfDirection == "compound-literal" {
 							compoundNode := ectx.global.BlankNodeFactory.NewBlankNode()
@@ -553,7 +553,7 @@ func (r *Decoder) decodeValueNode(ectx evaluationContext, v *jsonldinternal.Expa
 											Predicate: rdfiri.Direction_Property,
 											Object: rdf.Literal{
 												Datatype:    xsdiri.String_Datatype,
-												LexicalForm: lit.Tags[rdf.BaseDirectionLiteralTag],
+												LexicalForm: litTagBaseDirection,
 											},
 										},
 										GraphName: ectx.ActiveGraph,
@@ -575,7 +575,7 @@ func (r *Decoder) decodeValueNode(ectx evaluationContext, v *jsonldinternal.Expa
 												Predicate: rdfiri.Language_Property,
 												Object: rdf.Literal{
 													Datatype:    xsdiri.String_Datatype,
-													LexicalForm: strings.ToLower(lit.Tags[rdf.LanguageLiteralTag]),
+													LexicalForm: strings.ToLower(litTagLanguage),
 												},
 											},
 											GraphName: ectx.ActiveGraph,
@@ -590,9 +590,18 @@ func (r *Decoder) decodeValueNode(ectx evaluationContext, v *jsonldinternal.Expa
 							}
 
 							return nil
+						} else {
+							lit.Datatype = "http://www.w3.org/1999/02/22-rdf-syntax-ns#dirLangString" // RDF 1.2
+							lit.Tag = rdf.DirectionalLanguageLiteralTag{
+								Language:      litTagLanguage,
+								BaseDirection: litTagBaseDirection,
+							}
 						}
 					} else if atLangageKnown {
 						lit.Datatype = rdfiri.LangString_Datatype
+						lit.Tag = rdf.LanguageLiteralTag{
+							Language: litTagLanguage,
+						}
 					}
 				}
 			}

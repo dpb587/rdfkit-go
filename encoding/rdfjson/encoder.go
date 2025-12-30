@@ -89,10 +89,17 @@ func (w *Encoder) AddTriple(ctx context.Context, t rdf.Triple) error {
 		}
 	case rdf.Literal:
 		if o.Datatype == rdfiri.LangString_Datatype {
-			oData = map[string]string{
-				"type":  "literal",
-				"value": o.LexicalForm,
-				"lang":  o.Tags[rdf.LanguageLiteralTag],
+			if langTag, ok := o.Tag.(rdf.LanguageLiteralTag); ok {
+				oData = map[string]string{
+					"type":  "literal",
+					"value": o.LexicalForm,
+					"lang":  langTag.Language,
+				}
+			} else {
+				oData = map[string]string{
+					"type":  "literal",
+					"value": o.LexicalForm,
+				}
 			}
 		} else if o.Datatype != xsdiri.String_Datatype {
 			oData = map[string]string{

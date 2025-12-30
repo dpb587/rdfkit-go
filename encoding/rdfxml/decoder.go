@@ -451,8 +451,8 @@ func (d *Decoder) processNodeElt(ectx evaluationContext, startElement xml.StartE
 
 		if ectx.Language != nil {
 			lit.Datatype = rdfiri.LangString_Datatype
-			lit.Tags = map[rdf.LiteralTag]string{
-				rdf.LanguageLiteralTag: *ectx.Language,
+			lit.Tag = rdf.LanguageLiteralTag{
+				Language: *ectx.Language,
 			}
 		}
 
@@ -673,8 +673,8 @@ func (d *Decoder) processPropertyElt(ectx evaluationContext, startElement xml.St
 
 				if !explicitDatatype && ectx.Language != nil {
 					lit.Datatype = rdfiri.LangString_Datatype
-					lit.Tags = map[rdf.LiteralTag]string{
-						rdf.LanguageLiteralTag: *ectx.Language,
+					lit.Tag = rdf.LanguageLiteralTag{
+						Language: *ectx.Language,
 					}
 				}
 
@@ -865,8 +865,8 @@ func (d *Decoder) processPropertyElt(ectx evaluationContext, startElement xml.St
 
 						if ectx.Language != nil {
 							lit.Datatype = rdfiri.LangString_Datatype
-							lit.Tags = map[rdf.LiteralTag]string{
-								rdf.LanguageLiteralTag: *ectx.Language,
+							lit.Tag = rdf.LanguageLiteralTag{
+								Language: *ectx.Language,
 							}
 						}
 

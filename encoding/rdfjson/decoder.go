@@ -284,8 +284,8 @@ func (r *Decoder) parseRoot() error {
 								Object: rdf.Literal{
 									LexicalForm: objectMembers.Value.Content,
 									Datatype:    rdfiri.LangString_Datatype,
-									Tags: map[rdf.LiteralTag]string{
-										rdf.LanguageLiteralTag: objectMembers.Lang.Content,
+									Tag: rdf.LanguageLiteralTag{
+										Language: objectMembers.Lang.Content,
 									},
 								},
 							},

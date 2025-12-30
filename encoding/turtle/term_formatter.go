@@ -70,8 +70,10 @@ func (tf *termFormatter) FormatTerm(t rdf.Term) string {
 		sb := &strings.Builder{}
 		sb.WriteString(formatLiteralLexicalForm(string(t.LexicalForm), tf.ascii))
 		if t.Datatype == rdfiri.LangString_Datatype {
-			sb.WriteString("@")
-			sb.WriteString(t.Tags[rdf.LanguageLiteralTag])
+			if langTag, ok := t.Tag.(rdf.LanguageLiteralTag); ok {
+				sb.WriteString("@")
+				sb.WriteString(langTag.Language)
+			}
 		} else {
 			sb.WriteString("^^")
 			sb.WriteString(tf.FormatTerm(t.Datatype))

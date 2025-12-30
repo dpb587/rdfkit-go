@@ -40,8 +40,8 @@ func TestExamples(t *testing.T) {
 						Object: rdf.Literal{
 							LexicalForm: "Anna's Homepage",
 							Datatype:    rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"),
-							Tags: map[rdf.LiteralTag]string{
-								rdf.LanguageLiteralTag: "en",
+							Tag: rdf.LanguageLiteralTag{
+								Language: "en",
 							},
 						},
 					},
@@ -82,8 +82,8 @@ func TestExamples(t *testing.T) {
 						Object: rdf.Literal{
 							LexicalForm: "Anna's Homepage",
 							Datatype:    rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"),
-							Tags: map[rdf.LiteralTag]string{
-								rdf.LanguageLiteralTag: "en",
+							Tag: rdf.LanguageLiteralTag{
+								Language: "en",
 							},
 						},
 					},
@@ -109,8 +109,8 @@ func TestExamples(t *testing.T) {
 						Object: rdf.Literal{
 							LexicalForm: "Annas hjemmeside",
 							Datatype:    rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"),
-							Tags: map[rdf.LiteralTag]string{
-								rdf.LanguageLiteralTag: "da",
+							Tag: rdf.LanguageLiteralTag{
+								Language: "da",
 							},
 						},
 					},

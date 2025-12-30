@@ -322,8 +322,8 @@ func TestDecodeQueryResponseJSON_SpecNonNormative(t *testing.T) {
 								Term: rdf.Literal{
 									Datatype:    rdfiri.LangString_Datatype,
 									LexicalForm: "Bob",
-									Tags: map[rdf.LiteralTag]string{
-										rdf.LanguageLiteralTag: "en",
+									Tag: rdf.LanguageLiteralTag{
+										Language: "en",
 									},
 								},
 							},

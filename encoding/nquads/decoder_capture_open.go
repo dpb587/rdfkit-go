@@ -255,8 +255,8 @@ END_LEXICAL_FORM:
 		return rdf.Literal{
 			Datatype:    rdfiri.LangString_Datatype,
 			LexicalForm: string(decoded),
-			Tags: map[rdf.LiteralTag]string{
-				rdf.LanguageLiteralTag: langtag,
+			Tag: rdf.LanguageLiteralTag{
+				Language: langtag,
 			},
 		}, fullRange, nil
 	case r0.Rune == '^':

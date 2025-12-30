@@ -270,8 +270,13 @@ func (d *Dataset) bindNode(t rdf.Term, write bool) (*Node, bool) {
 
 		h.Write([]byte(t.Datatype + "\n"))
 
-		for k, v := range t.Tags {
-			fmt.Fprintf(h, "%v=%q\n", k, v)
+		if t.Tag != nil {
+			switch tag := t.Tag.(type) {
+			case rdf.LanguageLiteralTag:
+				fmt.Fprintf(h, "lang=%q\n", tag.Language)
+			case rdf.DirectionalLanguageLiteralTag:
+				fmt.Fprintf(h, "lang=%q; dir=%q\n", tag.Language, tag.BaseDirection)
+			}
 		}
 
 		h.Write([]byte(t.LexicalForm))

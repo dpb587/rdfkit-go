@@ -124,8 +124,8 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedR
 				}
 
 				literal.Datatype = rdfiri.LangString_Datatype
-				literal.Tags = map[rdf.LiteralTag]string{
-					rdf.LanguageLiteralTag: langtagToken.Decoded,
+				literal.Tag = rdf.LanguageLiteralTag{
+					Language: langtagToken.Decoded,
 				}
 			case '^':
 				r1, err := r.buf.NextRune()

@@ -93,8 +93,8 @@ func (d *QueryResponseDecoderJSON) Decode() (*QueryResponse, error) {
 						t.Datatype = rdf.IRI(v.Datatype)
 					} else if len(v.Lang) > 0 {
 						t.Datatype = rdfiri.LangString_Datatype
-						t.Tags = map[rdf.LiteralTag]string{
-							rdf.LanguageLiteralTag: v.Lang,
+						t.Tag = rdf.LanguageLiteralTag{
+							Language: v.Lang,
 						}
 					}
 

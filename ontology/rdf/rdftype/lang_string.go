@@ -17,8 +17,8 @@ func (v LangString) AsObjectValue() rdf.ObjectValue {
 	return rdf.Literal{
 		Datatype:    rdfiri.LangString_Datatype,
 		LexicalForm: v.String,
-		Tags: map[rdf.LiteralTag]string{
-			rdf.LanguageLiteralTag: v.Lang,
+		Tag: rdf.LanguageLiteralTag{
+			Language: v.Lang,
 		},
 	}
 }
@@ -37,5 +37,9 @@ func (v LangString) TermEquals(t rdf.Term) bool {
 		return false
 	}
 
-	return tLiteral.Tags[rdf.LanguageLiteralTag] == v.Lang
+	if langTag, ok := tLiteral.Tag.(rdf.LanguageLiteralTag); ok {
+		return langTag.Language == v.Lang
+	}
+
+	return false
 }
