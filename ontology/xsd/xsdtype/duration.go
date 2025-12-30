@@ -87,7 +87,7 @@ func MapDuration(lexicalForm string) (Duration, error) {
 func (v Duration) AsObjectValue() rdf.ObjectValue {
 	return rdf.Literal{
 		Datatype:    xsdiri.Duration_Datatype,
-		LexicalForm: v.asString(),
+		LexicalForm: v.AsLexicalForm(),
 	}
 }
 
@@ -103,10 +103,10 @@ func (v Duration) TermEquals(t rdf.Term) bool {
 		return false
 	}
 
-	return v.asString() == tLiteral.LexicalForm
+	return v.AsLexicalForm() == tLiteral.LexicalForm
 }
 
-func (l Duration) asString() string {
+func (l Duration) AsLexicalForm() string {
 	out := &strings.Builder{}
 
 	if l.Negative {
