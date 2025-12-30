@@ -2,55 +2,20 @@ package htmlmicrodata
 
 import (
 	"bytes"
-	"context"
-	"fmt"
 	"testing"
 
 	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/encodingtest"
 	"github.com/dpb587/rdfkit-go/encoding/html"
-	"github.com/dpb587/rdfkit-go/encoding/ntriples"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 	"github.com/dpb587/rdfkit-go/rdf/triples"
+	"github.com/dpb587/rdfkit-go/testing/testingassert"
 )
 
 var testingBnode = blanknodeutil.NewStringMapper()
-
-func microdataLivingAssertEquals(t *testing.T, expected, actual rdf.TripleList) {
-	var lazyCompare = [2]*bytes.Buffer{
-		bytes.NewBuffer(nil),
-		bytes.NewBuffer(nil),
-	}
-
-	for i, entities := range [2]rdf.TripleList{expected, actual} {
-		ctx := context.Background()
-		encoder, err := ntriples.NewEncoder(lazyCompare[i])
-		if err != nil {
-			t.Fatalf("unexpected error: %v", err)
-		}
-
-		for eIdx, triple := range entities {
-			if triple.Subject == nil {
-				triple.Subject = testingBnode.MapBlankNodeIdentifier(fmt.Sprintf("b%d", eIdx))
-			}
-
-			if err := encoder.AddTriple(ctx, triple); err != nil {
-				t.Fatalf("unexpected error: %v", err)
-			}
-		}
-
-		if err := encoder.Close(); err != nil {
-			t.Fatalf("unexpected error: %v", err)
-		}
-	}
-
-	if lazyCompare[0].String() != lazyCompare[1].String() {
-		t.Fatalf("expected does not match actual\n\n# EXPECTED\n%s\n# ACTUAL\n%s", lazyCompare[0].String(), lazyCompare[1].String())
-	}
-}
 
 func TestMicrodataLivingNonNormative(t *testing.T) {
 	// https://html.spec.whatwg.org/multipage/microdata.html
@@ -4029,7 +3994,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			// 	}
 			// }
 
-			microdataLivingAssertEquals(t, testcase.Expected.AsTriples(), out)
+			testingassert.IsomorphicGraphs(t, testcase.Expected.AsTriples(), out)
 		})
 	}
 }

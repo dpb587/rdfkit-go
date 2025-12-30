@@ -2,15 +2,10 @@ package rdfa
 
 import (
 	"bytes"
-	"context"
-	"fmt"
-	"slices"
-	"strings"
 	"testing"
 
 	"github.com/dpb587/rdfkit-go/encoding/encodingtest"
 	"github.com/dpb587/rdfkit-go/encoding/html"
-	"github.com/dpb587/rdfkit-go/encoding/ntriples"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfobject"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
@@ -19,48 +14,10 @@ import (
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdf/triples"
+	"github.com/dpb587/rdfkit-go/testing/testingassert"
 )
 
 var testingBnode = blanknodeutil.NewStringMapper()
-
-func lazyAssertEquals(t *testing.T, expected, actual rdf.TripleList) {
-	var lazyCompare = [2]*bytes.Buffer{
-		bytes.NewBuffer(nil),
-		bytes.NewBuffer(nil),
-	}
-
-	for i, entities := range [2]rdf.TripleList{expected, actual} {
-		ctx := context.Background()
-		encoder, err := ntriples.NewEncoder(lazyCompare[i])
-		if err != nil {
-			t.Fatalf("unexpected error: %v", err)
-		}
-
-		for eIdx, triple := range entities {
-			if triple.Subject == nil {
-				triple.Subject = testingBnode.MapBlankNodeIdentifier(fmt.Sprintf("b%d", eIdx))
-			}
-
-			if err := encoder.AddTriple(ctx, triple); err != nil {
-				t.Fatalf("unexpected error: %v", err)
-			}
-		}
-
-		if err := encoder.Close(); err != nil {
-			t.Fatalf("unexpected error: %v", err)
-		}
-	}
-
-	lines0 := strings.Split(lazyCompare[0].String(), "\n")
-	slices.SortFunc(lines0, strings.Compare)
-
-	lines1 := strings.Split(lazyCompare[1].String(), "\n")
-	slices.SortFunc(lines1, strings.Compare)
-
-	if str0, str1 := strings.Join(lines0, "\n"), strings.Join(lines1, "\n"); str0 != str1 {
-		t.Fatalf("expected does not match actual\n\n# EXPECTED\n%s\n# ACTUAL\n%s", str0, str1)
-	}
-}
 
 // https://www.w3.org/TR/html-rdfa/
 func TestW3trHtmlRdfaNonNormative(t *testing.T) {
@@ -325,7 +282,7 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
 				t.Fatalf("unexpected error: %v", err)
 			}
 
-			lazyAssertEquals(t, testcase.Expected.AsTriples(), out)
+			testingassert.IsomorphicGraphs(t, testcase.Expected.AsTriples(), out)
 		})
 	}
 }
@@ -1588,7 +1545,7 @@ Sue knows
 				t.Fatalf("unexpected error: %v", err)
 			}
 
-			lazyAssertEquals(t, testcase.Expected.AsTriples(), out)
+			testingassert.IsomorphicGraphs(t, testcase.Expected.AsTriples(), out)
 		})
 	}
 }

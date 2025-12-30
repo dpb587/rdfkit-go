@@ -14,12 +14,12 @@ func IsomorphicGraphs(t *testing.T, expected, actual rdf.TripleList) {
 }
 
 func IsomorphicDatasets(t *testing.T, expected, actual rdf.QuadList) {
-	expectedCanonical, err := rdfcanon.Canonicalize(quads.NewIterator(expected))
+	expectedCanonical, err := rdfcanon.Canonicalize(newDedupQuadsIterator(quads.NewIterator(expected)))
 	if err != nil {
 		t.Fatalf("canonicalize expected: %v", err)
 	}
 
-	actualCanonical, err := rdfcanon.Canonicalize(quads.NewIterator(actual))
+	actualCanonical, err := rdfcanon.Canonicalize(newDedupQuadsIterator(quads.NewIterator(actual)))
 	if err != nil {
 		t.Fatalf("canonicalize actual: %v", err)
 	}

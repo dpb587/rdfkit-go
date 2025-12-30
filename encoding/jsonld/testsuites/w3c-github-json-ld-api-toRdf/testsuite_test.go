@@ -17,16 +17,15 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
 	"github.com/dpb587/rdfkit-go/encoding/nquads"
 	"github.com/dpb587/rdfkit-go/internal/devencoding/rdfioutil"
-	"github.com/dpb587/rdfkit-go/internal/devtest"
 	"github.com/dpb587/rdfkit-go/rdf/quads"
 	"github.com/dpb587/rdfkit-go/testing/testingarchive"
+	"github.com/dpb587/rdfkit-go/testing/testingassert"
 )
 
 const manifestPrefix = "https://w3c.github.io/json-ld-api/tests/"
 
 func Test(t *testing.T) {
 	testdata, manifestResources := requireTestdata(t)
-	oxigraphExec := os.Getenv("TESTING_OXIGRAPH_EXEC")
 
 	var debugWriter = io.Discard
 	var debugBundle *rdfioutil.BundleEncoder
@@ -146,21 +145,7 @@ func Test(t *testing.T) {
 					t.Fatalf("error: %v", err)
 				}
 
-				err = devtest.AssertStatementEquals(expectedStatements, actualStatements.AsQuads())
-				if err == nil {
-					// good
-				} else if len(oxigraphExec) == 0 {
-					t.Log("eval: processor required, but TESTING_OXIGRAPH_EXEC is empty")
-					t.Log(err.Error())
-					t.SkipNow()
-				} else {
-					oxigraphErr := devtest.AssertOxigraphAsk(t.Context(), oxigraphExec, manifestPrefix, testdata.NewFileByteReader(t, manifestPrefix+sequence.Expect), actualStatements.AsQuads())
-					if oxigraphErr != nil {
-						t.Logf("eval: %v", oxigraphErr)
-						t.Log(err.Error())
-						t.FailNow()
-					}
-				}
+				testingassert.IsomorphicDatasets(t, expectedStatements, actualStatements.AsQuads())
 
 				debugBundle.PutQuadsBundle(t.Name(), actualStatements)
 			})

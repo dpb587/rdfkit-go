@@ -14,92 +14,10 @@ import (
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 	"github.com/dpb587/rdfkit-go/rdf/triples"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
+	"github.com/dpb587/rdfkit-go/testing/testingassert"
 )
 
 var testBnode = blanknodeutil.NewStringMapper()
-
-func assertEqual(t *testing.T, expectedList, actualList rdf.TripleList) {
-	bnEtoA := map[rdf.BlankNode]rdf.BlankNode{}
-	bnAtoE := map[rdf.BlankNode]rdf.BlankNode{}
-
-	for idx, expectedTriple := range expectedList {
-		if len(actualList) <= idx {
-			t.Fatalf("expected %dth triple, but got %d", idx, len(actualList))
-		}
-
-		actualTriple := actualList[idx]
-
-		switch expectedTripleSubject := expectedTriple.Subject.(type) {
-		case rdf.BlankNode:
-			actualTripleSubject, ok := actualTriple.Subject.(rdf.BlankNode)
-			if !ok {
-				t.Fatalf("expected subject to be blank node, but got %T", actualTriple.Subject)
-			}
-
-			if bn, ok := bnEtoA[expectedTripleSubject]; ok {
-				if bn != actualTripleSubject {
-					t.Fatalf("expected subject to be %v, but got %v", bn, actualTripleSubject)
-				}
-			} else if _, ok := bnAtoE[actualTripleSubject]; ok {
-				t.Fatalf("expected subject to be %v, but got %v", bn, actualTripleSubject)
-			} else {
-				bnEtoA[expectedTripleSubject] = actualTripleSubject
-				bnAtoE[actualTripleSubject] = expectedTripleSubject
-			}
-		case rdf.IRI:
-			if !expectedTripleSubject.TermEquals(actualTriple.Subject) {
-				t.Fatalf("expected subject to be %v, but got %v", expectedTripleSubject, actualTriple.Subject)
-			}
-		default:
-			t.Fatalf("unexpected type: %T", expectedTripleSubject)
-		}
-
-		switch expectedTriplePredicate := expectedTriple.Predicate.(type) {
-		case rdf.IRI:
-			if !expectedTriplePredicate.TermEquals(actualTriple.Predicate) {
-				t.Fatalf("expected predicate to be %v, but got %v", expectedTriplePredicate, actualTriple.Predicate)
-			}
-		default:
-			t.Fatalf("unexpected type: %T", expectedTriplePredicate)
-		}
-
-		switch expectedTripleObject := expectedTriple.Object.(type) {
-		case rdf.BlankNode:
-			actualTripleObject, ok := actualTriple.Object.(rdf.BlankNode)
-			if !ok {
-				t.Fatalf("expected subject to be blank node, but got %T", actualTriple.Object)
-			}
-
-			if bn, ok := bnEtoA[expectedTripleObject]; ok {
-				if bn != actualTripleObject {
-					t.Fatalf("expected subject to be %v, but got %v", bn, actualTripleObject)
-				}
-			} else if _, ok := bnAtoE[actualTripleObject]; ok {
-				t.Fatalf("expected subject to be %v, but got %v", bn, actualTripleObject)
-			} else {
-				bnEtoA[expectedTripleObject] = actualTripleObject
-				bnAtoE[actualTripleObject] = expectedTripleObject
-			}
-		case rdf.IRI:
-			if !expectedTripleObject.TermEquals(actualTriple.Object) {
-				t.Fatalf("expected object to be %v, but got %v", expectedTripleObject, actualTriple.Object)
-			}
-		case rdf.Literal:
-			if !expectedTripleObject.TermEquals(actualTriple.Object) {
-				t.Fatalf("expected object to be %v, but got %v", expectedTripleObject, actualTriple.Object)
-			}
-		default:
-			t.Fatalf("unexpected type: %T", expectedTripleObject)
-		}
-
-		// expectedLocation := expected.(encoding.TripleLocationBinding).GetEncodingLocation()
-		// actualLocation := actual.(encoding.TripleLocationBinding).GetEncodingLocation()
-
-		// if expectedLocation.Object.LookupString() != actualLocation.Object.LookupString() {
-		// 	t.Fatalf("expected location to be %s, but got %#+v", expectedLocation.Object.LookupString(), actualLocation.Object)
-		// }
-	}
-}
 
 func patchExampleMissingXmlns(s string) string {
 	return strings.Replace(s, `<rdf:Description`, `<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ex="http://example.org/stuff/1.0/" `, 1)
@@ -912,7 +830,7 @@ func TestSpecNonNormative(t *testing.T) {
 				}
 			})
 
-			assertEqual(t, testcase.Expected.NewTriples(), out)
+			testingassert.IsomorphicGraphs(t, testcase.Expected.NewTriples(), out)
 
 			success = true
 		})
@@ -1318,7 +1236,7 @@ func TestSpecTestcase(t *testing.T) {
 				t.Fatalf("unexpected error: %v", err)
 			}
 
-			assertEqual(t, testcase.Expected.NewTriples(), out)
+			testingassert.IsomorphicGraphs(t, testcase.Expected.NewTriples(), out)
 		})
 	}
 }

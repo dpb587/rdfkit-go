@@ -14,11 +14,11 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding/trig"
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
 	"github.com/dpb587/rdfkit-go/internal/devencoding/rdfioutil"
-	"github.com/dpb587/rdfkit-go/internal/devtest"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/quads"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
 	"github.com/dpb587/rdfkit-go/testing/testingarchive"
+	"github.com/dpb587/rdfkit-go/testing/testingassert"
 	"github.com/dpb587/rdfkit-go/x/rdfdescriptionstruct"
 )
 
@@ -26,7 +26,6 @@ const manifestPrefix = "http://www.w3.org/2013/TriGTests/"
 
 func Test(t *testing.T) {
 	testdata, manifest := requireTestdata(t)
-	oxigraphExec := os.Getenv("TESTING_OXIGRAPH_EXEC")
 
 	var debugWriter = io.Discard
 	var debugBundle *rdfioutil.BundleEncoder
@@ -79,21 +78,7 @@ func Test(t *testing.T) {
 					t.Fatalf("error: %v", err)
 				}
 
-				err = devtest.AssertStatementEquals(expectedStatements, actualStatements.AsQuads())
-				if err == nil {
-					// good
-				} else if len(oxigraphExec) == 0 {
-					t.Log("eval: processor required, but TESTING_OXIGRAPH_EXEC is empty")
-					t.Log(err.Error())
-					t.SkipNow()
-				} else {
-					oxigraphErr := devtest.AssertOxigraphAsk(t.Context(), oxigraphExec, entry.Action, testdata.NewFileByteReader(t, string(entry.Result)), actualStatements.AsQuads())
-					if oxigraphErr != nil {
-						t.Logf("eval: %v", oxigraphErr)
-						t.Log(err.Error())
-						t.FailNow()
-					}
-				}
+				testingassert.IsomorphicDatasets(t, expectedStatements, actualStatements.AsQuads())
 
 				debugBundle.PutQuadsBundle(t.Name(), actualStatements)
 			})

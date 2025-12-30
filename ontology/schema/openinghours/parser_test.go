@@ -3,11 +3,11 @@ package openinghours
 import (
 	"testing"
 
-	"github.com/dpb587/rdfkit-go/internal/devtest"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/schema/schemairi"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
+	"github.com/dpb587/rdfkit-go/testing/testingassert"
 )
 
 func TestParseText(t *testing.T) {
@@ -385,9 +385,7 @@ func TestParseText(t *testing.T) {
 				t.Fatalf("expected %v, got %v", _e, _a)
 			}
 
-			if _a := devtest.AssertTripleEquals(tc.ExpectedOpeningHoursSpecification.NewTriples(), resultData.AsOpeningHoursSpecification().NewTriples()); _a != nil {
-				t.Fatalf("unexpected error: %v", _a)
-			}
+			testingassert.IsomorphicGraphs(t, tc.ExpectedOpeningHoursSpecification.NewTriples(), resultData.AsOpeningHoursSpecification().NewTriples())
 		})
 	}
 }
