@@ -14,7 +14,15 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding/jsonld"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
 	"github.com/dpb587/rdfkit-go/encoding/nquads"
+	"github.com/dpb587/rdfkit-go/ontology/earl/earliri"
+	"github.com/dpb587/rdfkit-go/ontology/earl/earltesting"
+	"github.com/dpb587/rdfkit-go/ontology/foaf/foafiri"
+	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
+	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
+	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/quads"
+	"github.com/dpb587/rdfkit-go/rdf/rdfutil"
+	"github.com/dpb587/rdfkit-go/rdfdescription"
 	"github.com/dpb587/rdfkit-go/testing/testingarchive"
 	"github.com/dpb587/rdfkit-go/testing/testingassert"
 	"github.com/dpb587/rdfkit-go/testing/testingutil"
@@ -24,6 +32,39 @@ const manifestPrefix = "https://w3c.github.io/json-ld-api/tests/"
 
 func Test(t *testing.T) {
 	testdata, manifestResources := requireTestdata(t)
+
+	earlReport := earltesting.NewReportFromEnv(t).
+		WithAssertor(
+			rdf.IRI("#assertor"),
+			rdfdescription.NewStatementsFromObjectsByPredicate(rdfutil.ObjectsByPredicate{
+				foafiri.Name_Property: rdf.ObjectValueList{
+					xsdobject.String("rdfkit-go test suite"),
+				},
+				foafiri.Homepage_Property: rdf.ObjectValueList{
+					rdf.IRI("https://github.com/dpb587/rdfkit-go/tree/main/encoding/jsonld/testsuites/w3c-github-json-ld-api-toRdf"),
+				},
+			})...,
+		).
+		WithSubject(
+			rdf.IRI("#subject"),
+			rdfdescription.NewStatementsFromObjectsByPredicate(rdfutil.ObjectsByPredicate{
+				rdfiri.Type_Property: rdf.ObjectValueList{
+					rdf.IRI("http://usefulinc.com/ns/doap#Project"),
+				},
+				foafiri.Name_Property: rdf.ObjectValueList{
+					xsdobject.String("rdfkit-go"),
+				},
+				foafiri.Homepage_Property: rdf.ObjectValueList{
+					rdf.IRI("https://github.com/dpb587/rdfkit-go"),
+				},
+				rdf.IRI("http://usefulinc.com/ns/doap#programming-language"): rdf.ObjectValueList{
+					xsdobject.String("Go"),
+				},
+				rdf.IRI("http://usefulinc.com/ns/doap#repository"): rdf.ObjectValueList{
+					rdf.IRI("https://github.com/dpb587/rdfkit-go"),
+				},
+			})...,
+		)
 
 	rdfioDebug := testingutil.NewDebugRdfioBuilderFromEnv(t)
 
@@ -78,8 +119,10 @@ func Test(t *testing.T) {
 
 		if slices.Contains(sequence.Type, "jld:PositiveEvaluationTest") {
 			t.Run("Eval/"+sequence.ID, func(t *testing.T) {
+				earlAssertion := earlReport.NewAssertion(t, rdf.IRI(manifestPrefix+"toRdf"+sequence.ID))
+
 				if sequence.Option.ProduceGeneralizedRdf {
-					t.Skip("ignore: produceGeneralizedRdf is not supported")
+					earlAssertion.TSkip(t, earliri.Inapplicable_NotApplicable, "produceGeneralizedRdf is not supported")
 				} else if sequence.ID == "#t0122" || sequence.ID == "#t0123" || sequence.ID == "#t0124" || sequence.ID == "#t0125" {
 					// The stdlib URL resolver normalizes .. and . segments out of the path, but these tests expect
 					// the dot-segments to be retained.
@@ -113,7 +156,7 @@ func Test(t *testing.T) {
 					//   ACTUAL <urn:ex:s099> <urn:ex:p> <http://a/bb/ccc/d;p?q> .
 					// * EXPECT <urn:ex:s133> <urn:ex:p> <http://a/bb/ccc/../d;p?y> .
 					//   ACTUAL <urn:ex:s133> <urn:ex:p> <http://a/bb/d;p?y> .
-					t.Skip("ignore: expected failures (requires unresolved RFC 3986 dot-segments)")
+					earlAssertion.TSkip(t, earliri.Inapplicable_NotApplicable, "expected failure (requires unresolved RFC 3986 dot-segments)")
 				}
 
 				expectedStatements, err := quads.CollectErr(nquads.NewDecoder(

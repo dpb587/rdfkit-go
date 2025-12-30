@@ -10,7 +10,12 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding/encodingtest"
 	"github.com/dpb587/rdfkit-go/encoding/ntriples"
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
+	"github.com/dpb587/rdfkit-go/ontology/earl/earltesting"
+	"github.com/dpb587/rdfkit-go/ontology/foaf/foafiri"
+	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
+	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
 	"github.com/dpb587/rdfkit-go/rdf"
+	"github.com/dpb587/rdfkit-go/rdf/rdfutil"
 	"github.com/dpb587/rdfkit-go/rdf/triples"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
 	"github.com/dpb587/rdfkit-go/testing/testingarchive"
@@ -23,6 +28,39 @@ const manifestPrefix = "http://www.w3.org/2013/TurtleTests/"
 
 func Test(t *testing.T) {
 	testdata, manifest := requireTestdata(t)
+
+	earlReport := earltesting.NewReportFromEnv(t).
+		WithAssertor(
+			rdf.IRI("#assertor"),
+			rdfdescription.NewStatementsFromObjectsByPredicate(rdfutil.ObjectsByPredicate{
+				foafiri.Name_Property: rdf.ObjectValueList{
+					xsdobject.String("rdfkit-go test suite"),
+				},
+				foafiri.Homepage_Property: rdf.ObjectValueList{
+					rdf.IRI("https://github.com/dpb587/rdfkit-go/tree/main/encoding/turtle/testsuites/w3-2013-TurtleTests"),
+				},
+			})...,
+		).
+		WithSubject(
+			rdf.IRI("#subject"),
+			rdfdescription.NewStatementsFromObjectsByPredicate(rdfutil.ObjectsByPredicate{
+				rdfiri.Type_Property: rdf.ObjectValueList{
+					rdf.IRI("http://usefulinc.com/ns/doap#Project"),
+				},
+				foafiri.Name_Property: rdf.ObjectValueList{
+					xsdobject.String("rdfkit-go"),
+				},
+				foafiri.Homepage_Property: rdf.ObjectValueList{
+					rdf.IRI("https://github.com/dpb587/rdfkit-go"),
+				},
+				rdf.IRI("http://usefulinc.com/ns/doap#programming-language"): rdf.ObjectValueList{
+					xsdobject.String("Go"),
+				},
+				rdf.IRI("http://usefulinc.com/ns/doap#repository"): rdf.ObjectValueList{
+					rdf.IRI("https://github.com/dpb587/rdfkit-go"),
+				},
+			})...,
+		)
 
 	rdfioDebug := testingutil.NewDebugRdfioBuilderFromEnv(t)
 
@@ -48,6 +86,8 @@ func Test(t *testing.T) {
 		switch entry.Type {
 		case "http://www.w3.org/ns/rdftest#TestTurtleEval":
 			t.Run("Eval/"+entry.Name, func(t *testing.T) {
+				earlReport.NewAssertion(t, entry.ID)
+
 				expectedStatements, err := triples.CollectErr(ntriples.NewDecoder(
 					testdata.NewFileByteReader(t, string(entry.Result)),
 				))
@@ -68,13 +108,19 @@ func Test(t *testing.T) {
 			// TODO
 		case "http://www.w3.org/ns/rdftest#TestTurtlePositiveSyntax":
 			t.Run("PositiveSyntax/"+entry.Name, func(t *testing.T) {
-				_, err := decodeAction()
+				earlReport.NewAssertion(t, entry.ID)
+
+				statements, err := decodeAction()
 				if err != nil {
 					t.Fatalf("error: %v", err)
 				}
+
+				rdfioDebug.PutTriplesBundle(t.Name(), statements)
 			})
 		case "http://www.w3.org/ns/rdftest#TestTurtleNegativeSyntax":
 			t.Run("NegativeSyntax/"+entry.Name, func(t *testing.T) {
+				earlReport.NewAssertion(t, entry.ID)
+
 				_, err := decodeAction()
 				if err != nil {
 					t.Logf("error: %v", err)

@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"io"
 	"slices"
-	"sort"
 	"strings"
 
 	"github.com/dpb587/rdfkit-go/encoding"
@@ -33,6 +32,7 @@ type Encoder struct {
 
 	err              error
 	buffered         bool
+	bufferedSort     bool
 	bufferedSections [][]byte
 }
 
@@ -68,9 +68,11 @@ func (w *Encoder) Close() error {
 	}
 
 	if w.buffered && len(w.bufferedSections) > 0 {
-		sort.Slice(w.bufferedSections, func(i, j int) bool {
-			return bytes.Compare(w.bufferedSections[i], w.bufferedSections[j]) < 0
-		})
+		if w.bufferedSort {
+			slices.SortFunc(w.bufferedSections, func(i, j []byte) int {
+				return bytes.Compare(i, j)
+			})
+		}
 
 		if prefixMappings := w.prefixes.GetUsedPrefixMappings(); w.base != nil || len(prefixMappings) > 0 {
 			slices.SortFunc(prefixMappings, iriutil.ComparePrefixMappingByPrefix)

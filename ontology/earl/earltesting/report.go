@@ -17,6 +17,7 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
+	"github.com/dpb587/rdfkit-go/rdf/rdfutil"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
 )
 
@@ -76,19 +77,15 @@ func NewReportFromEnv(t *testing.T) ReportScope {
 		}
 
 		if v := os.Getenv("TESTING_EARL_SUBJECT_RELEASE_DATE"); len(v) > 0 {
-			if value, err := xsdobject.MapDateTime(v); err == nil {
-				releaseStatements = append(releaseStatements, rdfdescription.ObjectStatement{
-					Predicate: rdf.IRI("http://purl.org/dc/terms/created"),
-					Object:    value,
-				})
-			} else if value, err := xsdobject.MapDate(v); err == nil {
-				releaseStatements = append(releaseStatements, rdfdescription.ObjectStatement{
-					Predicate: rdf.IRI("http://purl.org/dc/terms/created"),
-					Object:    value,
-				})
-			} else {
+			literalValue, err := rdfutil.CoalesceObjectValue(v, xsdobject.MapDateTime, xsdobject.MapDate)
+			if err != nil {
 				t.Fatalf("configure: TESTING_EARL_SUBJECT_RELEASE_DATE: %v", err)
 			}
+
+			releaseStatements = append(releaseStatements, rdfdescription.ObjectStatement{
+				Predicate: rdf.IRI("http://purl.org/dc/terms/created"),
+				Object:    literalValue,
+			})
 		}
 
 		r.AddSubjectStatements(rdf.IRI("#subject"), rdfdescription.AnonResourceStatement{
@@ -192,6 +189,7 @@ func (r *Report) writeOutput() error {
 
 	encoder, err := turtle.NewEncoder(file, turtle.EncoderConfig{}.
 		SetBuffered(true).
+		SetBufferedSort(false).
 		SetPrefixes(iriutil.NewPrefixMap(
 			iriutil.PrefixMapping{Prefix: "dc", Expanded: "http://purl.org/dc/terms/"},
 			iriutil.PrefixMapping{Prefix: "doap", Expanded: "http://usefulinc.com/ns/doap#"},
@@ -210,7 +208,7 @@ func (r *Report) writeOutput() error {
 	for _, assertionSubject := range r.assertionSubjects {
 		for _, resource := range resources {
 			if resource.GetResourceSubject() == assertionSubject {
-				if err := encoder.AddResource(ctx, resource); err != nil {
+				if err := encoder.AddResource(ctx, rdfdescription.PreferAnonResource(r.builder, resource)); err != nil {
 					return fmt.Errorf("failed to add resource: %w", err)
 				}
 
@@ -224,7 +222,7 @@ func (r *Report) writeOutput() error {
 			continue
 		}
 
-		if err := encoder.AddResource(ctx, resource); err != nil {
+		if err := encoder.AddResource(ctx, rdfdescription.PreferAnonResource(r.builder, resource)); err != nil {
 			return fmt.Errorf("failed to add resource: %w", err)
 		}
 	}

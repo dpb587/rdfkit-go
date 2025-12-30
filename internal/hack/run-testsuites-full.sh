@@ -38,7 +38,7 @@ run() {
           ) else "" end))
       )
     ' \
-    > RESULTS.md
+    > testresults/README.md
 }
 
 while read -r dir
@@ -46,6 +46,10 @@ do
   echo "$dir"
   pushd "$dir" > /dev/null
   
+  rm -fr testresults
+  mkdir testresults
+
+  export TESTING_EARL_OUTPUT="testresults/earl.ttl"
   export TESTING_DEBUG_RDFIO_OUTPUT="testresults/rdfio.txt"
 
   run

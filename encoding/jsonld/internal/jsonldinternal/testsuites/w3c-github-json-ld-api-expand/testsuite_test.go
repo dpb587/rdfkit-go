@@ -14,7 +14,14 @@ import (
 	"github.com/dpb587/inspectjson-go/inspectjson"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/internal/jsonldinternal"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
+	"github.com/dpb587/rdfkit-go/ontology/earl/earltesting"
+	"github.com/dpb587/rdfkit-go/ontology/foaf/foafiri"
+	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
+	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
+	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
+	"github.com/dpb587/rdfkit-go/rdf/rdfutil"
+	"github.com/dpb587/rdfkit-go/rdfdescription"
 	"github.com/dpb587/rdfkit-go/testing/testingarchive"
 )
 
@@ -24,6 +31,39 @@ var manifestPrefixURL, _ = iriutil.ParseIRI(manifestPrefix)
 
 func Test(t *testing.T) {
 	testdata, manifestResources := requireTestdata(t)
+
+	earlReport := earltesting.NewReportFromEnv(t).
+		WithAssertor(
+			rdf.IRI("#assertor"),
+			rdfdescription.NewStatementsFromObjectsByPredicate(rdfutil.ObjectsByPredicate{
+				foafiri.Name_Property: rdf.ObjectValueList{
+					xsdobject.String("rdfkit-go w3c-github-json-ld-api-expand"),
+				},
+				foafiri.Homepage_Property: rdf.ObjectValueList{
+					rdf.IRI("https://github.com/dpb587/rdfkit-go/tree/main/encoding/jsonld/internal/jsonldinternal/testsuites/w3c-github-json-ld-api-expand"),
+				},
+			})...,
+		).
+		WithSubject(
+			rdf.IRI("#subject"),
+			rdfdescription.NewStatementsFromObjectsByPredicate(rdfutil.ObjectsByPredicate{
+				rdfiri.Type_Property: rdf.ObjectValueList{
+					rdf.IRI("http://usefulinc.com/ns/doap#Project"),
+				},
+				foafiri.Name_Property: rdf.ObjectValueList{
+					xsdobject.String("rdfkit-go"),
+				},
+				foafiri.Homepage_Property: rdf.ObjectValueList{
+					rdf.IRI("https://github.com/dpb587/rdfkit-go"),
+				},
+				rdf.IRI("http://usefulinc.com/ns/doap#programming-language"): rdf.ObjectValueList{
+					xsdobject.String("Go"),
+				},
+				rdf.IRI("http://usefulinc.com/ns/doap#repository"): rdf.ObjectValueList{
+					rdf.IRI("https://github.com/dpb587/rdfkit-go"),
+				},
+			})...,
+		)
 
 	for _, sequence := range manifestResources.Sequence {
 		decodeAction := func() (jsonldinternal.ExpandedValue, error) {
@@ -83,6 +123,8 @@ func Test(t *testing.T) {
 
 		if slices.Contains(sequence.Type, "jld:NegativeEvaluationTest") {
 			t.Run("NegativeSyntax/"+strings.TrimPrefix(sequence.ID, "#"), func(t *testing.T) {
+				earlReport.NewAssertion(t, rdf.IRI(manifestPrefix+"expand"+sequence.ID))
+
 				_, err := decodeAction()
 				if err != nil {
 					t.Logf("error: %v", err)
@@ -92,6 +134,8 @@ func Test(t *testing.T) {
 			})
 		} else if slices.Contains(sequence.Type, "jld:PositiveEvaluationTest") {
 			t.Run("Eval/"+strings.TrimPrefix(sequence.ID, "#"), func(t *testing.T) {
+				earlReport.NewAssertion(t, rdf.IRI(manifestPrefix+"expand"+sequence.ID))
+
 				var expectedBuiltin any
 
 				err := json.NewDecoder(testdata.NewFileByteReader(t, manifestPrefix+sequence.Expect)).Decode(&expectedBuiltin)

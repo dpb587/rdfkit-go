@@ -15,9 +15,8 @@ type EncoderConfig struct {
 
 	blankNodeStringer blanknodeutil.Stringer
 
-	// Buffered causes all output to be buffered until Close is called. Once closed, the base and any used prefixes will
-	// be written, the buffered sections will be sorted and written, and the encoder will no longer be usable.
-	buffered *bool
+	buffered     *bool
+	bufferedSort *bool
 }
 
 func (s EncoderConfig) SetBase(v string) EncoderConfig {
@@ -44,6 +43,12 @@ func (s EncoderConfig) SetBuffered(v bool) EncoderConfig {
 	return s
 }
 
+func (s EncoderConfig) SetBufferedSort(v bool) EncoderConfig {
+	s.bufferedSort = &v
+
+	return s
+}
+
 func (s EncoderConfig) apply(d *EncoderConfig) {
 	if s.base != nil {
 		d.base = s.base
@@ -59,6 +64,10 @@ func (s EncoderConfig) apply(d *EncoderConfig) {
 
 	if s.buffered != nil {
 		d.buffered = s.buffered
+	}
+
+	if s.bufferedSort != nil {
+		d.bufferedSort = s.bufferedSort
 	}
 }
 
@@ -88,6 +97,11 @@ func (s EncoderConfig) newEncoder(w io.Writer) (*Encoder, error) {
 
 	if s.buffered != nil && *s.buffered {
 		e.buffered = *s.buffered
+		e.bufferedSort = e.buffered
+	}
+
+	if s.bufferedSort != nil {
+		e.bufferedSort = *s.bufferedSort
 	}
 
 	if e.blankNodeStringer == nil {
