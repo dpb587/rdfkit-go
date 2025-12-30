@@ -1,5 +1,7 @@
 github.com/apparentlymart/go-textseg/v16 v16.0.0 h1:xD7KZ/8d+ED3d+k78g/2weJEIGzDMreyMqntQymTZB0=
 github.com/apparentlymart/go-textseg/v16 v16.0.0/go.mod h1:wCrfQB/AReGqD1ECqVHhhsq7BV2AxUhnirsBLInYHvE=
+github.com/cespare/permute/v2 v2.0.0-beta2 h1:iiJWgDsInCbnwfDZiLJX7cVlJevgIM1pUiArcUylUMc=
+github.com/cespare/permute/v2 v2.0.0-beta2/go.mod h1:7e2Tqe0fjn1T4rTjDLJjQ+kNtt+UW4B9lg10asqWw0A=
 github.com/dpb587/cursorio-go v0.0.0-20250717044249-e1d8c928b30d h1:UxedKtdKz4vyHhlQtjdOx8ogG+y7uhIViUVXM3jSeVY=
 github.com/dpb587/cursorio-go v0.0.0-20250717044249-e1d8c928b30d/go.mod h1:YokGb5i31XI0Z+4t8bZxvZecyKY3ddLlih9Rr7eBgW0=
 github.com/dpb587/inspecthtml-go v0.0.0-20250906134739-0d404c86637b h1:h7XE5d+xgEvGyRIIral6XAZUcMGrh/zb01Yz+mjYHN0=

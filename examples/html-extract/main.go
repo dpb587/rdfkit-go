@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/dpb587/rdfkit-go/encoding/encodingutil"
 	"github.com/dpb587/rdfkit-go/encoding/html"
 	"github.com/dpb587/rdfkit-go/encoding/htmljsonld"
 	"github.com/dpb587/rdfkit-go/encoding/htmlmicrodata"
@@ -15,8 +16,8 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil/rdfacontext"
-	"github.com/dpb587/rdfkit-go/rdfdescription/rdfdescriptionio"
-	"github.com/dpb587/rdfkit-go/rdfio/rdfioutil"
+	"github.com/dpb587/rdfkit-go/rdf/quads"
+	"github.com/dpb587/rdfkit-go/rdfdescription"
 )
 
 func main() {
@@ -78,11 +79,32 @@ func main() {
 		panic(fmt.Errorf("prepare rdfa: %v", err))
 	}
 
-	decoder := rdfioutil.NewStatementIteratorIterator(htmlJsonld, htmlMicrodata, htmlRdfa)
+	decoder := quads.NewIteratorIterator(
+		htmlJsonld,
+		encodingutil.TripleAsQuadDecoder{
+			TriplesDecoder: htmlMicrodata,
+		},
+		encodingutil.TripleAsQuadDecoder{
+			TriplesDecoder: htmlRdfa,
+		},
+	)
 
 	defer decoder.Close()
 
-	// Prepare the Turtle encoder.
+	// Load all statements.
+
+	resourceEncoder := rdfdescription.NewResourceListBuilder()
+
+	for decoder.Next() {
+		// ignoring the graph name for now
+		resourceEncoder.AddTriple(ctx, decoder.Quad().Triple)
+	}
+
+	if err := decoder.Err(); err != nil {
+		panic(fmt.Errorf("decode: %v", err))
+	}
+
+	// Output as structured Turtle resources.
 
 	encoder, err := turtle.NewEncoder(
 		os.Stdout,
@@ -95,17 +117,10 @@ func main() {
 		panic(fmt.Errorf("turtle encoder: %v", err))
 	}
 
-	resourceEncoder := rdfdescriptionio.NewBufferedGraphEncoder(encoder)
+	defer encoder.Close()
 
-	defer resourceEncoder.Close()
-
-	// Pipe everything
-
-	for decoder.Next() {
-		resourceEncoder.PutTriple(ctx, decoder.GetStatement().GetTriple())
-	}
-
-	if err := decoder.Err(); err != nil {
-		panic(fmt.Errorf("decode: %v", err))
+	err = resourceEncoder.AddTo(ctx, encoder, true)
+	if err != nil {
+		panic(fmt.Errorf("encode: %v", err))
 	}
 }

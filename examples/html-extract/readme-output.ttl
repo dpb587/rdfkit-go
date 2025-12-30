@@ -18,7 +18,7 @@
 	og:title "Microsoft – AI, Cloud, Productivity, Computing, Gaming & Apps"@en-US ;
 	og:type "website"@en-US ;
 	og:url "https://www.microsoft.com/en-us"@en-US .
-_:b0
+[]
 	a schema:Organization ;
 	schema:logo <https://uhf.microsoft.com/images/microsoft/RE1Mu3b.png> ;
 	schema:name "Microsoft" ;

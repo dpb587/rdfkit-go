@@ -15,7 +15,7 @@ import (
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil/rdfacontext"
-	"github.com/dpb587/rdfkit-go/rdfio"
+	"github.com/dpb587/rdfkit-go/rdf/quads"
 )
 
 func main() {
@@ -40,7 +40,7 @@ func main() {
 
 	// Read all the statements before we visualize it. This is primarily to capture any base and prefix directives that
 	// may be within the file.
-	allStatements, err := rdfio.CollectStatements(ih.Decoder)
+	allStatements, err := quads.Collect(ih.Decoder)
 	if err != nil {
 		panic(err)
 	}
@@ -116,7 +116,7 @@ func main() {
 	buf := &bytes.Buffer{}
 
 	for _, statement := range allStatements {
-		triple := statement.GetTriple()
+		triple := statement.Triple
 
 		sKey := requireResource(buf, "\t", triple.Subject)
 
@@ -134,9 +134,12 @@ func main() {
 			fmt.Fprintf(buf, "\t\t"+`<tr><td align="left" colspan="2">%s</td></tr>`+"\n", html.EscapeString(oLiteral.LexicalForm))
 			fmt.Fprintf(buf, "\t\t"+`<tr><td align="right">Datatype</td><td align="left" href="%s">%s</td></tr>`+"\n", html.EscapeString(string(oLiteral.Datatype)), html.EscapeString(shortenIRI(oLiteral.Datatype)))
 
-			if oLiteral.Tags != nil {
-				if v, ok := oLiteral.Tags[rdf.LanguageLiteralTag]; ok {
-					fmt.Fprintf(buf, "\t\t"+`<tr><td align="right">Language</td><td align="left">%s</td></tr>`+"\n", html.EscapeString(string(v)))
+			if oLiteral.Tag != nil {
+				if tag, ok := oLiteral.Tag.(rdf.LanguageLiteralTag); ok {
+					fmt.Fprintf(buf, "\t\t"+`<tr><td align="right">Language</td><td align="left">%s</td></tr>`+"\n", html.EscapeString(tag.Language))
+				} else if tag, ok := oLiteral.Tag.(rdf.DirectionalLanguageLiteralTag); ok {
+					fmt.Fprintf(buf, "\t\t"+`<tr><td align="right">Language</td><td align="left">%s</td></tr>`+"\n", html.EscapeString(tag.Language))
+					fmt.Fprintf(buf, "\t\t"+`<tr><td align="right">Base Direction</td><td align="left">%s</td></tr>`+"\n", html.EscapeString(tag.BaseDirection))
 				}
 			}
 
