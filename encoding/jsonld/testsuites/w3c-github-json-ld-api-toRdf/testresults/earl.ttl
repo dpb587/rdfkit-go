@@ -1,0 +1,3819 @@
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix earl: <http://www.w3.org/ns/earl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0001> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0002> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0003> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0004> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0005> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0006> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0007> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0008> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0009> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0010> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0011> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0012> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0013> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0014> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0015> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0016> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0017> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0018> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0019> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0020> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0022> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0023> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0024> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0025> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0026> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0027> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0028> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0029> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0030> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0031> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0032> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0033> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0034> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:failed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0035> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0036> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0113> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0114> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0115> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0116> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0117> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		dc:description "produceGeneralizedRdf is not supported" ;
+		earl:outcome earl:inapplicable
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0118> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0119> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0120> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0121> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		dc:description "expected failure (requires unresolved RFC 3986 dot-segments)" ;
+		earl:outcome earl:inapplicable
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0122> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		dc:description "expected failure (requires unresolved RFC 3986 dot-segments)" ;
+		earl:outcome earl:inapplicable
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0123> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		dc:description "expected failure (requires unresolved RFC 3986 dot-segments)" ;
+		earl:outcome earl:inapplicable
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0124> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		dc:description "expected failure (requires unresolved RFC 3986 dot-segments)" ;
+		earl:outcome earl:inapplicable
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0125> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0126> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0127> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0128> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0129> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0130> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0131> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0132> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#t0133> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc001> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc002> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc003> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc004> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc005> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc006> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc007> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc008> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc009> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc010> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc011> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc012> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc013> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc014> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc015> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc016> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc017> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc018> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc019> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc020> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc021> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc022> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc023> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc024> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc025> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc026> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc027> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc028> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc031> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc034> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc035> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc036> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc037> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tc038> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tdi01> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tdi02> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tdi03> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tdi04> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tdi05> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tdi06> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tdi07> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tdi09> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tdi10> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tdi11> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tdi12> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te001> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te002> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te003> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te004> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te005> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te006> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te007> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te008> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te009> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te010> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te011> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te012> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te013> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te014> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te015> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te016> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te017> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te018> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te019> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te020> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te021> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te022> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te023> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te024> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te025> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te026> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te027> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te028> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te029> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te030> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:failed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te031> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te032> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te033> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te034> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te035> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te036> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te037> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te038> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te039> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te040> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te041> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te042> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te043> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te044> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te045> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te046> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te047> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te048> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te049> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te050> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te051> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te052> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te053> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te054> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te055> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te056> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te057> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te058> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te059> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:failed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te060> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te061> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te062> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te063> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te064> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te065> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te066> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te067> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te068> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te069> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te070> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te071> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te072> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te073> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te074> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		dc:description "produceGeneralizedRdf is not supported" ;
+		earl:outcome earl:inapplicable
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te075> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te076> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:failed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te077> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te078> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te079> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te080> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te081> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te082> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te083> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te084> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te085> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te086> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te087> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te088> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te089> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te090> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te091> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te092> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te093> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te094> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te095> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te096> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te097> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te098> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te099> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te100> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te101> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te102> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te103> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te104> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te105> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te106> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te107> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te108> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te109> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te110> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:failed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te111> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:failed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te112> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te113> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te114> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te117> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te118> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te119> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te120> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te121> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te122> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te124> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te125> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te126> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te127> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te128> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te129> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#te130> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tin01> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tin02> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tin03> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tin04> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tin05> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tin06> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tjs01> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tjs02> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tjs03> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tjs04> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tjs05> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tjs06> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tjs07> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tjs08> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tjs09> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tjs10> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tjs11> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tjs12> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:failed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tjs13> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tjs14> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tjs15> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tjs16> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tjs17> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tjs18> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tjs19> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tjs20> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tjs21> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tjs22> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tjs23> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tli01> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tli02> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tli03> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tli04> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tli05> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tli06> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tli07> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tli08> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tli09> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tli10> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tli11> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:failed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tli12> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tli13> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:failed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tli14> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tm001> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tm002> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tm003> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tm004> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tm005> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tm006> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tm007> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tm008> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tm009> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tm010> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tm011> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tm012> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tm013> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tm014> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tm015> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tm016> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tm017> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tm018> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tm019> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tn001> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tn002> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tn003> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tn004> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tn005> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tn006> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tn007> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tn008> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tp001> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tp002> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tp003> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tp004> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpi06> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpi07> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpi08> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpi09> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpi10> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpi11> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpr02> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpr06> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpr10> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpr13> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpr14> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpr15> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpr16> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpr19> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpr22> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpr23> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpr24> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpr25> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpr27> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpr29> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpr30> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpr34> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpr35> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpr36> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpr37> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpr38> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpr39> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpr40> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpr41> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tpr43> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:failed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#trt01> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tso05> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tso06> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tso08> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tso09> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#tso11> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:passed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#ttn02> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:failed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#twf01> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:failed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#twf02> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:failed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#twf03> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:failed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#twf04> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:failed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#twf05> .
+[]
+	a earl:Assertion ;
+	earl:assertedBy <#assertor> ;
+	earl:mode earl:automatic ;
+	earl:result [
+		a earl:TestResult ;
+		dc:date "2025-12-30T17:12:21Z"^^xsd:dateTime ;
+		earl:outcome earl:failed
+	] ;
+	earl:subject <#subject> ;
+	earl:test <https://w3c.github.io/json-ld-api/tests/toRdf#twf07> .
+<#assertor>
+	a earl:Assertor ;
+	foaf:homepage <https://github.com/dpb587/rdfkit-go/tree/main/encoding/jsonld/testsuites/w3c-github-json-ld-api-toRdf> ;
+	foaf:name "rdfkit-go test suite" .
+<#subject>
+	a
+		earl:TestSubject ,
+		doap:Project ;
+	doap:programming\-language "Go" ;
+	doap:repository <https://github.com/dpb587/rdfkit-go> ;
+	foaf:homepage <https://github.com/dpb587/rdfkit-go> ;
+	foaf:name "rdfkit-go" .
