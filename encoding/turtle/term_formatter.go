@@ -11,7 +11,7 @@ import (
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
-	"github.com/dpb587/rdfkit-go/rdf/termutil"
+	"github.com/dpb587/rdfkit-go/rdf/terms"
 )
 
 type TermFormatterOptions struct {
@@ -28,7 +28,7 @@ type termFormatter struct {
 	blankNodeStringer blanknodeutil.Stringer
 }
 
-func NewTermFormatter(options TermFormatterOptions) termutil.Formatter {
+func NewTermFormatter(options TermFormatterOptions) terms.Formatter {
 	return &termFormatter{
 		ascii:             options.ASCII,
 		base:              options.Base,

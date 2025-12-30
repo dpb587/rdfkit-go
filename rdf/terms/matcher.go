@@ -1,26 +1,10 @@
-package termutil
+package terms
 
 import "github.com/dpb587/rdfkit-go/rdf"
 
-type Matcher interface {
-	MatchTerm(t rdf.Term) bool
-}
+type LogicalOrMatcher []rdf.TermMatcher
 
-//
-
-type MatcherFunc func(t rdf.Term) bool
-
-var _ Matcher = MatcherFunc(nil)
-
-func (f MatcherFunc) MatchTerm(t rdf.Term) bool {
-	return f(t)
-}
-
-//
-
-type LogicalOrMatcher []Matcher
-
-var _ Matcher = LogicalOrMatcher(nil)
+var _ rdf.TermMatcher = LogicalOrMatcher(nil)
 
 func (m LogicalOrMatcher) MatchTerm(t rdf.Term) bool {
 	for _, matcher := range m {
@@ -34,9 +18,9 @@ func (m LogicalOrMatcher) MatchTerm(t rdf.Term) bool {
 
 //
 
-type LogicalAndMatcher []Matcher
+type LogicalAndMatcher []rdf.TermMatcher
 
-var _ Matcher = LogicalAndMatcher(nil)
+var _ rdf.TermMatcher = LogicalAndMatcher(nil)
 
 func (m LogicalAndMatcher) MatchTerm(t rdf.Term) bool {
 	for _, matcher := range m {
@@ -51,10 +35,10 @@ func (m LogicalAndMatcher) MatchTerm(t rdf.Term) bool {
 //
 
 type LogicalNotMatcher struct {
-	Matcher Matcher
+	Matcher rdf.TermMatcher
 }
 
-var _ Matcher = LogicalNotMatcher{}
+var _ rdf.TermMatcher = LogicalNotMatcher{}
 
 func (m LogicalNotMatcher) MatchTerm(t rdf.Term) bool {
 	return !m.Matcher.MatchTerm(t)

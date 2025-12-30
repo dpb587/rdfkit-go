@@ -1,4 +1,4 @@
-package termutil
+package terms
 
 import "github.com/dpb587/rdfkit-go/rdf"
 

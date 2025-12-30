@@ -55,6 +55,14 @@ type TripleMatcher interface {
 
 //
 
+type TripleMatcherFunc func(t Triple) bool
+
+func (f TripleMatcherFunc) MatchTriple(t Triple) bool {
+	return f(t)
+}
+
+//
+
 type TripleList []Triple
 
 func (tl TripleList) AsQuads(g GraphNameValue) QuadList {

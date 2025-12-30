@@ -19,6 +19,22 @@ type Term interface {
 
 //
 
+type TermMatcher interface {
+	MatchTerm(t Term) bool
+}
+
+//
+
+type TermMatcherFunc func(t Term) bool
+
+var _ TermMatcher = TermMatcherFunc(nil)
+
+func (f TermMatcherFunc) MatchTerm(t Term) bool {
+	return f(t)
+}
+
+//
+
 type TermList []Term
 
 //
@@ -31,4 +47,14 @@ func BuildTermList[S ~[]E, E Term](terms S) TermList {
 	}
 
 	return tl
+}
+
+//
+
+type TermIterator interface {
+	Next() bool
+	Err() error
+	Close() error
+
+	Term() Term
 }

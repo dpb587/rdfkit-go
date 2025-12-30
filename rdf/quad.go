@@ -21,6 +21,14 @@ type QuadMatcher interface {
 
 //
 
+type QuadMatcherFunc func(t Quad) bool
+
+func (f QuadMatcherFunc) MatchQuad(t Quad) bool {
+	return f(t)
+}
+
+//
+
 type QuadList []Quad
 
 func (ql QuadList) AsTriples() TripleList {

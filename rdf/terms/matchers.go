@@ -1,4 +1,4 @@
-package termutil
+package terms
 
 import "github.com/dpb587/rdfkit-go/rdf"
 
@@ -39,7 +39,7 @@ var IsLiteral = isLiteral{}
 //
 
 type IsLiteralDatatype struct {
-	Datatype Matcher
+	Datatype rdf.TermMatcher
 }
 
 func (m IsLiteralDatatype) MatchTerm(t rdf.Term) bool {
@@ -122,7 +122,7 @@ func (m EqualsOneOfCompiled) MatchTerm(t rdf.Term) bool {
 	return false
 }
 
-func EqualsOneOf(expected ...rdf.Term) Matcher {
+func EqualsOneOf(expected ...rdf.Term) rdf.TermMatcher {
 	compiled := EqualsOneOfCompiled{
 		mappedIRIs:         map[rdf.IRI]struct{}{},
 		mappedBlankNodes:   map[rdf.BlankNodeIdentifier]struct{}{},
