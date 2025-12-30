@@ -4,9 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io"
 	"net/url"
-	"os"
 	"slices"
 	"strings"
 	"testing"
@@ -16,10 +14,10 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding/jsonld"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
 	"github.com/dpb587/rdfkit-go/encoding/nquads"
-	"github.com/dpb587/rdfkit-go/internal/devencoding/rdfioutil"
 	"github.com/dpb587/rdfkit-go/rdf/quads"
 	"github.com/dpb587/rdfkit-go/testing/testingarchive"
 	"github.com/dpb587/rdfkit-go/testing/testingassert"
+	"github.com/dpb587/rdfkit-go/testing/testingutil"
 )
 
 const manifestPrefix = "https://w3c.github.io/json-ld-api/tests/"
@@ -27,22 +25,7 @@ const manifestPrefix = "https://w3c.github.io/json-ld-api/tests/"
 func Test(t *testing.T) {
 	testdata, manifestResources := requireTestdata(t)
 
-	var debugWriter = io.Discard
-	var debugBundle *rdfioutil.BundleEncoder
-
-	if fhPath := os.Getenv("TESTING_DEBUG_DUMPFILE"); len(fhPath) > 0 {
-		fh, err := os.OpenFile(fhPath, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
-		if err != nil {
-			t.Fatalf("open debug file: %v", err)
-		}
-
-		defer fh.Close()
-
-		debugWriter = fh
-	}
-
-	debugBundle = rdfioutil.NewBundleEncoder(debugWriter)
-	defer debugBundle.Close()
+	rdfioDebug := testingutil.NewDebugRdfioBuilderFromEnv(t)
 
 	for _, sequence := range manifestResources.Sequence {
 		decodeAction := func() (encodingtest.QuadStatementList, error) {
@@ -147,7 +130,7 @@ func Test(t *testing.T) {
 
 				testingassert.IsomorphicDatasets(t, expectedStatements, actualStatements.AsQuads())
 
-				debugBundle.PutQuadsBundle(t.Name(), actualStatements)
+				rdfioDebug.PutQuadsBundle(t.Name(), actualStatements)
 			})
 		}
 	}

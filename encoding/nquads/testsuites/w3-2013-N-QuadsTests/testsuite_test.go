@@ -2,18 +2,16 @@ package testsuite
 
 import (
 	"fmt"
-	"io"
-	"os"
 	"strings"
 	"testing"
 
 	"github.com/dpb587/rdfkit-go/encoding/encodingtest"
 	"github.com/dpb587/rdfkit-go/encoding/nquads"
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
-	"github.com/dpb587/rdfkit-go/internal/devencoding/rdfioutil"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
 	"github.com/dpb587/rdfkit-go/testing/testingarchive"
+	"github.com/dpb587/rdfkit-go/testing/testingutil"
 	"github.com/dpb587/rdfkit-go/x/rdfdescriptionstruct"
 )
 
@@ -22,22 +20,7 @@ const manifestPrefix = "http://www.w3.org/2013/N-QuadsTests/"
 func Test(t *testing.T) {
 	testdata, manifest := requireTestdata(t)
 
-	var debugWriter = io.Discard
-	var debugBundle *rdfioutil.BundleEncoder
-
-	if fhPath := os.Getenv("TESTING_DEBUG_DUMPFILE"); len(fhPath) > 0 {
-		fh, err := os.OpenFile(fhPath, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
-		if err != nil {
-			t.Fatalf("open debug file: %v", err)
-		}
-
-		defer fh.Close()
-
-		debugWriter = fh
-	}
-
-	debugBundle = rdfioutil.NewBundleEncoder(debugWriter)
-	defer debugBundle.Close()
+	rdfioDebug := testingutil.NewDebugRdfioBuilderFromEnv(t)
 
 	for _, entry := range manifest.Entries {
 		decodeAction := func() (encodingtest.QuadStatementList, error) {
@@ -67,7 +50,7 @@ func Test(t *testing.T) {
 					t.Fatalf("error: %v", err)
 				}
 
-				debugBundle.PutQuadsBundle(t.Name(), actualStatements)
+				rdfioDebug.PutQuadsBundle(t.Name(), actualStatements)
 			})
 		default:
 			t.Fatalf("unsupported test type: %s", entry.Type)

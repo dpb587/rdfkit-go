@@ -46,7 +46,8 @@ do
   echo "$dir"
   pushd "$dir" > /dev/null
   
-  export TESTING_DEBUG_DUMPFILE="RESULTS.rdfio.txt"
+  export TESTING_DEBUG_RDFIO_OUTPUT="testresults/rdfio.txt"
+
   run
 
   popd > /dev/null
