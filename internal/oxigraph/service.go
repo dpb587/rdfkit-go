@@ -196,7 +196,7 @@ func (s *Service) ImportReader(r io.Reader, format Format, opts ImportOptions) e
 		loadCommand.Args = append(loadCommand.Args, "--base", string(opts.Base))
 	}
 
-	if opts.Graph != nil && opts.Graph != rdf.DefaultGraph {
+	if opts.Graph != nil {
 		switch g := opts.Graph.(type) {
 		case rdf.IRI:
 			loadCommand.Args = append(loadCommand.Args, "--graph", string(g))

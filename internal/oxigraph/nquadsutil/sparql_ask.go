@@ -34,7 +34,7 @@ func NewSpaqlAsk(r io.Reader) ([]byte, error) {
 	bnodes := map[string]struct{}{}
 
 	for gn, triples := range bygraph {
-		if gn != rdf.DefaultGraph {
+		if gn != nil {
 			fmt.Fprintf(out, "\nGRAPH ")
 
 			switch gn := gn.(type) {
@@ -122,7 +122,7 @@ func NewSpaqlAsk(r io.Reader) ([]byte, error) {
 			fmt.Fprintf(out, " .\n")
 		}
 
-		if gn != rdf.DefaultGraph {
+		if gn != nil {
 			fmt.Fprintf(out, "}\n")
 		}
 
