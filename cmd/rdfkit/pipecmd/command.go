@@ -19,7 +19,9 @@ func New(app *cmdutil.App) *cobra.Command {
 	fOut := &cmdflags.EncodingOutput{}
 
 	cmd := &cobra.Command{
-		Use: "pipe",
+		Use:   "pipe",
+		Short: "Decode and re-encode using supported encoding formats",
+		Args:  cobra.ExactArgs(0),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := cmd.Context()
 

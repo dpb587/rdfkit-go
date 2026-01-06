@@ -15,7 +15,9 @@ func New(app *cmdutil.App) *cobra.Command {
 	fIn := &cmdflags.EncodingInput{}
 
 	cmd := &cobra.Command{
-		Use: "canonicalize",
+		Use:   "canonicalize",
+		Short: "Convert a dataset into canonical blank nodes and ordering",
+		Args:  cobra.ExactArgs(0),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := cmd.Context()
 

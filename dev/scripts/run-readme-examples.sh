@@ -11,6 +11,13 @@ go run ./html-extract https://microsoft.com \
 
 cd ../cmd/rdfkit
 
+go run . --help \
+  > ../../dev/artifacts/readme-rdfkit-help.txt 2>&1
+
+go run . pipe --help \
+  > ../../dev/artifacts/readme-rdfkit-pipe-help.txt 2>&1
+
+
 go run . export-dot \
   -i https://www.w3.org/2000/01/rdf-schema.ttl \
   | tee ../../dev/artifacts/readme-rdf-ontology.dot \

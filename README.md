@@ -5,26 +5,28 @@ Work with RDF-related concepts, datasets, and files in Go.
 * Decode TriG, N-Quads, XML, JSON-LD, HTML, and other RDF-based sources.
 * Reference common IRI constants generated from vocabularies.
 * Canonicalize datasets with RDFC-1.0.
-* Track data lineage for RDF properties within source files.
-* Build higher-level abstractions based on RDF primitives.
 
 ## Usage
 
-Import the module and refer to the code's documentation ([pkg.go.dev](https://pkg.go.dev/github.com/dpb587/rdfkit-go)).
+Refer to the code's documentation ([pkg.go.dev](https://pkg.go.dev/github.com/dpb587/rdfkit-go)). Below are a few packages to get started with...
 
 ```go
+// rdf contains primitives for statements and value types
 import "github.com/dpb587/rdfkit-go/rdf"
+
+// encoding subpackages are well-known formats with encoders/decoders
+import "github.com/dpb587/rdfkit-go/encoding/nquads"
+
+// rdfio offers simplified access to files and encodings
+import "github.com/dpb587/rdfkit-go/rdfio"
+
+// rdfcanon implements the dataset canonicalization algorithm
+import "github.com/dpb587/rdfkit-go/rdfcanon"
 ```
 
-Some sample use cases and starter snippets can be found in the [`examples` directory](examples).
+The [`examples` submodules](examples) demonstrates some common use cases and starter snippets.
 
-<details><summary><code>examples$ go run <strong>./rdf-to-dot -i https://www.w3.org/2000/01/rdf-schema.ttl</strong> | dot -Tsvg</code></summary>
-
-![rdf-schema](dev/artifacts/readme-rdf-ontology.svg)
-
-</details>
-
-<details><summary><code>examples$ go run <strong>./html-extract https://microsoft.com</strong></code></summary>
+<details><summary><code>html-extract$ <strong>go run . https://microsoft.com</strong></code></summary>
 
 ```turtle
 @base <https://www.microsoft.com/en-us/> .
@@ -53,6 +55,155 @@ _:b0
 	schema:name "Microsoft" ;
 	schema:url <https://www.microsoft.com> .
 ```
+
+</details>
+
+The [`cmd/rdfkit` submodule](cmd/rdfkit) offers command line access to some common tasks. Refer to its subpackages to learn more about their implementations.
+
+<details><summary><code>rdfkit$ <strong>go run . --help</strong></code></summary>
+
+```
+Usage:
+  rdfkit [command]
+
+Available Commands:
+  canonicalize  Convert a dataset into canonical blank nodes and ordering
+  completion    Generate the autocompletion script for the specified shell
+  export-dot    Generate a Graphviz DOT visualization from an ontology
+  export-go-iri Generate a Go file of IRI constants from an ontology
+  help          Help about any command
+  pipe          Decode and re-encode using supported encoding formats
+
+Flags:
+  -h, --help   help for rdfkit
+
+Use "rdfkit [command] --help" for more information about a command.
+```
+
+</details>
+
+<details><summary><code>rdfkit$ <strong>go run . pipe --help</strong></code></summary>
+
+```
+Decode and re-encode using supported encoding formats
+
+Usage:
+  rdfkit pipe [flags]
+
+Flags:
+  -h, --help                       help for pipe
+  -i, --in string                  path or IRI for reading (default stdin)
+      --in-base string             override the base IRI of the resource
+      --in-param stringArray       extra decode configuration parameters (syntax "KEY[=VALUE]")
+      --in-param-io stringArray    extra read configuration parameters (syntax "KEY[=VALUE]")
+      --in-type string             name or alias for the decoder (default detect)
+  -o, --out string                 path or IRI for writing (default stdout)
+      --out-base string            override the base IRI of the resource
+      --out-param stringArray      extra encode configuration parameters (syntax "KEY[=VALUE]")
+      --out-param-io stringArray   extra write configuration parameters (syntax "KEY[=VALUE]")
+      --out-type string            name or alias for the encoder (default detect or nquads)
+
+Encodings:
+
+  org.json-ld.document (decode)
+
+    Aliases: jsonld
+    File Extensions: .jsonld
+    Media Types: application/ld+json
+
+    --in-param captureTextOffsets[=bool]
+      Capture the line+column offsets for statement properties
+
+    --in-param tokenizer.lax[=bool]
+      Accept and recover common syntax errors
+
+  org.w3.n-quads (decode, encode)
+
+    Aliases: n-quads, nq, nquads
+    File Extensions: .nq
+    Media Types: application/n-quads
+
+    --in-param captureTextOffsets[=bool]
+      Capture the line+column offsets for statement properties
+
+    --out-param ascii[=bool]
+      Use escape sequences for non-ASCII characters
+
+  org.w3.n-triples (decode, encode)
+
+    Aliases: n-triples, nt, ntriples
+    File Extensions: .nt
+    Media Types: application/n-triples
+
+    --in-param captureTextOffsets[=bool]
+      Capture the line+column offsets for statement properties
+
+    --out-param ascii[=bool]
+      Use escape sequences for non-ASCII characters
+
+  org.w3.rdf-json (decode, encode)
+
+    Aliases: rdf-json, rdfjson, rj
+    File Extensions: .rj
+    Media Types: application/rdf+json
+
+    --in-param captureTextOffsets[=bool]
+      Capture the line+column offsets for statement properties
+
+  org.w3.rdf-xml (decode)
+
+    Aliases: rdf-xml, rdfxml, xml
+    File Extensions: .rdf
+    Media Types: application/rdf+xml
+
+    --in-param captureTextOffsets[=bool]
+      Capture the line+column offsets for statement properties
+
+  org.w3.trig (decode)
+
+    Aliases: trig
+    File Extensions: .trig
+    Media Types: application/trig
+
+    --in-param captureTextOffsets[=bool]
+      Capture the line+column offsets for statement properties
+
+  org.w3.turtle (decode, encode)
+
+    Aliases: ttl, turtle
+    File Extensions: .ttl
+    Media Types: text/turtle
+
+    --in-param captureTextOffsets[=bool]
+      Capture the line+column offsets for statement properties
+
+    --out-param buffered[=bool]
+      Load all statements into memory before writing any output
+
+    --out-param iris.useBase[=bool]
+      Prefer IRIs relative to the resource IRI
+
+    --out-param iris.usePrefix=string...
+      Prefer IRIs using a prefix. Use the syntax of "{prefix}:{iri}", "rdfa-context", or "none"
+
+    --out-param resources[=bool]
+      Write nested statements and resource descriptions (implies buffered=true)
+
+  public.html (decode)
+
+    Aliases: htm, html, xhtml
+    File Extensions: .htm, .html, .xhtml
+    Media Types: application/xhtml+xml, text/html, text/xhtml+xml
+
+    --in-param captureTextOffsets[=bool]
+      Capture the line+column offsets for statement properties
+```
+
+</details>
+
+<details><summary><code>rdfkit$ <strong>go run . export-dot -i https://www.w3.org/2000/01/rdf-schema.ttl</strong> | dot -Tsvg</code></summary>
+
+![rdf-schema](dev/artifacts/readme-rdf-ontology.svg)
 
 </details>
 
@@ -105,9 +256,10 @@ A *blank node* represents an anonymous resource and are always created with a un
 
 ```go
 bnode := rdf.NewBlankNode()
+bnode.Identifier != rdf.NewBlankNode().Identifier
 ```
 
-The [`blanknodeutil` package](rdf/blanknodeutil) provides additional support for using string-based identifiers (e.g. `b0`), mapping blank nodes from implementations, and scoped factories.
+The [`blanknodes` package](rdf/blanknodes) provides additional support for using string-based identifiers (e.g. `b0`) and other utilities.
 
 ### Triple
 
@@ -121,19 +273,11 @@ nameTriple := rdf.Triple{
 }
 ```
 
-The fields of a triple are restricted to the normative value types they support, described by the table below.
-
-| Field | IRI | Literal | Blank Node |
-| ----- |:---:|:-------:|:----------:|
-| Subject | Valid | Invalid | Valid |
-| Predicate | Valid | Invalid | Invalid |
-| Object | Valid | Valid | Valid |
-
-The `rdf` package includes other supporting types (e.g. `TripleList`, `TripleIterator`, and `TripleMatcher`), and the [`triples` package](rdf/triples) offers additional interfaces and utilities for working with triple types.
+The `rdf` package includes other supporting types (e.g. `TripleList`, `TripleIterator`, and `TripleMatcher`), and the [`triples` package](rdf/triples) offers additional interfaces and utilities for working with triples.
 
 ### Quad
 
-A *quad* is used to describe a triple with an optional graph name. A graph name may be an IRI, Blank Node, or `nil` which indicates the default graph.
+A *quad* is used to describe a triple with an optional graph name.
 
 ```go
 nameQuad := rdf.Quad{
@@ -142,7 +286,18 @@ nameQuad := rdf.Quad{
 }
 ```
 
-Similar to triples, the `rdf` and [`quads` package](rdf/quads) offers additional interfaces and utilities.
+The `rdf` and [`quads` packages](rdf/quads) offer additional interfaces and utilities for working with quads.
+
+### Property Values
+
+The fields of triples and quads are restricted (with interfaces) to the normative value types they support, described by the table below. [Generalized RDF](https://www.w3.org/TR/rdf11-concepts/#section-generalized-rdf) values are not currently supported.
+
+| Field | IRI | Literal | Blank Node | `nil` |
+| ----- |:---:|:-------:|:----------:|:-----:|
+| Subject | Valid | Invalid | Valid | Invalid |
+| Predicate | Valid | Invalid | Invalid | Invalid |
+| Object | Valid | Valid | Valid | Invalid |
+| GraphName | Valid | Invalid | Valid | Valid |
 
 ## Graphs
 
@@ -172,7 +327,7 @@ The [`inmemory` experimental package](x/storage/inmemory) offers a dataset imple
 storage := inmemory.NewDataset()
 ```
 
-Better-supported storage or alternative, remote service clients will likely be a focus on the future.
+Better-supported storage or alternative, remote service clients will likely be a focus in the future.
 
 ## Encodings
 
@@ -180,20 +335,16 @@ An *encoding* (or *file format*) is used to decode and encode RDF data. The foll
 
 | Package | Decode | Encode |
 |:------- |:------:|:------:|
-| [`htmljsonld`](encoding/htmljsonld) | Quad | n/a |
-| [`htmlmicrodata`](encoding/htmlmicrodata) | Triple | n/a |
+| [`htmljsonld`](encoding/htmljsonld) | Quad | - |
+| [`htmlmicrodata`](encoding/htmlmicrodata) | Triple | - |
 | [`jsonld`](encoding/jsonld) | Quad | Quad |
 | [`nquads`](encoding/nquads) | Quad | Quad |
 | [`ntriples`](encoding/ntriples) | Triple | Triple |
-| [`rdfa`](encoding/rdfa) | Triple | n/a |
+| [`rdfa`](encoding/rdfa) | Triple | - |
 | [`rdfjson`](encoding/rdfjson) | Triple | Triple |
-| [`rdfxml`](encoding/rdfxml) | Triple | n/a |
-| [`trig`](encoding/trig) | Quad | n/a |
+| [`rdfxml`](encoding/rdfxml) | Triple | - |
+| [`trig`](encoding/trig) | Quad | - |
 | [`turtle`](encoding/turtle) | Triple | Triple, Description |
-
-Some encodings do not yet support all syntactic features defined by their official specification, though they should cover common practices. Most are tested against some sort of test suite (such as the ones published by W3C), and the latest results can be found in their `testsuites/*/testresults` directory.
-
-Broader support for encoders will likely be added in the future.
 
 ### Decoder
 
@@ -238,7 +389,7 @@ for decoder.Next() {
 
 When working with offsets, consider the following caveats.
 
-* Capturing and processing text offsets comes with a slight impact to performance and memory.
+* Capturing and processing text offsets impacts the performance and memory.
 * Offsets for some properties may not always be available due to decoding limitations.
 * Offsets for some properties may be "incomplete" due to stream processing. For example, `turtle` may only refer to the opening `[` token of an anonymous resource when the closing `]` token has not yet been read.
 
@@ -330,7 +481,7 @@ Once canonicalized, the encoded N-Quads form can be directly written to an `io.W
 _, err := canonicalized.WriteTo(os.Stdout)
 ```
 
-Alternatively, use `NewIterator` to manually iterate over the results containing its encoded form. If the `BuildCanonicalQuad` option was enabled, use `NewQuadIterator` for a standard `rdf.QuadIterator` of quads including the canonicalized blank nodes.
+Alternatively, use `NewIterator` to manually iterate over the results containing its encoded form. If the `BuildCanonicalQuad` option was enabled, use `NewQuadIterator` for a standard `rdf.QuadIterator` of quads with the canonical blank nodes.
 
 ```go
 canonicalized, err := rdfcanon.Canonicalize(quadIterator, rdfcanon.CanonicalizeConfig{}.
@@ -423,17 +574,9 @@ ok && rIRI == "http://example.com/resource"
 
 The [`rdfacontext` package](rdf/iriutil/rdfacontext/) provides a list of prefix mappings defined by the W3C at [RDFa Core Initial Context](https://www.w3.org/2011/rdfa-context/rdfa-1.1). This includes prefixes such as `owl:`, `rdfa:`, and `xsd:`. The list of widely-used prefixes is included as well, which includes prefixes such as `dc:` and `schema:`.
 
-## Command Line
-
-The `cmd/rdfkit` package offers a command line interface with a few utilities. Most notably:
-
-* `irigen` - generate Go constants from an RDF vocabulary. Used internally for most of the `*iri` packages.
-* `pipe` - decode local files or remote URLs, and then re-encode using any of the supported RDF formats.
-
 ## Notes
 
-* **RDF 1.2** (i.e. RDF-star) - not currently supported; waiting for more stability in the draft specification and definitions.
-* **Generalized RDF** - not currently supported; may be introduced in the future as a breaking change or via build tag.
+* **RDF 1.2** (i.e. RDF-star) - not currently supported; likely to add primitive type support soon, encodings later.
 * This is a periodically updated fork based on private usage. There may still be some breaking changes before starting to version this module.
 
 ## License

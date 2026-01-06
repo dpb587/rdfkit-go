@@ -26,8 +26,9 @@ func New(app *cmdutil.App) *cobra.Command {
 	fIn := &cmdflags.EncodingInput{}
 
 	cmd := &cobra.Command{
-		Use:  "export-go-iri",
-		Args: cobra.ExactArgs(0),
+		Use:   "export-go-iri",
+		Short: "Generate a Go file of IRI constants from an ontology",
+		Args:  cobra.ExactArgs(0),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := cmd.Context()
 
