@@ -6,7 +6,6 @@ import (
 	"github.com/dpb587/rdfkit-go/cmd/rdfkit/canonicalizecmd"
 	"github.com/dpb587/rdfkit-go/cmd/rdfkit/exportdotcmd"
 	"github.com/dpb587/rdfkit-go/cmd/rdfkit/exportgoiricmd"
-	"github.com/dpb587/rdfkit-go/cmd/rdfkit/inspectdecodercmd"
 	"github.com/dpb587/rdfkit-go/cmd/rdfkit/pipecmd"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
 	"github.com/dpb587/rdfkit-go/x/encodingref"
@@ -37,7 +36,6 @@ func main() {
 		canonicalizecmd.New(resourceManager, encodingRegistry),
 		exportdotcmd.New(resourceManager, encodingRegistry),
 		exportgoiricmd.New(resourceManager, encodingRegistry),
-		inspectdecodercmd.New(resourceManager, encodingRegistry),
 	)
 
 	if err := cmd.Execute(); err != nil {

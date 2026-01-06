@@ -117,6 +117,7 @@ func NewRegistry(opts RegistryOptions) encodingref.Registry {
 			trigcontent.TypeIdentifier:     encodingTrig{},
 			turtlecontent.TypeIdentifier:   encodingTurtle{},
 			// dev
+			ctiDevHtmlInspector: devEncoding,
 			encodingtest.DiscardEncoderContentTypeIdentifier: devEncoding,
 			encodingtest.QuadsEncoderContentTypeIdentifier:   devEncoding,
 			encodingtest.TriplesEncoderContentTypeIdentifier: devEncoding,
