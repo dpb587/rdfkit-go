@@ -2,29 +2,25 @@ package canonicalizecmd
 
 import (
 	"fmt"
-	"net/http"
 	"os"
 
 	"github.com/dpb587/rdfkit-go/cmd/rdfkit/cmdflags"
-	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
+	"github.com/dpb587/rdfkit-go/encoding/nquads/nquadscontent"
+	"github.com/dpb587/rdfkit-go/encoding/trig/trigcontent"
 	"github.com/dpb587/rdfkit-go/rdfcanon"
+	"github.com/dpb587/rdfkit-go/x/encodingref"
 	"github.com/spf13/cobra"
 )
 
-func New() *cobra.Command {
+func New(resourceManager encodingref.ResourceManager, encodingRegistry encodingref.Registry) *cobra.Command {
 	fIn := &cmdflags.EncodingInput{
-		Path:           "-",
-		FallbackOpener: cmdflags.WebRemoteOpener,
-		DocumentLoaderJSONLD: jsonldtype.NewCachingDocumentLoader(
-			jsonldtype.NewDefaultDocumentLoader(
-				http.DefaultClient,
-			),
-		),
+		ResourceName:         "-",
+		EncodingFallbackType: trigcontent.TypeIdentifier,
 	}
 
 	fOut := &cmdflags.EncodingOutput{
-		Path: "-",
-		Type: "nquads",
+		ResourceName:         "-",
+		EncodingFallbackType: nquadscontent.TypeIdentifier,
 	}
 
 	cmd := &cobra.Command{
@@ -32,14 +28,14 @@ func New() *cobra.Command {
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := cmd.Context()
 
-			bfIn, err := fIn.Open()
+			bfIn, err := fIn.Open(ctx, resourceManager, encodingRegistry)
 			if err != nil {
 				return fmt.Errorf("input: %v", err)
 			}
 
 			defer bfIn.Close()
 
-			rdfc, err := rdfcanon.Canonicalize(ctx, bfIn.Decoder)
+			rdfc, err := rdfcanon.Canonicalize(ctx, bfIn.GetQuadsDecoder())
 			if err != nil {
 				return fmt.Errorf("canonicalize: %v", err)
 			}
@@ -54,10 +50,8 @@ func New() *cobra.Command {
 	}
 
 	f := cmd.Flags()
-	f.StringVarP(&fIn.Path, "in", "i", fIn.Path, "")
-	f.StringVar(&fIn.Type, "in-type", fIn.Type, "")
-	f.StringVar(&fIn.DefaultBase, "in-default-base", fIn.DefaultBase, "")
-	f.StringVarP(&fOut.Path, "out", "o", fOut.Path, "")
+	fIn.Bind(f, "in", "i")
+	fOut.Bind(f, "out", "o")
 
 	return cmd
 }

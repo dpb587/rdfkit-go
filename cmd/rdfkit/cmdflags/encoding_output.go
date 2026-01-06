@@ -1,156 +1,84 @@
 package cmdflags
 
 import (
-	"crypto/sha256"
+	"context"
+	"errors"
 	"fmt"
-	"io"
-	"os"
 
-	"github.com/dpb587/rdfkit-go/encoding/encodingtest"
-	"github.com/dpb587/rdfkit-go/encoding/encodingutil"
-	"github.com/dpb587/rdfkit-go/encoding/nquads"
-	"github.com/dpb587/rdfkit-go/encoding/ntriples"
-	"github.com/dpb587/rdfkit-go/encoding/rdfjson"
-	"github.com/dpb587/rdfkit-go/encoding/turtle"
-	"github.com/dpb587/rdfkit-go/internal/ioutil"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil/rdfacontext"
+	"github.com/dpb587/rdfkit-go/encoding"
+	"github.com/dpb587/rdfkit-go/rdf"
+	"github.com/dpb587/rdfkit-go/x/encodingref"
+	"github.com/spf13/pflag"
 )
 
 type EncodingOutput struct {
-	Path string
-	Type string
+	ResourceName    string
+	ResourceOptions []string
+	ResourceIRI     string
 
-	DefaultBase string
+	EncodingName         string
+	EncodingOptions      []string
+	EncodingFallbackType encoding.ContentTypeIdentifier
 }
 
-func (f EncodingOutput) NewStatementWriter() (*EncodingOutputHandle, error) {
-	b := &EncodingOutputHandle{}
+func (f *EncodingOutput) Bind(fs *pflag.FlagSet, base, shorthand string) {
+	fs.StringVarP(&f.ResourceName, base, shorthand, f.ResourceName, "")
+	fs.StringVar(&f.ResourceIRI, base+"-base", f.ResourceIRI, "")
+	fs.StringArrayVar(&f.ResourceOptions, base+"-io-option", f.ResourceOptions, "")
+	fs.StringVar(&f.EncodingName, base+"-type", f.EncodingName, "")
+	fs.StringArrayVar(&f.EncodingOptions, base+"-option", f.EncodingOptions, "")
+}
 
-	var writeCloser func() error
-	var writeWriter io.Writer
+func (f EncodingOutput) Open(ctx context.Context, resourceManager encodingref.ResourceManager, encodingRegistry encodingref.Registry) (*encodingref.EncoderHandle, error) {
+	return f.OpenOptions(ctx, resourceManager, encodingRegistry, encodingref.EncoderOptions{})
+}
 
-	if f.Path == "-" {
-		writeCloser = func() error { return nil }
-		writeWriter = os.Stdout
-
-		b.WritePath = "file:///dev/stdout"
-	} else {
-		outFile, err := os.OpenFile(f.Path, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0600)
-		if err != nil {
-			return nil, fmt.Errorf("open: %v", err)
-		}
-
-		writeCloser = outFile.Close
-		writeWriter = outFile
-
-		b.WritePath = f.Path
+func (f EncodingOutput) OpenOptions(ctx context.Context, resourceManager encodingref.ResourceManager, encodingRegistry encodingref.Registry, opts encodingref.EncoderOptions) (*encodingref.EncoderHandle, error) {
+	ww, err := resourceManager.OpenWriter(ctx, encodingref.ResourceRef{
+		Name:  f.ResourceName,
+		Flags: f.ResourceOptions,
+	})
+	if err != nil {
+		return nil, fmt.Errorf("open resource: %v", err)
 	}
 
-	writeHasher := sha256.New()
-	writeWriter = io.MultiWriter(writeHasher, writeWriter)
+	var cti encoding.ContentTypeIdentifier
+	var ok bool
 
-	b.writeHasher = writeHasher
-	b.writer = ioutil.NewWriterCloser(writeWriter, writeCloser)
+	if len(f.EncodingName) > 0 {
+		cti, ok = encodingRegistry.ResolveName(f.EncodingName)
+		if !ok {
+			ww.Close()
 
-	var err error
-
-	switch f.Type {
-	case "discard":
-		b.Encoder = encodingtest.DiscardEncoder
-	case "encodingtest/quads":
-		b.Encoder = encodingtest.NewQuadsEncoder(
-			writeWriter,
-			encodingtest.QuadsEncoderOptions{},
-		)
-	case "encodingtest/triples":
-		b.Encoder = encodingutil.QuadAsTripleEncoder{
-			TriplesEncoder: encodingtest.NewTriplesEncoder(
-				writeWriter,
-				encodingtest.TriplesEncoderOptions{},
-			),
+			return nil, fmt.Errorf("unknown encoding: %s", f.EncodingName)
 		}
-	case "nquads", "nq":
-		b.Encoder, err = nquads.NewEncoder(
-			writeWriter,
-		)
-		if err != nil {
-			writeCloser()
-
-			return nil, fmt.Errorf("nquads: %v", err)
-		}
-	case "nquads/ascii":
-		b.Encoder, err = nquads.NewEncoder(
-			writeWriter,
-			nquads.EncoderConfig{}.
-				SetASCII(true),
-		)
-		if err != nil {
-			writeCloser()
-
-			return nil, fmt.Errorf("nquads: %v", err)
-		}
-	case "ntriples", "nt":
-		encoder, err := ntriples.NewEncoder(
-			writeWriter,
-			ntriples.EncoderConfig{},
-		)
-		if err != nil {
-			writeCloser()
-
-			return nil, fmt.Errorf("ntriples: %v", err)
-		}
-
-		b.Encoder = encodingutil.QuadAsTripleEncoder{
-			TriplesEncoder: encoder,
-		}
-	case "ntriples/ascii":
-		encoder, err := ntriples.NewEncoder(
-			writeWriter,
-			ntriples.EncoderConfig{}.
-				SetASCII(true),
-		)
-		if err != nil {
-			writeCloser()
-
-			return nil, fmt.Errorf("ntriples: %v", err)
-		}
-
-		b.Encoder = encodingutil.QuadAsTripleEncoder{
-			TriplesEncoder: encoder,
-		}
-	case "rdfjson", "rj":
-		encoder, err := rdfjson.NewEncoder(
-			writeWriter,
-		)
-		if err != nil {
-			writeCloser()
-
-			return nil, fmt.Errorf("rdfjson: %v", err)
-		}
-
-		b.Encoder = encodingutil.QuadAsTripleEncoder{
-			TriplesEncoder: encoder,
-		}
-	case "turtle", "ttl":
-		encoder, err := turtle.NewEncoder(
-			writeWriter,
-			turtle.EncoderConfig{}.
-				SetBase(f.DefaultBase).
-				SetPrefixes(iriutil.NewPrefixMap(rdfacontext.InitialContext()...)),
-		)
-		if err != nil {
-			writeCloser()
-
-			return nil, fmt.Errorf("turtle: %v", err)
-		}
-
-		b.Encoder = encodingutil.QuadAsTripleEncoder{
-			TriplesEncoder: encoder,
-		}
-	default:
-		return nil, fmt.Errorf("unknown format: %s", f.Type)
 	}
 
-	return b, nil
+	if len(cti) == 0 {
+		cti, ok = encodingRegistry.ResolveWriter(ww)
+		if !ok {
+			if len(f.EncodingFallbackType) > 0 {
+				cti = f.EncodingFallbackType
+			} else {
+				ww.Close()
+
+				return nil, errors.New("failed to detect encoding")
+			}
+		}
+	}
+
+	if len(f.ResourceIRI) > 0 {
+		opts.IRI = rdf.IRI(f.ResourceIRI)
+	}
+
+	opts.Flags = append(f.EncodingOptions, opts.Flags...)
+
+	eh, err := encodingRegistry.NewEncoder(cti, ww, opts)
+	if err != nil {
+		ww.Close()
+
+		return nil, fmt.Errorf("open decoder: %v", err)
+	}
+
+	return eh, nil
 }

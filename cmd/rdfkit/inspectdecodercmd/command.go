@@ -8,9 +8,15 @@ import (
 
 	"github.com/dpb587/rdfkit-go/cmd/rdfkit/cmdflags"
 	"github.com/dpb587/rdfkit-go/encoding"
+	"github.com/dpb587/rdfkit-go/encoding/html/htmlcontent"
+	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldcontent"
 	"github.com/dpb587/rdfkit-go/encoding/nquads"
+	"github.com/dpb587/rdfkit-go/encoding/rdfjson/rdfjsoncontent"
+	"github.com/dpb587/rdfkit-go/encoding/rdfxml/rdfxmlcontent"
+	"github.com/dpb587/rdfkit-go/encoding/trig/trigcontent"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/x/encodingref"
 	"github.com/spf13/cobra"
 )
 
@@ -134,18 +140,25 @@ type parseRow struct {
 	GraphNameRange string
 }
 
-func New() *cobra.Command {
+func New(resourceManager encodingref.ResourceManager, encodingRegistry encodingref.Registry) *cobra.Command {
 	fIn := &cmdflags.EncodingInput{
-		Path: "-",
-		Type: "",
+		ResourceName:         "-",
+		EncodingFallbackType: trigcontent.TypeIdentifier,
 	}
 
 	cmd := &cobra.Command{
 		Use: "inspectdecoder",
 		RunE: func(cmd *cobra.Command, args []string) error {
+			ctx := cmd.Context()
+
 			var sourceBuffer = &bytes.Buffer{}
 
-			bfIn, err := fIn.OpenTee(sourceBuffer)
+			bfIn, err := fIn.OpenOptions(ctx, resourceManager, encodingRegistry, encodingref.DecoderOptions{
+				Flags: []string{
+					"captureTextOffsets",
+				},
+				Tee: sourceBuffer,
+			})
 			if err != nil {
 				return fmt.Errorf("input: %v", err)
 			}
@@ -158,10 +171,11 @@ func New() *cobra.Command {
 
 			b := &bytes.Buffer{}
 
-			decoderTextOffsets, _ := bfIn.Decoder.(encoding.StatementTextOffsetsProvider)
+			decoderQuads := bfIn.GetQuadsDecoder()
+			decoderTextOffsets, _ := decoderQuads.(encoding.StatementTextOffsetsProvider)
 
-			for bfIn.Decoder.Next() {
-				quad := bfIn.Decoder.Quad()
+			for decoderQuads.Next() {
+				quad := decoderQuads.Quad()
 
 				pr := parseRow{}
 
@@ -246,8 +260,8 @@ func New() *cobra.Command {
 				prl = append(prl, pr)
 			}
 
-			if err := bfIn.Decoder.Err(); err != nil {
-				return fmt.Errorf("read: %s: %v", bfIn.Format, err)
+			if err := decoderQuads.Err(); err != nil {
+				return fmt.Errorf("decode[%s]: %v", bfIn.Decoder.GetContentTypeIdentifier(), err)
 			}
 
 			tmplArgs := map[string]any{
@@ -256,12 +270,12 @@ func New() *cobra.Command {
 				"ParseRows": prl,
 			}
 
-			switch fIn.Type {
-			case "html":
+			switch bfIn.Decoder.GetContentTypeIdentifier() {
+			case htmlcontent.TypeIdentifier:
 				tmplArgs["Language"] = "html"
-			case "jsonld", "rdfjson":
+			case jsonldcontent.TypeIdentifier, rdfjsoncontent.TypeIdentifier:
 				tmplArgs["Language"] = "json"
-			case "rdfxml":
+			case rdfxmlcontent.TypeIdentifier:
 				tmplArgs["Language"] = "xml"
 			}
 
@@ -275,8 +289,7 @@ func New() *cobra.Command {
 	}
 
 	f := cmd.Flags()
-	f.StringVarP(&fIn.Path, "in", "i", fIn.Path, "")
-	f.StringVar(&fIn.Type, "in-type", fIn.Type, "")
+	fIn.Bind(f, "in", "i")
 
 	return cmd
 }

@@ -2,44 +2,46 @@ package irigencmd
 
 import (
 	"bytes"
+	"crypto/sha256"
 	"errors"
 	"fmt"
 	"go/format"
-	"net/http"
 	"os"
 	"path/filepath"
 	"strings"
 
 	"github.com/dpb587/rdfkit-go/cmd/rdfkit/cmdflags"
-	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
+	"github.com/dpb587/rdfkit-go/encoding/trig/trigcontent"
 	"github.com/dpb587/rdfkit-go/rdf"
+	"github.com/dpb587/rdfkit-go/x/encodingref"
 	"github.com/spf13/cobra"
 )
 
-func New() *cobra.Command {
+func New(resourceManager encodingref.ResourceManager, encodingRegistry encodingref.Registry) *cobra.Command {
 	var pkgName = ""
 	var base string
 	var prefix string
 	var outPath string
 
 	fIn := &cmdflags.EncodingInput{
-		FallbackOpener: cmdflags.WebRemoteOpener,
-		DocumentLoaderJSONLD: jsonldtype.NewCachingDocumentLoader(
-			jsonldtype.NewDefaultDocumentLoader(
-				http.DefaultClient,
-			),
-		),
+		EncodingFallbackType: trigcontent.TypeIdentifier,
 	}
 
 	cmd := &cobra.Command{
 		Use:  "irigen",
 		Args: cobra.ExactArgs(0),
 		RunE: func(cmd *cobra.Command, args []string) error {
+			ctx := cmd.Context()
+
 			if len(outPath) == 0 {
 				return errors.New("output path required")
 			}
 
-			bfIn, err := fIn.Open()
+			hasher := sha256.New()
+
+			bfIn, err := fIn.OpenOptions(ctx, resourceManager, encodingRegistry, encodingref.DecoderOptions{
+				Hasher: hasher,
+			})
 			if err != nil {
 				return fmt.Errorf("input: %v", err)
 			}
@@ -67,12 +69,14 @@ func New() *cobra.Command {
 				statementsBySubject: map[rdf.IRI]*builderSubject{},
 			}
 
-			for bfIn.Decoder.Next() {
-				b.AddStatement(bfIn.Decoder.Quad())
+			decoderQuads := bfIn.GetQuadsDecoder()
+
+			for decoderQuads.Next() {
+				b.AddStatement(decoderQuads.Quad())
 			}
 
-			if err := bfIn.Decoder.Err(); err != nil {
-				return fmt.Errorf("read: %s: %v", bfIn.Format, err)
+			if err := decoderQuads.Err(); err != nil {
+				return fmt.Errorf("decode[%s]: %v", bfIn.Decoder.GetContentTypeIdentifier(), err)
 			}
 
 			if len(base) == 0 {
@@ -100,8 +104,8 @@ package %s
 import "github.com/dpb587/rdfkit-go/rdf"
 
 `,
-				bfIn.HashSum(),
-				bfIn.ReadPath,
+				hasher.Sum(nil),
+				bfIn.Reader.GetIRI(),
 				pkgName,
 			)
 
@@ -176,11 +180,7 @@ import "github.com/dpb587/rdfkit-go/rdf"
 	}
 
 	f := cmd.Flags()
-
-	f.StringVarP(&fIn.Path, "in", "i", fIn.Path, "")
-	f.StringVar(&fIn.Type, "in-type", fIn.Type, "")
-	f.StringVar(&fIn.DefaultBase, "in-default-base", fIn.DefaultBase, "")
-
+	fIn.Bind(f, "in", "i")
 	f.StringVar(&base, "base", "", "vocab base IRI")
 	f.StringVar(&prefix, "prefix", "", "optional prefix for tokens")
 	f.StringVarP(&outPath, "out", "o", outPath, "go output file")

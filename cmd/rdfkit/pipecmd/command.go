@@ -3,31 +3,26 @@ package pipecmd
 import (
 	"context"
 	"fmt"
-	"net/http"
 
 	"github.com/dpb587/rdfkit-go/cmd/rdfkit/cmdflags"
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/encodingtest"
-	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
+	"github.com/dpb587/rdfkit-go/encoding/nquads/nquadscontent"
+	"github.com/dpb587/rdfkit-go/encoding/trig/trigcontent"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdfdescription"
+	"github.com/dpb587/rdfkit-go/x/encodingref"
 	"github.com/spf13/cobra"
 )
 
-func New() *cobra.Command {
+func New(resourceManager encodingref.ResourceManager, encodingRegistry encodingref.Registry) *cobra.Command {
 	fIn := &cmdflags.EncodingInput{
-		Path:           "-",
-		FallbackOpener: cmdflags.WebRemoteOpener,
-		DocumentLoaderJSONLD: jsonldtype.NewCachingDocumentLoader(
-			jsonldtype.NewDefaultDocumentLoader(
-				http.DefaultClient,
-			),
-		),
+		ResourceName:         "-",
+		EncodingFallbackType: trigcontent.TypeIdentifier,
 	}
 
 	fOut := &cmdflags.EncodingOutput{
-		Path: "-",
-		Type: "nquads",
+		ResourceName:         "-",
+		EncodingFallbackType: nquadscontent.TypeIdentifier,
 	}
 
 	cmd := &cobra.Command{
@@ -35,42 +30,31 @@ func New() *cobra.Command {
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := cmd.Context()
 
-			bfIn, err := fIn.Open()
+			bfIn, err := fIn.Open(ctx, resourceManager, encodingRegistry)
 			if err != nil {
 				return fmt.Errorf("input: %v", err)
 			}
 
 			defer bfIn.Close()
 
-			bfOut, err := fOut.NewStatementWriter()
+			bfOut, err := fOut.Open(ctx, resourceManager, encodingRegistry)
 			if err != nil {
 				return fmt.Errorf("output: %v", err)
 			}
 
 			defer bfOut.Close()
 
+			decoderQuads := bfIn.GetQuadsDecoder()
+			encoderQuads := bfOut.GetQuadsEncoder()
+
 			writeStatementFunc := func(ctx context.Context, iter rdf.QuadIterator) error {
-				return bfOut.Encoder.AddQuad(ctx, iter.Quad())
+				return encoderQuads.AddQuad(ctx, iter.Quad())
 			}
 
-			var seqCloser func() error
-
-			if descriptionsEncoder, ok := bfOut.Encoder.(rdfdescription.DatasetResourceWriter); ok {
-				descriptions := rdfdescription.NewDatasetResourceListBuilder()
-
-				writeStatementFunc = func(_ context.Context, iter rdf.QuadIterator) error {
-					descriptions.Add(iter.Quad())
-
-					return nil
-				}
-
-				seqCloser = func() error {
-					return descriptions.AddToDataset(ctx, descriptionsEncoder, true)
-				}
-			} else if statementEncoder, ok := bfOut.Encoder.(interface {
+			if statementEncoder, ok := encoderQuads.(interface {
 				AddQuadStatement(context.Context, encodingtest.QuadStatement) error
 			}); ok {
-				if statementDecoder, ok := bfIn.Decoder.(encoding.StatementTextOffsetsProvider); ok {
+				if statementDecoder, ok := decoderQuads.(encoding.StatementTextOffsetsProvider); ok {
 					writeStatementFunc = func(ctx context.Context, iter rdf.QuadIterator) error {
 						return statementEncoder.AddQuadStatement(ctx, encodingtest.QuadStatement{
 							Quad:        iter.Quad(),
@@ -80,21 +64,15 @@ func New() *cobra.Command {
 				}
 			}
 
-			for bfIn.Decoder.Next() {
-				err := writeStatementFunc(ctx, bfIn.Decoder)
+			for decoderQuads.Next() {
+				err := writeStatementFunc(ctx, decoderQuads)
 				if err != nil {
 					return fmt.Errorf("write: %v", err)
 				}
 			}
 
-			if err := bfIn.Decoder.Err(); err != nil {
-				return fmt.Errorf("read: %s: %v", bfIn.Format, err)
-			}
-
-			if seqCloser != nil {
-				if err := seqCloser(); err != nil {
-					return fmt.Errorf("write: %v", err)
-				}
+			if err := decoderQuads.Err(); err != nil {
+				return fmt.Errorf("decode[%s]: %v", bfIn.Decoder.GetContentTypeIdentifier(), err)
 			}
 
 			return nil
@@ -102,12 +80,8 @@ func New() *cobra.Command {
 	}
 
 	f := cmd.Flags()
-	f.StringVarP(&fIn.Path, "in", "i", fIn.Path, "")
-	f.StringVar(&fIn.Type, "in-type", fIn.Type, "")
-	f.StringVar(&fIn.DefaultBase, "in-default-base", fIn.DefaultBase, "")
-	f.BoolVar(&fIn.SkipTextOffsets, "in-skip-text-offsets", fIn.SkipTextOffsets, "")
-	f.StringVarP(&fOut.Path, "out", "o", fOut.Path, "")
-	f.StringVar(&fOut.Type, "out-type", fOut.Type, "")
+	fIn.Bind(f, "in", "i")
+	fOut.Bind(f, "out", "o")
 
 	return cmd
 }
