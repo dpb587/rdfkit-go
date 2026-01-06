@@ -4,8 +4,9 @@ import (
 	"net/http"
 
 	"github.com/dpb587/rdfkit-go/cmd/rdfkit/canonicalizecmd"
+	"github.com/dpb587/rdfkit-go/cmd/rdfkit/exportdotcmd"
+	"github.com/dpb587/rdfkit-go/cmd/rdfkit/exportgoiricmd"
 	"github.com/dpb587/rdfkit-go/cmd/rdfkit/inspectdecodercmd"
-	"github.com/dpb587/rdfkit-go/cmd/rdfkit/irigencmd"
 	"github.com/dpb587/rdfkit-go/cmd/rdfkit/pipecmd"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
 	"github.com/dpb587/rdfkit-go/x/encodingref"
@@ -34,7 +35,8 @@ func main() {
 	cmd.AddCommand(
 		pipecmd.New(resourceManager, encodingRegistry),
 		canonicalizecmd.New(resourceManager, encodingRegistry),
-		irigencmd.New(resourceManager, encodingRegistry),
+		exportdotcmd.New(resourceManager, encodingRegistry),
+		exportgoiricmd.New(resourceManager, encodingRegistry),
 		inspectdecodercmd.New(resourceManager, encodingRegistry),
 	)
 

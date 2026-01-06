@@ -1,4 +1,4 @@
-package irigencmd
+package exportgoiricmd
 
 import (
 	"bytes"

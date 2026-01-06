@@ -1,4 +1,4 @@
-package irigencmd
+package exportgoiricmd
 
 import (
 	"bytes"
@@ -28,7 +28,7 @@ func New(resourceManager encodingref.ResourceManager, encodingRegistry encodingr
 	}
 
 	cmd := &cobra.Command{
-		Use:  "irigen",
+		Use:  "export-go-iri",
 		Args: cobra.ExactArgs(0),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := cmd.Context()

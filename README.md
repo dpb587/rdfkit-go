@@ -20,7 +20,7 @@ Some sample use cases and starter snippets can be found in the [`examples` direc
 
 <details><summary><code>examples$ go run <strong>./rdf-to-dot -i https://www.w3.org/2000/01/rdf-schema.ttl</strong> | dot -Tsvg</code></summary>
 
-![rdf-schema](examples/rdf-to-dot/readme-output.svg)
+![rdf-schema](dev/artifacts/readme-rdf-ontology.svg)
 
 </details>
 
