@@ -1,10 +1,11 @@
 module github.com/dpb587/rdfkit-go/cmd/rdfkit
 
-go 1.24.4
+go 1.25.5
 
 replace github.com/dpb587/rdfkit-go => ../../
 
 require (
+	github.com/dpb587/kvstrings-go v0.0.0-20260105164922-00f00f4a51f0
 	github.com/dpb587/rdfkit-go v0.0.0-00010101000000-000000000000
 	github.com/spf13/cobra v1.10.2
 	github.com/spf13/pflag v1.0.10

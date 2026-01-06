@@ -11,21 +11,19 @@ import (
 	"strings"
 
 	"github.com/dpb587/rdfkit-go/cmd/rdfkit/cmdflags"
+	"github.com/dpb587/rdfkit-go/cmd/rdfkit/cmdutil"
 	"github.com/dpb587/rdfkit-go/encoding/trig/trigcontent"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/x/encodingref"
 	"github.com/spf13/cobra"
 )
 
-func New(resourceManager encodingref.ResourceManager, encodingRegistry encodingref.Registry) *cobra.Command {
+func New(app *cmdutil.App) *cobra.Command {
 	var pkgName = ""
 	var base string
 	var prefix string
 	var outPath string
 
-	fIn := &cmdflags.EncodingInput{
-		EncodingFallbackType: trigcontent.TypeIdentifier,
-	}
+	fIn := &cmdflags.EncodingInput{}
 
 	cmd := &cobra.Command{
 		Use:  "export-go-iri",
@@ -39,8 +37,9 @@ func New(resourceManager encodingref.ResourceManager, encodingRegistry encodingr
 
 			hasher := sha256.New()
 
-			bfIn, err := fIn.OpenOptions(ctx, resourceManager, encodingRegistry, encodingref.DecoderOptions{
-				Hasher: hasher,
+			bfIn, err := fIn.Open(ctx, app.Registry, &cmdflags.EncodingInputOpenOptions{
+				ReaderTee:           hasher,
+				DecoderFallbackType: trigcontent.TypeIdentifier,
 			})
 			if err != nil {
 				return fmt.Errorf("input: %v", err)

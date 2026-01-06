@@ -2,83 +2,79 @@ package cmdflags
 
 import (
 	"context"
-	"errors"
-	"fmt"
+	"io"
 
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/x/encodingref"
+	"github.com/dpb587/rdfkit-go/rdfio/rdfiotypes"
 	"github.com/spf13/pflag"
 )
 
 type EncodingOutput struct {
-	ResourceName    string
-	ResourceOptions []string
-	ResourceIRI     string
+	ResourceName   string
+	ResourceParams []string
 
-	EncodingName         string
-	EncodingOptions      []string
-	EncodingFallbackType encoding.ContentTypeIdentifier
+	EncodingName    string
+	EncodingBaseIRI string
+	EncodingParams  []string
 }
 
 func (f *EncodingOutput) Bind(fs *pflag.FlagSet, base, shorthand string) {
-	fs.StringVarP(&f.ResourceName, base, shorthand, f.ResourceName, "")
-	fs.StringVar(&f.ResourceIRI, base+"-base", f.ResourceIRI, "")
-	fs.StringArrayVar(&f.ResourceOptions, base+"-io-option", f.ResourceOptions, "")
-	fs.StringVar(&f.EncodingName, base+"-type", f.EncodingName, "")
-	fs.StringArrayVar(&f.EncodingOptions, base+"-option", f.EncodingOptions, "")
+	f.BindResource(fs, base, shorthand)
+	f.BindEncoding(fs, base, true)
 }
 
-func (f EncodingOutput) Open(ctx context.Context, resourceManager encodingref.ResourceManager, encodingRegistry encodingref.Registry) (*encodingref.EncoderHandle, error) {
-	return f.OpenOptions(ctx, resourceManager, encodingRegistry, encodingref.EncoderOptions{})
+func (f *EncodingOutput) BindResource(fs *pflag.FlagSet, base, shorthand string) {
+	fs.StringVarP(&f.ResourceName, base, shorthand, f.ResourceName, "path or IRI for writing (default stdout)")
+	fs.StringArrayVar(&f.ResourceParams, base+"-param-io", f.ResourceParams, "extra write configuration parameters (syntax \"KEY[=VALUE]\")")
 }
 
-func (f EncodingOutput) OpenOptions(ctx context.Context, resourceManager encodingref.ResourceManager, encodingRegistry encodingref.Registry, opts encodingref.EncoderOptions) (*encodingref.EncoderHandle, error) {
-	ww, err := resourceManager.OpenWriter(ctx, encodingref.ResourceRef{
-		Name:  f.ResourceName,
-		Flags: f.ResourceOptions,
-	})
-	if err != nil {
-		return nil, fmt.Errorf("open resource: %v", err)
+func (f *EncodingOutput) BindEncoding(fs *pflag.FlagSet, base string, includeType bool) {
+	if includeType {
+		fs.StringVar(&f.EncodingName, base+"-type", f.EncodingName, "name or alias for the encoder (default detect or nquads)")
 	}
 
-	var cti encoding.ContentTypeIdentifier
-	var ok bool
+	fs.StringVar(&f.EncodingBaseIRI, base+"-base", f.EncodingBaseIRI, "override the base IRI of the resource")
+	fs.StringArrayVar(&f.EncodingParams, base+"-param", f.EncodingParams, "extra encode configuration parameters (syntax \"KEY[=VALUE]\")")
+}
 
-	if len(f.EncodingName) > 0 {
-		cti, ok = encodingRegistry.ResolveName(f.EncodingName)
-		if !ok {
-			ww.Close()
+type EncodingOutputOpenOptions struct {
+	WriterTee           io.Writer
+	EncoderPatcher      rdfiotypes.GenericOptionsPatcherFunc
+	EncoderDecoderPipe  *rdfiotypes.DecoderHandle
+	EncoderFallbackType encoding.ContentTypeIdentifier
+}
 
-			return nil, fmt.Errorf("unknown encoding: %s", f.EncodingName)
-		}
+func (f EncodingOutput) Open(ctx context.Context, r rdfiotypes.Registry, opts *EncodingOutputOpenOptions) (*rdfiotypes.EncoderHandle, error) {
+	if opts == nil {
+		opts = &EncodingOutputOpenOptions{}
 	}
 
-	if len(cti) == 0 {
-		cti, ok = encodingRegistry.ResolveWriter(ww)
-		if !ok {
-			if len(f.EncodingFallbackType) > 0 {
-				cti = f.EncodingFallbackType
-			} else {
-				ww.Close()
+	return r.OpenEncoder(
+		ctx,
+		rdfiotypes.WriterOptions{
+			Name:   f.ResourceName,
+			Params: f.ResourceParams,
+			Tee:    opts.WriterTee,
+		},
+		rdfiotypes.EncoderOptions{
+			Type:        f.EncodingName,
+			BaseIRI:     rdf.IRI(f.EncodingBaseIRI),
+			Params:      f.EncodingParams,
+			Patcher:     opts.EncoderPatcher,
+			DecoderPipe: opts.EncoderDecoderPipe,
+		},
+		rdfiotypes.EncoderOptionsBuilderFunc(func(r rdfiotypes.Registry, ww rdfiotypes.Writer, ropts *rdfiotypes.EncoderOptions) error {
+			cti, ok := r.ResolveEncoderType(ww, ropts.Type)
+			if ok {
+				ropts.Type = string(cti)
 
-				return nil, errors.New("failed to detect encoding")
+				return nil
 			}
-		}
-	}
 
-	if len(f.ResourceIRI) > 0 {
-		opts.IRI = rdf.IRI(f.ResourceIRI)
-	}
+			ropts.Type = string(opts.EncoderFallbackType)
 
-	opts.Flags = append(f.EncodingOptions, opts.Flags...)
-
-	eh, err := encodingRegistry.NewEncoder(cti, ww, opts)
-	if err != nil {
-		ww.Close()
-
-		return nil, fmt.Errorf("open decoder: %v", err)
-	}
-
-	return eh, nil
+			return nil
+		}),
+	)
 }

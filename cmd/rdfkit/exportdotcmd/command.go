@@ -2,28 +2,26 @@ package exportdotcmd
 
 import (
 	"bytes"
-	"errors"
 	"fmt"
 	"html"
 	"io"
 
 	"github.com/dpb587/rdfkit-go/cmd/rdfkit/cmdflags"
+	"github.com/dpb587/rdfkit-go/cmd/rdfkit/cmdutil"
 	"github.com/dpb587/rdfkit-go/encoding/trig/trigcontent"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil/rdfacontext"
 	"github.com/dpb587/rdfkit-go/rdf/quads"
-	"github.com/dpb587/rdfkit-go/x/encodingref"
+	"github.com/dpb587/rdfkit-go/rdfio"
+	"github.com/dpb587/rdfkit-go/rdfio/rdfiotypes"
 	"github.com/spf13/cobra"
 )
 
-func New(resourceManager encodingref.ResourceManager, encodingRegistry encodingref.Registry) *cobra.Command {
-	var outPath string = "-"
-
-	fIn := &cmdflags.EncodingInput{
-		EncodingFallbackType: trigcontent.TypeIdentifier,
-	}
+func New(app *cmdutil.App) *cobra.Command {
+	fIn := &cmdflags.EncodingInput{}
+	fOut := &cmdflags.EncodingOutput{}
 
 	cmd := &cobra.Command{
 		Use:  "export-dot",
@@ -31,19 +29,25 @@ func New(resourceManager encodingref.ResourceManager, encodingRegistry encodingr
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := cmd.Context()
 
-			if len(outPath) == 0 {
-				return errors.New("output path required")
-			}
+			directives := &rdfio.DirectiveAggregator{}
 
-			bfIn, err := fIn.Open(ctx, resourceManager, encodingRegistry)
+			bfIn, err := fIn.Open(ctx, app.Registry, &cmdflags.EncodingInputOpenOptions{
+				DecoderPatcher: func(opts any) (any, error) {
+					return rdfio.PatchDirectiveAggregatorOptions(directives, opts)
+				},
+				DecoderFallbackType: trigcontent.TypeIdentifier,
+			})
 			if err != nil {
 				return fmt.Errorf("input: %v", err)
 			}
 
 			defer bfIn.Close()
 
-			bfOut, err := resourceManager.OpenWriter(ctx, encodingref.ResourceRef{
-				Name: outPath,
+			//
+
+			bfOut, err := app.Registry.OpenWriter(ctx, rdfiotypes.WriterOptions{
+				Name:   fOut.ResourceName,
+				Params: fOut.ResourceParams,
 			})
 			if err != nil {
 				return fmt.Errorf("output: %v", err)
@@ -62,9 +66,9 @@ func New(resourceManager encodingref.ResourceManager, encodingRegistry encodingr
 
 			var base *iriutil.BaseIRI
 
-			if len(bfIn.DecodedBase) > 0 {
+			if len(directives.Base) > 0 {
 				// Last-most base ends up being used.
-				base, err = iriutil.ParseBaseIRI(bfIn.DecodedBase[len(bfIn.DecodedBase)-1])
+				base, err = iriutil.ParseBaseIRI(directives.Base[len(directives.Base)-1])
 				if err != nil {
 					panic(fmt.Errorf("decode base: %v", err))
 				}
@@ -74,7 +78,7 @@ func New(resourceManager encodingref.ResourceManager, encodingRegistry encodingr
 				// Include some well-known prefixes, like xsd.
 				rdfacontext.WidelyUsedInitialContext(),
 				// And override with prefixes from the input.
-				bfIn.DecodedPrefixMappings...,
+				directives.PrefixMappings...,
 			)...)
 
 			shortenIRI := func(iri rdf.IRI) string {
@@ -184,7 +188,7 @@ func New(resourceManager encodingref.ResourceManager, encodingRegistry encodingr
 
 	f := cmd.Flags()
 	fIn.Bind(f, "in", "i")
-	f.StringVarP(&outPath, "out", "o", outPath, "")
+	fOut.BindResource(f, "out", "o")
 
 	return cmd
 }

@@ -1,15 +1,12 @@
 package main
 
 import (
-	"net/http"
-
 	"github.com/dpb587/rdfkit-go/cmd/rdfkit/canonicalizecmd"
+	"github.com/dpb587/rdfkit-go/cmd/rdfkit/cmdutil"
 	"github.com/dpb587/rdfkit-go/cmd/rdfkit/exportdotcmd"
 	"github.com/dpb587/rdfkit-go/cmd/rdfkit/exportgoiricmd"
 	"github.com/dpb587/rdfkit-go/cmd/rdfkit/pipecmd"
-	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
-	"github.com/dpb587/rdfkit-go/x/encodingref"
-	"github.com/dpb587/rdfkit-go/x/encodingref/encodingdefaults"
+	"github.com/dpb587/rdfkit-go/rdfio"
 	"github.com/spf13/cobra"
 )
 
@@ -18,24 +15,15 @@ func main() {
 		Use: "rdfkit",
 	}
 
-	resourceManager := encodingref.NewResourceManager(
-		encodingref.NewWebResourceManager(http.DefaultClient),
-		encodingref.NewFileResourceManager(),
-	)
-
-	encodingRegistry := encodingdefaults.NewRegistry(encodingdefaults.RegistryOptions{
-		DocumentLoaderJSONLD: jsonldtype.NewCachingDocumentLoader(
-			jsonldtype.NewDefaultDocumentLoader(
-				http.DefaultClient,
-			),
-		),
-	})
+	app := &cmdutil.App{
+		Registry: rdfio.Registry,
+	}
 
 	cmd.AddCommand(
-		pipecmd.New(resourceManager, encodingRegistry),
-		canonicalizecmd.New(resourceManager, encodingRegistry),
-		exportdotcmd.New(resourceManager, encodingRegistry),
-		exportgoiricmd.New(resourceManager, encodingRegistry),
+		pipecmd.New(app),
+		canonicalizecmd.New(app),
+		exportdotcmd.New(app),
+		exportgoiricmd.New(app),
 	)
 
 	if err := cmd.Execute(); err != nil {

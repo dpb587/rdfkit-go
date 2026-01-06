@@ -5,30 +5,23 @@ import (
 	"os"
 
 	"github.com/dpb587/rdfkit-go/cmd/rdfkit/cmdflags"
-	"github.com/dpb587/rdfkit-go/encoding/nquads/nquadscontent"
+	"github.com/dpb587/rdfkit-go/cmd/rdfkit/cmdutil"
 	"github.com/dpb587/rdfkit-go/encoding/trig/trigcontent"
 	"github.com/dpb587/rdfkit-go/rdfcanon"
-	"github.com/dpb587/rdfkit-go/x/encodingref"
 	"github.com/spf13/cobra"
 )
 
-func New(resourceManager encodingref.ResourceManager, encodingRegistry encodingref.Registry) *cobra.Command {
-	fIn := &cmdflags.EncodingInput{
-		ResourceName:         "-",
-		EncodingFallbackType: trigcontent.TypeIdentifier,
-	}
-
-	fOut := &cmdflags.EncodingOutput{
-		ResourceName:         "-",
-		EncodingFallbackType: nquadscontent.TypeIdentifier,
-	}
+func New(app *cmdutil.App) *cobra.Command {
+	fIn := &cmdflags.EncodingInput{}
 
 	cmd := &cobra.Command{
 		Use: "canonicalize",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			ctx := cmd.Context()
 
-			bfIn, err := fIn.Open(ctx, resourceManager, encodingRegistry)
+			bfIn, err := fIn.Open(ctx, app.Registry, &cmdflags.EncodingInputOpenOptions{
+				DecoderFallbackType: trigcontent.TypeIdentifier,
+			})
 			if err != nil {
 				return fmt.Errorf("input: %v", err)
 			}
@@ -51,7 +44,6 @@ func New(resourceManager encodingref.ResourceManager, encodingRegistry encodingr
 
 	f := cmd.Flags()
 	fIn.Bind(f, "in", "i")
-	fOut.Bind(f, "out", "o")
 
 	return cmd
 }
