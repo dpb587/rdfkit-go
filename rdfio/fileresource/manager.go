@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/dpb587/rdfkit-go/internal/ioutil"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdfio/rdfiotypes"
 )
@@ -21,13 +22,13 @@ func NewManager() rdfiotypes.ResourceManager {
 }
 
 func (e manager) NewReaderParams() rdfiotypes.Params {
-	return &readerParams{}
+	return newReaderParams()
 }
 
 func (rm *manager) NewReader(ctx context.Context, opts rdfiotypes.ReaderOptions) (rdfiotypes.Reader, error) {
-	flags := &readerParams{}
+	params := newReaderParams()
 
-	err := rdfiotypes.LoadAndApplyParams(flags, opts.Params...)
+	err := rdfiotypes.LoadAndApplyParams(params, opts.Params...)
 	if err != nil {
 		return nil, fmt.Errorf("params: %v", err)
 	}
@@ -60,10 +61,47 @@ func (rm *manager) NewReader(ctx context.Context, opts rdfiotypes.ReaderOptions)
 		rr.body = io.TeeReader(rr.body, opts.Tee)
 	}
 
+	err = params.Filter.ResolveReader(
+		rr.body,
+		rr.bodyCloser,
+		func() []string {
+			if filename, ok := rr.GetFileName(); ok {
+				switch strings.ToLower(filepath.Ext(filename)) {
+				case ".gz":
+					return []string{"gzip"}
+				}
+			}
+
+			// fallback to all
+
+			return []string{"gzip"}
+		},
+		func(nextReader io.Reader, nextCloser ioutil.CloserFunc) {
+			rr.body = nextReader
+			rr.bodyCloser = nextCloser
+		},
+	)
+	if err != nil {
+		rr.bodyCloser()
+
+		return nil, err
+	}
+
 	return rr, nil
 }
 
+func (e manager) NewWriterParams() rdfiotypes.Params {
+	return &writerParams{}
+}
+
 func (rm *manager) NewWriter(ctx context.Context, opts rdfiotypes.WriterOptions) (rdfiotypes.Writer, error) {
+	params := newWriterParams()
+
+	err := rdfiotypes.LoadAndApplyParams(params, opts.Params...)
+	if err != nil {
+		return nil, fmt.Errorf("params: %v", err)
+	}
+
 	fp := strings.TrimPrefix(opts.Name, "file://")
 
 	var ww *writer
@@ -92,9 +130,29 @@ func (rm *manager) NewWriter(ctx context.Context, opts rdfiotypes.WriterOptions)
 		ww.body = io.MultiWriter(ww.body, opts.Tee)
 	}
 
+	err = params.Filter.ResolveWriterEncoding(
+		ww.body,
+		ww.bodyCloser,
+		func() (string, bool) {
+			if filename, ok := ww.GetFileName(); ok {
+				switch strings.ToLower(filepath.Ext(filename)) {
+				case ".gz":
+					return "gzip", true
+				}
+			}
+
+			return "", false
+		},
+		func(nextWriter io.Writer, nextCloser ioutil.CloserFunc) {
+			ww.body = nextWriter
+			ww.bodyCloser = nextCloser
+		},
+	)
+	if err != nil {
+		ww.bodyCloser()
+
+		return nil, err
+	}
+
 	return ww, nil
 }
-
-//
-
-//

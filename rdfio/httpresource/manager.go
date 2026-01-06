@@ -6,8 +6,10 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"path/filepath"
 	"strings"
 
+	"github.com/dpb587/rdfkit-go/internal/ioutil"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdfio/rdfiotypes"
 )
@@ -25,7 +27,7 @@ func NewManager(client *http.Client) rdfiotypes.ResourceManager {
 }
 
 func (e manager) NewReaderParams() rdfiotypes.Params {
-	return &readerParams{}
+	return newReaderParams()
 }
 
 func (rm *manager) NewReader(ctx context.Context, opts rdfiotypes.ReaderOptions) (rdfiotypes.Reader, error) {
@@ -33,9 +35,9 @@ func (rm *manager) NewReader(ctx context.Context, opts rdfiotypes.ReaderOptions)
 		return nil, rdfiotypes.ErrResourceNotSupported
 	}
 
-	flags := &readerParams{}
+	params := newReaderParams()
 
-	err := rdfiotypes.LoadAndApplyParams(flags, opts.Params...)
+	err := rdfiotypes.LoadAndApplyParams(params, opts.Params...)
 	if err != nil {
 		return nil, fmt.Errorf("params: %v", err)
 	}
@@ -91,6 +93,41 @@ func (rm *manager) NewReader(ctx context.Context, opts rdfiotypes.ReaderOptions)
 
 	if opts.Tee != nil {
 		rr.body = io.TeeReader(rr.body, opts.Tee)
+	}
+
+	err = params.Filter.ResolveReader(
+		rr.body,
+		rr.bodyCloser,
+		func() []string {
+			switch strings.ToLower(strings.SplitN(rr.headers.Get("Content-Type"), ";", 2)[0]) {
+			case "":
+				// unknown
+			case "application/octet-stream":
+				// possible
+			default:
+				return nil
+			}
+
+			if filename, ok := rr.GetFileName(); ok {
+				switch strings.ToLower(filepath.Ext(filename)) {
+				case ".gz":
+					return []string{"gzip"}
+				}
+			}
+
+			// fallback to all
+
+			return []string{"gzip"}
+		},
+		func(nextReader io.Reader, nextCloser ioutil.CloserFunc) {
+			rr.body = nextReader
+			rr.bodyCloser = nextCloser
+		},
+	)
+	if err != nil {
+		resp.Body.Close()
+
+		return nil, err
 	}
 
 	return rr, nil
