@@ -1,6 +1,7 @@
 package rdfcanon
 
 import (
+	"context"
 	"maps"
 	"slices"
 
@@ -10,7 +11,7 @@ import (
 
 type CanonicalizeOption interface {
 	apply(s *CanonicalizeConfig)
-	newCanonicalizer(input rdf.QuadIterator) (*canonicalizer, error)
+	newCanonicalizer(ctx context.Context, input rdf.QuadIterator) (*canonicalizer, error)
 }
 
 //
@@ -23,14 +24,14 @@ type canonicalizer struct {
 
 //
 
-func Canonicalize(input rdf.QuadIterator, options ...CanonicalizeOption) (*Canonicalization, error) {
+func Canonicalize(ctx context.Context, input rdf.QuadIterator, options ...CanonicalizeOption) (*Canonicalization, error) {
 	c := CanonicalizeConfig{}
 
 	for _, opt := range options {
 		opt.apply(&c)
 	}
 
-	cc, err := c.newCanonicalizer(input)
+	cc, err := c.newCanonicalizer(ctx, input)
 	if err != nil {
 		return nil, err
 	}

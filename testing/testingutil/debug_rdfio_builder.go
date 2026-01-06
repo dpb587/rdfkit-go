@@ -85,7 +85,7 @@ func (be *DebugRdfioBuilder) PutQuadsBundle(name string, statements encodingtest
 	ctx := context.Background()
 
 	// TODO statements.NewQuadIterator()
-	canonicalized, err := rdfcanon.Canonicalize(quads.NewIterator(statements.AsQuads()))
+	canonicalized, err := rdfcanon.Canonicalize(context.Background(), quads.NewIterator(statements.AsQuads()))
 	if err != nil {
 		return fmt.Errorf("canonicalize: %v", err)
 	}
@@ -152,7 +152,7 @@ func (be *DebugRdfioBuilder) PutTriplesBundle(name string, statements encodingte
 	ctx := context.Background()
 
 	// TODO statements.NewTripleIterator()
-	canonicalized, err := rdfcanon.Canonicalize(quads.NewIterator(statements.AsTriples().AsQuads(nil)))
+	canonicalized, err := rdfcanon.Canonicalize(context.Background(), quads.NewIterator(statements.AsTriples().AsQuads(nil)))
 	if err != nil {
 		return fmt.Errorf("canonicalize: %v", err)
 	}

@@ -1,6 +1,7 @@
 package rdfcanon
 
 import (
+	"context"
 	"crypto/sha256"
 	"hash"
 
@@ -48,16 +49,17 @@ func (c CanonicalizeConfig) apply(s *CanonicalizeConfig) {
 	}
 }
 
-func (c CanonicalizeConfig) newCanonicalizer(input rdf.QuadIterator) (*canonicalizer, error) {
+func (c CanonicalizeConfig) newCanonicalizer(ctx context.Context, input rdf.QuadIterator) (*canonicalizer, error) {
 	cc := &canonicalizer{
 		canonicalizationState: &canonicalizationState{
+			ctx:              ctx,
 			hashNewer:        c.hashNewer,
 			blankNodeToQuads: map[rdf.BlankNodeIdentifier][]*canonicalizationQuad{},
 			hashToBlankNodes: map[string][]rdf.BlankNodeIdentifier{},
 			canonicalIssuer: identifierIssuer{
 				knownIdentifiers: map[rdf.BlankNodeIdentifier]string{},
 			},
-			// kind of arbitrary; probably should be configurable? tbd better "poison" controls
+			// these are arbitrary; probably should be configurable?
 			maxPermutations:   4096,
 			maxRecursionDepth: 512,
 		},

@@ -1,4 +1,4 @@
-package pipecanoncmd
+package canonicalizecmd
 
 import (
 	"fmt"
@@ -28,8 +28,10 @@ func New() *cobra.Command {
 	}
 
 	cmd := &cobra.Command{
-		Use: "pipe-canon",
+		Use: "canonicalize",
 		RunE: func(cmd *cobra.Command, args []string) error {
+			ctx := cmd.Context()
+
 			bfIn, err := fIn.Open()
 			if err != nil {
 				return fmt.Errorf("input: %v", err)
@@ -37,7 +39,7 @@ func New() *cobra.Command {
 
 			defer bfIn.Close()
 
-			rdfc, err := rdfcanon.Canonicalize(bfIn.Decoder)
+			rdfc, err := rdfcanon.Canonicalize(ctx, bfIn.Decoder)
 			if err != nil {
 				return fmt.Errorf("canonicalize: %v", err)
 			}

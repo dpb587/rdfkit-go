@@ -41,7 +41,12 @@ func (a algorithmHashNDegreeQuads) Call() (algorithmHashNDegreeQuadsResult, erro
 
 	// [spec // 4.8.3 // 3] For each quad in quads:
 
-	for _, quad := range quads {
+	for quadIdx, quad := range quads {
+		if b := 512; quadIdx%b == b-1 {
+			if err := a.canonicalizationState.ctx.Err(); err != nil {
+				return algorithmHashNDegreeQuadsResult{}, err
+			}
+		}
 
 		// [spec // 4.8.3 // 3.1] For each component in quad, where component is the subject, object, or graph name, and it
 		// is a blank node that is not identified by identifier:
@@ -110,10 +115,18 @@ func (a algorithmHashNDegreeQuads) Call() (algorithmHashNDegreeQuadsResult, erro
 
 		blankNodeListPermutations := permute.Slice(blankNodeList)
 
-		for blankNodeListPermutations.Permute() {
-			a.canonicalizationState.maxPermutations--
+		var permutationIdx int
 
-			if a.canonicalizationState.maxPermutations < 0 {
+		for blankNodeListPermutations.Permute() {
+			permutationIdx++
+
+			if b := 8; permutationIdx%b == b-1 {
+				if err := a.canonicalizationState.ctx.Err(); err != nil {
+					return algorithmHashNDegreeQuadsResult{}, err
+				}
+			}
+
+			if permutationIdx > a.canonicalizationState.maxPermutations {
 				return algorithmHashNDegreeQuadsResult{}, ErrMaxIterationsReached
 			}
 

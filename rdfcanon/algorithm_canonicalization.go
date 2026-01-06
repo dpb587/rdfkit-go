@@ -2,6 +2,7 @@ package rdfcanon
 
 import (
 	"bytes"
+	"context"
 	"fmt"
 	"hash"
 	"maps"
@@ -14,6 +15,7 @@ import (
 )
 
 type canonicalizationState struct {
+	ctx       context.Context
 	hashNewer func() hash.Hash
 
 	blankNodeToQuads map[rdf.BlankNodeIdentifier][]*canonicalizationQuad
@@ -48,6 +50,12 @@ func (a algorithmCanonicalization) Call() (*Canonicalization, error) {
 	b := &bytes.Buffer{}
 
 	for a.input.Next() {
+		if b := int64(1024); inputIdx%b == b-1 {
+			if err := a.canonicalizationState.ctx.Err(); err != nil {
+				return nil, err
+			}
+		}
+
 		q := &canonicalizationQuad{
 			Original:      a.input.Quad(),
 			OriginalIndex: inputIdx,

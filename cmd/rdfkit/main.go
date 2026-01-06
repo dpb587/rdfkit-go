@@ -1,9 +1,9 @@
 package main
 
 import (
+	"github.com/dpb587/rdfkit-go/cmd/rdfkit/canonicalizecmd"
 	"github.com/dpb587/rdfkit-go/cmd/rdfkit/inspectdecodercmd"
 	"github.com/dpb587/rdfkit-go/cmd/rdfkit/irigencmd"
-	"github.com/dpb587/rdfkit-go/cmd/rdfkit/pipecanoncmd"
 	"github.com/dpb587/rdfkit-go/cmd/rdfkit/pipecmd"
 	"github.com/spf13/cobra"
 )
@@ -14,7 +14,7 @@ func main() {
 	}
 	cmd.AddCommand(
 		pipecmd.New(),
-		pipecanoncmd.New(),
+		canonicalizecmd.New(),
 		irigencmd.New(),
 		inspectdecodercmd.New(),
 	)

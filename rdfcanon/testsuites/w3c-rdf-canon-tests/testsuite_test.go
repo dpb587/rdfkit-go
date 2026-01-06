@@ -110,7 +110,7 @@ func Test(t *testing.T) {
 				return nil, fmt.Errorf("create dataset iterator: %v", err)
 			}
 
-			return rdfcanon.Canonicalize(datasetIter, canonicalizerOpts...)
+			return rdfcanon.Canonicalize(t.Context(), datasetIter, canonicalizerOpts...)
 		}
 
 		switch entry.Type {
@@ -175,7 +175,7 @@ func Test(t *testing.T) {
 					t.Fatalf("decode action: %v", err)
 				}
 
-				canonicalization, err := rdfcanon.Canonicalize(inputDecoder, canonicalizerOpts...)
+				canonicalization, err := rdfcanon.Canonicalize(t.Context(), inputDecoder, canonicalizerOpts...)
 				if err != nil {
 					t.Fatalf("canonicalize: %v", err)
 				}
@@ -208,7 +208,7 @@ func Test(t *testing.T) {
 				if err == nil {
 					t.Fatalf("expected error, but got none")
 				} else {
-					t.Logf("expected error: %v", err)
+					t.Logf("error (expected): %v", err)
 				}
 			})
 		default:
