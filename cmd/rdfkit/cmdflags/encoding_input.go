@@ -28,7 +28,6 @@ import (
 	"github.com/dpb587/rdfkit-go/internal/ioutil"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
-	"github.com/dpb587/rdfkit-go/rdf/quads"
 )
 
 type EncodingInput struct {
@@ -219,7 +218,7 @@ func (f EncodingInput) openTee(w io.Writer) (*EncodingInputHandle, error) {
 		}
 
 		handle.Format = "html"
-		handle.Decoder = quads.NewIteratorIterator(
+		handle.Decoder = encodingutil.NewQuadIteratorIterator(
 			htmlJsonld,
 			encodingutil.TripleAsQuadDecoder{
 				TriplesDecoder: htmlMicrodata,

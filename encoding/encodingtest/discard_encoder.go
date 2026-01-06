@@ -8,6 +8,8 @@ import (
 	"github.com/dpb587/rdfkit-go/rdfdescription"
 )
 
+const DiscardEncoderContentTypeIdentifier encoding.ContentTypeIdentifier = "internal.dev.discard"
+
 var DiscardEncoder = &discardEncoder{}
 
 type discardEncoder struct{}
@@ -16,6 +18,10 @@ var _ encoding.QuadsEncoder = &discardEncoder{}
 var _ encoding.TriplesEncoder = &discardEncoder{}
 var _ rdfdescription.ResourceWriter = &discardEncoder{}
 var _ rdfdescription.DatasetResourceWriter = &discardEncoder{}
+
+func (w *discardEncoder) GetContentTypeIdentifier() encoding.ContentTypeIdentifier {
+	return DiscardEncoderContentTypeIdentifier
+}
 
 func (w *discardEncoder) GetContentMetadata() encoding.ContentMetadata {
 	return encoding.ContentMetadata{}

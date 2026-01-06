@@ -13,6 +13,8 @@ import (
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 )
 
+const TriplesEncoderContentTypeIdentifier encoding.ContentTypeIdentifier = "internal.dev.triples"
+
 type TriplesEncoderOptions struct {
 	BlankNodeStringer        blanknodeutil.Stringer
 	BlankNodeStringMapperVar string
@@ -45,10 +47,17 @@ func NewTriplesEncoder(w io.Writer, opts TriplesEncoderOptions) *TriplesEncoder 
 	return ww
 }
 
+func (w *TriplesEncoder) GetContentTypeIdentifier() encoding.ContentTypeIdentifier {
+	return TriplesEncoderContentTypeIdentifier
+}
+
 func (w *TriplesEncoder) GetContentMetadata() encoding.ContentMetadata {
 	return encoding.ContentMetadata{
-		FileExt:   ".go",
-		MediaType: "application/octet-stream",
+		FileExt: ".go",
+		MediaType: encoding.ContentMediaType{
+			Type:    "application",
+			Subtype: "octet-stream",
+		},
 	}
 }
 

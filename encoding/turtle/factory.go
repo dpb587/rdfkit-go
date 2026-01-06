@@ -4,6 +4,7 @@ import (
 	"io"
 
 	"github.com/dpb587/rdfkit-go/encoding"
+	"github.com/dpb587/rdfkit-go/encoding/turtle/turtlecontent"
 )
 
 type Factory struct {
@@ -32,9 +33,5 @@ func (e *Factory) NewDecoder(r io.Reader) (encoding.TriplesDecoder, error) {
 }
 
 func (e *Factory) GetContentMetadata() encoding.ContentMetadata {
-	return encoding.ContentMetadata{
-		FileExt:   ".ttl",
-		MediaType: "text/turtle",
-		Charset:   "utf-8",
-	}
+	return turtlecontent.DefaultMetadata
 }

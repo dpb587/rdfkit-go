@@ -6,6 +6,7 @@ import (
 	"github.com/dpb587/inspectjson-go/inspectjson"
 	"github.com/dpb587/rdfkit-go/encoding"
 	encodinghtml "github.com/dpb587/rdfkit-go/encoding/html"
+	"github.com/dpb587/rdfkit-go/encoding/htmljsonld/htmljsonldcontent"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"golang.org/x/net/html"
@@ -33,7 +34,7 @@ type Decoder struct {
 	currentTextOffsets encoding.StatementTextOffsets
 }
 
-var _ rdf.QuadIterator = &Decoder{}
+var _ encoding.QuadsDecoder = &Decoder{}
 var _ encoding.StatementTextOffsetsProvider = &Decoder{}
 
 func NewDecoder(doc *encodinghtml.Document, opts ...DecoderOption) (*Decoder, error) {
@@ -44,6 +45,10 @@ func NewDecoder(doc *encodinghtml.Document, opts ...DecoderOption) (*Decoder, er
 	}
 
 	return compiledOpts.newDecoder(doc)
+}
+
+func (r *Decoder) GetContentTypeIdentifier() encoding.ContentTypeIdentifier {
+	return htmljsonldcontent.TypeIdentifier
 }
 
 func (r *Decoder) Close() error {

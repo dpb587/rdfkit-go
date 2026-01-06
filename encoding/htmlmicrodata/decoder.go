@@ -10,6 +10,7 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/encodingutil"
 	encodinghtml "github.com/dpb587/rdfkit-go/encoding/html"
+	"github.com/dpb587/rdfkit-go/encoding/htmlmicrodata/htmlmicrodatacontent"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
@@ -54,7 +55,7 @@ type Decoder struct {
 	statementsIdx int
 }
 
-var _ rdf.TripleIterator = &Decoder{}
+var _ encoding.TriplesDecoder = &Decoder{}
 var _ encoding.StatementTextOffsetsProvider = &Decoder{}
 
 func NewDecoder(doc *encodinghtml.Document, opts ...DecoderOption) (*Decoder, error) {
@@ -65,6 +66,10 @@ func NewDecoder(doc *encodinghtml.Document, opts ...DecoderOption) (*Decoder, er
 	}
 
 	return compiledOpts.newDecoder(doc)
+}
+
+func (r *Decoder) GetContentTypeIdentifier() encoding.ContentTypeIdentifier {
+	return htmlmicrodatacontent.TypeIdentifier
 }
 
 func (r *Decoder) Close() error {

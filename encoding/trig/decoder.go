@@ -9,6 +9,7 @@ import (
 	"github.com/dpb587/cursorio-go/x/cursorioutil"
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/encodingutil"
+	"github.com/dpb587/rdfkit-go/encoding/trig/trigcontent"
 	"github.com/dpb587/rdfkit-go/rdf"
 )
 
@@ -37,7 +38,7 @@ type Decoder struct {
 	statements []statement
 }
 
-var _ rdf.QuadIterator = &Decoder{}
+var _ encoding.QuadsDecoder = &Decoder{}
 var _ encoding.StatementTextOffsetsProvider = &Decoder{}
 
 func NewDecoder(r io.Reader, opts ...DecoderOption) (*Decoder, error) {
@@ -48,6 +49,10 @@ func NewDecoder(r io.Reader, opts ...DecoderOption) (*Decoder, error) {
 	}
 
 	return compiledOpts.newDecoder(r)
+}
+
+func (r *Decoder) GetContentTypeIdentifier() encoding.ContentTypeIdentifier {
+	return trigcontent.TypeIdentifier
 }
 
 func (r *Decoder) Close() error {

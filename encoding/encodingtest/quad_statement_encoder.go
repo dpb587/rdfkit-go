@@ -14,6 +14,8 @@ import (
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 )
 
+const QuadsEncoderContentTypeIdentifier encoding.ContentTypeIdentifier = "internal.dev.quads"
+
 type QuadsEncoderOptions struct {
 	BlankNodeStringer        blanknodeutil.Stringer
 	BlankNodeStringMapperVar string
@@ -46,10 +48,17 @@ func NewQuadsEncoder(w io.Writer, opts QuadsEncoderOptions) *QuadsEncoder {
 	return ww
 }
 
+func (w *QuadsEncoder) GetContentTypeIdentifier() encoding.ContentTypeIdentifier {
+	return QuadsEncoderContentTypeIdentifier
+}
+
 func (w *QuadsEncoder) GetContentMetadata() encoding.ContentMetadata {
 	return encoding.ContentMetadata{
-		FileExt:   ".go",
-		MediaType: "application/octet-stream",
+		FileExt: ".go",
+		MediaType: encoding.ContentMediaType{
+			Type:    "application",
+			Subtype: "octet-stream",
+		},
 	}
 }
 

@@ -27,6 +27,14 @@ func NewBufferedTriplesEncoder(ctx context.Context, encoder ResourceEncoder, pre
 	}
 }
 
+func (e *BufferedTriplesEncoder) GetContentTypeIdentifier() encoding.ContentTypeIdentifier {
+	return e.encoder.GetContentTypeIdentifier()
+}
+
+func (e *BufferedTriplesEncoder) GetContentMetadata() encoding.ContentMetadata {
+	return e.encoder.GetContentMetadata()
+}
+
 func (e *BufferedTriplesEncoder) AddTriple(ctx context.Context, triple rdf.Triple) error {
 	return e.builder.AddTriple(ctx, triple)
 }
@@ -38,8 +46,4 @@ func (e *BufferedTriplesEncoder) Close() error {
 	}
 
 	return e.encoder.Close()
-}
-
-func (e *BufferedTriplesEncoder) GetContentMetadata() encoding.ContentMetadata {
-	return e.encoder.GetContentMetadata()
 }

@@ -27,6 +27,14 @@ func NewBufferedQuadsEncoder(ctx context.Context, encoder DatasetResourceEncoder
 	}
 }
 
+func (e *BufferedQuadsEncoder) GetContentTypeIdentifier() encoding.ContentTypeIdentifier {
+	return e.encoder.GetContentTypeIdentifier()
+}
+
+func (e *BufferedQuadsEncoder) GetContentMetadata() encoding.ContentMetadata {
+	return e.encoder.GetContentMetadata()
+}
+
 func (e *BufferedQuadsEncoder) AddQuad(ctx context.Context, quad rdf.Quad) error {
 	return e.builder.AddQuad(ctx, quad)
 }
@@ -38,8 +46,4 @@ func (e *BufferedQuadsEncoder) Close() error {
 	}
 
 	return e.encoder.Close()
-}
-
-func (e *BufferedQuadsEncoder) GetContentMetadata() encoding.ContentMetadata {
-	return e.encoder.GetContentMetadata()
 }

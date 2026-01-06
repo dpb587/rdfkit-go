@@ -7,6 +7,7 @@ import (
 	"io"
 
 	"github.com/dpb587/rdfkit-go/encoding"
+	"github.com/dpb587/rdfkit-go/encoding/nquads/nquadscontent"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 )
@@ -36,11 +37,11 @@ func NewEncoder(w io.Writer, opts ...EncoderOption) (*Encoder, error) {
 }
 
 func (w *Encoder) GetContentMetadata() encoding.ContentMetadata {
-	return encoding.ContentMetadata{
-		FileExt:   ".nt",
-		MediaType: "application/n-triples",
-		// spec says always utf-8 (even if ascii; application-default)
-	}
+	return nquadscontent.DefaultMetadata
+}
+
+func (w *Encoder) GetContentTypeIdentifier() encoding.ContentTypeIdentifier {
+	return nquadscontent.TypeIdentifier
 }
 
 func (w *Encoder) Close() error {

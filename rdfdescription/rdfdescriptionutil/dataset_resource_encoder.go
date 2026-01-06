@@ -6,8 +6,6 @@ import (
 )
 
 type DatasetResourceEncoder interface {
+	encoding.Encoder
 	rdfdescription.DatasetResourceWriter
-
-	Close() error
-	GetContentMetadata() encoding.ContentMetadata
 }

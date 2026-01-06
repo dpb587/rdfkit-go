@@ -7,6 +7,7 @@ import (
 	"io"
 
 	"github.com/dpb587/rdfkit-go/encoding"
+	"github.com/dpb587/rdfkit-go/encoding/rdfjson/rdfjsoncontent"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/rdf"
@@ -40,10 +41,11 @@ func NewEncoder(w io.Writer, opts ...EncoderOption) (*Encoder, error) {
 }
 
 func (w *Encoder) GetContentMetadata() encoding.ContentMetadata {
-	return encoding.ContentMetadata{
-		FileExt:   ".rj",
-		MediaType: "application/rdf+json",
-	}
+	return rdfjsoncontent.DefaultMetadata
+}
+
+func (w *Encoder) GetContentTypeIdentifier() encoding.ContentTypeIdentifier {
+	return rdfjsoncontent.TypeIdentifier
 }
 
 func (w *Encoder) Close() error {

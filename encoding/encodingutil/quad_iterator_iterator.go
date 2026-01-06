@@ -23,6 +23,10 @@ func NewQuadIteratorIterator(iters ...rdf.QuadIterator) encoding.QuadsDecoder {
 	return i
 }
 
+func (i *quadIteratorIterator) GetContentTypeIdentifier() encoding.ContentTypeIdentifier {
+	return "public.composite-content"
+}
+
 func (i *quadIteratorIterator) Close() error {
 	for _, iter := range i.iters {
 		iter.Close()

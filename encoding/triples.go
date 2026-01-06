@@ -8,14 +8,13 @@ import (
 )
 
 type TriplesDecoder interface {
+	Decoder
 	rdf.TripleIterator
 }
 
 type TriplesEncoder interface {
+	Encoder
 	triples.GraphWriter
-
-	Close() error
-	GetContentMetadata() ContentMetadata
 }
 
 type TriplesFactory interface {

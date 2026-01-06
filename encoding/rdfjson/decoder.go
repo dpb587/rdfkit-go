@@ -10,6 +10,7 @@ import (
 	"github.com/dpb587/inspectjson-go/inspectjson"
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/encodingutil"
+	"github.com/dpb587/rdfkit-go/encoding/rdfjson/rdfjsoncontent"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/rdf"
@@ -37,7 +38,7 @@ type Decoder struct {
 	statementsIdx int
 }
 
-var _ rdf.TripleIterator = &Decoder{}
+var _ encoding.TriplesDecoder = &Decoder{}
 var _ encoding.StatementTextOffsetsProvider = &Decoder{}
 
 func NewDecoder(r io.Reader, opts ...DecoderOption) (*Decoder, error) {
@@ -48,6 +49,10 @@ func NewDecoder(r io.Reader, opts ...DecoderOption) (*Decoder, error) {
 	}
 
 	return compiledOpts.newDecoder(r)
+}
+
+func (d *Decoder) GetContentTypeIdentifier() encoding.ContentTypeIdentifier {
+	return rdfjsoncontent.TypeIdentifier
 }
 
 func (d *Decoder) Close() error {

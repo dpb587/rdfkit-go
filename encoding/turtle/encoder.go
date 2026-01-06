@@ -10,6 +10,7 @@ import (
 	"strings"
 
 	"github.com/dpb587/rdfkit-go/encoding"
+	"github.com/dpb587/rdfkit-go/encoding/turtle/turtlecontent"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/rdf"
@@ -51,11 +52,11 @@ func NewEncoder(w io.Writer, opts ...EncoderOption) (*Encoder, error) {
 }
 
 func (e *Encoder) GetContentMetadata() encoding.ContentMetadata {
-	return encoding.ContentMetadata{
-		FileExt:   ".ttl",
-		MediaType: "text/turtle",
-		Charset:   "utf-8",
-	}
+	return turtlecontent.DefaultMetadata
+}
+
+func (e *Encoder) GetContentTypeIdentifier() encoding.ContentTypeIdentifier {
+	return turtlecontent.TypeIdentifier
 }
 
 func (w *Encoder) Close() error {

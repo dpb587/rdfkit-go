@@ -9,6 +9,7 @@ import (
 	"slices"
 
 	"github.com/dpb587/rdfkit-go/encoding"
+	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldcontent"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/rdf"
@@ -46,10 +47,11 @@ func NewEncoder(w io.Writer, opts ...EncoderOption) (*Encoder, error) {
 }
 
 func (e *Encoder) GetContentMetadata() encoding.ContentMetadata {
-	return encoding.ContentMetadata{
-		FileExt:   ".jsonld",
-		MediaType: "application/ld+json",
-	}
+	return jsonldcontent.DefaultMetadata
+}
+
+func (e *Encoder) GetContentTypeIdentifier() encoding.ContentTypeIdentifier {
+	return jsonldcontent.TypeIdentifier
 }
 
 func (e *Encoder) Close() error {

@@ -8,14 +8,13 @@ import (
 )
 
 type QuadsDecoder interface {
+	Decoder
 	rdf.QuadIterator
 }
 
 type QuadsEncoder interface {
+	Encoder
 	quads.DatasetWriter
-
-	Close() error
-	GetContentMetadata() ContentMetadata
 }
 
 type QuadsFactory interface {

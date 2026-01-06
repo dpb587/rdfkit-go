@@ -10,6 +10,7 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/encodingutil"
 	"github.com/dpb587/rdfkit-go/encoding/nquads/internal/grammar"
+	"github.com/dpb587/rdfkit-go/encoding/nquads/nquadscontent"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 )
@@ -31,7 +32,7 @@ type Decoder struct {
 	currentTextOffsets encoding.StatementTextOffsets
 }
 
-var _ rdf.QuadIterator = &Decoder{}
+var _ encoding.QuadsDecoder = &Decoder{}
 var _ encoding.StatementTextOffsetsProvider = &Decoder{}
 
 func NewDecoder(r io.Reader, opts ...DecoderOption) (*Decoder, error) {
@@ -42,6 +43,10 @@ func NewDecoder(r io.Reader, opts ...DecoderOption) (*Decoder, error) {
 	}
 
 	return compiledOpts.newDecoder(r)
+}
+
+func (r *Decoder) GetContentTypeIdentifier() encoding.ContentTypeIdentifier {
+	return nquadscontent.TypeIdentifier
 }
 
 func (r *Decoder) Close() error {
