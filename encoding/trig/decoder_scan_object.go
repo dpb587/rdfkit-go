@@ -206,11 +206,11 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedR
 		if r0.Rune == '.' {
 			r1, err := r.buf.NextRune()
 			if err != nil {
-				return readerStack{}, err // TODO EOF check
+				return readerStack{}, grammar.R_object.Err(r.newOffsetError(err, r0.AsDecodedRunes(), cursorio.DecodedRunes{}))
 			} else if r1.Rune < '0' || r1.Rune > '9' {
 				r.buf.BacktrackRunes(r0, r1)
 
-				return readerStack{}, nil
+				return readerStack{}, grammar.R_object.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0.Rune}, cursorio.DecodedRunes{}, r0.AsDecodedRunes()))
 			}
 
 			r.buf.BacktrackRunes(r1)

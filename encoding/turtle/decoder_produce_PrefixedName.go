@@ -64,6 +64,15 @@ PN_PREFIX_DONE:
 		))
 	}
 
+	// Verify that a ':' was actually found - this is required for PNAME_NS
+	if len(uncommitted) == 0 || uncommitted[len(uncommitted)-1].Rune != ':' {
+		return nil, grammar.R_PNAME_NS.Err(r.newOffsetError(
+			cursorioutil.UnexpectedRuneError{Rune: 0}, // The missing ':'
+			uncommitted.AsDecodedRunes(),
+			cursorio.DecodedRunes{},
+		))
+	}
+
 DONE:
 
 	return &tokenPNAME_NS{

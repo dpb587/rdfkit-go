@@ -40,7 +40,7 @@ func reader_scan_Triples_Subject_IRIREF(r *Decoder, ectx evaluationContext, r0 c
 
 	r.pushState(ectx, reader_scan_PredicateObjectList_Continue)
 
-	return readerStack{ectx, reader_scan_PredicateObjectList}, nil
+	return readerStack{ectx, reader_scan_PredicateObjectList_Required}, nil
 }
 
 func reader_scan_Triples_Subject_PrefixedName(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, err error) (readerStack, error) {
@@ -63,7 +63,7 @@ func reader_scan_Triples_Subject_PrefixedName(r *Decoder, ectx evaluationContext
 
 	r.pushState(ectx, reader_scan_PredicateObjectList_Continue)
 
-	return readerStack{ectx, reader_scan_PredicateObjectList}, nil
+	return readerStack{ectx, reader_scan_PredicateObjectList_Required}, nil
 }
 
 func reader_scan_Triples_Subject_BlankNode(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, err error) (readerStack, error) {
@@ -81,5 +81,5 @@ func reader_scan_Triples_Subject_BlankNode(r *Decoder, ectx evaluationContext, r
 
 	r.pushState(ectx, reader_scan_PredicateObjectList_Continue)
 
-	return readerStack{ectx, reader_scan_PredicateObjectList}, nil
+	return readerStack{ectx, reader_scan_PredicateObjectList_Required}, nil
 }

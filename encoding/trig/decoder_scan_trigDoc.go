@@ -557,7 +557,7 @@ func reader_scan_trigDoc(r *Decoder, ectx evaluationContext, r0 cursorio.Decoded
 				r.pushState(ectx, reader_scan_triples_End)
 				r.pushState(nectx, reader_scan_PredicateObjectList_Continue)
 
-				return readerStack{nectx, reader_scan_PredicateObjectList}, nil
+				return readerStack{nectx, reader_scan_PredicateObjectList_Required}, nil
 			}
 
 			r.buf.BacktrackRunes(r0)
@@ -567,7 +567,7 @@ func reader_scan_trigDoc(r *Decoder, ectx evaluationContext, r0 cursorio.Decoded
 
 			r.pushState(ectx, reader_scan_triples_End)
 			r.pushState(ectx, reader_scan_PredicateObjectList_Continue)
-			r.pushState(nectx, reader_scan_PredicateObjectList)
+			r.pushState(nectx, reader_scan_PredicateObjectList_Required)
 
 			fn := scanFunc(func(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, err error) (readerStack, error) {
 				return reader_scan_collection(r, ectx, r0, nectx.CurSubject, nectx.CurSubjectLocation)

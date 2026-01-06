@@ -62,7 +62,7 @@ func reader_scan_triples(r *Decoder, ectx evaluationContext, r0 cursorio.Decoded
 
 				r.pushState(nectx, reader_scan_PredicateObjectList_Continue)
 
-				return readerStack{nectx, reader_scan_PredicateObjectList}, nil
+				return readerStack{nectx, reader_scan_PredicateObjectList_Required}, nil
 			}
 
 			r.buf.BacktrackRunes(r0)
@@ -71,8 +71,7 @@ func reader_scan_triples(r *Decoder, ectx evaluationContext, r0 cursorio.Decoded
 			nectx.CurSubjectLocation = blankNodeRange
 
 			r.pushState(ectx, reader_scan_PredicateObjectList_Continue)
-			r.pushState(nectx, reader_scan_PredicateObjectList)
-
+			r.pushState(nectx, reader_scan_PredicateObjectList_Required)
 			fn := scanFunc(func(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, err error) (readerStack, error) {
 				return reader_scan_collection(r, ectx, r0, nectx.CurSubject, nectx.CurSubjectLocation)
 			})
@@ -127,7 +126,7 @@ func reader_scan_triples_subject_IRIREF(r *Decoder, ectx evaluationContext, r0 c
 
 	r.pushState(ectx, reader_scan_PredicateObjectList_Continue)
 
-	return readerStack{ectx, reader_scan_PredicateObjectList}, nil
+	return readerStack{ectx, reader_scan_PredicateObjectList_Required}, nil
 }
 
 func reader_scan_triples_subject_BlankNode(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, err error) (readerStack, error) {
@@ -145,7 +144,7 @@ func reader_scan_triples_subject_BlankNode(r *Decoder, ectx evaluationContext, r
 
 	r.pushState(ectx, reader_scan_PredicateObjectList_Continue)
 
-	return readerStack{ectx, reader_scan_PredicateObjectList}, nil
+	return readerStack{ectx, reader_scan_PredicateObjectList_Required}, nil
 }
 
 func reader_scan_triples_subject_PrefixedName(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, err error) (readerStack, error) {
@@ -168,5 +167,5 @@ func reader_scan_triples_subject_PrefixedName(r *Decoder, ectx evaluationContext
 
 	r.pushState(ectx, reader_scan_PredicateObjectList_Continue)
 
-	return readerStack{ectx, reader_scan_PredicateObjectList}, nil
+	return readerStack{ectx, reader_scan_PredicateObjectList_Required}, nil
 }

@@ -21,7 +21,7 @@ func reader_scanStatement_Subject_AnonOrBlankNode(r *Decoder, ectx evaluationCon
 		r.pushState(ectx, reader_scan_Triples_End)
 		r.pushState(ectx, reader_scan_PredicateObjectList_Continue)
 
-		return readerStack{ectx, reader_scan_PredicateObjectList}, nil
+		return readerStack{ectx, reader_scan_PredicateObjectList_Required}, nil
 	}
 
 	r.buf.BacktrackRunes(r0)
@@ -31,7 +31,7 @@ func reader_scanStatement_Subject_AnonOrBlankNode(r *Decoder, ectx evaluationCon
 	r.pushState(ectx, reader_scan_blankNodePropertyList_End)
 	r.pushState(ectx, reader_scan_PredicateObjectList_Continue)
 
-	return readerStack{ectx, reader_scan_PredicateObjectList}, nil
+	return readerStack{ectx, reader_scan_PredicateObjectList_Required}, nil
 }
 
 func reader_scanStatement(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, err error) (readerStack, error) {

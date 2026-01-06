@@ -28,7 +28,7 @@ func reader_scan_triplesOrGraph_E1(value rdf.GraphNameValue, valueRange *cursori
 		r.pushState(ectx, reader_scan_triples_End)
 		r.pushState(ectx, reader_scan_PredicateObjectList_Continue)
 
-		return readerStack{ectx, reader_scan_PredicateObjectList}, nil
+		return readerStack{ectx, reader_scan_PredicateObjectList_Required}, nil
 	}
 }
 

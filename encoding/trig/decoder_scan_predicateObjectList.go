@@ -4,6 +4,7 @@ import (
 	"unicode"
 
 	"github.com/dpb587/cursorio-go/cursorio"
+	"github.com/dpb587/cursorio-go/x/cursorioutil"
 	"github.com/dpb587/rdfkit-go/encoding/trig/internal"
 	"github.com/dpb587/rdfkit-go/encoding/trig/internal/grammar"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
@@ -107,4 +108,23 @@ func reader_scan_PredicateObjectList_Continue(r *Decoder, ectx evaluationContext
 	r.buf.BacktrackRunes(r0)
 
 	return readerStack{}, nil
+}
+
+func reader_scan_PredicateObjectList_Required(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, err error) (readerStack, error) {
+	// TODO update scan functions to reflect the required rule-path and avoid nested call + return value checks.
+
+	if err != nil {
+		return readerStack{}, grammar.R_predicateObjectList.Err(r.newOffsetError(err, cursorio.DecodedRunes{}, cursorio.DecodedRunes{}))
+	}
+
+	rs, parseErr := reader_scan_PredicateObjectList(r, ectx, r0, err)
+	if parseErr != nil {
+		return rs, parseErr
+	}
+
+	if rs.fn == nil {
+		return readerStack{}, grammar.R_predicateObjectList.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0.Rune}, cursorio.DecodedRunes{}, r0.AsDecodedRunes()))
+	}
+
+	return rs, nil
 }
