@@ -1,13 +1,13 @@
 package ntriples
 
 import (
-	"io"
+	"bytes"
 
 	"github.com/dpb587/rdfkit-go/encoding/ntriples/internal"
 	"github.com/dpb587/rdfkit-go/rdf"
 )
 
-func WriteIRI(w io.Writer, t rdf.IRI, ascii bool) (int, error) {
+func WriteIRI(w *bytes.Buffer, t rdf.IRI, ascii bool) int {
 	var uchar4, uchar8 int
 
 	tr := []rune(t)
@@ -22,7 +22,9 @@ func WriteIRI(w io.Writer, t rdf.IRI, ascii bool) (int, error) {
 	}
 
 	if uchar4 == 0 && uchar8 == 0 {
-		return w.Write([]byte("<" + string(t) + ">"))
+		wlen, _ := w.Write([]byte("<" + string(t) + ">"))
+
+		return wlen
 	}
 
 	buf := make([]rune, len(tr)+uchar4*5+uchar8*9)
@@ -58,7 +60,9 @@ func WriteIRI(w io.Writer, t rdf.IRI, ascii bool) (int, error) {
 		}
 	}
 
-	return w.Write([]byte("<" + string(buf) + ">"))
+	wlen, _ := w.Write([]byte("<" + string(buf) + ">"))
+
+	return wlen
 }
 
 type iriRuneEscapeMode uint

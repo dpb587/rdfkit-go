@@ -1,6 +1,7 @@
 package ntriples
 
 import (
+	"bytes"
 	"context"
 	"fmt"
 	"io"
@@ -19,6 +20,7 @@ type Encoder struct {
 	w                 io.Writer
 	blankNodeStringer blanknodeutil.Stringer
 	ascii             bool
+	buf               *bytes.Buffer
 }
 
 var _ encoding.TriplesEncoder = &Encoder{}
@@ -48,63 +50,42 @@ func (w *Encoder) Close() error {
 func (w *Encoder) AddTriple(ctx context.Context, t rdf.Triple) error {
 	var err error
 
+	w.buf.Reset()
+
 	switch s := t.Subject.(type) {
 	case rdf.BlankNode:
-		_, err = w.w.Write([]byte("_:" + w.blankNodeStringer.GetBlankNodeIdentifier(s)))
-		if err != nil {
-			return err
-		}
+		w.buf.Write([]byte("_:" + w.blankNodeStringer.GetBlankNodeIdentifier(s)))
 	case rdf.IRI:
-		_, err = WriteIRI(w.w, s, w.ascii)
-		if err != nil {
-			return err
-		}
+		WriteIRI(w.buf, s, w.ascii)
 	default:
 		return fmt.Errorf("subject: invalid type: %T", s)
 	}
 
-	_, err = w.w.Write([]byte(" "))
-	if err != nil {
-		return err
-	}
+	w.buf.Write([]byte(" "))
 
 	switch p := t.Predicate.(type) {
 	case rdf.IRI:
-		_, err = WriteIRI(w.w, p, w.ascii)
-		if err != nil {
-			return err
-		}
+		WriteIRI(w.buf, p, w.ascii)
 	default:
 		return fmt.Errorf("predicate: invalid type: %T", p)
 	}
 
-	_, err = w.w.Write([]byte(" "))
-	if err != nil {
-		return err
-	}
+	w.buf.Write([]byte(" "))
 
 	switch o := t.Object.(type) {
 	case rdf.BlankNode:
-		_, err = w.w.Write([]byte("_:" + w.blankNodeStringer.GetBlankNodeIdentifier(o)))
-		if err != nil {
-			return err
-		}
+		w.buf.Write([]byte("_:" + w.blankNodeStringer.GetBlankNodeIdentifier(o)))
 	case rdf.IRI:
-		_, err = WriteIRI(w.w, o, w.ascii)
-		if err != nil {
-			return err
-		}
+		WriteIRI(w.buf, o, w.ascii)
 	case rdf.Literal:
-		_, err = WriteLiteral(w.w, o, w.ascii)
-		if err != nil {
-			return err
-		}
-
+		WriteLiteral(w.buf, o, w.ascii)
 	default:
 		return fmt.Errorf("object: invalid type: %T", o)
 	}
 
-	_, err = w.w.Write([]byte(" .\n"))
+	w.buf.Write([]byte(" .\n"))
+
+	_, err = w.buf.WriteTo(w.w)
 	if err != nil {
 		return err
 	}

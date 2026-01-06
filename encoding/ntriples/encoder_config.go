@@ -1,6 +1,7 @@
 package ntriples
 
 import (
+	"bytes"
 	"io"
 
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
@@ -37,6 +38,7 @@ func (o EncoderConfig) newEncoder(w io.Writer) (*Encoder, error) {
 	ww := &Encoder{
 		w:                 w,
 		blankNodeStringer: o.blankNodeStringer,
+		buf:               bytes.NewBuffer(make([]byte, 0, 4096)),
 	}
 
 	if o.ascii != nil && *o.ascii {

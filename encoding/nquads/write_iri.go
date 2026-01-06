@@ -1,13 +1,13 @@
 package nquads
 
 import (
-	"io"
+	"bytes"
 
 	"github.com/dpb587/rdfkit-go/encoding/nquads/internal"
 	"github.com/dpb587/rdfkit-go/rdf"
 )
 
-func WriteIRI(w io.Writer, t rdf.IRI, ascii bool) (int, error) {
+func WriteIRI(w *bytes.Buffer, t rdf.IRI, ascii bool) {
 	var uchar4, uchar8 int
 
 	tr := []rune(t)
@@ -22,7 +22,11 @@ func WriteIRI(w io.Writer, t rdf.IRI, ascii bool) (int, error) {
 	}
 
 	if uchar4 == 0 && uchar8 == 0 {
-		return w.Write([]byte("<" + string(t) + ">"))
+		w.Write([]byte{'<'})
+		w.Write([]byte(t))
+		w.Write([]byte{'>'})
+
+		return
 	}
 
 	buf := make([]rune, len(tr)+uchar4*5+uchar8*9)
@@ -58,7 +62,9 @@ func WriteIRI(w io.Writer, t rdf.IRI, ascii bool) (int, error) {
 		}
 	}
 
-	return w.Write([]byte("<" + string(buf) + ">"))
+	w.Write([]byte{'<'})
+	w.Write([]byte(string(buf)))
+	w.Write([]byte{'>'})
 }
 
 type iriRuneEscapeMode uint

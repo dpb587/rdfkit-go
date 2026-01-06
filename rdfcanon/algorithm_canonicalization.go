@@ -45,6 +45,8 @@ func (a algorithmCanonicalization) Call() (*Canonicalization, error) {
 
 	var inputIdx int64
 
+	b := &bytes.Buffer{}
+
 	for a.input.Next() {
 		q := &canonicalizationQuad{
 			Original:      a.input.Quad(),
@@ -62,11 +64,8 @@ func (a algorithmCanonicalization) Call() (*Canonicalization, error) {
 			q.SubjectBlankNodeIdentifier = s.GetBlankNodeIdentifier()
 			a.canonicalizationState.blankNodeToQuads[q.SubjectBlankNodeIdentifier] = append(a.canonicalizationState.blankNodeToQuads[q.SubjectBlankNodeIdentifier], q)
 		case rdf.IRI:
-			b := &bytes.Buffer{}
-			_, err := nquads.WriteIRI(b, s, false)
-			if err != nil {
-				panic(err)
-			}
+			b.Reset()
+			nquads.WriteIRI(b, s, false)
 
 			q.SubjectEncoded = b.String()
 		default:
@@ -75,11 +74,8 @@ func (a algorithmCanonicalization) Call() (*Canonicalization, error) {
 
 		switch p := q.Original.Triple.Predicate.(type) {
 		case rdf.IRI:
-			b := &bytes.Buffer{}
-			_, err := nquads.WriteIRI(b, p, false)
-			if err != nil {
-				panic(err)
-			}
+			b.Reset()
+			nquads.WriteIRI(b, p, false)
 
 			q.PredicateEncoded = b.String()
 		default:
@@ -91,19 +87,13 @@ func (a algorithmCanonicalization) Call() (*Canonicalization, error) {
 			q.ObjectBlankNodeIdentifier = o.GetBlankNodeIdentifier()
 			a.canonicalizationState.blankNodeToQuads[q.ObjectBlankNodeIdentifier] = append(a.canonicalizationState.blankNodeToQuads[q.ObjectBlankNodeIdentifier], q)
 		case rdf.IRI:
-			b := &bytes.Buffer{}
-			_, err := nquads.WriteIRI(b, o, false)
-			if err != nil {
-				panic(err)
-			}
+			b.Reset()
+			nquads.WriteIRI(b, o, false)
 
 			q.ObjectEncoded = b.String()
 		case rdf.Literal:
-			b := &bytes.Buffer{}
-			_, err := nquads.WriteLiteral(b, o, false)
-			if err != nil {
-				panic(err)
-			}
+			b.Reset()
+			nquads.WriteLiteral(b, o, false)
 
 			q.ObjectEncoded = b.String()
 		default:
@@ -116,11 +106,8 @@ func (a algorithmCanonicalization) Call() (*Canonicalization, error) {
 				q.GraphNameBlankNodeIdentifier = g.GetBlankNodeIdentifier()
 				a.canonicalizationState.blankNodeToQuads[q.GraphNameBlankNodeIdentifier] = append(a.canonicalizationState.blankNodeToQuads[q.GraphNameBlankNodeIdentifier], q)
 			case rdf.IRI:
-				b := &bytes.Buffer{}
-				_, err := nquads.WriteIRI(b, g, false)
-				if err != nil {
-					panic(err)
-				}
+				b.Reset()
+				nquads.WriteIRI(b, g, false)
 
 				q.GraphNameEncoded = b.String()
 			default:

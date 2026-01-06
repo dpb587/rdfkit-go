@@ -171,10 +171,7 @@ func New() *cobra.Command {
 				case rdf.IRI:
 					b.Reset()
 
-					_, err = nquads.WriteIRI(b, s, false)
-					if err != nil {
-						return fmt.Errorf("write: %v", err)
-					}
+					nquads.WriteIRI(b, s, false)
 
 					pr.Subject = b.String()
 				default:
@@ -185,10 +182,7 @@ func New() *cobra.Command {
 				case rdf.IRI:
 					b.Reset()
 
-					_, err = nquads.WriteIRI(b, p, false)
-					if err != nil {
-						return fmt.Errorf("write: %v", err)
-					}
+					nquads.WriteIRI(b, p, false)
 
 					pr.Predicate = b.String()
 				default:
@@ -201,19 +195,13 @@ func New() *cobra.Command {
 				case rdf.IRI:
 					b.Reset()
 
-					_, err = nquads.WriteIRI(b, o, false)
-					if err != nil {
-						return fmt.Errorf("write: %v", err)
-					}
+					nquads.WriteIRI(b, o, false)
 
 					pr.Object = b.String()
 				case rdf.Literal:
 					b.Reset()
 
-					_, err = nquads.WriteLiteral(b, o, false)
-					if err != nil {
-						return fmt.Errorf("write: %v", err)
-					}
+					nquads.WriteLiteral(b, o, false)
 
 					pr.Object = b.String()
 				default:
@@ -227,10 +215,7 @@ func New() *cobra.Command {
 					case rdf.IRI:
 						b.Reset()
 
-						_, err = nquads.WriteIRI(b, g, false)
-						if err != nil {
-							return fmt.Errorf("write: %v", err)
-						}
+						nquads.WriteIRI(b, g, false)
 
 						pr.GraphName = b.String()
 					default:

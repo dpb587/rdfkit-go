@@ -1,7 +1,7 @@
 package ntriples
 
 import (
-	"io"
+	"bytes"
 
 	"github.com/dpb587/rdfkit-go/encoding/ntriples/internal"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
@@ -9,7 +9,7 @@ import (
 	"github.com/dpb587/rdfkit-go/rdf"
 )
 
-func WriteLiteral(w io.Writer, t rdf.Literal, ascii bool) (int, error) {
+func WriteLiteral(w *bytes.Buffer, t rdf.Literal, ascii bool) int {
 	var wlen int
 
 	var echar, uchar4, uchar8 int
@@ -28,11 +28,7 @@ func WriteLiteral(w io.Writer, t rdf.Literal, ascii bool) (int, error) {
 	}
 
 	if echar == 0 && uchar4 == 0 && uchar8 == 0 {
-		wwlen, err := w.Write([]byte(`"` + string(t.LexicalForm) + `"`))
-		if err != nil {
-			return wwlen, err
-		}
-
+		wwlen, _ := w.Write([]byte(`"` + string(t.LexicalForm) + `"`))
 		wlen += wwlen
 	} else {
 		buf := make([]rune, len(tr)+echar+uchar4*5+uchar8*9)
@@ -91,34 +87,30 @@ func WriteLiteral(w io.Writer, t rdf.Literal, ascii bool) (int, error) {
 			}
 		}
 
-		wwlen, err := w.Write([]byte(`"` + string(buf) + `"`))
-		if err != nil {
-			return wwlen, err
-		}
-
+		wwlen, _ := w.Write([]byte(`"` + string(buf) + `"`))
 		wlen += wwlen
 	}
 
 	switch t.Datatype {
 	case xsdiri.String_Datatype:
-		return wlen, nil
+		return wlen
 	case rdfiri.LangString_Datatype:
 		if langTag, ok := t.Tag.(rdf.LanguageLiteralTag); ok {
-			wwlen, err := w.Write([]byte("@" + langTag.Language))
-			return wlen + wwlen, err
+			wwlen, _ := w.Write([]byte("@" + langTag.Language))
+			wlen += wwlen
+
+			return wlen
 		}
 
-		return wlen, nil
+		return wlen
 	}
 
-	wwlen, err := w.Write([]byte("^^"))
-	if err != nil {
-		return wlen + wwlen, err
-	}
+	wwlen, _ := w.Write([]byte("^^"))
+	wlen += wwlen
 
-	wwlen, err = WriteIRI(w, t.Datatype, ascii)
+	wwlen += WriteIRI(w, t.Datatype, ascii)
 
-	return wlen + wwlen, err
+	return wlen
 }
 
 type stringLiteralQuoteRuneEscapeMode uint

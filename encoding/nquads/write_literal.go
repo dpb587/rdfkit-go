@@ -1,7 +1,7 @@
 package nquads
 
 import (
-	"io"
+	"bytes"
 
 	"github.com/dpb587/rdfkit-go/encoding/nquads/internal"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
@@ -9,9 +9,7 @@ import (
 	"github.com/dpb587/rdfkit-go/rdf"
 )
 
-func WriteLiteral(w io.Writer, t rdf.Literal, ascii bool) (int, error) {
-	var wlen int
-
+func WriteLiteral(w *bytes.Buffer, t rdf.Literal, ascii bool) {
 	var echar, uchar4, uchar8 int
 
 	tr := []rune(t.LexicalForm)
@@ -28,12 +26,9 @@ func WriteLiteral(w io.Writer, t rdf.Literal, ascii bool) (int, error) {
 	}
 
 	if echar == 0 && uchar4 == 0 && uchar8 == 0 {
-		wwlen, err := w.Write([]byte(`"` + string(t.LexicalForm) + `"`))
-		if err != nil {
-			return wwlen, err
-		}
-
-		wlen += wwlen
+		w.Write([]byte{'"'})
+		w.Write([]byte(t.LexicalForm))
+		w.Write([]byte{'"'})
 	} else {
 		buf := make([]rune, len(tr)+echar+uchar4*5+uchar8*9)
 		widx := 0
@@ -91,34 +86,25 @@ func WriteLiteral(w io.Writer, t rdf.Literal, ascii bool) (int, error) {
 			}
 		}
 
-		wwlen, err := w.Write([]byte(`"` + string(buf) + `"`))
-		if err != nil {
-			return wwlen, err
-		}
-
-		wlen += wwlen
+		w.Write([]byte{'"'})
+		w.Write([]byte(string(buf)))
+		w.Write([]byte{'"'})
 	}
 
 	switch t.Datatype {
 	case xsdiri.String_Datatype:
-		return wlen, nil
+		return
 	case rdfiri.LangString_Datatype:
 		if langTag, ok := t.Tag.(rdf.LanguageLiteralTag); ok {
-			wwlen, err := w.Write([]byte("@" + langTag.Language))
-			return wlen + wwlen, err
+			w.Write([]byte{'@'})
+			w.Write([]byte(langTag.Language))
 		}
 
-		return wlen, nil
+		return
 	}
 
-	wwlen, err := w.Write([]byte("^^"))
-	if err != nil {
-		return wlen + wwlen, err
-	}
-
-	wwlen, err = WriteIRI(w, t.Datatype, ascii)
-
-	return wlen + wwlen, err
+	w.Write([]byte{'^', '^'})
+	WriteIRI(w, t.Datatype, ascii)
 }
 
 type stringLiteralQuoteRuneEscapeMode uint
