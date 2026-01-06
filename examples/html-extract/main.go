@@ -6,17 +6,11 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/dpb587/rdfkit-go/encoding/encodingutil"
-	"github.com/dpb587/rdfkit-go/encoding/html"
-	"github.com/dpb587/rdfkit-go/encoding/htmljsonld"
-	"github.com/dpb587/rdfkit-go/encoding/htmlmicrodata"
-	"github.com/dpb587/rdfkit-go/encoding/jsonld"
+	"github.com/dpb587/rdfkit-go/encoding/html/htmldefaults"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
-	"github.com/dpb587/rdfkit-go/encoding/rdfa"
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil/rdfacontext"
-	"github.com/dpb587/rdfkit-go/rdf/quads"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
 )
 
@@ -40,54 +34,17 @@ func main() {
 
 	// Parse the HTML document into a DOM tree.
 
-	htmlDocument, err := html.ParseDocument(
+	decoder, err := htmldefaults.NewDecoder(
 		res.Body,
-		html.DocumentConfig{}.
-			SetLocation(res.Request.URL.String()),
+		htmldefaults.DecoderConfig{}.
+			SetLocation(res.Request.URL.String()).
+			SetDocumentLoaderJSONLD(jsonldtype.NewCachingDocumentLoader(
+				jsonldtype.NewDefaultDocumentLoader(http.DefaultClient),
+			)),
 	)
 	if err != nil {
-		panic(fmt.Errorf("parse html: %v", err))
+		panic(fmt.Errorf("creating decoder: %v", err))
 	}
-
-	// Create all the HTML-based decoders since the original encoding is unknown.
-	// (this might be simplified into a single, wrapper decoder in the future)
-
-	htmlJsonld, err := htmljsonld.NewDecoder(
-		htmlDocument,
-		htmljsonld.DecoderConfig{}.
-			SetDecoderOptions(jsonld.DecoderConfig{}.
-				SetDocumentLoader(jsonldtype.NewCachingDocumentLoader(
-					jsonldtype.NewDefaultDocumentLoader(http.DefaultClient),
-				)),
-			),
-	)
-	if err != nil {
-		panic(fmt.Errorf("prepare htmljsonld: %v", err))
-	}
-
-	htmlMicrodata, err := htmlmicrodata.NewDecoder(
-		htmlDocument,
-		htmlmicrodata.DecoderConfig{}.
-			SetVocabularyResolver(htmlmicrodata.ItemtypeVocabularyResolver),
-	)
-	if err != nil {
-		panic(fmt.Errorf("prepare htmlmicrodata: %v", err))
-	}
-
-	htmlRdfa, err := rdfa.NewDecoder(htmlDocument)
-	if err != nil {
-		panic(fmt.Errorf("prepare rdfa: %v", err))
-	}
-
-	decoder := quads.NewIteratorIterator(
-		htmlJsonld,
-		encodingutil.TripleAsQuadDecoder{
-			TriplesDecoder: htmlMicrodata,
-		},
-		encodingutil.TripleAsQuadDecoder{
-			TriplesDecoder: htmlRdfa,
-		},
-	)
 
 	defer decoder.Close()
 
