@@ -9,23 +9,23 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdf/terms"
 )
 
 type TermFormatterOptions struct {
-	ASCII             bool
-	Base              *iriutil.BaseIRI
-	Prefixes          iriutil.PrefixMap
-	BlankNodeStringer blanknodeutil.Stringer
+	ASCII                   bool
+	Base                    *iriutil.BaseIRI
+	Prefixes                iriutil.PrefixMap
+	BlankNodeStringProvider blanknodes.StringProvider
 }
 
 type termFormatter struct {
 	ascii             bool
 	base              *iriutil.BaseIRI
 	prefixes          iriutil.PrefixMap
-	blankNodeStringer blanknodeutil.Stringer
+	blankNodeStringer blanknodes.StringProvider
 }
 
 func NewTermFormatter(options TermFormatterOptions) terms.Formatter {
@@ -33,7 +33,7 @@ func NewTermFormatter(options TermFormatterOptions) terms.Formatter {
 		ascii:             options.ASCII,
 		base:              options.Base,
 		prefixes:          options.Prefixes,
-		blankNodeStringer: options.BlankNodeStringer,
+		blankNodeStringer: options.BlankNodeStringProvider,
 	}
 }
 
@@ -51,7 +51,7 @@ func (tf *termFormatter) FormatTerm(t rdf.Term) string {
 		return "<" + formatIRI(string(t), tf.ascii) + ">"
 	case rdf.BlankNode:
 		if tf.blankNodeStringer != nil {
-			return "_:" + tf.blankNodeStringer.GetBlankNodeIdentifier(t)
+			return "_:" + tf.blankNodeStringer.GetBlankNodeString(t)
 		}
 
 		return "_:b0x" + strconv.FormatUint(uint64(reflect.ValueOf(t).Pointer()), 16)

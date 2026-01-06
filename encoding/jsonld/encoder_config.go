@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
 )
@@ -19,7 +19,7 @@ type EncoderConfig struct {
 	jsonIndent     *string
 	jsonEscapeHTML *bool
 
-	blankNodeStringer blanknodeutil.Stringer
+	bnStringProvider blanknodes.StringProvider
 }
 
 func (s EncoderConfig) SetBase(v string) EncoderConfig {
@@ -40,8 +40,8 @@ func (s EncoderConfig) SetBuffered(v bool) EncoderConfig {
 	return s
 }
 
-func (s EncoderConfig) SetBlankNodeStringer(v blanknodeutil.Stringer) EncoderConfig {
-	s.blankNodeStringer = v
+func (s EncoderConfig) SetBlankNodeStringProvider(v blanknodes.StringProvider) EncoderConfig {
+	s.bnStringProvider = v
 
 	return s
 }
@@ -72,8 +72,8 @@ func (s EncoderConfig) apply(d *EncoderConfig) {
 		d.buffered = s.buffered
 	}
 
-	if s.blankNodeStringer != nil {
-		d.blankNodeStringer = s.blankNodeStringer
+	if s.bnStringProvider != nil {
+		d.bnStringProvider = s.bnStringProvider
 	}
 
 	if s.jsonPrefix != nil {
@@ -99,10 +99,10 @@ func (s EncoderConfig) newEncoder(w io.Writer) (*Encoder, error) {
 	}
 
 	e := &Encoder{
-		w:                 json.NewEncoder(w),
-		prefixes:          iriutil.NewPrefixTracker(prefixes),
-		blankNodeStringer: s.blankNodeStringer,
-		builder:           rdfdescription.NewDatasetResourceListBuilder(),
+		w:                json.NewEncoder(w),
+		prefixes:         iriutil.NewPrefixTracker(prefixes),
+		bnStringProvider: s.bnStringProvider,
+		builder:          rdfdescription.NewDatasetResourceListBuilder(),
 	}
 
 	if s.base != nil {
@@ -118,8 +118,8 @@ func (s EncoderConfig) newEncoder(w io.Writer) (*Encoder, error) {
 		e.buffered = *s.buffered
 	}
 
-	if e.blankNodeStringer == nil {
-		e.blankNodeStringer = blanknodeutil.NewStringerInt64()
+	if e.bnStringProvider == nil {
+		e.bnStringProvider = blanknodes.NewInt64StringProvider("b%d")
 	}
 
 	if s.jsonPrefix != nil && s.jsonIndent != nil {

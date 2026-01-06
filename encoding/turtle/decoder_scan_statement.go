@@ -433,7 +433,7 @@ func reader_scanStatement(r *Decoder, ectx evaluationContext, r0 cursorio.Decode
 
 		return readerStack{ectx, reader_scan_Triples_Subject_BlankNode}, nil
 	case '[':
-		blankNode := ectx.Global.BlankNodeFactory.NewBlankNode()
+		blankNode := ectx.Global.BlankNodeStringFactory.NewBlankNode()
 		blankNodeRange := r.commitForTextOffsetRange(r0.AsDecodedRunes())
 
 		ectx.CurSubject = blankNode
@@ -444,7 +444,7 @@ func reader_scanStatement(r *Decoder, ectx evaluationContext, r0 cursorio.Decode
 		r.pushState(ectx, reader_scan_Triples_End)
 
 		nectx := ectx
-		nectx.CurSubject = ectx.Global.BlankNodeFactory.NewBlankNode()
+		nectx.CurSubject = ectx.Global.BlankNodeStringFactory.NewBlankNode()
 		nectx.CurSubjectLocation = r.commitForTextOffsetRange(r0.AsDecodedRunes())
 
 		r.pushState(nectx, reader_scan_PredicateObjectList)

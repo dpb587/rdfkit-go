@@ -8,7 +8,7 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 )
 
 // TODO stream/lex
@@ -29,14 +29,14 @@ type modelQueryResponseJSON struct {
 }
 
 type QueryResponseDecoderJSON struct {
-	BlankNodeTable blanknodeutil.StringMapper
+	BlankNodeTable blanknodes.StringFactory
 
 	r io.Reader
 }
 
 func NewQueryResponseDecoderJSON(r io.Reader) *QueryResponseDecoderJSON {
 	return &QueryResponseDecoderJSON{
-		BlankNodeTable: blanknodeutil.NewStringMapper(),
+		BlankNodeTable: blanknodes.NewStringFactory(),
 		r:              r,
 	}
 }
@@ -100,7 +100,7 @@ func (d *QueryResponseDecoderJSON) Decode() (*QueryResponse, error) {
 
 					b.Term = t
 				case "bnode":
-					b.Term = d.BlankNodeTable.MapBlankNodeIdentifier(v.Value)
+					b.Term = d.BlankNodeTable.NewStringBlankNode(v.Value)
 				default:
 					return nil, errors.New("unknown binding type: " + v.Type)
 				}

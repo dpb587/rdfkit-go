@@ -6,14 +6,14 @@ import (
 	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/cursorio-go/x/cursorioutil"
 	"github.com/dpb587/rdfkit-go/encoding/encodingutil"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 )
 
 type DecoderConfig struct {
 	captureTextOffsets *bool
 	initialTextOffset  *cursorio.TextOffset
 
-	blankNodeStringMapper blanknodeutil.StringMapper
+	bnStringFactory blanknodes.StringFactory
 }
 
 func (b DecoderConfig) SetCaptureTextOffsets(v bool) DecoderConfig {
@@ -31,8 +31,8 @@ func (b DecoderConfig) SetInitialTextOffset(v cursorio.TextOffset) DecoderConfig
 	return b
 }
 
-func (b DecoderConfig) SetBlankNodeStringMapper(v blanknodeutil.StringMapper) DecoderConfig {
-	b.blankNodeStringMapper = v
+func (b DecoderConfig) SetBlankNodeStringFactory(v blanknodes.StringFactory) DecoderConfig {
+	b.bnStringFactory = v
 
 	return b
 }
@@ -46,16 +46,16 @@ func (b DecoderConfig) apply(s *DecoderConfig) {
 		s.initialTextOffset = b.initialTextOffset
 	}
 
-	if b.blankNodeStringMapper != nil {
-		s.blankNodeStringMapper = b.blankNodeStringMapper
+	if b.bnStringFactory != nil {
+		s.bnStringFactory = b.bnStringFactory
 	}
 }
 
 func (b DecoderConfig) newDecoder(r io.Reader) (*Decoder, error) {
 	d := &Decoder{
-		buf:                   cursorioutil.NewRuneBuffer(r),
-		blankNodeStringMapper: b.blankNodeStringMapper,
-		buildTextOffsets:      encodingutil.BuildTextOffsetsNil,
+		buf:              cursorioutil.NewRuneBuffer(r),
+		bnStringFactory:  b.bnStringFactory,
+		buildTextOffsets: encodingutil.BuildTextOffsetsNil,
 	}
 
 	if b.captureTextOffsets != nil && *b.captureTextOffsets {
@@ -69,8 +69,8 @@ func (b DecoderConfig) newDecoder(r io.Reader) (*Decoder, error) {
 		d.buildTextOffsets = encodingutil.BuildTextOffsetsValue
 	}
 
-	if b.blankNodeStringMapper == nil {
-		d.blankNodeStringMapper = blanknodeutil.NewStringMapper()
+	if b.bnStringFactory == nil {
+		d.bnStringFactory = blanknodes.NewStringFactory()
 	}
 
 	return d, nil

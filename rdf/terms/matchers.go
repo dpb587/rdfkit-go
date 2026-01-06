@@ -80,7 +80,9 @@ func (m EqualsOneOfCompiled) AsLogicalOrMatcher() LogicalOrMatcher {
 
 	for identifier := range m.mappedBlankNodes {
 		as = append(as, Equals{
-			Expected: rdf.NewBlankNodeWithIdentifier(identifier),
+			Expected: rdf.BlankNode{
+				Identifier: identifier,
+			},
 		})
 	}
 
@@ -101,12 +103,11 @@ func (m EqualsOneOfCompiled) MatchTerm(t rdf.Term) bool {
 		_, ok := m.mappedIRIs[t]
 		return ok
 	case rdf.BlankNode:
-		identifier := t.GetBlankNodeIdentifier()
-		if identifier == nil {
+		if t.Identifier == nil {
 			return false
 		}
 
-		_, ok := m.mappedBlankNodes[identifier]
+		_, ok := m.mappedBlankNodes[t.Identifier]
 
 		return ok
 	case rdf.Literal:
@@ -134,8 +135,8 @@ func EqualsOneOf(expected ...rdf.Term) rdf.TermMatcher {
 		case rdf.IRI:
 			compiled.mappedIRIs[t] = struct{}{}
 		case rdf.BlankNode:
-			if identifier := t.GetBlankNodeIdentifier(); identifier != nil {
-				compiled.mappedBlankNodes[identifier] = struct{}{}
+			if t.Identifier != nil {
+				compiled.mappedBlankNodes[t.Identifier] = struct{}{}
 			}
 		case rdf.Literal:
 			compiled.literalsByDatatype[t.Datatype] = append(compiled.literalsByDatatype[t.Datatype], t)

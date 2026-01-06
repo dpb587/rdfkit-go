@@ -16,7 +16,7 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
@@ -36,7 +36,7 @@ type Decoder struct {
 
 	baseURL *iriutil.ParsedIRI
 
-	blankNodeStringMapper blanknodeutil.StringMapper
+	bnStringFactory blanknodes.StringFactory
 
 	captureTextOffsets bool
 	initialTextOffset  cursorio.TextOffset
@@ -129,9 +129,8 @@ func (d *Decoder) parseAll() {
 		evaluationContext{
 			Base: d.baseURL,
 			Global: &globalEvaluationContext{
-				BlankNodeStringMapper: d.blankNodeStringMapper,
-				BlankNodeFactory:      blanknodeutil.NewFactory(),
-				uniqRefID:             map[uniqRefID]struct{}{},
+				BlankNodeStringFactory: d.bnStringFactory,
+				uniqRefID:              map[uniqRefID]struct{}{},
 			},
 			CurrentContainer: &DocumentResource{},
 			UsedIDs:          map[string]struct{}{},
@@ -355,7 +354,7 @@ func (d *Decoder) processNodeElt(ectx evaluationContext, startElement xml.StartE
 				return nil, d.newTokenAttrError(err, attr)
 			}
 
-			eSubject = ectx.Global.BlankNodeStringMapper.MapBlankNodeIdentifier(attr.Value)
+			eSubject = ectx.Global.BlankNodeStringFactory.NewStringBlankNode(attr.Value)
 			eSubjectLocation = attr.Metadata.Value
 
 			usedNameAttributes = append(usedNameAttributes, "rdf:nodeID")
@@ -373,7 +372,7 @@ func (d *Decoder) processNodeElt(ectx evaluationContext, startElement xml.StartE
 	}
 
 	if eSubject == nil {
-		eSubject = ectx.Global.BlankNodeFactory.NewBlankNode()
+		eSubject = ectx.Global.BlankNodeStringFactory.NewBlankNode()
 	}
 
 	if startElement.Name != (xml.Name{Space: internal.Space, Local: internal.Local_Description_Syntax}) {
@@ -795,13 +794,13 @@ func (d *Decoder) processPropertyElt(ectx evaluationContext, startElement xml.St
 						ot.textOffsets[encoding.ObjectStatementOffsets] = *(*resourceAttr).Metadata.Value
 					}
 				} else if nodeIdAttr != nil {
-					ot.triple.Object = ectx.Global.BlankNodeStringMapper.MapBlankNodeIdentifier((*nodeIdAttr).Value)
+					ot.triple.Object = ectx.Global.BlankNodeStringFactory.NewStringBlankNode((*nodeIdAttr).Value)
 
 					if d.captureTextOffsets && (*nodeIdAttr).Metadata.Value != nil {
 						ot.textOffsets[encoding.ObjectStatementOffsets] = *(*nodeIdAttr).Metadata.Value
 					}
 				} else {
-					ot.triple.Object = ectx.Global.BlankNodeFactory.NewBlankNode()
+					ot.triple.Object = ectx.Global.BlankNodeStringFactory.NewBlankNode()
 				}
 
 				for _, attr := range append(rdfAttrList, otherAttrList...) {
@@ -1045,7 +1044,7 @@ func (d *Decoder) processParseTypeResourcePropertyElt(ectx evaluationContext, st
 		return err
 	}
 
-	n := ectx.Global.BlankNodeFactory.NewBlankNode()
+	n := ectx.Global.BlankNodeStringFactory.NewBlankNode()
 
 	t := statement{
 		triple: rdf.Triple{
@@ -1167,7 +1166,7 @@ func (d *Decoder) processParseTypeCollectionPropertyElt(ectx evaluationContext, 
 				return fmt.Errorf("description: %w", err)
 			}
 
-			nextContainer := ectx.Global.BlankNodeFactory.NewBlankNode()
+			nextContainer := ectx.Global.BlankNodeStringFactory.NewBlankNode()
 
 			if lastContainer == nil {
 				d.statements = append(d.statements,

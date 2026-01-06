@@ -1,69 +1,46 @@
 package rdf
 
+type BlankNodeIdentifier interface {
+	EqualsBlankNodeIdentifier(bni BlankNodeIdentifier) bool
+}
+
 // BlankNode does not identify a specific resource and is disjoint from an [IRI] and a [Literal]. Two BlankNode values
-// are equal if and only if they have the same internal [BlankNodeIdentifier].
+// are equal if both of their Identifier fields are non-nil and equivalent.
 //
-// [NewBlankNode] (or [BlankNodeFactory]) must be used to create a blank node.
-type BlankNode interface {
-	Term
-	SubjectValue
-	ObjectValue
-	GraphNameValue
-
-	GetBlankNodeIdentifier() BlankNodeIdentifier
+// You should use [NewBlankNode] or a [BlankNodeFactory] to construct a new BlankNode.
+type BlankNode struct {
+	Identifier BlankNodeIdentifier
 }
 
-type blankNode struct {
-	identifier BlankNodeIdentifier
-}
+var _ Term = BlankNode{}
+var _ SubjectValue = BlankNode{}
+var _ ObjectValue = BlankNode{}
+var _ GraphNameValue = BlankNode{}
 
-// NewBlankNode creates a new blank node using [DefaultBlankNodeFactory].
-func NewBlankNode() BlankNode {
-	return DefaultBlankNodeFactory.NewBlankNode()
-}
+func (BlankNode) isTermBuiltin()           {}
+func (BlankNode) isSubjectValueBuiltin()   {}
+func (BlankNode) isObjectValueBuiltin()    {}
+func (BlankNode) isGraphNameValueBuiltin() {}
 
-// NewBlankNodeWithIdentifier creates a new blank node using the provided identifier. This should only be called by
-// custom [BlankNodeFactory] implementations.
-func NewBlankNodeWithIdentifier(identifier BlankNodeIdentifier) BlankNode {
-	if identifier == nil {
-		panic("identifier cannot be nil")
-	}
-
-	return blankNode{
-		identifier: identifier,
-	}
-}
-
-var _ BlankNode = blankNode{}
-
-func (blankNode) isTermBuiltin()           {}
-func (blankNode) isSubjectValueBuiltin()   {}
-func (blankNode) isObjectValueBuiltin()    {}
-func (blankNode) isGraphNameValueBuiltin() {}
-
-func (t blankNode) AsObjectValue() ObjectValue {
+func (t BlankNode) AsObjectValue() ObjectValue {
 	return t
 }
 
-func (blankNode) TermKind() TermKind {
+func (BlankNode) TermKind() TermKind {
 	return TermKindBlankNode
 }
 
-func (t blankNode) TermEquals(a Term) bool {
-	if t.identifier == nil {
+func (t BlankNode) TermEquals(a Term) bool {
+	if t.Identifier == nil {
 		return false
 	}
 
-	aBlankNode, ok := a.(blankNode)
+	aBlankNode, ok := a.(BlankNode)
 	if !ok {
 		return false
-	} else if aBlankNode.identifier == nil {
+	} else if aBlankNode.Identifier == nil {
 		return false
 	}
 
-	return t.identifier == aBlankNode.identifier
-}
-
-func (t blankNode) GetBlankNodeIdentifier() BlankNodeIdentifier {
-	return t.identifier
+	return t.Identifier.EqualsBlankNodeIdentifier(aBlankNode.Identifier)
 }

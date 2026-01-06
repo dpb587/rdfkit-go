@@ -9,12 +9,12 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding/encodingtest"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 	"github.com/dpb587/rdfkit-go/rdf/triples"
 	"github.com/dpb587/rdfkit-go/testing/testingassert"
 )
 
-var testingBnode = blanknodeutil.NewStringMapper()
+var testingBnode = blanknodes.NewStringFactory()
 
 func TestExamples(t *testing.T) {
 	// https://www.w3.org/TR/rdf-json/
@@ -184,7 +184,7 @@ func TestExamples(t *testing.T) {
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://example.org/about"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/creator"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b0"),
+						Object:    testingBnode.NewStringBlankNode("b0"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -203,7 +203,7 @@ func TestExamples(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
 						Object:    xsdobject.String("Anna"),
 					},
@@ -235,7 +235,7 @@ func TestExamples(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/homepage"),
 						Object:    rdf.IRI("http://example.org/anna"),
 					},
@@ -269,7 +269,7 @@ func TestExamples(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
 						Object:    xsdobject.String("Anna"),
 					},
@@ -290,7 +290,7 @@ func TestExamples(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/homepage"),
 						Object:    rdf.IRI("http://example.org/anna"),
 					},

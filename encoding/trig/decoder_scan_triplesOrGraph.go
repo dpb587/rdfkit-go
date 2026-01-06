@@ -78,5 +78,5 @@ func reader_scan_triplesOrGraph_labelOrSubject_BlankNode(r *Decoder, ectx evalua
 		return readerStack{}, grammar.R_triples.Err(grammar.R_subject.Err(err))
 	}
 
-	return readerStack{ectx, reader_scan_triplesOrGraph_E1(ectx.Global.BlankNodeStringMapper.MapBlankNodeIdentifier(token.Decoded), token.Offsets)}, nil
+	return readerStack{ectx, reader_scan_triplesOrGraph_E1(ectx.Global.BlankNodeStringFactory.NewStringBlankNode(token.Decoded), token.Offsets)}, nil
 }

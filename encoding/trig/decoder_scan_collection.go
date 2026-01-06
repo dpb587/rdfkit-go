@@ -90,7 +90,7 @@ func reader_scan_collection_Continue(r *Decoder, ectx evaluationContext, r0 curs
 	r.buf.BacktrackRunes(r0)
 
 	nectx := ectx
-	nectx.CurSubject = ectx.Global.BlankNodeFactory.NewBlankNode()
+	nectx.CurSubject = ectx.Global.BlankNodeStringFactory.NewBlankNode()
 	nectx.CurSubjectLocation = nil
 
 	r.pushState(nectx, reader_scan_collection_Continue)

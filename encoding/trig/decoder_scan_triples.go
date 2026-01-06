@@ -26,7 +26,7 @@ func reader_scan_triples(r *Decoder, ectx evaluationContext, r0 cursorio.Decoded
 
 		return readerStack{ectx, reader_scan_triples_subject_BlankNode}, nil
 	case '[':
-		blankNode := ectx.Global.BlankNodeFactory.NewBlankNode()
+		blankNode := ectx.Global.BlankNodeStringFactory.NewBlankNode()
 		blankNodeRange := r.commitForTextOffsetRange(r0.AsDecodedRunes())
 
 		ectx.CurSubject = blankNode
@@ -40,7 +40,7 @@ func reader_scan_triples(r *Decoder, ectx evaluationContext, r0 cursorio.Decoded
 
 		return readerStack{ectx, reader_scan_PredicateObjectList}, nil
 	case '(':
-		blankNode := ectx.Global.BlankNodeFactory.NewBlankNode()
+		blankNode := ectx.Global.BlankNodeStringFactory.NewBlankNode()
 		blankNodeRange := r.commitForTextOffsetRange(r0.AsDecodedRunes())
 
 		fn := scanFunc(func(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, err error) (readerStack, error) {
@@ -139,7 +139,7 @@ func reader_scan_triples_subject_BlankNode(r *Decoder, ectx evaluationContext, r
 		return readerStack{}, grammar.R_triples.Err(grammar.R_subject.Err(err))
 	}
 
-	ectx.CurSubject = ectx.Global.BlankNodeStringMapper.MapBlankNodeIdentifier(token.Decoded)
+	ectx.CurSubject = ectx.Global.BlankNodeStringFactory.NewStringBlankNode(token.Decoded)
 	ectx.CurSubjectLocation = token.Offsets
 
 	r.pushState(ectx, reader_scan_PredicateObjectList_Continue)

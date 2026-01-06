@@ -16,6 +16,7 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
 	"github.com/dpb587/rdfkit-go/rdf"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 	"github.com/dpb587/rdfkit-go/rdf/quads"
 	"github.com/dpb587/rdfkit-go/rdf/rdfutil"
 	"github.com/dpb587/rdfkit-go/rdfcanon"
@@ -169,7 +170,7 @@ func Test(t *testing.T) {
 				mapper := NewTrackingStringMapper()
 				inputDecoder, err := nquads.NewDecoder(
 					bytes.NewReader(testdata.GetFileBytes(t, string(entry.Action))),
-					nquads.DecoderConfig{}.SetBlankNodeStringMapper(mapper),
+					nquads.DecoderConfig{}.SetBlankNodeStringFactory(mapper),
 				)
 				if err != nil {
 					tAssertion.Fatalf("decode action: %v", err)
@@ -182,7 +183,7 @@ func Test(t *testing.T) {
 
 				// Build the actual map from original identifiers to canonical identifiers
 				actualMap := make(map[string]string)
-				for origID, bn := range mapper.GetMappings() {
+				for origID, bn := range mapper.mappings {
 					actualMap[origID] = canonicalization.GetBlankNodeIdentifier(bn)
 				}
 
@@ -277,26 +278,26 @@ type ManifestEntry struct {
 // TrackingStringMapper is a custom StringMapper that tracks the original string identifiers
 // so we can verify the blank node mappings after canonicalization
 type TrackingStringMapper struct {
-	factory  rdf.BlankNodeFactory
+	factory  blanknodes.StringFactory
 	mappings map[string]rdf.BlankNode
 }
 
 func NewTrackingStringMapper() *TrackingStringMapper {
 	return &TrackingStringMapper{
-		factory:  rdf.DefaultBlankNodeFactory,
+		factory:  blanknodes.NewStringFactory(),
 		mappings: make(map[string]rdf.BlankNode),
 	}
 }
 
-func (t *TrackingStringMapper) MapBlankNodeIdentifier(v string) rdf.BlankNode {
+func (t *TrackingStringMapper) NewBlankNode() rdf.BlankNode {
+	return t.factory.NewBlankNode()
+}
+
+func (t *TrackingStringMapper) NewStringBlankNode(v string) rdf.BlankNode {
 	if bn, ok := t.mappings[v]; ok {
 		return bn
 	}
-	bn := t.factory.NewBlankNode()
+	bn := t.factory.NewStringBlankNode(v)
 	t.mappings[v] = bn
 	return bn
-}
-
-func (t *TrackingStringMapper) GetMappings() map[string]rdf.BlankNode {
-	return t.mappings
 }

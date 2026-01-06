@@ -11,13 +11,13 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdf/triples"
 	"github.com/dpb587/rdfkit-go/testing/testingassert"
 )
 
-var testingBnode = blanknodeutil.NewStringMapper()
+var testingBnode = blanknodes.NewStringFactory()
 
 // https://www.w3.org/TR/html-rdfa/
 func TestW3trHtmlRdfaNonNormative(t *testing.T) {
@@ -97,14 +97,14 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://schema.org/MusicEvent"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://schema.org/startDate"),
 						Object: rdf.Literal{
 							LexicalForm: "2013-03-03",
@@ -114,21 +114,21 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://schema.org/location"),
 						Object:    rdf.IRI("#united"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://schema.org/MusicEvent"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("http://schema.org/startDate"),
 						Object: rdf.Literal{
 							LexicalForm: "2013-03-07",
@@ -138,7 +138,7 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("http://schema.org/location"),
 						Object:    rdf.IRI("#target"),
 					},
@@ -146,56 +146,56 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
 				// pattern
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://schema.org/image"),
 						Object:    rdf.IRI("Muse1.jpg"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://schema.org/image"),
 						Object:    rdf.IRI("Muse2.jpg"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://schema.org/image"),
 						Object:    rdf.IRI("Muse3.jpg"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://schema.org/name"),
 						Object:    xsdobject.String("Muse"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("http://schema.org/image"),
 						Object:    rdf.IRI("Muse1.jpg"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("http://schema.org/image"),
 						Object:    rdf.IRI("Muse2.jpg"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("http://schema.org/image"),
 						Object:    rdf.IRI("Muse3.jpg"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("http://schema.org/name"),
 						Object:    xsdobject.String("Muse"),
 					},
@@ -225,42 +225,42 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://schema.org/Person"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://schema.org/name"),
 						Object:    xsdobject.String("John Lennon"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://schema.org/band"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b1"),
+						Object:    testingBnode.NewStringBlankNode("b1"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://schema.org/MusicGroup"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("http://schema.org/name"),
 						Object:    xsdobject.String("The Beatles"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("http://schema.org/size"),
 						Object:    xsdobject.String("4"),
 					},
@@ -547,21 +547,21 @@ Sue knows
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://xmlns.com/foaf/0.1/Person"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
 						Object:    xsdobject.String("Albert Einstein"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/givenName"),
 						Object:    xsdobject.String("Albert"),
 					},
@@ -577,21 +577,21 @@ Sue knows
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://xmlns.com/foaf/0.1/Person"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
 						Object:    xsdobject.String("Albert Einstein"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/givenName"),
 						Object:    xsdobject.String("Albert"),
 					},
@@ -610,19 +610,19 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Albert_Einstein"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/birthPlace"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b0"),
+						Object:    testingBnode.NewStringBlankNode("b0"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://schema.org/Country"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/conventionalLongName"),
 						Object:    xsdobject.String("the German Empire"),
 					},
@@ -769,7 +769,7 @@ Sue knows
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
 						Object:    xsdobject.String("Albert Einstein"),
 					},
@@ -778,12 +778,12 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Baruch_Spinoza"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/influenced"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b0"),
+						Object:    testingBnode.NewStringBlankNode("b0"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/dateOfBirth"),
 						Object: rdf.Literal{
 							LexicalForm: "1879-03-14",
@@ -796,7 +796,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Baruch_Spinoza"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/influenced"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b0"),
+						Object:    testingBnode.NewStringBlankNode("b0"),
 					},
 				},
 			},
@@ -810,7 +810,7 @@ Sue knows
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
 						Object:    xsdobject.String("Albert Einstein"),
 					},
@@ -819,12 +819,12 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Baruch_Spinoza"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/influenced"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b0"),
+						Object:    testingBnode.NewStringBlankNode("b0"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/dateOfBirth"),
 						Object: rdf.Literal{
 							LexicalForm: "1879-03-14",
@@ -837,7 +837,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Baruch_Spinoza"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/influenced"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b0"),
+						Object:    testingBnode.NewStringBlankNode("b0"),
 					},
 				},
 			},
@@ -853,7 +853,7 @@ Sue knows
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
 						Object:    xsdobject.String("Albert Einstein"),
 					},
@@ -862,12 +862,12 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Baruch_Spinoza"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/influenced"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b0"),
+						Object:    testingBnode.NewStringBlankNode("b0"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/dateOfBirth"),
 						Object: rdf.Literal{
 							LexicalForm: "1879-03-14",
@@ -880,7 +880,7 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Baruch_Spinoza"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/influenced"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b0"),
+						Object:    testingBnode.NewStringBlankNode("b0"),
 					},
 				},
 			},
@@ -928,26 +928,26 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Baruch_Spinoza"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/influenced"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b0"),
+						Object:    testingBnode.NewStringBlankNode("b0"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://xmlns.com/foaf/0.1/Person"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
 						Object:    xsdobject.String("Albert Einstein"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/dateOfBirth"),
 						Object: rdf.Literal{
 							LexicalForm: "1879-03-14",
@@ -959,26 +959,26 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Baruch_Spinoza"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/influenced"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b1"),
+						Object:    testingBnode.NewStringBlankNode("b1"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://xmlns.com/foaf/0.1/Person"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
 						Object:    xsdobject.String("Arthur Schopenhauer"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/dateOfBirth"),
 						Object: rdf.Literal{
 							LexicalForm: "1788-02-22",
@@ -1002,7 +1002,7 @@ Sue knows
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://xmlns.com/foaf/0.1/name"),
 						Object:    xsdobject.String("Albert Einstein"),
 					},
@@ -1011,12 +1011,12 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Baruch_Spinoza"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/influenced"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b0"),
+						Object:    testingBnode.NewStringBlankNode("b0"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://dbpedia.org/property/dateOfBirth"),
 						Object: rdf.Literal{
 							LexicalForm: "1879-03-14",
@@ -1028,19 +1028,19 @@ Sue knows
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Baruch_Spinoza"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/influenced"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b0"),
+						Object:    testingBnode.NewStringBlankNode("b0"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   rdf.IRI("http://dbpedia.org/resource/Baruch_Spinoza"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/influenced"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b0"),
+						Object:    testingBnode.NewStringBlankNode("b0"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://dbpedia.org/ontology/residence"),
 						Object:    rdf.IRI("http://dbpedia.org/resource/German_Empire"),
 					},
@@ -1256,63 +1256,63 @@ Sue knows
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://purl.org/ontology/bibo/Chapter"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/title"),
 						Object:    xsdobject.String("Semantic Annotation and Retrieval"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/creator"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b1"),
+						Object:    testingBnode.NewStringBlankNode("b1"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 						Object:    rdf.IRI("http://ben.adida.net/#me"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b2"),
+						Object:    testingBnode.NewStringBlankNode("b2"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
+						Subject:   testingBnode.NewStringBlankNode("b2"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 						Object:    rdf.IRI("http://twitter.com/markbirbeck"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
+						Subject:   testingBnode.NewStringBlankNode("b2"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b3"),
+						Object:    testingBnode.NewStringBlankNode("b3"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
+						Subject:   testingBnode.NewStringBlankNode("b3"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 						Object:    rdf.IRI("http://www.ivan-herman.net/foaf#me"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
+						Subject:   testingBnode.NewStringBlankNode("b3"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 						Object:    rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
 					},
@@ -1330,63 +1330,63 @@ Sue knows
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://purl.org/ontology/bibo/Chapter"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/title"),
 						Object:    xsdobject.String("Semantic Annotation and Retrieval"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/creator"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b1"),
+						Object:    testingBnode.NewStringBlankNode("b1"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 						Object:    rdf.IRI("http://ben.adida.net/#me"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b2"),
+						Object:    testingBnode.NewStringBlankNode("b2"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
+						Subject:   testingBnode.NewStringBlankNode("b2"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 						Object:    xsdobject.String("Mark Birbeck"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
+						Subject:   testingBnode.NewStringBlankNode("b2"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b3"),
+						Object:    testingBnode.NewStringBlankNode("b3"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
+						Subject:   testingBnode.NewStringBlankNode("b3"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 						Object:    rdf.IRI("http://www.ivan-herman.net/foaf#me"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
+						Subject:   testingBnode.NewStringBlankNode("b3"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 						Object:    rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
 					},
@@ -1404,63 +1404,63 @@ Sue knows
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://purl.org/ontology/bibo/Chapter"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/title"),
 						Object:    xsdobject.String("Semantic Annotation and Retrieval"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://purl.org/dc/terms/creator"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b1"),
+						Object:    testingBnode.NewStringBlankNode("b1"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 						Object:    rdf.IRI("http://ben.adida.net/#me"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b2"),
+						Object:    testingBnode.NewStringBlankNode("b2"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
+						Subject:   testingBnode.NewStringBlankNode("b2"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 						Object:    xsdobject.String("Mark Birbeck"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
+						Subject:   testingBnode.NewStringBlankNode("b2"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b3"),
+						Object:    testingBnode.NewStringBlankNode("b3"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
+						Subject:   testingBnode.NewStringBlankNode("b3"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 						Object:    rdf.IRI("http://www.ivan-herman.net/foaf#me"),
 					},
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
+						Subject:   testingBnode.NewStringBlankNode("b3"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 						Object:    rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
 					},

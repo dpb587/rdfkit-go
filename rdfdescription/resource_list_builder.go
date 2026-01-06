@@ -37,13 +37,13 @@ func (rb *ResourceListBuilder) Add(triples ...rdf.Triple) {
 
 		switch objectSubject := t.Object.(type) {
 		case rdf.BlankNode:
-			rb.blankNodeReferences[objectSubject.GetBlankNodeIdentifier()]++
+			rb.blankNodeReferences[objectSubject.Identifier]++
 		}
 	}
 }
 
 func (rb *ResourceListBuilder) GetBlankNodeReferences(bn rdf.BlankNode) int {
-	return rb.blankNodeReferences[bn.GetBlankNodeIdentifier()]
+	return rb.blankNodeReferences[bn.Identifier]
 }
 
 func (rb *ResourceListBuilder) GetResourceStatements(s rdf.SubjectValue) StatementList {
@@ -54,7 +54,7 @@ func (rb *ResourceListBuilder) GetResources() ResourceList {
 	var resources ResourceList
 
 	for subject := range rb.resourceBySubject {
-		if bn, ok := subject.(rdf.BlankNode); ok && rb.blankNodeReferences[bn.GetBlankNodeIdentifier()] == 1 {
+		if bn, ok := subject.(rdf.BlankNode); ok && rb.blankNodeReferences[bn.Identifier] == 1 {
 			continue
 		}
 
@@ -82,7 +82,7 @@ func (rb *ResourceListBuilder) getResourceStatements(subject rdf.SubjectValue) S
 	var statements StatementList
 
 	for _, statement := range rb.resourceBySubject[subject] {
-		if bn, ok := statement.Object.(rdf.BlankNode); ok && rb.blankNodeReferences[bn.GetBlankNodeIdentifier()] == 1 {
+		if bn, ok := statement.Object.(rdf.BlankNode); ok && rb.blankNodeReferences[bn.Identifier] == 1 {
 			statements = append(statements, AnonResourceStatement{
 				Predicate: statement.Predicate,
 				AnonResource: AnonResource{

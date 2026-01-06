@@ -8,6 +8,7 @@ import (
 	"github.com/dpb587/inspectjson-go/inspectjson"
 	"github.com/dpb587/rdfkit-go/encoding/encodingutil"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 )
 
 type DecoderConfig struct {
@@ -17,6 +18,8 @@ type DecoderConfig struct {
 	initialTextOffset  *cursorio.TextOffset
 
 	parserOptions []inspectjson.ParserOption
+
+	bnStringFactory blanknodes.StringFactory
 
 	processingMode *string
 	documentLoader jsonldtype.DocumentLoader
@@ -50,6 +53,12 @@ func (b DecoderConfig) SetInitialTextOffset(v cursorio.TextOffset) DecoderConfig
 
 func (b DecoderConfig) SetParserOptions(v ...inspectjson.ParserOption) DecoderConfig {
 	b.parserOptions = v
+
+	return b
+}
+
+func (b DecoderConfig) SetBlankNodeStringFactory(v blanknodes.StringFactory) DecoderConfig {
+	b.bnStringFactory = v
 
 	return b
 }
@@ -107,6 +116,10 @@ func (b DecoderConfig) apply(s *DecoderConfig) {
 		s.parserOptions = b.parserOptions
 	}
 
+	if b.bnStringFactory != nil {
+		s.bnStringFactory = b.bnStringFactory
+	}
+
 	if b.processingMode != nil {
 		s.processingMode = b.processingMode
 	}
@@ -139,6 +152,7 @@ func (b DecoderConfig) newDecoder(r io.Reader) (*Decoder, error) {
 		documentLoader:          b.documentLoader,
 		expandContext:           b.expandContext,
 		parserOptions:           b.parserOptions,
+		bnStringFactory:         b.bnStringFactory,
 		baseDirectiveListener:   b.baseDirectiveListener,
 		prefixDirectiveListener: b.prefixDirectiveListener,
 		buildTextOffsets:        encodingutil.BuildTextOffsetsNil,
@@ -156,6 +170,10 @@ func (b DecoderConfig) newDecoder(r io.Reader) (*Decoder, error) {
 		}
 
 		d.buildTextOffsets = encodingutil.BuildTextOffsetsValue
+	}
+
+	if b.bnStringFactory == nil {
+		d.bnStringFactory = blanknodes.NewStringFactory()
 	}
 
 	if b.processingMode != nil {

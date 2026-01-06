@@ -14,7 +14,7 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 )
 
 type DecoderOption interface {
@@ -31,6 +31,7 @@ type Decoder struct {
 	r                io.Reader
 	topts            []inspectjson.TokenizerOption
 	buildTextOffsets encodingutil.TextOffsetsBuilderFunc
+	bnStringFactory  blanknodes.StringFactory
 
 	err error
 
@@ -90,8 +91,6 @@ func (r *Decoder) StatementTextOffsets() encoding.StatementTextOffsets {
 func (r *Decoder) parseRoot() error {
 	t := inspectjson.NewTokenizer(r.r, r.topts...)
 
-	bnodeMap := blanknodeutil.NewStringMapper()
-
 	var subjectValue rdf.SubjectValue
 	var subjectOffset *cursorio.TextOffsetRange
 	var predicateValue rdf.PredicateValue
@@ -120,7 +119,7 @@ func (r *Decoder) parseRoot() error {
 		}
 
 		if strings.HasPrefix(tokenScalarString.Content, "_:") {
-			subjectValue = bnodeMap.MapBlankNodeIdentifier(tokenScalarString.Content[2:])
+			subjectValue = r.bnStringFactory.NewStringBlankNode(tokenScalarString.Content[2:])
 		} else {
 			subjectValue = rdf.IRI(tokenScalarString.Content)
 		}
@@ -340,7 +339,7 @@ func (r *Decoder) parseRoot() error {
 						triple: rdf.Triple{
 							Subject:   subjectValue,
 							Predicate: predicateValue,
-							Object:    bnodeMap.MapBlankNodeIdentifier(v[2:]),
+							Object:    r.bnStringFactory.NewStringBlankNode(v[2:]),
 						},
 						textOffsets: r.buildTextOffsets(
 							encoding.SubjectStatementOffsets, subjectOffset,

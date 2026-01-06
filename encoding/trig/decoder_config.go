@@ -7,7 +7,7 @@ import (
 	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/cursorio-go/x/cursorioutil"
 	"github.com/dpb587/rdfkit-go/encoding/encodingutil"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
@@ -15,7 +15,7 @@ type DecoderConfig struct {
 	defaultBase     *string
 	defaultPrefixes iriutil.PrefixMap
 
-	blankNodeStringMapper blanknodeutil.StringMapper
+	bnStringFactory blanknodes.StringFactory
 
 	captureTextOffsets *bool
 	initialTextOffset  *cursorio.TextOffset
@@ -36,8 +36,8 @@ func (b DecoderConfig) SetDefaultPrefixes(v iriutil.PrefixMap) DecoderConfig {
 	return b
 }
 
-func (b DecoderConfig) SetBlankNodeStringMapper(v blanknodeutil.StringMapper) DecoderConfig {
-	b.blankNodeStringMapper = v
+func (b DecoderConfig) SetBlankNodeStringFactory(v blanknodes.StringFactory) DecoderConfig {
+	b.bnStringFactory = v
 
 	return b
 }
@@ -77,8 +77,8 @@ func (o DecoderConfig) apply(s *DecoderConfig) {
 		s.defaultPrefixes = o.defaultPrefixes
 	}
 
-	if o.blankNodeStringMapper != nil {
-		s.blankNodeStringMapper = o.blankNodeStringMapper
+	if o.bnStringFactory != nil {
+		s.bnStringFactory = o.bnStringFactory
 	}
 
 	if o.captureTextOffsets != nil {
@@ -118,12 +118,10 @@ func (o DecoderConfig) newDecoder(r io.Reader) (*Decoder, error) {
 		defaultPrefixes = iriutil.PrefixMap{}
 	}
 
-	var blankNodeStringMapper blanknodeutil.StringMapper
+	var bnStringFactory = o.bnStringFactory
 
-	if o.blankNodeStringMapper != nil {
-		blankNodeStringMapper = o.blankNodeStringMapper
-	} else {
-		blankNodeStringMapper = blanknodeutil.NewStringMapper()
+	if bnStringFactory == nil {
+		bnStringFactory = blanknodes.NewStringFactory()
 	}
 
 	d := &Decoder{
@@ -135,10 +133,9 @@ func (o DecoderConfig) newDecoder(r io.Reader) (*Decoder, error) {
 			{
 				ectx: evaluationContext{
 					Global: &globalEvaluationContext{
-						Base:                  defaultBase,
-						Prefixes:              defaultPrefixes,
-						BlankNodeStringMapper: blankNodeStringMapper,
-						BlankNodeFactory:      blanknodeutil.NewFactory(),
+						Base:                   defaultBase,
+						Prefixes:               defaultPrefixes,
+						BlankNodeStringFactory: bnStringFactory,
 					},
 				},
 				fn: reader_scan_trigDoc,

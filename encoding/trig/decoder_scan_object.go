@@ -51,7 +51,7 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedR
 			return readerStack{}, grammar.R_object.Err(err)
 		}
 
-		blankNode := ectx.Global.BlankNodeStringMapper.MapBlankNodeIdentifier(token.Decoded)
+		blankNode := ectx.Global.BlankNodeStringFactory.NewStringBlankNode(token.Decoded)
 
 		return r.emit(statement{
 			quad: rdf.Quad{
@@ -77,12 +77,12 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedR
 				return readerStack{}, grammar.R_object.Err(grammar.R_collection.Err(err))
 			}
 
-			return reader_scan_collection(r, ectx, r0, ectx.Global.BlankNodeFactory.NewBlankNode(), cursor)
+			return reader_scan_collection(r, ectx, r0, ectx.Global.BlankNodeStringFactory.NewBlankNode(), cursor)
 		})
 
 		return readerStack{ectx, fn}, nil
 	case r0.Rune == '[':
-		blankNode := ectx.Global.BlankNodeFactory.NewBlankNode()
+		blankNode := ectx.Global.BlankNodeStringFactory.NewBlankNode()
 		blankNodeRange := r.commitForTextOffsetRange(r0.AsDecodedRunes())
 
 		nectx := ectx

@@ -11,15 +11,15 @@ import (
 	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 )
 
 const QuadsEncoderContentTypeIdentifier encoding.ContentTypeIdentifier = "internal.dev.quads"
 
 type QuadsEncoderOptions struct {
-	BlankNodeStringer        blanknodeutil.Stringer
-	BlankNodeStringMapperVar string
-	Source                   []byte
+	BlankNodeStringProvider   blanknodes.StringProvider
+	BlankNodeStringFactoryVar string
+	Source                    []byte
 }
 
 type QuadsEncoder struct {
@@ -30,12 +30,12 @@ type QuadsEncoder struct {
 var _ encoding.QuadsEncoder = &QuadsEncoder{}
 
 func NewQuadsEncoder(w io.Writer, opts QuadsEncoderOptions) *QuadsEncoder {
-	if opts.BlankNodeStringer == nil {
-		opts.BlankNodeStringer = blanknodeutil.NewStringerInt64()
+	if opts.BlankNodeStringProvider == nil {
+		opts.BlankNodeStringProvider = blanknodes.NewInt64StringProvider("b%d")
 	}
 
-	if opts.BlankNodeStringMapperVar == "" {
-		opts.BlankNodeStringMapperVar = "bnTODO"
+	if opts.BlankNodeStringFactoryVar == "" {
+		opts.BlankNodeStringFactoryVar = "bnTODO"
 	}
 
 	ww := &QuadsEncoder{
@@ -107,7 +107,7 @@ func (w *QuadsEncoder) AddQuadStatement(_ context.Context, s QuadStatement) erro
 
 				switch subject := s.Quad.Triple.Subject.(type) {
 				case rdf.BlankNode:
-					fmt.Fprintf(w.w, "%s.MapBlankNodeIdentifier(%q)", w.opts.BlankNodeStringMapperVar, w.opts.BlankNodeStringer.GetBlankNodeIdentifier(subject))
+					fmt.Fprintf(w.w, "%s.NewStringBlankNode(%q)", w.opts.BlankNodeStringFactoryVar, w.opts.BlankNodeStringProvider.GetBlankNodeString(subject))
 				case rdf.IRI:
 					fmt.Fprintf(w.w, "rdf.IRI(%q)", subject)
 				default:
@@ -135,7 +135,7 @@ func (w *QuadsEncoder) AddQuadStatement(_ context.Context, s QuadStatement) erro
 
 				switch object := s.Quad.Triple.Object.(type) {
 				case rdf.BlankNode:
-					fmt.Fprintf(w.w, "%s.MapBlankNodeIdentifier(%q)", w.opts.BlankNodeStringMapperVar, w.opts.BlankNodeStringer.GetBlankNodeIdentifier(object))
+					fmt.Fprintf(w.w, "%s.NewStringBlankNode(%q)", w.opts.BlankNodeStringFactoryVar, w.opts.BlankNodeStringProvider.GetBlankNodeString(object))
 				case rdf.IRI:
 					fmt.Fprintf(w.w, "rdf.IRI(%q)", object)
 				case rdf.Literal:
@@ -173,7 +173,7 @@ func (w *QuadsEncoder) AddQuadStatement(_ context.Context, s QuadStatement) erro
 
 			switch graphName := s.Quad.GraphName.(type) {
 			case rdf.BlankNode:
-				fmt.Fprintf(w.w, "%s.MapBlankNodeIdentifier(%q)", w.opts.BlankNodeStringMapperVar, w.opts.BlankNodeStringer.GetBlankNodeIdentifier(graphName))
+				fmt.Fprintf(w.w, "%s.NewStringBlankNode(%q)", w.opts.BlankNodeStringFactoryVar, w.opts.BlankNodeStringProvider.GetBlankNodeString(graphName))
 			case rdf.IRI:
 				fmt.Fprintf(w.w, "rdf.IRI(%q)", graphName)
 			default:

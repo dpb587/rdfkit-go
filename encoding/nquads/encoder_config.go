@@ -4,12 +4,12 @@ import (
 	"bytes"
 	"io"
 
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 )
 
 type EncoderConfig struct {
-	ascii             *bool
-	blankNodeStringer blanknodeutil.Stringer
+	ascii            *bool
+	bnStringProvider blanknodes.StringProvider
 }
 
 func (o EncoderConfig) SetASCII(v bool) EncoderConfig {
@@ -18,8 +18,8 @@ func (o EncoderConfig) SetASCII(v bool) EncoderConfig {
 	return o
 }
 
-func (o EncoderConfig) SetBlankNodeStringer(v blanknodeutil.Stringer) EncoderConfig {
-	o.blankNodeStringer = v
+func (o EncoderConfig) SetBlankNodeStringProvider(v blanknodes.StringProvider) EncoderConfig {
+	o.bnStringProvider = v
 
 	return o
 }
@@ -29,24 +29,24 @@ func (o EncoderConfig) apply(d *EncoderConfig) {
 		d.ascii = o.ascii
 	}
 
-	if o.blankNodeStringer != nil {
-		d.blankNodeStringer = o.blankNodeStringer
+	if o.bnStringProvider != nil {
+		d.bnStringProvider = o.bnStringProvider
 	}
 }
 
 func (o EncoderConfig) newEncoder(w io.Writer) (*Encoder, error) {
 	ww := &Encoder{
-		w:                 w,
-		blankNodeStringer: o.blankNodeStringer,
-		buf:               bytes.NewBuffer(make([]byte, 0, 4096)),
+		w:                w,
+		bnStringProvider: o.bnStringProvider,
+		buf:              bytes.NewBuffer(make([]byte, 0, 4096)),
 	}
 
 	if o.ascii != nil && *o.ascii {
 		ww.ascii = *o.ascii
 	}
 
-	if ww.blankNodeStringer == nil {
-		ww.blankNodeStringer = blanknodeutil.NewStringerInt64()
+	if ww.bnStringProvider == nil {
+		ww.bnStringProvider = blanknodes.NewInt64StringProvider("b%d")
 	}
 
 	return ww, nil

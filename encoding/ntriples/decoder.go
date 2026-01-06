@@ -12,7 +12,7 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding/ntriples/internal/grammar"
 	"github.com/dpb587/rdfkit-go/encoding/ntriples/ntriplescontent"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 )
 
 type DecoderOption interface {
@@ -21,10 +21,10 @@ type DecoderOption interface {
 }
 
 type Decoder struct {
-	buf                   *cursorioutil.RuneBuffer
-	doc                   *cursorio.TextWriter
-	blankNodeStringMapper blanknodeutil.StringMapper
-	buildTextOffsets      encodingutil.TextOffsetsBuilderFunc
+	buf              *cursorioutil.RuneBuffer
+	doc              *cursorio.TextWriter
+	bnStringFactory  blanknodes.StringFactory
+	buildTextOffsets encodingutil.TextOffsetsBuilderFunc
 
 	err error
 

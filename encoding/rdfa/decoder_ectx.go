@@ -6,7 +6,7 @@ import (
 	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
@@ -53,8 +53,7 @@ type globalEvaluationContext struct {
 	HtmlProcessing HtmlProcessingProfile
 	HtmlFoundBase  bool
 
-	BlankNodeStringMapper blanknodeutil.StringMapper
-	BlankNodeFactory      rdf.BlankNodeFactory
+	BlankNodeStringFactory blanknodes.StringFactory
 }
 
 type listMappingBuilder struct {
@@ -118,10 +117,10 @@ func resolveIRI(g *globalEvaluationContext, prefixes iriutil.PrefixMap, termMapp
 	if strings.HasPrefix(value, "_:") {
 		if value == "_:" {
 			// [rdfa-core] As a special case, _: is also a valid reference for one specific bnode.
-			return g.BlankNodeFactory.NewBlankNode()
+			return g.BlankNodeStringFactory.NewBlankNode()
 		}
 
-		return g.BlankNodeStringMapper.MapBlankNodeIdentifier(value[2:])
+		return g.BlankNodeStringFactory.NewStringBlankNode(value[2:])
 	}
 
 	if isSafe {

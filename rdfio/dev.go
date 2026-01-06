@@ -7,7 +7,7 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/encodingtest"
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 	"github.com/dpb587/rdfkit-go/rdfio/rdfiotypes"
 )
 
@@ -198,7 +198,7 @@ func (encodingDevHtmlInspector) NewEncoder(ww rdfiotypes.Writer, opts rdfiotypes
 	</body>
 </html>`)),
 		Formatter: turtle.NewTermFormatter(turtle.TermFormatterOptions{
-			BlankNodeStringer: blanknodeutil.NewStringerInt64(),
+			BlankNodeStringProvider: blanknodes.NewInt64StringProvider("b%d"),
 		}),
 	}
 

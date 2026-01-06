@@ -4,10 +4,10 @@ import (
 	"testing"
 
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 )
 
-var testingBnode = blanknodeutil.NewStringMapper()
+var testingBnode = blanknodes.NewStringFactory()
 
 func assertQueryResponseResultBindingEqual(t *testing.T, e, a QueryResponseResultBinding) {
 	if e.Name != a.Name {

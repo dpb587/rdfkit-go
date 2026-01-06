@@ -446,7 +446,7 @@ func reader_scan_trigDoc(r *Decoder, ectx evaluationContext, r0 cursorio.Decoded
 						return readerStack{}, grammar.R_block.Err(grammar.R_labelOrSubject.Err(err))
 					}
 
-					graphRef = ectx.Global.BlankNodeStringMapper.MapBlankNodeIdentifier(token.Decoded)
+					graphRef = ectx.Global.BlankNodeStringFactory.NewStringBlankNode(token.Decoded)
 					graphCursorRange = token.Offsets
 				case '[':
 					blankNodeRange := r.commitForTextOffsetRange(r0.AsDecodedRunes())
@@ -456,7 +456,7 @@ func reader_scan_trigDoc(r *Decoder, ectx evaluationContext, r0 cursorio.Decoded
 							return readerStack{}, grammar.R_block.Err(grammar.R_labelOrSubject.Err(grammar.R_BlankNode.Err(grammar.R_ANON.Err(r.newOffsetError(cursorioutil.UnexpectedRuneError{Rune: r0.Rune}, cursorio.DecodedRunes{}, r0.AsDecodedRunes())))))
 						}
 
-						ectx.CurGraphName = ectx.Global.BlankNodeFactory.NewBlankNode()
+						ectx.CurGraphName = ectx.Global.BlankNodeStringFactory.NewBlankNode()
 
 						closeRange := r.commitForTextOffsetRange(r0.AsDecodedRunes())
 
@@ -514,7 +514,7 @@ func reader_scan_trigDoc(r *Decoder, ectx evaluationContext, r0 cursorio.Decoded
 	case '_':
 		return reader_scan_triplesOrGraph_labelOrSubject_BlankNode(r, ectx, r0, nil)
 	case '[':
-		blankNode := ectx.Global.BlankNodeFactory.NewBlankNode()
+		blankNode := ectx.Global.BlankNodeStringFactory.NewBlankNode()
 		blankNodeRange := r.commitForTextOffsetRange(r0.AsDecodedRunes())
 
 		fn := scanFunc(func(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, err error) (readerStack, error) {
@@ -534,7 +534,7 @@ func reader_scan_trigDoc(r *Decoder, ectx evaluationContext, r0 cursorio.Decoded
 
 		return readerStack{ectx, fn}, nil
 	case '(':
-		blankNode := ectx.Global.BlankNodeFactory.NewBlankNode()
+		blankNode := ectx.Global.BlankNodeStringFactory.NewBlankNode()
 		blankNodeRange := r.commitForTextOffsetRange(r0.AsDecodedRunes())
 
 		fn := scanFunc(func(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, err error) (readerStack, error) {

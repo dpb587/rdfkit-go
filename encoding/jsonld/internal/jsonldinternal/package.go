@@ -8,7 +8,6 @@ import (
 
 	"github.com/dpb587/inspectjson-go/inspectjson"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
@@ -79,7 +78,6 @@ func Expand(input inspectjson.Value, opts jsonldtype.ProcessorOptions) (Expanded
 		TermDefinitions: map[string]*TermDefinition{},
 		_processor: &contextProcessor{
 			ctx:                       context.Background(),
-			blankNodeStringMapper:     blanknodeutil.NewStringMapper(),
 			processingMode:            opts.ProcessingMode,
 			dereferencedDocumentByIRI: map[string]dereferencedDocument{},
 			documentLoader:            opts.DocumentLoader,

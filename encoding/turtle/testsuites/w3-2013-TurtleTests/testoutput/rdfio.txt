@@ -767,7 +767,7 @@ encodingtest.TripleStatementList{
 		Triple: rdf.Triple{
 			Subject: rdf.IRI("http://a.example/s"),
 			Predicate: rdf.IRI("http://a.example/p"),
-			Object: bnTODO.MapBlankNodeIdentifier("b0"),
+			Object: bnTODO.NewStringBlankNode("b0"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -791,7 +791,7 @@ encodingtest.TripleStatementList{
 encodingtest.TripleStatementList{
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://a.example/p"),
 			Object: rdf.IRI("http://a.example/o"),
 		},
@@ -932,7 +932,7 @@ encodingtest.TripleStatementList{
 		Triple: rdf.Triple{
 			Subject: rdf.IRI("http://a.example/s"),
 			Predicate: rdf.IRI("http://a.example/p"),
-			Object: bnTODO.MapBlankNodeIdentifier("b0"),
+			Object: bnTODO.NewStringBlankNode("b0"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -951,7 +951,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://a.example/p2"),
 			Object: rdf.IRI("http://a.example/o2"),
 		},
@@ -977,7 +977,7 @@ encodingtest.TripleStatementList{
 encodingtest.TripleStatementList{
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://a.example/p"),
 			Object: rdf.IRI("http://a.example/o"),
 		},
@@ -998,7 +998,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://a.example/p2"),
 			Object: rdf.IRI("http://a.example/o2"),
 		},
@@ -1024,9 +1024,9 @@ encodingtest.TripleStatementList{
 encodingtest.TripleStatementList{
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://a.example/p1"),
-			Object: bnTODO.MapBlankNodeIdentifier("b1"),
+			Object: bnTODO.NewStringBlankNode("b1"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1045,7 +1045,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+			Subject: bnTODO.NewStringBlankNode("b1"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 			Object: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
 		},
@@ -1062,7 +1062,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+			Subject: bnTODO.NewStringBlankNode("b1"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 			Object: rdf.Literal{
 				LexicalForm: "1",
@@ -1087,7 +1087,7 @@ encodingtest.TripleStatementList{
 encodingtest.TripleStatementList{
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://a.example/p"),
 			Object: rdf.IRI("http://a.example/o"),
 		},
@@ -1108,7 +1108,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://a.example/p2"),
 			Object: rdf.IRI("http://a.example/o2"),
 		},
@@ -1129,7 +1129,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://a.example/p1"),
 			Object: rdf.IRI("http://a.example/o1"),
 		},
@@ -1157,7 +1157,7 @@ encodingtest.TripleStatementList{
 		Triple: rdf.Triple{
 			Subject: rdf.IRI("http://a.example/s"),
 			Predicate: rdf.IRI("http://a.example/p"),
-			Object: bnTODO.MapBlankNodeIdentifier("b0"),
+			Object: bnTODO.NewStringBlankNode("b0"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1176,7 +1176,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 			Object: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
 		},
@@ -1193,7 +1193,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 			Object: rdf.Literal{
 				LexicalForm: "1",
@@ -1218,7 +1218,7 @@ encodingtest.TripleStatementList{
 encodingtest.TripleStatementList{
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 			Object: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
 		},
@@ -1235,7 +1235,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 			Object: rdf.Literal{
 				LexicalForm: "1",
@@ -1255,7 +1255,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://a.example/p"),
 			Object: rdf.IRI("http://a.example/o"),
 		},
@@ -1416,7 +1416,7 @@ encodingtest.TripleStatementList{
 		Triple: rdf.Triple{
 			Subject: rdf.IRI("http://a.example/s"),
 			Predicate: rdf.IRI("http://a.example/p"),
-			Object: bnTODO.MapBlankNodeIdentifier("b0"),
+			Object: bnTODO.NewStringBlankNode("b0"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1435,9 +1435,9 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
-			Object: bnTODO.MapBlankNodeIdentifier("b1"),
+			Object: bnTODO.NewStringBlankNode("b1"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1448,9 +1448,9 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
-			Object: bnTODO.MapBlankNodeIdentifier("b2"),
+			Object: bnTODO.NewStringBlankNode("b2"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1465,7 +1465,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b2"),
+			Subject: bnTODO.NewStringBlankNode("b2"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 			Object: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
 		},
@@ -1482,7 +1482,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b2"),
+			Subject: bnTODO.NewStringBlankNode("b2"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 			Object: rdf.Literal{
 				LexicalForm: "1",
@@ -1502,7 +1502,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+			Subject: bnTODO.NewStringBlankNode("b1"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 			Object: rdf.Literal{
 				LexicalForm: "2",
@@ -1518,7 +1518,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+			Subject: bnTODO.NewStringBlankNode("b1"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 			Object: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
 		},
@@ -1538,7 +1538,7 @@ encodingtest.TripleStatementList{
 		Triple: rdf.Triple{
 			Subject: rdf.IRI("http://a.example/s"),
 			Predicate: rdf.IRI("http://a.example/p"),
-			Object: bnTODO.MapBlankNodeIdentifier("b0"),
+			Object: bnTODO.NewStringBlankNode("b0"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1562,7 +1562,7 @@ encodingtest.TripleStatementList{
 encodingtest.TripleStatementList{
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://a.example/p"),
 			Object: rdf.IRI("http://a.example/o"),
 		},
@@ -1590,7 +1590,7 @@ encodingtest.TripleStatementList{
 		Triple: rdf.Triple{
 			Subject: rdf.IRI("http://a.example/s"),
 			Predicate: rdf.IRI("http://a.example/p"),
-			Object: bnTODO.MapBlankNodeIdentifier("b0"),
+			Object: bnTODO.NewStringBlankNode("b0"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1616,7 +1616,7 @@ encodingtest.TripleStatementList{
 		Triple: rdf.Triple{
 			Subject: rdf.IRI("http://a.example/s"),
 			Predicate: rdf.IRI("http://a.example/p"),
-			Object: bnTODO.MapBlankNodeIdentifier("b0"),
+			Object: bnTODO.NewStringBlankNode("b0"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1642,7 +1642,7 @@ encodingtest.TripleStatementList{
 		Triple: rdf.Triple{
 			Subject: rdf.IRI("http://a.example/s"),
 			Predicate: rdf.IRI("http://a.example/p"),
-			Object: bnTODO.MapBlankNodeIdentifier("b0"),
+			Object: bnTODO.NewStringBlankNode("b0"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1668,7 +1668,7 @@ encodingtest.TripleStatementList{
 		Triple: rdf.Triple{
 			Subject: rdf.IRI("http://a.example/s"),
 			Predicate: rdf.IRI("http://a.example/p"),
-			Object: bnTODO.MapBlankNodeIdentifier("b0"),
+			Object: bnTODO.NewStringBlankNode("b0"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1822,7 +1822,7 @@ encodingtest.TripleStatementList{
 		Triple: rdf.Triple{
 			Subject: rdf.IRI("http://a.example/s"),
 			Predicate: rdf.IRI("http://a.example/p"),
-			Object: bnTODO.MapBlankNodeIdentifier("b0"),
+			Object: bnTODO.NewStringBlankNode("b0"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1841,9 +1841,9 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
-			Object: bnTODO.MapBlankNodeIdentifier("b1"),
+			Object: bnTODO.NewStringBlankNode("b1"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1854,7 +1854,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 			Object: rdf.Literal{
 				LexicalForm: "1",
@@ -1874,9 +1874,9 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+			Subject: bnTODO.NewStringBlankNode("b1"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
-			Object: bnTODO.MapBlankNodeIdentifier("b2"),
+			Object: bnTODO.NewStringBlankNode("b2"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1887,7 +1887,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b2"),
+			Subject: bnTODO.NewStringBlankNode("b2"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 			Object: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
 		},
@@ -1904,7 +1904,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b2"),
+			Subject: bnTODO.NewStringBlankNode("b2"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 			Object: rdf.Literal{
 				LexicalForm: "2",
@@ -1924,7 +1924,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+			Subject: bnTODO.NewStringBlankNode("b1"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 			Object: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
 		},
@@ -2588,7 +2588,7 @@ encodingtest.TripleStatementList{
 encodingtest.TripleStatementList{
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://a.example/p"),
 			Object: rdf.IRI("http://a.example/o"),
 		},
@@ -2609,9 +2609,9 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://a.example/p1"),
-			Object: bnTODO.MapBlankNodeIdentifier("b1"),
+			Object: bnTODO.NewStringBlankNode("b1"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2630,7 +2630,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+			Subject: bnTODO.NewStringBlankNode("b1"),
 			Predicate: rdf.IRI("http://a.example/p2"),
 			Object: rdf.IRI("http://a.example/o2"),
 		},
@@ -2658,7 +2658,7 @@ encodingtest.TripleStatementList{
 		Triple: rdf.Triple{
 			Subject: rdf.IRI("http://a.example/s"),
 			Predicate: rdf.IRI("http://a.example/p"),
-			Object: bnTODO.MapBlankNodeIdentifier("b0"),
+			Object: bnTODO.NewStringBlankNode("b0"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2677,7 +2677,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 			Object: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
 		},
@@ -2694,9 +2694,9 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
-			Object: bnTODO.MapBlankNodeIdentifier("b1"),
+			Object: bnTODO.NewStringBlankNode("b1"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2711,7 +2711,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+			Subject: bnTODO.NewStringBlankNode("b1"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 			Object: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
 		},
@@ -2728,7 +2728,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+			Subject: bnTODO.NewStringBlankNode("b1"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 			Object: rdf.Literal{
 				LexicalForm: "1",
@@ -3319,7 +3319,7 @@ encodingtest.TripleStatementList{
 encodingtest.TripleStatementList{
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://a.example/p"),
 			Object: rdf.IRI("http://a.example/o"),
 		},
@@ -3418,7 +3418,7 @@ encodingtest.TripleStatementList{
 encodingtest.TripleStatementList{
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/2013/TurtleTests/turtle-subm-01.ttl#x"),
 			Object: rdf.IRI("http://www.w3.org/2013/TurtleTests/turtle-subm-01.ttl#y"),
 		},
@@ -3648,7 +3648,7 @@ encodingtest.TripleStatementList{
 encodingtest.TripleStatementList{
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://example.org/base#a"),
 			Object: rdf.IRI("http://example.org/base#b"),
 		},
@@ -3671,7 +3671,7 @@ encodingtest.TripleStatementList{
 		Triple: rdf.Triple{
 			Subject: rdf.IRI("http://example.org/base#c"),
 			Predicate: rdf.IRI("http://example.org/base#d"),
-			Object: bnTODO.MapBlankNodeIdentifier("b1"),
+			Object: bnTODO.NewStringBlankNode("b1"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -3695,7 +3695,7 @@ encodingtest.TripleStatementList{
 encodingtest.TripleStatementList{
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://example.org/base#c"),
 			Object: rdf.IRI("http://example.org/base#d"),
 		},
@@ -3716,7 +3716,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://example.org/base#a"),
 			Object: rdf.IRI("http://example.org/base#b"),
 		},
@@ -3739,7 +3739,7 @@ encodingtest.TripleStatementList{
 		Triple: rdf.Triple{
 			Subject: rdf.IRI("http://example.org/base#e"),
 			Predicate: rdf.IRI("http://example.org/base#f"),
-			Object: bnTODO.MapBlankNodeIdentifier("b1"),
+			Object: bnTODO.NewStringBlankNode("b1"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -3758,7 +3758,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+			Subject: bnTODO.NewStringBlankNode("b1"),
 			Predicate: rdf.IRI("http://example.org/base#g"),
 			Object: rdf.IRI("http://example.org/base#h"),
 		},
@@ -3812,7 +3812,7 @@ encodingtest.TripleStatementList{
 		Triple: rdf.Triple{
 			Subject: rdf.IRI("http://example.org/stuff/1.0/a"),
 			Predicate: rdf.IRI("http://example.org/stuff/1.0/b"),
-			Object: bnTODO.MapBlankNodeIdentifier("b0"),
+			Object: bnTODO.NewStringBlankNode("b0"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -3831,9 +3831,9 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
-			Object: bnTODO.MapBlankNodeIdentifier("b1"),
+			Object: bnTODO.NewStringBlankNode("b1"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -3844,7 +3844,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 			Object: rdf.Literal{
 				LexicalForm: "apple",
@@ -3864,7 +3864,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+			Subject: bnTODO.NewStringBlankNode("b1"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 			Object: rdf.Literal{
 				LexicalForm: "banana",
@@ -3880,7 +3880,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+			Subject: bnTODO.NewStringBlankNode("b1"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 			Object: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
 		},
@@ -3924,7 +3924,7 @@ encodingtest.TripleStatementList{
 encodingtest.TripleStatementList{
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 			Object: rdf.IRI("http://www.w3.org/2002/07/owl#ObjectProperty"),
 		},
@@ -3945,9 +3945,9 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+			Subject: bnTODO.NewStringBlankNode("b1"),
 			Predicate: rdf.IRI("http://www.w3.org/2002/07/owl#onProperty"),
-			Object: bnTODO.MapBlankNodeIdentifier("b0"),
+			Object: bnTODO.NewStringBlankNode("b0"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -3966,7 +3966,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+			Subject: bnTODO.NewStringBlankNode("b1"),
 			Predicate: rdf.IRI("http://www.w3.org/2002/07/owl#maxCardinality"),
 			Object: rdf.Literal{
 				LexicalForm: "2",
@@ -3990,7 +3990,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+			Subject: bnTODO.NewStringBlankNode("b1"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 			Object: rdf.IRI("http://www.w3.org/2002/07/owl#Restriction"),
 		},
@@ -4343,9 +4343,9 @@ encodingtest.TripleStatementList{
 encodingtest.TripleStatementList{
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://example.org/ron"),
-			Object: bnTODO.MapBlankNodeIdentifier("b1"),
+			Object: bnTODO.NewStringBlankNode("b1"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -5778,7 +5778,7 @@ encodingtest.TripleStatementList{
 encodingtest.TripleStatementList{
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/2013/TurtleTests/p"),
 			Object: rdf.IRI("http://www.w3.org/2013/TurtleTests/o"),
 		},
@@ -5799,7 +5799,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+			Subject: bnTODO.NewStringBlankNode("b1"),
 			Predicate: rdf.IRI("http://www.w3.org/2013/TurtleTests/p"),
 			Object: rdf.IRI("http://www.w3.org/2013/TurtleTests/o"),
 		},
@@ -5820,7 +5820,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b2"),
+			Subject: bnTODO.NewStringBlankNode("b2"),
 			Predicate: rdf.IRI("http://www.w3.org/2013/TurtleTests/p"),
 			Object: rdf.IRI("http://www.w3.org/2013/TurtleTests/o"),
 		},
@@ -5846,7 +5846,7 @@ encodingtest.TripleStatementList{
 encodingtest.TripleStatementList{
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/2013/TurtleTests/p"),
 			Object: rdf.IRI("http://www.w3.org/2013/TurtleTests/o"),
 		},
@@ -5874,7 +5874,7 @@ encodingtest.TripleStatementList{
 		Triple: rdf.Triple{
 			Subject: rdf.IRI("http://www.w3.org/2013/TurtleTests/s"),
 			Predicate: rdf.IRI("http://www.w3.org/2013/TurtleTests/p"),
-			Object: bnTODO.MapBlankNodeIdentifier("b0"),
+			Object: bnTODO.NewStringBlankNode("b0"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -5900,7 +5900,7 @@ encodingtest.TripleStatementList{
 		Triple: rdf.Triple{
 			Subject: rdf.IRI("http://www.w3.org/2013/TurtleTests/s"),
 			Predicate: rdf.IRI("http://www.w3.org/2013/TurtleTests/p"),
-			Object: bnTODO.MapBlankNodeIdentifier("b0"),
+			Object: bnTODO.NewStringBlankNode("b0"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -5919,7 +5919,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/2013/TurtleTests/q"),
 			Object: rdf.IRI("http://www.w3.org/2013/TurtleTests/o"),
 		},
@@ -5947,7 +5947,7 @@ encodingtest.TripleStatementList{
 		Triple: rdf.Triple{
 			Subject: rdf.IRI("http://www.w3.org/2013/TurtleTests/s"),
 			Predicate: rdf.IRI("http://www.w3.org/2013/TurtleTests/p"),
-			Object: bnTODO.MapBlankNodeIdentifier("b0"),
+			Object: bnTODO.NewStringBlankNode("b0"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -5966,7 +5966,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/2013/TurtleTests/q2"),
 			Object: rdf.IRI("http://www.w3.org/2013/TurtleTests/o2"),
 		},
@@ -5987,7 +5987,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/2013/TurtleTests/q1"),
 			Object: rdf.IRI("http://www.w3.org/2013/TurtleTests/o1"),
 		},
@@ -6013,7 +6013,7 @@ encodingtest.TripleStatementList{
 encodingtest.TripleStatementList{
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/2013/TurtleTests/q2"),
 			Object: rdf.IRI("http://www.w3.org/2013/TurtleTests/o2"),
 		},
@@ -6034,7 +6034,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/2013/TurtleTests/q1"),
 			Object: rdf.IRI("http://www.w3.org/2013/TurtleTests/o1"),
 		},
@@ -6055,7 +6055,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/2013/TurtleTests/p"),
 			Object: rdf.IRI("http://www.w3.org/2013/TurtleTests/o"),
 		},
@@ -6081,7 +6081,7 @@ encodingtest.TripleStatementList{
 encodingtest.TripleStatementList{
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/2013/TurtleTests/p"),
 			Object: rdf.IRI("http://www.w3.org/2013/TurtleTests/o"),
 		},
@@ -6109,7 +6109,7 @@ encodingtest.TripleStatementList{
 		Triple: rdf.Triple{
 			Subject: rdf.IRI("http://www.w3.org/2013/TurtleTests/s"),
 			Predicate: rdf.IRI("http://www.w3.org/2013/TurtleTests/p"),
-			Object: bnTODO.MapBlankNodeIdentifier("b0"),
+			Object: bnTODO.NewStringBlankNode("b0"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -6128,7 +6128,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/2013/TurtleTests/p"),
 			Object: rdf.IRI("http://www.w3.org/2013/TurtleTests/o"),
 		},
@@ -6154,7 +6154,7 @@ encodingtest.TripleStatementList{
 encodingtest.TripleStatementList{
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/2013/TurtleTests/p"),
 			Object: rdf.IRI("http://www.w3.org/2013/TurtleTests/o"),
 		},
@@ -6180,7 +6180,7 @@ encodingtest.TripleStatementList{
 encodingtest.TripleStatementList{
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/2013/TurtleTests/p"),
 			Object: rdf.IRI("http://www.w3.org/2013/TurtleTests/o1"),
 		},
@@ -6201,7 +6201,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/2013/TurtleTests/p"),
 			Object: rdf.IRI("http://www.w3.org/2013/TurtleTests/2"),
 		},
@@ -6269,7 +6269,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/2013/TurtleTests/p2"),
 			Object: rdf.IRI("http://www.w3.org/2013/TurtleTests/o2"),
 		},
@@ -6290,7 +6290,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/2013/TurtleTests/p1"),
 			Object: rdf.IRI("http://www.w3.org/2013/TurtleTests/o1"),
 		},
@@ -6522,7 +6522,7 @@ encodingtest.TripleStatementList{
 		Triple: rdf.Triple{
 			Subject: rdf.IRI("http://www.w3.org/2013/TurtleTests/s"),
 			Predicate: rdf.IRI("http://www.w3.org/2013/TurtleTests/p"),
-			Object: bnTODO.MapBlankNodeIdentifier("b0"),
+			Object: bnTODO.NewStringBlankNode("b0"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -6541,9 +6541,9 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
-			Object: bnTODO.MapBlankNodeIdentifier("b1"),
+			Object: bnTODO.NewStringBlankNode("b1"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -6554,7 +6554,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 			Object: rdf.Literal{
 				LexicalForm: "1",
@@ -6574,7 +6574,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+			Subject: bnTODO.NewStringBlankNode("b1"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 			Object: rdf.Literal{
 				LexicalForm: "2",
@@ -6590,7 +6590,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b2"),
+			Subject: bnTODO.NewStringBlankNode("b2"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 			Object: rdf.IRI("http://www.w3.org/2013/TurtleTests/o"),
 		},
@@ -6603,7 +6603,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b2"),
+			Subject: bnTODO.NewStringBlankNode("b2"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 			Object: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
 		},
@@ -6616,9 +6616,9 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+			Subject: bnTODO.NewStringBlankNode("b1"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
-			Object: bnTODO.MapBlankNodeIdentifier("b2"),
+			Object: bnTODO.NewStringBlankNode("b2"),
 		},
 	},
 }
@@ -6628,9 +6628,9 @@ encodingtest.TripleStatementList{
 encodingtest.TripleStatementList{
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/2013/TurtleTests/p"),
-			Object: bnTODO.MapBlankNodeIdentifier("b1"),
+			Object: bnTODO.NewStringBlankNode("b1"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -6649,7 +6649,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 			Object: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
 		},
@@ -6666,7 +6666,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 			Object: rdf.Literal{
 				LexicalForm: "1",
@@ -6686,7 +6686,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+			Subject: bnTODO.NewStringBlankNode("b1"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 			Object: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
 		},
@@ -6703,7 +6703,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+			Subject: bnTODO.NewStringBlankNode("b1"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 			Object: rdf.Literal{
 				LexicalForm: "1",
@@ -6728,9 +6728,9 @@ encodingtest.TripleStatementList{
 encodingtest.TripleStatementList{
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/2013/TurtleTests/p"),
-			Object: bnTODO.MapBlankNodeIdentifier("b1"),
+			Object: bnTODO.NewStringBlankNode("b1"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -6749,7 +6749,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 			Object: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
 		},
@@ -6766,7 +6766,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 			Object: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
 		},
@@ -6783,7 +6783,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+			Subject: bnTODO.NewStringBlankNode("b1"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 			Object: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
 		},
@@ -6800,7 +6800,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+			Subject: bnTODO.NewStringBlankNode("b1"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 			Object: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
 		},
@@ -6822,9 +6822,9 @@ encodingtest.TripleStatementList{
 encodingtest.TripleStatementList{
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/2013/TurtleTests/p"),
-			Object: bnTODO.MapBlankNodeIdentifier("b1"),
+			Object: bnTODO.NewStringBlankNode("b1"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -6843,9 +6843,9 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
-			Object: bnTODO.MapBlankNodeIdentifier("b2"),
+			Object: bnTODO.NewStringBlankNode("b2"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -6856,7 +6856,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+			Subject: bnTODO.NewStringBlankNode("b0"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 			Object: rdf.Literal{
 				LexicalForm: "1",
@@ -6876,7 +6876,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b2"),
+			Subject: bnTODO.NewStringBlankNode("b2"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 			Object: rdf.Literal{
 				LexicalForm: "2",
@@ -6892,9 +6892,9 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b3"),
+			Subject: bnTODO.NewStringBlankNode("b3"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
-			Object: bnTODO.MapBlankNodeIdentifier("b4"),
+			Object: bnTODO.NewStringBlankNode("b4"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
@@ -6905,9 +6905,9 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b4"),
+			Subject: bnTODO.NewStringBlankNode("b4"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
-			Object: bnTODO.MapBlankNodeIdentifier("b5"),
+			Object: bnTODO.NewStringBlankNode("b5"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -6918,7 +6918,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b4"),
+			Subject: bnTODO.NewStringBlankNode("b4"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 			Object: rdf.Literal{
 				LexicalForm: "1",
@@ -6938,7 +6938,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b5"),
+			Subject: bnTODO.NewStringBlankNode("b5"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 			Object: rdf.Literal{
 				LexicalForm: "2",
@@ -6954,7 +6954,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b5"),
+			Subject: bnTODO.NewStringBlankNode("b5"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 			Object: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
 		},
@@ -6967,7 +6967,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b3"),
+			Subject: bnTODO.NewStringBlankNode("b3"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 			Object: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
 		},
@@ -6980,9 +6980,9 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+			Subject: bnTODO.NewStringBlankNode("b1"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
-			Object: bnTODO.MapBlankNodeIdentifier("b6"),
+			Object: bnTODO.NewStringBlankNode("b6"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -6993,9 +6993,9 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+			Subject: bnTODO.NewStringBlankNode("b1"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
-			Object: bnTODO.MapBlankNodeIdentifier("b7"),
+			Object: bnTODO.NewStringBlankNode("b7"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -7010,7 +7010,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b7"),
+			Subject: bnTODO.NewStringBlankNode("b7"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 			Object: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
 		},
@@ -7027,7 +7027,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b7"),
+			Subject: bnTODO.NewStringBlankNode("b7"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 			Object: rdf.Literal{
 				LexicalForm: "a",
@@ -7047,7 +7047,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b6"),
+			Subject: bnTODO.NewStringBlankNode("b6"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 			Object: rdf.Literal{
 				LexicalForm: "b",
@@ -7063,7 +7063,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b8"),
+			Subject: bnTODO.NewStringBlankNode("b8"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
 			Object: rdf.IRI("http://www.w3.org/2013/TurtleTests/o"),
 		},
@@ -7076,7 +7076,7 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b8"),
+			Subject: bnTODO.NewStringBlankNode("b8"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
 			Object: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
 		},
@@ -7089,16 +7089,16 @@ encodingtest.TripleStatementList{
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b2"),
+			Subject: bnTODO.NewStringBlankNode("b2"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
-			Object: bnTODO.MapBlankNodeIdentifier("b3"),
+			Object: bnTODO.NewStringBlankNode("b3"),
 		},
 	},
 	{
 		Triple: rdf.Triple{
-			Subject: bnTODO.MapBlankNodeIdentifier("b6"),
+			Subject: bnTODO.NewStringBlankNode("b6"),
 			Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
-			Object: bnTODO.MapBlankNodeIdentifier("b8"),
+			Object: bnTODO.NewStringBlankNode("b8"),
 		},
 	},
 }

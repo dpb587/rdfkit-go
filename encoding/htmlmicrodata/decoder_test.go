@@ -10,12 +10,12 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding/html"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 	"github.com/dpb587/rdfkit-go/rdf/triples"
 	"github.com/dpb587/rdfkit-go/testing/testingassert"
 )
 
-var testingBnode = blanknodeutil.NewStringMapper()
+var testingBnode = blanknodes.NewStringFactory()
 
 func TestMicrodataLivingNonNormative(t *testing.T) {
 	// https://html.spec.whatwg.org/multipage/microdata.html
@@ -37,7 +37,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("name"),
 						Object:    xsdobject.String("Elizabeth"),
 					},
@@ -58,7 +58,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("name"),
 						Object:    xsdobject.String("Daniel"),
 					},
@@ -95,7 +95,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("name"),
 						Object:    xsdobject.String("Elizabeth"),
 					},
@@ -116,7 +116,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("name"),
 						Object:    xsdobject.String("Daniel"),
 					},
@@ -147,7 +147,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("name"),
 						Object:    xsdobject.String("Neil"),
 					},
@@ -168,7 +168,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("band"),
 						Object:    xsdobject.String("Four Parts Water"),
 					},
@@ -189,7 +189,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("nationality"),
 						Object:    xsdobject.String("British"),
 					},
@@ -218,7 +218,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("image"),
 						Object:    rdf.IRI("google-logo.png"),
 					},
@@ -247,7 +247,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("product-id"),
 						Object:    xsdobject.String("9678AOU879"),
 					},
@@ -282,7 +282,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://schema.org/Product"),
 					},
@@ -303,7 +303,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("name"),
 						Object:    xsdobject.String("Panasonic White 60L Refrigerator"),
 					},
@@ -324,9 +324,9 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("aggregateRating"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b1"),
+						Object:    testingBnode.NewStringBlankNode("b1"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -345,7 +345,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://schema.org/AggregateRating"),
 					},
@@ -366,7 +366,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("ratingValue"),
 						Object: rdf.Literal{
 							LexicalForm: "3.5",
@@ -391,7 +391,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("reviewCount"),
 						Object:    xsdobject.String("11"),
 					},
@@ -420,7 +420,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("birthday"),
 						Object: rdf.Literal{
 							LexicalForm: "2009-05-10",
@@ -453,7 +453,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("name"),
 						Object:    xsdobject.String("Amanda"),
 					},
@@ -474,9 +474,9 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("band"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b1"),
+						Object:    testingBnode.NewStringBlankNode("b1"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -495,7 +495,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("name"),
 						Object:    xsdobject.String("Jazz Band"),
 					},
@@ -516,7 +516,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("size"),
 						Object:    xsdobject.String("12"),
 					},
@@ -549,7 +549,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("name"),
 						Object:    xsdobject.String("Amanda"),
 					},
@@ -570,9 +570,9 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("band"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b1"),
+						Object:    testingBnode.NewStringBlankNode("b1"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -591,7 +591,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("name"),
 						Object:    xsdobject.String("Jazz Band"),
 					},
@@ -612,7 +612,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("size"),
 						Object:    xsdobject.String("12"),
 					},
@@ -645,7 +645,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("flavor"),
 						Object:    xsdobject.String("Lemon sorbet"),
 					},
@@ -666,7 +666,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("flavor"),
 						Object:    xsdobject.String("Apricot sorbet"),
 					},
@@ -695,7 +695,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("favorite-color"),
 						Object:    xsdobject.String("orange"),
 					},
@@ -716,7 +716,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("favorite-fruit"),
 						Object:    xsdobject.String("orange"),
 					},
@@ -746,7 +746,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("name"),
 						Object:    xsdobject.String("The Castle"),
 					},
@@ -777,7 +777,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("name"),
 						Object:    xsdobject.String("The Castle"),
 					},
@@ -809,7 +809,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("https://example.org/animals#cat"),
 					},
@@ -830,7 +830,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("name"),
 						Object:    xsdobject.String("Hedral"),
 					},
@@ -851,7 +851,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("desc"),
 						Object:    xsdobject.String("Hedral is a male american domestic\n shorthair, with a fluffy black fur with white paws and belly."),
 					},
@@ -872,7 +872,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("img"),
 						Object:    rdf.IRI("hedral.jpeg"),
 					},
@@ -1008,7 +1008,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("https://example.org/animals#cat"),
 					},
@@ -1029,7 +1029,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("name"),
 						Object:    xsdobject.String("Hedral"),
 					},
@@ -1050,7 +1050,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("https://example.com/fn"),
 						Object:    xsdobject.String("Hedral"),
 					},
@@ -1071,7 +1071,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("desc"),
 						Object:    xsdobject.String("Hedral is a male American domestic\n shorthair, with a fluffy black fur with white paws and belly."),
 					},
@@ -1092,7 +1092,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("https://example.com/color"),
 						Object:    xsdobject.String("black"),
 					},
@@ -1113,7 +1113,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("https://example.com/color"),
 						Object:    xsdobject.String("white"),
 					},
@@ -1134,7 +1134,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("img"),
 						Object:    rdf.IRI("hedral.jpeg"),
 					},
@@ -1171,7 +1171,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("https://md.example.com/loco"),
 					},
@@ -1192,7 +1192,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("https://md.example.com/lighting"),
 					},
@@ -1213,7 +1213,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("name"),
 						Object:    xsdobject.String("Tank Locomotive (DB 80)\n "),
 					},
@@ -1234,7 +1234,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("product-code"),
 						Object:    xsdobject.String("33041\n "),
 					},
@@ -1255,7 +1255,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("scale"),
 						Object:    xsdobject.String("HO\n "),
 					},
@@ -1276,7 +1276,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("digital"),
 						Object:    xsdobject.String("Delta\n"),
 					},
@@ -1312,7 +1312,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("https://md.example.com/track"),
 					},
@@ -1333,7 +1333,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("https://md.example.com/lighting"),
 					},
@@ -1354,7 +1354,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("name"),
 						Object:    xsdobject.String("Turnout Lantern Kit\n "),
 					},
@@ -1375,7 +1375,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("product-code"),
 						Object:    xsdobject.String("74470\n "),
 					},
@@ -1396,7 +1396,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("track-type"),
 						Object:    xsdobject.String("C"),
 					},
@@ -1417,7 +1417,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("scale"),
 						Object:    xsdobject.String("HO"),
 					},
@@ -1451,7 +1451,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("https://md.example.com/passengers"),
 					},
@@ -1472,7 +1472,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("name"),
 						Object:    xsdobject.String("Express Train Passenger Car (DB Am 203)\n "),
 					},
@@ -1493,7 +1493,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("product-code"),
 						Object:    xsdobject.String("8710\n "),
 					},
@@ -1514,7 +1514,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("scale"),
 						Object:    xsdobject.String("Z\n"),
 					},
@@ -1545,7 +1545,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("a"),
 						Object:    xsdobject.String("1"),
 					},
@@ -1566,7 +1566,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("a"),
 						Object:    xsdobject.String("2"),
 					},
@@ -1587,7 +1587,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("b"),
 						Object:    xsdobject.String("test"),
 					},
@@ -1618,7 +1618,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("b"),
 						Object:    xsdobject.String("test"),
 					},
@@ -1639,7 +1639,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("a"),
 						Object:    xsdobject.String("1"),
 					},
@@ -1660,7 +1660,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("a"),
 						Object:    xsdobject.String("2"),
 					},
@@ -1691,7 +1691,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("a"),
 						Object:    xsdobject.String("1"),
 					},
@@ -1712,7 +1712,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("b"),
 						Object:    xsdobject.String("test"),
 					},
@@ -1733,7 +1733,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("a"),
 						Object:    xsdobject.String("2"),
 					},
@@ -1766,7 +1766,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("a"),
 						Object:    xsdobject.String("1"),
 					},
@@ -1787,7 +1787,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("b"),
 						Object:    xsdobject.String("test"),
 					},
@@ -1808,7 +1808,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("a"),
 						Object:    xsdobject.String("2"),
 					},
@@ -1856,7 +1856,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://n.whatwg.org/work"),
 					},
@@ -1877,7 +1877,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("license"),
 						Object:    rdf.IRI("http://www.opensource.org/licenses/mit-license.php"),
 					},
@@ -1898,7 +1898,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("work"),
 						Object:    rdf.IRI("images/house.jpeg"),
 					},
@@ -1919,7 +1919,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("title"),
 						Object:    xsdobject.String("The house I found."),
 					},
@@ -1940,7 +1940,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://n.whatwg.org/work"),
 					},
@@ -1961,7 +1961,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("license"),
 						Object:    rdf.IRI("http://www.opensource.org/licenses/mit-license.php"),
 					},
@@ -1982,7 +1982,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("work"),
 						Object:    rdf.IRI("images/mailbox.jpeg"),
 					},
@@ -2003,7 +2003,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("title"),
 						Object:    xsdobject.String("The mailbox."),
 					},
@@ -2081,7 +2081,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://microformats.org/profile/hcard"),
 					},
@@ -2102,7 +2102,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("fn"),
 						Object:    xsdobject.String("\n  \n   Jack\n   Bauer\n  \n "),
 					},
@@ -2123,9 +2123,9 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("n"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b1"),
+						Object:    testingBnode.NewStringBlankNode("b1"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2144,7 +2144,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("given-name"),
 						Object:    xsdobject.String("Jack"),
 					},
@@ -2165,7 +2165,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("family-name"),
 						Object:    xsdobject.String("Bauer"),
 					},
@@ -2186,7 +2186,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("photo"),
 						Object:    rdf.IRI("jack-bauer.jpg"),
 					},
@@ -2207,9 +2207,9 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("org"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b2"),
+						Object:    testingBnode.NewStringBlankNode("b2"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2228,7 +2228,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
+						Subject:   testingBnode.NewStringBlankNode("b2"),
 						Predicate: rdf.IRI("organization-name"),
 						Object:    xsdobject.String("Counter-Terrorist Unit"),
 					},
@@ -2249,7 +2249,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
+						Subject:   testingBnode.NewStringBlankNode("b2"),
 						Predicate: rdf.IRI("organization-unit"),
 						Object:    xsdobject.String("Los Angeles Division"),
 					},
@@ -2270,9 +2270,9 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("adr"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b3"),
+						Object:    testingBnode.NewStringBlankNode("b3"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2291,7 +2291,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
+						Subject:   testingBnode.NewStringBlankNode("b3"),
 						Predicate: rdf.IRI("street-address"),
 						Object:    xsdobject.String("10201 W. Pico Blvd."),
 					},
@@ -2312,7 +2312,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
+						Subject:   testingBnode.NewStringBlankNode("b3"),
 						Predicate: rdf.IRI("locality"),
 						Object:    xsdobject.String("Los Angeles"),
 					},
@@ -2333,7 +2333,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
+						Subject:   testingBnode.NewStringBlankNode("b3"),
 						Predicate: rdf.IRI("region"),
 						Object:    xsdobject.String("CA"),
 					},
@@ -2354,7 +2354,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
+						Subject:   testingBnode.NewStringBlankNode("b3"),
 						Predicate: rdf.IRI("postal-code"),
 						Object:    xsdobject.String("90064"),
 					},
@@ -2375,7 +2375,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
+						Subject:   testingBnode.NewStringBlankNode("b3"),
 						Predicate: rdf.IRI("country-name"),
 						Object:    xsdobject.String("United States"),
 					},
@@ -2396,7 +2396,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("geo"),
 						Object:    xsdobject.String("34.052339;-118.410623"),
 					},
@@ -2417,9 +2417,9 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("tel"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b4"),
+						Object:    testingBnode.NewStringBlankNode("b4"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2438,7 +2438,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b4"),
+						Subject:   testingBnode.NewStringBlankNode("b4"),
 						Predicate: rdf.IRI("value"),
 						Object:    xsdobject.String("+1 (310) 597 3781"),
 					},
@@ -2459,7 +2459,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b4"),
+						Subject:   testingBnode.NewStringBlankNode("b4"),
 						Predicate: rdf.IRI("type"),
 						Object:    xsdobject.String("work"),
 					},
@@ -2480,7 +2480,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b4"),
+						Subject:   testingBnode.NewStringBlankNode("b4"),
 						Predicate: rdf.IRI("type"),
 						Object:    xsdobject.String("voice"),
 					},
@@ -2501,7 +2501,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("url"),
 						Object:    rdf.IRI("https://en.wikipedia.org/wiki/Jack_Bauer"),
 					},
@@ -2522,7 +2522,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("url"),
 						Object:    rdf.IRI("http://www.jackbauerfacts.com/"),
 					},
@@ -2543,7 +2543,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("email"),
 						Object:    xsdobject.String("j.bauer@la.ctu.gov.invalid"),
 					},
@@ -2564,9 +2564,9 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("tel"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b5"),
+						Object:    testingBnode.NewStringBlankNode("b5"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2585,7 +2585,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b5"),
+						Subject:   testingBnode.NewStringBlankNode("b5"),
 						Predicate: rdf.IRI("value"),
 						Object:    xsdobject.String("+1 (310) 555 3781"),
 					},
@@ -2606,7 +2606,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b5"),
+						Subject:   testingBnode.NewStringBlankNode("b5"),
 						Predicate: rdf.IRI("type"),
 						Object:    xsdobject.String("cell"),
 					},
@@ -2627,7 +2627,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("rev"),
 						Object:    xsdobject.String("2008-07-20 21:00:00+01:00"),
 					},
@@ -2648,9 +2648,9 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("tel"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b6"),
+						Object:    testingBnode.NewStringBlankNode("b6"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2669,7 +2669,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b6"),
+						Subject:   testingBnode.NewStringBlankNode("b6"),
 						Predicate: rdf.IRI("type"),
 						Object:    xsdobject.String("home"),
 					},
@@ -2690,7 +2690,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b6"),
+						Subject:   testingBnode.NewStringBlankNode("b6"),
 						Predicate: rdf.IRI("value"),
 						Object:    xsdobject.String("01632 960 123"),
 					},
@@ -2726,7 +2726,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://microformats.org/profile/hcard"),
 					},
@@ -2747,7 +2747,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("fn"),
 						Object:    xsdobject.String("Alfred\n Person"),
 					},
@@ -2768,9 +2768,9 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("n"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b1"),
+						Object:    testingBnode.NewStringBlankNode("b1"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2789,7 +2789,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("given-name"),
 						Object:    xsdobject.String("Alfred"),
 					},
@@ -2810,7 +2810,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("family-name"),
 						Object:    xsdobject.String("Person"),
 					},
@@ -2831,9 +2831,9 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("adr"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b2"),
+						Object:    testingBnode.NewStringBlankNode("b2"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -2852,7 +2852,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
+						Subject:   testingBnode.NewStringBlankNode("b2"),
 						Predicate: rdf.IRI("street-address"),
 						Object:    xsdobject.String("1600 Amphitheatre Parkway"),
 					},
@@ -2873,7 +2873,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
+						Subject:   testingBnode.NewStringBlankNode("b2"),
 						Predicate: rdf.IRI("street-address"),
 						Object:    xsdobject.String("Building 43, Second Floor"),
 					},
@@ -2894,7 +2894,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
+						Subject:   testingBnode.NewStringBlankNode("b2"),
 						Predicate: rdf.IRI("locality"),
 						Object:    xsdobject.String("Mountain View"),
 					},
@@ -2915,7 +2915,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
+						Subject:   testingBnode.NewStringBlankNode("b2"),
 						Predicate: rdf.IRI("region"),
 						Object:    xsdobject.String("CA"),
 					},
@@ -2936,7 +2936,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
+						Subject:   testingBnode.NewStringBlankNode("b2"),
 						Predicate: rdf.IRI("postal-code"),
 						Object:    xsdobject.String("94043"),
 					},
@@ -2966,7 +2966,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://microformats.org/profile/hcard"),
 					},
@@ -2987,7 +2987,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("fn"),
 						Object:    xsdobject.String("George Washington"),
 					},
@@ -3008,9 +3008,9 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("n"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b1"),
+						Object:    testingBnode.NewStringBlankNode("b1"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -3029,7 +3029,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("given-name"),
 						Object:    xsdobject.String("George"),
 					},
@@ -3050,7 +3050,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("family-name"),
 						Object:    xsdobject.String("Washington"),
 					},
@@ -3093,7 +3093,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://microformats.org/profile/hcalendar#vevent"),
 					},
@@ -3114,7 +3114,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("summary"),
 						Object:    xsdobject.String("Bluesday Tuesday: Money Road"),
 					},
@@ -3135,7 +3135,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("dtstart"),
 						Object: rdf.Literal{
 							LexicalForm: "2009-05-05T19:00:00Z",
@@ -3159,7 +3159,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("dtend"),
 						Object: rdf.Literal{
 							LexicalForm: "2009-05-05T21:00:00Z",
@@ -3183,7 +3183,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("url"),
 						Object:    rdf.IRI("http://livebrum.co.uk/2009/05/05/bluesday-tuesday-money-road"),
 					},
@@ -3204,7 +3204,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("location"),
 						Object:    xsdobject.String("The RoadHouse"),
 					},
@@ -3225,7 +3225,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("description"),
 						Object:    xsdobject.String("via livebrum.co.uk"),
 					},
@@ -3261,7 +3261,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://microformats.org/profile/hcalendar#vevent"),
 					},
@@ -3282,7 +3282,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("summary"),
 						Object:    xsdobject.String("Bluesday Tuesday: Money Road"),
 					},
@@ -3303,7 +3303,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("dtstart"),
 						Object: rdf.Literal{
 							LexicalForm: "2009-05-05T19:00:00Z",
@@ -3327,7 +3327,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("dtend"),
 						Object: rdf.Literal{
 							LexicalForm: "2009-05-05T21:00:00Z",
@@ -3351,7 +3351,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("location"),
 						Object:    xsdobject.String("The RoadHouse"),
 					},
@@ -3372,7 +3372,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("url"),
 						Object:    rdf.IRI("http://livebrum.co.uk/2009/05/05/bluesday-tuesday-money-road"),
 					},
@@ -3393,7 +3393,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("description"),
 						Object:    xsdobject.String("via livebrum.co.uk"),
 					},
@@ -3431,7 +3431,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://n.whatwg.org/work"),
 					},
@@ -3452,7 +3452,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("work"),
 						Object:    rdf.IRI("mypond.jpeg"),
 					},
@@ -3473,7 +3473,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("title"),
 						Object:    xsdobject.String("My Pond"),
 					},
@@ -3494,7 +3494,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("license"),
 						Object:    rdf.IRI("https://creativecommons.org/licenses/by-sa/4.0/"),
 					},
@@ -3515,7 +3515,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("license"),
 						Object:    rdf.IRI("http://www.opensource.org/licenses/mit-license.php"),
 					},
@@ -3576,7 +3576,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			Expected: encodingtest.TripleStatementList{
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://schema.org/BlogPosting"),
 					},
@@ -3597,7 +3597,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("headline"),
 						Object:    xsdobject.String("Progress report"),
 					},
@@ -3618,7 +3618,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("datePublished"),
 						Object: rdf.Literal{
 							LexicalForm: "2013-08-29",
@@ -3642,7 +3642,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("url"),
 						Object:    rdf.IRI("?comments=0"),
 					},
@@ -3663,9 +3663,9 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("comment"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b1"),
+						Object:    testingBnode.NewStringBlankNode("b1"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -3684,7 +3684,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://schema.org/UserComments"),
 					},
@@ -3705,7 +3705,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("url"),
 						Object:    rdf.IRI("#c1"),
 					},
@@ -3726,9 +3726,9 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("creator"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b2"),
+						Object:    testingBnode.NewStringBlankNode("b2"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -3747,7 +3747,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
+						Subject:   testingBnode.NewStringBlankNode("b2"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://schema.org/Person"),
 					},
@@ -3768,7 +3768,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b2"),
+						Subject:   testingBnode.NewStringBlankNode("b2"),
 						Predicate: rdf.IRI("name"),
 						Object:    xsdobject.String("Greg"),
 					},
@@ -3789,7 +3789,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b1"),
+						Subject:   testingBnode.NewStringBlankNode("b1"),
 						Predicate: rdf.IRI("commentTime"),
 						Object: rdf.Literal{
 							LexicalForm: "2013-08-29",
@@ -3813,9 +3813,9 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b0"),
+						Subject:   testingBnode.NewStringBlankNode("b0"),
 						Predicate: rdf.IRI("comment"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b3"),
+						Object:    testingBnode.NewStringBlankNode("b3"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -3834,7 +3834,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
+						Subject:   testingBnode.NewStringBlankNode("b3"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://schema.org/UserComments"),
 					},
@@ -3855,7 +3855,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
+						Subject:   testingBnode.NewStringBlankNode("b3"),
 						Predicate: rdf.IRI("url"),
 						Object:    rdf.IRI("#c2"),
 					},
@@ -3876,9 +3876,9 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
+						Subject:   testingBnode.NewStringBlankNode("b3"),
 						Predicate: rdf.IRI("creator"),
-						Object:    testingBnode.MapBlankNodeIdentifier("b4"),
+						Object:    testingBnode.NewStringBlankNode("b4"),
 					},
 					TextOffsets: encoding.StatementTextOffsets{
 						encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -3897,7 +3897,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b4"),
+						Subject:   testingBnode.NewStringBlankNode("b4"),
 						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 						Object:    rdf.IRI("http://schema.org/Person"),
 					},
@@ -3918,7 +3918,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b4"),
+						Subject:   testingBnode.NewStringBlankNode("b4"),
 						Predicate: rdf.IRI("name"),
 						Object:    xsdobject.String("Charlotte"),
 					},
@@ -3939,7 +3939,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
-						Subject:   testingBnode.MapBlankNodeIdentifier("b3"),
+						Subject:   testingBnode.NewStringBlankNode("b3"),
 						Predicate: rdf.IRI("commentTime"),
 						Object: rdf.Literal{
 							LexicalForm: "2013-08-29",

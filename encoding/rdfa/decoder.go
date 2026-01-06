@@ -18,7 +18,7 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil/rdfacontext"
 	"github.com/dpb587/rdfkit-go/x/storage/inmemory"
@@ -46,7 +46,7 @@ type Decoder struct {
 	htmlProcessingProfile HtmlProcessingProfile
 	defaultVocabulary     *string
 	defaultPrefixes       iriutil.PrefixMap
-	blankNodeStringMapper blanknodeutil.StringMapper
+	bnStringFactory       blanknodes.StringFactory
 	buildTextOffsets      encodingutil.TextOffsetsBuilderFunc
 
 	err error
@@ -87,11 +87,10 @@ func (v *Decoder) Next() bool {
 		rootNode := v.doc.GetRoot()
 
 		gectx := &globalEvaluationContext{
-			HostDefaultVocabulary: ptr.Value("http://www.w3.org/1999/xhtml/vocab#"),
-			HostDefaultPrefixes:   v.defaultPrefixes,
-			HtmlProcessing:        v.htmlProcessingProfile,
-			BlankNodeStringMapper: v.blankNodeStringMapper,
-			BlankNodeFactory:      blanknodeutil.NewFactory(),
+			HostDefaultVocabulary:  ptr.Value("http://www.w3.org/1999/xhtml/vocab#"),
+			HostDefaultPrefixes:    v.defaultPrefixes,
+			HtmlProcessing:         v.htmlProcessingProfile,
+			BlankNodeStringFactory: v.bnStringFactory,
 		}
 
 		if gectx.HostDefaultPrefixes == nil {
@@ -485,7 +484,7 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 								}
 							}
 						} else {
-							typedResource = ectx.Global.BlankNodeFactory.NewBlankNode()
+							typedResource = ectx.Global.BlankNodeStringFactory.NewBlankNode()
 							typedResourceAnno = nil
 
 							if v.captureOffsets {
@@ -562,7 +561,7 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 							newSubjectAnno = nil
 						}
 					} else if attrTypeof != nil {
-						newSubject = ectx.Global.BlankNodeFactory.NewBlankNode()
+						newSubject = ectx.Global.BlankNodeStringFactory.NewBlankNode()
 						newSubjectAnno = nil
 
 						if v.captureOffsets {
@@ -650,7 +649,7 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 						}
 					}
 				} else if attrTypeof != nil && attrAbout == nil {
-					currentObjectResource = ectx.Global.BlankNodeFactory.NewBlankNode()
+					currentObjectResource = ectx.Global.BlankNodeStringFactory.NewBlankNode()
 					currentObjectResourceAnno = nil
 				}
 
@@ -838,7 +837,7 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 		} else if attrRel != nil || attrRev != nil {
 			// Processing, Step 10
 
-			currentObjectResource = ectx.Global.BlankNodeFactory.NewBlankNode()
+			currentObjectResource = ectx.Global.BlankNodeStringFactory.NewBlankNode()
 			currentObjectResourceAnno = nil
 
 			if v.captureOffsets {
@@ -1286,7 +1285,7 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 				var listBnodes = make([]rdf.BlankNode, len(listItems.Objects))
 
 				for listItemIdx := range listItems.Objects {
-					listBnodes[listItemIdx] = ectx.Global.BlankNodeFactory.NewBlankNode()
+					listBnodes[listItemIdx] = ectx.Global.BlankNodeStringFactory.NewBlankNode()
 				}
 
 				for listItemIdx, listItem := range listItems.Objects {

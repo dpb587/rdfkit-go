@@ -3,13 +3,13 @@ package rdfjson
 import (
 	"io"
 
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 )
 
 type EncoderConfig struct {
-	prefix            *string
-	indent            *string
-	blankNodeStringer blanknodeutil.Stringer
+	prefix           *string
+	indent           *string
+	bnStringProvider blanknodes.StringProvider
 }
 
 func (s EncoderConfig) SetPrefix(v string) EncoderConfig {
@@ -24,8 +24,8 @@ func (s EncoderConfig) SetIndent(v string) EncoderConfig {
 	return s
 }
 
-func (s EncoderConfig) SetBlankNodeStringer(v blanknodeutil.Stringer) EncoderConfig {
-	s.blankNodeStringer = v
+func (s EncoderConfig) SetBlankNodeStringProvider(v blanknodes.StringProvider) EncoderConfig {
+	s.bnStringProvider = v
 
 	return s
 }
@@ -39,16 +39,16 @@ func (s EncoderConfig) apply(d *EncoderConfig) {
 		d.indent = s.indent
 	}
 
-	if s.blankNodeStringer != nil {
-		d.blankNodeStringer = s.blankNodeStringer
+	if s.bnStringProvider != nil {
+		d.bnStringProvider = s.bnStringProvider
 	}
 }
 
 func (s EncoderConfig) newEncoder(w io.Writer) (*Encoder, error) {
 	ww := &Encoder{
-		w:                 w,
-		blankNodeStringer: s.blankNodeStringer,
-		buf:               map[string]map[string][]any{},
+		w:                w,
+		bnStringProvider: s.bnStringProvider,
+		buf:              map[string]map[string][]any{},
 	}
 
 	if s.prefix != nil {
@@ -59,8 +59,8 @@ func (s EncoderConfig) newEncoder(w io.Writer) (*Encoder, error) {
 		ww.indent = *s.indent
 	}
 
-	if ww.blankNodeStringer == nil {
-		ww.blankNodeStringer = blanknodeutil.NewStringerInt64()
+	if ww.bnStringProvider == nil {
+		ww.bnStringProvider = blanknodes.NewInt64StringProvider("b%d")
 	}
 
 	return ww, nil

@@ -152,7 +152,7 @@ func (a algorithmHashNDegreeQuads) Call() (algorithmHashNDegreeQuadsResult, erro
 				// [spec // 4.8.3 // 5.4.4.1] If a canonical identifier has been issued for related by canonical issuer, append
 				// the string _:, followed by the canonical identifier for related, to path.
 
-				if id, ok := a.canonicalizationState.canonicalIssuer.GetBlankNodeIdentifierIfKnown(rdf.NewBlankNodeWithIdentifier(related)); ok {
+				if id, ok := a.canonicalizationState.canonicalIssuer.GetBlankNodeStringIfKnown(related); ok {
 					path += "_:" + id
 				} else {
 
@@ -160,14 +160,14 @@ func (a algorithmHashNDegreeQuads) Call() (algorithmHashNDegreeQuadsResult, erro
 					// [spec // 4.8.3 // 5.4.4.2.1] If issuer copy has not issued an identifier for related, append related to
 					// recursion list.
 
-					if _, ok := issuerCopy.GetBlankNodeIdentifierIfKnown(rdf.NewBlankNodeWithIdentifier(related)); !ok {
+					if _, ok := issuerCopy.GetBlankNodeStringIfKnown(related); !ok {
 						recursionList = append(recursionList, related)
 					}
 
 					// [spec // 4.8.3 // 5.4.4.2.2] Use the Issue Identifier algorithm, passing issuer copy and the related, and
 					// append the string _:, followed by the result, to path.
 
-					path += "_:" + issuerCopy.GetBlankNodeIdentifier(rdf.NewBlankNodeWithIdentifier(related))
+					path += "_:" + issuerCopy.GetBlankNodeString(related)
 
 				}
 
@@ -202,7 +202,7 @@ func (a algorithmHashNDegreeQuads) Call() (algorithmHashNDegreeQuadsResult, erro
 				// [spec // 4.8.3 // 5.4.5.2] Use the Issue Identifier algorithm, passing issuer copy and related; append the
 				// string _:, followed by the result, to path.
 
-				path += "_:" + issuerCopy.GetBlankNodeIdentifier(rdf.NewBlankNodeWithIdentifier(related))
+				path += "_:" + issuerCopy.GetBlankNodeString(related)
 
 				// [spec // 4.8.3 // 5.4.5.3] Append <, the hash in result, and > to path.
 

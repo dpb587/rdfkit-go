@@ -10,7 +10,7 @@ import (
 	"github.com/dpb587/rdfkit-go/cmd/rdfkit/cmdutil"
 	"github.com/dpb587/rdfkit-go/encoding/trig/trigcontent"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil/rdfacontext"
 	"github.com/dpb587/rdfkit-go/rdf/quads"
@@ -99,7 +99,7 @@ func New(app *cmdutil.App) *cobra.Command {
 
 			literalNodes := 0
 			knownResources := map[rdf.SubjectValue]string{}
-			blankNodeStringer := blanknodeutil.NewStringerInt64()
+			bnStringProvider := blanknodes.NewInt64StringProvider("b%d")
 
 			requireResource := func(w io.Writer, indent string, s rdf.SubjectValue) string {
 				if node, ok := knownResources[s]; ok {
@@ -110,7 +110,7 @@ func New(app *cmdutil.App) *cobra.Command {
 				knownResources[s] = node
 
 				if sBlankNode, ok := s.(rdf.BlankNode); ok {
-					fmt.Fprintf(w, indent+`%s [fillcolor="lavender",label=%q,shape=box,style="dashed,filled,rounded,setlinewidth(2)"]`+"\n", node, "_:"+blankNodeStringer.GetBlankNodeIdentifier(sBlankNode))
+					fmt.Fprintf(w, indent+`%s [fillcolor="lavender",label=%q,shape=box,style="dashed,filled,rounded,setlinewidth(2)"]`+"\n", node, "_:"+bnStringProvider.GetBlankNodeString(sBlankNode))
 				} else if sIRI, ok := s.(rdf.IRI); ok {
 					fmt.Fprintf(w, indent+`%s [fillcolor="lavender",href=%q,label=%q,shape=box,style="filled,rounded,setlinewidth(2)"]`+"\n", node, sIRI, shortenIRI(sIRI))
 				} else {

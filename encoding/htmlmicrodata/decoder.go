@@ -15,7 +15,6 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"golang.org/x/net/html"
 	"golang.org/x/net/html/atom"
@@ -89,7 +88,7 @@ func (w *Decoder) Next() bool {
 			Global: &globalEvaluationContext{
 				DocumentContainer:  documentContainer,
 				ResolvedItemscopes: map[*html.Node]rdf.SubjectValue{},
-				BlankNodeFactory:   blanknodeutil.NewFactory(),
+				BlankNodeFactory:   rdf.NewBlankNodeFactory(),
 			},
 			BaseURL:          w.docBaseURL,
 			CurrentContainer: documentContainer,

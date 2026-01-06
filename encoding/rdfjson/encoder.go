@@ -11,7 +11,7 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 )
 
 type EncoderOption interface {
@@ -20,10 +20,10 @@ type EncoderOption interface {
 }
 
 type Encoder struct {
-	w                 io.Writer
-	blankNodeStringer blanknodeutil.Stringer
-	prefix            string
-	indent            string
+	w                io.Writer
+	bnStringProvider blanknodes.StringProvider
+	prefix           string
+	indent           string
 
 	buf map[string]map[string][]any
 }
@@ -60,7 +60,7 @@ func (w *Encoder) AddTriple(ctx context.Context, t rdf.Triple) error {
 
 	switch s := t.Subject.(type) {
 	case rdf.BlankNode:
-		sData = "_:" + w.blankNodeStringer.GetBlankNodeIdentifier(s)
+		sData = "_:" + w.bnStringProvider.GetBlankNodeString(s)
 	case rdf.IRI:
 		sData = string(s)
 	default:
@@ -82,7 +82,7 @@ func (w *Encoder) AddTriple(ctx context.Context, t rdf.Triple) error {
 	case rdf.BlankNode:
 		oData = map[string]string{
 			"type":  "bnode",
-			"value": "_:" + w.blankNodeStringer.GetBlankNodeIdentifier(o),
+			"value": "_:" + w.bnStringProvider.GetBlankNodeString(o),
 		}
 	case rdf.IRI:
 		oData = map[string]string{

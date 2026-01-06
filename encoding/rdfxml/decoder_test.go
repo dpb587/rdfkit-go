@@ -11,13 +11,13 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfobject"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 	"github.com/dpb587/rdfkit-go/rdf/triples"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
 	"github.com/dpb587/rdfkit-go/testing/testingassert"
 )
 
-var testBnode = blanknodeutil.NewStringMapper()
+var testBnode = blanknodes.NewStringFactory()
 
 func patchExampleMissingXmlns(s string) string {
 	return strings.Replace(s, `<rdf:Description`, `<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:ex="http://example.org/stuff/1.0/" `, 1)
@@ -248,7 +248,7 @@ func TestSpecNonNormative(t *testing.T) {
 					},
 				},
 				rdfdescription.SubjectResource{
-					Subject: testBnode.MapBlankNodeIdentifier("b0"),
+					Subject: testBnode.NewStringBlankNode("b0"),
 					Statements: rdfdescription.StatementList{
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://example.org/stuff/1.0/fullName"),
@@ -265,7 +265,7 @@ func TestSpecNonNormative(t *testing.T) {
 					Statements: rdfdescription.StatementList{
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://example.org/stuff/1.0/editor"),
-							Object:    testBnode.MapBlankNodeIdentifier("b0"),
+							Object:    testBnode.NewStringBlankNode("b0"),
 						},
 					},
 				},
@@ -420,12 +420,12 @@ func TestSpecNonNormative(t *testing.T) {
 						},
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://example.org/stuff/1.0/editor"),
-							Object:    testBnode.MapBlankNodeIdentifier("b0"),
+							Object:    testBnode.NewStringBlankNode("b0"),
 						},
 					},
 				},
 				rdfdescription.SubjectResource{
-					Subject: testBnode.MapBlankNodeIdentifier("b0"),
+					Subject: testBnode.NewStringBlankNode("b0"),
 					Statements: rdfdescription.StatementList{
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://example.org/stuff/1.0/fullName"),
@@ -464,12 +464,12 @@ func TestSpecNonNormative(t *testing.T) {
 						},
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://example.org/stuff/1.0/editor"),
-							Object:    testBnode.MapBlankNodeIdentifier("b0"),
+							Object:    testBnode.NewStringBlankNode("b0"),
 						},
 					},
 				},
 				rdfdescription.SubjectResource{
-					Subject: testBnode.MapBlankNodeIdentifier("b0"),
+					Subject: testBnode.NewStringBlankNode("b0"),
 					Statements: rdfdescription.StatementList{
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://example.org/stuff/1.0/fullName"),
@@ -694,12 +694,12 @@ func TestSpecNonNormative(t *testing.T) {
 					Statements: rdfdescription.StatementList{
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://example.org/stuff/1.0/hasFruit"),
-							Object:    testBnode.MapBlankNodeIdentifier("b0"),
+							Object:    testBnode.NewStringBlankNode("b0"),
 						},
 					},
 				},
 				rdfdescription.SubjectResource{
-					Subject: testBnode.MapBlankNodeIdentifier("b0"),
+					Subject: testBnode.NewStringBlankNode("b0"),
 					Statements: rdfdescription.StatementList{
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
@@ -707,12 +707,12 @@ func TestSpecNonNormative(t *testing.T) {
 						},
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
-							Object:    testBnode.MapBlankNodeIdentifier("b1"),
+							Object:    testBnode.NewStringBlankNode("b1"),
 						},
 					},
 				},
 				rdfdescription.SubjectResource{
-					Subject: testBnode.MapBlankNodeIdentifier("b1"),
+					Subject: testBnode.NewStringBlankNode("b1"),
 					Statements: rdfdescription.StatementList{
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
@@ -720,12 +720,12 @@ func TestSpecNonNormative(t *testing.T) {
 						},
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
-							Object:    testBnode.MapBlankNodeIdentifier("b2"),
+							Object:    testBnode.NewStringBlankNode("b2"),
 						},
 					},
 				},
 				rdfdescription.SubjectResource{
-					Subject: testBnode.MapBlankNodeIdentifier("b2"),
+					Subject: testBnode.NewStringBlankNode("b2"),
 					Statements: rdfdescription.StatementList{
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
@@ -919,7 +919,7 @@ func TestSpecTestcase(t *testing.T) {
 `,
 			Expected: rdfdescription.ResourceList{
 				rdfdescription.SubjectResource{
-					Subject: testBnode.MapBlankNodeIdentifier("b0"),
+					Subject: testBnode.NewStringBlankNode("b0"),
 					Statements: rdfdescription.StatementList{
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://example.org/value"),
@@ -961,7 +961,7 @@ func TestSpecTestcase(t *testing.T) {
 `,
 			Expected: rdfdescription.ResourceList{
 				rdfdescription.SubjectResource{
-					Subject: testBnode.MapBlankNodeIdentifier("b0"),
+					Subject: testBnode.NewStringBlankNode("b0"),
 					Statements: rdfdescription.StatementList{
 						rdfdescription.ObjectStatement{
 							Predicate: rdf.IRI("http://example.org/value"),
@@ -978,7 +978,7 @@ func TestSpecTestcase(t *testing.T) {
 						},
 						rdfdescription.ObjectStatement{
 							Predicate: rdfiri.Subject_Property,
-							Object:    testBnode.MapBlankNodeIdentifier("b0"),
+							Object:    testBnode.NewStringBlankNode("b0"),
 						},
 						rdfdescription.ObjectStatement{
 							Predicate: rdfiri.Predicate_Property,

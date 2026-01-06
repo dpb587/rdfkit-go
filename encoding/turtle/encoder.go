@@ -14,7 +14,7 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
 	"github.com/dpb587/rdfkit-go/rdfdescription/rdfdescriptionutil"
@@ -26,10 +26,10 @@ type EncoderOption interface {
 }
 
 type Encoder struct {
-	w                 io.Writer
-	base              *iriutil.BaseIRI
-	prefixes          *iriutil.PrefixTracker
-	blankNodeStringer blanknodeutil.Stringer
+	w                io.Writer
+	base             *iriutil.BaseIRI
+	prefixes         *iriutil.PrefixTracker
+	bnStringProvider blanknodes.StringProvider
 
 	err              error
 	buffered         bool
@@ -316,7 +316,7 @@ func (w *Encoder) AddTriple(ctx context.Context, t rdf.Triple) error {
 func (w *Encoder) writeSubjectValue(buf *bytes.Buffer, v rdf.SubjectValue) error {
 	switch s := v.(type) {
 	case rdf.BlankNode:
-		buf.WriteString("_:" + w.blankNodeStringer.GetBlankNodeIdentifier(s))
+		buf.WriteString("_:" + w.bnStringProvider.GetBlankNodeString(s))
 
 		return nil
 	case rdf.IRI:
@@ -352,7 +352,7 @@ func (e *Encoder) writeObjectValue(w *bytes.Buffer, v rdf.ObjectValue) error {
 
 	switch o := v.(type) {
 	case rdf.BlankNode:
-		label := e.blankNodeStringer.GetBlankNodeIdentifier(o)
+		label := e.bnStringProvider.GetBlankNodeString(o)
 
 		w.WriteString("_:" + label)
 

@@ -5,7 +5,7 @@ import (
 
 	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
@@ -41,8 +41,7 @@ func (ectx evaluationContext) ResolveIRI(v string) (rdf.IRI, error) {
 }
 
 type globalEvaluationContext struct {
-	Base                  *iriutil.ParsedIRI
-	Prefixes              iriutil.PrefixMap
-	BlankNodeStringMapper blanknodeutil.StringMapper
-	BlankNodeFactory      rdf.BlankNodeFactory
+	Base                   *iriutil.ParsedIRI
+	Prefixes               iriutil.PrefixMap
+	BlankNodeStringFactory blanknodes.StringFactory
 }

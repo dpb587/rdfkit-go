@@ -274,7 +274,7 @@ func TestDecodeQueryResponseJSON_SpecNonNormative(t *testing.T) {
 						Bindings: QueryResponseResultBindingMap{
 							"x": QueryResponseResultBinding{
 								Name: "x",
-								Term: testingBnode.MapBlankNodeIdentifier("r1"),
+								Term: testingBnode.NewStringBlankNode("r1"),
 							},
 							"hpage": QueryResponseResultBinding{
 								Name: "hpage",
@@ -303,7 +303,7 @@ func TestDecodeQueryResponseJSON_SpecNonNormative(t *testing.T) {
 							},
 							"friend": QueryResponseResultBinding{
 								Name: "friend",
-								Term: testingBnode.MapBlankNodeIdentifier("r2"),
+								Term: testingBnode.NewStringBlankNode("r2"),
 							},
 						},
 					},
@@ -311,7 +311,7 @@ func TestDecodeQueryResponseJSON_SpecNonNormative(t *testing.T) {
 						Bindings: QueryResponseResultBindingMap{
 							"x": QueryResponseResultBinding{
 								Name: "x",
-								Term: testingBnode.MapBlankNodeIdentifier("r2"),
+								Term: testingBnode.NewStringBlankNode("r2"),
 							},
 							"hpage": QueryResponseResultBinding{
 								Name: "hpage",
@@ -333,7 +333,7 @@ func TestDecodeQueryResponseJSON_SpecNonNormative(t *testing.T) {
 							},
 							"friend": QueryResponseResultBinding{
 								Name: "friend",
-								Term: testingBnode.MapBlankNodeIdentifier("r1"),
+								Term: testingBnode.NewStringBlankNode("r1"),
 							},
 						},
 					},

@@ -4,7 +4,7 @@ import (
 	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
@@ -14,8 +14,7 @@ type uniqRefID struct {
 }
 
 type globalEvaluationContext struct {
-	BlankNodeStringMapper blanknodeutil.StringMapper
-	BlankNodeFactory      rdf.BlankNodeFactory
+	BlankNodeStringFactory blanknodes.StringFactory
 
 	uniqRefID map[uniqRefID]struct{}
 }

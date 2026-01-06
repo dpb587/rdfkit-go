@@ -6,6 +6,7 @@ import (
 	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/inspectjson-go/inspectjson"
 	"github.com/dpb587/rdfkit-go/encoding/encodingutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 )
 
 type DecoderConfig struct {
@@ -13,6 +14,7 @@ type DecoderConfig struct {
 
 	captureTextOffsets *bool
 	initialTextOffset  *cursorio.TextOffset
+	bnStringFactory    blanknodes.StringFactory
 }
 
 func (b DecoderConfig) SetTokenizerOptions(v ...inspectjson.TokenizerOption) DecoderConfig {
@@ -33,6 +35,12 @@ func (b DecoderConfig) SetInitialTextOffset(v cursorio.TextOffset) DecoderConfig
 	return b
 }
 
+func (b DecoderConfig) SetBlankNodeStringFactory(v blanknodes.StringFactory) DecoderConfig {
+	b.bnStringFactory = v
+
+	return b
+}
+
 func (b DecoderConfig) apply(s *DecoderConfig) {
 	if b.tokenizerOptions != nil {
 		s.tokenizerOptions = b.tokenizerOptions
@@ -45,6 +53,10 @@ func (b DecoderConfig) apply(s *DecoderConfig) {
 	if b.initialTextOffset != nil {
 		s.initialTextOffset = b.initialTextOffset
 	}
+
+	if b.bnStringFactory != nil {
+		s.bnStringFactory = b.bnStringFactory
+	}
 }
 
 func (b DecoderConfig) newDecoder(r io.Reader) (*Decoder, error) {
@@ -52,6 +64,7 @@ func (b DecoderConfig) newDecoder(r io.Reader) (*Decoder, error) {
 		r:                r,
 		statementsIdx:    -1,
 		buildTextOffsets: encodingutil.BuildTextOffsetsNil,
+		bnStringFactory:  b.bnStringFactory,
 	}
 
 	if len(b.tokenizerOptions) > 0 {
@@ -67,6 +80,10 @@ func (b DecoderConfig) newDecoder(r io.Reader) (*Decoder, error) {
 
 		d.topts = append(d.topts, inspectjson.TokenizerConfig{}.SetSourceInitialOffset(initialTextOffset))
 		d.buildTextOffsets = encodingutil.BuildTextOffsetsValue
+	}
+
+	if d.bnStringFactory == nil {
+		d.bnStringFactory = blanknodes.NewStringFactory()
 	}
 
 	return d, nil

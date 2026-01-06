@@ -4,7 +4,7 @@ import (
 	"io"
 
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 )
 
 type canonicalizedQuad struct {
@@ -16,13 +16,13 @@ type canonicalizedQuad struct {
 //
 
 type Canonicalization struct {
-	blankNodeStringer blanknodeutil.Stringer
-	hasCanonicalQuad  bool
-	nquads            []canonicalizedQuad
+	bnStringProvider blanknodes.StringProvider
+	hasCanonicalQuad bool
+	nquads           []canonicalizedQuad
 }
 
 func (c *Canonicalization) GetBlankNodeIdentifier(bn rdf.BlankNode) string {
-	return c.blankNodeStringer.GetBlankNodeIdentifier(bn)
+	return c.bnStringProvider.GetBlankNodeString(bn)
 }
 
 func (c *Canonicalization) AsQuads() rdf.QuadList {

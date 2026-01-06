@@ -1,4 +1,4 @@
-package blanknodeutil
+package blanknodes
 
 import (
 	"testing"
@@ -7,7 +7,7 @@ import (
 )
 
 func TestMapper_ReproducibleInput(t *testing.T) {
-	subject := NewMapper(rdf.DefaultBlankNodeFactory)
+	subject := NewFactoryMapper(rdf.DefaultBlankNodeFactory)
 
 	input := rdf.NewBlankNode()
 	output := subject.MapBlankNode(input)

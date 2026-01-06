@@ -30,9 +30,9 @@ func (a algorithmHashRelatedBlankNode) Call() string {
 	// string _:, followed by that identifier (using the canonical identifier if present, otherwise the one issued by
 	// issuer) to input.
 
-	if id, ok := a.canonicalizationState.canonicalIssuer.GetBlankNodeIdentifierIfKnown(rdf.NewBlankNodeWithIdentifier(a.related)); ok {
+	if id, ok := a.canonicalizationState.canonicalIssuer.GetBlankNodeStringIfKnown(a.related); ok {
 		input += "_:" + id
-	} else if id, ok := a.issuer.GetBlankNodeIdentifierIfKnown(rdf.NewBlankNodeWithIdentifier(a.related)); ok {
+	} else if id, ok := a.issuer.GetBlankNodeStringIfKnown(a.related); ok {
 		input += "_:" + id
 	} else {
 

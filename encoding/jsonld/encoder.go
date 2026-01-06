@@ -13,7 +13,7 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
 )
@@ -24,11 +24,11 @@ type EncoderOption interface {
 }
 
 type Encoder struct {
-	w                 *json.Encoder
-	base              *iriutil.BaseIRI
-	prefixes          *iriutil.PrefixTracker
-	buffered          bool
-	blankNodeStringer blanknodeutil.Stringer
+	w                *json.Encoder
+	base             *iriutil.BaseIRI
+	prefixes         *iriutil.PrefixTracker
+	buffered         bool
+	bnStringProvider blanknodes.StringProvider
 
 	err     error
 	builder *rdfdescription.DatasetResourceListBuilder
@@ -169,7 +169,7 @@ func (e *Encoder) buildResource(builder *rdfdescription.ResourceListBuilder, res
 				}
 			case rdf.BlankNode:
 				statementObject = map[string]any{
-					"@id": "_:" + e.blankNodeStringer.GetBlankNodeIdentifier(obj),
+					"@id": "_:" + e.bnStringProvider.GetBlankNodeString(obj),
 				}
 			case rdf.Literal:
 				switch obj.Datatype {
@@ -252,10 +252,10 @@ func (e *Encoder) buildResource(builder *rdfdescription.ResourceListBuilder, res
 	case rdf.BlankNode:
 		if root {
 			if builder.GetBlankNodeReferences(v) > 0 {
-				graphItem["@id"] = "_:" + e.blankNodeStringer.GetBlankNodeIdentifier(v)
+				graphItem["@id"] = "_:" + e.bnStringProvider.GetBlankNodeString(v)
 			}
 		} else if builder.GetBlankNodeReferences(v) > 1 {
-			graphItem["@id"] = "_:" + e.blankNodeStringer.GetBlankNodeIdentifier(v)
+			graphItem["@id"] = "_:" + e.bnStringProvider.GetBlankNodeString(v)
 		}
 	case nil:
 		// AnonResource

@@ -5,7 +5,7 @@ import (
 
 	"github.com/dpb587/rdfkit-go/encoding/encodingutil"
 	encodinghtml "github.com/dpb587/rdfkit-go/encoding/html"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
@@ -13,7 +13,7 @@ type DecoderConfig struct {
 	htmlProcessingProfile *HtmlProcessingProfile
 	defaultVocabulary     *string
 	defaultPrefixes       iriutil.PrefixMap
-	blankNodeStringMapper blanknodeutil.StringMapper
+	bnStringFactory       blanknodes.StringFactory
 }
 
 var _ DecoderOption = DecoderConfig{}
@@ -36,8 +36,8 @@ func (b DecoderConfig) SetDefaultPrefixes(v iriutil.PrefixMap) DecoderConfig {
 	return b
 }
 
-func (b DecoderConfig) SetBlankNodeStringMapper(v blanknodeutil.StringMapper) DecoderConfig {
-	b.blankNodeStringMapper = v
+func (b DecoderConfig) SetBlankNodeStringFactory(v blanknodes.StringFactory) DecoderConfig {
+	b.bnStringFactory = v
 
 	return b
 }
@@ -55,8 +55,8 @@ func (b DecoderConfig) apply(s *DecoderConfig) {
 		s.defaultPrefixes = b.defaultPrefixes
 	}
 
-	if b.blankNodeStringMapper != nil {
-		s.blankNodeStringMapper = b.blankNodeStringMapper
+	if b.bnStringFactory != nil {
+		s.bnStringFactory = b.bnStringFactory
 	}
 }
 
@@ -73,13 +73,13 @@ func (b DecoderConfig) newDecoder(doc *encodinghtml.Document) (*Decoder, error) 
 	docProfile := doc.GetInfo()
 
 	w := &Decoder{
-		doc:                   doc,
-		captureOffsets:        docProfile.HasNodeMetadata,
-		defaultVocabulary:     b.defaultVocabulary,
-		defaultPrefixes:       b.defaultPrefixes,
-		blankNodeStringMapper: b.blankNodeStringMapper,
-		buildTextOffsets:      encodingutil.BuildTextOffsetsNil,
-		statementsIdx:         -1,
+		doc:               doc,
+		captureOffsets:    docProfile.HasNodeMetadata,
+		defaultVocabulary: b.defaultVocabulary,
+		defaultPrefixes:   b.defaultPrefixes,
+		bnStringFactory:   b.bnStringFactory,
+		buildTextOffsets:  encodingutil.BuildTextOffsetsNil,
+		statementsIdx:     -1,
 	}
 
 	if len(docProfile.BaseURL) > 0 {
@@ -97,8 +97,8 @@ func (b DecoderConfig) newDecoder(doc *encodinghtml.Document) (*Decoder, error) 
 		w.htmlProcessingProfile = *b.htmlProcessingProfile
 	}
 
-	if w.blankNodeStringMapper == nil {
-		w.blankNodeStringMapper = blanknodeutil.NewStringMapper()
+	if w.bnStringFactory == nil {
+		w.bnStringFactory = blanknodes.NewStringFactory()
 	}
 
 	if docProfile.HasNodeMetadata {

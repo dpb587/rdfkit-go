@@ -6,7 +6,7 @@ import (
 	"slices"
 
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 )
 
 type CanonicalizeOption interface {
@@ -46,25 +46,25 @@ func Canonicalize(ctx context.Context, input rdf.QuadIterator, options ...Canoni
 //
 
 type identifierIssuer struct {
-	stringer         blanknodeutil.Stringer
+	stringer         blanknodes.StringProvider
 	knownIdentifiers map[rdf.BlankNodeIdentifier]string
 	issuedOrder      []rdf.BlankNodeIdentifier
 }
 
-func (i *identifierIssuer) GetBlankNodeIdentifierIfKnown(bn rdf.BlankNode) (string, bool) {
-	id, ok := i.knownIdentifiers[bn.GetBlankNodeIdentifier()]
+func (i *identifierIssuer) GetBlankNodeStringIfKnown(bni rdf.BlankNodeIdentifier) (string, bool) {
+	id, ok := i.knownIdentifiers[bni]
 
 	return id, ok
 }
 
-func (i *identifierIssuer) GetBlankNodeIdentifier(bn rdf.BlankNode) string {
-	bnId := bn.GetBlankNodeIdentifier()
+func (i *identifierIssuer) GetBlankNodeString(bni rdf.BlankNodeIdentifier) string {
+	id := i.stringer.GetBlankNodeString(rdf.BlankNode{
+		Identifier: bni,
+	})
 
-	id := i.stringer.GetBlankNodeIdentifier(bn)
-
-	if _, ok := i.knownIdentifiers[bnId]; !ok {
-		i.issuedOrder = append(i.issuedOrder, bnId)
-		i.knownIdentifiers[bnId] = id
+	if _, ok := i.knownIdentifiers[bni]; !ok {
+		i.issuedOrder = append(i.issuedOrder, bni)
+		i.knownIdentifiers[bni] = id
 	}
 
 	return id

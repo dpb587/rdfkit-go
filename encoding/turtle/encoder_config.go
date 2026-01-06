@@ -5,7 +5,7 @@ import (
 	"io"
 	"slices"
 
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
@@ -13,7 +13,7 @@ type EncoderConfig struct {
 	base     *string
 	prefixes iriutil.PrefixMap
 
-	blankNodeStringer blanknodeutil.Stringer
+	bnStringProvider blanknodes.StringProvider
 
 	buffered     *bool
 	bufferedSort *bool
@@ -31,8 +31,8 @@ func (s EncoderConfig) SetPrefixes(v iriutil.PrefixMap) EncoderConfig {
 	return s
 }
 
-func (s EncoderConfig) SetBlankNodeStringer(v blanknodeutil.Stringer) EncoderConfig {
-	s.blankNodeStringer = v
+func (s EncoderConfig) SetBlankNodeStringProvider(v blanknodes.StringProvider) EncoderConfig {
+	s.bnStringProvider = v
 
 	return s
 }
@@ -58,8 +58,8 @@ func (s EncoderConfig) apply(d *EncoderConfig) {
 		d.prefixes = s.prefixes
 	}
 
-	if s.blankNodeStringer != nil {
-		d.blankNodeStringer = s.blankNodeStringer
+	if s.bnStringProvider != nil {
+		d.bnStringProvider = s.bnStringProvider
 	}
 
 	if s.buffered != nil {
@@ -81,9 +81,9 @@ func (s EncoderConfig) newEncoder(w io.Writer) (*Encoder, error) {
 	}
 
 	e := &Encoder{
-		w:                 w,
-		prefixes:          iriutil.NewPrefixTracker(prefixes),
-		blankNodeStringer: s.blankNodeStringer,
+		w:                w,
+		prefixes:         iriutil.NewPrefixTracker(prefixes),
+		bnStringProvider: s.bnStringProvider,
 	}
 
 	if s.base != nil {
@@ -104,8 +104,8 @@ func (s EncoderConfig) newEncoder(w io.Writer) (*Encoder, error) {
 		e.bufferedSort = *s.bufferedSort
 	}
 
-	if e.blankNodeStringer == nil {
-		e.blankNodeStringer = blanknodeutil.NewStringerInt64()
+	if e.bnStringProvider == nil {
+		e.bnStringProvider = blanknodes.NewInt64StringProvider("b%d")
 	}
 
 	if !e.buffered && (e.base != nil || len(prefixes) > 0) {

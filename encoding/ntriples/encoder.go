@@ -9,7 +9,7 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/ntriples/ntriplescontent"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 )
 
 type EncoderOption interface {
@@ -18,10 +18,10 @@ type EncoderOption interface {
 }
 
 type Encoder struct {
-	w                 io.Writer
-	blankNodeStringer blanknodeutil.Stringer
-	ascii             bool
-	buf               *bytes.Buffer
+	w                io.Writer
+	bnStringProvider blanknodes.StringProvider
+	ascii            bool
+	buf              *bytes.Buffer
 }
 
 var _ encoding.TriplesEncoder = &Encoder{}
@@ -55,7 +55,7 @@ func (w *Encoder) AddTriple(ctx context.Context, t rdf.Triple) error {
 
 	switch s := t.Subject.(type) {
 	case rdf.BlankNode:
-		w.buf.Write([]byte("_:" + w.blankNodeStringer.GetBlankNodeIdentifier(s)))
+		w.buf.Write([]byte("_:" + w.bnStringProvider.GetBlankNodeString(s)))
 	case rdf.IRI:
 		WriteIRI(w.buf, s, w.ascii)
 	default:
@@ -75,7 +75,7 @@ func (w *Encoder) AddTriple(ctx context.Context, t rdf.Triple) error {
 
 	switch o := t.Object.(type) {
 	case rdf.BlankNode:
-		w.buf.Write([]byte("_:" + w.blankNodeStringer.GetBlankNodeIdentifier(o)))
+		w.buf.Write([]byte("_:" + w.bnStringProvider.GetBlankNodeString(o)))
 	case rdf.IRI:
 		WriteIRI(w.buf, o, w.ascii)
 	case rdf.Literal:

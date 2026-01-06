@@ -840,7 +840,7 @@ func TestUnmarshal_ListsValue_BlankNodeNotList(t *testing.T) {
 	// Should have one element (the blank node itself, not expanded as a list)
 	if len(result.Result) != 1 {
 		t.Errorf("Result length = %d, want 1", len(result.Result))
-	} else if result.Result[0].GetBlankNodeIdentifier() != bn.GetBlankNodeIdentifier() {
+	} else if !result.Result[0].Identifier.EqualsBlankNodeIdentifier(bn.Identifier) {
 		t.Errorf("Result[0] blank node ID mismatch")
 	}
 }

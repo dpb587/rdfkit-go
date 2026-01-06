@@ -21,7 +21,7 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 )
 
 type statement struct {
@@ -44,6 +44,8 @@ type Decoder struct {
 	initialTextOffset  cursorio.TextOffset
 
 	parserOptions []inspectjson.ParserOption
+
+	bnStringFactory blanknodes.StringFactory
 
 	processingMode string
 	documentLoader jsonldtype.DocumentLoader
@@ -182,8 +184,7 @@ func (r *Decoder) parseRoot() error {
 
 	ectx := evaluationContext{
 		global: &globalEvaluationContext{
-			BlankNodeStringMapper: blanknodeutil.NewStringMapper(),
-			BlankNodeFactory:      blanknodeutil.NewFactory(),
+			bnStringFactory: r.bnStringFactory,
 		},
 		CurrentContainer: &DocumentResource{},
 	}
@@ -239,7 +240,7 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element jsonldinternal.E
 				})
 			}
 		} else {
-			listSubject := ectx.global.BlankNodeFactory.NewBlankNode()
+			listSubject := ectx.global.bnStringFactory.NewBlankNode()
 
 			propagatePropertyRange := elementObject.PropertySourceOffsets
 
@@ -264,7 +265,7 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element jsonldinternal.E
 
 			for listIdx, listValue := range listArray.Values {
 				if listIdx > 0 && ectx.ActiveProperty != nil {
-					nextListSubject := ectx.global.BlankNodeFactory.NewBlankNode()
+					nextListSubject := ectx.global.bnStringFactory.NewBlankNode()
 
 					r.statements = append(r.statements, statement{
 						quad: rdf.Quad{
@@ -330,7 +331,7 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element jsonldinternal.E
 		idString := valuePrimitive.Value.(inspectjson.StringValue).Value
 
 		if strings.HasPrefix(idString, "_:") {
-			selfSubject = ectx.global.BlankNodeStringMapper.MapBlankNodeIdentifier(idString[2:])
+			selfSubject = ectx.global.bnStringFactory.NewStringBlankNode(idString[2:])
 		} else {
 			if !isWellFormedIRI(idString) {
 				// TODO warn
@@ -342,7 +343,7 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element jsonldinternal.E
 
 		selfSubjectRange = valuePrimitive.Value.GetSourceOffsets()
 	} else {
-		selfSubject = ectx.global.BlankNodeFactory.NewBlankNode()
+		selfSubject = ectx.global.bnStringFactory.NewBlankNode()
 		selfSubjectRange = elementObject.SourceOffsets
 	}
 
@@ -438,7 +439,7 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element jsonldinternal.E
 			var effectiveObject rdf.ObjectValue
 
 			if len(typeString.Value) > 2 && typeString.Value[:2] == "_:" {
-				effectiveObject = ectx.global.BlankNodeStringMapper.MapBlankNodeIdentifier(typeString.Value[2:])
+				effectiveObject = ectx.global.bnStringFactory.NewStringBlankNode(typeString.Value[2:])
 			} else {
 				if !isWellFormedIRI(typeString.Value) {
 					// TODO warn
@@ -607,7 +608,7 @@ func (r *Decoder) decodeValueNode(ectx evaluationContext, v *jsonldinternal.Expa
 								litTagBaseDirection,
 							))
 						} else if r.rdfDirection == "compound-literal" {
-							compoundNode := ectx.global.BlankNodeFactory.NewBlankNode()
+							compoundNode := ectx.global.bnStringFactory.NewBlankNode()
 
 							lit.Datatype = xsdiri.String_Datatype
 

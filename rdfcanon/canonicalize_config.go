@@ -6,12 +6,12 @@ import (
 	"hash"
 
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 )
 
 type CanonicalizeConfig struct {
 	hashNewer          func() hash.Hash
-	blankNodeStringer  blanknodeutil.Stringer
+	bnStringProvider   blanknodes.StringProvider
 	buildCanonicalQuad *bool
 }
 
@@ -23,8 +23,8 @@ func (c CanonicalizeConfig) SetHashFunc(v func() hash.Hash) CanonicalizeConfig {
 	return c
 }
 
-func (c CanonicalizeConfig) SetBlankNodeStringer(v blanknodeutil.Stringer) CanonicalizeConfig {
-	c.blankNodeStringer = v
+func (c CanonicalizeConfig) SetBlankNodeStringProvider(v blanknodes.StringProvider) CanonicalizeConfig {
+	c.bnStringProvider = v
 
 	return c
 }
@@ -40,8 +40,8 @@ func (c CanonicalizeConfig) apply(s *CanonicalizeConfig) {
 		s.hashNewer = c.hashNewer
 	}
 
-	if c.blankNodeStringer != nil {
-		s.blankNodeStringer = c.blankNodeStringer
+	if c.bnStringProvider != nil {
+		s.bnStringProvider = c.bnStringProvider
 	}
 
 	if c.buildCanonicalQuad != nil {
@@ -70,12 +70,10 @@ func (c CanonicalizeConfig) newCanonicalizer(ctx context.Context, input rdf.Quad
 		cc.canonicalizationState.hashNewer = sha256.New
 	}
 
-	if c.blankNodeStringer != nil {
-		cc.canonicalizationState.canonicalIssuer.stringer = c.blankNodeStringer
+	if c.bnStringProvider != nil {
+		cc.canonicalizationState.canonicalIssuer.stringer = c.bnStringProvider
 	} else {
-		cc.canonicalizationState.canonicalIssuer.stringer = blanknodeutil.NewStringerInt64(blanknodeutil.StringerInt64Config{}.
-			SetFormat("c14n%d"),
-		)
+		cc.canonicalizationState.canonicalIssuer.stringer = blanknodes.NewInt64StringProvider("c14n%d")
 	}
 
 	if c.buildCanonicalQuad != nil {

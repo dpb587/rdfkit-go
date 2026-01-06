@@ -76,7 +76,7 @@ func reader_scan_Triples_Subject_BlankNode(r *Decoder, ectx evaluationContext, r
 		return readerStack{}, grammar.R_triples.Err(grammar.R_subject.Err(err))
 	}
 
-	ectx.CurSubject = ectx.Global.BlankNodeStringMapper.MapBlankNodeIdentifier(token.Decoded)
+	ectx.CurSubject = ectx.Global.BlankNodeStringFactory.NewStringBlankNode(token.Decoded)
 	ectx.CurSubjectLocation = token.Offsets
 
 	r.pushState(ectx, reader_scan_PredicateObjectList_Continue)

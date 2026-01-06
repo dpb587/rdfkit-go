@@ -11,7 +11,7 @@ import (
 
 	"github.com/dpb587/rdfkit-go/encoding/nquads"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 )
 
 type canonicalizationState struct {
@@ -69,7 +69,7 @@ func (a algorithmCanonicalization) Call() (*Canonicalization, error) {
 
 		switch s := q.Original.Triple.Subject.(type) {
 		case rdf.BlankNode:
-			q.SubjectBlankNodeIdentifier = s.GetBlankNodeIdentifier()
+			q.SubjectBlankNodeIdentifier = s.Identifier
 			a.canonicalizationState.blankNodeToQuads[q.SubjectBlankNodeIdentifier] = append(a.canonicalizationState.blankNodeToQuads[q.SubjectBlankNodeIdentifier], q)
 		case rdf.IRI:
 			b.Reset()
@@ -92,7 +92,7 @@ func (a algorithmCanonicalization) Call() (*Canonicalization, error) {
 
 		switch o := q.Original.Triple.Object.(type) {
 		case rdf.BlankNode:
-			q.ObjectBlankNodeIdentifier = o.GetBlankNodeIdentifier()
+			q.ObjectBlankNodeIdentifier = o.Identifier
 			a.canonicalizationState.blankNodeToQuads[q.ObjectBlankNodeIdentifier] = append(a.canonicalizationState.blankNodeToQuads[q.ObjectBlankNodeIdentifier], q)
 		case rdf.IRI:
 			b.Reset()
@@ -111,7 +111,7 @@ func (a algorithmCanonicalization) Call() (*Canonicalization, error) {
 		if q.Original.GraphName != nil {
 			switch g := q.Original.GraphName.(type) {
 			case rdf.BlankNode:
-				q.GraphNameBlankNodeIdentifier = g.GetBlankNodeIdentifier()
+				q.GraphNameBlankNodeIdentifier = g.Identifier
 				a.canonicalizationState.blankNodeToQuads[q.GraphNameBlankNodeIdentifier] = append(a.canonicalizationState.blankNodeToQuads[q.GraphNameBlankNodeIdentifier], q)
 			case rdf.IRI:
 				b.Reset()
@@ -160,7 +160,7 @@ func (a algorithmCanonicalization) Call() (*Canonicalization, error) {
 		// [spec // 4.4.3 // 4.2] Use the Issue Identifier algorithm, passing canonical issuer and the single blank node
 		// identifier, identifier in identifier list to issue a canonical replacement identifier for identifier.
 
-		a.canonicalizationState.canonicalIssuer.GetBlankNodeIdentifier(rdf.NewBlankNodeWithIdentifier(a.canonicalizationState.hashToBlankNodes[hash][0]))
+		a.canonicalizationState.canonicalIssuer.GetBlankNodeString(a.canonicalizationState.hashToBlankNodes[hash][0])
 
 		// [spec // 4.4.3 // 4.3] Remove the map entry for hash from the hash to blank nodes map.
 
@@ -187,21 +187,21 @@ func (a algorithmCanonicalization) Call() (*Canonicalization, error) {
 			// [spec // 4.4.3 // 5.2.1] If a canonical identifier has already been issued for n, continue to the next blank
 			// node identifier.
 
-			if _, ok := a.canonicalizationState.canonicalIssuer.GetBlankNodeIdentifierIfKnown(rdf.NewBlankNodeWithIdentifier(n)); ok {
+			if _, ok := a.canonicalizationState.canonicalIssuer.GetBlankNodeStringIfKnown(n); ok {
 				continue
 			}
 
 			// [spec // 4.4.3 // 5.2.2] Create temporary issuer, an identifier issuer initialized with the prefix b.
 
 			temporaryIssuer := identifierIssuer{
-				stringer:         blanknodeutil.NewStringerInt64(),
+				stringer:         blanknodes.NewInt64StringProvider("b%d"),
 				knownIdentifiers: make(map[rdf.BlankNodeIdentifier]string),
 			}
 
 			// [spec // 4.4.3 // 5.2.3] Use the Issue Identifier algorithm, passing temporary issuer and n, to issue a new
 			// temporary blank node identifier bn to n.
 
-			temporaryIssuer.GetBlankNodeIdentifier(rdf.NewBlankNodeWithIdentifier(n))
+			temporaryIssuer.GetBlankNodeString(n)
 
 			// [spec // 4.4.3 // 5.2.4] Run the Hash N-Degree Quads algorithm, passing the canonicalization state, n for
 			// identifier, and temporary issuer, appending the result to the hash path list.
@@ -233,7 +233,7 @@ func (a algorithmCanonicalization) Call() (*Canonicalization, error) {
 			// Identifier algorithm, passing canonical issuer and existing identifier.
 
 			for _, existingIdentifier := range result.identifierIssuer.issuedOrder {
-				a.canonicalizationState.canonicalIssuer.GetBlankNodeIdentifier(rdf.NewBlankNodeWithIdentifier(existingIdentifier))
+				a.canonicalizationState.canonicalIssuer.GetBlankNodeString(existingIdentifier)
 			}
 
 		}
@@ -248,8 +248,8 @@ func (a algorithmCanonicalization) Call() (*Canonicalization, error) {
 	// issued identifiers map from the canonical issuer.
 
 	cres := &Canonicalization{
-		blankNodeStringer: a.canonicalizationState.canonicalIssuer.stringer,
-		hasCanonicalQuad:  a.buildCanonicalQuad,
+		bnStringProvider: a.canonicalizationState.canonicalIssuer.stringer,
+		hasCanonicalQuad: a.buildCanonicalQuad,
 	}
 
 	for _, quad := range a.canonicalizationState.allQuads {
@@ -265,12 +265,12 @@ func (a algorithmCanonicalization) Call() (*Canonicalization, error) {
 		if len(quad.SubjectEncoded) > 0 {
 			s.WriteString(quad.SubjectEncoded)
 		} else {
-			bn := rdf.NewBlankNodeWithIdentifier(quad.SubjectBlankNodeIdentifier)
-
 			s.WriteString("_:")
-			s.WriteString(a.canonicalizationState.canonicalIssuer.GetBlankNodeIdentifier(bn))
+			s.WriteString(a.canonicalizationState.canonicalIssuer.GetBlankNodeString(quad.SubjectBlankNodeIdentifier))
 
-			cquad.Triple.Subject = bn
+			cquad.Triple.Subject = rdf.BlankNode{
+				Identifier: quad.SubjectBlankNodeIdentifier,
+			}
 		}
 
 		s.WriteString(" ")
@@ -281,24 +281,24 @@ func (a algorithmCanonicalization) Call() (*Canonicalization, error) {
 		if len(quad.ObjectEncoded) > 0 {
 			s.WriteString(quad.ObjectEncoded)
 		} else {
-			bn := rdf.NewBlankNodeWithIdentifier(quad.ObjectBlankNodeIdentifier)
-
 			s.WriteString("_:")
-			s.WriteString(a.canonicalizationState.canonicalIssuer.GetBlankNodeIdentifier(bn))
+			s.WriteString(a.canonicalizationState.canonicalIssuer.GetBlankNodeString(quad.ObjectBlankNodeIdentifier))
 
-			cquad.Triple.Object = bn
+			cquad.Triple.Object = rdf.BlankNode{
+				Identifier: quad.ObjectBlankNodeIdentifier,
+			}
 		}
 
 		if len(quad.GraphNameEncoded) > 0 {
 			s.WriteString(" ")
 			s.WriteString(quad.GraphNameEncoded)
 		} else if quad.GraphNameBlankNodeIdentifier != nil {
-			bn := rdf.NewBlankNodeWithIdentifier(quad.GraphNameBlankNodeIdentifier)
-
 			s.WriteString(" _:")
-			s.WriteString(a.canonicalizationState.canonicalIssuer.GetBlankNodeIdentifier(bn))
+			s.WriteString(a.canonicalizationState.canonicalIssuer.GetBlankNodeString(quad.GraphNameBlankNodeIdentifier))
 
-			cquad.GraphName = bn
+			cquad.GraphName = rdf.BlankNode{
+				Identifier: quad.GraphNameBlankNodeIdentifier,
+			}
 		}
 
 		s.WriteString(" .\n")

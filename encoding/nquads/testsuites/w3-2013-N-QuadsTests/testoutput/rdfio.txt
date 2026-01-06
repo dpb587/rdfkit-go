@@ -29,7 +29,7 @@ encodingtest.QuadStatementList{
 			Triple: rdf.Triple{
 				Subject: rdf.IRI("http://example/s"),
 				Predicate: rdf.IRI("http://example/p"),
-				Object: bnTODO.MapBlankNodeIdentifier("b0"),
+				Object: bnTODO.NewStringBlankNode("b0"),
 			},
 		},
 		TextOffsets: encoding.StatementTextOffsets{
@@ -813,7 +813,7 @@ encodingtest.QuadStatementList{
 			Triple: rdf.Triple{
 				Subject: rdf.IRI("http://example/s"),
 				Predicate: rdf.IRI("http://example/p"),
-				Object: bnTODO.MapBlankNodeIdentifier("b0"),
+				Object: bnTODO.NewStringBlankNode("b0"),
 			},
 		},
 		TextOffsets: encoding.StatementTextOffsets{
@@ -834,7 +834,7 @@ encodingtest.QuadStatementList{
 	{
 		Quad: rdf.Quad{
 			Triple: rdf.Triple{
-				Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+				Subject: bnTODO.NewStringBlankNode("b1"),
 				Predicate: rdf.IRI("http://example/p"),
 				Object: rdf.IRI("http://example/o"),
 			},
@@ -857,7 +857,7 @@ encodingtest.QuadStatementList{
 	{
 		Quad: rdf.Quad{
 			Triple: rdf.Triple{
-				Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+				Subject: bnTODO.NewStringBlankNode("b1"),
 				Predicate: rdf.IRI("http://example/p"),
 				Object: rdf.Literal{
 					LexicalForm: "Alice",
@@ -883,9 +883,9 @@ encodingtest.QuadStatementList{
 	{
 		Quad: rdf.Quad{
 			Triple: rdf.Triple{
-				Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+				Subject: bnTODO.NewStringBlankNode("b1"),
 				Predicate: rdf.IRI("http://example/p"),
-				Object: bnTODO.MapBlankNodeIdentifier("b2"),
+				Object: bnTODO.NewStringBlankNode("b2"),
 			},
 		},
 		TextOffsets: encoding.StatementTextOffsets{
@@ -915,7 +915,7 @@ encodingtest.QuadStatementList{
 				Predicate: rdf.IRI("http://example/p"),
 				Object: rdf.IRI("http://example/o"),
 			},
-			GraphName: bnTODO.MapBlankNodeIdentifier("b0"),
+			GraphName: bnTODO.NewStringBlankNode("b0"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -944,11 +944,11 @@ encodingtest.QuadStatementList{
 	{
 		Quad: rdf.Quad{
 			Triple: rdf.Triple{
-				Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+				Subject: bnTODO.NewStringBlankNode("b0"),
 				Predicate: rdf.IRI("http://example/p"),
 				Object: rdf.IRI("http://example/o"),
 			},
-			GraphName: bnTODO.MapBlankNodeIdentifier("b1"),
+			GraphName: bnTODO.NewStringBlankNode("b1"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -979,9 +979,9 @@ encodingtest.QuadStatementList{
 			Triple: rdf.Triple{
 				Subject: rdf.IRI("http://example/s"),
 				Predicate: rdf.IRI("http://example/p"),
-				Object: bnTODO.MapBlankNodeIdentifier("b0"),
+				Object: bnTODO.NewStringBlankNode("b0"),
 			},
-			GraphName: bnTODO.MapBlankNodeIdentifier("b1"),
+			GraphName: bnTODO.NewStringBlankNode("b1"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1017,7 +1017,7 @@ encodingtest.QuadStatementList{
 					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
 				},
 			},
-			GraphName: bnTODO.MapBlankNodeIdentifier("b0"),
+			GraphName: bnTODO.NewStringBlankNode("b0"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1056,7 +1056,7 @@ encodingtest.QuadStatementList{
 					},
 				},
 			},
-			GraphName: bnTODO.MapBlankNodeIdentifier("b0"),
+			GraphName: bnTODO.NewStringBlankNode("b0"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1092,7 +1092,7 @@ encodingtest.QuadStatementList{
 					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
 				},
 			},
-			GraphName: bnTODO.MapBlankNodeIdentifier("b0"),
+			GraphName: bnTODO.NewStringBlankNode("b0"),
 		},
 		TextOffsets: encoding.StatementTextOffsets{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
@@ -1154,7 +1154,7 @@ encodingtest.QuadStatementList{
 	{
 		Quad: rdf.Quad{
 			Triple: rdf.Triple{
-				Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+				Subject: bnTODO.NewStringBlankNode("b0"),
 				Predicate: rdf.IRI("http://example/p"),
 				Object: rdf.IRI("http://example/o"),
 			},
@@ -1189,7 +1189,7 @@ encodingtest.QuadStatementList{
 			Triple: rdf.Triple{
 				Subject: rdf.IRI("http://example/s"),
 				Predicate: rdf.IRI("http://example/p"),
-				Object: bnTODO.MapBlankNodeIdentifier("b0"),
+				Object: bnTODO.NewStringBlankNode("b0"),
 			},
 			GraphName: rdf.IRI("http://example/g"),
 		},
@@ -1331,7 +1331,7 @@ encodingtest.QuadStatementList{
 	{
 		Quad: rdf.Quad{
 			Triple: rdf.Triple{
-				Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+				Subject: bnTODO.NewStringBlankNode("b0"),
 				Predicate: rdf.IRI("http://example/p"),
 				Object: rdf.IRI("http://example/o"),
 			},
@@ -1361,7 +1361,7 @@ encodingtest.QuadStatementList{
 			Triple: rdf.Triple{
 				Subject: rdf.IRI("http://example/s"),
 				Predicate: rdf.IRI("http://example/p"),
-				Object: bnTODO.MapBlankNodeIdentifier("b0"),
+				Object: bnTODO.NewStringBlankNode("b0"),
 			},
 		},
 		TextOffsets: encoding.StatementTextOffsets{
@@ -1382,7 +1382,7 @@ encodingtest.QuadStatementList{
 	{
 		Quad: rdf.Quad{
 			Triple: rdf.Triple{
-				Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+				Subject: bnTODO.NewStringBlankNode("b0"),
 				Predicate: rdf.IRI("http://example/p"),
 				Object: rdf.IRI("http://example/o"),
 			},
@@ -1412,7 +1412,7 @@ encodingtest.QuadStatementList{
 			Triple: rdf.Triple{
 				Subject: rdf.IRI("http://example/s"),
 				Predicate: rdf.IRI("http://example/p"),
-				Object: bnTODO.MapBlankNodeIdentifier("b0"),
+				Object: bnTODO.NewStringBlankNode("b0"),
 			},
 		},
 		TextOffsets: encoding.StatementTextOffsets{
@@ -1433,7 +1433,7 @@ encodingtest.QuadStatementList{
 	{
 		Quad: rdf.Quad{
 			Triple: rdf.Triple{
-				Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+				Subject: bnTODO.NewStringBlankNode("b0"),
 				Predicate: rdf.IRI("http://example/p"),
 				Object: rdf.IRI("http://example/o"),
 			},
@@ -1753,7 +1753,7 @@ encodingtest.QuadStatementList{
 	{
 		Quad: rdf.Quad{
 			Triple: rdf.Triple{
-				Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+				Subject: bnTODO.NewStringBlankNode("b0"),
 				Predicate: rdf.IRI("http://example.org/property"),
 				Object: rdf.IRI("http://example.org/resource2"),
 			},
@@ -1778,7 +1778,7 @@ encodingtest.QuadStatementList{
 			Triple: rdf.Triple{
 				Subject: rdf.IRI("http://example.org/resource2"),
 				Predicate: rdf.IRI("http://example.org/property"),
-				Object: bnTODO.MapBlankNodeIdentifier("b0"),
+				Object: bnTODO.NewStringBlankNode("b0"),
 			},
 		},
 		TextOffsets: encoding.StatementTextOffsets{
@@ -2098,7 +2098,7 @@ encodingtest.QuadStatementList{
 			Triple: rdf.Triple{
 				Subject: rdf.IRI("http://example.org/resource15"),
 				Predicate: rdf.IRI("http://example.org/property"),
-				Object: bnTODO.MapBlankNodeIdentifier("b0"),
+				Object: bnTODO.NewStringBlankNode("b0"),
 			},
 		},
 		TextOffsets: encoding.StatementTextOffsets{

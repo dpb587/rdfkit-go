@@ -5,7 +5,6 @@ import (
 
 	"github.com/dpb587/inspectjson-go/inspectjson"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
@@ -19,9 +18,8 @@ const (
 )
 
 type contextProcessor struct {
-	ctx                   context.Context
-	documentLoader        jsonldtype.DocumentLoader
-	blankNodeStringMapper blanknodeutil.StringMapper
+	ctx            context.Context
+	documentLoader jsonldtype.DocumentLoader
 
 	processingMode string
 

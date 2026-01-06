@@ -4,12 +4,11 @@ import (
 	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 )
 
 type globalEvaluationContext struct {
-	BlankNodeStringMapper blanknodeutil.StringMapper
-	BlankNodeFactory      rdf.BlankNodeFactory
+	bnStringFactory blanknodes.StringFactory
 }
 
 type evaluationContext struct {

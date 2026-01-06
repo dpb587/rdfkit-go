@@ -16,7 +16,7 @@ import (
 	"github.com/dpb587/rdfkit-go/rdf"
 )
 
-func (r *Decoder) captureOpenBlankNode(uncommitted cursorio.DecodedRuneList) (rdf.BlankNode, *cursorio.TextOffsetRange, error) {
+func (r *Decoder) captureOpenBlankNode(uncommitted cursorio.DecodedRuneList) (rdf.SubjectValue, *cursorio.TextOffsetRange, error) {
 	// assert(len(uncommitted) == 2 && uncommitted[0:2] == "_:")
 
 	r0, err := r.buf.NextRune()
@@ -72,7 +72,7 @@ DONE:
 		}
 	}
 
-	return r.blankNodeStringMapper.MapBlankNodeIdentifier(string(uncommitted[2:].AsDecodedRunes().Runes)), r.commitForTextOffsetRange(uncommitted.AsDecodedRunes()), nil
+	return r.bnStringFactory.NewStringBlankNode(string(uncommitted[2:].AsDecodedRunes().Runes)), r.commitForTextOffsetRange(uncommitted.AsDecodedRunes()), nil
 }
 
 func (r *Decoder) captureOpenIRI(uncommitted cursorio.DecodedRuneList) (rdf.IRI, *cursorio.TextOffsetRange, error) {

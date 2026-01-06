@@ -73,7 +73,7 @@ func (d *dedupQuadsIterator) hashTerm(h hash.Hash, t rdf.Term) {
 
 		return
 	} else if bn, ok := t.(rdf.BlankNode); ok {
-		fmt.Fprintf(h, "rdf.NewBlankNodeWithIdentifier(%#+v)\n", bn.GetBlankNodeIdentifier())
+		fmt.Fprintf(h, "rdf.BlankNode{%#+v}\n", bn.Identifier)
 
 		return
 	}
