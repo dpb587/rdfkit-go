@@ -1152,3 +1152,110 @@ func TestUnmarshaler_CustomPrefixesWithNestedResources(t *testing.T) {
 		}
 	})
 }
+
+func TestUnmarshal_EARLExample(t *testing.T) {
+	// Build resource from the EARL example in design.md
+	// This tests AnonResourceStatement support for nested structs
+	resource := &rdfdescription.SubjectResource{
+		Subject: rdf.NewBlankNode(),
+		Statements: rdfdescription.StatementList{
+			rdfdescription.ObjectStatement{
+				Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
+				Object:    rdf.IRI("http://www.w3.org/ns/earl#Assertion"),
+			},
+			rdfdescription.ObjectStatement{
+				Predicate: rdf.IRI("http://www.w3.org/ns/earl#subject"),
+				Object:    rdf.IRI("http://jena.apache.org/#jena"),
+			},
+			rdfdescription.ObjectStatement{
+				Predicate: rdf.IRI("http://www.w3.org/ns/earl#test"),
+				Object:    rdf.IRI("https://w3c.github.io/rdf-star/tests/trig/eval#trig-star-2"),
+			},
+			rdfdescription.ObjectStatement{
+				Predicate: rdf.IRI("http://www.w3.org/ns/earl#assertedBy"),
+				Object:    rdf.IRI("http://jena.apache.org/#jena"),
+			},
+			rdfdescription.ObjectStatement{
+				Predicate: rdf.IRI("http://www.w3.org/ns/earl#mode"),
+				Object:    rdf.IRI("http://www.w3.org/ns/earl#automatic"),
+			},
+			// This is the key: an AnonResourceStatement representing the nested TestResult
+			rdfdescription.AnonResourceStatement{
+				Predicate: rdf.IRI("http://www.w3.org/ns/earl#result"),
+				AnonResource: rdfdescription.AnonResource{
+					Statements: rdfdescription.StatementList{
+						rdfdescription.ObjectStatement{
+							Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
+							Object:    rdf.IRI("http://www.w3.org/ns/earl#TestResult"),
+						},
+						rdfdescription.ObjectStatement{
+							Predicate: rdf.IRI("http://www.w3.org/ns/earl#outcome"),
+							Object:    rdf.IRI("http://www.w3.org/ns/earl#passed"),
+						},
+						rdfdescription.ObjectStatement{
+							Predicate: rdf.IRI("http://purl.org/dc/elements/1.1/date"),
+							Object: rdf.Literal{
+								LexicalForm: "2021-12-18+00:00",
+								Datatype:    rdf.IRI("http://www.w3.org/2001/XMLSchema#date"),
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+
+	// Define structs matching the design.md EARL example
+	type TestResult struct {
+		Outcome rdf.IRI     `rdf:"o,p=http://www.w3.org/ns/earl#outcome"`
+		Date    rdf.Literal `rdf:"o,p=http://purl.org/dc/elements/1.1/date"`
+	}
+
+	type Assertion struct {
+		Subject    rdf.ObjectValue `rdf:"o,p=http://www.w3.org/ns/earl#subject"`
+		Test       rdf.ObjectValue `rdf:"o,p=http://www.w3.org/ns/earl#test"`
+		AssertedBy rdf.ObjectValue `rdf:"o,p=http://www.w3.org/ns/earl#assertedBy"`
+		Mode       rdf.ObjectValue `rdf:"o,p=http://www.w3.org/ns/earl#mode"`
+		Result     *TestResult     `rdf:"o,p=http://www.w3.org/ns/earl#result"`
+	}
+
+	var result Assertion
+	err := UnmarshalResource(resource, &result)
+	if err != nil {
+		t.Fatalf("Unmarshal failed: %v", err)
+	}
+
+	// Verify top-level fields
+	if result.Subject != rdf.IRI("http://jena.apache.org/#jena") {
+		t.Errorf("Subject = %v, want http://jena.apache.org/#jena", result.Subject)
+	}
+
+	if result.Test != rdf.IRI("https://w3c.github.io/rdf-star/tests/trig/eval#trig-star-2") {
+		t.Errorf("Test = %v, want https://w3c.github.io/rdf-star/tests/trig/eval#trig-star-2", result.Test)
+	}
+
+	if result.AssertedBy != rdf.IRI("http://jena.apache.org/#jena") {
+		t.Errorf("AssertedBy = %v, want http://jena.apache.org/#jena", result.AssertedBy)
+	}
+
+	if result.Mode != rdf.IRI("http://www.w3.org/ns/earl#automatic") {
+		t.Errorf("Mode = %v, want http://www.w3.org/ns/earl#automatic", result.Mode)
+	}
+
+	// Verify nested TestResult
+	if result.Result == nil {
+		t.Fatal("Result is nil, expected TestResult")
+	}
+
+	if result.Result.Outcome != rdf.IRI("http://www.w3.org/ns/earl#passed") {
+		t.Errorf("Result.Outcome = %v, want http://www.w3.org/ns/earl#passed", result.Result.Outcome)
+	}
+
+	expectedDate := rdf.Literal{
+		LexicalForm: "2021-12-18+00:00",
+		Datatype:    rdf.IRI("http://www.w3.org/2001/XMLSchema#date"),
+	}
+	if result.Result.Date != expectedDate {
+		t.Errorf("Result.Date = %v, want %v", result.Result.Date, expectedDate)
+	}
+}

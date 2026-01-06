@@ -57,7 +57,9 @@ Additionally, the generic `Collection[T]` type is supported for RDF list travers
 
 * `Collection[T]` - if the object value is an IRI or Blank Node, check if it represents a resource from the scope's ResourceListBuilder. If so, and if it includes the type `rdf:List`, follow the chain of values, process each list value in the context of the field type `T` (i.e. per "Tagged Object Scalar" section). The `Collection[T]` type is defined as `type Collection[T any] []T`.
 
-Any other type is assumed to be a custom struct which represents a Resource that can be recursively unmarshalled.
+Any other type is assumed to be a custom struct which represents a Resource that can be recursively unmarshalled. Custom structs can be unmarshaled from:
+* **ObjectStatement** - when the object is an IRI or BlankNode that references a resource with statements in the ResourceListBuilder
+* **AnonResourceStatement** - when the object is an inline blank node with embedded properties (no separate subject in the ResourceListBuilder)
 
 # Examples
 
@@ -166,6 +168,68 @@ result := Example{
     "https://w3id.org/jelly/dev/tests/rdf/from_jelly/triples_rdf_1_1/pos_015/out_001.nt",
     "https://w3id.org/jelly/dev/tests/rdf/from_jelly/triples_rdf_1_1/pos_015/out_002.nt",
     "https://w3id.org/jelly/dev/tests/rdf/from_jelly/triples_rdf_1_1/pos_015/out_003.nt",
+  },
+}
+```
+
+## EARL Example
+
+Given the following Turtle example.
+
+```ttl
+PREFIX dawg: <http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#>
+PREFIX dc:   <http://purl.org/dc/elements/1.1/>
+PREFIX dct:  <http://purl.org/dc/terms/>
+PREFIX doap: <http://usefulinc.com/ns/doap#>
+PREFIX earl: <http://www.w3.org/ns/earl#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdft: <http://www.w3.org/ns/rdftest#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+[ rdf:type         earl:Assertion ;
+  earl:assertedBy  <http://jena.apache.org/#jena> ;
+  earl:mode        earl:automatic ;
+  earl:result      [ rdf:type      earl:TestResult ;
+                     dc:date       "2021-12-18+00:00"^^xsd:date ;
+                     earl:outcome  earl:passed
+                   ] ;
+  earl:subject     <http://jena.apache.org/#jena> ;
+  earl:test        <https://w3c.github.io/rdf-star/tests/trig/eval#trig-star-2>
+] .
+```
+
+Given the following user-defined struct and tags.
+
+```go
+type Assertion struct {
+	Subject    rdf.ObjectValue `rdf:"o,p=http://www.w3.org/ns/earl#subject"`
+	Test       rdf.ObjectValue `rdf:"o,p=http://www.w3.org/ns/earl#test"`
+	AssertedBy rdf.ObjectValue `rdf:"o,p=http://www.w3.org/ns/earl#assertedBy"`
+	Mode       rdf.ObjectValue `rdf:"o,p=http://www.w3.org/ns/earl#mode"`
+	Result     *TestResult     `rdf:"o,p=http://www.w3.org/ns/earl#result"`
+}
+
+type TestResult struct {
+	Outcome rdf.IRI     `rdf:"o,p=http://www.w3.org/ns/earl#outcome"`
+	Date    rdf.Literal `rdf:"o,p=http://purl.org/dc/elements/1.1/date"`
+}
+```
+
+The following result is expected.
+
+```go
+result := Assertion{
+  Subject: rdf.IRI("http://jena.apache.org/#jena"),
+  Test: rdf.IRI("https://w3c.github.io/rdf-star/tests/trig/eval#trig-star-2"),
+  AssertedBy: rdf.IRI("http://jena.apache.org/#jena"),
+  Mode: rdf.IRI("http://www.w3.org/ns/earl#automatic"),
+  Result: &TestResult{
+    Outcome: rdf.IRI("http://www.w3.org/ns/earl#passed"),
+    Date: rdf.Literal{
+      LexicalForm: "2021-12-18+00:00",
+      Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#date"),
+    },
   },
 }
 ```

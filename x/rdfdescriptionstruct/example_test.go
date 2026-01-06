@@ -222,3 +222,94 @@ func Example_customPrefixes() {
 	// Title: The Go Programming Language
 	// Author: Alan Donovan
 }
+
+// Example_earlAssertion demonstrates unmarshaling EARL assertions with nested blank nodes.
+// This shows how AnonResourceStatement is used for inline blank node structures.
+func Example_earlAssertion() {
+	// Define structs for EARL (Evaluation and Report Language) assertions
+	type TestResult struct {
+		Outcome rdf.IRI     `rdf:"o,p=http://www.w3.org/ns/earl#outcome"`
+		Date    rdf.Literal `rdf:"o,p=http://purl.org/dc/elements/1.1/date"`
+	}
+
+	type Assertion struct {
+		Subject    rdf.IRI     `rdf:"o,p=http://www.w3.org/ns/earl#subject"`
+		Test       rdf.IRI     `rdf:"o,p=http://www.w3.org/ns/earl#test"`
+		AssertedBy rdf.IRI     `rdf:"o,p=http://www.w3.org/ns/earl#assertedBy"`
+		Mode       rdf.IRI     `rdf:"o,p=http://www.w3.org/ns/earl#mode"`
+		Result     *TestResult `rdf:"o,p=http://www.w3.org/ns/earl#result"`
+	}
+
+	// Create a resource with an inline blank node for the result
+	// This uses AnonResourceStatement for the nested TestResult
+	resource := &rdfdescription.SubjectResource{
+		Subject: rdf.NewBlankNode(),
+		Statements: rdfdescription.StatementList{
+			rdfdescription.ObjectStatement{
+				Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
+				Object:    rdf.IRI("http://www.w3.org/ns/earl#Assertion"),
+			},
+			rdfdescription.ObjectStatement{
+				Predicate: rdf.IRI("http://www.w3.org/ns/earl#subject"),
+				Object:    rdf.IRI("http://jena.apache.org/#jena"),
+			},
+			rdfdescription.ObjectStatement{
+				Predicate: rdf.IRI("http://www.w3.org/ns/earl#test"),
+				Object:    rdf.IRI("https://w3c.github.io/rdf-star/tests/trig/eval#trig-star-2"),
+			},
+			rdfdescription.ObjectStatement{
+				Predicate: rdf.IRI("http://www.w3.org/ns/earl#assertedBy"),
+				Object:    rdf.IRI("http://jena.apache.org/#jena"),
+			},
+			rdfdescription.ObjectStatement{
+				Predicate: rdf.IRI("http://www.w3.org/ns/earl#mode"),
+				Object:    rdf.IRI("http://www.w3.org/ns/earl#automatic"),
+			},
+			// AnonResourceStatement: inline blank node for earl:result
+			rdfdescription.AnonResourceStatement{
+				Predicate: rdf.IRI("http://www.w3.org/ns/earl#result"),
+				AnonResource: rdfdescription.AnonResource{
+					Statements: rdfdescription.StatementList{
+						rdfdescription.ObjectStatement{
+							Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
+							Object:    rdf.IRI("http://www.w3.org/ns/earl#TestResult"),
+						},
+						rdfdescription.ObjectStatement{
+							Predicate: rdf.IRI("http://www.w3.org/ns/earl#outcome"),
+							Object:    rdf.IRI("http://www.w3.org/ns/earl#passed"),
+						},
+						rdfdescription.ObjectStatement{
+							Predicate: rdf.IRI("http://purl.org/dc/elements/1.1/date"),
+							Object: rdf.Literal{
+								LexicalForm: "2021-12-18+00:00",
+								Datatype:    xsdiri.Date_Datatype,
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+
+	// Unmarshal the assertion
+	var assertion Assertion
+	err := rdfdescriptionstruct.UnmarshalResource(resource, &assertion)
+	if err != nil {
+		panic(err)
+	}
+
+	if assertion.Result == nil {
+		panic("Result is nil")
+	}
+
+	fmt.Printf("Subject: %s\n", assertion.Subject)
+	fmt.Printf("Test: %s\n", assertion.Test)
+	fmt.Printf("Outcome: %s\n", assertion.Result.Outcome)
+	fmt.Printf("Date: %s\n", assertion.Result.Date.LexicalForm)
+
+	// Output:
+	// Subject: http://jena.apache.org/#jena
+	// Test: https://w3c.github.io/rdf-star/tests/trig/eval#trig-star-2
+	// Outcome: http://www.w3.org/ns/earl#passed
+	// Date: 2021-12-18+00:00
+}

@@ -47,12 +47,20 @@ func (u *Unmarshaler) unmarshalObject(builder *rdfdescription.ResourceListBuilde
 		return fmt.Errorf("multiple values found for non-slice field")
 	}
 
-	objStmt, ok := objects[0].(rdfdescription.ObjectStatement)
-	if !ok {
-		return fmt.Errorf("expected ObjectStatement, got %T", objects[0])
+	stmt := objects[0]
+
+	// Handle ObjectStatement (normal case: object is IRI, BlankNode, or Literal)
+	if objStmt, ok := stmt.(rdfdescription.ObjectStatement); ok {
+		return u.unmarshalObjectValue(builder, objStmt.Object, fieldValue, fieldType)
 	}
 
-	return u.unmarshalObjectValue(builder, objStmt.Object, fieldValue, fieldType)
+	// Handle AnonResourceStatement (inline blank node with nested properties)
+	if anonStmt, ok := stmt.(rdfdescription.AnonResourceStatement); ok {
+		// For nested structs, unmarshal the anonymous resource directly
+		return u.unmarshalAnonResourceToStruct(builder, anonStmt.AnonResource, fieldValue, fieldType)
+	}
+
+	return fmt.Errorf("expected ObjectStatement or AnonResourceStatement, got %T", stmt)
 }
 
 // unmarshalObjectSlice unmarshals multiple object values into a slice field.
@@ -113,7 +121,17 @@ func (u *Unmarshaler) unmarshalObjectSlice(builder *rdfdescription.ResourceListB
 				}
 			}
 
-			// Not a list or not expandable, error
+			// Not a list - could be a nested struct
+			if !isCollection {
+				elemValue := reflect.New(elemType).Elem()
+				if err := u.unmarshalAnonResourceToStruct(builder, anonStmt.AnonResource, elemValue, elemType); err != nil {
+					return err
+				}
+				slice = reflect.Append(slice, elemValue)
+				continue
+			}
+
+			// Collection type but not an RDF list and no builder
 			if isCollection && builder == nil {
 				return fmt.Errorf("expected ObjectStatement (Collection type requires ResourceListBuilder - use UnmarshalBuilder instead of Unmarshal)")
 			}
@@ -209,6 +227,29 @@ func (u *Unmarshaler) unmarshalObjectValue(builder *rdfdescription.ResourceListB
 
 	// Recursively unmarshal into the field
 	return u.unmarshalResource(builder, subResource, fieldValue.Addr().Interface())
+}
+
+// unmarshalAnonResourceToStruct unmarshals an AnonResource into a struct field.
+// This is used when an object value is an inline blank node (AnonResourceStatement)
+// rather than a reference to a blank node or IRI (ObjectStatement).
+func (u *Unmarshaler) unmarshalAnonResourceToStruct(builder *rdfdescription.ResourceListBuilder, anon rdfdescription.AnonResource, fieldValue reflect.Value, fieldType reflect.Type) error {
+	// Handle pointer types
+	if fieldType.Kind() == reflect.Ptr {
+		ptr := reflect.New(fieldType.Elem())
+		if err := u.unmarshalAnonResourceToStruct(builder, anon, ptr.Elem(), fieldType.Elem()); err != nil {
+			return err
+		}
+		fieldValue.Set(ptr)
+		return nil
+	}
+
+	// The field type should be a struct for nested resources
+	if fieldType.Kind() != reflect.Struct {
+		return fmt.Errorf("cannot unmarshal AnonResource into non-struct type %s", fieldType.String())
+	}
+
+	// Recursively unmarshal the anonymous resource as a Resource
+	return u.unmarshalResource(builder, anon, fieldValue.Addr().Interface())
 }
 
 // unmarshalLiteralToBuiltin unmarshals a Literal to a builtin Go type.
