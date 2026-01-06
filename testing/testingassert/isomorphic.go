@@ -2,18 +2,23 @@ package testingassert
 
 import (
 	"bytes"
-	"testing"
+	"context"
 
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/quads"
 	"github.com/dpb587/rdfkit-go/rdfcanon"
 )
 
-func IsomorphicGraphs(t *testing.T, expected, actual rdf.TripleList) {
+type testingT interface {
+	Context() context.Context
+	Fatalf(format string, args ...any)
+}
+
+func IsomorphicGraphs(t testingT, expected, actual rdf.TripleList) {
 	IsomorphicDatasets(t, expected.AsQuads(nil), actual.AsQuads(nil))
 }
 
-func IsomorphicDatasets(t *testing.T, expected, actual rdf.QuadList) {
+func IsomorphicDatasets(t testingT, expected, actual rdf.QuadList) {
 	expectedCanonical, err := rdfcanon.Canonicalize(t.Context(), newDedupQuadsIterator(quads.NewIterator(expected)))
 	if err != nil {
 		t.Fatalf("canonicalize expected: %v", err)

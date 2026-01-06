@@ -1,6 +1,9 @@
 package earltesting
 
 import (
+	"bytes"
+	"context"
+	"fmt"
 	"testing"
 	"time"
 
@@ -19,6 +22,7 @@ type Assertion struct {
 	resultNode        rdf.SubjectValue
 	startTime         time.Time
 	testResultOutcome *rdf.IRI
+	descriptionLog    *bytes.Buffer
 }
 
 func (a *Assertion) SetTestResultOutcome(outcome rdf.IRI) {
@@ -42,12 +46,30 @@ func (a *Assertion) AddTestResultStatement(statements ...rdfdescription.Statemen
 	}.NewTriples()...)
 }
 
-func (a *Assertion) TSkip(t *testing.T, outcome rdf.IRI, description string) {
-	a.SetTestResultOutcome(outcome)
-	a.AddTestResultDescription(description)
+func (a *Assertion) Context() context.Context {
+	return a.t.Context()
+}
 
-	t.Helper()
-	t.Skip(description)
+func (a *Assertion) Skip(outcome rdf.IRI) {
+	a.SetTestResultOutcome(outcome)
+
+	a.t.Helper()
+	a.t.Skip()
+}
+
+func (a *Assertion) Logf(format string, args ...any) {
+	msg := fmt.Sprintf(format, args...)
+	a.descriptionLog.WriteString(msg)
+	a.descriptionLog.WriteString("\n")
+
+	a.t.Helper()
+	a.t.Log(msg)
+}
+
+func (a *Assertion) Fatalf(format string, args ...any) {
+	a.t.Helper()
+	a.Logf(format, args...)
+	a.t.FailNow()
 }
 
 func (a *Assertion) finalize() {
@@ -108,6 +130,17 @@ func (a *Assertion) finalize() {
 			Subject:   a.assertionNode,
 			Predicate: earliri.Subject_ObjectProperty,
 			Object:    a.rs.subject,
+		})
+	}
+
+	if a.descriptionLog.Len() > 0 {
+		a.rs.report.builder.Add(rdf.Triple{
+			Subject:   a.resultNode,
+			Predicate: rdf.IRI("http://purl.org/dc/terms/description"),
+			Object: rdf.Literal{
+				LexicalForm: a.descriptionLog.String(),
+				Datatype:    xsdiri.String_Datatype,
+			},
 		})
 	}
 }

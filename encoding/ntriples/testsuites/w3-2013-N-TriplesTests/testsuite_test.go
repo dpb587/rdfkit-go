@@ -44,7 +44,7 @@ func Test(t *testing.T) {
 					rdf.IRI("http://usefulinc.com/ns/doap#Project"),
 				},
 				foafiri.Name_Property: rdf.ObjectValueList{
-					xsdobject.String("rdfkit-go"),
+					xsdobject.String("rdfkit-go/encoding/ntriples"),
 				},
 				foafiri.Homepage_Property: rdf.ObjectValueList{
 					rdf.IRI("https://github.com/dpb587/rdfkit-go"),
@@ -72,22 +72,22 @@ func Test(t *testing.T) {
 		switch entry.Type {
 		case "http://www.w3.org/ns/rdftest#TestNTriplesNegativeSyntax":
 			t.Run("NegativeSyntax/"+entry.Name, func(t *testing.T) {
-				earlReport.NewAssertion(t, entry.ID)
+				tAssertion := earlReport.NewAssertion(t, entry.ID)
 
 				_, err := decodeAction()
 				if err != nil {
-					t.Logf("error: %v", err)
+					tAssertion.Logf("error (expected): %v", err)
 				} else {
-					t.Fatal("expected error, but got none")
+					tAssertion.Fatalf("expected error, but got none")
 				}
 			})
 		case "http://www.w3.org/ns/rdftest#TestNTriplesPositiveSyntax":
 			t.Run("PositiveSyntax/"+entry.Name, func(t *testing.T) {
-				earlReport.NewAssertion(t, entry.ID)
+				tAssertion := earlReport.NewAssertion(t, entry.ID)
 
 				actualStatements, err := decodeAction()
 				if err != nil {
-					t.Fatalf("error: %v", err)
+					tAssertion.Fatalf("error: %v", err)
 				}
 
 				rdfioDebug.PutTriplesBundle(t.Name(), actualStatements)

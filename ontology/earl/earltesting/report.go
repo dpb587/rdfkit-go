@@ -1,6 +1,7 @@
 package earltesting
 
 import (
+	"bytes"
 	"context"
 	"fmt"
 	"os"
@@ -160,12 +161,13 @@ func (rs ReportScope) NewAssertion(t *testing.T, testIRI rdf.IRI) *Assertion {
 	defer rs.report.mu.Unlock()
 
 	assertion := &Assertion{
-		rs:            rs,
-		t:             t,
-		testIRI:       testIRI,
-		assertionNode: rdf.NewBlankNode(),
-		resultNode:    rdf.NewBlankNode(),
-		startTime:     time.Now(),
+		rs:             rs,
+		t:              t,
+		testIRI:        testIRI,
+		assertionNode:  rdf.NewBlankNode(),
+		resultNode:     rdf.NewBlankNode(),
+		startTime:      time.Now(),
+		descriptionLog: &bytes.Buffer{},
 	}
 
 	rs.report.assertionSubjects = append(rs.report.assertionSubjects, assertion.assertionNode)

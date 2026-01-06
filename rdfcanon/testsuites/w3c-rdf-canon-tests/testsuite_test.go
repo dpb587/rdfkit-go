@@ -50,7 +50,7 @@ func Test(t *testing.T) {
 					rdf.IRI("http://usefulinc.com/ns/doap#Project"),
 				},
 				foafiri.Name_Property: rdf.ObjectValueList{
-					xsdobject.String("rdfkit-go"),
+					xsdobject.String("rdfkit-go/rdfcanon"),
 				},
 				foafiri.Homepage_Property: rdf.ObjectValueList{
 					rdf.IRI("https://github.com/dpb587/rdfkit-go"),
@@ -116,7 +116,7 @@ func Test(t *testing.T) {
 		switch entry.Type {
 		case "https://w3c.github.io/rdf-canon/tests/vocab#RDFC10EvalTest":
 			t.Run("EvalTest/"+entry.Name, func(t *testing.T) {
-				earlReport.NewAssertion(t, entry.ID)
+				tAssertion := earlReport.NewAssertion(t, entry.ID)
 
 				if entry.Result == "" {
 					t.Fatal("missing test result")
@@ -127,18 +127,18 @@ func Test(t *testing.T) {
 					nquads.DecoderConfig{},
 				))
 				if err != nil {
-					t.Fatalf("decode expected result: %v", err)
+					tAssertion.Fatalf("decode expected result: %v", err)
 				}
 
 				canonicalization, err := runCanonicalizer(t.Context())
 				if err != nil {
-					t.Fatalf("canonicalize: %v", err)
+					tAssertion.Fatalf("canonicalize: %v", err)
 				}
 
 				actualBuffer := &bytes.Buffer{}
 				_, err = canonicalization.WriteTo(actualBuffer)
 				if err != nil {
-					t.Fatalf("write canonicalized: %v", err)
+					tAssertion.Fatalf("write canonicalized: %v", err)
 				}
 
 				actualStatements, err := quads.CollectErr(nquads.NewDecoder(
@@ -146,14 +146,14 @@ func Test(t *testing.T) {
 					nquads.DecoderConfig{},
 				))
 				if err != nil {
-					t.Fatalf("collect: %v", err)
+					tAssertion.Fatalf("collect: %v", err)
 				}
 
-				testingassert.IsomorphicDatasets(t, expectedStatements, actualStatements)
+				testingassert.IsomorphicDatasets(tAssertion, expectedStatements, actualStatements)
 			})
 		case "https://w3c.github.io/rdf-canon/tests/vocab#RDFC10MapTest":
 			t.Run("MapTest/"+entry.Name, func(t *testing.T) {
-				earlReport.NewAssertion(t, entry.ID)
+				tAssertion := earlReport.NewAssertion(t, entry.ID)
 
 				if entry.Result == "" {
 					t.Fatal("missing test result")
@@ -162,7 +162,7 @@ func Test(t *testing.T) {
 				var expectedMap map[string]string
 				err := json.Unmarshal(testdata.GetFileBytes(t, string(entry.Result)), &expectedMap)
 				if err != nil {
-					t.Fatalf("decode expected map: %v", err)
+					tAssertion.Fatalf("decode expected map: %v", err)
 				}
 
 				// Create a custom StringMapper that tracks the original string identifiers
@@ -172,12 +172,12 @@ func Test(t *testing.T) {
 					nquads.DecoderConfig{}.SetBlankNodeStringMapper(mapper),
 				)
 				if err != nil {
-					t.Fatalf("decode action: %v", err)
+					tAssertion.Fatalf("decode action: %v", err)
 				}
 
 				canonicalization, err := rdfcanon.Canonicalize(t.Context(), inputDecoder, canonicalizerOpts...)
 				if err != nil {
-					t.Fatalf("canonicalize: %v", err)
+					tAssertion.Fatalf("canonicalize: %v", err)
 				}
 
 				// Build the actual map from original identifiers to canonical identifiers
@@ -187,28 +187,28 @@ func Test(t *testing.T) {
 				}
 
 				if len(expectedMap) != len(actualMap) {
-					t.Fatalf("map size mismatch: expected %d, got %d", len(expectedMap), len(actualMap))
+					tAssertion.Fatalf("map size mismatch: expected %d, got %d", len(expectedMap), len(actualMap))
 				}
 
 				for expectedBN, expectedCanonical := range expectedMap {
 					actualCanonical, ok := actualMap[expectedBN]
 					if !ok {
-						t.Fatalf("missing blank node in actual map: %s", expectedBN)
+						tAssertion.Fatalf("missing blank node in actual map: %s", expectedBN)
 					}
 					if expectedCanonical != actualCanonical {
-						t.Fatalf("blank node %s: expected %s, got %s", expectedBN, expectedCanonical, actualCanonical)
+						tAssertion.Fatalf("blank node %s: expected %s, got %s", expectedBN, expectedCanonical, actualCanonical)
 					}
 				}
 			})
 		case "https://w3c.github.io/rdf-canon/tests/vocab#RDFC10NegativeEvalTest":
 			t.Run("NegativeEvalTest/"+entry.Name, func(t *testing.T) {
-				earlReport.NewAssertion(t, entry.ID)
+				tAssertion := earlReport.NewAssertion(t, entry.ID)
 
 				_, err := runCanonicalizer(t.Context())
-				if err == nil {
-					t.Fatalf("expected error, but got none")
+				if err != nil {
+					tAssertion.Logf("error (expected): %v", err)
 				} else {
-					t.Logf("error (expected): %v", err)
+					tAssertion.Fatalf("expected error, but got none")
 				}
 			})
 		default:

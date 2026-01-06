@@ -51,7 +51,7 @@ func Test(t *testing.T) {
 					rdf.IRI("http://usefulinc.com/ns/doap#Project"),
 				},
 				foafiri.Name_Property: rdf.ObjectValueList{
-					xsdobject.String("rdfkit-go"),
+					xsdobject.String("rdfkit-go/encoding/jsonld/internal/jsonldinternal"),
 				},
 				foafiri.Homepage_Property: rdf.ObjectValueList{
 					rdf.IRI("https://github.com/dpb587/rdfkit-go"),
@@ -123,29 +123,29 @@ func Test(t *testing.T) {
 
 		if slices.Contains(sequence.Type, "jld:NegativeEvaluationTest") {
 			t.Run("NegativeSyntax/"+strings.TrimPrefix(sequence.ID, "#"), func(t *testing.T) {
-				earlReport.NewAssertion(t, rdf.IRI(manifestPrefix+"expand"+sequence.ID))
+				tAssertion := earlReport.NewAssertion(t, rdf.IRI(manifestPrefix+"expand"+sequence.ID))
 
 				_, err := decodeAction()
 				if err != nil {
-					t.Logf("error: %v", err)
+					tAssertion.Logf("error (expected): %v", err)
 				} else {
 					t.Fatal("expected error, but got none")
 				}
 			})
 		} else if slices.Contains(sequence.Type, "jld:PositiveEvaluationTest") {
 			t.Run("Eval/"+strings.TrimPrefix(sequence.ID, "#"), func(t *testing.T) {
-				earlReport.NewAssertion(t, rdf.IRI(manifestPrefix+"expand"+sequence.ID))
+				tAssertion := earlReport.NewAssertion(t, rdf.IRI(manifestPrefix+"expand"+sequence.ID))
 
 				var expectedBuiltin any
 
 				err := json.NewDecoder(testdata.NewFileByteReader(t, manifestPrefix+sequence.Expect)).Decode(&expectedBuiltin)
 				if err != nil {
-					t.Fatalf("unmarshal: %v", err)
+					tAssertion.Fatalf("unmarshal: %v", err)
 				}
 
 				actual, err := decodeAction()
 				if err != nil {
-					t.Fatalf("error: %v", err)
+					tAssertion.Fatalf("error: %v", err)
 				}
 
 				actualBuiltin := actual.AsBuiltin()

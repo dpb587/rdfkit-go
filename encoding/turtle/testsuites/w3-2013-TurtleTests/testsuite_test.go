@@ -48,7 +48,7 @@ func Test(t *testing.T) {
 					rdf.IRI("http://usefulinc.com/ns/doap#Project"),
 				},
 				foafiri.Name_Property: rdf.ObjectValueList{
-					xsdobject.String("rdfkit-go"),
+					xsdobject.String("rdfkit-go/encoding/turtle"),
 				},
 				foafiri.Homepage_Property: rdf.ObjectValueList{
 					rdf.IRI("https://github.com/dpb587/rdfkit-go"),
@@ -86,21 +86,21 @@ func Test(t *testing.T) {
 		switch entry.Type {
 		case "http://www.w3.org/ns/rdftest#TestTurtleEval":
 			t.Run("Eval/"+entry.Name, func(t *testing.T) {
-				earlReport.NewAssertion(t, entry.ID)
+				tAssertion := earlReport.NewAssertion(t, entry.ID)
 
 				expectedStatements, err := triples.CollectErr(ntriples.NewDecoder(
 					testdata.NewFileByteReader(t, string(entry.Result)),
 				))
 				if err != nil {
-					t.Fatalf("setup error: decode result: %v", err)
+					tAssertion.Fatalf("setup error: decode result: %v", err)
 				}
 
 				actualStatements, err := decodeAction()
 				if err != nil {
-					t.Fatalf("error: %v", err)
+					tAssertion.Fatalf("error: %v", err)
 				}
 
-				testingassert.IsomorphicGraphs(t, expectedStatements, actualStatements.AsTriples())
+				testingassert.IsomorphicGraphs(tAssertion, expectedStatements, actualStatements.AsTriples())
 
 				rdfioDebug.PutTriplesBundle(t.Name(), actualStatements)
 			})
@@ -108,22 +108,22 @@ func Test(t *testing.T) {
 			// TODO
 		case "http://www.w3.org/ns/rdftest#TestTurtlePositiveSyntax":
 			t.Run("PositiveSyntax/"+entry.Name, func(t *testing.T) {
-				earlReport.NewAssertion(t, entry.ID)
+				tAssertion := earlReport.NewAssertion(t, entry.ID)
 
 				statements, err := decodeAction()
 				if err != nil {
-					t.Fatalf("error: %v", err)
+					tAssertion.Fatalf("error: %v", err)
 				}
 
 				rdfioDebug.PutTriplesBundle(t.Name(), statements)
 			})
 		case "http://www.w3.org/ns/rdftest#TestTurtleNegativeSyntax":
 			t.Run("NegativeSyntax/"+entry.Name, func(t *testing.T) {
-				earlReport.NewAssertion(t, entry.ID)
+				tAssertion := earlReport.NewAssertion(t, entry.ID)
 
 				_, err := decodeAction()
 				if err != nil {
-					t.Logf("error: %v", err)
+					tAssertion.Logf("error (expected): %v", err)
 				} else {
 					t.Fatal("expected error, but got none")
 				}

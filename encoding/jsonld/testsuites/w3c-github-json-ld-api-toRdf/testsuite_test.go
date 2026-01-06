@@ -52,7 +52,7 @@ func Test(t *testing.T) {
 					rdf.IRI("http://usefulinc.com/ns/doap#Project"),
 				},
 				foafiri.Name_Property: rdf.ObjectValueList{
-					xsdobject.String("rdfkit-go"),
+					xsdobject.String("rdfkit-go/encoding/jsonld"),
 				},
 				foafiri.Homepage_Property: rdf.ObjectValueList{
 					rdf.IRI("https://github.com/dpb587/rdfkit-go"),
@@ -119,10 +119,11 @@ func Test(t *testing.T) {
 
 		if slices.Contains(sequence.Type, "jld:PositiveEvaluationTest") {
 			t.Run("Eval/"+sequence.ID, func(t *testing.T) {
-				earlAssertion := earlReport.NewAssertion(t, rdf.IRI(manifestPrefix+"toRdf"+sequence.ID))
+				tAssertion := earlReport.NewAssertion(t, rdf.IRI(manifestPrefix+"toRdf"+sequence.ID))
 
 				if sequence.Option.ProduceGeneralizedRdf {
-					earlAssertion.TSkip(t, earliri.Inapplicable_NotApplicable, "produceGeneralizedRdf is not supported")
+					tAssertion.Logf("produceGeneralizedRdf is not supported")
+					tAssertion.Skip(earliri.Inapplicable_NotApplicable)
 				} else if sequence.ID == "#t0122" || sequence.ID == "#t0123" || sequence.ID == "#t0124" || sequence.ID == "#t0125" {
 					// The stdlib URL resolver normalizes .. and . segments out of the path, but these tests expect
 					// the dot-segments to be retained.
@@ -156,22 +157,23 @@ func Test(t *testing.T) {
 					//   ACTUAL <urn:ex:s099> <urn:ex:p> <http://a/bb/ccc/d;p?q> .
 					// * EXPECT <urn:ex:s133> <urn:ex:p> <http://a/bb/ccc/../d;p?y> .
 					//   ACTUAL <urn:ex:s133> <urn:ex:p> <http://a/bb/d;p?y> .
-					earlAssertion.TSkip(t, earliri.Inapplicable_NotApplicable, "expected failure (requires unresolved RFC 3986 dot-segments)")
+					tAssertion.Logf("expected failure (requires unresolved RFC 3986 dot-segments)")
+					tAssertion.Skip(earliri.Inapplicable_NotApplicable)
 				}
 
 				expectedStatements, err := quads.CollectErr(nquads.NewDecoder(
 					testdata.NewFileByteReader(t, manifestPrefix+sequence.Expect),
 				))
 				if err != nil {
-					t.Fatalf("setup error: decode result: %v", err)
+					tAssertion.Fatalf("setup error: decode result: %v", err)
 				}
 
 				actualStatements, err := decodeAction()
 				if err != nil {
-					t.Fatalf("error: %v", err)
+					tAssertion.Fatalf("error: %v", err)
 				}
 
-				testingassert.IsomorphicDatasets(t, expectedStatements, actualStatements.AsQuads())
+				testingassert.IsomorphicDatasets(tAssertion, expectedStatements, actualStatements.AsQuads())
 
 				rdfioDebug.PutQuadsBundle(t.Name(), actualStatements)
 			})
