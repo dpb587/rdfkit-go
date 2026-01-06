@@ -525,7 +525,7 @@ func (vars algorithmCreateTermDefinition) Call() error {
 						value: inspectjson.StringValue{
 							Value: vars.term,
 						},
-						localContext: nil,
+						localContext: vars.localContext,
 						defined:      vars.defined,
 						// assumed
 						activeContext: vars.activeContext,

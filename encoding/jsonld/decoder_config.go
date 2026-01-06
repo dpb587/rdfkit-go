@@ -20,6 +20,7 @@ type DecoderConfig struct {
 
 	processingMode *string
 	documentLoader jsonldtype.DocumentLoader
+	expandContext  inspectjson.Value
 	rdfDirection   *string
 
 	baseDirectiveListener   DecoderEvent_BaseDirective_ListenerFunc
@@ -61,6 +62,12 @@ func (b DecoderConfig) SetProcessingMode(v string) DecoderConfig {
 
 func (b DecoderConfig) SetDocumentLoader(v jsonldtype.DocumentLoader) DecoderConfig {
 	b.documentLoader = v
+
+	return b
+}
+
+func (b DecoderConfig) SetExpandContext(v inspectjson.Value) DecoderConfig {
+	b.expandContext = v
 
 	return b
 }
@@ -108,6 +115,10 @@ func (b DecoderConfig) apply(s *DecoderConfig) {
 		s.documentLoader = b.documentLoader
 	}
 
+	if b.expandContext != nil {
+		s.expandContext = b.expandContext
+	}
+
 	if b.rdfDirection != nil {
 		s.rdfDirection = b.rdfDirection
 	}
@@ -126,6 +137,7 @@ func (b DecoderConfig) newDecoder(r io.Reader) (*Decoder, error) {
 		r:                       r,
 		statementsIdx:           -1,
 		documentLoader:          b.documentLoader,
+		expandContext:           b.expandContext,
 		parserOptions:           b.parserOptions,
 		baseDirectiveListener:   b.baseDirectiveListener,
 		prefixDirectiveListener: b.prefixDirectiveListener,

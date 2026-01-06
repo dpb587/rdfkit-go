@@ -1,10 +1,12 @@
 package jsonld
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"io"
 	"maps"
+	"math"
 	"slices"
 	"strconv"
 	"strings"
@@ -45,6 +47,7 @@ type Decoder struct {
 
 	processingMode string
 	documentLoader jsonldtype.DocumentLoader
+	expandContext  inspectjson.Value
 	rdfDirection   string
 
 	baseDirectiveListener   DecoderEvent_BaseDirective_ListenerFunc
@@ -106,6 +109,50 @@ func (r *Decoder) StatementTextOffsets() encoding.StatementTextOffsets {
 	return r.statements[r.statementsIdx].textOffsets
 }
 
+// non-comprehensive validation functions
+// TODO improve thoroughness? extract to shared package?
+
+func isWellFormedIRI(s string) bool {
+	var foundSchemeSeparator bool
+	var foundFragment bool
+	var foundQuery bool
+
+	for _, r := range s {
+		if r < 0x20 {
+			return false
+		}
+
+		switch r {
+		case ' ', '<', '>', '"', '{', '}', '|', '\\', '^', '`':
+			return false
+		case ':':
+			foundSchemeSeparator = true
+		case '?':
+			if foundQuery {
+				return false
+			}
+
+			foundQuery = true
+		case '#':
+			if foundFragment {
+				return false
+			}
+
+			foundFragment = true
+		}
+	}
+
+	return foundSchemeSeparator
+}
+
+func isWellFormedLiteralLanguageTag(s string) bool {
+	return !strings.Contains(s, " ")
+}
+
+func isWellFormedLiteralBaseDirectionTag(s string) bool {
+	return s == "ltr" || s == "rtl"
+}
+
 func (r *Decoder) parseRoot() error {
 	topt := inspectjson.TokenizerConfig{}
 
@@ -121,6 +168,7 @@ func (r *Decoder) parseRoot() error {
 	opts := jsonldtype.ProcessorOptions{
 		ProcessingMode: r.processingMode,
 		DocumentLoader: r.documentLoader,
+		ExpandContext:  r.expandContext,
 	}
 
 	if len(r.defaultBase) > 0 {
@@ -284,6 +332,11 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element jsonldinternal.E
 		if strings.HasPrefix(idString, "_:") {
 			selfSubject = ectx.global.BlankNodeStringMapper.MapBlankNodeIdentifier(idString[2:])
 		} else {
+			if !isWellFormedIRI(idString) {
+				// TODO warn
+				return nil
+			}
+
 			selfSubject = rdf.IRI(idString)
 		}
 
@@ -357,6 +410,11 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element jsonldinternal.E
 			if len(key) > 2 && key[:2] == "_:" {
 				nectx.ActiveProperty = nil // not supported
 			} else {
+				if !isWellFormedIRI(key) {
+					// TODO warn
+					continue
+				}
+
 				nectx.ActiveProperty = rdf.IRI(key)
 				// nectx.ActivePropertyRange = member.Name.SourceOffsets
 			}
@@ -382,6 +440,11 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element jsonldinternal.E
 			if len(typeString.Value) > 2 && typeString.Value[:2] == "_:" {
 				effectiveObject = ectx.global.BlankNodeStringMapper.MapBlankNodeIdentifier(typeString.Value[2:])
 			} else {
+				if !isWellFormedIRI(typeString.Value) {
+					// TODO warn
+					continue
+				}
+
 				effectiveObject = rdf.IRI(typeString.Value)
 			}
 
@@ -406,19 +469,29 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element jsonldinternal.E
 	}
 
 	if atGraph, ok := elementObject.Members["@graph"]; ok {
-		nectx := ectx
-		nectx.ActiveGraph = ectx.ActiveSubject.(rdf.GraphNameValue)
-		nectx.ActiveGraphRange = ectx.ActiveSubjectRange
-		nectx.ActiveSubject = nil
-		nectx.ActiveSubjectRange = nil
-		nectx.ActiveProperty = nil
-		nectx.ActivePropertyRange = nil
-		nectx.CurrentContainer = nil
+		var validGraphName = true
 
-		for _, item := range atGraph.(*jsonldinternal.ExpandedArray).Values {
-			err := r.decodeElement(nectx, item, false)
-			if err != nil {
-				return err
+		if graphIRI, ok := ectx.ActiveSubject.(rdf.IRI); ok {
+			validGraphName = isWellFormedIRI(string(graphIRI))
+		}
+
+		if !validGraphName {
+			// TODO warn
+		} else {
+			nectx := ectx
+			nectx.ActiveGraph = ectx.ActiveSubject.(rdf.GraphNameValue)
+			nectx.ActiveGraphRange = ectx.ActiveSubjectRange
+			nectx.ActiveSubject = nil
+			nectx.ActiveSubjectRange = nil
+			nectx.ActiveProperty = nil
+			nectx.ActivePropertyRange = nil
+			nectx.CurrentContainer = nil
+
+			for _, item := range atGraph.(*jsonldinternal.ExpandedArray).Values {
+				err := r.decodeElement(nectx, item, false)
+				if err != nil {
+					return err
+				}
 			}
 		}
 	}
@@ -452,6 +525,11 @@ func (r *Decoder) decodeElement(ectx evaluationContext, element jsonldinternal.E
 		if len(key) > 2 && key[:2] == "_:" {
 			nectx.ActiveProperty = nil // not supported
 		} else {
+			if !isWellFormedIRI(key) {
+				// TODO warn
+				continue
+			}
+
 			nectx.ActiveProperty = rdf.IRI(key)
 			// nectx.ActivePropertyRange = member.Name.SourceOffsets
 		}
@@ -477,13 +555,20 @@ func (r *Decoder) decodeValueNode(ectx evaluationContext, v *jsonldinternal.Expa
 	atValuePrimitive := v.Members["@value"].(*jsonldinternal.ExpandedScalarPrimitive)
 
 	if lit.Datatype == "@json" {
-		buf, err := json.Marshal(atValuePrimitive.Value.AsBuiltin())
+		buf := &bytes.Buffer{}
+
+		jsonEncoder := json.NewEncoder(buf)
+		jsonEncoder.SetEscapeHTML(false)
+
+		err := jsonEncoder.Encode(atValuePrimitive.Value.AsBuiltin())
 		if err != nil {
 			return fmt.Errorf("marshal for @json: %v", err)
 		}
 
 		lit.Datatype = rdfiri.JSON_Datatype
-		lit.LexicalForm = string(buf)
+
+		// drop the trailing \n
+		lit.LexicalForm = string(buf.Bytes()[0 : len(buf.Bytes())-1])
 	} else {
 		switch valuePrimitive := atValuePrimitive.Value.(type) {
 		case inspectjson.StringValue:
@@ -497,10 +582,20 @@ func (r *Decoder) decodeValueNode(ectx evaluationContext, v *jsonldinternal.Expa
 
 				if atLangageKnown {
 					litTagLanguage = atLanguage.(*jsonldinternal.ExpandedScalarPrimitive).Value.(inspectjson.StringValue).Value
+					if !isWellFormedLiteralLanguageTag(litTagLanguage) {
+						// TODO warn
+						return nil
+					}
 				}
 
 				if atDirectionKnown {
 					litTagBaseDirection = atDirection.(*jsonldinternal.ExpandedScalarPrimitive).Value.(inspectjson.StringValue).Value
+
+					// spec does not explicitly call for a well-formed base direction?
+					if !isWellFormedLiteralBaseDirectionTag(litTagBaseDirection) {
+						// TODO warn
+						return nil
+					}
 				}
 
 				if len(lit.Datatype) == 0 {
@@ -611,26 +706,47 @@ func (r *Decoder) decodeValueNode(ectx evaluationContext, v *jsonldinternal.Expa
 				}
 			}
 		case inspectjson.NumberValue:
-			lit.LexicalForm = strconv.FormatFloat(valuePrimitive.Value, 'f', -1, 64)
+			fixedForm := strconv.FormatFloat(valuePrimitive.Value, 'f', -1, 64)
+			hasDecimal := strings.Contains(fixedForm, ".")
 
-			if len(lit.Datatype) == 0 {
-				if strings.Contains(lit.LexicalForm, ".") {
+			// zero not expected to be negative (#trt01)
+			if valuePrimitive.Value == 0 && strings.HasPrefix(fixedForm, "-") {
+				fixedForm = "0"
+			}
+
+			datatypeExplicitlySet := len(lit.Datatype) > 0
+
+			if !datatypeExplicitlySet {
+				if hasDecimal || (valuePrimitive.Value < math.MinInt32 || valuePrimitive.Value > math.MaxInt32) {
 					lit.Datatype = xsdiri.Double_Datatype
 				} else {
 					lit.Datatype = xsdiri.Integer_Datatype
 				}
 			}
 
-			// based on testsuites (#t0035, #te061)
-			// probably related to canonicalization recommendations in spec and XML datatypes, though didn't find exact
-			// reference for this behavior
+			// apparently explicit datatypes should follow double conventions, too (#te061)
+			if lit.Datatype == xsdiri.Double_Datatype || (datatypeExplicitlySet && hasDecimal) {
+				sciForm := strconv.FormatFloat(valuePrimitive.Value, 'E', -1, 64)
+				parts := strings.Split(sciForm, "E")
 
-			// if !strings.Contains(lit.LexicalForm, ".") {
-			// 	lit.LexicalForm += ".0"
-			// }
+				if len(parts) == 2 {
+					mantissa := parts[0]
+					expStr := parts[1]
 
-			if strings.Contains(lit.LexicalForm, ".") && !strings.Contains(lit.LexicalForm, "e") && !strings.Contains(lit.LexicalForm, "E") {
-				lit.LexicalForm += "E0"
+					if !strings.Contains(mantissa, ".") {
+						mantissa += ".0"
+					}
+
+					// remove leading plus sign and zeros
+					expVal := 0
+					fmt.Sscanf(expStr, "%d", &expVal)
+
+					lit.LexicalForm = fmt.Sprintf("%sE%d", mantissa, expVal)
+				} else {
+					lit.LexicalForm = sciForm
+				}
+			} else {
+				lit.LexicalForm = fixedForm
 			}
 		case inspectjson.BooleanValue:
 			if len(lit.Datatype) == 0 {

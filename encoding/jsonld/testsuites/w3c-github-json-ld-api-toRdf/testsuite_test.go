@@ -111,6 +111,15 @@ func Test(t *testing.T) {
 				dopt = dopt.SetRDFDirection(sequence.Option.RDFDirection)
 			}
 
+			if len(sequence.Option.ExpandContext) > 0 {
+				expandContextDoc, err := inspectjson.Parse(testdata.NewFileByteReader(t, manifestPrefix+sequence.Option.ExpandContext))
+				if err != nil {
+					return nil, fmt.Errorf("parse expand context: %v", err)
+				}
+
+				dopt = dopt.SetExpandContext(expandContextDoc)
+			}
+
 			return encodingtest.CollectQuadStatementsErr(jsonld.NewDecoder(
 				testdata.NewFileByteReader(t, manifestPrefix+sequence.Input),
 				dopt,

@@ -1951,6 +1951,115 @@ encodingtest.QuadStatementList{
 	},
 }
 
+=== Test/Eval/#t0035
+
+encodingtest.QuadStatementList{
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+				Predicate: rdf.IRI("http://example.com/integer"),
+				Object: rdf.Literal{
+					LexicalForm: "9.9E0",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#integer"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 0, LineColumn: cursorio.TextLineColumn{0, 0}},
+				Until: cursorio.TextOffset{Byte: 316, LineColumn: cursorio.TextLineColumn{13, 1}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 294, LineColumn: cursorio.TextLineColumn{12, 2}},
+				Until: cursorio.TextOffset{Byte: 303, LineColumn: cursorio.TextLineColumn{12, 11}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 309, LineColumn: cursorio.TextLineColumn{12, 17}},
+				Until: cursorio.TextOffset{Byte: 312, LineColumn: cursorio.TextLineColumn{12, 20}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+				Predicate: rdf.IRI("http://example.com/integer"),
+				Object: rdf.Literal{
+					LexicalForm: "8",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#integer"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 0, LineColumn: cursorio.TextLineColumn{0, 0}},
+				Until: cursorio.TextOffset{Byte: 316, LineColumn: cursorio.TextLineColumn{13, 1}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 294, LineColumn: cursorio.TextLineColumn{12, 2}},
+				Until: cursorio.TextOffset{Byte: 303, LineColumn: cursorio.TextLineColumn{12, 11}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 306, LineColumn: cursorio.TextLineColumn{12, 14}},
+				Until: cursorio.TextOffset{Byte: 307, LineColumn: cursorio.TextLineColumn{12, 15}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+				Predicate: rdf.IRI("http://example.com/double"),
+				Object: rdf.Literal{
+					LexicalForm: "2.2E0",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#double"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 0, LineColumn: cursorio.TextLineColumn{0, 0}},
+				Until: cursorio.TextOffset{Byte: 316, LineColumn: cursorio.TextLineColumn{13, 1}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 271, LineColumn: cursorio.TextLineColumn{11, 2}},
+				Until: cursorio.TextOffset{Byte: 279, LineColumn: cursorio.TextLineColumn{11, 10}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 285, LineColumn: cursorio.TextLineColumn{11, 16}},
+				Until: cursorio.TextOffset{Byte: 288, LineColumn: cursorio.TextLineColumn{11, 19}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+				Predicate: rdf.IRI("http://example.com/double"),
+				Object: rdf.Literal{
+					LexicalForm: "1.0E0",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#double"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 0, LineColumn: cursorio.TextLineColumn{0, 0}},
+				Until: cursorio.TextOffset{Byte: 316, LineColumn: cursorio.TextLineColumn{13, 1}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 271, LineColumn: cursorio.TextLineColumn{11, 2}},
+				Until: cursorio.TextOffset{Byte: 279, LineColumn: cursorio.TextLineColumn{11, 10}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 282, LineColumn: cursorio.TextLineColumn{11, 13}},
+				Until: cursorio.TextOffset{Byte: 283, LineColumn: cursorio.TextLineColumn{11, 14}},
+			},
+		},
+	},
+}
+
 === Test/Eval/#t0036
 
 encodingtest.QuadStatementList{
@@ -6823,6 +6932,14 @@ encodingtest.QuadStatementList{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
 				From: cursorio.TextOffset{Byte: 396, LineColumn: cursorio.TextLineColumn{17, 13}},
 				Until: cursorio.TextOffset{Byte: 537, LineColumn: cursorio.TextLineColumn{24, 5}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 373, LineColumn: cursorio.TextLineColumn{16, 2}},
+				Until: cursorio.TextOffset{Byte: 379, LineColumn: cursorio.TextLineColumn{16, 8}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 387, LineColumn: cursorio.TextLineColumn{17, 4}},
+				Until: cursorio.TextOffset{Byte: 394, LineColumn: cursorio.TextLineColumn{17, 11}},
 			},
 		},
 	},
@@ -14782,6 +14899,89 @@ encodingtest.QuadStatementList{
 	},
 }
 
+=== Test/Eval/#te031
+
+encodingtest.QuadStatementList{
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.org/test#example1"),
+				Predicate: rdf.IRI("http://example.org/vocab#integer"),
+				Object: rdf.Literal{
+					LexicalForm: "1",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#integer"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 254, LineColumn: cursorio.TextLineColumn{8, 9}},
+				Until: cursorio.TextOffset{Byte: 288, LineColumn: cursorio.TextLineColumn{8, 43}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 292, LineColumn: cursorio.TextLineColumn{9, 2}},
+				Until: cursorio.TextOffset{Byte: 304, LineColumn: cursorio.TextLineColumn{9, 14}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 306, LineColumn: cursorio.TextLineColumn{9, 16}},
+				Until: cursorio.TextOffset{Byte: 307, LineColumn: cursorio.TextLineColumn{9, 17}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.org/test#example1"),
+				Predicate: rdf.IRI("http://example.org/vocab#double"),
+				Object: rdf.Literal{
+					LexicalForm: "1.2345E2",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#double"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 254, LineColumn: cursorio.TextLineColumn{8, 9}},
+				Until: cursorio.TextOffset{Byte: 288, LineColumn: cursorio.TextLineColumn{8, 43}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 311, LineColumn: cursorio.TextLineColumn{10, 2}},
+				Until: cursorio.TextOffset{Byte: 322, LineColumn: cursorio.TextLineColumn{10, 13}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 324, LineColumn: cursorio.TextLineColumn{10, 15}},
+				Until: cursorio.TextOffset{Byte: 330, LineColumn: cursorio.TextLineColumn{10, 21}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.org/test#example1"),
+				Predicate: rdf.IRI("http://example.org/vocab#boolean"),
+				Object: rdf.Literal{
+					LexicalForm: "true",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#boolean"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 254, LineColumn: cursorio.TextLineColumn{8, 9}},
+				Until: cursorio.TextOffset{Byte: 288, LineColumn: cursorio.TextLineColumn{8, 43}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 334, LineColumn: cursorio.TextLineColumn{11, 2}},
+				Until: cursorio.TextOffset{Byte: 346, LineColumn: cursorio.TextLineColumn{11, 14}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 348, LineColumn: cursorio.TextLineColumn{11, 16}},
+				Until: cursorio.TextOffset{Byte: 352, LineColumn: cursorio.TextLineColumn{11, 20}},
+			},
+		},
+	},
+}
+
 === Test/Eval/#te032
 
 encodingtest.QuadStatementList{
@@ -17190,6 +17390,126 @@ encodingtest.QuadStatementList{
 	},
 }
 
+=== Test/Eval/#te060
+
+encodingtest.QuadStatementList{
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("https://w3c.github.io/json-ld-api/tests/document-relative"),
+				Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
+				Object: rdf.IRI("https://w3c.github.io/json-ld-api/tests/toRdf/e060-in.jsonld#document-relative"),
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 84, LineColumn: cursorio.TextLineColumn{4, 9}},
+				Until: cursorio.TextOffset{Byte: 106, LineColumn: cursorio.TextLineColumn{4, 31}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 110, LineColumn: cursorio.TextLineColumn{5, 2}},
+				Until: cursorio.TextOffset{Byte: 117, LineColumn: cursorio.TextLineColumn{5, 9}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 119, LineColumn: cursorio.TextLineColumn{5, 11}},
+				Until: cursorio.TextOffset{Byte: 139, LineColumn: cursorio.TextLineColumn{5, 31}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("https://w3c.github.io/json-ld-api/tests/document-relative"),
+				Predicate: rdf.IRI("http://example.com/vocab#property"),
+				Object: rdf.IRI("http://example.org/document-base-overwritten"),
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 84, LineColumn: cursorio.TextLineColumn{4, 9}},
+				Until: cursorio.TextOffset{Byte: 106, LineColumn: cursorio.TextLineColumn{4, 31}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 143, LineColumn: cursorio.TextLineColumn{6, 2}},
+				Until: cursorio.TextOffset{Byte: 153, LineColumn: cursorio.TextLineColumn{6, 12}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 235, LineColumn: cursorio.TextLineColumn{10, 11}},
+				Until: cursorio.TextOffset{Byte: 265, LineColumn: cursorio.TextLineColumn{10, 41}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.org/document-base-overwritten"),
+				Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
+				Object: rdf.IRI("http://example.org/test/#document-base-overwritten"),
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 235, LineColumn: cursorio.TextLineColumn{10, 11}},
+				Until: cursorio.TextOffset{Byte: 265, LineColumn: cursorio.TextLineColumn{10, 41}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 271, LineColumn: cursorio.TextLineColumn{11, 4}},
+				Until: cursorio.TextOffset{Byte: 278, LineColumn: cursorio.TextLineColumn{11, 11}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 280, LineColumn: cursorio.TextLineColumn{11, 13}},
+				Until: cursorio.TextOffset{Byte: 308, LineColumn: cursorio.TextLineColumn{11, 41}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.org/document-base-overwritten"),
+				Predicate: rdf.IRI("http://example.com/vocab#property"),
+				Object: rdf.IRI("https://w3c.github.io/json-ld-api/tests/document-relative"),
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 235, LineColumn: cursorio.TextLineColumn{10, 11}},
+				Until: cursorio.TextOffset{Byte: 265, LineColumn: cursorio.TextLineColumn{10, 41}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 314, LineColumn: cursorio.TextLineColumn{12, 4}},
+				Until: cursorio.TextOffset{Byte: 324, LineColumn: cursorio.TextLineColumn{12, 14}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 377, LineColumn: cursorio.TextLineColumn{15, 15}},
+				Until: cursorio.TextOffset{Byte: 399, LineColumn: cursorio.TextLineColumn{15, 37}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("https://w3c.github.io/json-ld-api/tests/document-relative"),
+				Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
+				Object: rdf.IRI("https://w3c.github.io/json-ld-api/tests/toRdf/e060-in.jsonld#document-relative"),
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 377, LineColumn: cursorio.TextLineColumn{15, 15}},
+				Until: cursorio.TextOffset{Byte: 399, LineColumn: cursorio.TextLineColumn{15, 37}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 409, LineColumn: cursorio.TextLineColumn{16, 8}},
+				Until: cursorio.TextOffset{Byte: 416, LineColumn: cursorio.TextLineColumn{16, 15}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 418, LineColumn: cursorio.TextLineColumn{16, 17}},
+				Until: cursorio.TextOffset{Byte: 438, LineColumn: cursorio.TextLineColumn{16, 37}},
+			},
+		},
+	},
+}
+
 === Test/Eval/#te061
 
 encodingtest.QuadStatementList{
@@ -18834,6 +19154,193 @@ encodingtest.QuadStatementList{
 			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
 				From: cursorio.TextOffset{Byte: 44, LineColumn: cursorio.TextLineColumn{2, 17}},
 				Until: cursorio.TextOffset{Byte: 51, LineColumn: cursorio.TextLineColumn{2, 24}},
+			},
+		},
+	},
+}
+
+=== Test/Eval/#te077
+
+encodingtest.QuadStatementList{
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/id1"),
+				Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
+				Object: rdf.IRI("http://example.com/t1"),
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 11, LineColumn: cursorio.TextLineColumn{1, 9}},
+				Until: cursorio.TextOffset{Byte: 35, LineColumn: cursorio.TextLineColumn{1, 33}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 39, LineColumn: cursorio.TextLineColumn{2, 2}},
+				Until: cursorio.TextOffset{Byte: 46, LineColumn: cursorio.TextLineColumn{2, 9}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 48, LineColumn: cursorio.TextLineColumn{2, 11}},
+				Until: cursorio.TextOffset{Byte: 52, LineColumn: cursorio.TextLineColumn{2, 15}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/id1"),
+				Predicate: rdf.IRI("http://example.com/term5"),
+				Object: rdf.Literal{
+					LexicalForm: "51",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#integer"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 11, LineColumn: cursorio.TextLineColumn{1, 9}},
+				Until: cursorio.TextOffset{Byte: 35, LineColumn: cursorio.TextLineColumn{1, 33}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 179, LineColumn: cursorio.TextLineColumn{7, 2}},
+				Until: cursorio.TextOffset{Byte: 186, LineColumn: cursorio.TextLineColumn{7, 9}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 193, LineColumn: cursorio.TextLineColumn{7, 16}},
+				Until: cursorio.TextOffset{Byte: 195, LineColumn: cursorio.TextLineColumn{7, 18}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/id1"),
+				Predicate: rdf.IRI("http://example.com/term5"),
+				Object: rdf.Literal{
+					LexicalForm: "50",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#integer"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 11, LineColumn: cursorio.TextLineColumn{1, 9}},
+				Until: cursorio.TextOffset{Byte: 35, LineColumn: cursorio.TextLineColumn{1, 33}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 179, LineColumn: cursorio.TextLineColumn{7, 2}},
+				Until: cursorio.TextOffset{Byte: 186, LineColumn: cursorio.TextLineColumn{7, 9}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 189, LineColumn: cursorio.TextLineColumn{7, 12}},
+				Until: cursorio.TextOffset{Byte: 191, LineColumn: cursorio.TextLineColumn{7, 14}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/id1"),
+				Predicate: rdf.IRI("http://example.com/term4"),
+				Object: rdf.Literal{
+					LexicalForm: "4",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#integer"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 11, LineColumn: cursorio.TextLineColumn{1, 9}},
+				Until: cursorio.TextOffset{Byte: 35, LineColumn: cursorio.TextLineColumn{1, 33}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 165, LineColumn: cursorio.TextLineColumn{6, 2}},
+				Until: cursorio.TextOffset{Byte: 172, LineColumn: cursorio.TextLineColumn{6, 9}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 174, LineColumn: cursorio.TextLineColumn{6, 11}},
+				Until: cursorio.TextOffset{Byte: 175, LineColumn: cursorio.TextLineColumn{6, 12}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/id1"),
+				Predicate: rdf.IRI("http://example.com/term3"),
+				Object: rdf.Literal{
+					LexicalForm: "v3",
+					Datatype: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#langString"),
+					Tag: rdf.LanguageLiteralTag{
+						Language: "en",
+					},
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 11, LineColumn: cursorio.TextLineColumn{1, 9}},
+				Until: cursorio.TextOffset{Byte: 35, LineColumn: cursorio.TextLineColumn{1, 33}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 117, LineColumn: cursorio.TextLineColumn{5, 2}},
+				Until: cursorio.TextOffset{Byte: 124, LineColumn: cursorio.TextLineColumn{5, 9}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 137, LineColumn: cursorio.TextLineColumn{5, 22}},
+				Until: cursorio.TextOffset{Byte: 141, LineColumn: cursorio.TextLineColumn{5, 26}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/id1"),
+				Predicate: rdf.IRI("http://example.com/term2"),
+				Object: rdf.Literal{
+					LexicalForm: "v2",
+					Datatype: rdf.IRI("http://example.com/t2"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 11, LineColumn: cursorio.TextLineColumn{1, 9}},
+				Until: cursorio.TextOffset{Byte: 35, LineColumn: cursorio.TextLineColumn{1, 33}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 73, LineColumn: cursorio.TextLineColumn{4, 2}},
+				Until: cursorio.TextOffset{Byte: 80, LineColumn: cursorio.TextLineColumn{4, 9}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 93, LineColumn: cursorio.TextLineColumn{4, 22}},
+				Until: cursorio.TextOffset{Byte: 97, LineColumn: cursorio.TextLineColumn{4, 26}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/id1"),
+				Predicate: rdf.IRI("http://example.com/term1"),
+				Object: rdf.Literal{
+					LexicalForm: "v1",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 11, LineColumn: cursorio.TextLineColumn{1, 9}},
+				Until: cursorio.TextOffset{Byte: 35, LineColumn: cursorio.TextLineColumn{1, 33}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 56, LineColumn: cursorio.TextLineColumn{3, 2}},
+				Until: cursorio.TextOffset{Byte: 63, LineColumn: cursorio.TextLineColumn{3, 9}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 65, LineColumn: cursorio.TextLineColumn{3, 11}},
+				Until: cursorio.TextOffset{Byte: 69, LineColumn: cursorio.TextLineColumn{3, 15}},
 			},
 		},
 	},
@@ -22481,6 +22988,536 @@ encodingtest.QuadStatementList{
 	},
 }
 
+=== Test/Eval/#te111
+
+encodingtest.QuadStatementList{
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/some/deep/directory/and/file/relativePropertyIris"),
+				Predicate: rdf.IRI("http://example.com/vocabulary/./rel2#link"),
+				Object: rdf.Literal{
+					LexicalForm: "link",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 198, LineColumn: cursorio.TextLineColumn{8, 9}},
+				Until: cursorio.TextOffset{Byte: 220, LineColumn: cursorio.TextLineColumn{8, 31}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 224, LineColumn: cursorio.TextLineColumn{9, 2}},
+				Until: cursorio.TextOffset{Byte: 230, LineColumn: cursorio.TextLineColumn{9, 8}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 232, LineColumn: cursorio.TextLineColumn{9, 10}},
+				Until: cursorio.TextOffset{Byte: 238, LineColumn: cursorio.TextLineColumn{9, 16}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/some/deep/directory/and/file/relativePropertyIris"),
+				Predicate: rdf.IRI("http://example.com/vocabulary/./rel2#?query=works"),
+				Object: rdf.Literal{
+					LexicalForm: "?query=works",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 198, LineColumn: cursorio.TextLineColumn{8, 9}},
+				Until: cursorio.TextOffset{Byte: 220, LineColumn: cursorio.TextLineColumn{8, 31}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 282, LineColumn: cursorio.TextLineColumn{11, 2}},
+				Until: cursorio.TextOffset{Byte: 296, LineColumn: cursorio.TextLineColumn{11, 16}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 298, LineColumn: cursorio.TextLineColumn{11, 18}},
+				Until: cursorio.TextOffset{Byte: 312, LineColumn: cursorio.TextLineColumn{11, 32}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/some/deep/directory/and/file/relativePropertyIris"),
+				Predicate: rdf.IRI("http://example.com/vocabulary/./rel2#/absolute"),
+				Object: rdf.Literal{
+					LexicalForm: "/absolute",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 198, LineColumn: cursorio.TextLineColumn{8, 9}},
+				Until: cursorio.TextOffset{Byte: 220, LineColumn: cursorio.TextLineColumn{8, 31}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 572, LineColumn: cursorio.TextLineColumn{18, 2}},
+				Until: cursorio.TextOffset{Byte: 583, LineColumn: cursorio.TextLineColumn{18, 13}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 585, LineColumn: cursorio.TextLineColumn{18, 15}},
+				Until: cursorio.TextOffset{Byte: 596, LineColumn: cursorio.TextLineColumn{18, 26}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/some/deep/directory/and/file/relativePropertyIris"),
+				Predicate: rdf.IRI("http://example.com/vocabulary/./rel2#//example.org/scheme-relative"),
+				Object: rdf.Literal{
+					LexicalForm: "//example.org/scheme-relative",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 198, LineColumn: cursorio.TextLineColumn{8, 9}},
+				Until: cursorio.TextOffset{Byte: 220, LineColumn: cursorio.TextLineColumn{8, 31}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 600, LineColumn: cursorio.TextLineColumn{19, 2}},
+				Until: cursorio.TextOffset{Byte: 631, LineColumn: cursorio.TextLineColumn{19, 33}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 633, LineColumn: cursorio.TextLineColumn{19, 35}},
+				Until: cursorio.TextOffset{Byte: 664, LineColumn: cursorio.TextLineColumn{19, 66}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/some/deep/directory/and/file/relativePropertyIris"),
+				Predicate: rdf.IRI("http://example.com/vocabulary/./rel2#./"),
+				Object: rdf.Literal{
+					LexicalForm: "./",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 198, LineColumn: cursorio.TextLineColumn{8, 9}},
+				Until: cursorio.TextOffset{Byte: 220, LineColumn: cursorio.TextLineColumn{8, 31}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 316, LineColumn: cursorio.TextLineColumn{12, 2}},
+				Until: cursorio.TextOffset{Byte: 320, LineColumn: cursorio.TextLineColumn{12, 6}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 322, LineColumn: cursorio.TextLineColumn{12, 8}},
+				Until: cursorio.TextOffset{Byte: 326, LineColumn: cursorio.TextLineColumn{12, 12}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/some/deep/directory/and/file/relativePropertyIris"),
+				Predicate: rdf.IRI("http://example.com/vocabulary/./rel2#../parent"),
+				Object: rdf.Literal{
+					LexicalForm: "../parent",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 198, LineColumn: cursorio.TextLineColumn{8, 9}},
+				Until: cursorio.TextOffset{Byte: 220, LineColumn: cursorio.TextLineColumn{8, 31}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 346, LineColumn: cursorio.TextLineColumn{14, 2}},
+				Until: cursorio.TextOffset{Byte: 357, LineColumn: cursorio.TextLineColumn{14, 13}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 359, LineColumn: cursorio.TextLineColumn{14, 15}},
+				Until: cursorio.TextOffset{Byte: 370, LineColumn: cursorio.TextLineColumn{14, 26}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/some/deep/directory/and/file/relativePropertyIris"),
+				Predicate: rdf.IRI("http://example.com/vocabulary/./rel2#../"),
+				Object: rdf.Literal{
+					LexicalForm: "../",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 198, LineColumn: cursorio.TextLineColumn{8, 9}},
+				Until: cursorio.TextOffset{Byte: 220, LineColumn: cursorio.TextLineColumn{8, 31}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 330, LineColumn: cursorio.TextLineColumn{13, 2}},
+				Until: cursorio.TextOffset{Byte: 335, LineColumn: cursorio.TextLineColumn{13, 7}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 337, LineColumn: cursorio.TextLineColumn{13, 9}},
+				Until: cursorio.TextOffset{Byte: 342, LineColumn: cursorio.TextLineColumn{13, 14}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/some/deep/directory/and/file/relativePropertyIris"),
+				Predicate: rdf.IRI("http://example.com/vocabulary/./rel2#../../parent-parent-eq-root"),
+				Object: rdf.Literal{
+					LexicalForm: "../../parent-parent-eq-root",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 198, LineColumn: cursorio.TextLineColumn{8, 9}},
+				Until: cursorio.TextOffset{Byte: 220, LineColumn: cursorio.TextLineColumn{8, 31}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 374, LineColumn: cursorio.TextLineColumn{15, 2}},
+				Until: cursorio.TextOffset{Byte: 403, LineColumn: cursorio.TextLineColumn{15, 31}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 405, LineColumn: cursorio.TextLineColumn{15, 33}},
+				Until: cursorio.TextOffset{Byte: 434, LineColumn: cursorio.TextLineColumn{15, 62}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/some/deep/directory/and/file/relativePropertyIris"),
+				Predicate: rdf.IRI("http://example.com/vocabulary/./rel2#../.././.././../../too-many-dots"),
+				Object: rdf.Literal{
+					LexicalForm: "../.././.././../../too-many-dots",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 198, LineColumn: cursorio.TextLineColumn{8, 9}},
+				Until: cursorio.TextOffset{Byte: 220, LineColumn: cursorio.TextLineColumn{8, 31}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 498, LineColumn: cursorio.TextLineColumn{17, 2}},
+				Until: cursorio.TextOffset{Byte: 532, LineColumn: cursorio.TextLineColumn{17, 36}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 534, LineColumn: cursorio.TextLineColumn{17, 38}},
+				Until: cursorio.TextOffset{Byte: 568, LineColumn: cursorio.TextLineColumn{17, 72}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/some/deep/directory/and/file/relativePropertyIris"),
+				Predicate: rdf.IRI("http://example.com/vocabulary/./rel2#../../../../../still-root"),
+				Object: rdf.Literal{
+					LexicalForm: "../../../../../still-root",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 198, LineColumn: cursorio.TextLineColumn{8, 9}},
+				Until: cursorio.TextOffset{Byte: 220, LineColumn: cursorio.TextLineColumn{8, 31}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 438, LineColumn: cursorio.TextLineColumn{16, 2}},
+				Until: cursorio.TextOffset{Byte: 465, LineColumn: cursorio.TextLineColumn{16, 29}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 467, LineColumn: cursorio.TextLineColumn{16, 31}},
+				Until: cursorio.TextOffset{Byte: 494, LineColumn: cursorio.TextLineColumn{16, 58}},
+			},
+		},
+	},
+}
+
+=== Test/Eval/#te112
+
+encodingtest.QuadStatementList{
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/some/deep/directory/and/file/relativePropertyIris"),
+				Predicate: rdf.IRI("http://example.com/rel1./rel2#link"),
+				Object: rdf.Literal{
+					LexicalForm: "link",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 173, LineColumn: cursorio.TextLineColumn{8, 9}},
+				Until: cursorio.TextOffset{Byte: 195, LineColumn: cursorio.TextLineColumn{8, 31}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 199, LineColumn: cursorio.TextLineColumn{9, 2}},
+				Until: cursorio.TextOffset{Byte: 205, LineColumn: cursorio.TextLineColumn{9, 8}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 207, LineColumn: cursorio.TextLineColumn{9, 10}},
+				Until: cursorio.TextOffset{Byte: 213, LineColumn: cursorio.TextLineColumn{9, 16}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/some/deep/directory/and/file/relativePropertyIris"),
+				Predicate: rdf.IRI("http://example.com/rel1./rel2#?query=works"),
+				Object: rdf.Literal{
+					LexicalForm: "?query=works",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 173, LineColumn: cursorio.TextLineColumn{8, 9}},
+				Until: cursorio.TextOffset{Byte: 195, LineColumn: cursorio.TextLineColumn{8, 31}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 257, LineColumn: cursorio.TextLineColumn{11, 2}},
+				Until: cursorio.TextOffset{Byte: 271, LineColumn: cursorio.TextLineColumn{11, 16}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 273, LineColumn: cursorio.TextLineColumn{11, 18}},
+				Until: cursorio.TextOffset{Byte: 287, LineColumn: cursorio.TextLineColumn{11, 32}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/some/deep/directory/and/file/relativePropertyIris"),
+				Predicate: rdf.IRI("http://example.com/rel1./rel2#/absolute"),
+				Object: rdf.Literal{
+					LexicalForm: "/absolute",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 173, LineColumn: cursorio.TextLineColumn{8, 9}},
+				Until: cursorio.TextOffset{Byte: 195, LineColumn: cursorio.TextLineColumn{8, 31}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 547, LineColumn: cursorio.TextLineColumn{18, 2}},
+				Until: cursorio.TextOffset{Byte: 558, LineColumn: cursorio.TextLineColumn{18, 13}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 560, LineColumn: cursorio.TextLineColumn{18, 15}},
+				Until: cursorio.TextOffset{Byte: 571, LineColumn: cursorio.TextLineColumn{18, 26}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/some/deep/directory/and/file/relativePropertyIris"),
+				Predicate: rdf.IRI("http://example.com/rel1./rel2#//example.org/scheme-relative"),
+				Object: rdf.Literal{
+					LexicalForm: "//example.org/scheme-relative",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 173, LineColumn: cursorio.TextLineColumn{8, 9}},
+				Until: cursorio.TextOffset{Byte: 195, LineColumn: cursorio.TextLineColumn{8, 31}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 575, LineColumn: cursorio.TextLineColumn{19, 2}},
+				Until: cursorio.TextOffset{Byte: 606, LineColumn: cursorio.TextLineColumn{19, 33}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 608, LineColumn: cursorio.TextLineColumn{19, 35}},
+				Until: cursorio.TextOffset{Byte: 639, LineColumn: cursorio.TextLineColumn{19, 66}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/some/deep/directory/and/file/relativePropertyIris"),
+				Predicate: rdf.IRI("http://example.com/rel1./rel2#./"),
+				Object: rdf.Literal{
+					LexicalForm: "./",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 173, LineColumn: cursorio.TextLineColumn{8, 9}},
+				Until: cursorio.TextOffset{Byte: 195, LineColumn: cursorio.TextLineColumn{8, 31}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 291, LineColumn: cursorio.TextLineColumn{12, 2}},
+				Until: cursorio.TextOffset{Byte: 295, LineColumn: cursorio.TextLineColumn{12, 6}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 297, LineColumn: cursorio.TextLineColumn{12, 8}},
+				Until: cursorio.TextOffset{Byte: 301, LineColumn: cursorio.TextLineColumn{12, 12}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/some/deep/directory/and/file/relativePropertyIris"),
+				Predicate: rdf.IRI("http://example.com/rel1./rel2#../parent"),
+				Object: rdf.Literal{
+					LexicalForm: "../parent",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 173, LineColumn: cursorio.TextLineColumn{8, 9}},
+				Until: cursorio.TextOffset{Byte: 195, LineColumn: cursorio.TextLineColumn{8, 31}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 321, LineColumn: cursorio.TextLineColumn{14, 2}},
+				Until: cursorio.TextOffset{Byte: 332, LineColumn: cursorio.TextLineColumn{14, 13}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 334, LineColumn: cursorio.TextLineColumn{14, 15}},
+				Until: cursorio.TextOffset{Byte: 345, LineColumn: cursorio.TextLineColumn{14, 26}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/some/deep/directory/and/file/relativePropertyIris"),
+				Predicate: rdf.IRI("http://example.com/rel1./rel2#../"),
+				Object: rdf.Literal{
+					LexicalForm: "../",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 173, LineColumn: cursorio.TextLineColumn{8, 9}},
+				Until: cursorio.TextOffset{Byte: 195, LineColumn: cursorio.TextLineColumn{8, 31}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 305, LineColumn: cursorio.TextLineColumn{13, 2}},
+				Until: cursorio.TextOffset{Byte: 310, LineColumn: cursorio.TextLineColumn{13, 7}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 312, LineColumn: cursorio.TextLineColumn{13, 9}},
+				Until: cursorio.TextOffset{Byte: 317, LineColumn: cursorio.TextLineColumn{13, 14}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/some/deep/directory/and/file/relativePropertyIris"),
+				Predicate: rdf.IRI("http://example.com/rel1./rel2#../../parent-parent-eq-root"),
+				Object: rdf.Literal{
+					LexicalForm: "../../parent-parent-eq-root",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 173, LineColumn: cursorio.TextLineColumn{8, 9}},
+				Until: cursorio.TextOffset{Byte: 195, LineColumn: cursorio.TextLineColumn{8, 31}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 349, LineColumn: cursorio.TextLineColumn{15, 2}},
+				Until: cursorio.TextOffset{Byte: 378, LineColumn: cursorio.TextLineColumn{15, 31}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 380, LineColumn: cursorio.TextLineColumn{15, 33}},
+				Until: cursorio.TextOffset{Byte: 409, LineColumn: cursorio.TextLineColumn{15, 62}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/some/deep/directory/and/file/relativePropertyIris"),
+				Predicate: rdf.IRI("http://example.com/rel1./rel2#../.././.././../../too-many-dots"),
+				Object: rdf.Literal{
+					LexicalForm: "../.././.././../../too-many-dots",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 173, LineColumn: cursorio.TextLineColumn{8, 9}},
+				Until: cursorio.TextOffset{Byte: 195, LineColumn: cursorio.TextLineColumn{8, 31}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 473, LineColumn: cursorio.TextLineColumn{17, 2}},
+				Until: cursorio.TextOffset{Byte: 507, LineColumn: cursorio.TextLineColumn{17, 36}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 509, LineColumn: cursorio.TextLineColumn{17, 38}},
+				Until: cursorio.TextOffset{Byte: 543, LineColumn: cursorio.TextLineColumn{17, 72}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/some/deep/directory/and/file/relativePropertyIris"),
+				Predicate: rdf.IRI("http://example.com/rel1./rel2#../../../../../still-root"),
+				Object: rdf.Literal{
+					LexicalForm: "../../../../../still-root",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 173, LineColumn: cursorio.TextLineColumn{8, 9}},
+				Until: cursorio.TextOffset{Byte: 195, LineColumn: cursorio.TextLineColumn{8, 31}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 413, LineColumn: cursorio.TextLineColumn{16, 2}},
+				Until: cursorio.TextOffset{Byte: 440, LineColumn: cursorio.TextLineColumn{16, 29}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 442, LineColumn: cursorio.TextLineColumn{16, 31}},
+				Until: cursorio.TextOffset{Byte: 469, LineColumn: cursorio.TextLineColumn{16, 58}},
+			},
+		},
+	},
+}
+
 === Test/Eval/#te113
 
 encodingtest.QuadStatementList{
@@ -24493,6 +25530,33 @@ encodingtest.QuadStatementList{
 	},
 }
 
+=== Test/Eval/#tjs13
+
+encodingtest.QuadStatementList{
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+				Predicate: rdf.IRI("http://example.org/vocab#c14n"),
+				Object: rdf.Literal{
+					LexicalForm: "{\"\\n\":\"Newline\",\"\\r\":\"Carriage Return\",\"1\":\"One\",\"</script>\":\"Browser Challenge\",\"\u0080\":\"Control\x7f\",\"ö\":\"Latin Small Letter O With Diaeresis\",\"€\":\"Euro Sign\",\"😂\":\"Smiley\"}",
+					Datatype: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#JSON"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 0, LineColumn: cursorio.TextLineColumn{0, 0}},
+				Until: cursorio.TextOffset{Byte: 374, LineColumn: cursorio.TextLineColumn{15, 1}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 119, LineColumn: cursorio.TextLineColumn{5, 7}},
+				Until: cursorio.TextOffset{Byte: 372, LineColumn: cursorio.TextLineColumn{14, 3}},
+			},
+		},
+	},
+}
+
 === Test/Eval/#tjs14
 
 encodingtest.QuadStatementList{
@@ -25607,6 +26671,39 @@ encodingtest.QuadStatementList{
 	},
 }
 
+=== Test/Eval/#tli12
+
+encodingtest.QuadStatementList{
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+				Predicate: rdf.IRI("foo:bar"),
+				Object: bnTODO.MapBlankNodeIdentifier("b1"),
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 0, LineColumn: cursorio.TextLineColumn{0, 0}},
+				Until: cursorio.TextOffset{Byte: 172, LineColumn: cursorio.TextLineColumn{10, 1}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 154, LineColumn: cursorio.TextLineColumn{9, 2}},
+				Until: cursorio.TextOffset{Byte: 160, LineColumn: cursorio.TextLineColumn{9, 8}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+				Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
+				Object: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
+			},
+		},
+	},
+}
+
 === Test/Eval/#tli13
 
 encodingtest.QuadStatementList{
@@ -25645,6 +26742,39 @@ encodingtest.QuadStatementList{
 			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
 				From: cursorio.TextOffset{Byte: 136, LineColumn: cursorio.TextLineColumn{9, 10}},
 				Until: cursorio.TextOffset{Byte: 142, LineColumn: cursorio.TextLineColumn{9, 16}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+				Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
+				Object: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
+			},
+		},
+	},
+}
+
+=== Test/Eval/#tli14
+
+encodingtest.QuadStatementList{
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+				Predicate: rdf.IRI("foo:bar"),
+				Object: bnTODO.MapBlankNodeIdentifier("b1"),
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 0, LineColumn: cursorio.TextLineColumn{0, 0}},
+				Until: cursorio.TextOffset{Byte: 147, LineColumn: cursorio.TextLineColumn{10, 1}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 129, LineColumn: cursorio.TextLineColumn{9, 1}},
+				Until: cursorio.TextOffset{Byte: 135, LineColumn: cursorio.TextLineColumn{9, 7}},
 			},
 		},
 	},
@@ -25917,6 +27047,29 @@ encodingtest.QuadStatementList{
 	{
 		Quad: rdf.Quad{
 			Triple: rdf.Triple{
+				Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+				Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
+				Object: bnTODO.MapBlankNodeIdentifier("b3"),
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 191, LineColumn: cursorio.TextLineColumn{7, 13}},
+				Until: cursorio.TextOffset{Byte: 227, LineColumn: cursorio.TextLineColumn{7, 49}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 97, LineColumn: cursorio.TextLineColumn{5, 2}},
+				Until: cursorio.TextOffset{Byte: 106, LineColumn: cursorio.TextLineColumn{5, 11}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 182, LineColumn: cursorio.TextLineColumn{7, 4}},
+				Until: cursorio.TextOffset{Byte: 189, LineColumn: cursorio.TextLineColumn{7, 11}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
 				Subject: bnTODO.MapBlankNodeIdentifier("b2"),
 				Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 				Object: rdf.IRI("http://example.org/foo"),
@@ -25926,6 +27079,14 @@ encodingtest.QuadStatementList{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
 				From: cursorio.TextOffset{Byte: 140, LineColumn: cursorio.TextLineColumn{6, 30}},
 				Until: cursorio.TextOffset{Byte: 176, LineColumn: cursorio.TextLineColumn{6, 66}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 97, LineColumn: cursorio.TextLineColumn{5, 2}},
+				Until: cursorio.TextOffset{Byte: 106, LineColumn: cursorio.TextLineColumn{5, 11}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 114, LineColumn: cursorio.TextLineColumn{6, 4}},
+				Until: cursorio.TextOffset{Byte: 138, LineColumn: cursorio.TextLineColumn{6, 28}},
 			},
 		},
 	},
@@ -25952,21 +27113,6 @@ encodingtest.QuadStatementList{
 			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
 				From: cursorio.TextOffset{Byte: 150, LineColumn: cursorio.TextLineColumn{6, 40}},
 				Until: cursorio.TextOffset{Byte: 175, LineColumn: cursorio.TextLineColumn{6, 65}},
-			},
-		},
-	},
-	{
-		Quad: rdf.Quad{
-			Triple: rdf.Triple{
-				Subject: bnTODO.MapBlankNodeIdentifier("b1"),
-				Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
-				Object: bnTODO.MapBlankNodeIdentifier("b3"),
-			},
-		},
-		TextOffsets: encoding.StatementTextOffsets{
-			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
-				From: cursorio.TextOffset{Byte: 191, LineColumn: cursorio.TextLineColumn{7, 13}},
-				Until: cursorio.TextOffset{Byte: 227, LineColumn: cursorio.TextLineColumn{7, 49}},
 			},
 		},
 	},
@@ -26050,6 +27196,29 @@ encodingtest.QuadStatementList{
 	{
 		Quad: rdf.Quad{
 			Triple: rdf.Triple{
+				Subject: bnTODO.MapBlankNodeIdentifier("b1"),
+				Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
+				Object: bnTODO.MapBlankNodeIdentifier("b3"),
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 226, LineColumn: cursorio.TextLineColumn{7, 13}},
+				Until: cursorio.TextOffset{Byte: 280, LineColumn: cursorio.TextLineColumn{7, 67}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 97, LineColumn: cursorio.TextLineColumn{5, 2}},
+				Until: cursorio.TextOffset{Byte: 106, LineColumn: cursorio.TextLineColumn{5, 11}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 217, LineColumn: cursorio.TextLineColumn{7, 4}},
+				Until: cursorio.TextOffset{Byte: 224, LineColumn: cursorio.TextLineColumn{7, 11}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
 				Subject: bnTODO.MapBlankNodeIdentifier("b2"),
 				Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
 				Object: rdf.IRI("http://example.org/foo"),
@@ -26059,6 +27228,14 @@ encodingtest.QuadStatementList{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
 				From: cursorio.TextOffset{Byte: 140, LineColumn: cursorio.TextLineColumn{6, 30}},
 				Until: cursorio.TextOffset{Byte: 211, LineColumn: cursorio.TextLineColumn{6, 101}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 97, LineColumn: cursorio.TextLineColumn{5, 2}},
+				Until: cursorio.TextOffset{Byte: 106, LineColumn: cursorio.TextLineColumn{5, 11}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 114, LineColumn: cursorio.TextLineColumn{6, 4}},
+				Until: cursorio.TextOffset{Byte: 138, LineColumn: cursorio.TextLineColumn{6, 28}},
 			},
 		},
 	},
@@ -26108,21 +27285,6 @@ encodingtest.QuadStatementList{
 			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
 				From: cursorio.TextOffset{Byte: 185, LineColumn: cursorio.TextLineColumn{6, 75}},
 				Until: cursorio.TextOffset{Byte: 210, LineColumn: cursorio.TextLineColumn{6, 100}},
-			},
-		},
-	},
-	{
-		Quad: rdf.Quad{
-			Triple: rdf.Triple{
-				Subject: bnTODO.MapBlankNodeIdentifier("b1"),
-				Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
-				Object: bnTODO.MapBlankNodeIdentifier("b3"),
-			},
-		},
-		TextOffsets: encoding.StatementTextOffsets{
-			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
-				From: cursorio.TextOffset{Byte: 226, LineColumn: cursorio.TextLineColumn{7, 13}},
-				Until: cursorio.TextOffset{Byte: 280, LineColumn: cursorio.TextLineColumn{7, 67}},
 			},
 		},
 	},
@@ -26270,6 +27432,14 @@ encodingtest.QuadStatementList{
 				From: cursorio.TextOffset{Byte: 121, LineColumn: cursorio.TextLineColumn{6, 11}},
 				Until: cursorio.TextOffset{Byte: 157, LineColumn: cursorio.TextLineColumn{6, 47}},
 			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 97, LineColumn: cursorio.TextLineColumn{5, 2}},
+				Until: cursorio.TextOffset{Byte: 106, LineColumn: cursorio.TextLineColumn{5, 11}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 114, LineColumn: cursorio.TextLineColumn{6, 4}},
+				Until: cursorio.TextOffset{Byte: 119, LineColumn: cursorio.TextLineColumn{6, 9}},
+			},
 		},
 	},
 	{
@@ -26339,6 +27509,14 @@ encodingtest.QuadStatementList{
 				From: cursorio.TextOffset{Byte: 158, LineColumn: cursorio.TextLineColumn{7, 11}},
 				Until: cursorio.TextOffset{Byte: 194, LineColumn: cursorio.TextLineColumn{7, 47}},
 			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 134, LineColumn: cursorio.TextLineColumn{6, 2}},
+				Until: cursorio.TextOffset{Byte: 143, LineColumn: cursorio.TextLineColumn{6, 11}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 151, LineColumn: cursorio.TextLineColumn{7, 4}},
+				Until: cursorio.TextOffset{Byte: 156, LineColumn: cursorio.TextLineColumn{7, 9}},
+			},
 		},
 	},
 	{
@@ -26407,6 +27585,14 @@ encodingtest.QuadStatementList{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
 				From: cursorio.TextOffset{Byte: 179, LineColumn: cursorio.TextLineColumn{7, 12}},
 				Until: cursorio.TextOffset{Byte: 212, LineColumn: cursorio.TextLineColumn{7, 45}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 154, LineColumn: cursorio.TextLineColumn{6, 2}},
+				Until: cursorio.TextOffset{Byte: 163, LineColumn: cursorio.TextLineColumn{6, 11}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 171, LineColumn: cursorio.TextLineColumn{7, 4}},
+				Until: cursorio.TextOffset{Byte: 177, LineColumn: cursorio.TextLineColumn{7, 10}},
 			},
 		},
 	},
@@ -27075,6 +28261,14 @@ encodingtest.QuadStatementList{
 				From: cursorio.TextOffset{Byte: 179, LineColumn: cursorio.TextLineColumn{7, 17}},
 				Until: cursorio.TextOffset{Byte: 184, LineColumn: cursorio.TextLineColumn{7, 22}},
 			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 164, LineColumn: cursorio.TextLineColumn{7, 2}},
+				Until: cursorio.TextOffset{Byte: 169, LineColumn: cursorio.TextLineColumn{7, 7}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 172, LineColumn: cursorio.TextLineColumn{7, 10}},
+				Until: cursorio.TextOffset{Byte: 177, LineColumn: cursorio.TextLineColumn{7, 15}},
+			},
 		},
 	},
 }
@@ -27118,6 +28312,14 @@ encodingtest.QuadStatementList{
 				From: cursorio.TextOffset{Byte: 195, LineColumn: cursorio.TextLineColumn{7, 17}},
 				Until: cursorio.TextOffset{Byte: 200, LineColumn: cursorio.TextLineColumn{7, 22}},
 			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 180, LineColumn: cursorio.TextLineColumn{7, 2}},
+				Until: cursorio.TextOffset{Byte: 185, LineColumn: cursorio.TextLineColumn{7, 7}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 188, LineColumn: cursorio.TextLineColumn{7, 10}},
+				Until: cursorio.TextOffset{Byte: 193, LineColumn: cursorio.TextLineColumn{7, 15}},
+			},
 		},
 	},
 }
@@ -27160,6 +28362,14 @@ encodingtest.QuadStatementList{
 			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
 				From: cursorio.TextOffset{Byte: 198, LineColumn: cursorio.TextLineColumn{7, 17}},
 				Until: cursorio.TextOffset{Byte: 203, LineColumn: cursorio.TextLineColumn{7, 22}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 183, LineColumn: cursorio.TextLineColumn{7, 2}},
+				Until: cursorio.TextOffset{Byte: 188, LineColumn: cursorio.TextLineColumn{7, 7}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 191, LineColumn: cursorio.TextLineColumn{7, 10}},
+				Until: cursorio.TextOffset{Byte: 196, LineColumn: cursorio.TextLineColumn{7, 15}},
 			},
 		},
 	},
@@ -30552,6 +31762,115 @@ encodingtest.QuadStatementList{
 	},
 }
 
+=== Test/Eval/#trt01
+
+encodingtest.QuadStatementList{
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+				Predicate: rdf.IRI("http://example.com/number"),
+				Object: rdf.Literal{
+					LexicalForm: "9.9E0",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#double"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 0, LineColumn: cursorio.TextLineColumn{0, 0}},
+				Until: cursorio.TextOffset{Byte: 109, LineColumn: cursorio.TextLineColumn{5, 1}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 76, LineColumn: cursorio.TextLineColumn{4, 2}},
+				Until: cursorio.TextOffset{Byte: 84, LineColumn: cursorio.TextLineColumn{4, 10}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 96, LineColumn: cursorio.TextLineColumn{4, 22}},
+				Until: cursorio.TextOffset{Byte: 99, LineColumn: cursorio.TextLineColumn{4, 25}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+				Predicate: rdf.IRI("http://example.com/number"),
+				Object: rdf.Literal{
+					LexicalForm: "8",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#integer"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 0, LineColumn: cursorio.TextLineColumn{0, 0}},
+				Until: cursorio.TextOffset{Byte: 109, LineColumn: cursorio.TextLineColumn{5, 1}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 76, LineColumn: cursorio.TextLineColumn{4, 2}},
+				Until: cursorio.TextOffset{Byte: 84, LineColumn: cursorio.TextLineColumn{4, 10}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 93, LineColumn: cursorio.TextLineColumn{4, 19}},
+				Until: cursorio.TextOffset{Byte: 94, LineColumn: cursorio.TextLineColumn{4, 20}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+				Predicate: rdf.IRI("http://example.com/number"),
+				Object: rdf.Literal{
+					LexicalForm: "1.0E21",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#double"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 0, LineColumn: cursorio.TextLineColumn{0, 0}},
+				Until: cursorio.TextOffset{Byte: 109, LineColumn: cursorio.TextLineColumn{5, 1}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 76, LineColumn: cursorio.TextLineColumn{4, 2}},
+				Until: cursorio.TextOffset{Byte: 84, LineColumn: cursorio.TextLineColumn{4, 10}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 101, LineColumn: cursorio.TextLineColumn{4, 27}},
+				Until: cursorio.TextOffset{Byte: 105, LineColumn: cursorio.TextLineColumn{4, 31}},
+			},
+		},
+	},
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: bnTODO.MapBlankNodeIdentifier("b0"),
+				Predicate: rdf.IRI("http://example.com/number"),
+				Object: rdf.Literal{
+					LexicalForm: "0",
+					Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#integer"),
+				},
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 0, LineColumn: cursorio.TextLineColumn{0, 0}},
+				Until: cursorio.TextOffset{Byte: 109, LineColumn: cursorio.TextLineColumn{5, 1}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 76, LineColumn: cursorio.TextLineColumn{4, 2}},
+				Until: cursorio.TextOffset{Byte: 84, LineColumn: cursorio.TextLineColumn{4, 10}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 87, LineColumn: cursorio.TextLineColumn{4, 13}},
+				Until: cursorio.TextOffset{Byte: 91, LineColumn: cursorio.TextLineColumn{4, 17}},
+			},
+		},
+	},
+}
+
 === Test/Eval/#tso05
 
 encodingtest.QuadStatementList{
@@ -31059,4 +32378,57 @@ encodingtest.QuadStatementList{
 			},
 		},
 	},
+}
+
+=== Test/Eval/#twf01
+
+encodingtest.QuadStatementList{
+}
+
+=== Test/Eval/#twf02
+
+encodingtest.QuadStatementList{
+}
+
+=== Test/Eval/#twf03
+
+encodingtest.QuadStatementList{
+}
+
+=== Test/Eval/#twf04
+
+encodingtest.QuadStatementList{
+	{
+		Quad: rdf.Quad{
+			Triple: rdf.Triple{
+				Subject: rdf.IRI("http://example.com/foo"),
+				Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
+				Object: rdf.IRI("http://example.com/bar"),
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 11, LineColumn: cursorio.TextLineColumn{1, 9}},
+				Until: cursorio.TextOffset{Byte: 35, LineColumn: cursorio.TextLineColumn{1, 33}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 39, LineColumn: cursorio.TextLineColumn{2, 2}},
+				Until: cursorio.TextOffset{Byte: 46, LineColumn: cursorio.TextLineColumn{2, 9}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 49, LineColumn: cursorio.TextLineColumn{2, 12}},
+				Until: cursorio.TextOffset{Byte: 73, LineColumn: cursorio.TextLineColumn{2, 36}},
+			},
+		},
+	},
+}
+
+=== Test/Eval/#twf05
+
+encodingtest.QuadStatementList{
+}
+
+=== Test/Eval/#twf07
+
+encodingtest.QuadStatementList{
 }

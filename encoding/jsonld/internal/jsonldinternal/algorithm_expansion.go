@@ -1434,7 +1434,7 @@ func (vars algorithmExpansion) Call() (ExpandedValue, error) {
 											if slices.Contains(containerMapping, "@type") && expandedIndex != ExpandedIRIasKeyword("@none") {
 
 												var types = []ExpandedValue{
-													expandedIndex.NewPropertyValue(nil, nil),
+													expandedIndex.NewPropertyValue(itemObject.PropertySourceOffsets, valueObject.Members[index].Name.SourceOffsets),
 												}
 
 												if expandedTypeMember, ok := itemObject.Members["@type"]; ok {
