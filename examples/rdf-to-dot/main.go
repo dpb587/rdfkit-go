@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/dpb587/rdfkit-go/cmd/cmdflags"
+	"github.com/dpb587/rdfkit-go/cmd/rdfkit/cmdflags"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodeutil"

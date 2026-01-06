@@ -6,7 +6,7 @@ import (
 	"html/template"
 	"os"
 
-	"github.com/dpb587/rdfkit-go/cmd/cmdflags"
+	"github.com/dpb587/rdfkit-go/cmd/rdfkit/cmdflags"
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/nquads"
 	"github.com/dpb587/rdfkit-go/rdf"

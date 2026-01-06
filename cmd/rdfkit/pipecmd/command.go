@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/dpb587/rdfkit-go/cmd/cmdflags"
+	"github.com/dpb587/rdfkit-go/cmd/rdfkit/cmdflags"
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/encodingtest"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"

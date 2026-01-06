@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-cd examples
+cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/../examples"
 
 go mod tidy
 

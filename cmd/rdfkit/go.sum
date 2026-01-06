@@ -2,6 +2,7 @@ github.com/apparentlymart/go-textseg/v16 v16.0.0 h1:xD7KZ/8d+ED3d+k78g/2weJEIGzD
 github.com/apparentlymart/go-textseg/v16 v16.0.0/go.mod h1:wCrfQB/AReGqD1ECqVHhhsq7BV2AxUhnirsBLInYHvE=
 github.com/cespare/permute/v2 v2.0.0-beta2 h1:iiJWgDsInCbnwfDZiLJX7cVlJevgIM1pUiArcUylUMc=
 github.com/cespare/permute/v2 v2.0.0-beta2/go.mod h1:7e2Tqe0fjn1T4rTjDLJjQ+kNtt+UW4B9lg10asqWw0A=
+github.com/cpuguy83/go-md2man/v2 v2.0.6/go.mod h1:oOW0eioCTA6cOiMLiUPZOpcVxMig6NIQQ7OS05n1F4g=
 github.com/dpb587/cursorio-go v0.0.0-20250717044249-e1d8c928b30d h1:UxedKtdKz4vyHhlQtjdOx8ogG+y7uhIViUVXM3jSeVY=
 github.com/dpb587/cursorio-go v0.0.0-20250717044249-e1d8c928b30d/go.mod h1:YokGb5i31XI0Z+4t8bZxvZecyKY3ddLlih9Rr7eBgW0=
 github.com/dpb587/inspecthtml-go v0.0.0-20250906134739-0d404c86637b h1:h7XE5d+xgEvGyRIIral6XAZUcMGrh/zb01Yz+mjYHN0=
@@ -10,7 +11,17 @@ github.com/dpb587/inspectjson-go v0.0.0-20251203142639-90f1442149fb h1:RiCz/jdb3
 github.com/dpb587/inspectjson-go v0.0.0-20251203142639-90f1442149fb/go.mod h1:FTNc/N87Cz+dccpetYPiSsGpbl/CG7K26PeJSUwT2uQ=
 github.com/dpb587/inspectxml-go v0.0.0-20250415222439-71ac97da5967 h1:eDf5lVry/atdVqikH/ZC+b2uI6AeBdcOsoVaSOiNL/s=
 github.com/dpb587/inspectxml-go v0.0.0-20250415222439-71ac97da5967/go.mod h1:+0eCu7F5sPe9eNUj6yhxmqZc0C60jGtbPX2BTFhEjNo=
+github.com/inconshreveable/mousetrap v1.1.0 h1:wN+x4NVGpMsO7ErUn/mUI3vEoE6Jt13X2s0bqwp9tc8=
+github.com/inconshreveable/mousetrap v1.1.0/go.mod h1:vpF70FUmC8bwa3OWnCshd2FqLfsEA9PFc4w1p2J65bw=
+github.com/russross/blackfriday/v2 v2.1.0/go.mod h1:+Rmxgy9KzJVeS9/2gXHxylqXiyQDYRxCVz55jmeOWTM=
+github.com/spf13/cobra v1.10.2 h1:DMTTonx5m65Ic0GOoRY2c16WCbHxOOw6xxezuLaBpcU=
+github.com/spf13/cobra v1.10.2/go.mod h1:7C1pvHqHw5A4vrJfjNwvOdzYu0Gml16OCs2GRiTUUS4=
+github.com/spf13/pflag v1.0.9/go.mod h1:McXfInJRrz4CZXVZOBLb0bTZqETkiAhM9Iw0y3An2Bg=
+github.com/spf13/pflag v1.0.10 h1:4EBh2KAYBwaONj6b2Ye1GiHfwjqyROoF4RwYO+vPwFk=
+github.com/spf13/pflag v1.0.10/go.mod h1:McXfInJRrz4CZXVZOBLb0bTZqETkiAhM9Iw0y3An2Bg=
 github.com/tomnomnom/linkheader v0.0.0-20250811210735-e5fe3b51442e h1:tD38/4xg4nuQCASJ/JxcvCHNb46w0cdAaJfkzQOO1bA=
 github.com/tomnomnom/linkheader v0.0.0-20250811210735-e5fe3b51442e/go.mod h1:krvJ5AY/MjdPkTeRgMYbIDhbbbVvnPQPzsIsDJO8xrY=
+go.yaml.in/yaml/v3 v3.0.4/go.mod h1:DhzuOOF2ATzADvBadXxruRBLzYTpT36CKvDb3+aBEFg=
 golang.org/x/net v0.47.0 h1:Mx+4dIFzqraBXUugkia1OOvlD6LemFo1ALMHjrXDOhY=
 golang.org/x/net v0.47.0/go.mod h1:/jNxtkgq5yWUGYkaZGqo27cfGZ1c5Nen03aYrrKpVRU=
+gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
