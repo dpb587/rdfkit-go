@@ -1,3 +1,7 @@
 go.work
 go.work.sum
 tmp
+
+**/testoutput/*
+# these are deterministic and any change is likely a bug
+!**/testoutput/rdfio.txt
