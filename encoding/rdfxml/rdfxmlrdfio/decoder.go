@@ -6,6 +6,7 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/rdfxml"
 	"github.com/dpb587/rdfkit-go/encoding/rdfxml/rdfxmlcontent"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 	"github.com/dpb587/rdfkit-go/rdfio/rdfiotypes"
 )
 
@@ -33,7 +34,10 @@ func (e decoder) NewDecoder(rr rdfiotypes.Reader, opts rdfiotypes.DecoderOptions
 		return nil, fmt.Errorf("params: %v", err)
 	}
 
+	bnFactory := blanknodes.NewStringFactory()
+
 	options := rdfxml.DecoderConfig{}.
+		SetBlankNodeStringFactory(bnFactory).
 		SetBaseURL(string(opts.BaseIRI))
 
 	if params.CaptureTextOffsets != nil {
@@ -51,7 +55,8 @@ func (e decoder) NewDecoder(rr rdfiotypes.Reader, opts rdfiotypes.DecoderOptions
 	}
 
 	return &rdfiotypes.DecoderHandle{
-		Reader:  rr,
-		Decoder: decoder,
+		Reader:            rr,
+		Decoder:           decoder,
+		DecoderBlankNodes: bnFactory,
 	}, nil
 }

@@ -9,6 +9,7 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding/jsonld"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldcontent"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 	"github.com/dpb587/rdfkit-go/rdfio/rdfiotypes"
 )
 
@@ -40,7 +41,10 @@ func (e decoder) NewDecoder(rr rdfiotypes.Reader, opts rdfiotypes.DecoderOptions
 		return nil, fmt.Errorf("params: %v", err)
 	}
 
+	bnFactory := blanknodes.NewStringFactory()
+
 	options := jsonld.DecoderConfig{}.
+		SetBlankNodeStringFactory(bnFactory).
 		SetDocumentLoader(jsonldtype.NewDefaultDocumentLoader(http.DefaultClient)).
 		SetDefaultBase(string(opts.BaseIRI))
 
@@ -68,7 +72,8 @@ func (e decoder) NewDecoder(rr rdfiotypes.Reader, opts rdfiotypes.DecoderOptions
 	}
 
 	return &rdfiotypes.DecoderHandle{
-		Reader:  rr,
-		Decoder: decoder,
+		Reader:            rr,
+		Decoder:           decoder,
+		DecoderBlankNodes: bnFactory,
 	}, nil
 }

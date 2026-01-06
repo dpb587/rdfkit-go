@@ -35,6 +35,10 @@ func (e encoder) NewEncoder(ww rdfiotypes.Writer, opts rdfiotypes.EncoderOptions
 
 	options := rdfjson.EncoderConfig{}
 
+	if bnStringProvider := rdfiotypes.PropagateDecoderPipeBlankNodeStringProvider(opts.DecoderPipe); bnStringProvider != nil {
+		options = options.SetBlankNodeStringProvider(bnStringProvider)
+	}
+
 	allOptions, err := rdfiotypes.PatchGenericOptions([]rdfjson.EncoderOption{options}, opts.Patcher)
 	if err != nil {
 		return nil, err

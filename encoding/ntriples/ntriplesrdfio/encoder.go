@@ -35,6 +35,10 @@ func (e encoder) NewEncoder(ww rdfiotypes.Writer, opts rdfiotypes.EncoderOptions
 
 	options := ntriples.EncoderConfig{}
 
+	if bnStringProvider := rdfiotypes.PropagateDecoderPipeBlankNodeStringProvider(opts.DecoderPipe); bnStringProvider != nil {
+		options = options.SetBlankNodeStringProvider(bnStringProvider)
+	}
+
 	if params.Ascii != nil {
 		options = options.SetASCII(*params.Ascii)
 	}

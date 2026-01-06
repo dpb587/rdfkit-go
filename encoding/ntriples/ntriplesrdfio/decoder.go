@@ -6,6 +6,7 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/ntriples"
 	"github.com/dpb587/rdfkit-go/encoding/ntriples/ntriplescontent"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 	"github.com/dpb587/rdfkit-go/rdfio/rdfiotypes"
 )
 
@@ -33,7 +34,10 @@ func (e decoder) NewDecoder(rr rdfiotypes.Reader, opts rdfiotypes.DecoderOptions
 		return nil, fmt.Errorf("params: %v", err)
 	}
 
-	options := ntriples.DecoderConfig{}
+	bnFactory := blanknodes.NewStringFactory()
+
+	options := ntriples.DecoderConfig{}.
+		SetBlankNodeStringFactory(bnFactory)
 
 	if params.CaptureTextOffsets != nil {
 		options = options.SetCaptureTextOffsets(*params.CaptureTextOffsets)
@@ -50,7 +54,8 @@ func (e decoder) NewDecoder(rr rdfiotypes.Reader, opts rdfiotypes.DecoderOptions
 	}
 
 	return &rdfiotypes.DecoderHandle{
-		Reader:  rr,
-		Decoder: decoder,
+		Reader:            rr,
+		Decoder:           decoder,
+		DecoderBlankNodes: bnFactory,
 	}, nil
 }

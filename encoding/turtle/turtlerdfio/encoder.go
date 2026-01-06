@@ -41,6 +41,10 @@ func (e encoder) NewEncoder(ww rdfiotypes.Writer, opts rdfiotypes.EncoderOptions
 
 	options := turtle.EncoderConfig{}
 
+	if bnStringProvider := rdfiotypes.PropagateDecoderPipeBlankNodeStringProvider(opts.DecoderPipe); bnStringProvider != nil {
+		options = options.SetBlankNodeStringProvider(bnStringProvider)
+	}
+
 	if *params.Buffered {
 		options = options.SetBuffered(true)
 	}

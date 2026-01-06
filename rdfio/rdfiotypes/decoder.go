@@ -35,8 +35,9 @@ func (base DecoderOptions) ApplyOptions(r Registry, rr Reader, opts *DecoderOpti
 }
 
 type DecoderHandle struct {
-	Reader  Reader
-	Decoder encoding.Decoder
+	Reader            Reader
+	Decoder           encoding.Decoder
+	DecoderBlankNodes rdf.BlankNodeFactory
 }
 
 func (b *DecoderHandle) Close() error {

@@ -36,6 +36,7 @@ type stringFactory struct {
 }
 
 var _ StringFactory = &stringFactory{}
+var _ StringProviderProvider = &stringFactory{}
 
 func NewStringFactory() StringFactory {
 	return &stringFactory{
@@ -58,4 +59,28 @@ func (bnf *stringFactory) NewStringBlankNode(identifier string) rdf.BlankNode {
 			value: identifier,
 		},
 	}
+}
+
+func (bnf *stringFactory) GetStringProvider(fallback StringProvider) StringProvider {
+	return stringIdentifierProvider{
+		scope:    bnf,
+		fallback: fallback,
+	}
+}
+
+//
+
+type stringIdentifierProvider struct {
+	scope    *stringFactory
+	fallback StringProvider
+}
+
+var _ StringProvider = stringIdentifierProvider{}
+
+func (sp stringIdentifierProvider) GetBlankNodeString(bn rdf.BlankNode) string {
+	if bnT, ok := bn.Identifier.(stringIdentifier); ok && bnT.scope == sp.scope {
+		return bnT.value
+	}
+
+	return sp.fallback.GetBlankNodeString(bn)
 }

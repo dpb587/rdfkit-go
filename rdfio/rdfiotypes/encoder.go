@@ -6,6 +6,7 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/encodingutil"
 	"github.com/dpb587/rdfkit-go/rdf"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 )
 
 type EncoderOptions struct {
@@ -31,6 +32,10 @@ func (base EncoderOptions) ApplyOptions(r Registry, ww Writer, opts *EncoderOpti
 	if base.Patcher != nil {
 		// TODO merge?
 		opts.Patcher = base.Patcher
+	}
+
+	if base.DecoderPipe != nil {
+		opts.DecoderPipe = base.DecoderPipe
 	}
 
 	return nil
@@ -65,3 +70,23 @@ func (dh *EncoderHandle) GetQuadsEncoder() encoding.QuadsEncoder {
 
 	panic(fmt.Errorf("unexpected encoder type: %T", dh.Encoder))
 }
+
+//
+
+func PropagateDecoderPipeBlankNodeStringProvider(h *DecoderHandle) blanknodes.StringProvider {
+	if h != nil && h.DecoderBlankNodes != nil {
+		if bnStringProvider, ok := h.DecoderBlankNodes.(blanknodes.StringProviderProvider); ok {
+			return bnStringProvider.GetStringProvider(fatalEncoderPipeBlankNodeStringProvider)
+		}
+	}
+
+	return nil
+}
+
+type fatalEncoderPipeBlankNodeStringProviderWrapper struct{}
+
+func (f fatalEncoderPipeBlankNodeStringProviderWrapper) GetBlankNodeString(bn rdf.BlankNode) string {
+	panic(fmt.Errorf("improper usage of StringProvider.GetBlankNodeString(%#+v)", bn))
+}
+
+var fatalEncoderPipeBlankNodeStringProvider fatalEncoderPipeBlankNodeStringProviderWrapper

@@ -6,6 +6,7 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
 	"github.com/dpb587/rdfkit-go/encoding/turtle/turtlecontent"
+	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 	"github.com/dpb587/rdfkit-go/rdfio/rdfiotypes"
 )
 
@@ -33,15 +34,14 @@ func (e decoder) NewDecoder(rr rdfiotypes.Reader, opts rdfiotypes.DecoderOptions
 		return nil, fmt.Errorf("params: %v", err)
 	}
 
+	bnFactory := blanknodes.NewStringFactory()
+
 	options := turtle.DecoderConfig{}.
+		SetBlankNodeStringFactory(bnFactory).
 		SetDefaultBase(string(opts.BaseIRI))
 
 	if params.CaptureTextOffsets != nil {
 		options = options.SetCaptureTextOffsets(*params.CaptureTextOffsets)
-	}
-
-	handle := &rdfiotypes.DecoderHandle{
-		Reader: rr,
 	}
 
 	allOptions, err := rdfiotypes.PatchGenericOptions([]turtle.DecoderOption{options}, opts.Patcher)
@@ -54,7 +54,9 @@ func (e decoder) NewDecoder(rr rdfiotypes.Reader, opts rdfiotypes.DecoderOptions
 		return nil, err
 	}
 
-	handle.Decoder = decoder
-
-	return handle, nil
+	return &rdfiotypes.DecoderHandle{
+		Reader:            rr,
+		Decoder:           decoder,
+		DecoderBlankNodes: bnFactory,
+	}, nil
 }
