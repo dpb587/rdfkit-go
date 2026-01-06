@@ -18,15 +18,26 @@ type Registry struct {
 	EncoderManagers  map[encoding.ContentTypeIdentifier]EncoderManager
 	DecoderManagers  map[encoding.ContentTypeIdentifier]DecoderManager
 
-	Aliases             map[string]encoding.ContentTypeIdentifier
-	MediaTypes          map[string]encoding.ContentTypeIdentifier
+	Aliases    map[string]encoding.ContentTypeIdentifier
+	MediaTypes map[string]encoding.ContentTypeIdentifier
+
+	// FileExts contains a map from file extensions to content type identifiers. File extensions must be lowercase,
+	// should include a leading dot, and are matched as suffixes against file names.
 	FileExts            map[string]encoding.ContentTypeIdentifier
 	MagicBytesResolvers []MagicBytesResolver
 }
 
+type RegistryMapper interface {
+	MapRegistry(r Registry) Registry
+}
+
 type RegistryMapperFunc func(r Registry) Registry
 
-func (r Registry) Clone(m ...RegistryMapperFunc) Registry {
+func (f RegistryMapperFunc) MapRegistry(r Registry) Registry {
+	return f(r)
+}
+
+func (r Registry) Clone(m ...RegistryMapper) Registry {
 	next := Registry{
 		ResourceManagers: slices.Clone(r.ResourceManagers),
 		EncoderManagers:  maps.Clone(r.EncoderManagers),
@@ -39,7 +50,7 @@ func (r Registry) Clone(m ...RegistryMapperFunc) Registry {
 	}
 
 	for _, fn := range m {
-		next = fn(next)
+		next = fn.MapRegistry(next)
 	}
 
 	return next
@@ -69,8 +80,12 @@ func (r Registry) ResolveDecoderType(rr Reader, t string) (encoding.ContentTypeI
 	}
 
 	if fileName, ok := rr.GetFileName(); ok {
-		if cti, ok := r.FileExts[filepath.Ext(fileName)]; ok {
-			return cti, true
+		fileNameLower := strings.ToLower(fileName)
+
+		for fileExt, cti := range r.FileExts {
+			if strings.HasSuffix(fileNameLower, fileExt) {
+				return cti, true
+			}
 		}
 	}
 
