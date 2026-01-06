@@ -6,6 +6,7 @@ import (
 
 type iteratorIterator struct {
 	iters []rdf.QuadIterator
+	err   error
 }
 
 var _ rdf.QuadIterator = &iteratorIterator{}
@@ -25,21 +26,19 @@ func (i *iteratorIterator) Close() error {
 }
 
 func (i *iteratorIterator) Err() error {
-	if len(i.iters) > 0 {
-		return i.iters[0].Err()
-	}
-
-	return nil
+	return i.err
 }
 
 func (i *iteratorIterator) Next() bool {
 	for {
 		if len(i.iters) == 0 {
 			return false
-		} else if i.iters[0].Err() != nil {
-			return false
 		} else if i.iters[0].Next() {
 			return true
+		} else if v := i.iters[0].Err(); v != nil {
+			i.err = v
+
+			return false
 		}
 
 		i.iters = i.iters[1:]
