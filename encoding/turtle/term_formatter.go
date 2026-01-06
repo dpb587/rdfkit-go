@@ -51,7 +51,7 @@ func (tf *termFormatter) FormatTerm(t rdf.Term) string {
 		return "<" + formatIRI(string(t), tf.ascii) + ">"
 	case rdf.BlankNode:
 		if tf.blankNodeStringer != nil {
-			return tf.blankNodeStringer.GetBlankNodeIdentifier(t)
+			return "_:" + tf.blankNodeStringer.GetBlankNodeIdentifier(t)
 		}
 
 		return "_:b0x" + strconv.FormatUint(uint64(reflect.ValueOf(t).Pointer()), 16)
