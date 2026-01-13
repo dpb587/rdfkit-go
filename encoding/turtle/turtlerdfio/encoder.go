@@ -11,6 +11,7 @@ import (
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil/rdfacontext"
+	"github.com/dpb587/rdfkit-go/rdfdescription"
 	"github.com/dpb587/rdfkit-go/rdfdescription/rdfdescriptionutil"
 	"github.com/dpb587/rdfkit-go/rdfio/rdfiotypes"
 )
@@ -99,7 +100,7 @@ func (e encoder) NewEncoder(ww rdfiotypes.Writer, opts rdfiotypes.EncoderOptions
 		wrappedEncoder = rdfdescriptionutil.NewBufferedTriplesEncoder(
 			context.Background(),
 			encoder,
-			true,
+			rdfdescription.DefaultExportResourceOptions,
 		)
 	}
 

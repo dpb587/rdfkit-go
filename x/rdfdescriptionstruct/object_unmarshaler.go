@@ -222,7 +222,7 @@ func (u *Unmarshaler) unmarshalObjectValue(builder *rdfdescription.ResourceListB
 	// Get the resource for this subject
 	subResource := &rdfdescription.SubjectResource{
 		Subject:    subject,
-		Statements: builder.GetResourceStatements(subject),
+		Statements: builder.GetSubjectStatements(subject),
 	}
 
 	// Recursively unmarshal into the field
@@ -388,7 +388,7 @@ func (u *Unmarshaler) expandRDFList(builder *rdfdescription.ResourceListBuilder,
 	}
 
 	// Get the resource for this subject
-	statements := builder.GetResourceStatements(subject)
+	statements := builder.GetSubjectStatements(subject)
 	if len(statements) == 0 {
 		// No statements, not a list
 		return reflect.Value{}, nil
@@ -427,7 +427,7 @@ func (u *Unmarshaler) expandRDFList(builder *rdfdescription.ResourceListBuilder,
 		}
 
 		// Get statements for current node
-		currentStmts := builder.GetResourceStatements(current).GroupByPredicate()
+		currentStmts := builder.GetSubjectStatements(current).GroupByPredicate()
 
 		// Get rdf:first
 		firstStmts := currentStmts[rdfiri.First_Property]
@@ -531,7 +531,7 @@ func (u *Unmarshaler) expandRDFListFromAnon(builder *rdfdescription.ResourceList
 				return result, nil
 			} else if bn, ok := restStmt.Object.(rdf.BlankNode); ok {
 				// Continue with next node - need to get its statements from builder
-				nextStmts := builder.GetResourceStatements(bn)
+				nextStmts := builder.GetSubjectStatements(bn)
 				if len(nextStmts) == 0 {
 					return reflect.Value{}, fmt.Errorf("blank node in rdf:rest has no statements")
 				}

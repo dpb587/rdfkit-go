@@ -9,6 +9,17 @@ import (
 	"github.com/dpb587/rdfkit-go/rdf/quads"
 )
 
+type DatasetResource struct {
+	GraphName rdf.GraphNameValue
+	Resource  Resource
+}
+
+func (dr DatasetResource) NewQuads() rdf.QuadList {
+	return dr.Resource.NewTriples().AsQuads(dr.GraphName)
+}
+
+//
+
 type DatasetResourceListBuilder struct {
 	builderByGraphName map[rdf.GraphNameValue]*ResourceListBuilder
 }
@@ -55,9 +66,9 @@ func (e *DatasetResourceListBuilder) Add(quads ...rdf.Quad) {
 	}
 }
 
-func (e *DatasetResourceListBuilder) AddToDataset(ctx context.Context, z DatasetResourceWriter, preferAnon bool) error {
+func (e *DatasetResourceListBuilder) AddToDataset(ctx context.Context, z DatasetResourceWriter, opts ExportResourceOptions) error {
 	for graphName, builder := range e.builderByGraphName {
-		err := builder.AddToDataset(ctx, z, graphName, preferAnon)
+		err := builder.AddToDataset(ctx, z, graphName, opts)
 		if err != nil {
 			return err
 		}

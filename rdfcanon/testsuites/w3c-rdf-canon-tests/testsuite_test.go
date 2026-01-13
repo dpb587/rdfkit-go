@@ -252,8 +252,8 @@ func requireTestdata(t *testing.T) (testingarchive.Archive, *Manifest) {
 
 	manifest := &Manifest{}
 
-	manifestResource, ok := manifestResources.GetResource(rdf.IRI(manifestPrefix + "manifest"))
-	if !ok {
+	manifestResource := manifestResources.ExportResource(rdf.IRI(manifestPrefix+"manifest"), rdfdescription.DefaultExportResourceOptions)
+	if len(manifestResource.GetResourceStatements()) == 0 {
 		t.Fatalf("manifest resource not found")
 	} else if err := rdfdescriptionstruct.Unmarshal(manifestResources, manifestResource, manifest); err != nil {
 		t.Fatalf("unmarshal manifest: %v", err)

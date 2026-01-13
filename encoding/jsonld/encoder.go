@@ -68,7 +68,7 @@ func (e *Encoder) Close() error {
 
 		builder := e.builder.GetResourceListBuilder(graphName)
 
-		for _, resource := range builder.GetResources() {
+		for resource := range builder.ExportResources(rdfdescription.DefaultExportResourceOptions) {
 			graphItems = append(graphItems, e.buildResource(builder, resource, true))
 		}
 	}

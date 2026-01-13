@@ -2,8 +2,6 @@ package rdfdescription
 
 import (
 	"context"
-
-	"github.com/dpb587/rdfkit-go/rdf"
 )
 
 type ResourceWriter interface {
@@ -11,5 +9,5 @@ type ResourceWriter interface {
 }
 
 type DatasetResourceWriter interface {
-	AddDatasetResource(ctx context.Context, r Resource, g rdf.GraphNameValue) error
+	AddDatasetResource(ctx context.Context, dr DatasetResource) error
 }

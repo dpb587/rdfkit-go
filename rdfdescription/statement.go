@@ -68,6 +68,20 @@ func (l ObjectStatement) NewTriples(s rdf.SubjectValue) rdf.TripleList {
 
 //
 
+type ObjectStatementList []ObjectStatement
+
+func (l ObjectStatementList) AsStatementList() StatementList {
+	res := make(StatementList, len(l))
+
+	for s := range l {
+		res[s] = l[s]
+	}
+
+	return res
+}
+
+//
+
 type AnonResourceStatement struct {
 	Predicate    rdf.PredicateValue
 	AnonResource AnonResource

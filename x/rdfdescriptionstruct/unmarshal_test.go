@@ -307,7 +307,7 @@ func TestUnmarshal_ResourceRecursive(t *testing.T) {
 		// Create main resource
 		mainResource := &rdfdescription.SubjectResource{
 			Subject:    rdf.IRI("http://example.com/person1"),
-			Statements: builder.GetResourceStatements(rdf.IRI("http://example.com/person1")),
+			Statements: builder.GetSubjectStatements(rdf.IRI("http://example.com/person1")),
 		}
 
 		// Define structs
@@ -1090,7 +1090,7 @@ func TestUnmarshaler_CustomPrefixesWithNestedResources(t *testing.T) {
 
 	resource := &rdfdescription.SubjectResource{
 		Subject:    mainSubject,
-		Statements: builder.GetResourceStatements(mainSubject),
+		Statements: builder.GetSubjectStatements(mainSubject),
 	}
 
 	// Define nested struct using compact IRIs with custom prefix

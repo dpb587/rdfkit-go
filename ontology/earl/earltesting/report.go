@@ -205,26 +205,28 @@ func (r *Report) writeOutput() error {
 	}
 
 	ctx := context.Background()
-	resources := r.builder.GetResources()
 
-	for _, assertionSubject := range r.assertionSubjects {
-		for _, resource := range resources {
-			if resource.GetResourceSubject() == assertionSubject {
-				if err := encoder.AddResource(ctx, rdfdescription.PreferAnonResource(r.builder, resource)); err != nil {
-					return fmt.Errorf("failed to add resource: %w", err)
-				}
+	// prefer deterministic ordering based on assertion ordering (assuming tests are ordered)
 
-				break
-			}
+	resourcesByAssertionSubject := map[rdf.SubjectValue]rdfdescription.Resource{}
+	resourcesExtra := rdfdescription.ResourceList{}
+
+	for resource := range r.builder.ExportResources(rdfdescription.DefaultExportResourceOptions) {
+		if slices.Contains(r.assertionSubjects, resource.GetResourceSubject()) {
+			resourcesByAssertionSubject[resource.GetResourceSubject()] = resource
+		} else {
+			resourcesExtra = append(resourcesExtra, resource)
 		}
 	}
 
-	for _, resource := range resources {
-		if slices.Contains(r.assertionSubjects, resource.GetResourceSubject()) {
-			continue
+	for _, assertionSubject := range r.assertionSubjects {
+		if err := encoder.AddResource(ctx, resourcesByAssertionSubject[assertionSubject]); err != nil {
+			return fmt.Errorf("failed to add assertion resource: %w", err)
 		}
+	}
 
-		if err := encoder.AddResource(ctx, rdfdescription.PreferAnonResource(r.builder, resource)); err != nil {
+	for _, resource := range resourcesExtra {
+		if err := encoder.AddResource(ctx, resource); err != nil {
 			return fmt.Errorf("failed to add resource: %w", err)
 		}
 	}

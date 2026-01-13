@@ -96,7 +96,7 @@ func Example_recursive() {
 	// Create the main resource
 	resource := &rdfdescription.SubjectResource{
 		Subject:    rdf.IRI("http://example.com/person1"),
-		Statements: builder.GetResourceStatements(rdf.IRI("http://example.com/person1")),
+		Statements: builder.GetSubjectStatements(rdf.IRI("http://example.com/person1")),
 	}
 
 	// Unmarshal with the builder for recursive unmarshaling

@@ -11,18 +11,18 @@ import (
 type BufferedTriplesEncoder struct {
 	ctx        context.Context
 	encoder    ResourceEncoder
-	preferAnon bool
+	exportOpts rdfdescription.ExportResourceOptions
 
 	builder *rdfdescription.ResourceListBuilder
 }
 
 var _ encoding.TriplesEncoder = &BufferedTriplesEncoder{}
 
-func NewBufferedTriplesEncoder(ctx context.Context, encoder ResourceEncoder, preferAnon bool) *BufferedTriplesEncoder {
+func NewBufferedTriplesEncoder(ctx context.Context, encoder ResourceEncoder, exportOpts rdfdescription.ExportResourceOptions) *BufferedTriplesEncoder {
 	return &BufferedTriplesEncoder{
 		ctx:        ctx,
 		encoder:    encoder,
-		preferAnon: preferAnon,
+		exportOpts: exportOpts,
 		builder:    rdfdescription.NewResourceListBuilder(),
 	}
 }
@@ -40,7 +40,7 @@ func (e *BufferedTriplesEncoder) AddTriple(ctx context.Context, triple rdf.Tripl
 }
 
 func (e *BufferedTriplesEncoder) Close() error {
-	err := e.builder.AddTo(e.ctx, e.encoder, e.preferAnon)
+	err := e.builder.AddTo(e.ctx, e.encoder, e.exportOpts)
 	if err != nil {
 		return err
 	}

@@ -11,18 +11,18 @@ import (
 type BufferedQuadsEncoder struct {
 	ctx        context.Context
 	encoder    DatasetResourceEncoder
-	preferAnon bool
+	exportOpts rdfdescription.ExportResourceOptions
 
 	builder *rdfdescription.DatasetResourceListBuilder
 }
 
 var _ encoding.QuadsEncoder = &BufferedQuadsEncoder{}
 
-func NewBufferedQuadsEncoder(ctx context.Context, encoder DatasetResourceEncoder, preferAnon bool) *BufferedQuadsEncoder {
+func NewBufferedQuadsEncoder(ctx context.Context, encoder DatasetResourceEncoder, exportOpts rdfdescription.ExportResourceOptions) *BufferedQuadsEncoder {
 	return &BufferedQuadsEncoder{
 		ctx:        ctx,
 		encoder:    encoder,
-		preferAnon: preferAnon,
+		exportOpts: exportOpts,
 		builder:    rdfdescription.NewDatasetResourceListBuilder(),
 	}
 }
@@ -40,7 +40,7 @@ func (e *BufferedQuadsEncoder) AddQuad(ctx context.Context, quad rdf.Quad) error
 }
 
 func (e *BufferedQuadsEncoder) Close() error {
-	err := e.builder.AddToDataset(e.ctx, e.encoder, e.preferAnon)
+	err := e.builder.AddToDataset(e.ctx, e.encoder, e.exportOpts)
 	if err != nil {
 		return err
 	}

@@ -2,13 +2,15 @@ package rdfdescription
 
 import (
 	"context"
+	"iter"
+	"maps"
 
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/triples"
 )
 
 type ResourceListBuilder struct {
-	resourceBySubject   map[rdf.SubjectValue][]ObjectStatement
+	resourceBySubject   map[rdf.SubjectValue]ObjectStatementList
 	blankNodeReferences map[rdf.BlankNodeIdentifier]int
 }
 
@@ -16,7 +18,7 @@ var _ triples.GraphWriter = &ResourceListBuilder{}
 
 func NewResourceListBuilder() *ResourceListBuilder {
 	return &ResourceListBuilder{
-		resourceBySubject:   map[rdf.SubjectValue][]ObjectStatement{},
+		resourceBySubject:   map[rdf.SubjectValue]ObjectStatementList{},
 		blankNodeReferences: map[rdf.BlankNodeIdentifier]int{},
 	}
 }
@@ -46,66 +48,94 @@ func (rb *ResourceListBuilder) GetBlankNodeReferences(bn rdf.BlankNode) int {
 	return rb.blankNodeReferences[bn.Identifier]
 }
 
-func (rb *ResourceListBuilder) GetResourceStatements(s rdf.SubjectValue) StatementList {
-	return rb.getResourceStatements(s)
+func (rb *ResourceListBuilder) Subjects() iter.Seq[rdf.SubjectValue] {
+	return maps.Keys(rb.resourceBySubject)
 }
 
-func (rb *ResourceListBuilder) GetResources() ResourceList {
-	var resources ResourceList
+func (rb *ResourceListBuilder) GetSubjectStatements(s rdf.SubjectValue) StatementList {
+	return rb.resourceBySubject[s].AsStatementList()
+}
 
-	for subject := range rb.resourceBySubject {
-		if bn, ok := subject.(rdf.BlankNode); ok && rb.blankNodeReferences[bn.Identifier] == 1 {
-			continue
+type ExportResourceOptions struct {
+	// UseAnonResource will convert a SubjectResource, whose subject is a Blank Node and unreferenced by any object
+	// known to ResourceListBuilder, into an AnonResource.
+	UseAnonResource bool
+
+	// Inline will convert an ObjectStatement, whose object is a Blank Node and unreferenced by any other object known
+	// to ResourceListBuilder, into an AnonResourceStatement.
+	//
+	// Inlined resources will not be enumerated as an exported, root-level Resource.
+	Inline bool
+}
+
+var DefaultExportResourceOptions = ExportResourceOptions{
+	UseAnonResource: true,
+	Inline:          true,
+}
+
+func (rb *ResourceListBuilder) ExportResources(opts ExportResourceOptions) iter.Seq[Resource] {
+	return func(yield func(Resource) bool) {
+		for subject := range rb.resourceBySubject {
+			if opts.Inline {
+				if bn, ok := subject.(rdf.BlankNode); ok && rb.blankNodeReferences[bn.Identifier] == 1 {
+					continue
+				}
+			}
+
+			if !yield(rb.ExportResource(subject, opts)) {
+				return
+			}
 		}
-
-		resources = append(resources, SubjectResource{
-			Subject:    subject,
-			Statements: rb.getResourceStatements(subject),
-		})
 	}
-
-	return resources
 }
 
-func (rb *ResourceListBuilder) GetResource(s rdf.SubjectValue) (Resource, bool) {
-	if _, ok := rb.resourceBySubject[s]; !ok {
-		return nil, false
+func (rb *ResourceListBuilder) ExportResource(s rdf.SubjectValue, opts ExportResourceOptions) Resource {
+	statements := rb.ExportResourceStatements(s, opts)
+
+	if opts.UseAnonResource {
+		if sBlankNode, ok := s.(rdf.BlankNode); ok && rb.GetBlankNodeReferences(sBlankNode) == 0 {
+			return AnonResource{
+				Statements: statements,
+			}
+		}
 	}
 
 	return SubjectResource{
 		Subject:    s,
-		Statements: rb.getResourceStatements(s),
-	}, true
+		Statements: statements,
+	}
 }
 
-func (rb *ResourceListBuilder) getResourceStatements(subject rdf.SubjectValue) StatementList {
+func (rb *ResourceListBuilder) ExportResourceStatements(subject rdf.SubjectValue, opts ExportResourceOptions) StatementList {
 	var statements StatementList
 
 	for _, statement := range rb.resourceBySubject[subject] {
-		if bn, ok := statement.Object.(rdf.BlankNode); ok && rb.blankNodeReferences[bn.Identifier] == 1 {
-			statements = append(statements, AnonResourceStatement{
-				Predicate: statement.Predicate,
-				AnonResource: AnonResource{
-					Statements: rb.getResourceStatements(bn),
-				},
-			})
-		} else {
-			statements = append(statements, statement)
+		if opts.Inline {
+			if bn, ok := statement.Object.(rdf.BlankNode); ok && rb.blankNodeReferences[bn.Identifier] == 1 {
+				statements = append(statements, AnonResourceStatement{
+					Predicate: statement.Predicate,
+					AnonResource: AnonResource{
+						Statements: rb.ExportResourceStatements(bn, opts),
+					},
+				})
+
+				continue
+			}
 		}
+
+		statements = append(statements, statement)
 	}
 
 	return statements
 }
 
-func (rb *ResourceListBuilder) AddTo(ctx context.Context, e ResourceWriter, preferAnon bool) error {
+//
+
+func (rb *ResourceListBuilder) AddTo(ctx context.Context, e ResourceWriter, opts ExportResourceOptions) error {
 	var err error
 
-	for _, r := range rb.GetResources() {
-		if preferAnon {
-			err = e.AddResource(ctx, PreferAnonResource(rb, r))
-		} else {
-			err = e.AddResource(ctx, r)
-		}
+	for r := range rb.ExportResources(opts) {
+		err = e.AddResource(ctx, r)
 		if err != nil {
 			return err
 		}
@@ -114,15 +144,14 @@ func (rb *ResourceListBuilder) AddTo(ctx context.Context, e ResourceWriter, pref
 	return nil
 }
 
-func (rb *ResourceListBuilder) AddToDataset(ctx context.Context, e DatasetResourceWriter, g rdf.GraphNameValue, preferAnon bool) error {
+func (rb *ResourceListBuilder) AddToDataset(ctx context.Context, e DatasetResourceWriter, g rdf.GraphNameValue, opts ExportResourceOptions) error {
 	var err error
 
-	for _, r := range rb.GetResources() {
-		if preferAnon {
-			err = e.AddDatasetResource(ctx, PreferAnonResource(rb, r), g)
-		} else {
-			err = e.AddDatasetResource(ctx, r, g)
-		}
+	for r := range rb.ExportResources(opts) {
+		err = e.AddDatasetResource(ctx, DatasetResource{
+			Resource:  r,
+			GraphName: g,
+		})
 		if err != nil {
 			return err
 		}

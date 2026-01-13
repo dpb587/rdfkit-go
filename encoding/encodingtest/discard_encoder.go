@@ -43,6 +43,6 @@ func (w *discardEncoder) AddResource(_ context.Context, _ rdfdescription.Resourc
 	return nil
 }
 
-func (w *discardEncoder) AddDatasetResource(_ context.Context, _ rdfdescription.Resource, _ rdf.GraphNameValue) error {
+func (w *discardEncoder) AddDatasetResource(_ context.Context, _ rdfdescription.DatasetResource) error {
 	return nil
 }
