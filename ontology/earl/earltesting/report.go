@@ -4,9 +4,11 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"path/filepath"
 	"sync"
 	"testing"
 
+	"github.com/dpb587/rdfkit-go/encoding/ntriples"
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
 	"github.com/dpb587/rdfkit-go/ontology/earl/earliri"
 	"github.com/dpb587/rdfkit-go/ontology/foaf/foafiri"
@@ -52,21 +54,37 @@ func NewReportFromEnv(t *testing.T) *Report {
 
 		defer file.Close()
 
-		encoder, err := turtle.NewEncoder(file, turtle.EncoderConfig{}.
-			SetBuffered(true).
-			SetBufferedSort(false).
-			SetPrefixes(iriutil.NewPrefixMap(
-				iriutil.PrefixMapping{Prefix: "dc", Expanded: "http://purl.org/dc/terms/"},
-				iriutil.PrefixMapping{Prefix: "dc11", Expanded: "http://purl.org/dc/elements/1.1/"},
-				iriutil.PrefixMapping{Prefix: "doap", Expanded: "http://usefulinc.com/ns/doap#"},
-				iriutil.PrefixMapping{Prefix: "earl", Expanded: earliri.Base},
-				iriutil.PrefixMapping{Prefix: "foaf", Expanded: foafiri.Base},
-				iriutil.PrefixMapping{Prefix: "xsd", Expanded: xsdiri.Base},
-			)),
-		)
-		if err != nil {
-			t.Errorf("earltesting: failed to create encoder: %v", err)
+		var encoder rdfdescriptionutil.ResourceEncoder
+
+		if filepath.Ext(filepath.Base(filePath)) == ".ttl" {
+			encoder, err = turtle.NewEncoder(file, turtle.EncoderConfig{}.
+				SetBuffered(true).
+				SetBufferedSort(false).
+				SetPrefixes(iriutil.NewPrefixMap(
+					// based on usage in conventional reports
+					iriutil.PrefixMapping{Prefix: "dc", Expanded: "http://purl.org/dc/terms/"},
+					iriutil.PrefixMapping{Prefix: "dc11", Expanded: "http://purl.org/dc/elements/1.1/"},
+					iriutil.PrefixMapping{Prefix: "doap", Expanded: "http://usefulinc.com/ns/doap#"},
+					iriutil.PrefixMapping{Prefix: "rdf", Expanded: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"},
+					iriutil.PrefixMapping{Prefix: "rdfs", Expanded: "http://www.w3.org/2000/01/rdf-schema#"},
+					iriutil.PrefixMapping{Prefix: "earl", Expanded: earliri.Base},
+					iriutil.PrefixMapping{Prefix: "foaf", Expanded: foafiri.Base},
+					iriutil.PrefixMapping{Prefix: "xsd", Expanded: xsdiri.Base},
+				)),
+			)
+			if err != nil {
+				t.Errorf("earltesting: failed to create encoder[turtle]: %v", err)
+			}
+		} else {
+			ntriplesEncoder, err := ntriples.NewEncoder(file)
+			if err != nil {
+				t.Errorf("earltesting: failed to create encoder[ntriples]: %v", err)
+			}
+
+			encoder = rdfdescriptionutil.NewTriplesResourceEncoder(ntriplesEncoder)
 		}
+
+		defer encoder.Close()
 
 		if err := r.ExportResources(t.Context(), encoder); err != nil {
 			t.Errorf("earltesting: failed to export resources: %v", err)
