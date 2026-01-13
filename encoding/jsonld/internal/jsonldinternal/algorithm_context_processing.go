@@ -3,7 +3,9 @@ package jsonldinternal
 import (
 	"errors"
 	"fmt"
+	"maps"
 	"net/url"
+	"slices"
 	"strings"
 
 	"github.com/dpb587/inspectjson-go/inspectjson"
@@ -625,7 +627,10 @@ func (vars algorithmContextProcessing) Call() (*Context, error) {
 			}
 		}
 
-		for key := range contextObject.Members {
+		contextKeys := slices.Collect(maps.Keys(contextObject.Members))
+		slices.SortFunc(contextKeys, strings.Compare)
+
+		for _, key := range contextKeys {
 			switch key {
 			case "@base", "@direction", "@import", "@language", "@propagate", "@protected", "@version", "@vocab":
 				continue
