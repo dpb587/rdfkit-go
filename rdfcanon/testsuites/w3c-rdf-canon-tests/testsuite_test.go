@@ -11,6 +11,7 @@ import (
 
 	"github.com/dpb587/rdfkit-go/encoding/nquads"
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
+	"github.com/dpb587/rdfkit-go/ontology/earl/earliri"
 	"github.com/dpb587/rdfkit-go/ontology/earl/earltesting"
 	"github.com/dpb587/rdfkit-go/ontology/foaf/foafiri"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
@@ -30,12 +31,15 @@ import (
 const manifestPrefix = "https://w3c.github.io/rdf-canon/tests/"
 
 func Test(t *testing.T) {
-	testdata, manifest := requireTestdata(t)
+	testdata, testdataManifest := requireTestdata(t)
 
 	earlReport := earltesting.NewReportFromEnv(t).
 		WithAssertor(
 			rdf.IRI("#assertor"),
 			rdfdescription.NewStatementsFromObjectsByPredicate(rdfutil.ObjectsByPredicate{
+				rdfiri.Type_Property: rdf.ObjectValueList{
+					earliri.Software_Class,
+				},
 				foafiri.Name_Property: rdf.ObjectValueList{
 					xsdobject.String("rdfkit-go test suite"),
 				},
@@ -48,13 +52,14 @@ func Test(t *testing.T) {
 			rdf.IRI("#subject"),
 			rdfdescription.NewStatementsFromObjectsByPredicate(rdfutil.ObjectsByPredicate{
 				rdfiri.Type_Property: rdf.ObjectValueList{
+					earliri.Software_Class,
 					rdf.IRI("http://usefulinc.com/ns/doap#Project"),
 				},
 				foafiri.Name_Property: rdf.ObjectValueList{
 					xsdobject.String("rdfkit-go/rdfcanon"),
 				},
 				foafiri.Homepage_Property: rdf.ObjectValueList{
-					rdf.IRI("https://github.com/dpb587/rdfkit-go"),
+					rdf.IRI("https://pkg.go.dev/github.com/dpb587/rdfkit-go/rdfcanon"),
 				},
 				rdf.IRI("http://usefulinc.com/ns/doap#programming-language"): rdf.ObjectValueList{
 					xsdobject.String("Go"),
@@ -65,64 +70,56 @@ func Test(t *testing.T) {
 			})...,
 		)
 
-	for _, entry := range manifest.Entries {
-		if entry.Type == "http://www.w3.org/2001/sw/DataAccess/tests/test-manifest#Manifest" {
-			continue
-		}
+	for _, entry := range testdataManifest.Entries {
+		t.Run(string(entry.ID), func(t *testing.T) {
+			tAssertion := earlReport.NewAssertion(t, entry.ID)
 
-		canonicalizerOpts := []rdfcanon.CanonicalizeOption{}
+			canonicalizerOpts := []rdfcanon.CanonicalizeOption{}
 
-		if entry.HashAlgorithm != nil {
-			switch *entry.HashAlgorithm {
-			case "SHA384":
-				canonicalizerOpts = append(canonicalizerOpts, rdfcanon.CanonicalizeConfig{}.SetHashFunc(sha512.New384))
-			default:
-				t.Fatalf("unsupported hash algorithm: %s", *entry.HashAlgorithm)
-			}
-		}
-
-		runCanonicalizer := func(ctx context.Context) (*rdfcanon.Canonicalization, error) {
-			decoder, err := nquads.NewDecoder(
-				bytes.NewReader(testdata.GetFileBytes(t, string(entry.Action))),
-				nquads.DecoderConfig{},
-			)
-			if err != nil {
-				return nil, fmt.Errorf("decode action: %v", err)
+			if entry.HashAlgorithm != nil {
+				switch *entry.HashAlgorithm {
+				case "SHA384":
+					canonicalizerOpts = append(canonicalizerOpts, rdfcanon.CanonicalizeConfig{}.SetHashFunc(sha512.New384))
+				default:
+					t.Fatalf("unsupported hash algorithm: %s", *entry.HashAlgorithm)
+				}
 			}
 
-			defer decoder.Close()
-
-			// canonicalizer does not inherently dedup data
-			dataset := inmemory.NewDataset()
-
-			for decoder.Next() {
-				err := dataset.AddQuad(ctx, decoder.Quad())
+			runCanonicalizer := func(ctx context.Context) (*rdfcanon.Canonicalization, error) {
+				decoder, err := nquads.NewDecoder(
+					bytes.NewReader(testdata.GetFileBytes(t, string(entry.Action))),
+					nquads.DecoderConfig{},
+				)
 				if err != nil {
 					return nil, fmt.Errorf("decode action: %v", err)
 				}
-			}
 
-			if err := decoder.Err(); err != nil {
-				return nil, fmt.Errorf("decode action: %v", err)
-			}
+				defer decoder.Close()
 
-			datasetIter, err := dataset.NewQuadIterator(ctx)
-			if err != nil {
-				return nil, fmt.Errorf("create dataset iterator: %v", err)
-			}
+				// canonicalizer does not inherently dedup data
+				dataset := inmemory.NewDataset()
 
-			return rdfcanon.Canonicalize(t.Context(), datasetIter, canonicalizerOpts...)
-		}
-
-		switch entry.Type {
-		case "https://w3c.github.io/rdf-canon/tests/vocab#RDFC10EvalTest":
-			t.Run("EvalTest/"+entry.Name, func(t *testing.T) {
-				tAssertion := earlReport.NewAssertion(t, entry.ID)
-
-				if entry.Result == "" {
-					t.Fatal("missing test result")
+				for decoder.Next() {
+					err := dataset.AddQuad(ctx, decoder.Quad())
+					if err != nil {
+						return nil, fmt.Errorf("decode action: %v", err)
+					}
 				}
 
+				if err := decoder.Err(); err != nil {
+					return nil, fmt.Errorf("decode action: %v", err)
+				}
+
+				datasetIter, err := dataset.NewQuadIterator(ctx)
+				if err != nil {
+					return nil, fmt.Errorf("create dataset iterator: %v", err)
+				}
+
+				return rdfcanon.Canonicalize(t.Context(), datasetIter, canonicalizerOpts...)
+			}
+
+			switch entry.Type {
+			case "https://w3c.github.io/rdf-canon/tests/vocab#RDFC10EvalTest":
 				expectedStatements, err := quads.CollectErr(nquads.NewDecoder(
 					bytes.NewReader(testdata.GetFileBytes(t, string(entry.Result))),
 					nquads.DecoderConfig{},
@@ -151,11 +148,7 @@ func Test(t *testing.T) {
 				}
 
 				testingassert.IsomorphicDatasets(tAssertion, expectedStatements, actualStatements)
-			})
-		case "https://w3c.github.io/rdf-canon/tests/vocab#RDFC10MapTest":
-			t.Run("MapTest/"+entry.Name, func(t *testing.T) {
-				tAssertion := earlReport.NewAssertion(t, entry.ID)
-
+			case "https://w3c.github.io/rdf-canon/tests/vocab#RDFC10MapTest":
 				if entry.Result == "" {
 					t.Fatal("missing test result")
 				}
@@ -200,21 +193,17 @@ func Test(t *testing.T) {
 						tAssertion.Fatalf("blank node %s: expected %s, got %s", expectedBN, expectedCanonical, actualCanonical)
 					}
 				}
-			})
-		case "https://w3c.github.io/rdf-canon/tests/vocab#RDFC10NegativeEvalTest":
-			t.Run("NegativeEvalTest/"+entry.Name, func(t *testing.T) {
-				tAssertion := earlReport.NewAssertion(t, entry.ID)
-
+			case "https://w3c.github.io/rdf-canon/tests/vocab#RDFC10NegativeEvalTest":
 				_, err := runCanonicalizer(t.Context())
 				if err != nil {
 					tAssertion.Logf("error (expected): %v", err)
 				} else {
 					tAssertion.Fatalf("expected error, but got none")
 				}
-			})
-		default:
-			t.Fatalf("unsupported test type: %s", entry.Type)
-		}
+			default:
+				t.Fatalf("unsupported test type: %s", entry.Type)
+			}
+		})
 	}
 }
 

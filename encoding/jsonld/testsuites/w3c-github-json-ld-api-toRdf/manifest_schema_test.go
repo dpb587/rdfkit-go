@@ -1,8 +1,10 @@
 package testsuite
 
+import "github.com/dpb587/rdfkit-go/rdf"
+
 type manifestSchema struct {
-	Sequence []struct {
-		ID     string                       `json:"@id"`
+	Sequences []struct {
+		ID     rdf.IRI                      `json:"@id"`
 		Type   []string                     `json:"@type"`
 		Input  string                       `json:"input"`
 		Expect string                       `json:"expect"`

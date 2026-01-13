@@ -8,6 +8,7 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding/encodingtest"
 	"github.com/dpb587/rdfkit-go/encoding/ntriples"
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
+	"github.com/dpb587/rdfkit-go/ontology/earl/earliri"
 	"github.com/dpb587/rdfkit-go/ontology/earl/earltesting"
 	"github.com/dpb587/rdfkit-go/ontology/foaf/foafiri"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
@@ -23,12 +24,15 @@ import (
 const manifestPrefix = "http://www.w3.org/2013/N-TriplesTests/"
 
 func Test(t *testing.T) {
-	testdata, manifest := requireTestdata(t)
+	testdata, testdataManifest := requireTestdata(t)
 
 	earlReport := earltesting.NewReportFromEnv(t).
 		WithAssertor(
 			rdf.IRI("#assertor"),
 			rdfdescription.NewStatementsFromObjectsByPredicate(rdfutil.ObjectsByPredicate{
+				rdfiri.Type_Property: rdf.ObjectValueList{
+					earliri.Software_Class,
+				},
 				foafiri.Name_Property: rdf.ObjectValueList{
 					xsdobject.String("rdfkit-go test suite"),
 				},
@@ -41,13 +45,14 @@ func Test(t *testing.T) {
 			rdf.IRI("#subject"),
 			rdfdescription.NewStatementsFromObjectsByPredicate(rdfutil.ObjectsByPredicate{
 				rdfiri.Type_Property: rdf.ObjectValueList{
+					earliri.Software_Class,
 					rdf.IRI("http://usefulinc.com/ns/doap#Project"),
 				},
 				foafiri.Name_Property: rdf.ObjectValueList{
 					xsdobject.String("rdfkit-go/encoding/ntriples"),
 				},
 				foafiri.Homepage_Property: rdf.ObjectValueList{
-					rdf.IRI("https://github.com/dpb587/rdfkit-go"),
+					rdf.IRI("https://pkg.go.dev/github.com/dpb587/rdfkit-go/encoding/ntriples"),
 				},
 				rdf.IRI("http://usefulinc.com/ns/doap#programming-language"): rdf.ObjectValueList{
 					xsdobject.String("Go"),
@@ -60,41 +65,37 @@ func Test(t *testing.T) {
 
 	rdfioDebug := testingutil.NewDebugRdfioBuilderFromEnv(t)
 
-	for _, entry := range manifest.Entries {
-		decodeAction := func() (encodingtest.TripleStatementList, error) {
-			return encodingtest.CollectTripleStatementsErr(ntriples.NewDecoder(
-				testdata.NewFileByteReader(t, string(entry.Action)),
-				ntriples.DecoderConfig{}.
-					SetCaptureTextOffsets(true),
-			))
-		}
+	for _, entry := range testdataManifest.Entries {
+		t.Run(string(entry.ID), func(t *testing.T) {
+			tAssertion := earlReport.NewAssertion(t, entry.ID)
 
-		switch entry.Type {
-		case "http://www.w3.org/ns/rdftest#TestNTriplesNegativeSyntax":
-			t.Run("NegativeSyntax/"+entry.Name, func(t *testing.T) {
-				tAssertion := earlReport.NewAssertion(t, entry.ID)
+			decodeAction := func() (encodingtest.TripleStatementList, error) {
+				return encodingtest.CollectTripleStatementsErr(ntriples.NewDecoder(
+					testdata.NewFileByteReader(t, string(entry.Action)),
+					ntriples.DecoderConfig{}.
+						SetCaptureTextOffsets(true),
+				))
+			}
 
+			switch entry.Type {
+			case "http://www.w3.org/ns/rdftest#TestNTriplesNegativeSyntax":
 				_, err := decodeAction()
 				if err != nil {
 					tAssertion.Logf("error (expected): %v", err)
 				} else {
 					tAssertion.Fatalf("expected error, but got none")
 				}
-			})
-		case "http://www.w3.org/ns/rdftest#TestNTriplesPositiveSyntax":
-			t.Run("PositiveSyntax/"+entry.Name, func(t *testing.T) {
-				tAssertion := earlReport.NewAssertion(t, entry.ID)
-
+			case "http://www.w3.org/ns/rdftest#TestNTriplesPositiveSyntax":
 				actualStatements, err := decodeAction()
 				if err != nil {
 					tAssertion.Fatalf("error: %v", err)
 				}
 
 				rdfioDebug.PutTriplesBundle(t.Name(), actualStatements)
-			})
-		default:
-			t.Fatalf("unsupported test type: %s", entry.Type)
-		}
+			default:
+				t.Fatalf("unsupported test type: %s", entry.Type)
+			}
+		})
 	}
 }
 
