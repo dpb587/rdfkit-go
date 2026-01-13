@@ -1,0 +1,258 @@
+<https://w3c.github.io/rdf-canon/tests/manifest#test001c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test002c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test003c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test003m>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test004c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test004m>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test005c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test005m>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test006c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test008c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test009c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test010c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test011c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test013c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test014c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test016c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test016m>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test017c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test017m>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test018c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test018m>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test019c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test020c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test020m>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test021c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test022c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test023c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test024c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test025c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test026c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test027c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test028c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test029c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test030c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test030m>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test033c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test034c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test035c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test036c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test038c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test039c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test040c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test043c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test044c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test045c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test046c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test047c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test047m>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test048c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test048m>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test053c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test053m>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test054c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test055c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test055m>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test056c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test056m>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test057c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test057m>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test058c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test059c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test060c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test060m>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test061c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test062c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test063c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test063m>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test064c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test065c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test066c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test067c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test068c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test069c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test070c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test070m>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test071c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test071m>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test072c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test072m>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test073c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test073m>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test074c>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): maximum iterations reached\n"
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test075c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test075m>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test076c>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/rdf-canon/tests/manifest#test077c>
+  earl:outcome earl:passed

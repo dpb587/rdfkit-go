@@ -1,4 +1,4 @@
-=== Test/PositiveSyntax/comment_following_triple
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#comment_following_triple
 
 encodingtest.QuadStatementList{
 	{
@@ -130,7 +130,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/langtagged_string
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#langtagged_string
 
 encodingtest.QuadStatementList{
 	{
@@ -164,7 +164,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/lantag_with_subtag
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#lantag_with_subtag
 
 encodingtest.QuadStatementList{
 	{
@@ -198,7 +198,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/literal
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal
 
 encodingtest.QuadStatementList{
 	{
@@ -229,7 +229,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/literal_all_controls
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_all_controls
 
 encodingtest.QuadStatementList{
 	{
@@ -260,7 +260,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/literal_all_punctuation
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_all_punctuation
 
 encodingtest.QuadStatementList{
 	{
@@ -291,7 +291,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/literal_ascii_boundaries
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_ascii_boundaries
 
 encodingtest.QuadStatementList{
 	{
@@ -322,7 +322,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/literal_with_2_dquotes
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_2_dquotes
 
 encodingtest.QuadStatementList{
 	{
@@ -353,7 +353,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/literal_with_2_squotes
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_2_squotes
 
 encodingtest.QuadStatementList{
 	{
@@ -384,7 +384,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/literal_with_BACKSPACE
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_BACKSPACE
 
 encodingtest.QuadStatementList{
 	{
@@ -415,7 +415,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/literal_with_CARRIAGE_RETURN
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_CARRIAGE_RETURN
 
 encodingtest.QuadStatementList{
 	{
@@ -446,7 +446,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/literal_with_CHARACTER_TABULATION
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_CHARACTER_TABULATION
 
 encodingtest.QuadStatementList{
 	{
@@ -477,7 +477,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/literal_with_FORM_FEED
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_FORM_FEED
 
 encodingtest.QuadStatementList{
 	{
@@ -508,7 +508,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/literal_with_LINE_FEED
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_LINE_FEED
 
 encodingtest.QuadStatementList{
 	{
@@ -539,7 +539,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/literal_with_REVERSE_SOLIDUS
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_REVERSE_SOLIDUS
 
 encodingtest.QuadStatementList{
 	{
@@ -570,7 +570,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/literal_with_REVERSE_SOLIDUS2
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_REVERSE_SOLIDUS2
 
 encodingtest.QuadStatementList{
 	{
@@ -601,7 +601,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/literal_with_UTF8_boundaries
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_UTF8_boundaries
 
 encodingtest.QuadStatementList{
 	{
@@ -632,7 +632,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/literal_with_dquote
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_dquote
 
 encodingtest.QuadStatementList{
 	{
@@ -663,7 +663,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/literal_with_numeric_escape4
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_numeric_escape4
 
 encodingtest.QuadStatementList{
 	{
@@ -694,7 +694,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/literal_with_numeric_escape8
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_numeric_escape8
 
 encodingtest.QuadStatementList{
 	{
@@ -725,7 +725,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/literal_with_squote
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_squote
 
 encodingtest.QuadStatementList{
 	{
@@ -756,7 +756,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/minimal_whitespace
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#minimal_whitespace
 
 encodingtest.QuadStatementList{
 	{
@@ -905,7 +905,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nq-syntax-bnode-01
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-bnode-01
 
 encodingtest.QuadStatementList{
 	{
@@ -938,7 +938,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nq-syntax-bnode-02
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-bnode-02
 
 encodingtest.QuadStatementList{
 	{
@@ -971,7 +971,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nq-syntax-bnode-03
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-bnode-03
 
 encodingtest.QuadStatementList{
 	{
@@ -1004,7 +1004,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nq-syntax-bnode-04
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-bnode-04
 
 encodingtest.QuadStatementList{
 	{
@@ -1040,7 +1040,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nq-syntax-bnode-05
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-bnode-05
 
 encodingtest.QuadStatementList{
 	{
@@ -1079,7 +1079,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nq-syntax-bnode-06
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-bnode-06
 
 encodingtest.QuadStatementList{
 	{
@@ -1115,7 +1115,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nq-syntax-uri-01
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-uri-01
 
 encodingtest.QuadStatementList{
 	{
@@ -1148,7 +1148,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nq-syntax-uri-02
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-uri-02
 
 encodingtest.QuadStatementList{
 	{
@@ -1181,7 +1181,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nq-syntax-uri-03
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-uri-03
 
 encodingtest.QuadStatementList{
 	{
@@ -1214,7 +1214,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nq-syntax-uri-04
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-uri-04
 
 encodingtest.QuadStatementList{
 	{
@@ -1250,7 +1250,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nq-syntax-uri-05
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-uri-05
 
 encodingtest.QuadStatementList{
 	{
@@ -1289,7 +1289,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nq-syntax-uri-06
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-uri-06
 
 encodingtest.QuadStatementList{
 	{
@@ -1325,7 +1325,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nt-syntax-bnode-01
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bnode-01
 
 encodingtest.QuadStatementList{
 	{
@@ -1353,7 +1353,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nt-syntax-bnode-02
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bnode-02
 
 encodingtest.QuadStatementList{
 	{
@@ -1404,7 +1404,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nt-syntax-bnode-03
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bnode-03
 
 encodingtest.QuadStatementList{
 	{
@@ -1455,7 +1455,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nt-syntax-datatypes-01
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-datatypes-01
 
 encodingtest.QuadStatementList{
 	{
@@ -1486,7 +1486,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nt-syntax-datatypes-02
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-datatypes-02
 
 encodingtest.QuadStatementList{
 	{
@@ -1517,22 +1517,22 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nt-syntax-file-01
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-file-01
 
 encodingtest.QuadStatementList{
 }
 
-=== Test/PositiveSyntax/nt-syntax-file-02
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-file-02
 
 encodingtest.QuadStatementList{
 }
 
-=== Test/PositiveSyntax/nt-syntax-file-03
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-file-03
 
 encodingtest.QuadStatementList{
 }
 
-=== Test/PositiveSyntax/nt-syntax-str-esc-01
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-str-esc-01
 
 encodingtest.QuadStatementList{
 	{
@@ -1563,7 +1563,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nt-syntax-str-esc-02
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-str-esc-02
 
 encodingtest.QuadStatementList{
 	{
@@ -1594,7 +1594,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nt-syntax-str-esc-03
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-str-esc-03
 
 encodingtest.QuadStatementList{
 	{
@@ -1625,7 +1625,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nt-syntax-string-01
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-string-01
 
 encodingtest.QuadStatementList{
 	{
@@ -1656,7 +1656,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nt-syntax-string-02
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-string-02
 
 encodingtest.QuadStatementList{
 	{
@@ -1690,7 +1690,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nt-syntax-string-03
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-string-03
 
 encodingtest.QuadStatementList{
 	{
@@ -1724,7 +1724,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nt-syntax-subm-01
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-subm-01
 
 encodingtest.QuadStatementList{
 	{
@@ -2488,7 +2488,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nt-syntax-uri-01
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-uri-01
 
 encodingtest.QuadStatementList{
 	{
@@ -2516,7 +2516,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nt-syntax-uri-02
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-uri-02
 
 encodingtest.QuadStatementList{
 	{
@@ -2544,7 +2544,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nt-syntax-uri-03
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-uri-03
 
 encodingtest.QuadStatementList{
 	{
@@ -2572,7 +2572,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/nt-syntax-uri-04
+=== Test/http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-uri-04
 
 encodingtest.QuadStatementList{
 	{

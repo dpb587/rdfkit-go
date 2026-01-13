@@ -1,4 +1,4 @@
-=== Test/Eval/amp-in-url-test001
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#amp-in-url-test001
 
 encodingtest.TripleStatementList{
 	{
@@ -27,7 +27,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/datatypes-test001
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#datatypes-test001
 
 encodingtest.TripleStatementList{
 	{
@@ -80,7 +80,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/datatypes-test002
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#datatypes-test002
 
 encodingtest.TripleStatementList{
 	{
@@ -109,7 +109,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdf-charmod-literals-test001
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdf-charmod-literals-test001
 
 encodingtest.TripleStatementList{
 	{
@@ -151,7 +151,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdf-charmod-uris-test001
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdf-charmod-uris-test001
 
 encodingtest.TripleStatementList{
 	{
@@ -180,7 +180,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdf-charmod-uris-test002
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdf-charmod-uris-test002
 
 encodingtest.TripleStatementList{
 	{
@@ -209,7 +209,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdf-containers-syntax-vs-schema-test001
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdf-containers-syntax-vs-schema-test001
 
 encodingtest.TripleStatementList{
 	{
@@ -267,7 +267,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdf-containers-syntax-vs-schema-test002
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdf-containers-syntax-vs-schema-test002
 
 encodingtest.TripleStatementList{
 	{
@@ -365,7 +365,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdf-containers-syntax-vs-schema-test003
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdf-containers-syntax-vs-schema-test003
 
 encodingtest.TripleStatementList{
 	{
@@ -423,7 +423,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdf-containers-syntax-vs-schema-test004
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdf-containers-syntax-vs-schema-test004
 
 encodingtest.TripleStatementList{
 	{
@@ -635,7 +635,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdf-containers-syntax-vs-schema-test006
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdf-containers-syntax-vs-schema-test006
 
 encodingtest.TripleStatementList{
 	{
@@ -807,7 +807,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdf-containers-syntax-vs-schema-test007
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdf-containers-syntax-vs-schema-test007
 
 encodingtest.TripleStatementList{
 	{
@@ -885,7 +885,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdf-containers-syntax-vs-schema-test008
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdf-containers-syntax-vs-schema-test008
 
 encodingtest.TripleStatementList{
 	{
@@ -938,7 +938,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdf-element-not-mandatory-test001
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdf-element-not-mandatory-test001
 
 encodingtest.TripleStatementList{
 	{
@@ -976,7 +976,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdf-ns-prefix-confusion-test0001
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdf-ns-prefix-confusion-test0001
 
 encodingtest.TripleStatementList{
 	{
@@ -1005,7 +1005,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdf-ns-prefix-confusion-test0003
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdf-ns-prefix-confusion-test0003
 
 encodingtest.TripleStatementList{
 	{
@@ -1031,7 +1031,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdf-ns-prefix-confusion-test0004
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdf-ns-prefix-confusion-test0004
 
 encodingtest.TripleStatementList{
 	{
@@ -1060,7 +1060,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdf-ns-prefix-confusion-test0005
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdf-ns-prefix-confusion-test0005
 
 encodingtest.TripleStatementList{
 	{
@@ -1106,7 +1106,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdf-ns-prefix-confusion-test0006
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdf-ns-prefix-confusion-test0006
 
 encodingtest.TripleStatementList{
 	{
@@ -1132,7 +1132,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdf-ns-prefix-confusion-test0009
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdf-ns-prefix-confusion-test0009
 
 encodingtest.TripleStatementList{
 	{
@@ -1161,7 +1161,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdf-ns-prefix-confusion-test0010
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdf-ns-prefix-confusion-test0010
 
 encodingtest.TripleStatementList{
 	{
@@ -1190,7 +1190,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdf-ns-prefix-confusion-test0011
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdf-ns-prefix-confusion-test0011
 
 encodingtest.TripleStatementList{
 	{
@@ -1236,7 +1236,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdf-ns-prefix-confusion-test0012
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdf-ns-prefix-confusion-test0012
 
 encodingtest.TripleStatementList{
 	{
@@ -1282,7 +1282,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdf-ns-prefix-confusion-test0013
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdf-ns-prefix-confusion-test0013
 
 encodingtest.TripleStatementList{
 	{
@@ -1328,7 +1328,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdf-ns-prefix-confusion-test0014
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdf-ns-prefix-confusion-test0014
 
 encodingtest.TripleStatementList{
 	{
@@ -1374,7 +1374,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-difference-between-ID-and-about-test1
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-difference-between-ID-and-about-test1
 
 encodingtest.TripleStatementList{
 	{
@@ -1403,7 +1403,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-difference-between-ID-and-about-test2
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-difference-between-ID-and-about-test2
 
 encodingtest.TripleStatementList{
 	{
@@ -1432,7 +1432,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-difference-between-ID-and-about-test3
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-difference-between-ID-and-about-test3
 
 encodingtest.TripleStatementList{
 	{
@@ -1461,7 +1461,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-duplicate-member-props-test001
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-duplicate-member-props-test001
 
 encodingtest.TripleStatementList{
 	{
@@ -1525,7 +1525,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-empty-property-elements-test001
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-empty-property-elements-test001
 
 encodingtest.TripleStatementList{
 	{
@@ -1551,7 +1551,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-empty-property-elements-test002
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-empty-property-elements-test002
 
 encodingtest.TripleStatementList{
 	{
@@ -1576,7 +1576,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-empty-property-elements-test004
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-empty-property-elements-test004
 
 encodingtest.TripleStatementList{
 	{
@@ -1598,7 +1598,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-empty-property-elements-test005
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-empty-property-elements-test005
 
 encodingtest.TripleStatementList{
 	{
@@ -1672,7 +1672,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-empty-property-elements-test006
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-empty-property-elements-test006
 
 encodingtest.TripleStatementList{
 	{
@@ -1740,7 +1740,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-empty-property-elements-test007
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-empty-property-elements-test007
 
 encodingtest.TripleStatementList{
 	{
@@ -1766,7 +1766,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-empty-property-elements-test008
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-empty-property-elements-test008
 
 encodingtest.TripleStatementList{
 	{
@@ -1791,7 +1791,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-empty-property-elements-test010
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-empty-property-elements-test010
 
 encodingtest.TripleStatementList{
 	{
@@ -1813,7 +1813,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-empty-property-elements-test011
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-empty-property-elements-test011
 
 encodingtest.TripleStatementList{
 	{
@@ -1887,7 +1887,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-empty-property-elements-test012
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-empty-property-elements-test012
 
 encodingtest.TripleStatementList{
 	{
@@ -1955,7 +1955,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-empty-property-elements-test013
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-empty-property-elements-test013
 
 encodingtest.TripleStatementList{
 	{
@@ -2005,7 +2005,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-empty-property-elements-test014
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-empty-property-elements-test014
 
 encodingtest.TripleStatementList{
 	{
@@ -2047,7 +2047,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-empty-property-elements-test015
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-empty-property-elements-test015
 
 encodingtest.TripleStatementList{
 	{
@@ -2089,7 +2089,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-empty-property-elements-test016
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-empty-property-elements-test016
 
 encodingtest.TripleStatementList{
 	{
@@ -2115,7 +2115,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-empty-property-elements-test017
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-empty-property-elements-test017
 
 encodingtest.TripleStatementList{
 	{
@@ -2141,7 +2141,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-identity-anon-resources-test001
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-identity-anon-resources-test001
 
 encodingtest.TripleStatementList{
 	{
@@ -2166,7 +2166,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-identity-anon-resources-test002
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-identity-anon-resources-test002
 
 encodingtest.TripleStatementList{
 	{
@@ -2204,7 +2204,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-identity-anon-resources-test003
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-identity-anon-resources-test003
 
 encodingtest.TripleStatementList{
 	{
@@ -2222,7 +2222,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-identity-anon-resources-test004
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-identity-anon-resources-test004
 
 encodingtest.TripleStatementList{
 	{
@@ -2260,7 +2260,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-identity-anon-resources-test005
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-identity-anon-resources-test005
 
 encodingtest.TripleStatementList{
 	{
@@ -2278,7 +2278,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-not-id-and-resource-attr-test001
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-not-id-and-resource-attr-test001
 
 encodingtest.TripleStatementList{
 	{
@@ -2362,7 +2362,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-not-id-and-resource-attr-test002
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-not-id-and-resource-attr-test002
 
 encodingtest.TripleStatementList{
 	{
@@ -2408,7 +2408,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-not-id-and-resource-attr-test004
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-not-id-and-resource-attr-test004
 
 encodingtest.TripleStatementList{
 	{
@@ -2476,7 +2476,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-not-id-and-resource-attr-test005
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-not-id-and-resource-attr-test005
 
 encodingtest.TripleStatementList{
 	{
@@ -2568,7 +2568,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-para196-test001
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-para196-test001
 
 encodingtest.TripleStatementList{
 	{
@@ -2645,12 +2645,12 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-001
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-001
 
 encodingtest.TripleStatementList{
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-002
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-002
 
 encodingtest.TripleStatementList{
 	{
@@ -2672,7 +2672,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-003
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-003
 
 encodingtest.TripleStatementList{
 	{
@@ -2694,7 +2694,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-004
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-004
 
 encodingtest.TripleStatementList{
 	{
@@ -2716,7 +2716,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-005
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-005
 
 encodingtest.TripleStatementList{
 	{
@@ -2738,7 +2738,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-006
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-006
 
 encodingtest.TripleStatementList{
 	{
@@ -2760,7 +2760,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-007
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-007
 
 encodingtest.TripleStatementList{
 	{
@@ -2782,7 +2782,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-008
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-008
 
 encodingtest.TripleStatementList{
 	{
@@ -2804,7 +2804,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-009
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-009
 
 encodingtest.TripleStatementList{
 	{
@@ -2826,7 +2826,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-010
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-010
 
 encodingtest.TripleStatementList{
 	{
@@ -2848,7 +2848,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-011
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-011
 
 encodingtest.TripleStatementList{
 	{
@@ -2870,7 +2870,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-012
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-012
 
 encodingtest.TripleStatementList{
 	{
@@ -2892,7 +2892,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-013
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-013
 
 encodingtest.TripleStatementList{
 	{
@@ -2914,7 +2914,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-014
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-014
 
 encodingtest.TripleStatementList{
 	{
@@ -2936,7 +2936,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-015
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-015
 
 encodingtest.TripleStatementList{
 	{
@@ -2958,7 +2958,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-016
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-016
 
 encodingtest.TripleStatementList{
 	{
@@ -2980,7 +2980,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-017
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-017
 
 encodingtest.TripleStatementList{
 	{
@@ -3006,7 +3006,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-018
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-018
 
 encodingtest.TripleStatementList{
 	{
@@ -3032,7 +3032,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-019
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-019
 
 encodingtest.TripleStatementList{
 	{
@@ -3058,7 +3058,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-020
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-020
 
 encodingtest.TripleStatementList{
 	{
@@ -3084,7 +3084,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-021
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-021
 
 encodingtest.TripleStatementList{
 	{
@@ -3110,7 +3110,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-022
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-022
 
 encodingtest.TripleStatementList{
 	{
@@ -3136,7 +3136,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-023
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-023
 
 encodingtest.TripleStatementList{
 	{
@@ -3162,7 +3162,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-024
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-024
 
 encodingtest.TripleStatementList{
 	{
@@ -3188,7 +3188,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-025
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-025
 
 encodingtest.TripleStatementList{
 	{
@@ -3214,7 +3214,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-026
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-026
 
 encodingtest.TripleStatementList{
 	{
@@ -3240,7 +3240,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-027
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-027
 
 encodingtest.TripleStatementList{
 	{
@@ -3266,7 +3266,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-028
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-028
 
 encodingtest.TripleStatementList{
 	{
@@ -3292,7 +3292,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-029
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-029
 
 encodingtest.TripleStatementList{
 	{
@@ -3318,7 +3318,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-030
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-030
 
 encodingtest.TripleStatementList{
 	{
@@ -3344,7 +3344,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-031
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-031
 
 encodingtest.TripleStatementList{
 	{
@@ -3370,7 +3370,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-032
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-032
 
 encodingtest.TripleStatementList{
 	{
@@ -3399,7 +3399,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-033
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-033
 
 encodingtest.TripleStatementList{
 	{
@@ -3428,7 +3428,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-034
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-034
 
 encodingtest.TripleStatementList{
 	{
@@ -3457,7 +3457,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-035
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-035
 
 encodingtest.TripleStatementList{
 	{
@@ -3486,7 +3486,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-036
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-036
 
 encodingtest.TripleStatementList{
 	{
@@ -3515,7 +3515,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-test-037
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-test-037
 
 encodingtest.TripleStatementList{
 	{
@@ -3544,7 +3544,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-warn-001
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-warn-001
 
 encodingtest.TripleStatementList{
 	{
@@ -3566,7 +3566,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-warn-002
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-warn-002
 
 encodingtest.TripleStatementList{
 	{
@@ -3592,7 +3592,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-rdf-names-use-warn-003
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-rdf-names-use-warn-003
 
 encodingtest.TripleStatementList{
 	{
@@ -3621,7 +3621,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-reification-required-test001
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-reification-required-test001
 
 encodingtest.TripleStatementList{
 	{
@@ -3650,7 +3650,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-seq-representation-test001
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-seq-representation-test001
 
 encodingtest.TripleStatementList{
 	{
@@ -3707,7 +3707,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-syntax-incomplete-test001
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-syntax-incomplete-test001
 
 encodingtest.TripleStatementList{
 	{
@@ -3733,7 +3733,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-syntax-incomplete-test002
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-syntax-incomplete-test002
 
 encodingtest.TripleStatementList{
 	{
@@ -3793,7 +3793,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-syntax-incomplete-test003
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-syntax-incomplete-test003
 
 encodingtest.TripleStatementList{
 	{
@@ -3822,7 +3822,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-syntax-incomplete-test004
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-syntax-incomplete-test004
 
 encodingtest.TripleStatementList{
 	{
@@ -3907,7 +3907,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-uri-substructure-test001
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-uri-substructure-test001
 
 encodingtest.TripleStatementList{
 	{
@@ -3932,7 +3932,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-xmllang-test003
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-xmllang-test003
 
 encodingtest.TripleStatementList{
 	{
@@ -3961,7 +3961,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-xmllang-test004
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-xmllang-test004
 
 encodingtest.TripleStatementList{
 	{
@@ -3993,7 +3993,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-xmllang-test005
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-xmllang-test005
 
 encodingtest.TripleStatementList{
 	{
@@ -4022,7 +4022,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfms-xmllang-test006
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfms-xmllang-test006
 
 encodingtest.TripleStatementList{
 	{
@@ -4054,7 +4054,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfs-domain-and-range-test001
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfs-domain-and-range-test001
 
 encodingtest.TripleStatementList{
 	{
@@ -4118,7 +4118,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/rdfs-domain-and-range-test002
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#rdfs-domain-and-range-test002
 
 encodingtest.TripleStatementList{
 	{
@@ -4182,7 +4182,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/unrecognised-xml-attributes-test001
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#unrecognised-xml-attributes-test001
 
 encodingtest.TripleStatementList{
 	{
@@ -4235,7 +4235,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/unrecognised-xml-attributes-test002
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#unrecognised-xml-attributes-test002
 
 encodingtest.TripleStatementList{
 	{
@@ -4264,7 +4264,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/xml-canon-test001
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#xml-canon-test001
 
 encodingtest.TripleStatementList{
 	{
@@ -4289,7 +4289,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/xmlbase-test001
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#xmlbase-test001
 
 encodingtest.TripleStatementList{
 	{
@@ -4318,7 +4318,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/xmlbase-test002
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#xmlbase-test002
 
 encodingtest.TripleStatementList{
 	{
@@ -4340,7 +4340,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/xmlbase-test003
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#xmlbase-test003
 
 encodingtest.TripleStatementList{
 	{
@@ -4362,7 +4362,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/xmlbase-test004
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#xmlbase-test004
 
 encodingtest.TripleStatementList{
 	{
@@ -4436,7 +4436,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/xmlbase-test006
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#xmlbase-test006
 
 encodingtest.TripleStatementList{
 	{
@@ -4482,7 +4482,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/xmlbase-test007
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#xmlbase-test007
 
 encodingtest.TripleStatementList{
 	{
@@ -4504,7 +4504,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/xmlbase-test008
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#xmlbase-test008
 
 encodingtest.TripleStatementList{
 	{
@@ -4522,7 +4522,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/xmlbase-test009
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#xmlbase-test009
 
 encodingtest.TripleStatementList{
 	{
@@ -4544,7 +4544,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/xmlbase-test010
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#xmlbase-test010
 
 encodingtest.TripleStatementList{
 	{
@@ -4566,7 +4566,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/xmlbase-test011
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#xmlbase-test011
 
 encodingtest.TripleStatementList{
 	{
@@ -4588,7 +4588,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/xmlbase-test013
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#xmlbase-test013
 
 encodingtest.TripleStatementList{
 	{
@@ -4627,7 +4627,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/xmlbase-test014
+=== Test/http://www.w3.org/2013/RDFXMLTests/manifest.ttl#xmlbase-test014
 
 encodingtest.TripleStatementList{
 	{

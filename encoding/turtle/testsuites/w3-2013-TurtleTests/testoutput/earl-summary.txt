@@ -1,0 +1,950 @@
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#IRI_subject>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#IRI_with_four_digit_numeric_escape>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#IRI_with_eight_digit_numeric_escape>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#IRI_with_all_punctuation>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#bareword_a_predicate>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#old_style_prefix>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#SPARQL_style_prefix>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#prefixed_IRI_predicate>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#prefixed_IRI_object>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#prefix_only_IRI>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#prefix_with_PN_CHARS_BASE_character_boundaries>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#prefix_with_non_leading_extras>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#default_namespace_IRI>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#prefix_reassigned_and_used>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#reserved_escaped_localName>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#percent_escaped_localName>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#HYPHEN_MINUS_in_localName>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#underscore_in_localName>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#localname_with_COLON>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#localName_with_assigned_nfc_bmp_PN_CHARS_BASE_character_boundaries>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#localName_with_assigned_nfc_PN_CHARS_BASE_character_boundaries>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#localName_with_nfc_PN_CHARS_BASE_character_boundaries>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#localName_with_leading_underscore>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#localName_with_leading_digit>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#localName_with_non_leading_extras>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#old_style_base>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#SPARQL_style_base>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#labeled_blank_node_subject>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#labeled_blank_node_object>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#labeled_blank_node_with_PN_CHARS_BASE_character_boundaries>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#labeled_blank_node_with_leading_underscore>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#labeled_blank_node_with_leading_digit>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#labeled_blank_node_with_non_leading_extras>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#anonymous_blank_node_subject>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#anonymous_blank_node_object>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#sole_blankNodePropertyList>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#blankNodePropertyList_as_subject>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#blankNodePropertyList_as_object>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#blankNodePropertyList_with_multiple_triples>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#nested_blankNodePropertyLists>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#blankNodePropertyList_containing_collection>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#collection_subject>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#collection_object>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#empty_collection>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#nested_collection>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#first>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#last>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL1>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL1_ascii_boundaries>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL1_with_UTF8_boundaries>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL1_all_controls>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL1_all_punctuation>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL_LONG1>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL_LONG1_ascii_boundaries>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL_LONG1_with_UTF8_boundaries>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL_LONG1_with_1_squote>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL_LONG1_with_2_squotes>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL2>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL2_ascii_boundaries>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL2_with_UTF8_boundaries>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL_LONG2>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL_LONG2_ascii_boundaries>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL_LONG2_with_UTF8_boundaries>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL_LONG2_with_1_squote>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL_LONG2_with_2_squotes>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_with_CHARACTER_TABULATION>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_with_BACKSPACE>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_with_LINE_FEED>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_with_CARRIAGE_RETURN>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_with_FORM_FEED>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_with_REVERSE_SOLIDUS>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_with_escaped_CHARACTER_TABULATION>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_with_escaped_BACKSPACE>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_with_escaped_LINE_FEED>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_with_escaped_CARRIAGE_RETURN>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_with_escaped_FORM_FEED>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_with_numeric_escape4>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_with_numeric_escape8>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#IRIREF_datatype>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#prefixed_name_datatype>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#bareword_integer>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#bareword_decimal>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#bareword_double>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#double_lower_case_e>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#negative_numeric>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#positive_numeric>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#numeric_with_leading_0>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_true>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_false>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#langtagged_non_LONG>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#langtagged_LONG>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#lantag_with_subtag>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#objectList_with_two_objects>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#predicateObjectList_with_two_objectLists>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#repeated_semis_at_end>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#repeated_semis_not_at_end>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#comment_following_localName>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#number_sign_following_localName>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#comment_following_PNAME_NS>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#number_sign_following_PNAME_NS>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL_LONG2_with_REVERSE_SOLIDUS>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-LITERAL2_with_langtag_and_datatype-dGC5Dskw>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (triples): offset L1C67;0x42: unexpected rune ('^')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#two_LITERAL_LONG2s>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#langtagged_LONG_with_subtag>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-file-01>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-file-02>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-file-03>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-uri-01>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-uri-02>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-uri-03>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-uri-04>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-base-01>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-base-02>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-base-03>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-base-04>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-prefix-01>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-prefix-02>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-prefix-03>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-prefix-04>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-prefix-05>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-prefix-06>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-prefix-07>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-prefix-08>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-prefix-09>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-string-01>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-string-02>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-string-03>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-string-04>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-string-05>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-string-06>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-string-07>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-string-08>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-string-09>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-string-10>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-string-11>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-str-esc-01>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-str-esc-02>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-str-esc-03>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-pname-esc-01>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-pname-esc-02>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-pname-esc-03>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bnode-01>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bnode-02>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bnode-03>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bnode-04>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bnode-05>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bnode-06>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bnode-07>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bnode-08>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bnode-09>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bnode-10>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-number-01>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-number-02>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-number-03>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-number-04>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-number-05>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-number-06>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-number-07>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-number-08>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-number-09>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-number-10>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-number-11>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-datatypes-01>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-datatypes-02>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-kw-01>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-kw-02>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-kw-03>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-struct-01>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-struct-02>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-struct-03>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-struct-04>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-struct-05>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-lists-01>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-lists-02>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-lists-03>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-lists-04>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-lists-05>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-uri-01>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (triples): token (subject): token (IRIREF): offset L2C37;0x37: unexpected rune (' ')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-uri-02>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (triples): token (subject): token (IRIREF): token (UCHAR): offset L2C41;0x3f: unexpected rune ('Z')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-uri-03>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (triples): token (subject): token (IRIREF): token (UCHAR): offset L2C41;0x3f: unexpected rune ('Z')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-uri-04>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (triples): token (subject): token (IRIREF): offset L2C38;0x50: unexpected rune ('n')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-uri-05>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (triples): token (subject): token (IRIREF): offset L2C38;0x50: unexpected rune ('/')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-prefix-01>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (triples): token (subject): token (PrefixedName; offset=L2C1:L2C3;0xc:0xe): unknown prefix: \n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-prefix-02>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (object): token (PrefixedName; offset=L3C49:L3C51;0x7d:0x7f): unknown prefix: \n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-prefix-03>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (directive): token (prefixID): token (IRIREF): offset L2C13;0x23: unexpected rune ('.')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-prefix-04>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (directive): token (prefixID): token (PNAME_NS): offset L2C9;0x28: unexpected rune ('<')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-prefix-05>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (directive): token (prefixID): token (PNAME_NS): offset L2C10;0x1d: unexpected rune ('\\x00')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-base-01>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (directive): token (base): token (IRIREF): offset L2C7;0x1b: unexpected rune ('.')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-base-02>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (directive): offset L2C2;0x18: unexpected rune ('B')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-base-03>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): offset L2C44;0x4e: unexpected rune ('.')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-struct-01>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): offset L2C1;0x15: unexpected rune ('{')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-struct-02>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (predicateObjectList): offset L2C40;0x3a: unexpected rune ('=')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-struct-03>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (triples): offset L2C118;0x8c: unexpected rune ('<')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-struct-04>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): offset L2C1;0x2d: unexpected rune ('\"')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-struct-05>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (predicateObjectList): offset L2C40;0x56: unexpected rune ('\"')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-struct-06>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (predicateObjectList): offset L2C40;0x54: unexpected rune ('[')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-struct-07>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (predicateObjectList): offset L2C40;0x54: unexpected rune ('_')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-kw-01>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (predicateObjectList): token (verb): token (PrefixedName): token (PNAME_NS): offset L2C5;0x36: unexpected rune ('\\x00')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-kw-02>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (triples): token (subject): token (PrefixedName): token (PNAME_NS): offset L2C2;0x33: unexpected rune ('\\x00')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-kw-03>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (object): token (PrefixedName): token (PNAME_NS): offset L2C8;0x39: unexpected rune ('\\x00')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-kw-04>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (triples): token (subject): token (PrefixedName): token (PNAME_NS): offset L2C5;0x36: unexpected rune ('\\x00')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-kw-05>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (predicateObjectList): token (verb): token (PrefixedName): token (PNAME_NS): offset L2C8;0x39: unexpected rune ('\\x00')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-n3-extras-01>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): offset L4C1;0x4e: unexpected rune ('{')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-n3-extras-02>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (predicateObjectList): offset L4C4;0x48: unexpected rune ('=')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-n3-extras-03>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (predicateObjectList): offset L5C3;0x76: unexpected rune ('.')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-n3-extras-04>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (predicateObjectList): offset L5C3;0x76: unexpected rune ('^')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-n3-extras-05>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (predicateObjectList): token (verb): token (PrefixedName): token (PNAME_NS): offset L4C6;0x45: unexpected rune ('\\x00')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-n3-extras-06>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (predicateObjectList): offset L4C10;0x4e: unexpected rune ('.')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-n3-extras-07>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (directive): offset L2C2;0x1b: unexpected rune ('k')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-n3-extras-08>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (directive): offset L2C2;0x1b: unexpected rune ('k')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-n3-extras-09>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (predicateObjectList): offset L3C4;0x48: unexpected rune ('=')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-n3-extras-10>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (predicateObjectList): token (verb): token (IRIREF): offset L3C6;0x4a: unexpected rune (' ')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-n3-extras-11>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (directive): offset L3C2;0x4c: unexpected rune ('f')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-n3-extras-12>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (directive): offset L3C2;0x4b: unexpected rune ('f')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-n3-extras-13>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (directive): offset L2C2;0x1b: unexpected rune ('k')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-struct-08>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (objectList): offset L2C117;0x7d: EOF\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-struct-09>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): offset L2C120;0x86: unexpected rune ('.')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-struct-10>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): offset L2C120;0x86: unexpected rune ('.')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-struct-11>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (predicateObjectList): offset L2C119;0x83: EOF\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-struct-12>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (object): offset L1C78;0x4d: EOF\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-struct-13>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (object): offset L1C78;0x4d: EOF\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-struct-14>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): offset L2C1;0x15: unexpected rune ('\"')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-struct-15>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (predicateObjectList): offset L2C40;0x3e: unexpected rune ('\"')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-struct-16>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (predicateObjectList): offset L2C40;0x3c: unexpected rune ('[')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-struct-17>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (predicateObjectList): offset L2C40;0x3c: unexpected rune ('_')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-lang-01>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (triples): offset L2C88;0x66: unexpected rune ('1')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-esc-01>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_QUOTE): token (ECHAR): offset L2C82;0x65: unexpected rune ('z')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-esc-02>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_QUOTE): token (UCHAR): offset L2C82;0x65: unexpected rune ('W')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-esc-03>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_QUOTE): token (UCHAR): offset L2C86;0x69: unexpected rune ('W')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-esc-04>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_QUOTE): token (UCHAR): offset L2C86;0x69: unexpected rune ('W')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-pname-01>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (predicateObjectList): offset L3C3;0x49: unexpected rune ('~')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-pname-02>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (triples): token (subject): token (PrefixedName): token (PN_LOCAL): token (PERCENT): token (HEX): offset L3C5;0x47: unexpected rune (' ')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-pname-03>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (triples): token (subject): token (PrefixedName): token (PN_LOCAL): token (PN_LOCAL_ESC): offset L3C4;0x4a: unexpected rune ('u')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-string-01>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_QUOTE): offset L3C1;0x40: EOF\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-string-02>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_SINGLE_QUOTE): offset L3C1;0x40: EOF\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-string-03>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_LONG_SINGLE_QUOTE): offset L3C1;0x42: EOF\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-string-04>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_LONG_QUOTE): offset L3C1;0x44: EOF\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-string-05>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (object): token (literal): token (RDFLiteral): token (String): token (STRING_LITERAL_LONG_QUOTE): offset L5C1;0x63: EOF\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-string-06>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (triples): offset L3C16;0x58: unexpected rune ('\"')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-string-07>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (triples): offset L3C16;0x58: unexpected rune ('\\'')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-num-01>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (triples): token (subject): token (PrefixedName): token (PNAME_NS): offset L1C86;0x55: unexpected rune ('\\x00')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-num-02>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (object): token (literal): token (NumericLiteral): token (DOUBLE): token (EXPONENT): offset L1C83;0x52: unexpected rune (' ')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-num-03>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (triples): offset L1C82;0x51: unexpected rune ('a')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-num-04>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (triples): offset L1C80;0x4f: unexpected rune ('x')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-num-05-SdWdo1OK>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (object): token (literal): token (NumericLiteral): token (NumericLiteral): offset L1C79;0x4e: unexpected rune ('+')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-eval-struct-01>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-eval-struct-02>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-01>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-02>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-03>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-04>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-05>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-06>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-07>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-08>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-09>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-10>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-11>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-12>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-13>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-14>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-15>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-16>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-17>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-18>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-19>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-20>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-21>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-22>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-23>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-24>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-25>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-26>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-27>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-eval-bad-01>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-eval-bad-02>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-eval-bad-03>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-eval-bad-04>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-blank-label-dot-end>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (predicateObjectList): offset L2C5;0x36: unexpected rune ('.')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-ln-dash-start>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (triples): offset L2C8;0x39: unexpected rune ('-')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-ln-escape-start>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (object): token (PrefixedName): token (PN_LOCAL): token (PERCENT): token (HEX): offset L2C10;0x3b: unexpected rune ('o')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-ln-escape>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (object): token (PrefixedName): token (PN_LOCAL): token (PERCENT): token (HEX): offset L2C11;0x3c: unexpected rune (' ')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-missing-ns-dot-end>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (triples): token (subject): token (PrefixedName; offset=L1C1:L1C8;0x0:0x7): unknown prefix: valid\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-missing-ns-dot-start>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): offset L1C1;0x0: unexpected rune ('.')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-ns-dot-end>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (directive): token (prefixID): token (PNAME_NS): offset L1C11;0xa: unexpected rune ('.')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-ns-dot-start>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (directive): token (prefixID): token (PNAME_NS): offset L1C9;0x8: unexpected rune ('.')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bad-number-dot-in-anon>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (blankNodePropertyList): offset L5C9;0x44: unexpected rune ('.')\n"
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-blank-label>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-ln-colons>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-ln-dots>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-ns-dots>
+  earl:outcome earl:passed

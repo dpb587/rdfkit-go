@@ -1,4 +1,4 @@
-=== Test/Eval/HYPHEN_MINUS_in_localName
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#HYPHEN_MINUS_in_localName
 
 encodingtest.TripleStatementList{
 	{
@@ -24,7 +24,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/IRIREF_datatype
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#IRIREF_datatype
 
 encodingtest.TripleStatementList{
 	{
@@ -53,7 +53,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/IRI_subject
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#IRI_subject
 
 encodingtest.TripleStatementList{
 	{
@@ -79,7 +79,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/IRI_with_all_punctuation
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#IRI_with_all_punctuation
 
 encodingtest.TripleStatementList{
 	{
@@ -105,7 +105,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/IRI_with_eight_digit_numeric_escape
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#IRI_with_eight_digit_numeric_escape
 
 encodingtest.TripleStatementList{
 	{
@@ -131,7 +131,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/IRI_with_four_digit_numeric_escape
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#IRI_with_four_digit_numeric_escape
 
 encodingtest.TripleStatementList{
 	{
@@ -157,7 +157,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/LITERAL1
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL1
 
 encodingtest.TripleStatementList{
 	{
@@ -186,7 +186,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/LITERAL1_all_controls
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL1_all_controls
 
 encodingtest.TripleStatementList{
 	{
@@ -215,7 +215,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/LITERAL1_all_punctuation
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL1_all_punctuation
 
 encodingtest.TripleStatementList{
 	{
@@ -244,7 +244,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/LITERAL1_ascii_boundaries
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL1_ascii_boundaries
 
 encodingtest.TripleStatementList{
 	{
@@ -273,7 +273,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/LITERAL1_with_UTF8_boundaries
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL1_with_UTF8_boundaries
 
 encodingtest.TripleStatementList{
 	{
@@ -302,7 +302,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/LITERAL2
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL2
 
 encodingtest.TripleStatementList{
 	{
@@ -331,7 +331,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/LITERAL2_ascii_boundaries
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL2_ascii_boundaries
 
 encodingtest.TripleStatementList{
 	{
@@ -360,7 +360,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/LITERAL2_with_UTF8_boundaries
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL2_with_UTF8_boundaries
 
 encodingtest.TripleStatementList{
 	{
@@ -389,7 +389,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/LITERAL_LONG1
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL_LONG1
 
 encodingtest.TripleStatementList{
 	{
@@ -418,7 +418,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/LITERAL_LONG1_ascii_boundaries
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL_LONG1_ascii_boundaries
 
 encodingtest.TripleStatementList{
 	{
@@ -447,7 +447,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/LITERAL_LONG1_with_1_squote
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL_LONG1_with_1_squote
 
 encodingtest.TripleStatementList{
 	{
@@ -476,7 +476,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/LITERAL_LONG1_with_2_squotes
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL_LONG1_with_2_squotes
 
 encodingtest.TripleStatementList{
 	{
@@ -505,7 +505,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/LITERAL_LONG1_with_UTF8_boundaries
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL_LONG1_with_UTF8_boundaries
 
 encodingtest.TripleStatementList{
 	{
@@ -534,7 +534,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/LITERAL_LONG2
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL_LONG2
 
 encodingtest.TripleStatementList{
 	{
@@ -563,7 +563,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/LITERAL_LONG2_ascii_boundaries
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL_LONG2_ascii_boundaries
 
 encodingtest.TripleStatementList{
 	{
@@ -592,7 +592,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/LITERAL_LONG2_with_1_squote
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL_LONG2_with_1_squote
 
 encodingtest.TripleStatementList{
 	{
@@ -621,7 +621,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/LITERAL_LONG2_with_2_squotes
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL_LONG2_with_2_squotes
 
 encodingtest.TripleStatementList{
 	{
@@ -650,7 +650,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/LITERAL_LONG2_with_REVERSE_SOLIDUS
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL_LONG2_with_REVERSE_SOLIDUS
 
 encodingtest.TripleStatementList{
 	{
@@ -679,7 +679,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/LITERAL_LONG2_with_UTF8_boundaries
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#LITERAL_LONG2_with_UTF8_boundaries
 
 encodingtest.TripleStatementList{
 	{
@@ -708,7 +708,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/SPARQL_style_base
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#SPARQL_style_base
 
 encodingtest.TripleStatementList{
 	{
@@ -734,7 +734,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/SPARQL_style_prefix
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#SPARQL_style_prefix
 
 encodingtest.TripleStatementList{
 	{
@@ -760,7 +760,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/anonymous_blank_node_object
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#anonymous_blank_node_object
 
 encodingtest.TripleStatementList{
 	{
@@ -786,7 +786,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/anonymous_blank_node_subject
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#anonymous_blank_node_subject
 
 encodingtest.TripleStatementList{
 	{
@@ -812,7 +812,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/bareword_a_predicate
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#bareword_a_predicate
 
 encodingtest.TripleStatementList{
 	{
@@ -838,7 +838,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/bareword_decimal
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#bareword_decimal
 
 encodingtest.TripleStatementList{
 	{
@@ -867,7 +867,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/bareword_double
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#bareword_double
 
 encodingtest.TripleStatementList{
 	{
@@ -896,7 +896,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/bareword_integer
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#bareword_integer
 
 encodingtest.TripleStatementList{
 	{
@@ -925,7 +925,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/blankNodePropertyList_as_object
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#blankNodePropertyList_as_object
 
 encodingtest.TripleStatementList{
 	{
@@ -972,7 +972,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/blankNodePropertyList_as_subject
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#blankNodePropertyList_as_subject
 
 encodingtest.TripleStatementList{
 	{
@@ -1019,7 +1019,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/blankNodePropertyList_containing_collection
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#blankNodePropertyList_containing_collection
 
 encodingtest.TripleStatementList{
 	{
@@ -1082,7 +1082,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/blankNodePropertyList_with_multiple_triples
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#blankNodePropertyList_with_multiple_triples
 
 encodingtest.TripleStatementList{
 	{
@@ -1150,7 +1150,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/collection_object
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#collection_object
 
 encodingtest.TripleStatementList{
 	{
@@ -1213,7 +1213,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/collection_subject
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#collection_subject
 
 encodingtest.TripleStatementList{
 	{
@@ -1276,7 +1276,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/comment_following_PNAME_NS
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#comment_following_PNAME_NS
 
 encodingtest.TripleStatementList{
 	{
@@ -1302,7 +1302,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/comment_following_localName
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#comment_following_localName
 
 encodingtest.TripleStatementList{
 	{
@@ -1328,7 +1328,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/default_namespace_IRI
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#default_namespace_IRI
 
 encodingtest.TripleStatementList{
 	{
@@ -1354,7 +1354,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/double_lower_case_e
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#double_lower_case_e
 
 encodingtest.TripleStatementList{
 	{
@@ -1383,7 +1383,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/empty_collection
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#empty_collection
 
 encodingtest.TripleStatementList{
 	{
@@ -1409,7 +1409,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/first
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#first
 
 encodingtest.TripleStatementList{
 	{
@@ -1531,7 +1531,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/labeled_blank_node_object
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#labeled_blank_node_object
 
 encodingtest.TripleStatementList{
 	{
@@ -1557,7 +1557,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/labeled_blank_node_subject
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#labeled_blank_node_subject
 
 encodingtest.TripleStatementList{
 	{
@@ -1583,7 +1583,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/labeled_blank_node_with_PN_CHARS_BASE_character_boundaries
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#labeled_blank_node_with_PN_CHARS_BASE_character_boundaries
 
 encodingtest.TripleStatementList{
 	{
@@ -1609,7 +1609,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/labeled_blank_node_with_leading_digit
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#labeled_blank_node_with_leading_digit
 
 encodingtest.TripleStatementList{
 	{
@@ -1635,7 +1635,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/labeled_blank_node_with_leading_underscore
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#labeled_blank_node_with_leading_underscore
 
 encodingtest.TripleStatementList{
 	{
@@ -1661,7 +1661,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/labeled_blank_node_with_non_leading_extras
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#labeled_blank_node_with_non_leading_extras
 
 encodingtest.TripleStatementList{
 	{
@@ -1687,7 +1687,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/langtagged_LONG
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#langtagged_LONG
 
 encodingtest.TripleStatementList{
 	{
@@ -1719,7 +1719,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/langtagged_LONG_with_subtag
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#langtagged_LONG_with_subtag
 
 encodingtest.TripleStatementList{
 	{
@@ -1751,7 +1751,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/langtagged_non_LONG
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#langtagged_non_LONG
 
 encodingtest.TripleStatementList{
 	{
@@ -1783,7 +1783,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/lantag_with_subtag
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#lantag_with_subtag
 
 encodingtest.TripleStatementList{
 	{
@@ -1815,7 +1815,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/last
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#last
 
 encodingtest.TripleStatementList{
 	{
@@ -1937,7 +1937,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/literal_false
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_false
 
 encodingtest.TripleStatementList{
 	{
@@ -1966,7 +1966,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/literal_true
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_true
 
 encodingtest.TripleStatementList{
 	{
@@ -1995,7 +1995,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/literal_with_BACKSPACE
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_with_BACKSPACE
 
 encodingtest.TripleStatementList{
 	{
@@ -2024,7 +2024,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/literal_with_CARRIAGE_RETURN
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_with_CARRIAGE_RETURN
 
 encodingtest.TripleStatementList{
 	{
@@ -2053,7 +2053,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/literal_with_CHARACTER_TABULATION
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_with_CHARACTER_TABULATION
 
 encodingtest.TripleStatementList{
 	{
@@ -2082,7 +2082,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/literal_with_FORM_FEED
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_with_FORM_FEED
 
 encodingtest.TripleStatementList{
 	{
@@ -2111,7 +2111,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/literal_with_LINE_FEED
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_with_LINE_FEED
 
 encodingtest.TripleStatementList{
 	{
@@ -2140,7 +2140,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/literal_with_REVERSE_SOLIDUS
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_with_REVERSE_SOLIDUS
 
 encodingtest.TripleStatementList{
 	{
@@ -2169,7 +2169,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/literal_with_escaped_BACKSPACE
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_with_escaped_BACKSPACE
 
 encodingtest.TripleStatementList{
 	{
@@ -2198,7 +2198,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/literal_with_escaped_CARRIAGE_RETURN
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_with_escaped_CARRIAGE_RETURN
 
 encodingtest.TripleStatementList{
 	{
@@ -2227,7 +2227,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/literal_with_escaped_CHARACTER_TABULATION
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_with_escaped_CHARACTER_TABULATION
 
 encodingtest.TripleStatementList{
 	{
@@ -2256,7 +2256,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/literal_with_escaped_FORM_FEED
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_with_escaped_FORM_FEED
 
 encodingtest.TripleStatementList{
 	{
@@ -2285,7 +2285,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/literal_with_escaped_LINE_FEED
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_with_escaped_LINE_FEED
 
 encodingtest.TripleStatementList{
 	{
@@ -2314,7 +2314,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/literal_with_numeric_escape4
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_with_numeric_escape4
 
 encodingtest.TripleStatementList{
 	{
@@ -2343,7 +2343,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/literal_with_numeric_escape8
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#literal_with_numeric_escape8
 
 encodingtest.TripleStatementList{
 	{
@@ -2372,7 +2372,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/localName_with_assigned_nfc_PN_CHARS_BASE_character_boundaries
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#localName_with_assigned_nfc_PN_CHARS_BASE_character_boundaries
 
 encodingtest.TripleStatementList{
 	{
@@ -2398,7 +2398,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/localName_with_assigned_nfc_bmp_PN_CHARS_BASE_character_boundaries
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#localName_with_assigned_nfc_bmp_PN_CHARS_BASE_character_boundaries
 
 encodingtest.TripleStatementList{
 	{
@@ -2424,7 +2424,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/localName_with_leading_digit
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#localName_with_leading_digit
 
 encodingtest.TripleStatementList{
 	{
@@ -2450,7 +2450,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/localName_with_leading_underscore
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#localName_with_leading_underscore
 
 encodingtest.TripleStatementList{
 	{
@@ -2476,7 +2476,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/localName_with_nfc_PN_CHARS_BASE_character_boundaries
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#localName_with_nfc_PN_CHARS_BASE_character_boundaries
 
 encodingtest.TripleStatementList{
 	{
@@ -2502,7 +2502,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/localName_with_non_leading_extras
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#localName_with_non_leading_extras
 
 encodingtest.TripleStatementList{
 	{
@@ -2528,7 +2528,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/localname_with_COLON
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#localname_with_COLON
 
 encodingtest.TripleStatementList{
 	{
@@ -2554,7 +2554,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/negative_numeric
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#negative_numeric
 
 encodingtest.TripleStatementList{
 	{
@@ -2583,7 +2583,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/nested_blankNodePropertyLists
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#nested_blankNodePropertyLists
 
 encodingtest.TripleStatementList{
 	{
@@ -2651,7 +2651,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/nested_collection
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#nested_collection
 
 encodingtest.TripleStatementList{
 	{
@@ -2748,7 +2748,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/number_sign_following_PNAME_NS
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#number_sign_following_PNAME_NS
 
 encodingtest.TripleStatementList{
 	{
@@ -2774,7 +2774,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/number_sign_following_localName
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#number_sign_following_localName
 
 encodingtest.TripleStatementList{
 	{
@@ -2800,7 +2800,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/numeric_with_leading_0
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#numeric_with_leading_0
 
 encodingtest.TripleStatementList{
 	{
@@ -2829,7 +2829,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/objectList_with_two_objects
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#objectList_with_two_objects
 
 encodingtest.TripleStatementList{
 	{
@@ -2876,7 +2876,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/old_style_base
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#old_style_base
 
 encodingtest.TripleStatementList{
 	{
@@ -2902,7 +2902,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/old_style_prefix
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#old_style_prefix
 
 encodingtest.TripleStatementList{
 	{
@@ -2928,7 +2928,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/percent_escaped_localName
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#percent_escaped_localName
 
 encodingtest.TripleStatementList{
 	{
@@ -2954,7 +2954,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/positive_numeric
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#positive_numeric
 
 encodingtest.TripleStatementList{
 	{
@@ -2983,7 +2983,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/predicateObjectList_with_two_objectLists
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#predicateObjectList_with_two_objectLists
 
 encodingtest.TripleStatementList{
 	{
@@ -3030,7 +3030,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/prefix_only_IRI
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#prefix_only_IRI
 
 encodingtest.TripleStatementList{
 	{
@@ -3056,7 +3056,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/prefix_reassigned_and_used
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#prefix_reassigned_and_used
 
 encodingtest.TripleStatementList{
 	{
@@ -3082,7 +3082,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/prefix_with_PN_CHARS_BASE_character_boundaries
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#prefix_with_PN_CHARS_BASE_character_boundaries
 
 encodingtest.TripleStatementList{
 	{
@@ -3108,7 +3108,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/prefix_with_non_leading_extras
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#prefix_with_non_leading_extras
 
 encodingtest.TripleStatementList{
 	{
@@ -3134,7 +3134,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/prefixed_IRI_object
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#prefixed_IRI_object
 
 encodingtest.TripleStatementList{
 	{
@@ -3160,7 +3160,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/prefixed_IRI_predicate
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#prefixed_IRI_predicate
 
 encodingtest.TripleStatementList{
 	{
@@ -3186,7 +3186,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/prefixed_name_datatype
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#prefixed_name_datatype
 
 encodingtest.TripleStatementList{
 	{
@@ -3215,7 +3215,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/repeated_semis_at_end
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#repeated_semis_at_end
 
 encodingtest.TripleStatementList{
 	{
@@ -3262,7 +3262,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/repeated_semis_not_at_end
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#repeated_semis_not_at_end
 
 encodingtest.TripleStatementList{
 	{
@@ -3288,7 +3288,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/reserved_escaped_localName
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#reserved_escaped_localName
 
 encodingtest.TripleStatementList{
 	{
@@ -3314,7 +3314,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/sole_blankNodePropertyList
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#sole_blankNodePropertyList
 
 encodingtest.TripleStatementList{
 	{
@@ -3340,7 +3340,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-eval-struct-01
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-eval-struct-01
 
 encodingtest.TripleStatementList{
 	{
@@ -3366,7 +3366,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-eval-struct-02
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-eval-struct-02
 
 encodingtest.TripleStatementList{
 	{
@@ -3413,7 +3413,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-01
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-01
 
 encodingtest.TripleStatementList{
 	{
@@ -3439,7 +3439,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-02
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-02
 
 encodingtest.TripleStatementList{
 	{
@@ -3507,7 +3507,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-03
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-03
 
 encodingtest.TripleStatementList{
 	{
@@ -3575,7 +3575,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-04
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-04
 
 encodingtest.TripleStatementList{
 	{
@@ -3643,7 +3643,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-05
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-05
 
 encodingtest.TripleStatementList{
 	{
@@ -3690,7 +3690,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-06
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-06
 
 encodingtest.TripleStatementList{
 	{
@@ -3779,7 +3779,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-07
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-07
 
 encodingtest.TripleStatementList{
 	{
@@ -3805,7 +3805,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-08
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-08
 
 encodingtest.TripleStatementList{
 	{
@@ -3893,7 +3893,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-09
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-09
 
 encodingtest.TripleStatementList{
 	{
@@ -3919,7 +3919,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-10
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-10
 
 encodingtest.TripleStatementList{
 	{
@@ -4011,7 +4011,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-11
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-11
 
 encodingtest.TripleStatementList{
 	{
@@ -4136,7 +4136,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-12
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-12
 
 encodingtest.TripleStatementList{
 	{
@@ -4237,7 +4237,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-13
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-13
 
 encodingtest.TripleStatementList{
 	{
@@ -4338,7 +4338,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-14
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-14
 
 encodingtest.TripleStatementList{
 	{
@@ -4385,7 +4385,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-15
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-15
 
 encodingtest.TripleStatementList{
 	{
@@ -4414,7 +4414,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-16
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-16
 
 encodingtest.TripleStatementList{
 	{
@@ -4467,7 +4467,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-17
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-17
 
 encodingtest.TripleStatementList{
 	{
@@ -4496,7 +4496,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-18
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-18
 
 encodingtest.TripleStatementList{
 	{
@@ -4549,7 +4549,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-19
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-19
 
 encodingtest.TripleStatementList{
 	{
@@ -4626,7 +4626,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-20
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-20
 
 encodingtest.TripleStatementList{
 	{
@@ -4703,7 +4703,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-21
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-21
 
 encodingtest.TripleStatementList{
 	{
@@ -4732,7 +4732,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-22
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-22
 
 encodingtest.TripleStatementList{
 	{
@@ -4785,7 +4785,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-23
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-23
 
 encodingtest.TripleStatementList{
 	{
@@ -4937,7 +4937,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-24
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-24
 
 encodingtest.TripleStatementList{
 	{
@@ -4963,7 +4963,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-25
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-25
 
 encodingtest.TripleStatementList{
 	{
@@ -4989,7 +4989,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-26
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-26
 
 encodingtest.TripleStatementList{
 	{
@@ -5522,7 +5522,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/turtle-subm-27
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-subm-27
 
 encodingtest.TripleStatementList{
 	{
@@ -5632,96 +5632,17 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/Eval/two_LITERAL_LONG2s
-
-encodingtest.TripleStatementList{
-	{
-		Triple: rdf.Triple{
-			Subject: rdf.IRI("http://example.org/ex#a"),
-			Predicate: rdf.IRI("http://example.org/ex#b"),
-			Object: rdf.Literal{
-				LexicalForm: "first long literal",
-				Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
-			},
-		},
-		TextOffsets: encoding.StatementTextOffsets{
-			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
-				From: cursorio.TextOffset{Byte: 97, LineColumn: cursorio.TextLineColumn{2, 0}},
-				Until: cursorio.TextOffset{Byte: 99, LineColumn: cursorio.TextLineColumn{2, 2}},
-			},
-			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
-				From: cursorio.TextOffset{Byte: 100, LineColumn: cursorio.TextLineColumn{2, 3}},
-				Until: cursorio.TextOffset{Byte: 102, LineColumn: cursorio.TextLineColumn{2, 5}},
-			},
-			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
-				From: cursorio.TextOffset{Byte: 103, LineColumn: cursorio.TextLineColumn{2, 6}},
-				Until: cursorio.TextOffset{Byte: 127, LineColumn: cursorio.TextLineColumn{2, 30}},
-			},
-		},
-	},
-	{
-		Triple: rdf.Triple{
-			Subject: rdf.IRI("http://example.org/ex#c"),
-			Predicate: rdf.IRI("http://example.org/ex#d"),
-			Object: rdf.Literal{
-				LexicalForm: "second long literal",
-				Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
-			},
-		},
-		TextOffsets: encoding.StatementTextOffsets{
-			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
-				From: cursorio.TextOffset{Byte: 130, LineColumn: cursorio.TextLineColumn{3, 0}},
-				Until: cursorio.TextOffset{Byte: 132, LineColumn: cursorio.TextLineColumn{3, 2}},
-			},
-			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
-				From: cursorio.TextOffset{Byte: 133, LineColumn: cursorio.TextLineColumn{3, 3}},
-				Until: cursorio.TextOffset{Byte: 135, LineColumn: cursorio.TextLineColumn{3, 5}},
-			},
-			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
-				From: cursorio.TextOffset{Byte: 136, LineColumn: cursorio.TextLineColumn{3, 6}},
-				Until: cursorio.TextOffset{Byte: 161, LineColumn: cursorio.TextLineColumn{3, 31}},
-			},
-		},
-	},
-}
-
-=== Test/Eval/underscore_in_localName
-
-encodingtest.TripleStatementList{
-	{
-		Triple: rdf.Triple{
-			Subject: rdf.IRI("http://a.example/s_"),
-			Predicate: rdf.IRI("http://a.example/p"),
-			Object: rdf.IRI("http://a.example/o"),
-		},
-		TextOffsets: encoding.StatementTextOffsets{
-			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
-				From: cursorio.TextOffset{Byte: 32, LineColumn: cursorio.TextLineColumn{1, 0}},
-				Until: cursorio.TextOffset{Byte: 36, LineColumn: cursorio.TextLineColumn{1, 4}},
-			},
-			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
-				From: cursorio.TextOffset{Byte: 37, LineColumn: cursorio.TextLineColumn{1, 5}},
-				Until: cursorio.TextOffset{Byte: 57, LineColumn: cursorio.TextLineColumn{1, 25}},
-			},
-			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
-				From: cursorio.TextOffset{Byte: 58, LineColumn: cursorio.TextLineColumn{1, 26}},
-				Until: cursorio.TextOffset{Byte: 78, LineColumn: cursorio.TextLineColumn{1, 46}},
-			},
-		},
-	},
-}
-
-=== Test/PositiveSyntax/turtle-syntax-base-01
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-base-01
 
 encodingtest.TripleStatementList{
 }
 
-=== Test/PositiveSyntax/turtle-syntax-base-02
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-base-02
 
 encodingtest.TripleStatementList{
 }
 
-=== Test/PositiveSyntax/turtle-syntax-base-03
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-base-03
 
 encodingtest.TripleStatementList{
 	{
@@ -5747,7 +5668,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-base-04
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-base-04
 
 encodingtest.TripleStatementList{
 	{
@@ -5773,7 +5694,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-blank-label
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-blank-label
 
 encodingtest.TripleStatementList{
 	{
@@ -5841,7 +5762,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-bnode-01
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bnode-01
 
 encodingtest.TripleStatementList{
 	{
@@ -5867,7 +5788,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-bnode-02
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bnode-02
 
 encodingtest.TripleStatementList{
 	{
@@ -5893,7 +5814,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-bnode-03
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bnode-03
 
 encodingtest.TripleStatementList{
 	{
@@ -5940,7 +5861,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-bnode-04
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bnode-04
 
 encodingtest.TripleStatementList{
 	{
@@ -6008,7 +5929,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-bnode-05
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bnode-05
 
 encodingtest.TripleStatementList{
 	{
@@ -6076,7 +5997,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-bnode-06
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bnode-06
 
 encodingtest.TripleStatementList{
 	{
@@ -6102,7 +6023,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-bnode-07
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bnode-07
 
 encodingtest.TripleStatementList{
 	{
@@ -6149,7 +6070,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-bnode-08
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bnode-08
 
 encodingtest.TripleStatementList{
 	{
@@ -6175,7 +6096,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-bnode-09
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bnode-09
 
 encodingtest.TripleStatementList{
 	{
@@ -6243,7 +6164,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-bnode-10
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-bnode-10
 
 encodingtest.TripleStatementList{
 	{
@@ -6332,7 +6253,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-datatypes-01
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-datatypes-01
 
 encodingtest.TripleStatementList{
 	{
@@ -6361,7 +6282,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-datatypes-02
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-datatypes-02
 
 encodingtest.TripleStatementList{
 	{
@@ -6390,22 +6311,22 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-file-01
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-file-01
 
 encodingtest.TripleStatementList{
 }
 
-=== Test/PositiveSyntax/turtle-syntax-file-02
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-file-02
 
 encodingtest.TripleStatementList{
 }
 
-=== Test/PositiveSyntax/turtle-syntax-file-03
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-file-03
 
 encodingtest.TripleStatementList{
 }
 
-=== Test/PositiveSyntax/turtle-syntax-kw-01
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-kw-01
 
 encodingtest.TripleStatementList{
 	{
@@ -6434,7 +6355,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-kw-02
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-kw-02
 
 encodingtest.TripleStatementList{
 	{
@@ -6463,7 +6384,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-kw-03
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-kw-03
 
 encodingtest.TripleStatementList{
 	{
@@ -6489,7 +6410,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-lists-01
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-lists-01
 
 encodingtest.TripleStatementList{
 	{
@@ -6515,7 +6436,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-lists-02
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-lists-02
 
 encodingtest.TripleStatementList{
 	{
@@ -6623,7 +6544,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-lists-03
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-lists-03
 
 encodingtest.TripleStatementList{
 	{
@@ -6723,7 +6644,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-lists-04
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-lists-04
 
 encodingtest.TripleStatementList{
 	{
@@ -6817,7 +6738,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-lists-05
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-lists-05
 
 encodingtest.TripleStatementList{
 	{
@@ -7103,7 +7024,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-ln-colons
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-ln-colons
 
 encodingtest.TripleStatementList{
 	{
@@ -7213,7 +7134,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-ln-dots
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-ln-dots
 
 encodingtest.TripleStatementList{
 	{
@@ -7281,7 +7202,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-ns-dots
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-ns-dots
 
 encodingtest.TripleStatementList{
 	{
@@ -7307,7 +7228,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-number-01
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-number-01
 
 encodingtest.TripleStatementList{
 	{
@@ -7336,7 +7257,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-number-02
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-number-02
 
 encodingtest.TripleStatementList{
 	{
@@ -7365,7 +7286,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-number-03
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-number-03
 
 encodingtest.TripleStatementList{
 	{
@@ -7394,7 +7315,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-number-04
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-number-04
 
 encodingtest.TripleStatementList{
 	{
@@ -7423,7 +7344,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-number-05
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-number-05
 
 encodingtest.TripleStatementList{
 	{
@@ -7452,7 +7373,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-number-06
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-number-06
 
 encodingtest.TripleStatementList{
 	{
@@ -7481,7 +7402,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-number-07
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-number-07
 
 encodingtest.TripleStatementList{
 	{
@@ -7510,7 +7431,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-number-08
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-number-08
 
 encodingtest.TripleStatementList{
 	{
@@ -7539,7 +7460,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-number-09
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-number-09
 
 encodingtest.TripleStatementList{
 	{
@@ -7568,7 +7489,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-number-10
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-number-10
 
 encodingtest.TripleStatementList{
 	{
@@ -7597,7 +7518,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-number-11
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-number-11
 
 encodingtest.TripleStatementList{
 	{
@@ -7626,7 +7547,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-pname-esc-01
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-pname-esc-01
 
 encodingtest.TripleStatementList{
 	{
@@ -7652,7 +7573,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-pname-esc-02
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-pname-esc-02
 
 encodingtest.TripleStatementList{
 	{
@@ -7678,7 +7599,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-pname-esc-03
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-pname-esc-03
 
 encodingtest.TripleStatementList{
 	{
@@ -7704,17 +7625,17 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-prefix-01
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-prefix-01
 
 encodingtest.TripleStatementList{
 }
 
-=== Test/PositiveSyntax/turtle-syntax-prefix-02
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-prefix-02
 
 encodingtest.TripleStatementList{
 }
 
-=== Test/PositiveSyntax/turtle-syntax-prefix-03
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-prefix-03
 
 encodingtest.TripleStatementList{
 	{
@@ -7740,7 +7661,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-prefix-04
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-prefix-04
 
 encodingtest.TripleStatementList{
 	{
@@ -7766,7 +7687,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-prefix-05
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-prefix-05
 
 encodingtest.TripleStatementList{
 	{
@@ -7792,7 +7713,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-prefix-06
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-prefix-06
 
 encodingtest.TripleStatementList{
 	{
@@ -7818,7 +7739,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-prefix-07
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-prefix-07
 
 encodingtest.TripleStatementList{
 	{
@@ -7844,7 +7765,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-prefix-08
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-prefix-08
 
 encodingtest.TripleStatementList{
 	{
@@ -7870,7 +7791,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-prefix-09
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-prefix-09
 
 encodingtest.TripleStatementList{
 	{
@@ -7896,7 +7817,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-str-esc-01
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-str-esc-01
 
 encodingtest.TripleStatementList{
 	{
@@ -7925,7 +7846,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-str-esc-02
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-str-esc-02
 
 encodingtest.TripleStatementList{
 	{
@@ -7954,7 +7875,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-str-esc-03
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-str-esc-03
 
 encodingtest.TripleStatementList{
 	{
@@ -7983,7 +7904,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-string-01
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-string-01
 
 encodingtest.TripleStatementList{
 	{
@@ -8012,7 +7933,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-string-02
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-string-02
 
 encodingtest.TripleStatementList{
 	{
@@ -8044,7 +7965,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-string-03
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-string-03
 
 encodingtest.TripleStatementList{
 	{
@@ -8076,7 +7997,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-string-04
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-string-04
 
 encodingtest.TripleStatementList{
 	{
@@ -8105,7 +8026,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-string-05
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-string-05
 
 encodingtest.TripleStatementList{
 	{
@@ -8137,7 +8058,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-string-06
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-string-06
 
 encodingtest.TripleStatementList{
 	{
@@ -8169,7 +8090,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-string-07
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-string-07
 
 encodingtest.TripleStatementList{
 	{
@@ -8198,7 +8119,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-string-08
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-string-08
 
 encodingtest.TripleStatementList{
 	{
@@ -8227,7 +8148,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-string-09
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-string-09
 
 encodingtest.TripleStatementList{
 	{
@@ -8256,7 +8177,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-string-10
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-string-10
 
 encodingtest.TripleStatementList{
 	{
@@ -8288,7 +8209,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-string-11
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-string-11
 
 encodingtest.TripleStatementList{
 	{
@@ -8320,7 +8241,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-struct-01
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-struct-01
 
 encodingtest.TripleStatementList{
 	{
@@ -8367,7 +8288,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-struct-02
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-struct-02
 
 encodingtest.TripleStatementList{
 	{
@@ -8414,7 +8335,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-struct-03
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-struct-03
 
 encodingtest.TripleStatementList{
 	{
@@ -8461,7 +8382,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-struct-04
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-struct-04
 
 encodingtest.TripleStatementList{
 	{
@@ -8508,7 +8429,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-struct-05
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-struct-05
 
 encodingtest.TripleStatementList{
 	{
@@ -8555,7 +8476,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-uri-01
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-uri-01
 
 encodingtest.TripleStatementList{
 	{
@@ -8581,7 +8502,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-uri-02
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-uri-02
 
 encodingtest.TripleStatementList{
 	{
@@ -8607,7 +8528,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-uri-03
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-uri-03
 
 encodingtest.TripleStatementList{
 	{
@@ -8633,7 +8554,7 @@ encodingtest.TripleStatementList{
 	},
 }
 
-=== Test/PositiveSyntax/turtle-syntax-uri-04
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#turtle-syntax-uri-04
 
 encodingtest.TripleStatementList{
 	{
@@ -8654,6 +8575,85 @@ encodingtest.TripleStatementList{
 			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
 				From: cursorio.TextOffset{Byte: 106, LineColumn: cursorio.TextLineColumn{2, 0}},
 				Until: cursorio.TextOffset{Byte: 199, LineColumn: cursorio.TextLineColumn{2, 93}},
+			},
+		},
+	},
+}
+
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#two_LITERAL_LONG2s
+
+encodingtest.TripleStatementList{
+	{
+		Triple: rdf.Triple{
+			Subject: rdf.IRI("http://example.org/ex#a"),
+			Predicate: rdf.IRI("http://example.org/ex#b"),
+			Object: rdf.Literal{
+				LexicalForm: "first long literal",
+				Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 97, LineColumn: cursorio.TextLineColumn{2, 0}},
+				Until: cursorio.TextOffset{Byte: 99, LineColumn: cursorio.TextLineColumn{2, 2}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 100, LineColumn: cursorio.TextLineColumn{2, 3}},
+				Until: cursorio.TextOffset{Byte: 102, LineColumn: cursorio.TextLineColumn{2, 5}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 103, LineColumn: cursorio.TextLineColumn{2, 6}},
+				Until: cursorio.TextOffset{Byte: 127, LineColumn: cursorio.TextLineColumn{2, 30}},
+			},
+		},
+	},
+	{
+		Triple: rdf.Triple{
+			Subject: rdf.IRI("http://example.org/ex#c"),
+			Predicate: rdf.IRI("http://example.org/ex#d"),
+			Object: rdf.Literal{
+				LexicalForm: "second long literal",
+				Datatype: rdf.IRI("http://www.w3.org/2001/XMLSchema#string"),
+			},
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 130, LineColumn: cursorio.TextLineColumn{3, 0}},
+				Until: cursorio.TextOffset{Byte: 132, LineColumn: cursorio.TextLineColumn{3, 2}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 133, LineColumn: cursorio.TextLineColumn{3, 3}},
+				Until: cursorio.TextOffset{Byte: 135, LineColumn: cursorio.TextLineColumn{3, 5}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 136, LineColumn: cursorio.TextLineColumn{3, 6}},
+				Until: cursorio.TextOffset{Byte: 161, LineColumn: cursorio.TextLineColumn{3, 31}},
+			},
+		},
+	},
+}
+
+=== Test/http://www.w3.org/2013/TurtleTests/manifest.ttl#underscore_in_localName
+
+encodingtest.TripleStatementList{
+	{
+		Triple: rdf.Triple{
+			Subject: rdf.IRI("http://a.example/s_"),
+			Predicate: rdf.IRI("http://a.example/p"),
+			Object: rdf.IRI("http://a.example/o"),
+		},
+		TextOffsets: encoding.StatementTextOffsets{
+			encoding.SubjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 32, LineColumn: cursorio.TextLineColumn{1, 0}},
+				Until: cursorio.TextOffset{Byte: 36, LineColumn: cursorio.TextLineColumn{1, 4}},
+			},
+			encoding.PredicateStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 37, LineColumn: cursorio.TextLineColumn{1, 5}},
+				Until: cursorio.TextOffset{Byte: 57, LineColumn: cursorio.TextLineColumn{1, 25}},
+			},
+			encoding.ObjectStatementOffsets: cursorio.TextOffsetRange{
+				From: cursorio.TextOffset{Byte: 58, LineColumn: cursorio.TextLineColumn{1, 26}},
+				Until: cursorio.TextOffset{Byte: 78, LineColumn: cursorio.TextLineColumn{1, 46}},
 			},
 		},
 	},

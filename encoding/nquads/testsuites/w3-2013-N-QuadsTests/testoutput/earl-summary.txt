@@ -1,0 +1,286 @@
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-uri-01>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-uri-02>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-uri-03>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-uri-04>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-uri-05>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-uri-06>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-bnode-01>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-bnode-02>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-bnode-03>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-bnode-04>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-bnode-05>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-bnode-06>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-bad-literal-01>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (graphLabel): offset L1C58;0x39: unexpected rune ('\"')\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-bad-literal-02>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (graphLabel): offset L1C58;0x39: unexpected rune ('\"')\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-bad-literal-03>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (graphLabel): offset L1C58;0x39: unexpected rune ('\"')\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-bad-uri-01>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (graphLabel): token (IRIREF; offset=L2C58:L2C61;0x57:0x5a): relative urls are not allowed\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nq-syntax-bad-quint-01>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): offset L2C77;0x66: unexpected rune ('<')\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-file-01>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-file-02>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-file-03>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-uri-01>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-uri-02>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-uri-03>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-uri-04>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-string-01>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-string-02>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-string-03>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-str-esc-01>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-str-esc-02>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-str-esc-03>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bnode-01>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bnode-02>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bnode-03>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-datatypes-01>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-datatypes-02>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-uri-01>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (subject): token (IRIREF): offset L2C17;0x23: unexpected rune (' ')\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-uri-02>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (subject): token (IRIREF): token (UCHAR): offset L2C21;0x2b: unexpected rune ('Z')\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-uri-03>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (subject): token (IRIREF): token (UCHAR): offset L2C21;0x2b: unexpected rune ('Z')\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-uri-04>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (subject): token (IRIREF): offset L2C18;0x3c: unexpected rune ('n')\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-uri-05>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (subject): token (IRIREF): offset L2C18;0x3c: unexpected rune ('/')\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-uri-06>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (subject): token (IRIREF; offset=L2C1:L2C4;0x20:0x23): relative urls are not allowed\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-uri-07>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (predicate): token (IRIREF; offset=L2C20:L2C23;0x33:0x36): relative urls are not allowed\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-uri-08>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (object): token (IRIREF; offset=L2C39:L2C42;0x46:0x49): relative urls are not allowed\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-uri-09>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (object): token (literal): token (IRIREF; offset=L2C46:L2C50;0x4d:0x51): relative urls are not allowed\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-prefix-01>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (subject): offset L1C1;0x0: unexpected rune ('@')\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-base-01>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (subject): offset L1C1;0x0: unexpected rune ('@')\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-struct-01>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (graphLabel): offset L1C57;0x38: unexpected rune (',')\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-struct-02>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (graphLabel): offset L1C57;0x38: unexpected rune (';')\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-lang-01>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (graphLabel): offset L2C48;0x3e: unexpected rune ('1')\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-esc-01>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (object): token (literal): token (STRING_LITERAL_QUOTE): offset L2C42;0x3d: unexpected rune ('z')\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-esc-02>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (object): token (literal): token (STRING_LITERAL_QUOTE): token (UCHAR): offset L2C42;0x3d: unexpected rune ('W')\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-esc-03>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (object): token (literal): token (STRING_LITERAL_QUOTE): token (UCHAR): offset L2C46;0x41: unexpected rune ('W')\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-string-01>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (object): token (literal): token (STRING_LITERAL_QUOTE): offset L2C1;0x2e: EOF\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-string-02>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (object): offset L1C39;0x26: unexpected rune ('1')\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-string-03>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (object): offset L1C39;0x26: unexpected rune ('1')\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-string-04>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (object): offset L1C39;0x26: unexpected rune ('\\'')\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-string-05>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (graphLabel): offset L1C41;0x28: unexpected rune ('\"')\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-string-06>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (object): token (literal): token (STRING_LITERAL_QUOTE): offset L2C1;0x2d: EOF\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-string-07>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (object): offset L1C39;0x26: unexpected rune ('a')\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-num-01>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (object): offset L1C39;0x26: unexpected rune ('1')\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-num-02>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (object): offset L1C39;0x26: unexpected rune ('1')\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-bad-num-03>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): token (statement): token (object): offset L1C39;0x26: unexpected rune ('1')\n"
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#nt-syntax-subm-01>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#comment_following_triple>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_all_controls>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_all_punctuation>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_ascii_boundaries>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_2_dquotes>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_2_squotes>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_BACKSPACE>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_CARRIAGE_RETURN>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_CHARACTER_TABULATION>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_dquote>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_FORM_FEED>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_LINE_FEED>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_numeric_escape4>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_numeric_escape8>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_REVERSE_SOLIDUS>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_REVERSE_SOLIDUS2>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_squote>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#literal_with_UTF8_boundaries>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#langtagged_string>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#lantag_with_subtag>
+  earl:outcome earl:passed
+
+<http://www.w3.org/2013/N-QuadsTests/manifest.ttl#minimal_whitespace>
+  earl:outcome earl:passed
