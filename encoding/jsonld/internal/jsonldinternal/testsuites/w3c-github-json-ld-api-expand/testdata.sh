@@ -8,19 +8,19 @@ rm -fr testdata/
 
 mkdir testdata/
 
-wget -O testdata/manifest.jsonld https://w3c.github.io/json-ld-api/tests/expand-manifest.jsonld
+curl -Lo testdata/expand-manifest.jsonld https://w3c.github.io/json-ld-api/tests/expand-manifest.jsonld
 
 iter() {
   while read -r p; do
     mkdir -p "$( dirname "testdata/${p}" )"
-    wget -O "testdata/${p}" "https://w3c.github.io/json-ld-api/tests/${p}"
+    curl -Lo "testdata/${p}" "https://w3c.github.io/json-ld-api/tests/${p}"
   done 
 }
 
 iter < <(
-  jq -r '.sequence[].expect | select(.)' testdata/manifest.jsonld
-  jq -r '.sequence[].input | select(.)' testdata/manifest.jsonld
-  jq -r '.sequence[].option.expandContext | select(.)' < testdata/manifest.jsonld
+  jq -r '.sequence[].expect | select(.)' testdata/expand-manifest.jsonld
+  jq -r '.sequence[].input | select(.)' testdata/expand-manifest.jsonld
+  jq -r '.sequence[].option.expandContext | select(.)' < testdata/expand-manifest.jsonld
 )
 
 iter < <(

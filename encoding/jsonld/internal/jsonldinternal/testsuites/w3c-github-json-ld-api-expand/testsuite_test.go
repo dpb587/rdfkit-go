@@ -205,12 +205,12 @@ func requireTestdata(t *testing.T) (testingarchive.Archive, manifestSchema) {
 
 	var loadedManifest manifestSchema
 
-	if err := json.Unmarshal(testdata.GetFileBytes(t, manifestPrefix+"manifest.jsonld"), &loadedManifest); err != nil {
+	if err := json.Unmarshal(testdata.GetFileBytes(t, manifestPrefix+"expand-manifest.jsonld"), &loadedManifest); err != nil {
 		t.Fatalf("unmarshal: %v", err)
 	}
 
 	for sequenceIdx, sequence := range loadedManifest.Sequences {
-		loadedManifest.Sequences[sequenceIdx].ID = rdf.IRI(manifestPrefix + "expand" + sequence.ID)
+		loadedManifest.Sequences[sequenceIdx].ID = rdf.IRI(manifestPrefix + "expand-manifest" + sequence.ID)
 	}
 
 	return testdata, loadedManifest

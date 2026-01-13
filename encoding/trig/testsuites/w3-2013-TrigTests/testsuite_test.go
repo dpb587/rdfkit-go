@@ -27,6 +27,9 @@ import (
 	"github.com/dpb587/rdfkit-go/x/rdfdescriptionstruct"
 )
 
+// README of tarball says TriGTests
+// https://www.w3.org/2013/TriGTests/ redirects to and declares TrigTests
+// implementation reports appear to use TrigTests
 const manifestPrefix = "http://www.w3.org/2013/TriGTests/"
 
 func Test(t *testing.T) {

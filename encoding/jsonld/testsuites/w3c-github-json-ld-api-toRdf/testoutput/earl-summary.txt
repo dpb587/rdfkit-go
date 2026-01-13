@@ -1,1512 +1,1512 @@
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0001>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0001>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0002>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0002>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0003>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0003>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0004>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0004>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0005>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0005>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0006>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0006>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0007>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0007>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0008>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0008>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0009>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0009>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0010>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0010>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0011>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0011>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0012>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0012>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0013>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0013>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0014>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0014>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0015>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0015>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0016>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0016>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0017>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0017>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0018>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0018>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0019>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0019>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0020>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0020>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0022>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0022>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0023>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0023>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0024>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0024>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0025>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0025>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0026>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0026>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0027>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0027>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0028>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0028>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0029>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0029>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0030>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0030>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0031>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0031>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0032>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0032>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0033>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0033>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0034>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0034>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0035>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0035>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0036>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0036>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0113>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0113>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0114>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0114>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0115>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0115>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0116>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0116>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0117>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0117>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0118>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0118>
   earl:outcome earl:inapplicable
   <http://purl.org/dc/terms/description> "produceGeneralizedRdf is not supported\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0119>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0119>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0120>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0120>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0121>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0121>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0122>
-  earl:outcome earl:NotTested
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0122>
+  earl:outcome earl:untested
   <http://purl.org/dc/terms/description> "Go automatically resolves dot-segments during our IRI resolution. Resulting IRIs are equivalent, but not byte-identical to test expectations.\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0123>
-  earl:outcome earl:NotTested
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0123>
+  earl:outcome earl:untested
   <http://purl.org/dc/terms/description> "Go automatically resolves dot-segments during our IRI resolution. Resulting IRIs are equivalent, but not byte-identical to test expectations.\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0124>
-  earl:outcome earl:NotTested
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0124>
+  earl:outcome earl:untested
   <http://purl.org/dc/terms/description> "Go automatically resolves dot-segments during our IRI resolution. Resulting IRIs are equivalent, but not byte-identical to test expectations.\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0125>
-  earl:outcome earl:NotTested
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0125>
+  earl:outcome earl:untested
   <http://purl.org/dc/terms/description> "Go automatically resolves dot-segments during our IRI resolution. Resulting IRIs are equivalent, but not byte-identical to test expectations.\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0126>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0126>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0127>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0127>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0128>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0128>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0129>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0129>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0130>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0130>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0131>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0131>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0132>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0132>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#t0133>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0133>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc001>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc001>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc002>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc002>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc003>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc003>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc004>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc004>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc005>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc005>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc006>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc006>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc007>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc007>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc008>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc008>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc009>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc009>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc010>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc010>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc011>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc011>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc012>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc012>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc013>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc013>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc014>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc014>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc015>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc015>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc016>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc016>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc017>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc017>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc018>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc018>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc019>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc019>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc020>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc020>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc021>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc021>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc022>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc022>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc023>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc023>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc024>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc024>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc025>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc025>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc026>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc026>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc027>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc027>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc028>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc028>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc029>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc029>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid context entry: invalid entry (processing mode json-ld-1.0): @propagate\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc030>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc030>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid @propagate value: invalid type: string\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc031>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc031>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc032>
-  earl:outcome earl:passed
-  <http://purl.org/dc/terms/description> "error (expected): expand: invalid scoped context: invalid IRI mapping: missing vocabulary mapping\n"
-
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc033>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc032>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid scoped context: invalid IRI mapping: missing vocabulary mapping\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc034>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc033>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): expand: invalid scoped context: invalid IRI mapping: missing vocabulary mapping\n"
+
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc034>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc035>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc035>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc036>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc036>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc037>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc037>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tc038>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc038>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tdi01>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tdi01>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tdi02>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tdi02>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tdi03>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tdi03>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tdi04>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tdi04>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tdi05>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tdi05>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tdi06>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tdi06>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tdi07>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tdi07>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tdi08>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tdi08>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid base direction: invalid value: foo\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tdi09>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tdi09>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tdi10>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tdi10>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tdi11>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tdi11>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tdi12>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tdi12>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te001>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te001>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te002>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te002>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te003>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te003>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te004>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te004>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te005>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te005>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te006>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te006>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te007>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te007>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te008>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te008>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te009>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te009>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te010>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te010>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te011>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te011>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te012>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te012>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te013>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te013>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te014>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te014>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te015>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te015>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te016>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te016>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te017>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te017>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te018>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te018>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te019>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te019>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te020>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te020>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te021>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te021>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te022>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te022>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te023>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te023>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te024>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te024>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te025>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te025>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te026>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te026>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te027>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te027>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te028>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te028>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te029>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te029>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te030>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te030>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te031>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te031>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te032>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te032>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te033>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te033>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te034>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te034>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te035>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te035>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te036>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te036>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te037>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te037>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te038>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te038>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te039>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te039>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te040>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te040>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te041>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te041>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te042>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te042>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te043>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te043>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te044>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te044>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te045>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te045>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te046>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te046>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te047>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te047>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te048>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te048>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te049>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te049>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te050>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te050>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te051>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te051>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te052>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te052>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te053>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te053>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te054>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te054>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te055>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te055>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te056>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te056>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te057>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te057>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te058>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te058>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te059>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te059>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te060>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te060>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te061>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te061>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te062>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te062>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te063>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te063>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te064>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te064>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te065>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te065>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te066>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te066>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te067>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te067>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te068>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te068>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te069>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te069>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te070>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te070>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te071>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te071>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te072>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te072>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te073>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te073>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te074>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te074>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te075>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te075>
   earl:outcome earl:inapplicable
   <http://purl.org/dc/terms/description> "produceGeneralizedRdf is not supported\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te076>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te076>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te077>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te077>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te078>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te078>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te079>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te079>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te080>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te080>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te081>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te081>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te082>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te082>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te083>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te083>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te084>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te084>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te085>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te085>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te086>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te086>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te087>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te087>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te088>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te088>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te089>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te089>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te090>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te090>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te091>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te091>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te092>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te092>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te093>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te093>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te094>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te094>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te095>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te095>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te096>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te096>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te097>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te097>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te098>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te098>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te099>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te099>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te100>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te100>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te101>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te101>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te102>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te102>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te103>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te103>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te104>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te104>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te105>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te105>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te106>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te106>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te107>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te107>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te108>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te108>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te109>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te109>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te110>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te110>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te111>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te111>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te112>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te112>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te113>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te113>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te114>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te114>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te115>
-  earl:outcome earl:passed
-  <http://purl.org/dc/terms/description> "error (expected): expand: invalid vocab mapping: @vocab must be an absolute IRI in JSON-LD 1.0\n"
-
-<https://w3c.github.io/json-ld-api/tests/toRdf#te116>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te115>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid vocab mapping: @vocab must be an absolute IRI in JSON-LD 1.0\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te117>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te116>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): expand: invalid vocab mapping: @vocab must be an absolute IRI in JSON-LD 1.0\n"
+
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te117>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te118>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te118>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te119>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te119>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te120>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te120>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te121>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te121>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te122>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te122>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te123>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te123>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid typed value: invalid @type value: expected iri: found \"http://example.com/baz z\"\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te124>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te124>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te125>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te125>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te126>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te126>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te127>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te127>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te128>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te128>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te129>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te129>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#te130>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te130>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tec01>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tec01>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid term definition: missing container mapping value: @index\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tec02>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tec02>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: keyword redefinition: unexpected entries within @type\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tem01>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tem01>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid container mapping: invalid value: @context\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ten01>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ten01>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid @nest value: invalid type: string\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ten02>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ten02>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid @nest value: invalid type: boolean\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ten03>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ten03>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid @nest value: invalid type: number\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ten04>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ten04>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid @nest value: invalid entry key: @value\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ten05>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ten05>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid @nest value: invalid value: @id\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ten06>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ten06>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid reverse property: found @nest entry\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tep02>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tep02>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: processing mode conflict: invalid entry (processing mode json-ld-1.0): @version\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tep03>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tep03>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid @version value: invalid type: number\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter01>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter01>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: keyword redefinition: invalid type: object\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter02>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter02>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: context overflow: limit exceeded: 128\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter03>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter03>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: context overflow: limit exceeded: 128\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter04>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter04>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: loading remote context failed: unknown url: tag:non-dereferencable-iri\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter05>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter05>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid remote context: invalid top-level type: array\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter06>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter06>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid local context: invalid type: boolean\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter07>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter07>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid base IRI: invalid type: boolean\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter08>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter08>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid vocab mapping: invalid type: boolean\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter09>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter09>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid default language: invalid type: boolean\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter10>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter10>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: cyclic IRI mapping\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter11>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter11>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid term definition: invalid type: boolean\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter12>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter12>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid type mapping: invalid type: boolean\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter13>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter13>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid type mapping: invalid expanded type: blank node\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter14>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter14>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid reverse property: found @id entry\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter15>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter15>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid IRI mapping: invalid type: boolean\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter17>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter17>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid reverse property: invalid @container value: @list\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter18>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter18>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid IRI mapping: invalid type: boolean\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter19>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter19>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid keyword alias: invalid value: @context\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter20>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter20>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid IRI mapping: missing vocabulary mapping\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter21>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter21>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid container mapping: invalid value (processing mode json-ld-1.0): @id\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter22>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter22>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid language mapping: invalid type: boolean\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter23>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter23>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid type mapping: expected absolute iri: found \"relative/iri\"\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter24>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter24>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid set or list object: invalid structure (processing mode json-ld-1.0): list of lists\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter25>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter25>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid reverse property map\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter26>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter26>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: colliding keywords: invalid entry: @id\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter27>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter27>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid @id value: invalid type: boolean\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter28>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter28>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid type value: invalid type: boolean\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter29>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter29>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid value object value: invalid type: array\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter30>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter30>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid language-tagged string: invalid type: boolean\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter31>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter31>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid @index value: invalid type: boolean\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter32>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter32>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid set or list object: invalid structure (processing mode json-ld-1.0): list of lists\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter33>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter33>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid @reverse value: invalid type: boolean\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter34>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter34>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid reverse property value: invalid entry key: @value\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter35>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter35>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid language map value: invalid type: boolean\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter36>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter36>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid reverse property value: invalid entry key: @list\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter37>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter37>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid value object: invalid entry key: @id\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter38>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter38>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid value object: invalid entry key: @type\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter39>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter39>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid language-tagged value: invalid @value type: boolean\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter40>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter40>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid typed value: invalid @type value: expected iri: found \"_:dt\"\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter41>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter41>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid set or list object: invalid key: @id\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter42>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter42>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: keyword redefinition: invalid @type entry (processing mode json-ld-1.0)\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter43>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter43>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid IRI mapping: invalid value (processing mode json-ld-1.1): @type\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter44>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter44>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid IRI mapping: expanded term does not match expanded iri (http://example.com/vocab#term != http://example.com/vocab#somethingElse)\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter48>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter48>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid IRI mapping: expanded term does not match expanded iri (./something != http://example.com/vocab#somethingElse)\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter49>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter49>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid term definition: invalid @prefix entry: term contains colon or slash\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter50>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter50>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid IRI mapping: @reverse value is not a valid IRI\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter51>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter51>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid value object value: invalid type: array\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter52>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter52>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid term definition: term cannot be the empty string\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter53>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter53>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid @prefix value: invalid type: number\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter54>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter54>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid value object: invalid @type type: array\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter55>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter55>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid type mapping: invalid type: array\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ter56>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ter56>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: keyword redefinition: @context\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tin01>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tin01>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tin02>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tin02>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tin03>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tin03>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tin04>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tin04>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tin05>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tin05>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tin06>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tin06>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tin07>
-  earl:outcome earl:passed
-  <http://purl.org/dc/terms/description> "error (expected): expand: invalid @included value\n"
-
-<https://w3c.github.io/json-ld-api/tests/toRdf#tin08>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tin07>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid @included value\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tin09>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tin08>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid @included value\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tjs01>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tin09>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): expand: invalid @included value\n"
+
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs01>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tjs02>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs02>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tjs03>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs03>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tjs04>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs04>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tjs05>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs05>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tjs06>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs06>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tjs07>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs07>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tjs08>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs08>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tjs09>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs09>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tjs10>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs10>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tjs11>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs11>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tjs12>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs12>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tjs13>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs13>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tjs14>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs14>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tjs15>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs15>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tjs16>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs16>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tjs17>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs17>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tjs18>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs18>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tjs19>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs19>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tjs20>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs20>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tjs21>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs21>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tjs22>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs22>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tjs23>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs23>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tli01>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli01>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tli02>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli02>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tli03>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli03>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tli04>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli04>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tli05>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli05>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tli06>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli06>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tli07>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli07>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tli08>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli08>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tli09>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli09>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tli10>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli10>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tli11>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli11>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tli12>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli12>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tli13>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli13>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tli14>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli14>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tm001>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm001>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tm002>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm002>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tm003>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm003>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tm004>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm004>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tm005>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm005>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tm006>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm006>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tm007>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm007>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tm008>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm008>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tm009>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm009>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tm010>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm010>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tm011>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm011>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tm012>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm012>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tm013>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm013>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tm014>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm014>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tm015>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm015>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tm016>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm016>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tm017>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm017>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tm018>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm018>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tm019>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm019>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tm020>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm020>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid type mapping: invalid value: http://example.org/ns/literal\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tn001>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tn001>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tn002>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tn002>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tn003>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tn003>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tn004>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tn004>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tn005>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tn005>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tn006>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tn006>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tn007>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tn007>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tn008>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tn008>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tnt01>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tnt01>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tnt02>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tnt02>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tnt03>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tnt03>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tnt04>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tnt04>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tnt05>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tnt05>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tnt06>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tnt06>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tnt07>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tnt07>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tnt08>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tnt08>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tnt09>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tnt09>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tnt10>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tnt10>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tnt11>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tnt11>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tnt12>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tnt12>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tnt13>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tnt13>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tnt14>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tnt14>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tnt15>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tnt15>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tnt16>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tnt16>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tp001>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tp001>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tp002>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tp002>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tp003>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tp003>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tp004>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tp004>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpi01>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpi01>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid term definition: invalid entry (processing mode json-ld-1.0): @index\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpi02>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpi02>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid term definition: missing container mapping value: @index\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpi03>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpi03>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid term definition: invalid expanded type: keyword\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpi04>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpi04>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid term definition: invalid index type: boolean\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpi05>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpi05>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid value object: invalid entry: http://example.com/prop\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpi06>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpi06>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpi07>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpi07>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpi08>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpi08>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpi09>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpi09>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpi10>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpi10>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpi11>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpi11>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr01>
-  earl:outcome earl:passed
-  <http://purl.org/dc/terms/description> "error (expected): expand: protected term redefinition\n"
-
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr02>
-  earl:outcome earl:passed
-
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr03>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr01>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: protected term redefinition\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr04>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr02>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr03>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: protected term redefinition\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr05>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr04>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): expand: protected term redefinition\n"
+
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr05>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid context nullification\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr06>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr06>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr08>
-  earl:outcome earl:passed
-  <http://purl.org/dc/terms/description> "error (expected): expand: protected term redefinition\n"
-
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr09>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr08>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: protected term redefinition\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr10>
-  earl:outcome earl:passed
-
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr11>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr09>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: protected term redefinition\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr12>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr10>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr11>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: protected term redefinition\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr13>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr12>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): expand: protected term redefinition\n"
+
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr13>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr14>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr14>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr15>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr15>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr16>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr16>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr17>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr17>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid context nullification\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr18>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr18>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid context nullification\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr19>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr19>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr20>
-  earl:outcome earl:passed
-  <http://purl.org/dc/terms/description> "error (expected): expand: invalid context nullification\n"
-
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr21>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr20>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid context nullification\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr22>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr21>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): expand: invalid context nullification\n"
+
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr22>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr23>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr23>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr24>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr24>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr25>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr25>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr26>
-  earl:outcome earl:passed
-  <http://purl.org/dc/terms/description> "error (expected): expand: protected term redefinition\n"
-
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr27>
-  earl:outcome earl:passed
-
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr28>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr26>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: protected term redefinition\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr29>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr27>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr30>
-  earl:outcome earl:passed
-
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr31>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr28>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: protected term redefinition\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr32>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr29>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr30>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr31>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: protected term redefinition\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr33>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr32>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): expand: protected term redefinition\n"
+
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr33>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid term definition: invalid @prefix entry: invalid iri mapping type: keyword\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr34>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr34>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr35>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr35>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr36>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr36>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr37>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr37>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr38>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr38>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr39>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr39>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr40>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr40>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr41>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr41>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr42>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr42>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: protected term redefinition\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tpr43>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr43>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#trt01>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#trt01>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tso01>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tso01>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid context entry: invalid entry (processing mode json-ld-1.0): @import\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tso02>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tso02>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid @import value: invalid type: object\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tso03>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tso03>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid context entry: invalid @import entry within imported context definition\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tso05>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tso05>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tso06>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tso06>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tso07>
-  earl:outcome earl:passed
-  <http://purl.org/dc/terms/description> "error (expected): expand: protected term redefinition\n"
-
-<https://w3c.github.io/json-ld-api/tests/toRdf#tso08>
-  earl:outcome earl:passed
-
-<https://w3c.github.io/json-ld-api/tests/toRdf#tso09>
-  earl:outcome earl:passed
-
-<https://w3c.github.io/json-ld-api/tests/toRdf#tso10>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tso07>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: protected term redefinition\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tso11>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tso08>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tso12>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tso09>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tso10>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "error (expected): expand: protected term redefinition\n"
+
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tso11>
+  earl:outcome earl:passed
+
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tso12>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid context entry: invalid @import entry within imported context definition\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#tso13>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tso13>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid remote context: invalid @context type: array\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ttn01>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ttn01>
   earl:outcome earl:passed
   <http://purl.org/dc/terms/description> "error (expected): expand: invalid type mapping: invalid value (processing mode json-ld-1.0): @none\n"
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#ttn02>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ttn02>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#twf01>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#twf01>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#twf02>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#twf02>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#twf03>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#twf03>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#twf04>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#twf04>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#twf05>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#twf05>
   earl:outcome earl:passed
 
-<https://w3c.github.io/json-ld-api/tests/toRdf#twf07>
+<https://w3c.github.io/json-ld-api/tests/toRdf-manifest#twf07>
   earl:outcome earl:passed

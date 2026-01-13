@@ -25,6 +25,9 @@ import (
 	"github.com/dpb587/rdfkit-go/x/rdfdescriptionstruct"
 )
 
+// README of the tarball says http://
+// http://www.w3.org/2013/RDFXMLTests/ redirects to and declares https://
+// implementation reports appear to use https://
 const manifestPrefix = "http://www.w3.org/2013/RDFXMLTests/"
 
 func Test(t *testing.T) {

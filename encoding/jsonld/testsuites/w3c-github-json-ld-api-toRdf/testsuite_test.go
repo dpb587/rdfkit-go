@@ -113,7 +113,7 @@ func Test(t *testing.T) {
 				//   ACTUAL <urn:ex:s099> <urn:ex:p> <http://a/bb/ccc/d;p?q> .
 				// * EXPECT <urn:ex:s133> <urn:ex:p> <http://a/bb/ccc/../d;p?y> .
 				//   ACTUAL <urn:ex:s133> <urn:ex:p> <http://a/bb/d;p?y> .
-				tAssertion.Skip(earliri.NotTested_Class, "Go automatically resolves dot-segments during our IRI resolution. Resulting IRIs are equivalent, but not byte-identical to test expectations.")
+				tAssertion.Skip(earliri.Untested_NotTested, "Go automatically resolves dot-segments during our IRI resolution. Resulting IRIs are equivalent, but not byte-identical to test expectations.")
 			}
 
 			decodeAction := func() (encodingtest.QuadStatementList, error) {
@@ -223,12 +223,12 @@ func requireTestdata(t *testing.T) (testingarchive.Archive, manifestSchema) {
 	// avoiding cyclical usage of jsonld for testing
 	var loadedManifest manifestSchema
 
-	if err := json.Unmarshal(testdata.GetFileBytes(t, manifestPrefix+"manifest.jsonld"), &loadedManifest); err != nil {
+	if err := json.Unmarshal(testdata.GetFileBytes(t, manifestPrefix+"toRdf-manifest.jsonld"), &loadedManifest); err != nil {
 		t.Fatalf("unmarshal: %v", err)
 	}
 
 	for sequenceIdx, sequence := range loadedManifest.Sequences {
-		loadedManifest.Sequences[sequenceIdx].ID = rdf.IRI(manifestPrefix + "toRdf" + sequence.ID)
+		loadedManifest.Sequences[sequenceIdx].ID = rdf.IRI(manifestPrefix + "toRdf-manifest" + sequence.ID)
 	}
 
 	return testdata, loadedManifest

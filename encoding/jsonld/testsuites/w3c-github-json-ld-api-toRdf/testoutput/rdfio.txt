@@ -1,4 +1,4 @@
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0001
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0001
 
 encodingtest.QuadStatementList{
 	{
@@ -29,7 +29,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0002
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0002
 
 encodingtest.QuadStatementList{
 	{
@@ -60,7 +60,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0003
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0003
 
 encodingtest.QuadStatementList{
 	{
@@ -88,7 +88,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0004
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0004
 
 encodingtest.QuadStatementList{
 	{
@@ -122,7 +122,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0005
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0005
 
 encodingtest.QuadStatementList{
 	{
@@ -179,7 +179,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0006
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0006
 
 encodingtest.QuadStatementList{
 	{
@@ -210,7 +210,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0007
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0007
 
 encodingtest.QuadStatementList{
 	{
@@ -238,7 +238,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0008
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0008
 
 encodingtest.QuadStatementList{
 	{
@@ -269,7 +269,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0009
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0009
 
 encodingtest.QuadStatementList{
 	{
@@ -300,7 +300,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0010
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0010
 
 encodingtest.QuadStatementList{
 	{
@@ -354,7 +354,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0011
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0011
 
 encodingtest.QuadStatementList{
 	{
@@ -408,7 +408,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0012
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0012
 
 encodingtest.QuadStatementList{
 	{
@@ -465,7 +465,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0013
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0013
 
 encodingtest.QuadStatementList{
 	{
@@ -489,7 +489,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0014
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0014
 
 encodingtest.QuadStatementList{
 	{
@@ -540,7 +540,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0015
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0015
 
 encodingtest.QuadStatementList{
 	{
@@ -618,7 +618,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0016
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0016
 
 encodingtest.QuadStatementList{
 	{
@@ -646,7 +646,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0017
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0017
 
 encodingtest.QuadStatementList{
 	{
@@ -674,7 +674,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0018
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0018
 
 encodingtest.QuadStatementList{
 	{
@@ -702,7 +702,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0019
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0019
 
 encodingtest.QuadStatementList{
 	{
@@ -730,7 +730,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0020
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0020
 
 encodingtest.QuadStatementList{
 	{
@@ -761,7 +761,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0022
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0022
 
 encodingtest.QuadStatementList{
 	{
@@ -792,7 +792,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0023
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0023
 
 encodingtest.QuadStatementList{
 	{
@@ -823,7 +823,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0024
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0024
 
 encodingtest.QuadStatementList{
 	{
@@ -854,7 +854,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0025
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0025
 
 encodingtest.QuadStatementList{
 	{
@@ -905,7 +905,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0026
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0026
 
 encodingtest.QuadStatementList{
 	{
@@ -956,7 +956,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0027
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0027
 
 encodingtest.QuadStatementList{
 	{
@@ -1158,7 +1158,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0028
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0028
 
 encodingtest.QuadStatementList{
 	{
@@ -1315,7 +1315,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0029
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0029
 
 encodingtest.QuadStatementList{
 	{
@@ -1433,7 +1433,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0030
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0030
 
 encodingtest.QuadStatementList{
 	{
@@ -1644,7 +1644,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0031
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0031
 
 encodingtest.QuadStatementList{
 	{
@@ -1720,7 +1720,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0032
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0032
 
 encodingtest.QuadStatementList{
 	{
@@ -1797,7 +1797,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0033
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0033
 
 encodingtest.QuadStatementList{
 	{
@@ -1874,7 +1874,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0034
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0034
 
 encodingtest.QuadStatementList{
 	{
@@ -1951,7 +1951,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0035
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0035
 
 encodingtest.QuadStatementList{
 	{
@@ -2060,7 +2060,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0036
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0036
 
 encodingtest.QuadStatementList{
 	{
@@ -2163,7 +2163,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0113
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0113
 
 encodingtest.QuadStatementList{
 	{
@@ -2196,7 +2196,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0114
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0114
 
 encodingtest.QuadStatementList{
 	{
@@ -2229,7 +2229,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0115
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0115
 
 encodingtest.QuadStatementList{
 	{
@@ -2313,7 +2313,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0116
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0116
 
 encodingtest.QuadStatementList{
 	{
@@ -2369,7 +2369,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0117
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0117
 
 encodingtest.QuadStatementList{
 	{
@@ -2425,7 +2425,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0119
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0119
 
 encodingtest.QuadStatementList{
 	{
@@ -2494,7 +2494,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0120
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0120
 
 encodingtest.QuadStatementList{
 	{
@@ -3465,7 +3465,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0121
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0121
 
 encodingtest.QuadStatementList{
 	{
@@ -4436,7 +4436,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0126
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0126
 
 encodingtest.QuadStatementList{
 	{
@@ -5407,7 +5407,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0127
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0127
 
 encodingtest.QuadStatementList{
 	{
@@ -5550,7 +5550,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0128
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0128
 
 encodingtest.QuadStatementList{
 	{
@@ -5624,7 +5624,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0129
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0129
 
 encodingtest.QuadStatementList{
 	{
@@ -5698,7 +5698,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0130
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0130
 
 encodingtest.QuadStatementList{
 	{
@@ -5726,7 +5726,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0131
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0131
 
 encodingtest.QuadStatementList{
 	{
@@ -5754,7 +5754,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0132
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0132
 
 encodingtest.QuadStatementList{
 	{
@@ -5782,7 +5782,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#t0133
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#t0133
 
 encodingtest.QuadStatementList{
 	{
@@ -5875,7 +5875,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc001
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc001
 
 encodingtest.QuadStatementList{
 	{
@@ -5929,7 +5929,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc002
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc002
 
 encodingtest.QuadStatementList{
 	{
@@ -5980,7 +5980,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc003
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc003
 
 encodingtest.QuadStatementList{
 	{
@@ -6034,7 +6034,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc004
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc004
 
 encodingtest.QuadStatementList{
 	{
@@ -6108,7 +6108,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc005
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc005
 
 encodingtest.QuadStatementList{
 	{
@@ -6263,7 +6263,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc006
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc006
 
 encodingtest.QuadStatementList{
 	{
@@ -6340,7 +6340,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc007
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc007
 
 encodingtest.QuadStatementList{
 	{
@@ -6414,7 +6414,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc008
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc008
 
 encodingtest.QuadStatementList{
 	{
@@ -6491,7 +6491,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc009
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc009
 
 encodingtest.QuadStatementList{
 	{
@@ -6568,7 +6568,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc010
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc010
 
 encodingtest.QuadStatementList{
 	{
@@ -6697,7 +6697,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc011
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc011
 
 encodingtest.QuadStatementList{
 	{
@@ -6771,7 +6771,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc012
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc012
 
 encodingtest.QuadStatementList{
 	{
@@ -6845,7 +6845,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc013
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc013
 
 encodingtest.QuadStatementList{
 	{
@@ -6994,7 +6994,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc014
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc014
 
 encodingtest.QuadStatementList{
 	{
@@ -7071,7 +7071,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc015
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc015
 
 encodingtest.QuadStatementList{
 	{
@@ -7194,7 +7194,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc016
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc016
 
 encodingtest.QuadStatementList{
 	{
@@ -7346,7 +7346,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc017
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc017
 
 encodingtest.QuadStatementList{
 	{
@@ -7472,7 +7472,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc018
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc018
 
 encodingtest.QuadStatementList{
 	{
@@ -7549,7 +7549,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc019
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc019
 
 encodingtest.QuadStatementList{
 	{
@@ -7724,7 +7724,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc020
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc020
 
 encodingtest.QuadStatementList{
 	{
@@ -7778,7 +7778,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc021
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc021
 
 encodingtest.QuadStatementList{
 	{
@@ -8028,7 +8028,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc022
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc022
 
 encodingtest.QuadStatementList{
 	{
@@ -8079,7 +8079,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc023
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc023
 
 encodingtest.QuadStatementList{
 	{
@@ -8176,7 +8176,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc024
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc024
 
 encodingtest.QuadStatementList{
 	{
@@ -8348,7 +8348,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc025
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc025
 
 encodingtest.QuadStatementList{
 	{
@@ -8442,7 +8442,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc026
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc026
 
 encodingtest.QuadStatementList{
 	{
@@ -8516,7 +8516,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc027
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc027
 
 encodingtest.QuadStatementList{
 	{
@@ -8593,7 +8593,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc028
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc028
 
 encodingtest.QuadStatementList{
 	{
@@ -8670,7 +8670,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc031
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc031
 
 encodingtest.QuadStatementList{
 	{
@@ -8724,7 +8724,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc034
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc034
 
 encodingtest.QuadStatementList{
 	{
@@ -8778,7 +8778,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc035
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc035
 
 encodingtest.QuadStatementList{
 	{
@@ -8858,7 +8858,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc036
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc036
 
 encodingtest.QuadStatementList{
 	{
@@ -8938,7 +8938,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc037
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc037
 
 encodingtest.QuadStatementList{
 	{
@@ -8969,7 +8969,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tc038
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tc038
 
 encodingtest.QuadStatementList{
 	{
@@ -9147,7 +9147,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tdi01
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tdi01
 
 encodingtest.QuadStatementList{
 	{
@@ -9230,7 +9230,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tdi02
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tdi02
 
 encodingtest.QuadStatementList{
 	{
@@ -9487,7 +9487,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tdi03
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tdi03
 
 encodingtest.QuadStatementList{
 	{
@@ -9584,7 +9584,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tdi04
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tdi04
 
 encodingtest.QuadStatementList{
 	{
@@ -9664,7 +9664,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tdi05
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tdi05
 
 encodingtest.QuadStatementList{
 	{
@@ -9744,7 +9744,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tdi06
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tdi06
 
 encodingtest.QuadStatementList{
 	{
@@ -9824,7 +9824,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tdi07
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tdi07
 
 encodingtest.QuadStatementList{
 	{
@@ -9904,7 +9904,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tdi09
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tdi09
 
 encodingtest.QuadStatementList{
 	{
@@ -9935,7 +9935,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tdi10
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tdi10
 
 encodingtest.QuadStatementList{
 	{
@@ -9966,7 +9966,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tdi11
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tdi11
 
 encodingtest.QuadStatementList{
 	{
@@ -10026,7 +10026,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tdi12
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tdi12
 
 encodingtest.QuadStatementList{
 	{
@@ -10104,12 +10104,12 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te001
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te001
 
 encodingtest.QuadStatementList{
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te002
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te002
 
 encodingtest.QuadStatementList{
 	{
@@ -10296,12 +10296,12 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te003
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te003
 
 encodingtest.QuadStatementList{
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te004
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te004
 
 encodingtest.QuadStatementList{
 	{
@@ -10503,7 +10503,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te005
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te005
 
 encodingtest.QuadStatementList{
 	{
@@ -10652,7 +10652,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te006
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te006
 
 encodingtest.QuadStatementList{
 	{
@@ -10752,7 +10752,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te007
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te007
 
 encodingtest.QuadStatementList{
 	{
@@ -10829,7 +10829,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te008
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te008
 
 encodingtest.QuadStatementList{
 	{
@@ -10889,7 +10889,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te009
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te009
 
 encodingtest.QuadStatementList{
 	{
@@ -11119,7 +11119,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te010
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te010
 
 encodingtest.QuadStatementList{
 	{
@@ -11176,7 +11176,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te011
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te011
 
 encodingtest.QuadStatementList{
 	{
@@ -11230,7 +11230,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te012
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te012
 
 encodingtest.QuadStatementList{
 	{
@@ -11460,7 +11460,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te013
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te013
 
 encodingtest.QuadStatementList{
 	{
@@ -11647,7 +11647,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te014
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te014
 
 encodingtest.QuadStatementList{
 	{
@@ -11796,7 +11796,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te015
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te015
 
 encodingtest.QuadStatementList{
 	{
@@ -11950,7 +11950,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te016
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te016
 
 encodingtest.QuadStatementList{
 	{
@@ -12119,7 +12119,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te017
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te017
 
 encodingtest.QuadStatementList{
 	{
@@ -12349,7 +12349,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te018
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te018
 
 encodingtest.QuadStatementList{
 	{
@@ -12594,12 +12594,12 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te019
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te019
 
 encodingtest.QuadStatementList{
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te020
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te020
 
 encodingtest.QuadStatementList{
 	{
@@ -12901,7 +12901,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te021
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te021
 
 encodingtest.QuadStatementList{
 	{
@@ -13295,7 +13295,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te022
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te022
 
 encodingtest.QuadStatementList{
 	{
@@ -13329,7 +13329,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te023
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te023
 
 encodingtest.QuadStatementList{
 	{
@@ -13618,7 +13618,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te024
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te024
 
 encodingtest.QuadStatementList{
 	{
@@ -13724,7 +13724,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te025
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te025
 
 encodingtest.QuadStatementList{
 	{
@@ -13798,7 +13798,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te026
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te026
 
 encodingtest.QuadStatementList{
 	{
@@ -13895,7 +13895,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te027
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te027
 
 encodingtest.QuadStatementList{
 	{
@@ -14131,7 +14131,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te028
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te028
 
 encodingtest.QuadStatementList{
 	{
@@ -14234,7 +14234,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te029
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te029
 
 encodingtest.QuadStatementList{
 	{
@@ -14819,7 +14819,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te030
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te030
 
 encodingtest.QuadStatementList{
 	{
@@ -14899,7 +14899,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te031
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te031
 
 encodingtest.QuadStatementList{
 	{
@@ -14982,7 +14982,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te032
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te032
 
 encodingtest.QuadStatementList{
 	{
@@ -15013,7 +15013,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te033
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te033
 
 encodingtest.QuadStatementList{
 	{
@@ -15093,7 +15093,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te034
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te034
 
 encodingtest.QuadStatementList{
 	{
@@ -15228,7 +15228,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te035
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te035
 
 encodingtest.QuadStatementList{
 	{
@@ -15366,7 +15366,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te036
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te036
 
 encodingtest.QuadStatementList{
 	{
@@ -16012,7 +16012,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te037
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te037
 
 encodingtest.QuadStatementList{
 	{
@@ -16088,7 +16088,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te038
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te038
 
 encodingtest.QuadStatementList{
 	{
@@ -16162,7 +16162,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te039
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te039
 
 encodingtest.QuadStatementList{
 	{
@@ -16238,7 +16238,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te040
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te040
 
 encodingtest.QuadStatementList{
 	{
@@ -16344,7 +16344,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te041
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te041
 
 encodingtest.QuadStatementList{
 	{
@@ -16427,7 +16427,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te042
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te042
 
 encodingtest.QuadStatementList{
 	{
@@ -16503,7 +16503,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te043
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te043
 
 encodingtest.QuadStatementList{
 	{
@@ -16632,7 +16632,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te044
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te044
 
 encodingtest.QuadStatementList{
 	{
@@ -16718,17 +16718,17 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te045
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te045
 
 encodingtest.QuadStatementList{
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te046
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te046
 
 encodingtest.QuadStatementList{
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te047
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te047
 
 encodingtest.QuadStatementList{
 	{
@@ -16759,7 +16759,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te048
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te048
 
 encodingtest.QuadStatementList{
 	{
@@ -16862,7 +16862,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te049
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te049
 
 encodingtest.QuadStatementList{
 	{
@@ -16931,7 +16931,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te050
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te050
 
 encodingtest.QuadStatementList{
 	{
@@ -16985,7 +16985,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te051
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te051
 
 encodingtest.QuadStatementList{
 	{
@@ -17016,7 +17016,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te052
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te052
 
 encodingtest.QuadStatementList{
 	{
@@ -17073,7 +17073,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te053
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te053
 
 encodingtest.QuadStatementList{
 	{
@@ -17101,7 +17101,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te054
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te054
 
 encodingtest.QuadStatementList{
 	{
@@ -17129,7 +17129,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te055
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te055
 
 encodingtest.QuadStatementList{
 	{
@@ -17157,7 +17157,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te056
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te056
 
 encodingtest.QuadStatementList{
 	{
@@ -17234,7 +17234,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te057
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te057
 
 encodingtest.QuadStatementList{
 	{
@@ -17262,7 +17262,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te058
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te058
 
 encodingtest.QuadStatementList{
 	{
@@ -17290,7 +17290,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te059
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te059
 
 encodingtest.QuadStatementList{
 	{
@@ -17390,7 +17390,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te060
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te060
 
 encodingtest.QuadStatementList{
 	{
@@ -17510,7 +17510,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te061
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te061
 
 encodingtest.QuadStatementList{
 	{
@@ -17619,7 +17619,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te062
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te062
 
 encodingtest.QuadStatementList{
 	{
@@ -18260,7 +18260,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te063
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te063
 
 encodingtest.QuadStatementList{
 	{
@@ -18381,7 +18381,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te064
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te064
 
 encodingtest.QuadStatementList{
 	{
@@ -18502,7 +18502,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te065
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te065
 
 encodingtest.QuadStatementList{
 	{
@@ -18578,7 +18578,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te066
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te066
 
 encodingtest.QuadStatementList{
 	{
@@ -18699,7 +18699,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te067
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te067
 
 encodingtest.QuadStatementList{
 	{
@@ -18753,7 +18753,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te068
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te068
 
 encodingtest.QuadStatementList{
 	{
@@ -18781,7 +18781,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te069
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te069
 
 encodingtest.QuadStatementList{
 	{
@@ -18832,7 +18832,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te070
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te070
 
 encodingtest.QuadStatementList{
 	{
@@ -18886,7 +18886,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te071
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te071
 
 encodingtest.QuadStatementList{
 	{
@@ -18943,7 +18943,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te072
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te072
 
 encodingtest.QuadStatementList{
 	{
@@ -18974,7 +18974,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te073
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te073
 
 encodingtest.QuadStatementList{
 	{
@@ -19051,7 +19051,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te074
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te074
 
 encodingtest.QuadStatementList{
 	{
@@ -19128,7 +19128,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te076
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te076
 
 encodingtest.QuadStatementList{
 	{
@@ -19159,7 +19159,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te077
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te077
 
 encodingtest.QuadStatementList{
 	{
@@ -19346,7 +19346,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te078
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te078
 
 encodingtest.QuadStatementList{
 	{
@@ -19557,7 +19557,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te079
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te079
 
 encodingtest.QuadStatementList{
 	{
@@ -19604,7 +19604,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te080
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te080
 
 encodingtest.QuadStatementList{
 	{
@@ -19651,7 +19651,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te081
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te081
 
 encodingtest.QuadStatementList{
 	{
@@ -19702,7 +19702,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te082
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te082
 
 encodingtest.QuadStatementList{
 	{
@@ -19749,7 +19749,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te083
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te083
 
 encodingtest.QuadStatementList{
 	{
@@ -19796,7 +19796,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te084
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te084
 
 encodingtest.QuadStatementList{
 	{
@@ -19855,7 +19855,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te085
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te085
 
 encodingtest.QuadStatementList{
 	{
@@ -19910,7 +19910,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te086
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te086
 
 encodingtest.QuadStatementList{
 	{
@@ -19965,7 +19965,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te087
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te087
 
 encodingtest.QuadStatementList{
 	{
@@ -20024,7 +20024,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te088
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te088
 
 encodingtest.QuadStatementList{
 	{
@@ -20413,7 +20413,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te089
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te089
 
 encodingtest.QuadStatementList{
 	{
@@ -20444,7 +20444,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te090
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te090
 
 encodingtest.QuadStatementList{
 	{
@@ -20475,7 +20475,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te091
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te091
 
 encodingtest.QuadStatementList{
 	{
@@ -20506,7 +20506,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te092
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te092
 
 encodingtest.QuadStatementList{
 	{
@@ -20797,7 +20797,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te093
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te093
 
 encodingtest.QuadStatementList{
 	{
@@ -20886,7 +20886,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te094
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te094
 
 encodingtest.QuadStatementList{
 	{
@@ -20975,7 +20975,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te095
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te095
 
 encodingtest.QuadStatementList{
 	{
@@ -21072,7 +21072,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te096
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te096
 
 encodingtest.QuadStatementList{
 	{
@@ -21161,7 +21161,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te097
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te097
 
 encodingtest.QuadStatementList{
 	{
@@ -21250,7 +21250,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te098
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te098
 
 encodingtest.QuadStatementList{
 	{
@@ -21363,7 +21363,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te099
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te099
 
 encodingtest.QuadStatementList{
 	{
@@ -21468,7 +21468,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te100
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te100
 
 encodingtest.QuadStatementList{
 	{
@@ -21573,7 +21573,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te101
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te101
 
 encodingtest.QuadStatementList{
 	{
@@ -21686,7 +21686,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te102
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te102
 
 encodingtest.QuadStatementList{
 	{
@@ -21768,7 +21768,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te103
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te103
 
 encodingtest.QuadStatementList{
 	{
@@ -21865,7 +21865,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te104
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te104
 
 encodingtest.QuadStatementList{
 	{
@@ -21958,7 +21958,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te105
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te105
 
 encodingtest.QuadStatementList{
 	{
@@ -22155,7 +22155,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te106
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te106
 
 encodingtest.QuadStatementList{
 	{
@@ -22268,7 +22268,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te107
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te107
 
 encodingtest.QuadStatementList{
 	{
@@ -22441,7 +22441,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te108
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te108
 
 encodingtest.QuadStatementList{
 	{
@@ -22646,7 +22646,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te109
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te109
 
 encodingtest.QuadStatementList{
 	{
@@ -22697,7 +22697,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te110
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te110
 
 encodingtest.QuadStatementList{
 	{
@@ -22988,7 +22988,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te111
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te111
 
 encodingtest.QuadStatementList{
 	{
@@ -23253,7 +23253,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te112
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te112
 
 encodingtest.QuadStatementList{
 	{
@@ -23518,7 +23518,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te113
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te113
 
 encodingtest.QuadStatementList{
 	{
@@ -23575,7 +23575,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te114
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te114
 
 encodingtest.QuadStatementList{
 	{
@@ -23626,7 +23626,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te117
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te117
 
 encodingtest.QuadStatementList{
 	{
@@ -23654,7 +23654,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te118
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te118
 
 encodingtest.QuadStatementList{
 	{
@@ -23760,7 +23760,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te119
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te119
 
 encodingtest.QuadStatementList{
 	{
@@ -23817,7 +23817,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te120
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te120
 
 encodingtest.QuadStatementList{
 	{
@@ -23900,7 +23900,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te121
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te121
 
 encodingtest.QuadStatementList{
 	{
@@ -23943,7 +23943,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te122
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te122
 
 encodingtest.QuadStatementList{
 	{
@@ -23994,7 +23994,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te124
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te124
 
 encodingtest.QuadStatementList{
 	{
@@ -24025,7 +24025,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te125
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te125
 
 encodingtest.QuadStatementList{
 	{
@@ -24056,7 +24056,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te126
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te126
 
 encodingtest.QuadStatementList{
 	{
@@ -24110,7 +24110,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te127
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te127
 
 encodingtest.QuadStatementList{
 	{
@@ -24164,7 +24164,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te128
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te128
 
 encodingtest.QuadStatementList{
 	{
@@ -24218,7 +24218,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te129
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te129
 
 encodingtest.QuadStatementList{
 	{
@@ -24249,7 +24249,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#te130
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#te130
 
 encodingtest.QuadStatementList{
 	{
@@ -24280,7 +24280,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tin01
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tin01
 
 encodingtest.QuadStatementList{
 	{
@@ -24337,7 +24337,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tin02
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tin02
 
 encodingtest.QuadStatementList{
 	{
@@ -24394,7 +24394,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tin03
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tin03
 
 encodingtest.QuadStatementList{
 	{
@@ -24451,7 +24451,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tin04
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tin04
 
 encodingtest.QuadStatementList{
 	{
@@ -24534,7 +24534,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tin05
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tin05
 
 encodingtest.QuadStatementList{
 	{
@@ -24608,7 +24608,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tin06
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tin06
 
 encodingtest.QuadStatementList{
 	{
@@ -25206,7 +25206,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tjs01
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs01
 
 encodingtest.QuadStatementList{
 	{
@@ -25233,7 +25233,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tjs02
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs02
 
 encodingtest.QuadStatementList{
 	{
@@ -25260,7 +25260,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tjs03
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs03
 
 encodingtest.QuadStatementList{
 	{
@@ -25287,7 +25287,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tjs04
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs04
 
 encodingtest.QuadStatementList{
 	{
@@ -25314,7 +25314,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tjs05
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs05
 
 encodingtest.QuadStatementList{
 	{
@@ -25341,7 +25341,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tjs06
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs06
 
 encodingtest.QuadStatementList{
 	{
@@ -25368,7 +25368,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tjs07
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs07
 
 encodingtest.QuadStatementList{
 	{
@@ -25395,7 +25395,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tjs08
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs08
 
 encodingtest.QuadStatementList{
 	{
@@ -25422,7 +25422,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tjs09
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs09
 
 encodingtest.QuadStatementList{
 	{
@@ -25449,7 +25449,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tjs10
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs10
 
 encodingtest.QuadStatementList{
 	{
@@ -25476,7 +25476,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tjs11
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs11
 
 encodingtest.QuadStatementList{
 	{
@@ -25503,7 +25503,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tjs12
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs12
 
 encodingtest.QuadStatementList{
 	{
@@ -25530,7 +25530,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tjs13
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs13
 
 encodingtest.QuadStatementList{
 	{
@@ -25557,7 +25557,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tjs14
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs14
 
 encodingtest.QuadStatementList{
 	{
@@ -25584,7 +25584,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tjs15
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs15
 
 encodingtest.QuadStatementList{
 	{
@@ -25615,7 +25615,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tjs16
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs16
 
 encodingtest.QuadStatementList{
 	{
@@ -25646,7 +25646,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tjs17
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs17
 
 encodingtest.QuadStatementList{
 	{
@@ -25673,7 +25673,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tjs18
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs18
 
 encodingtest.QuadStatementList{
 	{
@@ -25700,7 +25700,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tjs19
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs19
 
 encodingtest.QuadStatementList{
 	{
@@ -25731,7 +25731,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tjs20
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs20
 
 encodingtest.QuadStatementList{
 	{
@@ -25762,7 +25762,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tjs21
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs21
 
 encodingtest.QuadStatementList{
 	{
@@ -25789,7 +25789,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tjs22
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs22
 
 encodingtest.QuadStatementList{
 	{
@@ -25820,7 +25820,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tjs23
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tjs23
 
 encodingtest.QuadStatementList{
 	{
@@ -25851,7 +25851,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tli01
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli01
 
 encodingtest.QuadStatementList{
 	{
@@ -25926,7 +25926,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tli02
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli02
 
 encodingtest.QuadStatementList{
 	{
@@ -25974,7 +25974,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tli03
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli03
 
 encodingtest.QuadStatementList{
 	{
@@ -26049,7 +26049,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tli04
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli04
 
 encodingtest.QuadStatementList{
 	{
@@ -26097,7 +26097,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tli05
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli05
 
 encodingtest.QuadStatementList{
 	{
@@ -26172,7 +26172,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tli06
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli06
 
 encodingtest.QuadStatementList{
 	{
@@ -26220,7 +26220,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tli07
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli07
 
 encodingtest.QuadStatementList{
 	{
@@ -26319,7 +26319,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tli08
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli08
 
 encodingtest.QuadStatementList{
 	{
@@ -26391,7 +26391,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tli09
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli09
 
 encodingtest.QuadStatementList{
 	{
@@ -26517,7 +26517,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tli10
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli10
 
 encodingtest.QuadStatementList{
 	{
@@ -26619,7 +26619,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tli11
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli11
 
 encodingtest.QuadStatementList{
 	{
@@ -26671,7 +26671,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tli12
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli12
 
 encodingtest.QuadStatementList{
 	{
@@ -26704,7 +26704,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tli13
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli13
 
 encodingtest.QuadStatementList{
 	{
@@ -26756,7 +26756,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tli14
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tli14
 
 encodingtest.QuadStatementList{
 	{
@@ -26789,7 +26789,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tm001
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm001
 
 encodingtest.QuadStatementList{
 	{
@@ -26892,7 +26892,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tm002
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm002
 
 encodingtest.QuadStatementList{
 	{
@@ -26995,7 +26995,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tm003
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm003
 
 encodingtest.QuadStatementList{
 	{
@@ -27144,7 +27144,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tm004
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm004
 
 encodingtest.QuadStatementList{
 	{
@@ -27339,7 +27339,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tm005
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm005
 
 encodingtest.QuadStatementList{
 	{
@@ -27393,7 +27393,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tm006
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm006
 
 encodingtest.QuadStatementList{
 	{
@@ -27470,7 +27470,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tm007
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm007
 
 encodingtest.QuadStatementList{
 	{
@@ -27547,7 +27547,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tm008
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm008
 
 encodingtest.QuadStatementList{
 	{
@@ -27624,7 +27624,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tm009
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm009
 
 encodingtest.QuadStatementList{
 	{
@@ -27726,7 +27726,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tm010
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm010
 
 encodingtest.QuadStatementList{
 	{
@@ -27828,7 +27828,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tm011
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm011
 
 encodingtest.QuadStatementList{
 	{
@@ -27931,7 +27931,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tm012
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm012
 
 encodingtest.QuadStatementList{
 	{
@@ -28034,7 +28034,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tm013
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm013
 
 encodingtest.QuadStatementList{
 	{
@@ -28081,7 +28081,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tm014
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm014
 
 encodingtest.QuadStatementList{
 	{
@@ -28128,7 +28128,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tm015
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm015
 
 encodingtest.QuadStatementList{
 	{
@@ -28175,7 +28175,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tm016
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm016
 
 encodingtest.QuadStatementList{
 	{
@@ -28222,7 +28222,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tm017
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm017
 
 encodingtest.QuadStatementList{
 	{
@@ -28273,7 +28273,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tm018
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm018
 
 encodingtest.QuadStatementList{
 	{
@@ -28324,7 +28324,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tm019
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tm019
 
 encodingtest.QuadStatementList{
 	{
@@ -28375,7 +28375,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tn001
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tn001
 
 encodingtest.QuadStatementList{
 	{
@@ -28432,7 +28432,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tn002
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tn002
 
 encodingtest.QuadStatementList{
 	{
@@ -28489,7 +28489,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tn003
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tn003
 
 encodingtest.QuadStatementList{
 	{
@@ -28572,7 +28572,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tn004
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tn004
 
 encodingtest.QuadStatementList{
 	{
@@ -28681,7 +28681,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tn005
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tn005
 
 encodingtest.QuadStatementList{
 	{
@@ -28790,7 +28790,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tn006
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tn006
 
 encodingtest.QuadStatementList{
 	{
@@ -28925,7 +28925,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tn007
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tn007
 
 encodingtest.QuadStatementList{
 	{
@@ -29060,7 +29060,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tn008
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tn008
 
 encodingtest.QuadStatementList{
 	{
@@ -29137,7 +29137,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tp001
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tp001
 
 encodingtest.QuadStatementList{
 	{
@@ -29165,7 +29165,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tp002
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tp002
 
 encodingtest.QuadStatementList{
 	{
@@ -29216,7 +29216,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tp003
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tp003
 
 encodingtest.QuadStatementList{
 	{
@@ -29267,7 +29267,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tp004
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tp004
 
 encodingtest.QuadStatementList{
 	{
@@ -29318,7 +29318,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpi06
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpi06
 
 encodingtest.QuadStatementList{
 	{
@@ -29470,7 +29470,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpi07
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpi07
 
 encodingtest.QuadStatementList{
 	{
@@ -29700,7 +29700,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpi08
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpi08
 
 encodingtest.QuadStatementList{
 	{
@@ -29843,7 +29843,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpi09
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpi09
 
 encodingtest.QuadStatementList{
 	{
@@ -30055,7 +30055,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpi10
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpi10
 
 encodingtest.QuadStatementList{
 	{
@@ -30175,7 +30175,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpi11
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpi11
 
 encodingtest.QuadStatementList{
 	{
@@ -30244,7 +30244,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpr02
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr02
 
 encodingtest.QuadStatementList{
 	{
@@ -30350,7 +30350,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpr06
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr06
 
 encodingtest.QuadStatementList{
 	{
@@ -30378,7 +30378,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpr10
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr10
 
 encodingtest.QuadStatementList{
 	{
@@ -30458,7 +30458,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpr13
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr13
 
 encodingtest.QuadStatementList{
 	{
@@ -30538,7 +30538,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpr14
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr14
 
 encodingtest.QuadStatementList{
 	{
@@ -30618,7 +30618,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpr15
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr15
 
 encodingtest.QuadStatementList{
 	{
@@ -30698,7 +30698,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpr16
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr16
 
 encodingtest.QuadStatementList{
 	{
@@ -30830,7 +30830,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpr19
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr19
 
 encodingtest.QuadStatementList{
 	{
@@ -30936,7 +30936,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpr22
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr22
 
 encodingtest.QuadStatementList{
 	{
@@ -31033,7 +31033,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpr23
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr23
 
 encodingtest.QuadStatementList{
 	{
@@ -31061,7 +31061,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpr24
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr24
 
 encodingtest.QuadStatementList{
 	{
@@ -31092,7 +31092,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpr25
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr25
 
 encodingtest.QuadStatementList{
 	{
@@ -31254,7 +31254,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpr27
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr27
 
 encodingtest.QuadStatementList{
 	{
@@ -31282,7 +31282,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpr29
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr29
 
 encodingtest.QuadStatementList{
 	{
@@ -31339,7 +31339,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpr30
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr30
 
 encodingtest.QuadStatementList{
 	{
@@ -31390,7 +31390,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpr34
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr34
 
 encodingtest.QuadStatementList{
 	{
@@ -31418,7 +31418,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpr35
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr35
 
 encodingtest.QuadStatementList{
 	{
@@ -31446,7 +31446,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpr36
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr36
 
 encodingtest.QuadStatementList{
 	{
@@ -31474,7 +31474,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpr37
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr37
 
 encodingtest.QuadStatementList{
 	{
@@ -31528,7 +31528,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpr38
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr38
 
 encodingtest.QuadStatementList{
 	{
@@ -31556,7 +31556,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpr39
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr39
 
 encodingtest.QuadStatementList{
 	{
@@ -31633,7 +31633,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpr40
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr40
 
 encodingtest.QuadStatementList{
 	{
@@ -31687,7 +31687,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpr41
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr41
 
 encodingtest.QuadStatementList{
 	{
@@ -31715,7 +31715,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tpr43
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tpr43
 
 encodingtest.QuadStatementList{
 	{
@@ -31762,7 +31762,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#trt01
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#trt01
 
 encodingtest.QuadStatementList{
 	{
@@ -31871,7 +31871,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tso05
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tso05
 
 encodingtest.QuadStatementList{
 	{
@@ -31945,7 +31945,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tso06
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tso06
 
 encodingtest.QuadStatementList{
 	{
@@ -32022,7 +32022,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tso08
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tso08
 
 encodingtest.QuadStatementList{
 	{
@@ -32053,7 +32053,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tso09
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tso09
 
 encodingtest.QuadStatementList{
 	{
@@ -32084,7 +32084,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#tso11
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#tso11
 
 encodingtest.QuadStatementList{
 	{
@@ -32115,7 +32115,7 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#ttn02
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#ttn02
 
 encodingtest.QuadStatementList{
 	{
@@ -32380,22 +32380,22 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#twf01
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#twf01
 
 encodingtest.QuadStatementList{
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#twf02
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#twf02
 
 encodingtest.QuadStatementList{
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#twf03
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#twf03
 
 encodingtest.QuadStatementList{
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#twf04
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#twf04
 
 encodingtest.QuadStatementList{
 	{
@@ -32423,12 +32423,12 @@ encodingtest.QuadStatementList{
 	},
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#twf05
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#twf05
 
 encodingtest.QuadStatementList{
 }
 
-=== Test/https://w3c.github.io/json-ld-api/tests/toRdf#twf07
+=== Test/https://w3c.github.io/json-ld-api/tests/toRdf-manifest#twf07
 
 encodingtest.QuadStatementList{
 }
