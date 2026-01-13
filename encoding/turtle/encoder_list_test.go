@@ -93,7 +93,7 @@ func TestEncoder_Basic(t *testing.T) {
 				t.Fatal(err)
 			}
 
-			err = resources.AddTo(ctx, encoder, rdfdescription.DefaultExportResourceOptions)
+			err = resources.ToResourceWriter(ctx, encoder, rdfdescription.DefaultExportResourceOptions)
 			if err != nil {
 				t.Fatal(err)
 			}

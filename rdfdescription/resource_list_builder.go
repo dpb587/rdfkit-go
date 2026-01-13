@@ -131,7 +131,7 @@ func (rb *ResourceListBuilder) ExportResourceStatements(subject rdf.SubjectValue
 
 //
 
-func (rb *ResourceListBuilder) AddTo(ctx context.Context, e ResourceWriter, opts ExportResourceOptions) error {
+func (rb *ResourceListBuilder) ToResourceWriter(ctx context.Context, e ResourceWriter, opts ExportResourceOptions) error {
 	var err error
 
 	for r := range rb.ExportResources(opts) {
@@ -144,7 +144,7 @@ func (rb *ResourceListBuilder) AddTo(ctx context.Context, e ResourceWriter, opts
 	return nil
 }
 
-func (rb *ResourceListBuilder) AddToDataset(ctx context.Context, e DatasetResourceWriter, g rdf.GraphNameValue, opts ExportResourceOptions) error {
+func (rb *ResourceListBuilder) ToDatasetResourceWriter(ctx context.Context, e DatasetResourceWriter, g rdf.GraphNameValue, opts ExportResourceOptions) error {
 	var err error
 
 	for r := range rb.ExportResources(opts) {

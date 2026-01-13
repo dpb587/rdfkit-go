@@ -40,7 +40,7 @@ func (e *BufferedQuadsEncoder) AddQuad(ctx context.Context, quad rdf.Quad) error
 }
 
 func (e *BufferedQuadsEncoder) Close() error {
-	err := e.builder.AddToDataset(e.ctx, e.encoder, e.exportOpts)
+	err := e.builder.ToDatasetResourceWriter(e.ctx, e.encoder, e.exportOpts)
 	if err != nil {
 		return err
 	}

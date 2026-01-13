@@ -66,9 +66,9 @@ func (e *DatasetResourceListBuilder) Add(quads ...rdf.Quad) {
 	}
 }
 
-func (e *DatasetResourceListBuilder) AddToDataset(ctx context.Context, z DatasetResourceWriter, opts ExportResourceOptions) error {
+func (e *DatasetResourceListBuilder) ToDatasetResourceWriter(ctx context.Context, z DatasetResourceWriter, opts ExportResourceOptions) error {
 	for graphName, builder := range e.builderByGraphName {
-		err := builder.AddToDataset(ctx, z, graphName, opts)
+		err := builder.ToDatasetResourceWriter(ctx, z, graphName, opts)
 		if err != nil {
 			return err
 		}

@@ -40,7 +40,7 @@ func (e *BufferedTriplesEncoder) AddTriple(ctx context.Context, triple rdf.Tripl
 }
 
 func (e *BufferedTriplesEncoder) Close() error {
-	err := e.builder.AddTo(e.ctx, e.encoder, e.exportOpts)
+	err := e.builder.ToResourceWriter(e.ctx, e.encoder, e.exportOpts)
 	if err != nil {
 		return err
 	}

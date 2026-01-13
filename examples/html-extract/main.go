@@ -76,7 +76,7 @@ func main() {
 
 	defer encoder.Close()
 
-	err = resourceEncoder.AddTo(ctx, encoder, rdfdescription.DefaultExportResourceOptions)
+	err = resourceEncoder.ToResourceWriter(ctx, encoder, rdfdescription.DefaultExportResourceOptions)
 	if err != nil {
 		panic(fmt.Errorf("encode: %v", err))
 	}
