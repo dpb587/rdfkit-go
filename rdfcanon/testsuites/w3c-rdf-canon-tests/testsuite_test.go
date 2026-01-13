@@ -147,7 +147,7 @@ func Test(t *testing.T) {
 					tAssertion.Fatalf("collect: %v", err)
 				}
 
-				testingassert.IsomorphicDatasets(tAssertion, expectedStatements, actualStatements)
+				testingassert.IsomorphicDatasets(t.Context(), tAssertion, expectedStatements, actualStatements)
 			case "https://w3c.github.io/rdf-canon/tests/vocab#RDFC10MapTest":
 				if entry.Result == "" {
 					t.Fatal("missing test result")

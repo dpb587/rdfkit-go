@@ -326,7 +326,7 @@ func TestExamples(t *testing.T) {
 				t.Fatalf("unexpected error: %v", err)
 			}
 
-			testingassert.IsomorphicGraphs(t, testcase.Expected.AsTriples(), out)
+			testingassert.IsomorphicGraphs(t.Context(), t, testcase.Expected.AsTriples(), out)
 		})
 	}
 }

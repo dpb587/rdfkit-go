@@ -830,7 +830,7 @@ func TestSpecNonNormative(t *testing.T) {
 				}
 			})
 
-			testingassert.IsomorphicGraphs(t, testcase.Expected.NewTriples(), out)
+			testingassert.IsomorphicGraphs(t.Context(), t, testcase.Expected.NewTriples(), out)
 
 			success = true
 		})
@@ -1236,7 +1236,7 @@ func TestSpecTestcase(t *testing.T) {
 				t.Fatalf("unexpected error: %v", err)
 			}
 
-			testingassert.IsomorphicGraphs(t, testcase.Expected.NewTriples(), out)
+			testingassert.IsomorphicGraphs(t.Context(), t, testcase.Expected.NewTriples(), out)
 		})
 	}
 }

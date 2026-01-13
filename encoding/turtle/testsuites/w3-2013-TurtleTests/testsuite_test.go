@@ -107,7 +107,7 @@ func Test(t *testing.T) {
 					tAssertion.Fatalf("error: %v", err)
 				}
 
-				testingassert.IsomorphicGraphs(tAssertion, expectedStatements, actualStatements.AsTriples())
+				testingassert.IsomorphicGraphs(t.Context(), tAssertion, expectedStatements, actualStatements.AsTriples())
 
 				rdfioDebug.PutTriplesBundle(t.Name(), actualStatements)
 			case "http://www.w3.org/ns/rdftest#TestTurtleNegativeEval":

@@ -1,232 +1,132 @@
 package earltesting
 
 import (
-	"bytes"
 	"context"
 	"fmt"
 	"os"
-	"slices"
 	"sync"
 	"testing"
-	"time"
 
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
 	"github.com/dpb587/rdfkit-go/ontology/earl/earliri"
 	"github.com/dpb587/rdfkit-go/ontology/foaf/foafiri"
-	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
-	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
-	"github.com/dpb587/rdfkit-go/rdf/rdfutil"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
+	"github.com/dpb587/rdfkit-go/rdfdescription/rdfdescriptionutil"
 )
 
 type Report struct {
-	t      *testing.T
-	output string
+	t       *testing.T
+	fromEnv bool
 
-	mu                sync.Mutex
-	builder           *rdfdescription.ResourceListBuilder
-	assertionSubjects rdf.SubjectValueList
+	mu         sync.Mutex
+	builder    *rdfdescription.ResourceListBuilder
+	assertions []AssertionProfile
 }
 
-type ReportScope struct {
-	report   *Report
-	assertor rdf.SubjectValue
-	subject  rdf.SubjectValue
-}
-
-func NewReport(t *testing.T) ReportScope {
-	report := &Report{
+func NewReport(t *testing.T) *Report {
+	r := &Report{
 		t:       t,
 		builder: rdfdescription.NewResourceListBuilder(),
-	}
-
-	t.Cleanup(func() {
-		if report.output == "" {
-			return
-		}
-
-		if err := report.writeOutput(); err != nil {
-			t.Errorf("failed to write EARL report: %v", err)
-		}
-	})
-
-	return ReportScope{
-		report: report,
-	}
-}
-
-func NewReportFromEnv(t *testing.T) ReportScope {
-	r := NewReport(t)
-
-	if v := os.Getenv("TESTING_EARL_OUTPUT"); len(v) > 0 {
-		r.SetOutput(v)
-	}
-
-	if v := os.Getenv("TESTING_EARL_SUBJECT_RELEASE_REVISION"); len(v) > 0 {
-		releaseStatements := rdfdescription.StatementList{
-			rdfdescription.ObjectStatement{
-				Predicate: rdf.IRI("http://usefulinc.com/ns/doap#name"),
-				Object:    xsdobject.String("jelly-rdf-go"),
-			},
-			rdfdescription.ObjectStatement{
-				Predicate: rdf.IRI("http://usefulinc.com/ns/doap#revision"),
-				Object:    xsdobject.String(v),
-			},
-		}
-
-		if v := os.Getenv("TESTING_EARL_SUBJECT_RELEASE_DATE"); len(v) > 0 {
-			literalValue, err := rdfutil.CoalesceObjectValue(v, xsdobject.MapDateTime, xsdobject.MapDate)
-			if err != nil {
-				t.Fatalf("configure: TESTING_EARL_SUBJECT_RELEASE_DATE: %v", err)
-			}
-
-			releaseStatements = append(releaseStatements, rdfdescription.ObjectStatement{
-				Predicate: rdf.IRI("http://purl.org/dc/terms/created"),
-				Object:    literalValue,
-			})
-		}
-
-		r.AddSubjectStatements(rdf.IRI("#subject"), rdfdescription.AnonResourceStatement{
-			Predicate: rdf.IRI("http://usefulinc.com/ns/doap#release"),
-			AnonResource: rdfdescription.AnonResource{
-				Statements: releaseStatements,
-			},
-		})
 	}
 
 	return r
 }
 
-func (rs ReportScope) SetOutput(path string) {
-	rs.report.output = path
-}
-
-func (rs ReportScope) AddSubjectStatements(s rdf.SubjectValue, statements ...rdfdescription.Statement) {
-	rs.report.mu.Lock()
-	defer rs.report.mu.Unlock()
-
-	rs.report.builder.Add(rdfdescription.SubjectResource{
-		Subject:    s,
-		Statements: statements,
-	}.NewTriples()...)
-}
-
-func (rs ReportScope) WithAssertor(subjectValue rdf.SubjectValue, statements ...rdfdescription.Statement) ReportScope {
-	rs.report.mu.Lock()
-	defer rs.report.mu.Unlock()
-
-	rs.report.builder.Add(rdf.Triple{
-		Subject:   subjectValue,
-		Predicate: rdfiri.Type_Property,
-		Object:    earliri.Assertor_Class,
-	})
-
-	if len(statements) > 0 {
-		rs.report.builder.Add(rdfdescription.StatementList(statements).NewTriples(subjectValue)...)
-	}
-
-	return ReportScope{
-		report:   rs.report,
-		assertor: subjectValue,
-		subject:  rs.subject,
-	}
-}
-
-func (rs ReportScope) WithSubject(subjectValue rdf.SubjectValue, statements ...rdfdescription.Statement) ReportScope {
-	rs.report.mu.Lock()
-	defer rs.report.mu.Unlock()
-
-	rs.report.builder.Add(rdf.Triple{
-		Subject:   subjectValue,
-		Predicate: rdfiri.Type_Property,
-		Object:    earliri.TestSubject_Class,
-	})
-
-	if len(statements) > 0 {
-		rs.report.builder.Add(rdfdescription.StatementList(statements).NewTriples(subjectValue)...)
-	}
-
-	return ReportScope{
-		report:   rs.report,
-		assertor: rs.assertor,
-		subject:  subjectValue,
-	}
-}
-
-func (rs ReportScope) NewAssertion(t *testing.T, testIRI rdf.IRI) *Assertion {
-	rs.report.mu.Lock()
-	defer rs.report.mu.Unlock()
-
-	assertion := &Assertion{
-		rs:             rs,
-		t:              t,
-		testIRI:        testIRI,
-		assertionNode:  rdf.NewBlankNode(),
-		resultNode:     rdf.NewBlankNode(),
-		startTime:      time.Now(),
-		descriptionLog: &bytes.Buffer{},
-	}
-
-	rs.report.assertionSubjects = append(rs.report.assertionSubjects, assertion.assertionNode)
+func NewReportFromEnv(t *testing.T) *Report {
+	r := NewReport(t)
+	r.fromEnv = true
 
 	t.Cleanup(func() {
-		assertion.finalize()
+		filePath := os.Getenv("TESTING_EARL_OUTPUT")
+		if len(filePath) == 0 {
+			return
+		}
+
+		file, err := os.Create(filePath)
+		if err != nil {
+			t.Errorf("earltesting: failed to create file: %v", err)
+		}
+
+		defer file.Close()
+
+		encoder, err := turtle.NewEncoder(file, turtle.EncoderConfig{}.
+			SetBuffered(true).
+			SetBufferedSort(false).
+			SetPrefixes(iriutil.NewPrefixMap(
+				iriutil.PrefixMapping{Prefix: "dc", Expanded: "http://purl.org/dc/terms/"},
+				iriutil.PrefixMapping{Prefix: "dc11", Expanded: "http://purl.org/dc/elements/1.1/"},
+				iriutil.PrefixMapping{Prefix: "doap", Expanded: "http://usefulinc.com/ns/doap#"},
+				iriutil.PrefixMapping{Prefix: "earl", Expanded: earliri.Base},
+				iriutil.PrefixMapping{Prefix: "foaf", Expanded: foafiri.Base},
+				iriutil.PrefixMapping{Prefix: "xsd", Expanded: xsdiri.Base},
+			)),
+		)
+		if err != nil {
+			t.Errorf("earltesting: failed to create encoder: %v", err)
+		}
+
+		if err := r.ExportResources(t.Context(), encoder); err != nil {
+			t.Errorf("earltesting: failed to export resources: %v", err)
+		}
 	})
 
-	return assertion
+	return r
 }
 
-func (r *Report) writeOutput() error {
+func (r *Report) GetReport() *Report {
+	return r
+}
+
+func (r *Report) GetResourceListBuilder() *rdfdescription.ResourceListBuilder {
+	return r.builder
+}
+
+func (r *Report) GetAssertionProfiles() []AssertionProfile {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
-	file, err := os.Create(r.output)
-	if err != nil {
-		return fmt.Errorf("failed to create file: %w", err)
-	}
-	defer file.Close()
+	return append([]AssertionProfile{}, r.assertions...)
+}
 
-	encoder, err := turtle.NewEncoder(file, turtle.EncoderConfig{}.
-		SetBuffered(true).
-		SetBufferedSort(false).
-		SetPrefixes(iriutil.NewPrefixMap(
-			iriutil.PrefixMapping{Prefix: "dc", Expanded: "http://purl.org/dc/terms/"},
-			iriutil.PrefixMapping{Prefix: "doap", Expanded: "http://usefulinc.com/ns/doap#"},
-			iriutil.PrefixMapping{Prefix: "earl", Expanded: earliri.Base},
-			iriutil.PrefixMapping{Prefix: "foaf", Expanded: foafiri.Base},
-			iriutil.PrefixMapping{Prefix: "xsd", Expanded: xsdiri.Base},
-		)),
-	)
-	if err != nil {
-		return fmt.Errorf("failed to create encoder: %w", err)
-	}
+func (r *Report) WithAssertor(subjectValue rdf.SubjectValue, statements ...rdfdescription.Statement) ReportScope {
+	return ReportScope{report: r}.WithAssertor(subjectValue, statements...)
+}
 
-	ctx := context.Background()
+func (r *Report) WithSubject(subjectValue rdf.SubjectValue, statements ...rdfdescription.Statement) ReportScope {
+	return ReportScope{report: r}.WithSubject(subjectValue, statements...)
+}
+
+func (r *Report) ExportResources(ctx context.Context, encoder rdfdescriptionutil.ResourceEncoder) error {
+	r.mu.Lock()
+	defer r.mu.Unlock()
 
 	// prefer deterministic ordering based on assertion ordering (assuming tests are ordered)
 
-	resourcesByAssertionSubject := map[rdf.SubjectValue]rdfdescription.Resource{}
-	resourcesExtra := rdfdescription.ResourceList{}
+	resourcesByAssertionSubject := map[rdf.SubjectValue]struct{}{}
 
-	for resource := range r.builder.ExportResources(rdfdescription.DefaultExportResourceOptions) {
-		if slices.Contains(r.assertionSubjects, resource.GetResourceSubject()) {
-			resourcesByAssertionSubject[resource.GetResourceSubject()] = resource
-		} else {
-			resourcesExtra = append(resourcesExtra, resource)
-		}
-	}
-
-	for _, assertionSubject := range r.assertionSubjects {
-		if err := encoder.AddResource(ctx, resourcesByAssertionSubject[assertionSubject]); err != nil {
+	for _, profile := range r.assertions {
+		if err := encoder.AddResource(ctx, r.builder.ExportResource(profile.Node, rdfdescription.DefaultExportResourceOptions)); err != nil {
 			return fmt.Errorf("failed to add assertion resource: %w", err)
 		}
+
+		resourcesByAssertionSubject[profile.Node] = struct{}{}
 	}
 
-	for _, resource := range resourcesExtra {
-		if err := encoder.AddResource(ctx, resource); err != nil {
+	// TODO deterministic order?
+
+	for s := range r.builder.Subjects() {
+		if _, ok := resourcesByAssertionSubject[s]; ok {
+			continue
+		} else if sBlankNode, ok := s.(rdf.BlankNode); ok {
+			if r.builder.GetBlankNodeReferences(sBlankNode) == 1 {
+				continue
+			}
+		}
+
+		if err := encoder.AddResource(ctx, r.builder.ExportResource(s, rdfdescription.DefaultExportResourceOptions)); err != nil {
 			return fmt.Errorf("failed to add resource: %w", err)
 		}
 	}

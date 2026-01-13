@@ -385,7 +385,7 @@ func TestParseText(t *testing.T) {
 				t.Fatalf("expected %v, got %v", _e, _a)
 			}
 
-			testingassert.IsomorphicGraphs(t, tc.ExpectedOpeningHoursSpecification.NewTriples(), resultData.AsOpeningHoursSpecification().NewTriples())
+			testingassert.IsomorphicGraphs(t.Context(), t, tc.ExpectedOpeningHoursSpecification.NewTriples(), resultData.AsOpeningHoursSpecification().NewTriples())
 		})
 	}
 }

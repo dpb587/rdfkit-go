@@ -3994,7 +3994,7 @@ func TestMicrodataLivingNonNormative(t *testing.T) {
 			// 	}
 			// }
 
-			testingassert.IsomorphicGraphs(t, testcase.Expected.AsTriples(), out)
+			testingassert.IsomorphicGraphs(t.Context(), t, testcase.Expected.AsTriples(), out)
 		})
 	}
 }

@@ -108,7 +108,7 @@ func Test(t *testing.T) {
 					tAssertion.Fatalf("error: %v", err)
 				}
 
-				testingassert.IsomorphicDatasets(tAssertion, expectedStatements, actualStatements.AsQuads())
+				testingassert.IsomorphicDatasets(t.Context(), tAssertion, expectedStatements, actualStatements.AsQuads())
 
 				rdfioDebug.PutQuadsBundle(t.Name(), actualStatements)
 			case "http://www.w3.org/ns/rdftest#TestTrigNegativeEval":

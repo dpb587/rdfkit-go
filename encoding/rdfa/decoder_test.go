@@ -282,7 +282,7 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
 				t.Fatalf("unexpected error: %v", err)
 			}
 
-			testingassert.IsomorphicGraphs(t, testcase.Expected.AsTriples(), out)
+			testingassert.IsomorphicGraphs(t.Context(), t, testcase.Expected.AsTriples(), out)
 		})
 	}
 }
@@ -1545,7 +1545,7 @@ Sue knows
 				t.Fatalf("unexpected error: %v", err)
 			}
 
-			testingassert.IsomorphicGraphs(t, testcase.Expected.AsTriples(), out)
+			testingassert.IsomorphicGraphs(t.Context(), t, testcase.Expected.AsTriples(), out)
 		})
 	}
 }

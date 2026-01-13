@@ -2,8 +2,6 @@ package earltesting
 
 import (
 	"bytes"
-	"context"
-	"fmt"
 	"testing"
 	"time"
 
@@ -29,16 +27,6 @@ func (a *Assertion) SetTestResultOutcome(outcome rdf.IRI) {
 	a.testResultOutcome = &outcome
 }
 
-func (a *Assertion) AddTestResultDescription(description string) {
-	a.AddTestResultStatement(rdfdescription.ObjectStatement{
-		Predicate: rdf.IRI("http://purl.org/dc/terms/description"),
-		Object: rdf.Literal{
-			LexicalForm: description,
-			Datatype:    xsdiri.String_Datatype,
-		},
-	})
-}
-
 func (a *Assertion) AddTestResultStatement(statements ...rdfdescription.Statement) {
 	a.rs.report.builder.Add(rdfdescription.SubjectResource{
 		Subject:    a.resultNode,
@@ -46,30 +34,18 @@ func (a *Assertion) AddTestResultStatement(statements ...rdfdescription.Statemen
 	}.NewTriples()...)
 }
 
-func (a *Assertion) Context() context.Context {
-	return a.t.Context()
-}
-
-func (a *Assertion) Skip(outcome rdf.IRI) {
+func (a *Assertion) Skip(outcome rdf.IRI, args ...any) {
+	a.t.Helper()
 	a.SetTestResultOutcome(outcome)
-
-	a.t.Helper()
-	a.t.Skip()
+	a.Log(args...)
+	a.t.SkipNow()
 }
 
-func (a *Assertion) Logf(format string, args ...any) {
-	msg := fmt.Sprintf(format, args...)
-	a.descriptionLog.WriteString(msg)
-	a.descriptionLog.WriteString("\n")
-
+func (a *Assertion) Skipf(outcome rdf.IRI, format string, args ...any) {
 	a.t.Helper()
-	a.t.Log(msg)
-}
-
-func (a *Assertion) Fatalf(format string, args ...any) {
-	a.t.Helper()
+	a.SetTestResultOutcome(outcome)
 	a.Logf(format, args...)
-	a.t.FailNow()
+	a.t.SkipNow()
 }
 
 func (a *Assertion) finalize() {

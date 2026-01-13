@@ -77,8 +77,7 @@ func Test(t *testing.T) {
 			tAssertion := earlReport.NewAssertion(t, sequence.ID)
 
 			if sequence.Option.ProduceGeneralizedRdf {
-				tAssertion.Logf("produceGeneralizedRdf is not supported")
-				tAssertion.Skip(earliri.Inapplicable_NotApplicable)
+				tAssertion.Skip(earliri.Inapplicable_NotApplicable, "produceGeneralizedRdf is not supported")
 			} else if strings.HasSuffix(string(sequence.ID), "#t0122") || strings.HasSuffix(string(sequence.ID), "#t0123") || strings.HasSuffix(string(sequence.ID), "#t0124") || strings.HasSuffix(string(sequence.ID), "#t0125") {
 				// The stdlib URL resolver normalizes .. and . segments out of the path, but these tests expect
 				// the dot-segments to be retained.
@@ -112,8 +111,7 @@ func Test(t *testing.T) {
 				//   ACTUAL <urn:ex:s099> <urn:ex:p> <http://a/bb/ccc/d;p?q> .
 				// * EXPECT <urn:ex:s133> <urn:ex:p> <http://a/bb/ccc/../d;p?y> .
 				//   ACTUAL <urn:ex:s133> <urn:ex:p> <http://a/bb/d;p?y> .
-				tAssertion.Logf("Go automatically resolves dot-segments during our IRI resolution. Resulting IRIs are equivalent, but not byte-identical to test expectations.")
-				tAssertion.Skip(earliri.NotTested_Class)
+				tAssertion.Skip(earliri.NotTested_Class, "Go automatically resolves dot-segments during our IRI resolution. Resulting IRIs are equivalent, but not byte-identical to test expectations.")
 			}
 
 			decodeAction := func() (encodingtest.QuadStatementList, error) {
@@ -196,7 +194,7 @@ func Test(t *testing.T) {
 					tAssertion.Fatalf("error: %v", err)
 				}
 
-				testingassert.IsomorphicDatasets(tAssertion, expectedStatements, actualStatements.AsQuads())
+				testingassert.IsomorphicDatasets(t.Context(), tAssertion, expectedStatements, actualStatements.AsQuads())
 
 				rdfioDebug.PutQuadsBundle(t.Name(), actualStatements)
 			} else if slices.Contains(sequence.Type, "jld:PositiveSyntaxTest") {

@@ -9,22 +9,21 @@ import (
 	"github.com/dpb587/rdfkit-go/rdfcanon"
 )
 
-type testingT interface {
-	Context() context.Context
+type TFatalf interface {
 	Fatalf(format string, args ...any)
 }
 
-func IsomorphicGraphs(t testingT, expected, actual rdf.TripleList) {
-	IsomorphicDatasets(t, expected.AsQuads(nil), actual.AsQuads(nil))
+func IsomorphicGraphs(ctx context.Context, t TFatalf, expected, actual rdf.TripleList) {
+	IsomorphicDatasets(ctx, t, expected.AsQuads(nil), actual.AsQuads(nil))
 }
 
-func IsomorphicDatasets(t testingT, expected, actual rdf.QuadList) {
-	expectedCanonical, err := rdfcanon.Canonicalize(t.Context(), newDedupQuadsIterator(quads.NewIterator(expected)))
+func IsomorphicDatasets(ctx context.Context, t TFatalf, expected, actual rdf.QuadList) {
+	expectedCanonical, err := rdfcanon.Canonicalize(ctx, newDedupQuadsIterator(quads.NewIterator(expected)))
 	if err != nil {
 		t.Fatalf("canonicalize expected: %v", err)
 	}
 
-	actualCanonical, err := rdfcanon.Canonicalize(t.Context(), newDedupQuadsIterator(quads.NewIterator(actual)))
+	actualCanonical, err := rdfcanon.Canonicalize(ctx, newDedupQuadsIterator(quads.NewIterator(actual)))
 	if err != nil {
 		t.Fatalf("canonicalize actual: %v", err)
 	}
