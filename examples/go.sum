@@ -8,6 +8,8 @@ github.com/dpb587/inspecthtml-go v0.0.0-20250906134739-0d404c86637b h1:h7XE5d+xg
 github.com/dpb587/inspecthtml-go v0.0.0-20250906134739-0d404c86637b/go.mod h1:STz5Xq0b2UCumUEpt65TTy86vJuq+R5QUyCqGtUVH54=
 github.com/dpb587/inspectjson-go v0.0.0-20251203142639-90f1442149fb h1:RiCz/jdb3S2DeKCn/QGIeSvkOcFJW9+yazbSoH0pNCc=
 github.com/dpb587/inspectjson-go v0.0.0-20251203142639-90f1442149fb/go.mod h1:FTNc/N87Cz+dccpetYPiSsGpbl/CG7K26PeJSUwT2uQ=
+github.com/google/uuid v1.6.0 h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=
+github.com/google/uuid v1.6.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/tomnomnom/linkheader v0.0.0-20250811210735-e5fe3b51442e h1:tD38/4xg4nuQCASJ/JxcvCHNb46w0cdAaJfkzQOO1bA=
 github.com/tomnomnom/linkheader v0.0.0-20250811210735-e5fe3b51442e/go.mod h1:krvJ5AY/MjdPkTeRgMYbIDhbbbVvnPQPzsIsDJO8xrY=
 golang.org/x/net v0.47.0 h1:Mx+4dIFzqraBXUugkia1OOvlD6LemFo1ALMHjrXDOhY=

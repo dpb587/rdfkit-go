@@ -9,6 +9,7 @@ require (
 	github.com/dpb587/inspectjson-go v0.0.0-20251203142639-90f1442149fb
 	github.com/dpb587/inspectxml-go v0.0.0-20250415222439-71ac97da5967
 	github.com/dpb587/kvstrings-go v0.0.0-20260105164922-00f00f4a51f0
+	github.com/google/uuid v1.6.0
 	github.com/tomnomnom/linkheader v0.0.0-20250811210735-e5fe3b51442e
 	golang.org/x/net v0.47.0
 )

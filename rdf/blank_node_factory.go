@@ -1,6 +1,8 @@
 package rdf
 
-import "sync/atomic"
+import (
+	"sync/atomic"
+)
 
 // BlankNodeFactory allocates a new, unique blank node.
 type BlankNodeFactory interface {
@@ -16,47 +18,47 @@ func NewBlankNode() BlankNode {
 //
 
 // DefaultBlankNodeFactory is the default blank node factory used by [NewBlankNode].
-var DefaultBlankNodeFactory BlankNodeFactory = &unscopedBlankNodeFactory{
+var DefaultBlankNodeFactory BlankNodeFactory = &defaultBlankNodeFactory{
 	a: &atomic.Int64{},
 }
 
 //
 
-type blankNodeIdentifier struct {
-	scope *blankNodeFactory
-	value int64
+type bn struct {
+	v int64
+	s *bnF
 }
 
-var _ BlankNodeIdentifier = blankNodeIdentifier{}
+var _ BlankNodeIdentifier = bn{}
 
-func (bni blankNodeIdentifier) EqualsBlankNodeIdentifier(other BlankNodeIdentifier) bool {
-	otherT, ok := other.(blankNodeIdentifier)
+func (bni bn) EqualsBlankNodeIdentifier(other BlankNodeIdentifier) bool {
+	otherT, ok := other.(bn)
 	if !ok {
 		return false
 	}
 
-	return otherT.scope == bni.scope && otherT.value == bni.value
+	return otherT.s == bni.s && otherT.v == bni.v
 }
 
 //
 
-type blankNodeFactory struct {
+type bnF struct {
 	a *atomic.Int64
 }
 
-var _ BlankNodeFactory = &blankNodeFactory{}
+var _ BlankNodeFactory = &bnF{}
 
 func NewBlankNodeFactory() BlankNodeFactory {
-	return &blankNodeFactory{
+	return &bnF{
 		a: &atomic.Int64{},
 	}
 }
 
-func (g *blankNodeFactory) NewBlankNode() BlankNode {
+func (g *bnF) NewBlankNode() BlankNode {
 	return BlankNode{
-		Identifier: blankNodeIdentifier{
-			scope: g,
-			value: g.a.Add(1),
+		Identifier: bn{
+			v: g.a.Add(1),
+			s: g,
 		},
 	}
 }

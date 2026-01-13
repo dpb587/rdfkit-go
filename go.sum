@@ -12,6 +12,8 @@ github.com/dpb587/inspectxml-go v0.0.0-20250415222439-71ac97da5967 h1:eDf5lVry/a
 github.com/dpb587/inspectxml-go v0.0.0-20250415222439-71ac97da5967/go.mod h1:+0eCu7F5sPe9eNUj6yhxmqZc0C60jGtbPX2BTFhEjNo=
 github.com/dpb587/kvstrings-go v0.0.0-20260105164922-00f00f4a51f0 h1:+4yGlNS7mms63fCIYfBVkPuomh9WH+/p+ieIdzqrg8o=
 github.com/dpb587/kvstrings-go v0.0.0-20260105164922-00f00f4a51f0/go.mod h1:flcoanEM6hliG1c28zCSWqrOTCFhvEHk1A1Izo+BKFI=
+github.com/google/uuid v1.6.0 h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=
+github.com/google/uuid v1.6.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/tomnomnom/linkheader v0.0.0-20250811210735-e5fe3b51442e h1:tD38/4xg4nuQCASJ/JxcvCHNb46w0cdAaJfkzQOO1bA=
 github.com/tomnomnom/linkheader v0.0.0-20250811210735-e5fe3b51442e/go.mod h1:krvJ5AY/MjdPkTeRgMYbIDhbbbVvnPQPzsIsDJO8xrY=
 golang.org/x/net v0.47.0 h1:Mx+4dIFzqraBXUugkia1OOvlD6LemFo1ALMHjrXDOhY=

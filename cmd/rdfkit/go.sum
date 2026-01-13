@@ -13,6 +13,8 @@ github.com/dpb587/inspectxml-go v0.0.0-20250415222439-71ac97da5967 h1:eDf5lVry/a
 github.com/dpb587/inspectxml-go v0.0.0-20250415222439-71ac97da5967/go.mod h1:+0eCu7F5sPe9eNUj6yhxmqZc0C60jGtbPX2BTFhEjNo=
 github.com/dpb587/kvstrings-go v0.0.0-20260105164922-00f00f4a51f0 h1:+4yGlNS7mms63fCIYfBVkPuomh9WH+/p+ieIdzqrg8o=
 github.com/dpb587/kvstrings-go v0.0.0-20260105164922-00f00f4a51f0/go.mod h1:flcoanEM6hliG1c28zCSWqrOTCFhvEHk1A1Izo+BKFI=
+github.com/google/uuid v1.6.0 h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=
+github.com/google/uuid v1.6.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/inconshreveable/mousetrap v1.1.0 h1:wN+x4NVGpMsO7ErUn/mUI3vEoE6Jt13X2s0bqwp9tc8=
 github.com/inconshreveable/mousetrap v1.1.0/go.mod h1:vpF70FUmC8bwa3OWnCshd2FqLfsEA9PFc4w1p2J65bw=
 github.com/russross/blackfriday/v2 v2.1.0/go.mod h1:+Rmxgy9KzJVeS9/2gXHxylqXiyQDYRxCVz55jmeOWTM=
