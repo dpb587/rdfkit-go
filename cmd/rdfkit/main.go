@@ -12,7 +12,9 @@ import (
 
 func main() {
 	cmd := &cobra.Command{
-		Use: "rdfkit",
+		Use:           "rdfkit",
+		SilenceErrors: true,
+		SilenceUsage:  true,
 	}
 
 	app := &cmdutil.App{
