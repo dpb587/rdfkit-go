@@ -29,7 +29,12 @@ func unmarshalSubject(subject rdf.SubjectValue, fieldValue reflect.Value, fieldT
 	switch fieldType {
 	case reflect.TypeOf((*rdf.SubjectValue)(nil)).Elem():
 		// rdf.SubjectValue interface - accept anything
-		fieldValue.Set(reflect.ValueOf(subject))
+		if subject == nil {
+			// Set nil value to interface
+			fieldValue.Set(reflect.Zero(fieldType))
+		} else {
+			fieldValue.Set(reflect.ValueOf(subject))
+		}
 		return nil
 
 	case reflect.TypeOf(rdf.IRI("")):

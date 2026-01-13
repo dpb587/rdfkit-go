@@ -1259,3 +1259,65 @@ func TestUnmarshal_EARLExample(t *testing.T) {
 		t.Errorf("Result.Date = %v, want %v", result.Result.Date, expectedDate)
 	}
 }
+
+func TestUnmarshal_AnonResourceWithSubjectField(t *testing.T) {
+	// Regression test: ensure that unmarshaling a nested resource into a struct
+	// with a Subject field (rdf:"s") works correctly when the subject is a blank node.
+	builder := rdfdescription.NewResourceListBuilder()
+
+	mainSubject := rdf.NewBlankNode()
+	resultSubject := rdf.NewBlankNode()
+
+	// Add triples for the main resource
+	builder.Add(rdf.Triple{
+		Subject:   mainSubject,
+		Predicate: rdf.IRI("http://www.w3.org/ns/earl#result"),
+		Object:    resultSubject,
+	})
+
+	// Add triples for the nested result resource
+	builder.Add(rdf.Triple{
+		Subject:   resultSubject,
+		Predicate: rdf.IRI("http://www.w3.org/ns/earl#outcome"),
+		Object:    rdf.IRI("http://www.w3.org/ns/earl#passed"),
+	})
+
+	resource := &rdfdescription.SubjectResource{
+		Subject:    mainSubject,
+		Statements: builder.GetSubjectStatements(mainSubject),
+	}
+
+	type TestResult struct {
+		Subject rdf.SubjectValue `rdf:"s"`
+		Outcome rdf.IRI          `rdf:"o,p=http://www.w3.org/ns/earl#outcome"`
+	}
+
+	type Assertion struct {
+		Result *TestResult `rdf:"o,p=http://www.w3.org/ns/earl#result"`
+	}
+
+	var result Assertion
+	err := Unmarshal(builder, resource, &result)
+	if err != nil {
+		t.Fatalf("Unmarshal failed: %v", err)
+	}
+
+	// Verify the nested resource was unmarshaled
+	if result.Result == nil {
+		t.Fatal("Result is nil")
+	}
+
+	// Subject should be the blank node
+	if result.Result.Subject == nil {
+		t.Error("Result.Subject is nil, expected blank node")
+	} else if bn, ok := result.Result.Subject.(rdf.BlankNode); !ok {
+		t.Errorf("Result.Subject is not a blank node, got %T", result.Result.Subject)
+	} else if !bn.Identifier.EqualsBlankNodeIdentifier(resultSubject.Identifier) {
+		t.Error("Result.Subject blank node identifier mismatch")
+	}
+
+	// Other fields should be unmarshaled correctly
+	if result.Result.Outcome != "http://www.w3.org/ns/earl#passed" {
+		t.Errorf("Result.Outcome = %v, want http://www.w3.org/ns/earl#passed", result.Result.Outcome)
+	}
+}
