@@ -12,6 +12,7 @@ import (
 	"testing"
 
 	"github.com/dpb587/inspectjson-go/inspectjson"
+	"github.com/dpb587/rdfkit-go/dev/earltestingutil"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/internal/jsonldinternal"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
 	"github.com/dpb587/rdfkit-go/ontology/earl/earliri"
@@ -69,6 +70,8 @@ func Test(t *testing.T) {
 				},
 			})...,
 		)
+
+	earltestingutil.ReportSummaryFromEnv(t, earlReport, earltestingutil.DefaultReportSummaryOptions)
 
 	for _, sequence := range testdataManifest.Sequences {
 		t.Run(string(sequence.ID), func(t *testing.T) {

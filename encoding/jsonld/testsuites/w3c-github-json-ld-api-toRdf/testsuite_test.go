@@ -10,6 +10,7 @@ import (
 	"testing"
 
 	"github.com/dpb587/inspectjson-go/inspectjson"
+	"github.com/dpb587/rdfkit-go/dev/earltestingutil"
 	"github.com/dpb587/rdfkit-go/encoding/encodingtest"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
@@ -70,6 +71,7 @@ func Test(t *testing.T) {
 			})...,
 		)
 
+	earltestingutil.ReportSummaryFromEnv(t, earlReport, earltestingutil.DefaultReportSummaryOptions)
 	rdfioDebug := testingutil.NewDebugRdfioBuilderFromEnv(t)
 
 	for _, sequence := range testdataManifest.Sequences {

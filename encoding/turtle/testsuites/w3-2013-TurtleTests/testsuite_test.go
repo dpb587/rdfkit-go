@@ -7,6 +7,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/dpb587/rdfkit-go/dev/earltestingutil"
 	"github.com/dpb587/rdfkit-go/encoding/encodingtest"
 	"github.com/dpb587/rdfkit-go/encoding/ntriples"
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
@@ -67,6 +68,7 @@ func Test(t *testing.T) {
 			})...,
 		)
 
+	earltestingutil.ReportSummaryFromEnv(t, earlReport, earltestingutil.DefaultReportSummaryOptions)
 	rdfioDebug := testingutil.NewDebugRdfioBuilderFromEnv(t)
 
 	for _, entry := range testdataManifest.Entries {

@@ -9,6 +9,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/dpb587/rdfkit-go/dev/earltestingutil"
 	"github.com/dpb587/rdfkit-go/encoding/nquads"
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
 	"github.com/dpb587/rdfkit-go/ontology/earl/earliri"
@@ -69,6 +70,8 @@ func Test(t *testing.T) {
 				},
 			})...,
 		)
+
+	earltestingutil.ReportSummaryFromEnv(t, earlReport, earltestingutil.DefaultReportSummaryOptions)
 
 	for _, entry := range testdataManifest.Entries {
 		t.Run(string(entry.ID), func(t *testing.T) {

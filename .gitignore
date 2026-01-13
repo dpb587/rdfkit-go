@@ -3,5 +3,6 @@ go.work.sum
 tmp
 
 **/testoutput/*
-# these are deterministic and any change is likely a bug
+# deterministic; unexpected changes should be evaluated as signs of bugs
 !**/testoutput/rdfio.txt
+!**/testoutput/earl-summary.txt

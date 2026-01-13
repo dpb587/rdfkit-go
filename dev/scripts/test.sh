@@ -75,6 +75,7 @@ do
 
   export TESTING_EARL_OUTPUT="testoutput/earl.ttl"
   export TESTING_DEBUG_RDFIO_OUTPUT="testoutput/rdfio.txt"
+  export TESTING_DEV_EARL_SUMMARY_OUTPUT="testoutput/earl-summary.txt"
 
   go test -count 1 .
 
