@@ -20,7 +20,7 @@ jobs:
     - name: test
       run: dev/scripts/test.sh
     - name: earl-reports-artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         name: earl-reports
         path: tmp/earl-reports
