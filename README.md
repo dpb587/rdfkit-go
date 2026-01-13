@@ -290,7 +290,7 @@ The `rdf` and [`quads` packages](rdf/quads) offer additional interfaces and util
 
 ### Property Values
 
-The fields of triples and quads are restricted (with interfaces) to the normative value types they support, described by the table below. [Generalized RDF](https://www.w3.org/TR/rdf11-concepts/#section-generalized-rdf) values are not currently supported.
+The fields of triples and quads are restricted (with interfaces) to the normative value types they support, described by the table below.
 
 | Field | IRI | Literal | Blank Node | `nil` |
 | ----- |:---:|:-------:|:----------:|:-----:|
@@ -443,7 +443,7 @@ resource := rdfdescription.SubjectResource{
 }
 ```
 
-A description can be converted to triples by calling its `NewTriples` function. Each invocation creates new blank nodes for anonymous resources, so the triples returned from separate invocations may be non-isomorphic.
+A description can be converted to triples by calling its `NewTriples` function. Each invocation creates new blank nodes for anonymous resources, so the triples returned from subsequent invocations may be non-isomorphic.
 
 ```go
 resourceTriples := resource.NewTriples()
@@ -459,12 +459,12 @@ err := turtleEncoder.AddResource(ctx, resource)
 
 ### Resource List Builder
 
-The `ResourceListBuilder` may be used to construct resources from their triples. Once constructed, they can be enumerated with `GetResources()` or sent directly to supported encoders.
+The `ResourceListBuilder` may be used to construct resources from their triples. Once constructed, they can be enumerated with `ExportResources()` or sent directly to supported encoders.
 
 ```go
 builder := rdfdescription.NewResourceListBuilder()
 // builder.Add(rdf.Triple{...}, ...)
-err := builder.AddTo(ctx, turtleEncoder, true)
+err := builder.ToResourceWriter(ctx, turtleEncoder, rdfdescription.DefaultExportResourceOptions)
 ```
 
 ## Canonicalization
@@ -576,7 +576,9 @@ The [`rdfacontext` package](rdf/iriutil/rdfacontext/) provides a list of prefix 
 
 ## Notes
 
-* **RDF 1.2** (i.e. RDF-star) - not currently supported; likely to add primitive type support soon, encodings later.
+* **RDF 1.2** - not currently supported; likely to add primitive type support soon, encodings later.
+* [Generalized RDF](https://www.w3.org/TR/rdf11-concepts/#section-generalized-rdf) usage is not currently supported.
+* EARL Reports for well-known test suites are published as [build artifacts](https://github.com/dpb587/rdfkit-go/actions) ([preview](https://earl.dpb.io/source-ref?source=github.com%2Fdpb587%2Frdfkit-go%40main)).
 * This is a periodically updated fork based on private usage. There may still be some breaking changes before starting to version this module.
 
 ## License
