@@ -397,22 +397,14 @@ func (u *Unmarshaler) expandRDFList(builder *rdfdescription.ResourceListBuilder,
 	// Group statements by predicate
 	stmtsByPred := statements.GroupByPredicate()
 
-	// Check if this resource has rdf:type rdf:List
-	typeStmts := stmtsByPred[rdfiri.Type_Property]
-	hasListType := false
-	for _, stmt := range typeStmts {
-		objStmt, ok := stmt.(rdfdescription.ObjectStatement)
-		if !ok {
-			continue
-		}
-		if iri, ok := objStmt.Object.(rdf.IRI); ok && iri == rdfiri.List_Class {
-			hasListType = true
-			break
-		}
-	}
+	// Check if this looks like an rdf:List structure
+	// A list node should have rdf:first and rdf:rest properties
+	// (Some RDF parsers don't generate explicit rdf:type rdf:List statements)
+	hasFirst := len(stmtsByPred[rdfiri.First_Property]) > 0
+	hasRest := len(stmtsByPred[rdfiri.Rest_Property]) > 0
 
-	if !hasListType {
-		// Not an rdf:List
+	if !hasFirst || !hasRest {
+		// Not an rdf:List structure
 		return reflect.Value{}, nil
 	}
 

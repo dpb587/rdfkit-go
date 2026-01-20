@@ -55,9 +55,10 @@ Additionally, the following builtin types are supported for incoming `rdf.Litera
 
 Additionally, the generic `Collection[T]` type is supported for RDF list traversal.
 
-* `Collection[T]` - if the object value is an IRI or Blank Node, check if it represents a resource from the scope's ResourceListBuilder. If so, and if it includes the type `rdf:List`, follow the chain of values, process each list value in the context of the field type `T` (i.e. per "Tagged Object Scalar" section). The `Collection[T]` type is defined as `type Collection[T any] []T`.
+* `Collection[T]` - if the object value is an IRI or Blank Node, check if it represents a resource from the scope's ResourceListBuilder. If so, and if it offers `rdf:first` and `rdf:rest` properties, follow the [List](https://www.w3.org/TR/rdf11-mt/#rdf-collections) of values, process each list value in the context of the field type `T` (i.e. per "Tagged Object Scalar" section). The `Collection[T]` type is defined as `type Collection[T any] []T`.
 
 Any other type is assumed to be a custom struct which represents a Resource that can be recursively unmarshalled. Custom structs can be unmarshaled from:
+
 * **ObjectStatement** - when the object is an IRI or BlankNode that references a resource with statements in the ResourceListBuilder
 * **AnonResourceStatement** - when the object is an inline blank node with embedded properties (no separate subject in the ResourceListBuilder)
 

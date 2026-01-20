@@ -1321,3 +1321,90 @@ func TestUnmarshal_AnonResourceWithSubjectField(t *testing.T) {
 		t.Errorf("Result.Outcome = %v, want http://www.w3.org/ns/earl#passed", result.Result.Outcome)
 	}
 }
+
+// TestUnmarshal_Collection_WithoutExplicitType tests that RDF lists without
+// explicit rdf:type rdf:List statements are correctly recognized and unmarshaled.
+// This simulates the behavior of Turtle parsers that use the () syntax, which
+// create rdf:first/rdf:rest structures without explicit type statements.
+func TestUnmarshal_Collection_WithoutExplicitType(t *testing.T) {
+	// Create a list structure without rdf:type rdf:List statements
+	// This simulates what Turtle parsers generate for ( item1 item2 item3 ) syntax
+	listNode1 := rdf.NewBlankNode()
+	listNode2 := rdf.NewBlankNode()
+	listNode3 := rdf.NewBlankNode()
+
+	builder := rdfdescription.NewResourceListBuilder()
+
+	// List node 1: points to action1
+	builder.Add(rdf.Triple{
+		Subject:   listNode1,
+		Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
+		Object:    rdf.IRI("http://example.org/action1"),
+	})
+	builder.Add(rdf.Triple{
+		Subject:   listNode1,
+		Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
+		Object:    listNode2,
+	})
+
+	// List node 2: points to action2
+	builder.Add(rdf.Triple{
+		Subject:   listNode2,
+		Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
+		Object:    rdf.IRI("http://example.org/action2"),
+	})
+	builder.Add(rdf.Triple{
+		Subject:   listNode2,
+		Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
+		Object:    listNode3,
+	})
+
+	// List node 3: points to action3
+	builder.Add(rdf.Triple{
+		Subject:   listNode3,
+		Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#first"),
+		Object:    rdf.IRI("http://example.org/action3"),
+	})
+	builder.Add(rdf.Triple{
+		Subject:   listNode3,
+		Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#rest"),
+		Object:    rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"),
+	})
+
+	// Main resource pointing to the list
+	resource := &rdfdescription.SubjectResource{
+		Subject: rdf.IRI("http://example.org/test"),
+		Statements: rdfdescription.StatementList{
+			rdfdescription.ObjectStatement{
+				Predicate: rdf.IRI("http://example.org/action"),
+				Object:    listNode1,
+			},
+		},
+	}
+
+	type TestStruct struct {
+		Actions Collection[rdf.IRI] `rdf:"o,p=http://example.org/action"`
+	}
+
+	testStruct := &TestStruct{}
+	if err := Unmarshal(builder, resource, testStruct); err != nil {
+		t.Fatalf("Unmarshal error: %v", err)
+	}
+
+	// Verify the list was correctly unmarshaled
+	expected := []rdf.IRI{
+		"http://example.org/action1",
+		"http://example.org/action2",
+		"http://example.org/action3",
+	}
+
+	if len(testStruct.Actions) != len(expected) {
+		t.Fatalf("Actions length = %d, want %d", len(testStruct.Actions), len(expected))
+	}
+
+	for i, action := range testStruct.Actions {
+		if action != expected[i] {
+			t.Errorf("Actions[%d] = %v, want %v", i, action, expected[i])
+		}
+	}
+}
