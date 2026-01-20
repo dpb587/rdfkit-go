@@ -98,7 +98,7 @@ func (rb *BaseIRI) RelativizeIRI(v rdf.IRI) (string, bool) {
 		return "", true
 	}
 
-	if len(vString) >= rb.resourceIndex {
+	if len(vString) > rb.resourceIndex {
 		switch vString[rb.resourceIndex] {
 		case '#':
 			// dropping query

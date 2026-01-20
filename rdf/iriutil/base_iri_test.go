@@ -116,6 +116,13 @@ func TestBaseIRI_Relativize(t *testing.T) {
 			ExpectedRelativized: "subpath/other",
 			ExpectedOK:          true,
 		},
+		// past bug (off-by-one)
+		{
+			Base:                "http://www.w3.org/2013/TurtleTests/manifest.ttl",
+			Input:               "http://www.w3.org/2013/TurtleTests/LITERAL1.ttl",
+			ExpectedRelativized: "LITERAL1.ttl",
+			ExpectedOK:          true,
+		},
 	}
 
 	for _, tt := range tests {
