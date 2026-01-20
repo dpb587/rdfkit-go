@@ -86,7 +86,7 @@ func NewReportFromEnv(t *testing.T) *Report {
 
 		defer encoder.Close()
 
-		if err := r.ExportResources(t.Context(), encoder); err != nil {
+		if err := r.ToResourceWriter(t.Context(), encoder); err != nil {
 			t.Errorf("earltesting: failed to export resources: %v", err)
 		}
 	})
@@ -117,7 +117,7 @@ func (r *Report) WithSubject(subjectValue rdf.SubjectValue, statements ...rdfdes
 	return ReportScope{report: r}.WithSubject(subjectValue, statements...)
 }
 
-func (r *Report) ExportResources(ctx context.Context, encoder rdfdescriptionutil.ResourceEncoder) error {
+func (r *Report) ToResourceWriter(ctx context.Context, w rdfdescription.ResourceWriter) error {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
@@ -126,7 +126,7 @@ func (r *Report) ExportResources(ctx context.Context, encoder rdfdescriptionutil
 	resourcesByAssertionSubject := map[rdf.SubjectValue]struct{}{}
 
 	for _, profile := range r.assertions {
-		if err := encoder.AddResource(ctx, r.builder.ExportResource(profile.Node, rdfdescription.DefaultExportResourceOptions)); err != nil {
+		if err := w.AddResource(ctx, r.builder.ExportResource(profile.Node, rdfdescription.DefaultExportResourceOptions)); err != nil {
 			return fmt.Errorf("failed to add assertion resource: %w", err)
 		}
 
@@ -144,13 +144,9 @@ func (r *Report) ExportResources(ctx context.Context, encoder rdfdescriptionutil
 			}
 		}
 
-		if err := encoder.AddResource(ctx, r.builder.ExportResource(s, rdfdescription.DefaultExportResourceOptions)); err != nil {
+		if err := w.AddResource(ctx, r.builder.ExportResource(s, rdfdescription.DefaultExportResourceOptions)); err != nil {
 			return fmt.Errorf("failed to add resource: %w", err)
 		}
-	}
-
-	if err := encoder.Close(); err != nil {
-		return fmt.Errorf("failed to close encoder: %w", err)
 	}
 
 	return nil

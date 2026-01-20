@@ -117,7 +117,7 @@ func (rs ReportScope) WithSubject(subjectValue rdf.SubjectValue, statements ...r
 	}
 }
 
-func (rs ReportScope) NewAssertion(t *testing.T, testIRI rdf.IRI) *Assertion {
+func (rs ReportScope) NewAssertion(t *testing.T, test rdf.SubjectValue) *Assertion {
 	rs.report.mu.Lock()
 	defer rs.report.mu.Unlock()
 
@@ -127,7 +127,7 @@ func (rs ReportScope) NewAssertion(t *testing.T, testIRI rdf.IRI) *Assertion {
 	assertion := &Assertion{
 		rs:             rs,
 		t:              t,
-		testIRI:        testIRI,
+		test:           test,
 		assertionNode:  assertionNode,
 		resultNode:     resultNode,
 		startTime:      time.Now(),
@@ -135,15 +135,13 @@ func (rs ReportScope) NewAssertion(t *testing.T, testIRI rdf.IRI) *Assertion {
 	}
 
 	rs.report.assertions = append(rs.report.assertions, AssertionProfile{
-		Test:        testIRI,
+		Test:        test,
 		Node:        assertionNode,
 		ResultNode:  resultNode,
 		TestingName: t.Name(),
 	})
 
-	t.Cleanup(func() {
-		assertion.finalize()
-	})
+	t.Cleanup(assertion.finalize)
 
 	return assertion
 }

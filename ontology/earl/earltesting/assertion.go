@@ -15,7 +15,7 @@ import (
 type Assertion struct {
 	rs                ReportScope
 	t                 *testing.T
-	testIRI           rdf.IRI
+	test              rdf.SubjectValue
 	assertionNode     rdf.SubjectValue
 	resultNode        rdf.SubjectValue
 	startTime         time.Time
@@ -61,7 +61,7 @@ func (a *Assertion) finalize() {
 		{
 			Subject:   a.assertionNode,
 			Predicate: earliri.Test_ObjectProperty,
-			Object:    a.testIRI,
+			Object:    a.test,
 		},
 		{
 			Subject:   a.assertionNode,
