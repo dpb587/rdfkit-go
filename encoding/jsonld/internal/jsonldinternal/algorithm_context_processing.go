@@ -171,16 +171,16 @@ func (vars algorithmContextProcessing) Call() (*Context, error) {
 
 			// [spec // 4.1.2 // 5.2.3] If the number of entries in the *remote contexts* array exceeds a processor defined limit, a `context overflow` error has been detected and processing is aborted; otherwise, add `context` to `remote contexts`.
 
-			{
-				if len(vars.RemoteContexts) > ProcessorRemoteContextsLimit {
-					return nil, jsonldtype.Error{
-						Code: jsonldtype.ContextOverflow,
-						Err:  fmt.Errorf("limit exceeded: %d", ProcessorRemoteContextsLimit),
-					}
+			if len(vars.RemoteContexts) > ProcessorRemoteContextsLimit {
+				return nil, jsonldtype.Error{
+					Code: jsonldtype.ContextOverflow,
+					Err:  fmt.Errorf("limit exceeded: %d", ProcessorRemoteContextsLimit),
 				}
-
-				vars.RemoteContexts = append(vars.RemoteContexts, _contextURLString)
 			}
+
+			remoteContextsCopy := make([]string, len(vars.RemoteContexts), len(vars.RemoteContexts)+1)
+			copy(remoteContextsCopy, vars.RemoteContexts)
+			remoteContextsCopy = append(remoteContextsCopy, _contextURLString)
 
 			// [spec // 4.1.2 // 5.2.4] If *context* was previously dereferenced, then the processor *MUST NOT* do a further dereference, and context is set to the previously established internal representation: set *context document* to the previously dereferenced document, and set *loaded context* to the value of the `@context` entry from the document in *context document*.
 
@@ -256,7 +256,7 @@ func (vars algorithmContextProcessing) Call() (*Context, error) {
 				ActiveContext:         result,
 				LocalContext:          loadedContext,
 				BaseURL:               contextDocumentIRI,
-				RemoteContexts:        vars.RemoteContexts[:],
+				RemoteContexts:        remoteContextsCopy,
 				ValidateScopedContext: vars.ValidateScopedContext,
 				// defaults
 				OverrideProtected: false,
