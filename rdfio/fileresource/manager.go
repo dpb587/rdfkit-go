@@ -1,6 +1,7 @@
 package fileresource
 
 import (
+	"bufio"
 	"context"
 	"fmt"
 	"io"
@@ -12,6 +13,8 @@ import (
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdfio/rdfiotypes"
 )
+
+var WriterBufferSize = 32 * 1024
 
 type manager struct{}
 
@@ -107,10 +110,15 @@ func (rm *manager) NewWriter(ctx context.Context, opts rdfiotypes.WriterOptions)
 	var ww *writer
 
 	if fp == "" || fp == "-" {
+		bufWriter := bufio.NewWriterSize(os.Stdout, WriterBufferSize)
+
 		ww = &writer{
 			iri:      rdf.IRI("file:///dev/stdout"),
 			fileName: "stdout",
-			body:     os.Stdout,
+			body:     bufWriter,
+			bodyCloser: func() error {
+				return bufWriter.Flush()
+			},
 		}
 	} else {
 		f, err := os.OpenFile(fp, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0644)
@@ -118,11 +126,20 @@ func (rm *manager) NewWriter(ctx context.Context, opts rdfiotypes.WriterOptions)
 			return nil, err
 		}
 
+		bufWriter := bufio.NewWriterSize(f, WriterBufferSize)
+
 		ww = &writer{
-			iri:        rdf.IRI("file://" + fp),
-			fileName:   filepath.Base(fp),
-			body:       f,
-			bodyCloser: f.Close,
+			iri:      rdf.IRI("file://" + fp),
+			fileName: filepath.Base(fp),
+			body:     bufWriter,
+			bodyCloser: func() error {
+				err := bufWriter.Flush()
+				if err != nil {
+					return err
+				}
+
+				return f.Close()
+			},
 		}
 	}
 
