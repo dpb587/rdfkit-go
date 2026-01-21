@@ -35,6 +35,9 @@ type Encoder struct {
 	buffered         bool
 	bufferedSort     bool
 	bufferedSections [][]byte
+
+	baseDirectiveMode   DirectiveMode
+	prefixDirectiveMode DirectiveMode
 }
 
 var _ encoding.TriplesEncoder = &Encoder{}
@@ -84,14 +87,21 @@ func (w *Encoder) Close() error {
 				baseString = w.base.String()
 			}
 
-			_, err := WriteDocumentHeader(w.w, baseString, prefixMappings)
+			written, err := WriteDirectives(w.w, WriteDirectivesOptions{
+				Base:       baseString,
+				Prefixes:   prefixMappings,
+				BaseMode:   w.baseDirectiveMode,
+				PrefixMode: w.prefixDirectiveMode,
+			})
 			if err != nil {
 				return err
 			}
 
-			_, err = w.w.Write([]byte("\n"))
-			if err != nil {
-				return fmt.Errorf("write header: %v", err)
+			if written > 0 {
+				_, err = w.w.Write([]byte("\n"))
+				if err != nil {
+					return fmt.Errorf("write header: %v", err)
+				}
 			}
 		}
 

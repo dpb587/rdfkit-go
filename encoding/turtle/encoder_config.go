@@ -17,6 +17,9 @@ type EncoderConfig struct {
 
 	buffered     *bool
 	bufferedSort *bool
+
+	baseDirectiveMode   *DirectiveMode
+	prefixDirectiveMode *DirectiveMode
 }
 
 func (s EncoderConfig) SetBase(v string) EncoderConfig {
@@ -49,6 +52,25 @@ func (s EncoderConfig) SetBufferedSort(v bool) EncoderConfig {
 	return s
 }
 
+func (s EncoderConfig) SetBaseDirectiveMode(v DirectiveMode) EncoderConfig {
+	s.baseDirectiveMode = &v
+
+	return s
+}
+
+func (s EncoderConfig) SetPrefixDirectiveMode(v DirectiveMode) EncoderConfig {
+	s.prefixDirectiveMode = &v
+
+	return s
+}
+
+func (s EncoderConfig) SetDirectiveMode(v DirectiveMode) EncoderConfig {
+	s.baseDirectiveMode = &v
+	s.prefixDirectiveMode = &v
+
+	return s
+}
+
 func (s EncoderConfig) apply(d *EncoderConfig) {
 	if s.base != nil {
 		d.base = s.base
@@ -69,6 +91,14 @@ func (s EncoderConfig) apply(d *EncoderConfig) {
 	if s.bufferedSort != nil {
 		d.bufferedSort = s.bufferedSort
 	}
+
+	if s.baseDirectiveMode != nil {
+		d.baseDirectiveMode = s.baseDirectiveMode
+	}
+
+	if s.prefixDirectiveMode != nil {
+		d.prefixDirectiveMode = s.prefixDirectiveMode
+	}
 }
 
 func (s EncoderConfig) newEncoder(w io.Writer) (*Encoder, error) {
@@ -81,9 +111,11 @@ func (s EncoderConfig) newEncoder(w io.Writer) (*Encoder, error) {
 	}
 
 	e := &Encoder{
-		w:                w,
-		prefixes:         iriutil.NewPrefixTracker(prefixes),
-		bnStringProvider: s.bnStringProvider,
+		w:                   w,
+		prefixes:            iriutil.NewPrefixTracker(prefixes),
+		bnStringProvider:    s.bnStringProvider,
+		baseDirectiveMode:   DirectiveMode_At,
+		prefixDirectiveMode: DirectiveMode_At,
 	}
 
 	if s.base != nil {
@@ -118,7 +150,12 @@ func (s EncoderConfig) newEncoder(w io.Writer) (*Encoder, error) {
 			baseString = e.base.String()
 		}
 
-		written, err := WriteDocumentHeader(e.w, baseString, prefixMappings)
+		written, err := WriteDirectives(e.w, WriteDirectivesOptions{
+			Base:       baseString,
+			Prefixes:   prefixMappings,
+			BaseMode:   e.baseDirectiveMode,
+			PrefixMode: e.prefixDirectiveMode,
+		})
 		if err != nil {
 			return nil, fmt.Errorf("write header: %v", err)
 		} else if written > 0 {
@@ -127,6 +164,14 @@ func (s EncoderConfig) newEncoder(w io.Writer) (*Encoder, error) {
 				return nil, fmt.Errorf("write header: %v", err)
 			}
 		}
+	}
+
+	if s.baseDirectiveMode != nil {
+		e.baseDirectiveMode = *s.baseDirectiveMode
+	}
+
+	if s.prefixDirectiveMode != nil {
+		e.prefixDirectiveMode = *s.prefixDirectiveMode
 	}
 
 	return e, nil
