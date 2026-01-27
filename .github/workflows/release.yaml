@@ -1,0 +1,102 @@
+name: release
+permissions:
+  contents: write
+on:
+  push:
+    tags:
+    - 'v*'
+jobs:
+  prepare:
+    name: prepare
+    runs-on: ubuntu-latest
+    outputs:
+      repository_url: ${{ steps.configure.outputs.repository_url }}
+      version: ${{ steps.configure.outputs.version }}
+      version_numbers: ${{ steps.configure.outputs.version_numbers }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+    - name: checkout
+      uses: actions/checkout@v6
+      with:
+        fetch-depth: 0
+    - name: setup-go
+      uses: actions/setup-go@v6
+      with:
+        go-version: 1.25.x
+    - name: test
+      run: dev/scripts/test.sh
+    - id: configure
+      name: configure
+      run: |
+        version=${GITHUB_REF#$"refs/tags/"}
+        version_numbers=${GITHUB_REF#$"refs/tags/v"}
+
+        if ! git merge-base --is-ancestor $( git rev-parse HEAD ) refs/remotes/origin/main
+        then
+          echo tag and main have diverged >&2
+          exit 1
+        fi
+
+        gh release create ${version} \
+          --draft \
+          --prerelease=false \
+          --title "${version}"
+
+        echo "repository_url=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}" >> "$GITHUB_OUTPUT"
+        echo "version=${version}" >> "$GITHUB_OUTPUT"
+        echo "version_numbers=${version_numbers}" >> "$GITHUB_OUTPUT"
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    needs:
+    - prepare
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+    - name: checkout
+      uses: actions/checkout@v6
+      with:
+        fetch-depth: 0
+    - name: setup-go
+      uses: actions/setup-go@v6
+      with:
+        go-version: 1.25.x
+    - name: build-assets
+      run: dev/scripts/build-assets.sh
+    - name: sha256sum
+      run: |
+        pushd tmp/build-assets
+        sha256sum * > sha256sum.txt
+        popd
+    - name: upload
+      run: |
+        gh release upload ${{ needs.prepare.outputs.version }} tmp/build-assets/*
+  publish:
+    name: publish
+    runs-on: ubuntu-latest
+    needs:
+    - prepare
+    - build
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+    - name: checkout
+      uses: actions/checkout@v6
+      with:
+        fetch-depth: 0
+    - name: publish
+      run: |
+        (
+          if [ -e dev/releasenotes/${{ needs.prepare.outputs.version }}.md ]
+          then
+            cat dev/releasenotes/${{ needs.prepare.outputs.version }}.md
+            echo
+          fi
+        ) > notes.md
+
+        gh release edit ${{ needs.prepare.outputs.version }} \
+          --draft=false \
+          --notes-file=notes.md \
+          --latest
