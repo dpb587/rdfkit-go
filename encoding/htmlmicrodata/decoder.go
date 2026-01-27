@@ -515,8 +515,9 @@ func (w *Decoder) parseMicrodataItemvalue(ectx evaluationContext, n *html.Node) 
 		// also avoids GetInner which will panic if node had no children (aka missing end tag)
 	} else if w.captureOffsets {
 		if nodeProfile, ok := w.doc.GetNodeMetadata(n); ok {
-			innerOffsets := nodeProfile.GetInnerOffsets()
-			termCursorRange = &innerOffsets
+			if innerOffsets := nodeProfile.GetInnerOffsets(); innerOffsets != nil {
+				termCursorRange = innerOffsets
+			}
 		}
 	}
 

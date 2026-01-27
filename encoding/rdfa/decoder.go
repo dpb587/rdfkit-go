@@ -963,8 +963,9 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 					}
 
 					if v.captureOffsets {
-						innerOffsets := nodeProfile.GetInnerOffsets()
-						currentPropertyValueAnno = &innerOffsets
+						if innerOffsets := nodeProfile.GetInnerOffsets(); innerOffsets != nil {
+							currentPropertyValueAnno = innerOffsets
+						}
 					}
 				}
 			} else if attrDatatype != nil && len(datatypeIRI) == 0 {
@@ -990,8 +991,9 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 					}
 
 					if v.captureOffsets {
-						innerOffsets := nodeProfile.GetInnerOffsets()
-						currentPropertyValueAnno = &innerOffsets
+						if innerOffsets := nodeProfile.GetInnerOffsets(); innerOffsets != nil {
+							currentPropertyValueAnno = innerOffsets
+						}
 					}
 				}
 			} else if attrDatatype != nil && datatypeIRI == rdfiri.XMLLiteral_Datatype {
@@ -1007,8 +1009,9 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 
 				if v.captureOffsets {
 					// TODO use first/last child instead?
-					innerOffsets := nodeProfile.GetInnerOffsets()
-					currentPropertyValueAnno = &innerOffsets
+					if innerOffsets := nodeProfile.GetInnerOffsets(); innerOffsets != nil {
+						currentPropertyValueAnno = innerOffsets
+					}
 				}
 			} else if attrDatatype != nil && datatypeIRI == rdfiri.HTML_Datatype {
 				// rdfa-in-html // 3.1 // Additional Processing Rule 1
@@ -1024,8 +1027,9 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 				}
 
 				if v.captureOffsets {
-					innerOffsets := nodeProfile.GetInnerOffsets()
-					currentPropertyValueAnno = &innerOffsets
+					if innerOffsets := nodeProfile.GetInnerOffsets(); innerOffsets != nil {
+						currentPropertyValueAnno = innerOffsets
+					}
 				}
 			} else if ectx.Global.HtmlProcessing&ActiveHtmlProcessingProfile > 0 && n.DataAtom == atom.Time && attrContent == nil {
 				if attrDatetime == nil {
@@ -1038,8 +1042,9 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 					attrDatetime = ptr.Value(buf.String())
 
 					if v.captureOffsets {
-						innerOffsets := nodeProfile.GetInnerOffsets()
-						currentPropertyValueAnno = &innerOffsets
+						if innerOffsets := nodeProfile.GetInnerOffsets(); innerOffsets != nil {
+							currentPropertyValueAnno = innerOffsets
+						}
 					}
 				} else {
 					if v.captureOffsets {
@@ -1120,8 +1125,9 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 				}
 
 				if v.captureOffsets {
-					innerOffsets := nodeProfile.GetInnerOffsets()
-					currentPropertyValueAnno = &innerOffsets
+					if innerOffsets := nodeProfile.GetInnerOffsets(); innerOffsets != nil {
+						currentPropertyValueAnno = innerOffsets
+					}
 				}
 			}
 

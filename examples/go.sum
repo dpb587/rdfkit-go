@@ -4,8 +4,8 @@ github.com/cespare/permute/v2 v2.0.0-beta2 h1:iiJWgDsInCbnwfDZiLJX7cVlJevgIM1pUi
 github.com/cespare/permute/v2 v2.0.0-beta2/go.mod h1:7e2Tqe0fjn1T4rTjDLJjQ+kNtt+UW4B9lg10asqWw0A=
 github.com/dpb587/cursorio-go v0.0.0-20250717044249-e1d8c928b30d h1:UxedKtdKz4vyHhlQtjdOx8ogG+y7uhIViUVXM3jSeVY=
 github.com/dpb587/cursorio-go v0.0.0-20250717044249-e1d8c928b30d/go.mod h1:YokGb5i31XI0Z+4t8bZxvZecyKY3ddLlih9Rr7eBgW0=
-github.com/dpb587/inspecthtml-go v0.0.0-20250906134739-0d404c86637b h1:h7XE5d+xgEvGyRIIral6XAZUcMGrh/zb01Yz+mjYHN0=
-github.com/dpb587/inspecthtml-go v0.0.0-20250906134739-0d404c86637b/go.mod h1:STz5Xq0b2UCumUEpt65TTy86vJuq+R5QUyCqGtUVH54=
+github.com/dpb587/inspecthtml-go v0.0.0-20260127180550-88d5417d3e44 h1:Z+TFLxcKxMiWRjrdAYFKcELLDftGtyqklm6WDkHjAJw=
+github.com/dpb587/inspecthtml-go v0.0.0-20260127180550-88d5417d3e44/go.mod h1:STz5Xq0b2UCumUEpt65TTy86vJuq+R5QUyCqGtUVH54=
 github.com/dpb587/inspectjson-go v0.0.0-20251203142639-90f1442149fb h1:RiCz/jdb3S2DeKCn/QGIeSvkOcFJW9+yazbSoH0pNCc=
 github.com/dpb587/inspectjson-go v0.0.0-20251203142639-90f1442149fb/go.mod h1:FTNc/N87Cz+dccpetYPiSsGpbl/CG7K26PeJSUwT2uQ=
 github.com/google/uuid v1.6.0 h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=
