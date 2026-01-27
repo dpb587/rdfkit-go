@@ -1,4 +1,4 @@
-package rdfa
+package htmlrdfa
 
 import "github.com/dpb587/rdfkit-go/encoding"
 

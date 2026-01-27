@@ -1,4 +1,4 @@
-package rdfa
+package htmlrdfa
 
 import (
 	"bytes"

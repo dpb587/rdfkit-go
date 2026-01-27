@@ -11,8 +11,8 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding/html/htmlcontent"
 	"github.com/dpb587/rdfkit-go/encoding/htmljsonld"
 	"github.com/dpb587/rdfkit-go/encoding/htmlmicrodata"
+	"github.com/dpb587/rdfkit-go/encoding/htmlrdfa"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld"
-	"github.com/dpb587/rdfkit-go/encoding/rdfa"
 	"github.com/dpb587/rdfkit-go/rdf"
 )
 
@@ -140,9 +140,9 @@ func (d *Decoder) init() ([]nestedIterator, error) {
 		return nil, fmt.Errorf("htmlmicrodata: %v", err)
 	}
 
-	htmlRdfa, err := rdfa.NewDecoder(htmlDocument)
+	htmlRdfa, err := htmlrdfa.NewDecoder(htmlDocument)
 	if err != nil {
-		return nil, fmt.Errorf("rdfa: %v", err)
+		return nil, fmt.Errorf("htmlrdfa: %v", err)
 	}
 
 	return []nestedIterator{

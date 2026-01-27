@@ -1,4 +1,4 @@
-package rdfa
+package htmlrdfa
 
 import (
 	"bytes"
@@ -12,7 +12,7 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/encodingutil"
 	encodinghtml "github.com/dpb587/rdfkit-go/encoding/html"
-	"github.com/dpb587/rdfkit-go/encoding/rdfa/rdfacontent"
+	"github.com/dpb587/rdfkit-go/encoding/htmlrdfa/rdfacontent"
 	"github.com/dpb587/rdfkit-go/internal/ptr"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/rdfa/rdfairi"

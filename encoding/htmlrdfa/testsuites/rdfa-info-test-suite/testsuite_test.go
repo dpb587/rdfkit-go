@@ -9,7 +9,7 @@ import (
 	"github.com/dpb587/rdfkit-go/dev/earltestingutil"
 	"github.com/dpb587/rdfkit-go/encoding/encodingtest"
 	"github.com/dpb587/rdfkit-go/encoding/html"
-	"github.com/dpb587/rdfkit-go/encoding/rdfa"
+	"github.com/dpb587/rdfkit-go/encoding/htmlrdfa"
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
 	"github.com/dpb587/rdfkit-go/ontology/earl/earliri"
 	"github.com/dpb587/rdfkit-go/ontology/earl/earltesting"
@@ -172,21 +172,21 @@ func Test(t *testing.T) {
 						return nil, fmt.Errorf("parse document: %v", err)
 					}
 
-					opts := rdfa.DecoderConfig{}
+					opts := htmlrdfa.DecoderConfig{}
 
 					if profile.rdfaVersion == "rdfa1.1" && profile.hostLanguage == "html4" {
-						opts = opts.SetHtmlProcessingProfile(rdfa.HTML4_RDFa11_HtmlProcessProfile)
+						opts = opts.SetHtmlProcessingProfile(htmlrdfa.HTML4_RDFa11_HtmlProcessProfile)
 					} else if profile.rdfaVersion == "rdfa1.1" && profile.hostLanguage == "html5" {
-						opts = opts.SetHtmlProcessingProfile(rdfa.HTML5_RDFa11_HtmlProcessProfile)
+						opts = opts.SetHtmlProcessingProfile(htmlrdfa.HTML5_RDFa11_HtmlProcessProfile)
 					} else if profile.rdfaVersion == "rdfa1.1" && profile.hostLanguage == "xhtml1" {
-						opts = opts.SetHtmlProcessingProfile(rdfa.XHTML1_RDFa11_HtmlProcessProfile)
+						opts = opts.SetHtmlProcessingProfile(htmlrdfa.XHTML1_RDFa11_HtmlProcessProfile)
 					} else if profile.rdfaVersion == "rdfa1.1" && profile.hostLanguage == "xhtml5" {
-						opts = opts.SetHtmlProcessingProfile(rdfa.XHTML5_RDFa11_HtmlProcessProfile)
+						opts = opts.SetHtmlProcessingProfile(htmlrdfa.XHTML5_RDFa11_HtmlProcessProfile)
 					} else {
 						t.Fatalf("unsupported profile combination: %s + %s", profile.rdfaVersion, profile.hostLanguage)
 					}
 
-					return encodingtest.CollectTripleStatementsErr(rdfa.NewDecoder(
+					return encodingtest.CollectTripleStatementsErr(htmlrdfa.NewDecoder(
 						htmlDocument,
 						opts,
 					))
