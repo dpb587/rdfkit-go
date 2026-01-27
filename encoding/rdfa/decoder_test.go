@@ -8,6 +8,7 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding/html"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfobject"
+	"github.com/dpb587/rdfkit-go/ontology/rdfa/rdfairi"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
 	"github.com/dpb587/rdfkit-go/rdf"
@@ -27,6 +28,7 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
 		Expected encodingtest.TripleStatementList
 	}{
 		{
+			// for xml serialization, we include *all* namespaces rather than making assumptions on child namespace usage
 			Name: "3.4/Example 3",
 			Snippet: `<p xmlns:ex="http://example.org/vocab#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
@@ -39,7 +41,7 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
 						Subject:   rdf.IRI(""),
 						Predicate: rdf.IRI("http://example.org/vocab#markup"),
 						Object: rdf.Literal{
-							LexicalForm: `<rect xmlns="http://www.w3.org/2000/svg" width="300" height="100" style="fill:rgb(0,0,255);stroke-width:1; stroke:rgb(0,0,0)"/><rect xmlns="http://www.w3.org/2000/svg" width="50" height="50" style="fill:rgb(255,0,0);stroke-width:2;stroke:rgb(0,0,0)"/>`,
+							LexicalForm: `<rect xmlns="http://www.w3.org/2000/svg" xmlns:ex="http://example.org/vocab#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" height="100" style="fill:rgb(0,0,255);stroke-width:1; stroke:rgb(0,0,0)" width="300"/><rect xmlns="http://www.w3.org/2000/svg" xmlns:ex="http://example.org/vocab#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" height="50" style="fill:rgb(255,0,0);stroke-width:2;stroke:rgb(0,0,0)" width="50"/>`,
 							Datatype:    rdfiri.XMLLiteral_Datatype,
 						},
 					},
@@ -48,6 +50,7 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
 		},
 		{
 			// spec is missing "The User" from the expected triple object
+			// for xml serialization, we include *all* namespaces rather than making assumptions on child namespace usage
 			Name: "3.4/Example 5",
 			Snippet: `<p xmlns:ex="http://example.org/vocab#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -61,7 +64,7 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
 						Subject:   rdf.IRI(""),
 						Predicate: rdf.IRI("http://example.org/vocab#markup"),
 						Object: rdf.Literal{
-							LexicalForm: `<span xmlns:fb="http://www.facebook.com/2008/fbml"><fb:user uid="12345">The User</fb:user></span>`,
+							LexicalForm: `<span xmlns:ex="http://example.org/vocab#" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><fb:user uid="12345">The User</fb:user></span>`,
 							Datatype:    rdfiri.XMLLiteral_Datatype,
 						},
 					},
@@ -95,6 +98,13 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
   </p>
 </div>`,
 			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
+					Triple: rdf.Triple{
+						Subject:   rdf.IRI(""),
+						Predicate: rdfairi.UsesVocabulary_Property,
+						Object:    rdf.IRI("http://schema.org/"),
+					},
+				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.NewStringBlankNode("b0"),
@@ -223,6 +233,13 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
   </div>
 </div>`,
 			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
+					Triple: rdf.Triple{
+						Subject:   rdf.IRI(""),
+						Predicate: rdfairi.UsesVocabulary_Property,
+						Object:    rdf.IRI("http://schema.org/"),
+					},
+				},
 				encodingtest.TripleStatement{
 					Triple: rdf.Triple{
 						Subject:   testingBnode.NewStringBlankNode("b0"),

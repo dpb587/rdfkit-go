@@ -4,52 +4,81 @@ import (
 	"bytes"
 	"fmt"
 	"regexp"
+	"slices"
 	"strings"
 
 	"golang.org/x/net/html"
 )
 
-func (v *Decoder) xmlRender(n *html.Node, xmlnsKnown map[string]string) (string, error) {
-	switch n.Namespace {
-	case "":
-		//
-	case "math":
-		xmlnsKnown[""] = "http://www.w3.org/1998/Math/MathML"
-	case "svg":
-		xmlnsKnown[""] = "http://www.w3.org/2000/svg"
-	}
+func (v *Decoder) xmlRender(n *html.Node) (string, error) {
+	xmlnsKnown := make(map[string]string)
 
-	for _, attr := range n.Attr {
-		if attr.Namespace != "" {
-			continue
-		} else if attr.Key == "xmlns" {
-			xmlnsKnown[""] = attr.Val
-		} else if strings.HasPrefix(attr.Key, "xmlns:") {
-			xmlnsKnown[attr.Key[6:]] = attr.Val
+	for p := n; p != nil; p = p.Parent {
+		if _, exists := xmlnsKnown[""]; !exists {
+			switch p.Namespace {
+			case "math":
+				xmlnsKnown[""] = "http://www.w3.org/1998/Math/MathML"
+			case "svg":
+				xmlnsKnown[""] = "http://www.w3.org/2000/svg"
+			}
+		}
+
+		for _, attr := range p.Attr {
+			if attr.Namespace != "" {
+				continue
+			} else if attr.Key == "xmlns" {
+				if _, exists := xmlnsKnown[""]; !exists {
+					xmlnsKnown[""] = attr.Val
+				}
+			} else if strings.HasPrefix(attr.Key, "xmlns:") {
+				prefix := attr.Key[6:]
+				if _, exists := xmlnsKnown[prefix]; !exists {
+					xmlnsKnown[prefix] = attr.Val
+				}
+			} else if attr.Key == "prefix" {
+				// rdfa propagated as xmlns
+				fields := strings.Fields(strings.TrimSpace(attr.Val))
+
+				for fieldIdx := 0; fieldIdx+1 < len(fields); fieldIdx += 2 {
+					prefixTerm := strings.ToLower(fields[fieldIdx])
+					if strings.HasSuffix(prefixTerm, ":") {
+						prefix := prefixTerm[:len(prefixTerm)-1]
+						if _, exists := xmlnsKnown[prefix]; !exists {
+							xmlnsKnown[prefix] = fields[fieldIdx+1]
+						}
+					}
+				}
+			}
 		}
 	}
 
 	buf := &bytes.Buffer{}
 
 	for c := n.FirstChild; c != nil; c = c.NextSibling {
-		rebuilt, xmlnsHasRoot, xmlnsMissing := v.xmlRebuild(c, map[string]string{})
+		rebuilt, xmlnsHasRoot, _ := v.xmlRebuild(c, map[string]string{})
+		var attrModified bool
 
-		if _, xmlnsKnownRoot := xmlnsKnown[""]; !xmlnsHasRoot && xmlnsKnownRoot {
-			rebuilt.Attr = append([]html.Attribute{
-				{
-					Key: "xmlns",
-					Val: xmlnsKnown[""],
-				},
-			}, rebuilt.Attr...)
-		}
-
-		for k := range xmlnsMissing {
-			if schema, known := xmlnsKnown[k]; known {
+		for k, schema := range xmlnsKnown {
+			if len(k) == 0 && !xmlnsHasRoot {
 				rebuilt.Attr = append(rebuilt.Attr, html.Attribute{
-					Key: "xmlns:" + k,
+					Key: "xmlns",
 					Val: schema,
 				})
+
+				continue
 			}
+
+			rebuilt.Attr = append(rebuilt.Attr, html.Attribute{
+				Key: "xmlns:" + k,
+				Val: schema,
+			})
+
+			attrModified = true
+		}
+
+		if attrModified {
+			// not currently trying to do a full, recursive canonicalization
+			slices.SortStableFunc(rebuilt.Attr, v.xmlExtc14n)
 		}
 
 		err := html.Render(buf, rebuilt)
@@ -93,10 +122,6 @@ func (v *Decoder) xmlRebuild(n *html.Node, xmlnsKnown map[string]string) (*html.
 	}
 
 	for _, attr := range n.Attr {
-		if attr.Namespace == "" && attr.Key == "data-turple-offset" {
-			continue
-		}
-
 		if attr.Namespace == "" && attr.Key == "xmlns" {
 			xmlnsKnown[""] = attr.Val
 			xmlnsFound[""] = struct{}{}
@@ -133,4 +158,44 @@ func (v *Decoder) xmlRebuild(n *html.Node, xmlnsKnown map[string]string) (*html.
 	_, xmlnsHasRoot := xmlnsFound[""]
 
 	return nextNode, xmlnsHasRoot, xmlnsMissing
+}
+
+func (*Decoder) xmlExtc14n(a, b html.Attribute) int {
+	aIsDefaultNS := a.Namespace == "" && a.Key == "xmlns"
+	bIsDefaultNS := b.Namespace == "" && b.Key == "xmlns"
+	if aIsDefaultNS != bIsDefaultNS {
+		if aIsDefaultNS {
+			return -1
+		}
+
+		return 1
+	}
+
+	aIsNSDecl := a.Namespace == "" && strings.HasPrefix(a.Key, "xmlns:")
+	bIsNSDecl := b.Namespace == "" && strings.HasPrefix(b.Key, "xmlns:")
+	if aIsNSDecl && bIsNSDecl {
+		return strings.Compare(a.Key, b.Key)
+	} else if aIsNSDecl != bIsNSDecl {
+		if aIsNSDecl {
+			return -1
+		}
+		return 1
+	}
+
+	aIsUnqualified := a.Namespace == ""
+	bIsUnqualified := b.Namespace == ""
+	if aIsUnqualified && bIsUnqualified {
+		return strings.Compare(a.Key, b.Key)
+	} else if aIsUnqualified != bIsUnqualified {
+		if aIsUnqualified {
+			return -1
+		}
+		return 1
+	}
+
+	if a.Namespace != b.Namespace {
+		return strings.Compare(a.Namespace, b.Namespace)
+	}
+
+	return strings.Compare(a.Key, b.Key)
 }

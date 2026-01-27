@@ -1,0 +1,2104 @@
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0001>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0006>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0007>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0008>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0009>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0010>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0014>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0015>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0017>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0018>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0019>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0020>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0021>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0023>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0025>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0026>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0027>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0029>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0030>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0031>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0032>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0033>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0034>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0035>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0036>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0037>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0038>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0039>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0041>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0048>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0049>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0050>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0051>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0052>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0053>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0054>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0055>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0056>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0057>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0059>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0060>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0063>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0064>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0065>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0066>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0067>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0068>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0069>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0070>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0071>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0072>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0073>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0074>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0075>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0079>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0080>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0083>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0084>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0085>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0087>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0088>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0089>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0091>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0093>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0099>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0104>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0106>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0107>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0109>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0110>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0111>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0112>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0114>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0115>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0117>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0118>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0119>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0120>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0122>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0126>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0131>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0134>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0140>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0147>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0174>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0175>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0176>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0177>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0178>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0179>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0180>
+  earl:outcome earl:untested
+  <http://purl.org/dc/terms/description> "manual review: expectation seems incorrect? empty @prefix definition may be ignored, but reference still resolves against default vocabulary\n"
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0181>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0182>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0183>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0186>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0187>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0188>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0189>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0190>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0196>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0197>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0206>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0207>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0213>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0214>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0216>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0217>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0218>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0219>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0220>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0221>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0222>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0223>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0224>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0225>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0226>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0227>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0228>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0229>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0230>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0231>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0232>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0233>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0234>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0246>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0247>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0248>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0249>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0250>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0251>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0252>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0253>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0254>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0255>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0257>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0258>
+  earl:outcome earl:untested
+  <http://purl.org/dc/terms/description> "manual review: expectation seems incorrect? a warning may be emitted for the prefix, but the _:* syntax is still a valid blank node\n"
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0259>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0261>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0262>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0263>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0264>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0265>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0266>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0267>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0268>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0269>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0271>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0289>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0290>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0291>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0292>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0293>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0295>
+  earl:outcome earl:untested
+  <http://purl.org/dc/terms/description> "manual review: expectation assumes an HTML DOM implementation which immediately closes an incorrectly self-closed span tag (with go, Line 468 creates its following statements to have a subject of #b)\n"
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0296>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0297>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0298>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0299>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0300>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0301>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0302>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0303>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0311>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0318>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0319>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "manual review: leaky assumption about querying of results which expects iri resolution\n"
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0320>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0329>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0330>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0331>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html4/manifest#0332>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0001>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0006>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0007>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0008>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0009>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0010>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0014>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0015>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0017>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0018>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0020>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0021>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0023>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0025>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0026>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0027>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0029>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0030>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0031>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0032>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0033>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0034>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0036>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0038>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0048>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0049>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0050>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0051>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0052>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0053>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0054>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0055>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0056>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0057>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0059>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0060>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0063>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0064>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0065>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0066>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0067>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0068>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0069>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0070>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0071>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0072>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0073>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0074>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0075>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0080>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0083>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0084>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0088>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0089>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0091>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0093>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0099>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0104>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0106>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0107>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0110>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0111>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0112>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0115>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0117>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0118>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0119>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0120>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0122>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0126>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0134>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0140>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0174>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0175>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0176>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0177>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0178>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0181>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0182>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0186>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0187>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0188>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0189>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0190>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0196>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0197>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0206>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0207>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0213>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0214>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0216>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0217>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0218>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0219>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0220>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0221>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0224>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0225>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0228>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0229>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0231>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0232>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0233>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0246>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0247>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0248>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0249>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0250>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0251>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0252>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0253>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0254>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0255>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0257>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0259>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0261>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0262>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0263>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0264>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0265>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0266>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0267>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0268>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0269>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0271>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0272>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0273>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0274>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0275>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0276>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0277>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0278>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0279>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0281>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0282>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0283>
+  earl:outcome earl:untested
+  <http://purl.org/dc/terms/description> "manual review: expectation seems incorrect? html-rdfa says innerText is used as fallback for @datetime attr, then xsd:date uses whiteSpace=collapse, then it becomes a valid xsd:date\n"
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0284>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0287>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0289>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0290>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0291>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0292>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0293>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0296>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0297>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0298>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0299>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0300>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0301>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0302>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0311>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0312>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0315>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0316>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0317>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0318>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0321>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0322>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0323>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0324>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0325>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0326>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0327>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0328>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0329>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0330>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0331>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0332>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0333>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/html5/manifest#0334>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0001>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0006>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0007>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0008>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0009>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0010>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0012>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0013>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0014>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0015>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0017>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0018>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0019>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0020>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0021>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0023>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0025>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0026>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0027>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0029>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0030>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0031>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0032>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0033>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0034>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0035>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0036>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0037>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0038>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0039>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0041>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0048>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0049>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0050>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0051>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0052>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0053>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0054>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0055>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0056>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0057>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0059>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0060>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0061>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0062>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0063>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0064>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0065>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0066>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0067>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0068>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0069>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0070>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0071>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0072>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0073>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0074>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0075>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0076>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0077>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0079>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0080>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0083>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0084>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0085>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0087>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0088>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0089>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0091>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0093>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0099>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0104>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0106>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0107>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0108>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0110>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0111>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0112>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0113>
+  earl:outcome earl:untested
+  <http://purl.org/dc/terms/description> "manual review: expectation assumes an HTML DOM implementation (go tokenizer includes spaces until the outer closing tag since span should not be self-closing)\n"
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0114>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0115>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0117>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0118>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0119>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0120>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0121>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0122>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0126>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0131>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0134>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0140>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0147>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0172>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0173>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0174>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0175>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0176>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0177>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0178>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0179>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0180>
+  earl:outcome earl:untested
+  <http://purl.org/dc/terms/description> "manual review: expectation seems incorrect? empty @prefix definition may be ignored, but reference still resolves against default vocabulary\n"
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0181>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0182>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0183>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0186>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0187>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0188>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0189>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0190>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0196>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0197>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0198>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "manual review: verified equivalent aside from differing physical representations of xml (we use Exclusive XML Canonicalization for outer nodes)\n"
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0206>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0207>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0213>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0214>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0216>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0217>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0218>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0219>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0220>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0221>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0222>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0223>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0224>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0225>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0226>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0227>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0228>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0229>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0230>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0231>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0232>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0233>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0234>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0246>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0247>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0248>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0249>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0250>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0251>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0252>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0253>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0254>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0255>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0256>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0257>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0258>
+  earl:outcome earl:untested
+  <http://purl.org/dc/terms/description> "manual review: expectation seems incorrect? a warning may be emitted for the prefix, but the _:* syntax is still a valid blank node\n"
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0259>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0260>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0261>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0262>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0263>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0264>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0265>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0266>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0267>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0268>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0269>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0271>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0289>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0290>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0291>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0292>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0293>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0295>
+  earl:outcome earl:untested
+  <http://purl.org/dc/terms/description> "manual review: expectation assumes an HTML DOM implementation which immediately closes an incorrectly self-closed span tag (with go, Line 468 creates its following statements to have a subject of #b)\n"
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0296>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0297>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0298>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0299>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0300>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0301>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0302>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0311>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0318>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0319>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "manual review: leaky assumption about querying of results which expects iri resolution\n"
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0320>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0329>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0330>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0331>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml1/manifest#0332>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0001>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0006>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0007>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0008>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0009>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0010>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0014>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0015>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0017>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0018>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0020>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0021>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0023>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0025>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0026>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0027>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0029>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0030>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0031>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0032>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0033>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0034>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0036>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0038>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0048>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0049>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0050>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0051>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0052>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0053>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0054>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0055>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0056>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0057>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0059>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0060>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0063>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0064>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0065>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0066>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0067>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0068>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0069>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0070>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0071>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0072>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0073>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0074>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0075>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0080>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0083>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0084>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0088>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0089>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0091>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0093>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0099>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0104>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0106>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0107>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0110>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0111>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0112>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0115>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0117>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0118>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0119>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0120>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0121>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0122>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0126>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0134>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0140>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0147>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0174>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0175>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0176>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0177>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0178>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0179>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0181>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0182>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0183>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0186>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0187>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0188>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0189>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0190>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0196>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0197>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0198>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "manual review: verified equivalent aside from differing physical representations of xml (we use Exclusive XML Canonicalization for outer nodes)\n"
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0206>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0207>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0213>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0214>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0216>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0217>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0218>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0219>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0220>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0221>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0224>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0225>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0228>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0229>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0231>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0232>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0233>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0246>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0247>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0248>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0249>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0250>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0251>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0252>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0253>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0254>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0255>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0256>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0257>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0259>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0261>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0262>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0263>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0264>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0265>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0266>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0267>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0268>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0269>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0271>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0272>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0273>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0274>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0275>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0276>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0277>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0278>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0279>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0281>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0282>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0283>
+  earl:outcome earl:untested
+  <http://purl.org/dc/terms/description> "manual review: expectation seems incorrect? html-rdfa says innerText is used as fallback for @datetime attr, then xsd:date uses whiteSpace=collapse, then it becomes a valid xsd:date\n"
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0284>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0287>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0289>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0290>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0291>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0292>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0293>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0296>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0297>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0298>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0299>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0300>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0301>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0302>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0311>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0312>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0315>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0316>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0317>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0318>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0319>
+  earl:outcome earl:passed
+  <http://purl.org/dc/terms/description> "manual review: leaky assumption about querying of results which expects iri resolution\n"
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0321>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0322>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0323>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0324>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0325>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0326>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0327>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0328>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0329>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0330>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0331>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0332>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0333>
+  earl:outcome earl:passed
+
+<http://rdfa.info/test-suite/test-cases/rdfa1.1/xhtml5/manifest#0334>
+  earl:outcome earl:passed

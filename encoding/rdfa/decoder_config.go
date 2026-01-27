@@ -88,6 +88,9 @@ func (b DecoderConfig) newDecoder(doc *encodinghtml.Document) (*Decoder, error) 
 			return nil, fmt.Errorf("parse document url: %v", err)
 		}
 
+		// test[0117.html] fragment must be dropped; not documented in specs?
+		docBaseURL.DropFragment()
+
 		w.docBaseURL = docBaseURL
 	} else {
 		w.docBaseURL = emptyURL
