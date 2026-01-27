@@ -13,21 +13,26 @@ import (
 )
 
 type Assertion struct {
-	rs                ReportScope
-	t                 *testing.T
-	test              rdf.SubjectValue
-	assertionNode     rdf.SubjectValue
-	resultNode        rdf.SubjectValue
-	startTime         time.Time
-	testResultOutcome *rdf.IRI
-	descriptionLog    *bytes.Buffer
+	rs             ReportScope
+	t              *testing.T
+	test           rdf.SubjectValue
+	assertionNode  rdf.SubjectValue
+	assertionMode  *rdf.IRI
+	resultNode     rdf.SubjectValue
+	resultOutcome  *rdf.IRI
+	startTime      time.Time
+	descriptionLog *bytes.Buffer
 }
 
-func (a *Assertion) SetTestResultOutcome(outcome rdf.IRI) {
-	a.testResultOutcome = &outcome
+func (a *Assertion) SetMode(mode rdf.IRI) {
+	a.assertionMode = &mode
 }
 
-func (a *Assertion) AddTestResultStatement(statements ...rdfdescription.Statement) {
+func (a *Assertion) SetResultOutcome(outcome rdf.IRI) {
+	a.resultOutcome = &outcome
+}
+
+func (a *Assertion) AddResultStatement(statements ...rdfdescription.Statement) {
 	a.rs.report.builder.Add(rdfdescription.SubjectResource{
 		Subject:    a.resultNode,
 		Statements: statements,
@@ -36,14 +41,14 @@ func (a *Assertion) AddTestResultStatement(statements ...rdfdescription.Statemen
 
 func (a *Assertion) Skip(outcome rdf.IRI, args ...any) {
 	a.t.Helper()
-	a.SetTestResultOutcome(outcome)
+	a.SetResultOutcome(outcome)
 	a.Log(args...)
 	a.t.SkipNow()
 }
 
 func (a *Assertion) Skipf(outcome rdf.IRI, format string, args ...any) {
 	a.t.Helper()
-	a.SetTestResultOutcome(outcome)
+	a.SetResultOutcome(outcome)
 	a.Logf(format, args...)
 	a.t.SkipNow()
 }
@@ -66,7 +71,7 @@ func (a *Assertion) finalize() {
 		{
 			Subject:   a.assertionNode,
 			Predicate: earliri.Mode_ObjectProperty,
-			Object:    earliri.Automatic_TestMode,
+			Object:    a.getMode(),
 		},
 		{
 			Subject:   a.assertionNode,
@@ -81,7 +86,7 @@ func (a *Assertion) finalize() {
 		{
 			Subject:   a.resultNode,
 			Predicate: earliri.Outcome_ObjectProperty,
-			Object:    a.getTestResultOutcome(),
+			Object:    a.getResultOutcome(),
 		},
 		{
 			Subject:   a.resultNode,
@@ -121,9 +126,17 @@ func (a *Assertion) finalize() {
 	}
 }
 
-func (a *Assertion) getTestResultOutcome() rdf.IRI {
-	if a.testResultOutcome != nil {
-		return *a.testResultOutcome
+func (a *Assertion) getMode() rdf.IRI {
+	if a.assertionMode != nil {
+		return *a.assertionMode
+	}
+
+	return earliri.Automatic_TestMode
+}
+
+func (a *Assertion) getResultOutcome() rdf.IRI {
+	if a.resultOutcome != nil {
+		return *a.resultOutcome
 	} else if a.t.Failed() {
 		return earliri.Failed_Fail
 	} else if a.t.Skipped() {
