@@ -337,10 +337,10 @@ An *encoding* (or *file format*) is used to decode and encode RDF data. The foll
 |:------- |:------:|:------:|
 | [`htmljsonld`](encoding/htmljsonld) | Quad | - |
 | [`htmlmicrodata`](encoding/htmlmicrodata) | Triple | - |
+| [`htmlrdfa`](encoding/htmlrdfa) | Triple | - |
 | [`jsonld`](encoding/jsonld) | Quad | Quad |
 | [`nquads`](encoding/nquads) | Quad | Quad |
 | [`ntriples`](encoding/ntriples) | Triple | Triple |
-| [`rdfa`](encoding/rdfa) | Triple | - |
 | [`rdfjson`](encoding/rdfjson) | Triple | Triple |
 | [`rdfxml`](encoding/rdfxml) | Triple | - |
 | [`trig`](encoding/trig) | Quad | - |
@@ -500,7 +500,6 @@ An *ontology* (or *vocabulary*) offers domain-specific conventions for working w
 * rdf - [`rdfiri`](ontology/rdf/rdfiri), [`rdfliteral`](ontology/rdf/rdfliteral), and [`rdfvalue`](ontology/rdf/rdfvalue)
 * rdfa - [`rdfairi`](ontology/rdfa/rdfairi)
 * rdfs - [`rdfsiri`](ontology/rdfs/rdfsiri)
-* schema - [`schemairi`](ontology/schema/schemairi), [`schemaobject`](ontology/schema/schemaobject), and other utilities
 * xsd - [`xsdiri`](ontology/xsd/xsdiri), [`xsdobject`](ontology/xsd/xsdobject), [`xsdtype`](ontology/xsd/xsdtype), and other utilities
 
 To help maintain consistency, the following practices are used for the naming and implementations.
@@ -578,8 +577,8 @@ The [`rdfacontext` package](rdf/iriutil/rdfacontext/) provides a list of prefix 
 
 * **RDF 1.2** - not currently supported; likely to add primitive type support soon, encodings later.
 * [Generalized RDF](https://www.w3.org/TR/rdf11-concepts/#section-generalized-rdf) usage is not currently supported.
-* EARL Reports for well-known test suites are published as [build artifacts](https://github.com/dpb587/rdfkit-go/actions) ([preview](https://earl.dpb.io/source-ref?source=github.com%2Fdpb587%2Frdfkit-go%40main)).
-* This is a periodically updated fork based on private usage. There may still be some breaking changes before starting to version this module.
+* EARL Reports for well-known test suites are published as [build artifacts](https://github.com/dpb587/rdfkit-go/actions) ([preview](https://earl.dpb.io/source?ref=git%3buri%3dhttps%253A%252F%252Fgithub.com%252Fdpb587%252Frdfkit-go.git)).
+* This is periodically updated from a private fork and internal usage. There will be some breaking changes before starting to version this module.
 
 ## License
 
