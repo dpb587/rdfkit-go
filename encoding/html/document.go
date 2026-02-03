@@ -1,13 +1,14 @@
 package html
 
 import (
+	"fmt"
 	"io"
 
 	"github.com/dpb587/inspecthtml-go/inspecthtml"
+	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"golang.org/x/net/html"
 )
 
-// DocumentOption is a functional option for [ParseDocument] to affect its behavior.
 type DocumentOption interface {
 	apply(s *DocumentConfig)
 	newDocument(r io.Reader) (*Document, error)
@@ -28,6 +29,43 @@ func ParseDocument(r io.Reader, opts ...DocumentOption) (*Document, error) {
 	}
 
 	return compiledOpts.newDocument(r)
+}
+
+func NewDocument(root *html.Node, location string) (*Document, error) {
+	var locationURL *iriutil.ParsedIRI
+
+	if len(location) > 0 {
+		var err error
+
+		locationURL, err = iriutil.ParseIRI(location)
+		if err != nil {
+			return nil, fmt.Errorf("parse location: %v", err)
+		}
+	}
+
+	d := &Document{
+		info: DocumentInfo{
+			Location: location,
+		},
+		root: root,
+	}
+
+	if baseHref, ok := findFirstBaseHref(d.root); ok {
+		baseURL, err := iriutil.ParseIRI(baseHref)
+		if err != nil {
+			// TODO warn
+		} else {
+			if baseURL.IsAbs() {
+				d.info.BaseURL = baseURL.String()
+			} else if locationURL != nil {
+				d.info.BaseURL = locationURL.ResolveReference(baseURL).String()
+			} else {
+				d.info.BaseURL = baseHref
+			}
+		}
+	}
+
+	return d, nil
 }
 
 func (d *Document) GetInfo() DocumentInfo {
