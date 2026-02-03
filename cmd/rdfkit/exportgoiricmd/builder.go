@@ -186,11 +186,11 @@ func (b *builder) GetGoIdent(t rdf.IRI) string {
 	return ident
 }
 
+var reIdentUnsafe = regexp.MustCompile(`[^a-zA-Z0-9_]`)
+
 func (b *builder) safeIdent(ident string) string {
 	ident = regexp.MustCompile(`(\s+|_)(\w)`).ReplaceAllStringFunc(
-		strings.NewReplacer(
-			":", "_",
-		).Replace(ident),
+		reIdentUnsafe.ReplaceAllString(ident, "_"),
 		func(s string) string {
 			return s[0:len(s)-1] + strings.ToUpper(s[len(s)-1:])
 		},
