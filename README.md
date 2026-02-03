@@ -29,27 +29,27 @@ The [`examples` submodules](examples) demonstrates some common use cases and sta
 <details><summary><code>html-extract$ <strong>go run . https://microsoft.com</strong></code></summary>
 
 ```turtle
-@base <https://www.microsoft.com/en-us/> .
+@base <https://www.microsoft.com/en-us> .
 @prefix og: <http://ogp.me/ns#> .
 @prefix schema: <http://schema.org/> .
 
-</>
+<>
 	a schema:WebSite ;
 	schema:potentialAction [
 		a schema:SearchAction ;
-		schema:query\-input "required name=search_term_string" ;
+		schema:query-input "required name=search_term_string" ;
 		schema:target [
 			a schema:EntryPoint ;
 			schema:urlTemplate "https://www.microsoft.com/en-us/search/explore?q={search_term_string}&ocid=AID_seo_sitelinks_search"
 		]
 	] ;
-	schema:url </> .
+	schema:url <> .
 <>
 	og:description "Explore Microsoft products and services and support for your home or business. Shop Microsoft 365, Copilot, Teams, Xbox, Windows, Azure, Surface and more."@en-US ;
 	og:title "Microsoft – AI, Cloud, Productivity, Computing, Gaming & Apps"@en-US ;
 	og:type "website"@en-US ;
 	og:url "https://www.microsoft.com/en-us"@en-US .
-_:b0
+[]
 	a schema:Organization ;
 	schema:logo <https://uhf.microsoft.com/images/microsoft/RE1Mu3b.png> ;
 	schema:name "Microsoft" ;
@@ -73,6 +73,7 @@ Available Commands:
   export-go-iri Generate a Go file of IRI constants from an ontology
   help          Help about any command
   pipe          Decode and re-encode using supported encoding formats
+  version       Print version information
 
 Flags:
   -h, --help   help for rdfkit

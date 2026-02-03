@@ -1,18 +1,18 @@
-@base <https://www.microsoft.com/en-us/> .
+@base <https://www.microsoft.com/en-us> .
 @prefix og: <http://ogp.me/ns#> .
 @prefix schema: <http://schema.org/> .
 
-</>
+<>
 	a schema:WebSite ;
 	schema:potentialAction [
 		a schema:SearchAction ;
-		schema:query\-input "required name=search_term_string" ;
+		schema:query-input "required name=search_term_string" ;
 		schema:target [
 			a schema:EntryPoint ;
 			schema:urlTemplate "https://www.microsoft.com/en-us/search/explore?q={search_term_string}&ocid=AID_seo_sitelinks_search"
 		]
 	] ;
-	schema:url </> .
+	schema:url <> .
 <>
 	og:description "Explore Microsoft products and services and support for your home or business. Shop Microsoft 365, Copilot, Teams, Xbox, Windows, Azure, Surface and more."@en-US ;
 	og:title "Microsoft – AI, Cloud, Productivity, Computing, Gaming & Apps"@en-US ;

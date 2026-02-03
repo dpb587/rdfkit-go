@@ -11,7 +11,7 @@ func format_PN_LOCAL(v string) string {
 	tr := []rune(v)
 
 	for idx := 0; idx < len(tr); idx++ {
-		switch prefixLocalNameMustEscapeRune(tr[idx]) {
+		switch prefixLocalNameMustEscapeRune(tr[idx], idx, len(tr)) {
 		case prefixLocalNameRuneEscapePERCENT:
 			usePercent++
 		case prefixLocalNameRuneEscapeESC:
@@ -29,7 +29,7 @@ func format_PN_LOCAL(v string) string {
 	for ridx := 0; ridx < len(tr); ridx++ {
 		rr := tr[ridx]
 
-		switch prefixLocalNameMustEscapeRune(rr) {
+		switch prefixLocalNameMustEscapeRune(rr, ridx, len(tr)) {
 		case prefixLocalNameRuneEscapePERCENT:
 			buf[widx] = '%'
 			buf[widx+1] = rune(cursorioutil.HexUpper[rr&0x00f0>>4])
@@ -56,18 +56,24 @@ const (
 	prefixLocalNameRuneEscapeESC
 )
 
-// technically there are different cases for first/last/other runes of the sequence
-// should fix eventually with more complicated, index-based conditionals
-func prefixLocalNameMustEscapeRune(r rune) prefixLocalNameRuneEscapeMode {
-	switch r {
-	case '_', '~', '.', '-', '!', '$', '&', '\'', '(', ')', '*', '+', ',', ';', '=', '/', '?', '#', '@', '%':
-		return prefixLocalNameRuneEscapeESC
-	case ':':
+func prefixLocalNameMustEscapeRune(r rune, pos int, length int) prefixLocalNameRuneEscapeMode {
+	if r == '.' {
+		if pos == 0 || pos == length-1 {
+			return prefixLocalNameRuneEscapeESC
+		}
+
 		return prefixLocalNameRuneEscapeNone
 	}
 
 	if internal.IsRune_PN_CHARS(r) {
 		return prefixLocalNameRuneEscapeNone
+	} else if r == ':' {
+		return prefixLocalNameRuneEscapeNone
+	}
+
+	switch r {
+	case '~', '!', '$', '&', '\'', '(', ')', '*', '+', ',', ';', '=', '/', '?', '#', '@', '%':
+		return prefixLocalNameRuneEscapeESC
 	}
 
 	return prefixLocalNameRuneEscapePERCENT

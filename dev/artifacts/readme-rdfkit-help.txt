@@ -8,6 +8,7 @@ Available Commands:
   export-go-iri Generate a Go file of IRI constants from an ontology
   help          Help about any command
   pipe          Decode and re-encode using supported encoding formats
+  version       Print version information
 
 Flags:
   -h, --help   help for rdfkit
