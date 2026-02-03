@@ -1,15 +1,13 @@
-package iriutil
+package iri
 
 import (
 	"testing"
-
-	"github.com/dpb587/rdfkit-go/rdf"
 )
 
 func TestBaseIRI_RelativizeLiteral(t *testing.T) {
 	tests := []struct {
 		Base                string
-		Input               rdf.IRI
+		Input               string
 		ExpectedRelativized string
 		ExpectedOK          bool
 	}{
@@ -72,7 +70,7 @@ func TestBaseIRI_RelativizeLiteral(t *testing.T) {
 func TestBaseIRI_Relativize(t *testing.T) {
 	tests := []struct {
 		Base                string
-		Input               rdf.IRI
+		Input               string
 		ExpectedRelativized string
 		ExpectedOK          bool
 	}{
@@ -146,7 +144,7 @@ func TestBaseIRI_Relativize(t *testing.T) {
 			parsed, err := rb.Parse(relativized)
 			if err != nil {
 				t.Fatalf("fuzz-parse: unexpected error: %v", err)
-			} else if _a, _e := rdf.IRI(parsed.String()), tt.Input; _a != _e {
+			} else if _a, _e := parsed.String(), tt.Input; _a != _e {
 				t.Fatalf("fuzz-parse: parsed: expected %v, got %v", _e, _a)
 			}
 		})
@@ -156,7 +154,7 @@ func TestBaseIRI_Relativize(t *testing.T) {
 func TestBaseIRI_RelativizeWithQueryFragment(t *testing.T) {
 	tests := []struct {
 		Base                string
-		Input               rdf.IRI
+		Input               string
 		ExpectedRelativized string
 		ExpectedOK          bool
 	}{
@@ -223,7 +221,7 @@ func TestBaseIRI_RelativizeWithQueryFragment(t *testing.T) {
 			parsed, err := rb.Parse(relativized)
 			if err != nil {
 				t.Fatalf("fuzz-parse: unexpected error: %v", err)
-			} else if _a, _e := rdf.IRI(parsed.String()), tt.Input; _a != _e {
+			} else if _a, _e := parsed.String(), tt.Input; _a != _e {
 				t.Fatalf("fuzz-parse: parsed: expected %v, got %v", _e, _a)
 			}
 		})
@@ -233,7 +231,7 @@ func TestBaseIRI_RelativizeWithQueryFragment(t *testing.T) {
 func TestBaseIRI_RelativizeWithQuery(t *testing.T) {
 	tests := []struct {
 		Base                string
-		Input               rdf.IRI
+		Input               string
 		ExpectedRelativized string
 		ExpectedOK          bool
 	}{
@@ -300,7 +298,7 @@ func TestBaseIRI_RelativizeWithQuery(t *testing.T) {
 			parsed, err := rb.Parse(relativized)
 			if err != nil {
 				t.Fatalf("fuzz-parse: unexpected error: %v", err)
-			} else if _a, _e := rdf.IRI(parsed.String()), tt.Input; _a != _e {
+			} else if _a, _e := parsed.String(), tt.Input; _a != _e {
 				t.Fatalf("fuzz-parse: parsed: expected %v, got %v", _e, _a)
 			}
 		})
@@ -310,7 +308,7 @@ func TestBaseIRI_RelativizeWithQuery(t *testing.T) {
 func TestBaseIRI_RelativizeWithFragment(t *testing.T) {
 	tests := []struct {
 		Base                string
-		Input               rdf.IRI
+		Input               string
 		ExpectedRelativized string
 		ExpectedOK          bool
 	}{
@@ -365,7 +363,7 @@ func TestBaseIRI_RelativizeWithFragment(t *testing.T) {
 			parsed, err := rb.Parse(relativized)
 			if err != nil {
 				t.Fatalf("fuzz-parse: unexpected error: %v", err)
-			} else if _a, _e := rdf.IRI(parsed.String()), tt.Input; _a != _e {
+			} else if _a, _e := parsed.String(), tt.Input; _a != _e {
 				t.Fatalf("fuzz-parse: parsed: expected %v, got %v", _e, _a)
 			}
 		})

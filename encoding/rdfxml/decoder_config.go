@@ -6,8 +6,8 @@ import (
 
 	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/rdfkit-go/encoding/encodingutil"
+	"github.com/dpb587/rdfkit-go/iri"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
 type DecoderConfig struct {
@@ -106,7 +106,7 @@ func (b DecoderConfig) newDecoder(r io.Reader) (*Decoder, error) {
 	}
 
 	if b.baseURL != nil {
-		baseURL, err := iriutil.ParseIRI(*b.baseURL)
+		baseURL, err := iri.ParseIRI(*b.baseURL)
 		if err != nil {
 			return nil, fmt.Errorf("base url: %v", err)
 		}

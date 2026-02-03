@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
+	"github.com/dpb587/rdfkit-go/iri"
 )
 
 // DirectiveMode configures how base and prefix directives are written
@@ -26,7 +26,7 @@ type WriteDirectivesOptions struct {
 	Base     string
 	BaseMode DirectiveMode
 
-	Prefixes   iriutil.PrefixMappingList
+	Prefixes   iri.PrefixMappingList
 	PrefixMode DirectiveMode
 }
 

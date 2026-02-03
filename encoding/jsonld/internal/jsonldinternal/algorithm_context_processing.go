@@ -10,7 +10,7 @@ import (
 
 	"github.com/dpb587/inspectjson-go/inspectjson"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
+	"github.com/dpb587/rdfkit-go/iri"
 )
 
 type algorithmContextProcessing struct {
@@ -18,7 +18,7 @@ type algorithmContextProcessing struct {
 	LocalContext  inspectjson.Value
 
 	// [spec // 4.1.2] used when resolving relative context URLs
-	BaseURL *iriutil.ParsedIRI
+	BaseURL *iri.ParsedIRI
 
 	// Optional
 
@@ -184,7 +184,7 @@ func (vars algorithmContextProcessing) Call() (*Context, error) {
 
 			// [spec // 4.1.2 // 5.2.4] If *context* was previously dereferenced, then the processor *MUST NOT* do a further dereference, and context is set to the previously established internal representation: set *context document* to the previously dereferenced document, and set *loaded context* to the value of the `@context` entry from the document in *context document*.
 
-			var contextDocumentIRI *iriutil.ParsedIRI
+			var contextDocumentIRI *iri.ParsedIRI
 			var loadedContext inspectjson.Value
 
 			if dereferenced, ok := result._processor.dereferencedDocumentByIRI[_contextURLString]; ok {
@@ -231,7 +231,7 @@ func (vars algorithmContextProcessing) Call() (*Context, error) {
 					}
 				}
 
-				contextDocumentIRI, err = iriutil.ParseIRI(contextDocument.DocumentURL.String())
+				contextDocumentIRI, err = iri.ParseIRI(contextDocument.DocumentURL.String())
 				if err != nil {
 					return nil, jsonldtype.Error{
 						Code: jsonldtype.InvalidRemoteContext,
@@ -424,7 +424,7 @@ func (vars algorithmContextProcessing) Call() (*Context, error) {
 
 				// [spec // 4.1.2 // 5.7.3] Otherwise, if *value* is an IRI, the base IRI of *result* is set to *value*.
 			} else if valueString, ok := value.(inspectjson.StringValue); ok {
-				valueIRI, err := iriutil.ParseIRI(valueString.Value)
+				valueIRI, err := iri.ParseIRI(valueString.Value)
 				if err != nil {
 					return nil, jsonldtype.Error{
 						Code: jsonldtype.InvalidBaseIRI, // per 5.7.5

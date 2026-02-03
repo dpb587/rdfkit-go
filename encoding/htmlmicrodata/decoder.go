@@ -11,11 +11,11 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding/encodingutil"
 	encodinghtml "github.com/dpb587/rdfkit-go/encoding/html"
 	"github.com/dpb587/rdfkit-go/encoding/htmlmicrodata/htmlmicrodatacontent"
+	"github.com/dpb587/rdfkit-go/iri"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"golang.org/x/net/html"
 	"golang.org/x/net/html/atom"
 )
@@ -33,7 +33,7 @@ type statement struct {
 
 type Decoder struct {
 	doc              *encodinghtml.Document
-	docBaseURL       *iriutil.ParsedIRI
+	docBaseURL       *iri.ParsedIRI
 	buildTextOffsets encodingutil.TextOffsetsBuilderFunc
 
 	captureOffsets     bool

@@ -3,7 +3,7 @@ package jsonldinternal
 import (
 	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/inspectjson-go/inspectjson"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
+	"github.com/dpb587/rdfkit-go/iri"
 )
 
 type TermDefinition struct {
@@ -23,7 +23,7 @@ type TermDefinition struct {
 	ReverseProperty bool
 
 	// [4.1] an optional base URL (IRI),
-	BaseURL *iriutil.ParsedIRI
+	BaseURL *iri.ParsedIRI
 
 	// [4.1] an optional context (context),
 	// [dpb] sometimes referred to as "local context"?

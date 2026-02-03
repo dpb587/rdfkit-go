@@ -6,10 +6,10 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/trig/internal"
 	"github.com/dpb587/rdfkit-go/encoding/trig/internal/grammar"
+	"github.com/dpb587/rdfkit-go/iri"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
 func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, err error) (readerStack, error) {
@@ -172,9 +172,12 @@ func reader_scan_Object(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedR
 						return readerStack{}, grammar.R_object.Err(grammar.R_literal.Err(grammar.R_RDFLiteral.Err(err)))
 					}
 
-					expanded, ok := ectx.Global.Prefixes.ExpandPrefix(datatypeToken.NamespaceDecoded, datatypeToken.LocalDecoded)
+					expanded, ok := ectx.Global.Prefixes.ExpandPrefix(iri.PrefixReference{
+						Prefix:    datatypeToken.NamespaceDecoded,
+						Reference: datatypeToken.LocalDecoded,
+					})
 					if !ok {
-						return readerStack{}, grammar.R_object.Err(grammar.R_literal.Err(grammar.R_RDFLiteral.Err(grammar.R_PrefixedName.ErrWithTextOffsetRange(iriutil.NewUnknownPrefixError(datatypeToken.NamespaceDecoded), datatypeToken.Offsets))))
+						return readerStack{}, grammar.R_object.Err(grammar.R_literal.Err(grammar.R_RDFLiteral.Err(grammar.R_PrefixedName.ErrWithTextOffsetRange(iri.NewUnknownPrefixError(datatypeToken.NamespaceDecoded), datatypeToken.Offsets))))
 					}
 
 					literal.Datatype = rdf.IRI(expanded)
@@ -378,9 +381,12 @@ func reader_scan_object_PrefixedName(r *Decoder, ectx evaluationContext, r0 curs
 		return readerStack{}, grammar.R_object.Err(err)
 	}
 
-	expanded, ok := ectx.Global.Prefixes.ExpandPrefix(token.NamespaceDecoded, token.LocalDecoded)
+	expanded, ok := ectx.Global.Prefixes.ExpandPrefix(iri.PrefixReference{
+		Prefix:    token.NamespaceDecoded,
+		Reference: token.LocalDecoded,
+	})
 	if !ok {
-		return readerStack{}, grammar.R_object.Err(grammar.R_PrefixedName.ErrWithTextOffsetRange(iriutil.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets))
+		return readerStack{}, grammar.R_object.Err(grammar.R_PrefixedName.ErrWithTextOffsetRange(iri.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets))
 	}
 
 	return r.emit(statement{
@@ -388,7 +394,7 @@ func reader_scan_object_PrefixedName(r *Decoder, ectx evaluationContext, r0 curs
 			Triple: rdf.Triple{
 				Subject:   ectx.CurSubject,
 				Predicate: ectx.CurPredicate,
-				Object:    expanded,
+				Object:    rdf.IRI(expanded),
 			},
 			GraphName: ectx.CurGraphName,
 		},

@@ -5,7 +5,7 @@ import (
 
 	"github.com/dpb587/rdfkit-go/encoding/encodingutil"
 	encodinghtml "github.com/dpb587/rdfkit-go/encoding/html"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
+	"github.com/dpb587/rdfkit-go/iri"
 )
 
 type DecoderConfig struct {
@@ -56,7 +56,7 @@ func (b DecoderConfig) newDecoder(doc *encodinghtml.Document) (*Decoder, error) 
 	}
 
 	if len(docProfile.BaseURL) > 0 {
-		docBaseURL, err := iriutil.ParseIRI(docProfile.BaseURL)
+		docBaseURL, err := iri.ParseIRI(docProfile.BaseURL)
 		if err != nil {
 			return nil, fmt.Errorf("parse document url: %v", err)
 		}

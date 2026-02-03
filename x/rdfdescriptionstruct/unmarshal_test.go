@@ -4,6 +4,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/dpb587/rdfkit-go/iri"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
 )
@@ -1017,8 +1018,11 @@ func TestUnmarshaler_CustomPrefixes(t *testing.T) {
 
 	t.Run("with custom prefix", func(t *testing.T) {
 		// Create custom prefix map
-		customPrefixes := map[string]rdf.IRI{
-			"ex": "http://example.com/vocab#",
+		customPrefixes := iri.PrefixMappingList{
+			{
+				Prefix:   "ex",
+				Expanded: "http://example.com/vocab#",
+			},
 		}
 
 		// Create unmarshaler with custom prefixes
@@ -1105,8 +1109,11 @@ func TestUnmarshaler_CustomPrefixesWithNestedResources(t *testing.T) {
 
 	t.Run("with custom prefix in nested resources", func(t *testing.T) {
 		// Create custom prefix map
-		customPrefixes := map[string]rdf.IRI{
-			"ex": "http://example.com/vocab#",
+		customPrefixes := iri.PrefixMappingList{
+			{
+				Prefix:   "ex",
+				Expanded: "http://example.com/vocab#",
+			},
 		}
 
 		// Create unmarshaler with custom prefixes

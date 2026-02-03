@@ -5,13 +5,14 @@ import (
 	"io"
 	"slices"
 
+	"github.com/dpb587/rdfkit-go/iri"
+	"github.com/dpb587/rdfkit-go/iri/iriutil"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
 type EncoderConfig struct {
 	base     *string
-	prefixes iriutil.PrefixMap
+	prefixes iri.PrefixMappingList
 
 	bnStringProvider blanknodes.StringProvider
 
@@ -28,7 +29,7 @@ func (s EncoderConfig) SetBase(v string) EncoderConfig {
 	return s
 }
 
-func (s EncoderConfig) SetPrefixes(v iriutil.PrefixMap) EncoderConfig {
+func (s EncoderConfig) SetPrefixes(v iri.PrefixMappingList) EncoderConfig {
 	s.prefixes = v
 
 	return s
@@ -102,24 +103,18 @@ func (s EncoderConfig) apply(d *EncoderConfig) {
 }
 
 func (s EncoderConfig) newEncoder(w io.Writer) (*Encoder, error) {
-	var prefixes iriutil.PrefixMap
-
-	if s.prefixes == nil {
-		prefixes = iriutil.PrefixMap{}
-	} else {
-		prefixes = s.prefixes
-	}
+	prefixManager := iri.NewPrefixManager(s.prefixes)
 
 	e := &Encoder{
 		w:                   w,
-		prefixes:            iriutil.NewPrefixTracker(prefixes),
+		prefixes:            iriutil.NewUsagePrefixMapper(prefixManager),
 		bnStringProvider:    s.bnStringProvider,
 		baseDirectiveMode:   DirectiveMode_At,
 		prefixDirectiveMode: DirectiveMode_At,
 	}
 
 	if s.base != nil {
-		baseIRI, err := iriutil.ParseBaseIRI(string(*s.base))
+		baseIRI, err := iri.ParseBaseIRI(string(*s.base))
 		if err != nil {
 			return nil, fmt.Errorf("parse base: %v", err)
 		}
@@ -140,9 +135,9 @@ func (s EncoderConfig) newEncoder(w io.Writer) (*Encoder, error) {
 		e.bnStringProvider = blanknodes.NewInt64StringProvider("b%d")
 	}
 
-	if !e.buffered && (e.base != nil || len(prefixes) > 0) {
-		prefixMappings := prefixes.AsPrefixMappingList()
-		slices.SortFunc(prefixMappings, iriutil.ComparePrefixMappingByPrefix)
+	if !e.buffered && (e.base != nil || len(s.prefixes) > 0) {
+		prefixMappings := prefixManager.GetPrefixMappings()
+		slices.SortFunc(prefixMappings, iri.ComparePrefixMappingByPrefix)
 
 		var baseString string
 

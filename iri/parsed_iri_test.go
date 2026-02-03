@@ -1,4 +1,4 @@
-package iriutil
+package iri
 
 import (
 	"net/url"

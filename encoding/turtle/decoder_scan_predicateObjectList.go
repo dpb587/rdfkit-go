@@ -7,9 +7,9 @@ import (
 	"github.com/dpb587/cursorio-go/x/cursorioutil"
 	"github.com/dpb587/rdfkit-go/encoding/turtle/internal"
 	"github.com/dpb587/rdfkit-go/encoding/turtle/internal/grammar"
+	"github.com/dpb587/rdfkit-go/iri"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
 func reader_scan_PredicateObjectList(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, err error) (readerStack, error) {
@@ -53,9 +53,12 @@ func reader_scan_PredicateObjectList(r *Decoder, ectx evaluationContext, r0 curs
 				return readerStack{}, grammar.R_predicateObjectList.Err(grammar.R_verb.Err(err))
 			}
 
-			expanded, ok := ectx.Global.Prefixes.ExpandPrefix(token.NamespaceDecoded, token.LocalDecoded)
+			expanded, ok := ectx.Global.Prefixes.ExpandPrefix(iri.PrefixReference{
+				Prefix:    token.NamespaceDecoded,
+				Reference: token.LocalDecoded,
+			})
 			if !ok {
-				return readerStack{}, grammar.R_predicateObjectList.Err(grammar.R_verb.Err(grammar.R_PrefixedName.ErrWithTextOffsetRange(iriutil.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets)))
+				return readerStack{}, grammar.R_predicateObjectList.Err(grammar.R_verb.Err(grammar.R_PrefixedName.ErrWithTextOffsetRange(iri.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets)))
 			}
 
 			ectx.CurPredicate = rdf.IRI(expanded)
@@ -76,9 +79,12 @@ func reader_scan_PredicateObjectList(r *Decoder, ectx evaluationContext, r0 curs
 			return readerStack{}, grammar.R_predicateObjectList.Err(grammar.R_verb.Err(err))
 		}
 
-		expanded, ok := ectx.Global.Prefixes.ExpandPrefix(token.NamespaceDecoded, token.LocalDecoded)
+		expanded, ok := ectx.Global.Prefixes.ExpandPrefix(iri.PrefixReference{
+			Prefix:    token.NamespaceDecoded,
+			Reference: token.LocalDecoded,
+		})
 		if !ok {
-			return readerStack{}, grammar.R_predicateObjectList.Err(grammar.R_verb.Err(grammar.R_PrefixedName.ErrWithTextOffsetRange(iriutil.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets)))
+			return readerStack{}, grammar.R_predicateObjectList.Err(grammar.R_verb.Err(grammar.R_PrefixedName.ErrWithTextOffsetRange(iri.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets)))
 		}
 
 		ectx.CurPredicate = rdf.IRI(expanded)

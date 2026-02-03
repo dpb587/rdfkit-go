@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
+	"github.com/dpb587/rdfkit-go/iri"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
 )
 
 // Unmarshaler provides unmarshaling with custom configuration.
 type Unmarshaler struct {
-	prefixes iriutil.PrefixMap
+	prefixes iri.PrefixMapper
 }
 
 // NewUnmarshaler creates a new Unmarshaler with optional configuration.

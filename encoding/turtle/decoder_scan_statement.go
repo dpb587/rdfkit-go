@@ -9,7 +9,7 @@ import (
 	"github.com/dpb587/cursorio-go/x/cursorioutil"
 	"github.com/dpb587/rdfkit-go/encoding/turtle/internal"
 	"github.com/dpb587/rdfkit-go/encoding/turtle/internal/grammar"
-	"github.com/dpb587/rdfkit-go/rdf"
+	"github.com/dpb587/rdfkit-go/iri"
 )
 
 func reader_scanStatement_Subject_AnonOrBlankNode(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, err error) (readerStack, error) {
@@ -201,7 +201,10 @@ func reader_scanStatement(r *Decoder, ectx evaluationContext, r0 cursorio.Decode
 
 									r.commit(r0.AsDecodedRunes())
 
-									ectx.Global.Prefixes[prefixToken.Decoded] = rdf.IRI(resolvedExpanded.String())
+									ectx.Global.Prefixes.AddPrefixMappings(iri.PrefixMapping{
+										Prefix:   prefixToken.Decoded,
+										Expanded: resolvedExpanded.String(),
+									})
 
 									if r.prefixDirectiveListener != nil {
 										r.prefixDirectiveListener(DecoderEvent_PrefixDirective_Data{
@@ -403,7 +406,10 @@ func reader_scanStatement(r *Decoder, ectx evaluationContext, r0 cursorio.Decode
 							return readerStack{}, grammar.R_statement.Err(grammar.R_sparqlPrefix.Err(grammar.R_IRIREF.ErrWithTextOffsetRange(err, expandedToken.Offsets)))
 						}
 
-						ectx.Global.Prefixes[prefixToken.Decoded] = rdf.IRI(resolvedExpanded.String())
+						ectx.Global.Prefixes.AddPrefixMappings(iri.PrefixMapping{
+							Prefix:   prefixToken.Decoded,
+							Expanded: resolvedExpanded.String(),
+						})
 
 						if r.prefixDirectiveListener != nil {
 							r.prefixDirectiveListener(DecoderEvent_PrefixDirective_Data{

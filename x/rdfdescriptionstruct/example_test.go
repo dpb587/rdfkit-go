@@ -3,6 +3,7 @@ package rdfdescriptionstruct_test
 import (
 	"fmt"
 
+	"github.com/dpb587/rdfkit-go/iri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
@@ -198,8 +199,11 @@ func Example_customPrefixes() {
 	}
 
 	// Create custom prefix map for Dublin Core
-	customPrefixes := map[string]rdf.IRI{
-		"dc": "http://purl.org/dc/elements/1.1/",
+	customPrefixes := iri.PrefixMappingList{
+		{
+			Prefix:   "dc",
+			Expanded: "http://purl.org/dc/elements/1.1/",
+		},
 	}
 
 	// Create unmarshaler with custom prefixes

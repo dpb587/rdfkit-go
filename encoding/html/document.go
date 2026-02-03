@@ -5,7 +5,7 @@ import (
 	"io"
 
 	"github.com/dpb587/inspecthtml-go/inspecthtml"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
+	"github.com/dpb587/rdfkit-go/iri"
 	"golang.org/x/net/html"
 )
 
@@ -32,12 +32,12 @@ func ParseDocument(r io.Reader, opts ...DocumentOption) (*Document, error) {
 }
 
 func NewDocument(root *html.Node, location string) (*Document, error) {
-	var locationURL *iriutil.ParsedIRI
+	var locationURL *iri.ParsedIRI
 
 	if len(location) > 0 {
 		var err error
 
-		locationURL, err = iriutil.ParseIRI(location)
+		locationURL, err = iri.ParseIRI(location)
 		if err != nil {
 			return nil, fmt.Errorf("parse location: %v", err)
 		}
@@ -51,7 +51,7 @@ func NewDocument(root *html.Node, location string) (*Document, error) {
 	}
 
 	if baseHref, ok := findFirstBaseHref(d.root); ok {
-		baseURL, err := iriutil.ParseIRI(baseHref)
+		baseURL, err := iri.ParseIRI(baseHref)
 		if err != nil {
 			// TODO warn
 		} else {

@@ -8,7 +8,7 @@ import (
 	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/inspectjson-go/inspectjson"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
+	"github.com/dpb587/rdfkit-go/iri"
 )
 
 type algorithmExpansion struct {
@@ -22,7 +22,7 @@ type algorithmExpansion struct {
 	// [spec] If not passed, the optional flags are set to false.
 
 	// [spec] base URL associated with the documentUrl of the original document to expand
-	baseURL *iriutil.ParsedIRI
+	baseURL *iri.ParsedIRI
 
 	// [spec] frameExpansion flag allowing special forms of input used for frame expansion
 	// [dpb] not implemented

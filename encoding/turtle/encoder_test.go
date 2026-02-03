@@ -4,9 +4,9 @@ import (
 	"bytes"
 	"testing"
 
+	"github.com/dpb587/rdfkit-go/iri"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
 )
 
@@ -44,13 +44,16 @@ func TestEncoder_Buffered_Prefixes(t *testing.T) {
 	buf := &bytes.Buffer{}
 	e, err := NewEncoder(buf, EncoderConfig{}.
 		SetBuffered(true).
-		SetPrefixes(iriutil.NewPrefixMap(iriutil.PrefixMapping{
-			Prefix:   "ex",
-			Expanded: "http://example.com/path/",
-		}, iriutil.PrefixMapping{
-			Prefix:   "unused",
-			Expanded: "http://example.com/unused/",
-		})),
+		SetPrefixes(iri.PrefixMappingList{
+			{
+				Prefix:   "ex",
+				Expanded: "http://example.com/path/",
+			},
+			{
+				Prefix:   "unused",
+				Expanded: "http://example.com/unused/",
+			},
+		}),
 	)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
@@ -78,13 +81,16 @@ func TestEncoder_Unbuffered_Header(t *testing.T) {
 	buf := &bytes.Buffer{}
 	e, err := NewEncoder(buf, EncoderConfig{}.
 		SetBase("http://example.com/anywhere/").
-		SetPrefixes(iriutil.NewPrefixMap(iriutil.PrefixMapping{
-			Prefix:   "ex",
-			Expanded: "http://example.com/path/",
-		}, iriutil.PrefixMapping{
-			Prefix:   "unused",
-			Expanded: "http://example.com/unused/",
-		})),
+		SetPrefixes(iri.PrefixMappingList{
+			{
+				Prefix:   "ex",
+				Expanded: "http://example.com/path/",
+			},
+			{
+				Prefix:   "unused",
+				Expanded: "http://example.com/unused/",
+			},
+		}),
 	)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
@@ -113,10 +119,12 @@ func TestEncoder_Prefix_LocalNameEscapes(t *testing.T) {
 
 	buf := &bytes.Buffer{}
 	e, err := NewEncoder(buf, EncoderConfig{}.
-		SetPrefixes(iriutil.NewPrefixMap(iriutil.PrefixMapping{
-			Prefix:   "ex",
-			Expanded: "http://example.com/path/",
-		})),
+		SetPrefixes(iri.PrefixMappingList{
+			{
+				Prefix:   "ex",
+				Expanded: "http://example.com/path/",
+			},
+		}),
 	)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
@@ -143,10 +151,12 @@ func TestEncoder_Prefix_UnderscoreAndDashNotEscaped(t *testing.T) {
 
 	buf := &bytes.Buffer{}
 	e, err := NewEncoder(buf, EncoderConfig{}.
-		SetPrefixes(iriutil.NewPrefixMap(iriutil.PrefixMapping{
-			Prefix:   "ex",
-			Expanded: "http://example.com/",
-		})),
+		SetPrefixes(iri.PrefixMappingList{
+			{
+				Prefix:   "ex",
+				Expanded: "http://example.com/",
+			},
+		}),
 	)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
@@ -180,10 +190,12 @@ func TestEncoder_Prefix_SpecialCharsNeedEscape(t *testing.T) {
 
 	buf := &bytes.Buffer{}
 	e, err := NewEncoder(buf, EncoderConfig{}.
-		SetPrefixes(iriutil.NewPrefixMap(iriutil.PrefixMapping{
-			Prefix:   "ex",
-			Expanded: "http://example.com/",
-		})),
+		SetPrefixes(iri.PrefixMappingList{
+			{
+				Prefix:   "ex",
+				Expanded: "http://example.com/",
+			},
+		}),
 	)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
@@ -210,10 +222,12 @@ func TestEncoder_Prefix_DotPositionDependent(t *testing.T) {
 
 	buf := &bytes.Buffer{}
 	e, err := NewEncoder(buf, EncoderConfig{}.
-		SetPrefixes(iriutil.NewPrefixMap(iriutil.PrefixMapping{
-			Prefix:   "ex",
-			Expanded: "http://example.com/",
-		})),
+		SetPrefixes(iri.PrefixMappingList{
+			{
+				Prefix:   "ex",
+				Expanded: "http://example.com/",
+			},
+		}),
 	)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
@@ -254,10 +268,12 @@ func TestEncoder_Prefix_BackslashPercentEncoded(t *testing.T) {
 
 	buf := &bytes.Buffer{}
 	e, err := NewEncoder(buf, EncoderConfig{}.
-		SetPrefixes(iriutil.NewPrefixMap(iriutil.PrefixMapping{
-			Prefix:   "ex",
-			Expanded: "http://example.com/",
-		})),
+		SetPrefixes(iri.PrefixMappingList{
+			{
+				Prefix:   "ex",
+				Expanded: "http://example.com/",
+			},
+		}),
 	)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
@@ -285,13 +301,16 @@ func TestEncoder_Resources_AnonSinglePropertyWS(t *testing.T) {
 
 	buf := &bytes.Buffer{}
 	e, err := NewEncoder(buf, EncoderConfig{}.
-		SetPrefixes(iriutil.NewPrefixMap(iriutil.PrefixMapping{
-			Prefix:   "schema",
-			Expanded: "http://schema.org/",
-		}, iriutil.PrefixMapping{
-			Prefix:   "sh",
-			Expanded: "http://www.w3.org/ns/shacl#",
-		})),
+		SetPrefixes(iri.PrefixMappingList{
+			{
+				Prefix:   "schema",
+				Expanded: "http://schema.org/",
+			},
+			{
+				Prefix:   "sh",
+				Expanded: "http://www.w3.org/ns/shacl#",
+			},
+		}),
 	)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
@@ -336,13 +355,16 @@ func TestEncoder_Resources_AnonMultiplePropertiesWS(t *testing.T) {
 
 	buf := &bytes.Buffer{}
 	e, err := NewEncoder(buf, EncoderConfig{}.
-		SetPrefixes(iriutil.NewPrefixMap(iriutil.PrefixMapping{
-			Prefix:   "schema",
-			Expanded: "http://schema.org/",
-		}, iriutil.PrefixMapping{
-			Prefix:   "sh",
-			Expanded: "http://www.w3.org/ns/shacl#",
-		})),
+		SetPrefixes(iri.PrefixMappingList{
+			{
+				Prefix:   "schema",
+				Expanded: "http://schema.org/",
+			},
+			{
+				Prefix:   "sh",
+				Expanded: "http://www.w3.org/ns/shacl#",
+			},
+		}),
 	)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)

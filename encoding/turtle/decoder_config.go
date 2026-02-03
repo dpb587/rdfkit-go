@@ -7,13 +7,13 @@ import (
 	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/cursorio-go/x/cursorioutil"
 	"github.com/dpb587/rdfkit-go/encoding/encodingutil"
+	"github.com/dpb587/rdfkit-go/iri"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
 type DecoderConfig struct {
 	defaultBase     *string
-	defaultPrefixes iriutil.PrefixMap
+	defaultPrefixes iri.PrefixMappingList
 
 	bnStringFactory blanknodes.StringFactory
 
@@ -30,7 +30,7 @@ func (b DecoderConfig) SetDefaultBase(v string) DecoderConfig {
 	return b
 }
 
-func (b DecoderConfig) SetDefaultPrefixes(v iriutil.PrefixMap) DecoderConfig {
+func (b DecoderConfig) SetDefaultPrefixes(v iri.PrefixMappingList) DecoderConfig {
 	b.defaultPrefixes = v
 
 	return b
@@ -99,23 +99,15 @@ func (o DecoderConfig) apply(s *DecoderConfig) {
 }
 
 func (o DecoderConfig) newDecoder(r io.Reader) (*Decoder, error) {
-	var defaultBase *iriutil.ParsedIRI
+	var defaultBase *iri.ParsedIRI
 
 	if o.defaultBase != nil {
 		var err error
 
-		defaultBase, err = iriutil.ParseIRI(*o.defaultBase)
+		defaultBase, err = iri.ParseIRI(*o.defaultBase)
 		if err != nil {
 			return nil, fmt.Errorf("base url: %v", err)
 		}
-	}
-
-	var defaultPrefixes iriutil.PrefixMap
-
-	if o.defaultPrefixes != nil {
-		defaultPrefixes = o.defaultPrefixes
-	} else {
-		defaultPrefixes = iriutil.PrefixMap{}
 	}
 
 	var bnStringFactory = o.bnStringFactory
@@ -134,7 +126,7 @@ func (o DecoderConfig) newDecoder(r io.Reader) (*Decoder, error) {
 				ectx: evaluationContext{
 					Global: &globalEvaluationContext{
 						Base:                   defaultBase,
-						Prefixes:               defaultPrefixes,
+						Prefixes:               iri.NewPrefixManager(o.defaultPrefixes),
 						BlankNodeStringFactory: bnStringFactory,
 					},
 				},

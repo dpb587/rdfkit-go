@@ -5,7 +5,7 @@ import (
 
 	"github.com/dpb587/inspectjson-go/inspectjson"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
+	"github.com/dpb587/rdfkit-go/iri"
 )
 
 var ProcessorRemoteContextsLimit = 128
@@ -27,6 +27,6 @@ type contextProcessor struct {
 }
 
 type dereferencedDocument struct {
-	documentURL          *iriutil.ParsedIRI
+	documentURL          *iri.ParsedIRI
 	documentContextValue inspectjson.Value
 }

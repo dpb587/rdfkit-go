@@ -3,9 +3,9 @@ package rdfxml
 import (
 	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/rdfkit-go/encoding"
+	"github.com/dpb587/rdfkit-go/iri"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
 type uniqRefID struct {
@@ -20,7 +20,7 @@ type globalEvaluationContext struct {
 }
 
 type evaluationContext struct {
-	Base     *iriutil.ParsedIRI
+	Base     *iri.ParsedIRI
 	Language *string
 
 	ParentSubject           rdf.SubjectValue
@@ -36,7 +36,7 @@ type evaluationContext struct {
 }
 
 func (ectx evaluationContext) ResolveIRI(v string) rdf.IRI {
-	var vURL *iriutil.ParsedIRI
+	var vURL *iri.ParsedIRI
 
 	if ectx.Base == nil {
 		return rdf.IRI(v)

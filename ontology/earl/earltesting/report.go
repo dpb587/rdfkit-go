@@ -10,11 +10,13 @@ import (
 
 	"github.com/dpb587/rdfkit-go/encoding/ntriples"
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
+	"github.com/dpb587/rdfkit-go/iri"
 	"github.com/dpb587/rdfkit-go/ontology/earl/earliri"
 	"github.com/dpb587/rdfkit-go/ontology/foaf/foafiri"
+	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
+	"github.com/dpb587/rdfkit-go/ontology/rdfs/rdfsiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
 	"github.com/dpb587/rdfkit-go/rdfdescription/rdfdescriptionutil"
 )
@@ -60,17 +62,17 @@ func NewReportFromEnv(t *testing.T) *Report {
 			encoder, err = turtle.NewEncoder(file, turtle.EncoderConfig{}.
 				SetBuffered(true).
 				SetBufferedSort(false).
-				SetPrefixes(iriutil.NewPrefixMap(
+				SetPrefixes(iri.PrefixMappingList{
 					// based on usage in conventional reports
-					iriutil.PrefixMapping{Prefix: "dc", Expanded: "http://purl.org/dc/terms/"},
-					iriutil.PrefixMapping{Prefix: "dc11", Expanded: "http://purl.org/dc/elements/1.1/"},
-					iriutil.PrefixMapping{Prefix: "doap", Expanded: "http://usefulinc.com/ns/doap#"},
-					iriutil.PrefixMapping{Prefix: "rdf", Expanded: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"},
-					iriutil.PrefixMapping{Prefix: "rdfs", Expanded: "http://www.w3.org/2000/01/rdf-schema#"},
-					iriutil.PrefixMapping{Prefix: "earl", Expanded: earliri.Base},
-					iriutil.PrefixMapping{Prefix: "foaf", Expanded: foafiri.Base},
-					iriutil.PrefixMapping{Prefix: "xsd", Expanded: xsdiri.Base},
-				)),
+					iri.PrefixMapping{Prefix: "dc", Expanded: "http://purl.org/dc/terms/"},
+					iri.PrefixMapping{Prefix: "dc11", Expanded: "http://purl.org/dc/elements/1.1/"},
+					iri.PrefixMapping{Prefix: "doap", Expanded: "http://usefulinc.com/ns/doap#"},
+					iri.PrefixMapping{Prefix: "rdf", Expanded: string(rdfiri.Base)},
+					iri.PrefixMapping{Prefix: "rdfs", Expanded: string(rdfsiri.Base)},
+					iri.PrefixMapping{Prefix: "earl", Expanded: string(earliri.Base)},
+					iri.PrefixMapping{Prefix: "foaf", Expanded: string(foafiri.Base)},
+					iri.PrefixMapping{Prefix: "xsd", Expanded: string(xsdiri.Base)},
+				}),
 			)
 			if err != nil {
 				t.Errorf("earltesting: failed to create encoder[turtle]: %v", err)

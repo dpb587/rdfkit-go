@@ -1,15 +1,15 @@
-package iriutil
+package iri
 
 import (
 	"strings"
-
-	"github.com/dpb587/rdfkit-go/rdf"
 )
 
 type TermMapping struct {
 	Term     string
-	Expanded rdf.IRI
+	Expanded string
 }
+
+//
 
 type TermMappingList []TermMapping
 

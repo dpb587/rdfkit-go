@@ -4,9 +4,9 @@ import (
 	"fmt"
 
 	"github.com/dpb587/cursorio-go/cursorio"
+	"github.com/dpb587/rdfkit-go/iri"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
 type evaluationContext struct {
@@ -19,9 +19,9 @@ type evaluationContext struct {
 	Global *globalEvaluationContext
 }
 
-func (ectx evaluationContext) ResolveURL(v string) (*iriutil.ParsedIRI, error) {
+func (ectx evaluationContext) ResolveURL(v string) (*iri.ParsedIRI, error) {
 	if ectx.Global.Base == nil {
-		return iriutil.ParseIRI(v)
+		return iri.ParseIRI(v)
 	}
 
 	return ectx.Global.Base.Parse(v)
@@ -41,7 +41,7 @@ func (ectx evaluationContext) ResolveIRI(v string) (rdf.IRI, error) {
 }
 
 type globalEvaluationContext struct {
-	Base                   *iriutil.ParsedIRI
-	Prefixes               iriutil.PrefixMap
+	Base                   *iri.ParsedIRI
+	Prefixes               *iri.PrefixManager
 	BlankNodeStringFactory blanknodes.StringFactory
 }

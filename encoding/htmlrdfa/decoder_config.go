@@ -5,14 +5,15 @@ import (
 
 	"github.com/dpb587/rdfkit-go/encoding/encodingutil"
 	encodinghtml "github.com/dpb587/rdfkit-go/encoding/html"
+	"github.com/dpb587/rdfkit-go/iri"
+	"github.com/dpb587/rdfkit-go/iri/rdfacontext"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
 type DecoderConfig struct {
 	htmlProcessingProfile *HtmlProcessingProfile
 	defaultVocabulary     *string
-	defaultPrefixes       iriutil.PrefixMap
+	defaultPrefixes       iri.PrefixMappingList
 	bnStringFactory       blanknodes.StringFactory
 }
 
@@ -30,7 +31,7 @@ func (b DecoderConfig) SetDefaultVocabulary(v string) DecoderConfig {
 	return b
 }
 
-func (b DecoderConfig) SetDefaultPrefixes(v iriutil.PrefixMap) DecoderConfig {
+func (b DecoderConfig) SetDefaultPrefixes(v iri.PrefixMappingList) DecoderConfig {
 	b.defaultPrefixes = v
 
 	return b
@@ -60,8 +61,8 @@ func (b DecoderConfig) apply(s *DecoderConfig) {
 	}
 }
 
-var emptyURL = (func() *iriutil.ParsedIRI {
-	iri, err := iriutil.ParseIRI("")
+var emptyURL = (func() *iri.ParsedIRI {
+	iri, err := iri.ParseIRI("")
 	if err != nil {
 		panic(fmt.Sprintf("failed to parse empty IRI: %v", err))
 	}
@@ -76,14 +77,19 @@ func (b DecoderConfig) newDecoder(doc *encodinghtml.Document) (*Decoder, error) 
 		doc:               doc,
 		captureOffsets:    docProfile.HasNodeMetadata,
 		defaultVocabulary: b.defaultVocabulary,
-		defaultPrefixes:   b.defaultPrefixes,
 		bnStringFactory:   b.bnStringFactory,
 		buildTextOffsets:  encodingutil.BuildTextOffsetsNil,
 		statementsIdx:     -1,
 	}
 
+	if len(b.defaultPrefixes) > 0 {
+		w.defaultPrefixes = iri.NewPrefixManager(b.defaultPrefixes)
+	} else {
+		w.defaultPrefixes = rdfacontext.NewWidelyUsedInitialContext()
+	}
+
 	if len(docProfile.BaseURL) > 0 {
-		docBaseURL, err := iriutil.ParseIRI(docProfile.BaseURL)
+		docBaseURL, err := iri.ParseIRI(docProfile.BaseURL)
 		if err != nil {
 			return nil, fmt.Errorf("parse document url: %v", err)
 		}

@@ -8,7 +8,7 @@ import (
 
 	"github.com/dpb587/inspectjson-go/inspectjson"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
+	"github.com/dpb587/rdfkit-go/iri"
 )
 
 const MagicKeywordPropertySourceOffsets = "@rdfkit.property.sourceOffsets"
@@ -61,12 +61,12 @@ func Expand(input inspectjson.Value, opts jsonldtype.ProcessorOptions) (Expanded
 		})
 	}
 
-	var baseIRI *iriutil.ParsedIRI
+	var baseIRI *iri.ParsedIRI
 
 	if len(opts.BaseURL) > 0 {
 		var err error
 
-		baseIRI, err = iriutil.ParseIRI(opts.BaseURL)
+		baseIRI, err = iri.ParseIRI(opts.BaseURL)
 		if err != nil {
 			return nil, fmt.Errorf("parse base url: %v", err)
 		}

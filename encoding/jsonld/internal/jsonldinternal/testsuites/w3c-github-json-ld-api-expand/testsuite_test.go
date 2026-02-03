@@ -15,13 +15,13 @@ import (
 	"github.com/dpb587/rdfkit-go/dev/earltestingutil"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/internal/jsonldinternal"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
+	"github.com/dpb587/rdfkit-go/iri"
 	"github.com/dpb587/rdfkit-go/ontology/earl/earliri"
 	"github.com/dpb587/rdfkit-go/ontology/earl/earltesting"
 	"github.com/dpb587/rdfkit-go/ontology/foaf/foafiri"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdf/rdfutil"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
 	"github.com/dpb587/rdfkit-go/testing/testingarchive"
@@ -29,7 +29,7 @@ import (
 
 const manifestPrefix = "https://w3c.github.io/json-ld-api/tests/"
 
-var manifestPrefixURL, _ = iriutil.ParseIRI(manifestPrefix)
+var manifestPrefixURL, _ = iri.ParseIRI(manifestPrefix)
 
 func Test(t *testing.T) {
 	testdata, testdataManifest := requireTestdata(t)

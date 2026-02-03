@@ -6,6 +6,7 @@ import (
 
 	"github.com/dpb587/rdfkit-go/encoding/encodingtest"
 	"github.com/dpb587/rdfkit-go/encoding/html"
+	"github.com/dpb587/rdfkit-go/iri"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfobject"
 	"github.com/dpb587/rdfkit-go/ontology/rdfa/rdfairi"
@@ -13,7 +14,6 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdf/triples"
 	"github.com/dpb587/rdfkit-go/testing/testingassert"
 )
@@ -1496,68 +1496,68 @@ Sue knows
 			}
 
 			out, err := triples.CollectErr(NewDecoder(htmlDocument, DecoderConfig{}.
-				SetDefaultPrefixes(iriutil.NewPrefixMap(
-					iriutil.PrefixMapping{
+				SetDefaultPrefixes(iri.PrefixMappingList{
+					iri.PrefixMapping{
 						Prefix:   "bibo",
 						Expanded: "http://purl.org/ontology/bibo/",
 					},
-					iriutil.PrefixMapping{
+					iri.PrefixMapping{
 						Prefix:   "cal",
 						Expanded: "http://www.w3.org/2002/12/cal/ical#",
 					},
-					iriutil.PrefixMapping{
+					iri.PrefixMapping{
 						Prefix:   "cc",
 						Expanded: "http://creativecommons.org/ns#",
 					},
-					iriutil.PrefixMapping{
+					iri.PrefixMapping{
 						Prefix:   "dbp",
 						Expanded: "http://dbpedia.org/property/",
 					},
-					iriutil.PrefixMapping{
+					iri.PrefixMapping{
 						Prefix:   "dbp-owl",
 						Expanded: "http://dbpedia.org/ontology/",
 					},
-					iriutil.PrefixMapping{
+					iri.PrefixMapping{
 						Prefix:   "dbr",
 						Expanded: "http://dbpedia.org/resource/",
 					},
-					iriutil.PrefixMapping{
+					iri.PrefixMapping{
 						Prefix:   "dc",
 						Expanded: "http://purl.org/dc/terms/",
 					},
-					iriutil.PrefixMapping{
+					iri.PrefixMapping{
 						Prefix:   "ex",
 						Expanded: "http://example.org/",
 					},
-					iriutil.PrefixMapping{
+					iri.PrefixMapping{
 						Prefix:   "foaf",
 						Expanded: "http://xmlns.com/foaf/0.1/",
 					},
-					iriutil.PrefixMapping{
+					iri.PrefixMapping{
 						Prefix:   "owl",
 						Expanded: "http://www.w3.org/2002/07/owl#",
 					},
-					iriutil.PrefixMapping{
+					iri.PrefixMapping{
 						Prefix:   "rdf",
 						Expanded: "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
 					},
-					iriutil.PrefixMapping{
+					iri.PrefixMapping{
 						Prefix:   "rdfa",
 						Expanded: "http://www.w3.org/ns/rdfa#",
 					},
-					iriutil.PrefixMapping{
+					iri.PrefixMapping{
 						Prefix:   "rdfs",
 						Expanded: "http://www.w3.org/2000/01/rdf-schema#",
 					},
-					iriutil.PrefixMapping{
+					iri.PrefixMapping{
 						Prefix:   "xhv",
 						Expanded: "http://www.w3.org/1999/xhtml/vocab#",
 					},
-					iriutil.PrefixMapping{
+					iri.PrefixMapping{
 						Prefix:   "xsd",
 						Expanded: "http://www.w3.org/2001/XMLSchema#",
 					},
-				))))
+				})))
 			if err != nil {
 				t.Fatalf("unexpected error: %v", err)
 			}

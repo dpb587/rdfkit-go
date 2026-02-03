@@ -5,9 +5,9 @@ import (
 	"github.com/dpb587/cursorio-go/x/cursorioutil"
 	"github.com/dpb587/rdfkit-go/encoding/trig/internal"
 	"github.com/dpb587/rdfkit-go/encoding/trig/internal/grammar"
+	"github.com/dpb587/rdfkit-go/iri"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
 func reader_scan_triples(r *Decoder, ectx evaluationContext, r0 cursorio.DecodedRune, err error) (readerStack, error) {
@@ -157,9 +157,12 @@ func reader_scan_triples_subject_PrefixedName(r *Decoder, ectx evaluationContext
 		return readerStack{}, grammar.R_triples.Err(grammar.R_subject.Err(err))
 	}
 
-	expanded, ok := ectx.Global.Prefixes.ExpandPrefix(token.NamespaceDecoded, token.LocalDecoded)
+	expanded, ok := ectx.Global.Prefixes.ExpandPrefix(iri.PrefixReference{
+		Prefix:    token.NamespaceDecoded,
+		Reference: token.LocalDecoded,
+	})
 	if !ok {
-		return readerStack{}, grammar.R_triples.Err(grammar.R_subject.Err(grammar.R_PrefixedName.ErrWithTextOffsetRange(iriutil.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets)))
+		return readerStack{}, grammar.R_triples.Err(grammar.R_subject.Err(grammar.R_PrefixedName.ErrWithTextOffsetRange(iri.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets)))
 	}
 
 	ectx.CurSubject = rdf.IRI(expanded)

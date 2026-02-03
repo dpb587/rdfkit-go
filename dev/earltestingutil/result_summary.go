@@ -9,10 +9,10 @@ import (
 	"testing"
 
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
+	"github.com/dpb587/rdfkit-go/iri"
 	"github.com/dpb587/rdfkit-go/ontology/earl/earliri"
 	"github.com/dpb587/rdfkit-go/ontology/earl/earltesting"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
 )
 
@@ -58,12 +58,12 @@ func WriteResultSummary(w io.Writer, report *earltesting.Report, opts ReportSumm
 	buf := &bytes.Buffer{}
 
 	formatter := turtle.NewTermFormatter(turtle.TermFormatterOptions{
-		Prefixes: iriutil.NewPrefixMap(
-			iriutil.PrefixMapping{
+		Prefixes: iri.NewPrefixManager(iri.PrefixMappingList{
+			iri.PrefixMapping{
 				Prefix:   "earl",
-				Expanded: earliri.Base,
+				Expanded: string(earliri.Base),
 			},
-		),
+		}),
 	})
 
 	builder := report.GetResourceListBuilder()

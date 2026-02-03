@@ -11,11 +11,12 @@ import (
 
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/turtle/turtlecontent"
+	"github.com/dpb587/rdfkit-go/iri"
+	"github.com/dpb587/rdfkit-go/iri/iriutil"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
 	"github.com/dpb587/rdfkit-go/rdfdescription/rdfdescriptionutil"
 )
@@ -27,8 +28,8 @@ type EncoderOption interface {
 
 type Encoder struct {
 	w                io.Writer
-	base             *iriutil.BaseIRI
-	prefixes         *iriutil.PrefixTracker
+	base             *iri.BaseIRI
+	prefixes         *iriutil.UsagePrefixMapper
 	bnStringProvider blanknodes.StringProvider
 
 	err              error
@@ -78,8 +79,19 @@ func (w *Encoder) Close() error {
 			})
 		}
 
-		if prefixMappings := w.prefixes.GetUsedPrefixMappings(); w.base != nil || len(prefixMappings) > 0 {
-			slices.SortFunc(prefixMappings, iriutil.ComparePrefixMappingByPrefix)
+		if prefixes := w.prefixes.GetUsedPrefixes(); w.base != nil || len(prefixes) > 0 {
+			slices.SortFunc(prefixes, strings.Compare)
+
+			var prefixMappings iri.PrefixMappingList
+
+			for _, prefix := range prefixes {
+				if expanded, ok := w.prefixes.ExpandPrefix(iri.PrefixReference{Prefix: prefix}); ok {
+					prefixMappings = append(prefixMappings, iri.PrefixMapping{
+						Prefix:   prefix,
+						Expanded: expanded,
+					})
+				}
+			}
 
 			var baseString string
 
@@ -206,7 +218,7 @@ func (w *Encoder) putResourceStatements(ctx context.Context, buf *bytes.Buffer, 
 		if pIRI == rdfiri.Type_Property {
 			buf.WriteString("a")
 		} else {
-			w.writeIRI(buf, pIRI)
+			w.writeIRI(buf, string(pIRI))
 		}
 
 		pStatements := statementsByPredicate[p]
@@ -299,7 +311,7 @@ func (w *Encoder) AddTriple(ctx context.Context, t rdf.Triple) error {
 		if p == rdfiri.Type_Property {
 			buf.WriteString("a")
 		} else {
-			w.writeIRI(buf, p)
+			w.writeIRI(buf, string(p))
 		}
 	default:
 		return fmt.Errorf("predicate: invalid type: %T", p)
@@ -330,7 +342,7 @@ func (w *Encoder) writeSubjectValue(buf *bytes.Buffer, v rdf.SubjectValue) error
 
 		return nil
 	case rdf.IRI:
-		w.writeIRI(buf, s)
+		w.writeIRI(buf, string(s))
 
 		return nil
 	}
@@ -338,10 +350,10 @@ func (w *Encoder) writeSubjectValue(buf *bytes.Buffer, v rdf.SubjectValue) error
 	return fmt.Errorf("invalid type: %T", v)
 }
 
-func (w *Encoder) writeIRI(buffered *bytes.Buffer, v rdf.IRI) {
-	prefix, suffix, ok := w.prefixes.CompactPrefix(v)
+func (w *Encoder) writeIRI(buffered *bytes.Buffer, v string) {
+	pr, ok := w.prefixes.CompactPrefix(v)
 	if ok {
-		buffered.WriteString(prefix + ":" + format_PN_LOCAL(suffix))
+		buffered.WriteString(pr.Prefix + ":" + format_PN_LOCAL(pr.Reference))
 
 		return
 	}
@@ -354,7 +366,7 @@ func (w *Encoder) writeIRI(buffered *bytes.Buffer, v rdf.IRI) {
 		}
 	}
 
-	fmt.Fprintf(buffered, "<%s>", formatIRI(string(v), false))
+	fmt.Fprintf(buffered, "<%s>", formatIRI(v, false))
 }
 
 func (e *Encoder) writeObjectValue(w *bytes.Buffer, v rdf.ObjectValue) error {
@@ -368,7 +380,7 @@ func (e *Encoder) writeObjectValue(w *bytes.Buffer, v rdf.ObjectValue) error {
 
 		return nil
 	case rdf.IRI:
-		e.writeIRI(w, o)
+		e.writeIRI(w, string(o))
 
 		return nil
 	case rdf.Literal:
@@ -393,7 +405,7 @@ func (e *Encoder) writeObjectValue(w *bytes.Buffer, v rdf.ObjectValue) error {
 
 		if literal.Datatype != xsdiri.String_Datatype {
 			w.WriteString("^^")
-			e.writeIRI(w, literal.Datatype)
+			e.writeIRI(w, string(literal.Datatype))
 		}
 
 		return nil

@@ -6,7 +6,7 @@ import (
 
 	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/inspecthtml-go/inspecthtml"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
+	"github.com/dpb587/rdfkit-go/iri"
 	"golang.org/x/net/html"
 )
 
@@ -56,13 +56,13 @@ func (b DocumentConfig) apply(s *DocumentConfig) {
 
 func (b DocumentConfig) newDocument(r io.Reader) (*Document, error) {
 	var location string
-	var locationURL *iriutil.ParsedIRI
+	var locationURL *iri.ParsedIRI
 
 	if b.location != nil {
 		var err error
 
 		location = *b.location
-		locationURL, err = iriutil.ParseIRI(location)
+		locationURL, err = iri.ParseIRI(location)
 		if err != nil {
 			return nil, fmt.Errorf("parse location: %v", err)
 		}
@@ -96,7 +96,7 @@ func (b DocumentConfig) newDocument(r io.Reader) (*Document, error) {
 	}
 
 	if baseHref, ok := findFirstBaseHref(d.root); ok {
-		baseURL, err := iriutil.ParseIRI(baseHref)
+		baseURL, err := iri.ParseIRI(baseHref)
 		if err != nil {
 			// TODO warn
 		} else {

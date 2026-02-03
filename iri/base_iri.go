@@ -1,9 +1,7 @@
-package iriutil
+package iri
 
 import (
 	"strings"
-
-	"github.com/dpb587/rdfkit-go/rdf"
 )
 
 type BaseIRI struct {
@@ -79,38 +77,36 @@ func (rb *BaseIRI) ResolveReference(ref *ParsedIRI) *ParsedIRI {
 	return rb.parsed.ResolveReference(ref)
 }
 
-func (rb *BaseIRI) RelativizeIRI(v rdf.IRI) (string, bool) {
-	vString := string(v)
-
-	if len(vString) > len(rb.original) {
-		if rb.fragmentIndex == -1 && vString[len(rb.original)] == '#' {
-			return vString[len(rb.original):], true
-		} else if rb.queryIndex == -1 && vString[len(rb.original)] == '?' {
-			return vString[len(rb.original):], true
+func (rb *BaseIRI) RelativizeIRI(v string) (string, bool) {
+	if len(v) > len(rb.original) {
+		if rb.fragmentIndex == -1 && v[len(rb.original)] == '#' {
+			return v[len(rb.original):], true
+		} else if rb.queryIndex == -1 && v[len(rb.original)] == '?' {
+			return v[len(rb.original):], true
 		}
 	}
 
 	if rb.rootIndex == -1 {
 		return "", false
-	} else if len(vString) < rb.rootIndex || rb.original[0:rb.rootIndex] != vString[:rb.rootIndex] {
+	} else if len(v) < rb.rootIndex || rb.original[0:rb.rootIndex] != v[:rb.rootIndex] {
 		return "", false
-	} else if rb.original == vString {
+	} else if rb.original == v {
 		return "", true
 	}
 
-	if len(vString) > rb.resourceIndex {
-		switch vString[rb.resourceIndex] {
+	if len(v) > rb.resourceIndex {
+		switch v[rb.resourceIndex] {
 		case '#':
 			// dropping query
-			return vString[rb.directoryIndex:], true
+			return v[rb.directoryIndex:], true
 		case '?':
-			return vString[rb.resourceIndex:], true
+			return v[rb.resourceIndex:], true
 		}
 	}
 
-	if len(vString) >= rb.directoryIndex && rb.original[0:rb.directoryIndex] == vString[:rb.directoryIndex] {
-		return vString[rb.directoryIndex:], true
+	if len(v) >= rb.directoryIndex && rb.original[0:rb.directoryIndex] == v[:rb.directoryIndex] {
+		return v[rb.directoryIndex:], true
 	}
 
-	return vString[rb.rootIndex-1:], true
+	return v[rb.rootIndex-1:], true
 }

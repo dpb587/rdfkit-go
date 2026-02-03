@@ -9,10 +9,10 @@ import (
 	"github.com/dpb587/rdfkit-go/cmd/rdfkit/cmdflags"
 	"github.com/dpb587/rdfkit-go/cmd/rdfkit/cmdutil"
 	"github.com/dpb587/rdfkit-go/encoding/trig/trigcontent"
+	"github.com/dpb587/rdfkit-go/iri"
+	"github.com/dpb587/rdfkit-go/iri/rdfacontext"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil/rdfacontext"
 	"github.com/dpb587/rdfkit-go/rdf/quads"
 	"github.com/dpb587/rdfkit-go/rdfio"
 	"github.com/dpb587/rdfkit-go/rdfio/rdfiotypes"
@@ -65,30 +65,30 @@ func New(app *cmdutil.App) *cobra.Command {
 
 			// Utilities for shortening how IRIs are displayed (based on directives from the input).
 
-			var base *iriutil.BaseIRI
+			var base *iri.BaseIRI
 
 			if len(directives.Base) > 0 {
 				// Last-most base ends up being used.
-				base, err = iriutil.ParseBaseIRI(directives.Base[len(directives.Base)-1])
+				base, err = iri.ParseBaseIRI(directives.Base[len(directives.Base)-1])
 				if err != nil {
 					panic(fmt.Errorf("decode base: %v", err))
 				}
 			}
 
-			prefixes := iriutil.NewPrefixMap(append(
-				// Include some well-known prefixes, like xsd.
-				rdfacontext.WidelyUsedInitialContext(),
+			prefixes := rdfacontext.NewWidelyUsedInitialContext()
+
+			if len(directives.PrefixMappings) > 0 {
 				// And override with prefixes from the input.
-				directives.PrefixMappings...,
-			)...)
+				prefixes.AddPrefixMappings(directives.PrefixMappings...)
+			}
 
 			shortenIRI := func(iri rdf.IRI) string {
-				if prefix, localName, ok := prefixes.CompactPrefix(iri); ok {
-					return fmt.Sprintf("%s:%s", prefix, localName)
+				if pr, ok := prefixes.CompactPrefix(string(iri)); ok {
+					return pr.String()
 				}
 
 				if base != nil {
-					if relative, ok := base.RelativizeIRI(iri); ok {
+					if relative, ok := base.RelativizeIRI(string(iri)); ok {
 						return fmt.Sprintf("<%s>", relative)
 					}
 				}

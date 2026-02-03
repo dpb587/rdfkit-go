@@ -1,19 +1,18 @@
 package curie
 
 import (
-	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
+	"github.com/dpb587/rdfkit-go/iri"
 )
 
 type MappingScope struct {
 	Safe               bool
 	DefaultPrefix      string
 	DefaultPrefixEmpty bool
-	Prefixes           iriutil.PrefixManager
+	Prefixes           iri.PrefixMapper
 }
 
-func (m MappingScope) CompactCURIE(v rdf.IRI) CURIE {
-	prefix, reference, ok := m.Prefixes.CompactPrefix(v)
+func (m MappingScope) CompactCURIE(v string) CURIE {
+	pr, ok := m.Prefixes.CompactPrefix(v)
 	if !ok {
 		return CURIE{
 			Safe:      m.Safe,
@@ -23,8 +22,8 @@ func (m MappingScope) CompactCURIE(v rdf.IRI) CURIE {
 
 	c := CURIE{
 		Safe:      m.Safe,
-		Prefix:    prefix,
-		Reference: reference,
+		Prefix:    pr.Prefix,
+		Reference: pr.Reference,
 	}
 
 	if c.Prefix == m.DefaultPrefix && (len(c.Prefix) > 0 || m.DefaultPrefixEmpty) {
@@ -35,10 +34,13 @@ func (m MappingScope) CompactCURIE(v rdf.IRI) CURIE {
 	return c
 }
 
-func (m MappingScope) ExpandCURIE(v CURIE) (rdf.IRI, bool) {
+func (m MappingScope) ExpandCURIE(v CURIE) (string, bool) {
 	if v.DefaultPrefix && (len(m.DefaultPrefix) > 0 || m.DefaultPrefixEmpty) {
 		v.Prefix = m.DefaultPrefix
 	}
 
-	return m.Prefixes.ExpandPrefix(v.Prefix, v.Reference)
+	return m.Prefixes.ExpandPrefix(iri.PrefixReference{
+		Prefix:    v.Prefix,
+		Reference: v.Reference,
+	})
 }

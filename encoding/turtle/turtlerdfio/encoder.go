@@ -8,9 +8,8 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
 	"github.com/dpb587/rdfkit-go/encoding/turtle/turtlecontent"
-	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil/rdfacontext"
+	"github.com/dpb587/rdfkit-go/iri"
+	"github.com/dpb587/rdfkit-go/iri/rdfacontext"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
 	"github.com/dpb587/rdfkit-go/rdfdescription/rdfdescriptionutil"
 	"github.com/dpb587/rdfkit-go/rdfio/rdfiotypes"
@@ -55,11 +54,11 @@ func (e encoder) NewEncoder(ww rdfiotypes.Writer, opts rdfiotypes.EncoderOptions
 	}
 
 	{
-		var prefixes iriutil.PrefixMappingList
+		var prefixes iri.PrefixMappingList
 
 		for _, prefix := range params.IrisUsePrefixes {
 			if prefix == "rdfa-context" {
-				prefixes = append(prefixes, rdfacontext.WidelyUsedInitialContext()...)
+				prefixes = rdfacontext.AppendWidelyUsedInitialContext(prefixes)
 
 				continue
 			} else if prefix == "none" {
@@ -73,14 +72,14 @@ func (e encoder) NewEncoder(ww rdfiotypes.Writer, opts rdfiotypes.EncoderOptions
 				return nil, fmt.Errorf("flag[prefixes]: invalid prefix format")
 			}
 
-			prefixes = append(prefixes, iriutil.PrefixMapping{
+			prefixes = append(prefixes, iri.PrefixMapping{
 				Prefix:   prefixSplit[0],
-				Expanded: rdf.IRI(prefixSplit[1]),
+				Expanded: prefixSplit[1],
 			})
 		}
 
 		if len(prefixes) > 0 {
-			options = options.SetPrefixes(iriutil.NewPrefixMap(prefixes...))
+			options = options.SetPrefixes(prefixes)
 		}
 	}
 

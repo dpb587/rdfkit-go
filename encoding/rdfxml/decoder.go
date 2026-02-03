@@ -13,11 +13,11 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding/encodingutil"
 	"github.com/dpb587/rdfkit-go/encoding/rdfxml/internal"
 	"github.com/dpb587/rdfkit-go/encoding/rdfxml/rdfxmlcontent"
+	"github.com/dpb587/rdfkit-go/iri"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
 type DecoderOption interface {
@@ -34,7 +34,7 @@ type statement struct {
 type Decoder struct {
 	r io.Reader
 
-	baseURL *iriutil.ParsedIRI
+	baseURL *iri.ParsedIRI
 
 	bnStringFactory blanknodes.StringFactory
 
@@ -157,7 +157,7 @@ func (d *Decoder) processCommonAttr(ectx evaluationContext, startElement xml.Sta
 				baseIRI := ectx.ResolveIRI(attr.Value)
 
 				// TODO inefficient
-				valueIRI, err := iriutil.ParseIRI(string(baseIRI))
+				valueIRI, err := iri.ParseIRI(string(baseIRI))
 				if err != nil {
 					return evaluationContext{}, nil, nil, fmt.Errorf("parse base: %w", err)
 				}

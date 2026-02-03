@@ -9,8 +9,7 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding/html/htmldefaults"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil/rdfacontext"
+	"github.com/dpb587/rdfkit-go/iri/rdfacontext"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
 )
 
@@ -67,7 +66,7 @@ func main() {
 		os.Stdout,
 		turtle.EncoderConfig{}.
 			SetBase(res.Request.URL.String()).
-			SetPrefixes(iriutil.NewPrefixMap(rdfacontext.WidelyUsedInitialContext()...)).
+			SetPrefixes(rdfacontext.AppendWidelyUsedInitialContext(nil)).
 			SetBuffered(true),
 	)
 	if err != nil {

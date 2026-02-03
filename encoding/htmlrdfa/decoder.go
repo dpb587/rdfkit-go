@@ -14,14 +14,13 @@ import (
 	encodinghtml "github.com/dpb587/rdfkit-go/encoding/html"
 	"github.com/dpb587/rdfkit-go/encoding/htmlrdfa/rdfacontent"
 	"github.com/dpb587/rdfkit-go/internal/ptr"
+	"github.com/dpb587/rdfkit-go/iri"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/rdfa/rdfairi"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdobject"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil/rdfacontext"
 	"github.com/dpb587/rdfkit-go/x/storage/inmemory"
 	"github.com/dpb587/rdfkit-go/x/storage/inmemory/simplequery"
 	"golang.org/x/net/html"
@@ -41,12 +40,12 @@ type statement struct {
 
 type Decoder struct {
 	doc        *encodinghtml.Document
-	docBaseURL *iriutil.ParsedIRI
+	docBaseURL *iri.ParsedIRI
 
 	captureOffsets        bool
 	htmlProcessingProfile HtmlProcessingProfile
 	defaultVocabulary     *string
-	defaultPrefixes       iriutil.PrefixMap
+	defaultPrefixes       *iri.PrefixManager
 	bnStringFactory       blanknodes.StringFactory
 	buildTextOffsets      encodingutil.TextOffsetsBuilderFunc
 
@@ -92,10 +91,6 @@ func (v *Decoder) Next() bool {
 			HostDefaultPrefixes:    v.defaultPrefixes,
 			HtmlProcessing:         v.htmlProcessingProfile,
 			BlankNodeStringFactory: v.bnStringFactory,
-		}
-
-		if gectx.HostDefaultPrefixes == nil {
-			gectx.HostDefaultPrefixes = iriutil.NewPrefixMap(rdfacontext.WidelyUsedInitialContext()...)
 		}
 
 		ectx := evaluationContext{
@@ -185,7 +180,7 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 			ectx.DefaultVocabulary = ectx.Global.HostDefaultVocabulary
 
 			// rdfa-in-html // 3.1 // Additional Processing Rule 2
-			ectx.PrefixMapping = ectx.PrefixMapping.NewPrefixMap(InitialContext.AsPrefixMappingList()...)
+			ectx.PrefixMapping.AddPrefixMappings(InitialContext...)
 			maps.Copy(ectx.TermMappings, w3_2011_rdfacontext_rdfa11_TermMappings)
 
 			// xhtml-rdfa // Additional RDFa Processing Rules
@@ -225,7 +220,7 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 				// TODO warn; per-spec, href is a required attribute
 			} else {
 				// duplicate behavior from newDecoder where base is pulled from parsed html docInfo?
-				baseURL, err := iriutil.ParseIRI(*baseHref)
+				baseURL, err := iri.ParseIRI(*baseHref)
 				if err != nil {
 					// TODO warn; invalid data
 				} else {
@@ -267,7 +262,7 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 	var attrPrefix string
 	var attrAbout, attrContent, attrDatatype, attrDatetime, attrHref, attrInlist, attrLang, attrLangXml, attrProperty, attrRel, attrResource, attrRev, attrSrc, attrTypeof, attrVocab *string
 	var attrAboutIdx, attrContentIdx, attrDatetimeIdx, attrHrefIdx, attrPropertyIdx, attrRelIdx, attrResourceIdx, attrRevIdx, attrSrcIdx, attrTypeofIdx int
-	var attrPrefixEntries []iriutil.PrefixMapping
+	var attrPrefixEntries iri.PrefixMappingList
 
 	for attrIdx, attr := range n.Attr {
 		switch attr.Namespace {
@@ -317,7 +312,7 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 				if ectx.Global.HtmlProcessing.IsXHTML() {
 					// rdfa-in-html // 3.1 // Additional Processing Rule 3
 
-					baseURL, err := iriutil.ParseIRI(attr.Val)
+					baseURL, err := iri.ParseIRI(attr.Val)
 					if err != nil {
 						// TODO warning
 					} else if localBaseURL != nil {
@@ -350,9 +345,9 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 							continue
 						}
 
-						attrPrefixEntries = append(attrPrefixEntries, iriutil.PrefixMapping{
+						attrPrefixEntries = append(attrPrefixEntries, iri.PrefixMapping{
 							Prefix:   prefixName,
-							Expanded: rdf.IRI(attr.Val),
+							Expanded: attr.Val,
 						})
 					}
 				}
@@ -429,9 +424,9 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 					}
 
 					// per spec, @prefix will be processed after xmlns (which added to attrPrefixEntries earlier)
-					attrPrefixEntries = append(attrPrefixEntries, iriutil.PrefixMapping{
+					attrPrefixEntries = append(attrPrefixEntries, iri.PrefixMapping{
 						Prefix:   prefixTerm[:len(prefixTerm)-1],
-						Expanded: rdf.IRI(fields[fieldIdx+1]),
+						Expanded: fields[fieldIdx+1],
 					})
 				}
 			}
@@ -442,13 +437,14 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 				// rdfa-in-html // 3.1 // Additional Processing Rule 6
 
 				for _, prefixEntry := range attrPrefixEntries {
-					if expanded, known := localPrefixMappings.ExpandPrefix(prefixEntry.Prefix, ""); !known || expanded != rdf.IRI(prefixEntry.Expanded) {
+					if expanded, known := localPrefixMappings.ExpandPrefix(iri.PrefixReference{Prefix: prefixEntry.Prefix}); known && expanded != prefixEntry.Expanded {
 						// TODO emit rdfa:PrefixRedefinition
 					}
 				}
 			}
 
-			localPrefixMappings = localPrefixMappings.NewPrefixMap(attrPrefixEntries...)
+			localPrefixMappings = localPrefixMappings.Clone()
+			localPrefixMappings.AddPrefixMappings(attrPrefixEntries...)
 		}
 	}
 

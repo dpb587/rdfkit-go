@@ -6,25 +6,25 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/dpb587/rdfkit-go/iri"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdf/terms"
 )
 
 type TermFormatterOptions struct {
 	ASCII                   bool
-	Base                    *iriutil.BaseIRI
-	Prefixes                iriutil.PrefixMap
+	Base                    *iri.BaseIRI
+	Prefixes                iri.PrefixMapper
 	BlankNodeStringProvider blanknodes.StringProvider
 }
 
 type termFormatter struct {
 	ascii             bool
-	base              *iriutil.BaseIRI
-	prefixes          iriutil.PrefixMap
+	base              *iri.BaseIRI
+	prefixes          iri.PrefixMapper
 	blankNodeStringer blanknodes.StringProvider
 }
 
@@ -40,10 +40,10 @@ func NewTermFormatter(options TermFormatterOptions) terms.Formatter {
 func (tf *termFormatter) FormatTerm(t rdf.Term) string {
 	switch t := t.(type) {
 	case rdf.IRI:
-		if prefix, localName, ok := tf.prefixes.CompactPrefix(t); ok {
-			return prefix + ":" + format_PN_LOCAL(localName)
+		if pr, ok := tf.prefixes.CompactPrefix(string(t)); ok {
+			return pr.Prefix + ":" + format_PN_LOCAL(pr.Reference)
 		} else if tf.base != nil {
-			if reference, ok := tf.base.RelativizeIRI(t); ok {
+			if reference, ok := tf.base.RelativizeIRI(string(t)); ok {
 				return "<" + formatIRI(reference, tf.ascii) + ">"
 			}
 		}

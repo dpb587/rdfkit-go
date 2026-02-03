@@ -3,8 +3,8 @@ package trig
 import (
 	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/rdfkit-go/encoding/trig/internal/grammar"
+	"github.com/dpb587/rdfkit-go/iri"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
 func reader_scan_triplesOrGraph_E1(value rdf.GraphNameValue, valueRange *cursorio.TextOffsetRange) scanFunc {
@@ -60,9 +60,12 @@ func reader_scan_triplesOrGraph_labelOrSubject_PrefixedName(r *Decoder, ectx eva
 		return readerStack{}, grammar.R_triples.Err(grammar.R_subject.Err(err))
 	}
 
-	expanded, ok := ectx.Global.Prefixes.ExpandPrefix(token.NamespaceDecoded, token.LocalDecoded)
+	expanded, ok := ectx.Global.Prefixes.ExpandPrefix(iri.PrefixReference{
+		Prefix:    token.NamespaceDecoded,
+		Reference: token.LocalDecoded,
+	})
 	if !ok {
-		return readerStack{}, grammar.R_triples.Err(grammar.R_subject.Err(grammar.R_PrefixedName.ErrWithTextOffsetRange(iriutil.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets)))
+		return readerStack{}, grammar.R_triples.Err(grammar.R_subject.Err(grammar.R_PrefixedName.ErrWithTextOffsetRange(iri.NewUnknownPrefixError(token.NamespaceDecoded), token.Offsets)))
 	}
 
 	return readerStack{ectx, reader_scan_triplesOrGraph_E1(rdf.IRI(expanded), token.Offsets)}, nil

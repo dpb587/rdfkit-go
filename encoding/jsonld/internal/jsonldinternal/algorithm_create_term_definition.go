@@ -8,7 +8,7 @@ import (
 
 	"github.com/dpb587/inspectjson-go/inspectjson"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
+	"github.com/dpb587/rdfkit-go/iri"
 )
 
 type algorithmCreateTermDefinition struct {
@@ -18,7 +18,7 @@ type algorithmCreateTermDefinition struct {
 	defined       map[string]bool
 
 	// [spec // 4.2.2] *base URL* defaulting to `null``
-	baseURL *iriutil.ParsedIRI
+	baseURL *iri.ParsedIRI
 
 	// [spec // 4.2.2] protected which defaults to `false`
 	protected bool

@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
+	"github.com/dpb587/rdfkit-go/iri"
 )
 
 func TestDirectiveMode_AtIsZero(t *testing.T) {
@@ -20,7 +20,7 @@ func TestWriteDirectives_At(t *testing.T) {
 	_, err := WriteDirectives(buf, WriteDirectivesOptions{
 		Base:     "http://example.com/path/",
 		BaseMode: DirectiveMode_At,
-		Prefixes: iriutil.PrefixMappingList{
+		Prefixes: iri.PrefixMappingList{
 			{Prefix: "ex", Expanded: "http://example.com/ns/"},
 		},
 		PrefixMode: DirectiveMode_At,
@@ -43,7 +43,7 @@ func TestWriteDirectives_SPARQL(t *testing.T) {
 	_, err := WriteDirectives(buf, WriteDirectivesOptions{
 		Base:     "http://example.com/path/",
 		BaseMode: DirectiveMode_SPARQL,
-		Prefixes: iriutil.PrefixMappingList{
+		Prefixes: iri.PrefixMappingList{
 			{Prefix: "ex", Expanded: "http://example.com/ns/"},
 		},
 		PrefixMode: DirectiveMode_SPARQL,
@@ -66,7 +66,7 @@ func TestWriteDirectives_Disabled(t *testing.T) {
 	_, err := WriteDirectives(buf, WriteDirectivesOptions{
 		Base:     "http://example.com/path/",
 		BaseMode: DirectiveMode_Disabled,
-		Prefixes: iriutil.PrefixMappingList{
+		Prefixes: iri.PrefixMappingList{
 			{Prefix: "ex", Expanded: "http://example.com/ns/"},
 		},
 		PrefixMode: DirectiveMode_Disabled,
@@ -86,7 +86,7 @@ func TestWriteDirectives_Mixed_BaseDisabled_PrefixAt(t *testing.T) {
 	_, err := WriteDirectives(buf, WriteDirectivesOptions{
 		Base:     "http://example.com/path/",
 		BaseMode: DirectiveMode_Disabled,
-		Prefixes: iriutil.PrefixMappingList{
+		Prefixes: iri.PrefixMappingList{
 			{Prefix: "ex", Expanded: "http://example.com/ns/"},
 		},
 		PrefixMode: DirectiveMode_At,
@@ -108,7 +108,7 @@ func TestWriteDirectives_Mixed_BaseAt_PrefixSPARQL(t *testing.T) {
 	_, err := WriteDirectives(buf, WriteDirectivesOptions{
 		Base:     "http://example.com/path/",
 		BaseMode: DirectiveMode_At,
-		Prefixes: iriutil.PrefixMappingList{
+		Prefixes: iri.PrefixMappingList{
 			{Prefix: "ex", Expanded: "http://example.com/ns/"},
 		},
 		PrefixMode: DirectiveMode_SPARQL,
@@ -131,7 +131,7 @@ func TestWriteDirectives_Mixed_BaseSPARQL_PrefixDisabled(t *testing.T) {
 	_, err := WriteDirectives(buf, WriteDirectivesOptions{
 		Base:     "http://example.com/path/",
 		BaseMode: DirectiveMode_SPARQL,
-		Prefixes: iriutil.PrefixMappingList{
+		Prefixes: iri.PrefixMappingList{
 			{Prefix: "ex", Expanded: "http://example.com/ns/"},
 		},
 		PrefixMode: DirectiveMode_Disabled,
@@ -153,7 +153,7 @@ func TestWriteDirectives_EmptyBase(t *testing.T) {
 	_, err := WriteDirectives(buf, WriteDirectivesOptions{
 		Base:     "",
 		BaseMode: DirectiveMode_At,
-		Prefixes: iriutil.PrefixMappingList{
+		Prefixes: iri.PrefixMappingList{
 			{Prefix: "ex", Expanded: "http://example.com/ns/"},
 		},
 		PrefixMode: DirectiveMode_At,
@@ -175,7 +175,7 @@ func TestWriteDirectives_EmptyPrefixes(t *testing.T) {
 	_, err := WriteDirectives(buf, WriteDirectivesOptions{
 		Base:       "http://example.com/path/",
 		BaseMode:   DirectiveMode_At,
-		Prefixes:   iriutil.PrefixMappingList{},
+		Prefixes:   iri.PrefixMappingList{},
 		PrefixMode: DirectiveMode_At,
 	})
 	if err != nil {
@@ -195,7 +195,7 @@ func TestWriteDirectives_MultiplePrefixes(t *testing.T) {
 	_, err := WriteDirectives(buf, WriteDirectivesOptions{
 		Base:     "http://example.com/path/",
 		BaseMode: DirectiveMode_At,
-		Prefixes: iriutil.PrefixMappingList{
+		Prefixes: iri.PrefixMappingList{
 			{Prefix: "ex", Expanded: "http://example.com/ns/"},
 			{Prefix: "rdf", Expanded: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"},
 		},

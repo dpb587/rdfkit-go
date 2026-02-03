@@ -3,7 +3,9 @@
 Work with RDF-related concepts, datasets, and files in Go.
  
 * Decode TriG, N-Quads, XML, JSON-LD, HTML, and other RDF-based sources.
-* Reference common IRI constants generated from vocabularies.
+* Use blank nodes, literals, triples, quads, iterators and other RDF primitives.
+* Reference IRI constants from `rdf`, `owl`, `xsd`, and custom vocabularies.
+* Expand, compact, and parse IRI prefixes and CURIEs.
 * Canonicalize datasets with RDFC-1.0.
 
 ## Usage
@@ -220,7 +222,7 @@ An *IRI* records a URL-based identity as a `string` value.
 resourceIRI := rdf.IRI("http://example.com/resource")
 ```
 
-Some well-known IRIs are defined in subpackages such as `rdfiri` and `xsdiri` - see [Ontologies](#ontologies) for more details. The [`iriutil` package](rdf/iriutil) provides additional support for mapping IRIs from prefixes and CURIEs.
+Some well-known IRIs are defined in subpackages such as `rdfiri` and `xsdiri` - see [Ontologies](#ontologies) for more details. The [`iri` package](iri) provides additional support for mapping IRIs from prefixes and CURIEs.
 
 ### Literal
 
@@ -530,26 +532,34 @@ trueValue.AsLiteralTerm() == trueLiteral
 
 ## IRIs
 
+The top-level [`iri` package](iri) provides utilities for transforming IRIs. The `string` type is used for a plain IRI, and it must be cast as an `rdf.IRI` when used within RDF statements.
+
 ### Prefixes
 
 A common practice with IRIs is defining prefixes that may be used to expand and compact IRIs. These prefixes are often used in encoding formats.
 
 ```go
-prefixes := iriutil.NewPrefixMap(
-  iriutil.PrefixMapping{
+prefixes := iri.NewPrefixManager(iri.PrefixMappingList{
+  iri.PrefixMapping{
     Prefix: "ex",
     Expanded: "http://example.com/",
   },
-)
+})
 
-rIRI, ok := prefixes.ExpandPrefix("ex", "resource")
+rIRI, ok := prefixes.ExpandPrefix(iri.PrefixReference{
+  Prefix: "ex",
+  Resource: "resource",
+})
 ok && rIRI == rdf.IRI("http://example.com/resource")
 
-_, ok = prefixes.ExpandPrefix("unknown", "resource")
+_, ok = prefixes.ExpandPrefix(iri.PrefixReference{
+  Prefix: "unknown",
+  Resource: "resource",
+})
 !ok
 
-rNS, rLocalName, ok := prefixes.CompactPrefix(rdf.IRI("http://example.com/resource"))
-ok && rNS == "http://example.com/" && rLocalName == "resource"
+pr, ok := prefixes.CompactPrefix(rdf.IRI("http://example.com/resource"))
+ok && pr.Prefix == "http://example.com/" && pr.Reference == "resource"
 
 _, _, ok = prefixes.CompactPrefix(rdf.IRI("https://example.com/secure"))
 !ok
@@ -557,7 +567,7 @@ _, _, ok = prefixes.CompactPrefix(rdf.IRI("https://example.com/secure"))
 
 ### CURIE Syntax
 
-The [`curie` package](rdf/iriutil/curie/) provides several functions for working with CURIE syntax based on [CURIE Syntax](https://www.w3.org/TR/curie/).
+The [`curie` package](iri/curie/) provides several functions for working with CURIE prefixes based on [CURIE Syntax](https://www.w3.org/TR/curie/).
 
 ```go
 rCURIE, ok := curie.Parse("[ex:resource]")
@@ -573,7 +583,11 @@ ok && rIRI == "http://example.com/resource"
 
 ### RDFa Core Initial Context
 
-The [`rdfacontext` package](rdf/iriutil/rdfacontext/) provides a list of prefix mappings defined by the W3C at [RDFa Core Initial Context](https://www.w3.org/2011/rdfa-context/rdfa-1.1). This includes prefixes such as `owl:`, `rdfa:`, and `xsd:`. The list of widely-used prefixes is included as well, which includes prefixes such as `dc:` and `schema:`.
+The [`rdfacontext` package](iri/rdfacontext/) provides a list of prefix mappings defined by the W3C at [RDFa Core Initial Context](https://www.w3.org/2011/rdfa-context/rdfa-1.1). This includes prefixes such as `owl:`, `rdfa:`, and `xsd:`. The list of widely-used prefixes is included as well, which includes prefixes such as `dc:` and `schema:`.
+
+```go
+commonPrefixes := rdfacontext.NewWidelyUsedInitialContext()
+```
 
 ## Notes
 

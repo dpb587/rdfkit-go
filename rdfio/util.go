@@ -3,13 +3,12 @@ package rdfio
 import (
 	"github.com/dpb587/rdfkit-go/encoding/trig"
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
-	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
+	"github.com/dpb587/rdfkit-go/iri"
 )
 
 type DirectiveAggregator struct {
 	Base           []string
-	PrefixMappings iriutil.PrefixMappingList
+	PrefixMappings iri.PrefixMappingList
 }
 
 func PatchDirectiveAggregatorOptions(d *DirectiveAggregator, opts any) (any, error) {
@@ -20,9 +19,9 @@ func PatchDirectiveAggregatorOptions(d *DirectiveAggregator, opts any) (any, err
 				d.Base = append(d.Base, data.Value)
 			}).
 			SetPrefixDirectiveListener(func(data trig.DecoderEvent_PrefixDirective_Data) {
-				d.PrefixMappings = append(d.PrefixMappings, iriutil.PrefixMapping{
+				d.PrefixMappings = append(d.PrefixMappings, iri.PrefixMapping{
 					Prefix:   data.Prefix,
-					Expanded: rdf.IRI(data.Expanded),
+					Expanded: data.Expanded,
 				})
 			}),
 		), nil
@@ -32,9 +31,9 @@ func PatchDirectiveAggregatorOptions(d *DirectiveAggregator, opts any) (any, err
 				d.Base = append(d.Base, data.Value)
 			}).
 			SetPrefixDirectiveListener(func(data turtle.DecoderEvent_PrefixDirective_Data) {
-				d.PrefixMappings = append(d.PrefixMappings, iriutil.PrefixMapping{
+				d.PrefixMappings = append(d.PrefixMappings, iri.PrefixMapping{
 					Prefix:   data.Prefix,
-					Expanded: rdf.IRI(data.Expanded),
+					Expanded: data.Expanded,
 				})
 			}),
 		), nil

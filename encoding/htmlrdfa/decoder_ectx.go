@@ -5,12 +5,12 @@ import (
 
 	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/rdfkit-go/encoding"
+	"github.com/dpb587/rdfkit-go/iri"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 )
 
-var InitialContext = iriutil.PrefixMap{}
+var InitialContext = iri.PrefixMappingList{}
 
 type incompleteTripleDirection int
 
@@ -76,7 +76,7 @@ type globalEvaluationContext struct {
 	HostDefaultVocabulary *string
 
 	// not enumerated as a host option by specifications? seems useful though
-	HostDefaultPrefixes iriutil.PrefixMap
+	HostDefaultPrefixes *iri.PrefixManager
 
 	// https://www.w3.org/TR/rdfa-in-html/
 	HtmlProcessing HtmlProcessingProfile
@@ -93,13 +93,13 @@ type listMappingBuilder struct {
 }
 
 type evaluationContext struct {
-	BaseURL           *iriutil.ParsedIRI
+	BaseURL           *iri.ParsedIRI
 	ParentSubject     rdf.SubjectValue
 	ParentObject      rdf.ObjectValue
 	IncompleteTriples []incompleteTriple
 	ListMapping       map[rdf.IRI]*listMappingBuilder
 	Language          *string
-	PrefixMapping     iriutil.PrefixMap
+	PrefixMapping     *iri.PrefixManager
 	TermMappings      map[string]rdf.IRI
 	DefaultVocabulary *string
 
@@ -111,7 +111,7 @@ type evaluationContext struct {
 	Global *globalEvaluationContext
 }
 
-func resolveIRI(ectx evaluationContext, prefixes iriutil.PrefixMap, value string, baseURL *iriutil.ParsedIRI, defaultVocabulary *string, allowSafeCurie bool, allowTerms bool) rdf.SubjectValue {
+func resolveIRI(ectx evaluationContext, prefixes *iri.PrefixManager, value string, baseURL *iri.ParsedIRI, defaultVocabulary *string, allowSafeCurie bool, allowTerms bool) rdf.SubjectValue {
 	if len(value) == 0 {
 		if baseURL != nil {
 			return rdf.IRI(baseURL.String())
@@ -189,7 +189,10 @@ func resolveIRI(ectx evaluationContext, prefixes iriutil.PrefixMap, value string
 		}
 	}
 
-	expanded, ok := prefixes.ExpandPrefix(valueSplit[0], valueSplit[1])
+	expanded, ok := prefixes.ExpandPrefix(iri.PrefixReference{
+		Prefix:    valueSplit[0],
+		Reference: valueSplit[1],
+	})
 	if ok {
 		return rdf.IRI(expanded)
 	}

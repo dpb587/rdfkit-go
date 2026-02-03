@@ -10,11 +10,12 @@ import (
 
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldcontent"
+	"github.com/dpb587/rdfkit-go/iri"
+	"github.com/dpb587/rdfkit-go/iri/iriutil"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
 )
 
@@ -25,8 +26,8 @@ type EncoderOption interface {
 
 type Encoder struct {
 	w                *json.Encoder
-	base             *iriutil.BaseIRI
-	prefixes         *iriutil.PrefixTracker
+	base             *iri.BaseIRI
+	prefixes         *iriutil.UsagePrefixMapper
 	buffered         bool
 	bnStringProvider blanknodes.StringProvider
 
@@ -100,9 +101,11 @@ func (e *Encoder) Close() error {
 		wrappedContext["@base"] = e.base.String()
 	}
 
-	if prefixMappings := e.prefixes.GetUsedPrefixMappings(); len(prefixMappings) > 0 {
-		for _, pm := range prefixMappings {
-			wrappedContext[pm.Prefix] = pm.Expanded
+	if usedPrefixes := e.prefixes.GetUsedPrefixes(); len(usedPrefixes) > 0 {
+		for _, prefix := range usedPrefixes {
+			if expanded, found := e.prefixes.ExpandPrefix(iri.PrefixReference{Prefix: prefix}); found {
+				wrappedContext[prefix] = expanded
+			}
 		}
 	}
 
@@ -148,10 +151,10 @@ func (e *Encoder) buildResource(builder *rdfdescription.ResourceListBuilder, res
 			case rdf.IRI:
 				var wrapID string
 
-				if iriPrefix, iriSuffix, ok := e.prefixes.CompactPrefix(obj); ok {
-					wrapID = iriPrefix + ":" + iriSuffix
+				if pr, ok := e.prefixes.CompactPrefix(string(obj)); ok {
+					wrapID = pr.String()
 				} else if e.base != nil {
-					if rel, ok := e.base.RelativizeIRI(obj); ok {
+					if rel, ok := e.base.RelativizeIRI(string(obj)); ok {
 						wrapID = rel
 					} else {
 						wrapID = string(obj)
@@ -185,11 +188,11 @@ func (e *Encoder) buildResource(builder *rdfdescription.ResourceListBuilder, res
 					case "false":
 						statementObject = false
 					default:
-						typePrefix, typeSuffix, ok := e.prefixes.CompactPrefix(obj.Datatype)
+						pr, ok := e.prefixes.CompactPrefix(string(obj.Datatype))
 						if ok {
 							statementObject = map[string]any{
 								"@value": obj.LexicalForm,
-								"@type":  typePrefix + ":" + typeSuffix,
+								"@type":  pr.String(),
 							}
 						} else {
 							statementObject = map[string]any{
@@ -199,11 +202,11 @@ func (e *Encoder) buildResource(builder *rdfdescription.ResourceListBuilder, res
 						}
 					}
 				default:
-					typePrefix, typeSuffix, ok := e.prefixes.CompactPrefix(obj.Datatype)
+					pr, ok := e.prefixes.CompactPrefix(string(obj.Datatype))
 					if ok {
 						statementObject = map[string]any{
 							"@value": obj.LexicalForm,
-							"@type":  typePrefix + ":" + typeSuffix,
+							"@type":  pr.String(),
 						}
 					} else {
 						statementObject = map[string]any{
@@ -227,8 +230,8 @@ func (e *Encoder) buildResource(builder *rdfdescription.ResourceListBuilder, res
 
 		if predicate == rdfiri.Type_Property {
 			key = "@type"
-		} else if predicatePrefix, predicateSuffix, ok := e.prefixes.CompactPrefix(predicate); ok {
-			key = predicatePrefix + ":" + predicateSuffix
+		} else if pr, ok := e.prefixes.CompactPrefix(string(predicate)); ok {
+			key = pr.String()
 		}
 
 		graphProperties[key] = append(graphProperties[key], statementObject)
@@ -238,10 +241,10 @@ func (e *Encoder) buildResource(builder *rdfdescription.ResourceListBuilder, res
 
 	switch v := resource.GetResourceSubject().(type) {
 	case rdf.IRI:
-		if iriPrefix, iriSuffix, ok := e.prefixes.CompactPrefix(v); ok {
-			graphItem["@id"] = iriPrefix + ":" + iriSuffix
+		if pr, ok := e.prefixes.CompactPrefix(string(v)); ok {
+			graphItem["@id"] = pr.String()
 		} else if e.base != nil {
-			if rel, ok := e.base.RelativizeIRI(v); ok {
+			if rel, ok := e.base.RelativizeIRI(string(v)); ok {
 				graphItem["@id"] = rel
 			} else {
 				graphItem["@id"] = string(v)

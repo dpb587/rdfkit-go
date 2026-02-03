@@ -5,8 +5,8 @@ import (
 
 	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/rdfkit-go/encoding"
+	"github.com/dpb587/rdfkit-go/iri"
 	"github.com/dpb587/rdfkit-go/rdf"
-	"github.com/dpb587/rdfkit-go/rdf/iriutil"
 	"golang.org/x/net/html"
 )
 
@@ -17,7 +17,7 @@ type globalEvaluationContext struct {
 }
 
 type evaluationContext struct {
-	BaseURL *iriutil.ParsedIRI
+	BaseURL *iri.ParsedIRI
 
 	CurrentContainer encoding.ContainerResource
 
@@ -33,7 +33,7 @@ type evaluationContext struct {
 
 func (w evaluationContext) ResolveURL(u string) (string, error) {
 	if w.BaseURL == nil {
-		if valid, err := iriutil.ParseIRI(u); err == nil && valid.IsAbs() {
+		if valid, err := iri.ParseIRI(u); err == nil && valid.IsAbs() {
 			return u, nil
 		}
 
