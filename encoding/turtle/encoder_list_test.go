@@ -65,6 +65,36 @@ func TestEncoder_Basic(t *testing.T) {
 ) .
 `,
 		},
+		{
+			name: "list with single anon resource - single property",
+			content: `<http://example.com/weight_Property>
+	<http://www.w3.org/ns/shacl#name> "Weight"@en ;
+	<http://www.w3.org/ns/shacl#or> (
+		[ <http://www.w3.org/ns/shacl#class> <http://schema.org/Mass> ]
+	) ;
+	<http://www.w3.org/ns/shacl#path> <http://schema.org/weight> .
+`,
+		},
+		{
+			name: "list with single anon resource - multiple properties",
+			content: `<http://example.com/weight_Property>
+	<http://www.w3.org/ns/shacl#name> "Weight"@en ;
+	<http://www.w3.org/ns/shacl#or> (
+		[
+			<http://example.com/name> "name"@en ;
+			<http://www.w3.org/ns/shacl#class> <http://schema.org/Mass>
+		]
+	) ;
+	<http://www.w3.org/ns/shacl#path> <http://schema.org/weight> .
+`,
+		},
+		{
+			name: "list with single simple value",
+			content: `<http://example.com/test> <http://example.com/items> (
+	"item1"
+) .
+`,
+		},
 	}
 
 	for _, tt := range tests {

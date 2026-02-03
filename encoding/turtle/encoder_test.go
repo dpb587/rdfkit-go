@@ -7,6 +7,7 @@ import (
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/iriutil"
+	"github.com/dpb587/rdfkit-go/rdfdescription"
 )
 
 func TestEncoder_Buffered_Base(t *testing.T) {
@@ -274,6 +275,115 @@ func TestEncoder_Prefix_BackslashPercentEncoded(t *testing.T) {
 	if _a, _e := buf.String(), `@prefix ex: <http://example.com/> .
 
 ex:back%5Cslash a <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> .
+`; _a != _e {
+		t.Fatalf("expected %q, got %q", _e, _a)
+	}
+}
+
+func TestEncoder_Resources_AnonSinglePropertyWS(t *testing.T) {
+	ctx := t.Context()
+
+	buf := &bytes.Buffer{}
+	e, err := NewEncoder(buf, EncoderConfig{}.
+		SetPrefixes(iriutil.NewPrefixMap(iriutil.PrefixMapping{
+			Prefix:   "schema",
+			Expanded: "http://schema.org/",
+		}, iriutil.PrefixMapping{
+			Prefix:   "sh",
+			Expanded: "http://www.w3.org/ns/shacl#",
+		})),
+	)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	resource := rdfdescription.SubjectResource{
+		Subject: rdf.IRI("http://schema.org/weight_Property"),
+		Statements: rdfdescription.StatementList{
+			rdfdescription.AnonResourceStatement{
+				Predicate: rdf.IRI("http://www.w3.org/ns/shacl#or"),
+				AnonResource: rdfdescription.AnonResource{
+					Statements: rdfdescription.StatementList{
+						rdfdescription.ObjectStatement{
+							Predicate: rdf.IRI("http://www.w3.org/ns/shacl#class"),
+							Object:    rdf.IRI("http://schema.org/Mass"),
+						},
+					},
+				},
+			},
+		},
+	}
+
+	err = e.AddResource(ctx, resource)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	e.Close()
+
+	// The closing bracket should have a space before it
+	if _a, _e := buf.String(), `@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+schema:weight_Property sh:or [ sh:class schema:Mass ] .
+`; _a != _e {
+		t.Fatalf("expected %q, got %q", _e, _a)
+	}
+}
+
+func TestEncoder_Resources_AnonMultiplePropertiesWS(t *testing.T) {
+	ctx := t.Context()
+
+	buf := &bytes.Buffer{}
+	e, err := NewEncoder(buf, EncoderConfig{}.
+		SetPrefixes(iriutil.NewPrefixMap(iriutil.PrefixMapping{
+			Prefix:   "schema",
+			Expanded: "http://schema.org/",
+		}, iriutil.PrefixMapping{
+			Prefix:   "sh",
+			Expanded: "http://www.w3.org/ns/shacl#",
+		})),
+	)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	resource := rdfdescription.SubjectResource{
+		Subject: rdf.IRI("http://schema.org/weight_Property"),
+		Statements: rdfdescription.StatementList{
+			rdfdescription.AnonResourceStatement{
+				Predicate: rdf.IRI("http://www.w3.org/ns/shacl#property"),
+				AnonResource: rdfdescription.AnonResource{
+					Statements: rdfdescription.StatementList{
+						rdfdescription.ObjectStatement{
+							Predicate: rdf.IRI("http://www.w3.org/ns/shacl#class"),
+							Object:    rdf.IRI("http://schema.org/Mass"),
+						},
+						rdfdescription.ObjectStatement{
+							Predicate: rdf.IRI("http://www.w3.org/ns/shacl#name"),
+							Object:    rdf.Literal{LexicalForm: "Weight", Datatype: rdfiri.LangString_Datatype, Tag: rdf.LanguageLiteralTag{Language: "en"}},
+						},
+					},
+				},
+			},
+		},
+	}
+
+	err = e.AddResource(ctx, resource)
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	e.Close()
+
+	// When multiline, the closing bracket should be on its own line with no space before it
+	if _a, _e := buf.String(), `@prefix schema: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+schema:weight_Property sh:property [
+	sh:class schema:Mass ;
+	sh:name "Weight"@en
+] .
 `; _a != _e {
 		t.Fatalf("expected %q, got %q", _e, _a)
 	}

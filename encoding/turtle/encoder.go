@@ -252,8 +252,8 @@ func (w *Encoder) writeResourceStatement(ctx context.Context, buf *bytes.Buffer,
 	case rdfdescription.AnonResourceStatement:
 		if len(statementT.AnonResource.Statements) == 0 {
 			buf.WriteString("[]")
-		} else if entries, ok := w.tryResourceCompactList(statementT.AnonResource); ok {
-			mm, err := w.writeResourceCompactList(ctx, buf, linePrefix, entries)
+		} else if entries, ok := w.normalizedListSyntax(statementT.AnonResource); ok {
+			mm, err := w.writeResourceList(ctx, buf, linePrefix, entries)
 			if err != nil {
 				return false, fmt.Errorf("list: %v", err)
 			} else if mm {
@@ -270,7 +270,7 @@ func (w *Encoder) writeResourceStatement(ctx context.Context, buf *bytes.Buffer,
 
 				buf.WriteString("\n" + linePrefix + "]")
 			} else {
-				buf.WriteString("]")
+				buf.WriteString(" ]")
 			}
 		}
 	default:
@@ -402,7 +402,7 @@ func (e *Encoder) writeObjectValue(w *bytes.Buffer, v rdf.ObjectValue) error {
 	return fmt.Errorf("invalid type: %T", v)
 }
 
-func (e *Encoder) tryResourceCompactList(resource rdfdescription.AnonResource) (rdfdescription.StatementList, bool) {
+func (e *Encoder) normalizedListSyntax(resource rdfdescription.AnonResource) (rdfdescription.StatementList, bool) {
 	statements := resource.GetResourceStatements()
 	if len(statements) == 0 {
 		return nil, false
@@ -471,35 +471,28 @@ func (e *Encoder) tryResourceCompactList(resource rdfdescription.AnonResource) (
 	}
 }
 
-func (e *Encoder) writeResourceCompactList(ctx context.Context, buf *bytes.Buffer, linePrefix string, entries rdfdescription.StatementList) (bool, error) {
+func (e *Encoder) writeResourceList(ctx context.Context, buf *bytes.Buffer, linePrefix string, entries rdfdescription.StatementList) (bool, error) {
 	if len(entries) == 0 {
 		buf.WriteString("()")
 
 		return false, nil
 	}
 
-	var multiline bool
-
 	buf.WriteString("(")
 
-	if len(entries) > 0 {
-		multiline = true
+	itemLinePrefix := linePrefix + "\t"
 
-		itemLinePrefix := linePrefix + "\t"
+	for _, statement := range entries {
+		buf.WriteString("\n" + itemLinePrefix)
 
-		for _, statement := range entries {
-			buf.WriteString("\n" + itemLinePrefix)
-
-			_, err := e.writeResourceStatement(ctx, buf, itemLinePrefix, statement)
-			if err != nil {
-				return false, fmt.Errorf("statement: %v", err)
-			}
+		_, err := e.writeResourceStatement(ctx, buf, itemLinePrefix, statement)
+		if err != nil {
+			return false, fmt.Errorf("statement: %v", err)
 		}
-
-		buf.WriteString("\n" + linePrefix)
 	}
 
+	buf.WriteString("\n" + linePrefix)
 	buf.WriteString(")")
 
-	return multiline, nil
+	return true, nil
 }
