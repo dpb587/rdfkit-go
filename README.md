@@ -500,6 +500,7 @@ An *ontology* (or *vocabulary*) offers domain-specific conventions for working w
 * rdf - [`rdfiri`](ontology/rdf/rdfiri), [`rdfliteral`](ontology/rdf/rdfliteral), and [`rdfvalue`](ontology/rdf/rdfvalue)
 * rdfa - [`rdfairi`](ontology/rdfa/rdfairi)
 * rdfs - [`rdfsiri`](ontology/rdfs/rdfsiri)
+* shacl - [`shacliri`](ontology/shacl/shacliri)
 * xsd - [`xsdiri`](ontology/xsd/xsdiri), [`xsdobject`](ontology/xsd/xsdobject), [`xsdtype`](ontology/xsd/xsdtype), and other utilities
 
 To help maintain consistency, the following practices are used for the naming and implementations.
