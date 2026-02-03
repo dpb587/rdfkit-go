@@ -2,7 +2,7 @@ package rdf
 
 // ObjectValue represents any value that can be used for an object property.
 //
-// Normative values are a [BlankNode], [IRI], or [Literal] type.
+// This is a closed interface. See [BlankNode], [IRI], and [Literal].
 type ObjectValue interface {
 	Term
 

@@ -1,5 +1,9 @@
 package rdf
 
+// LiteralTag represents additional metadata about a [Literal] term. They should only be used in specific contexts,
+// typically dependent on the literal's datatype.
+//
+// This is a closed interface. See [LanguageLiteralTag] and [DirectionalLanguageLiteralTag].
 type LiteralTag interface {
 	Equals(other LiteralTag) bool
 
@@ -8,6 +12,7 @@ type LiteralTag interface {
 
 //
 
+// LanguageLiteralTag is used for a language-tagged literal.
 type LanguageLiteralTag struct {
 	// Language is a well-formed [BCP47] language tag.
 	//

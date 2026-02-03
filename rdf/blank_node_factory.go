@@ -4,13 +4,14 @@ import (
 	"sync/atomic"
 )
 
-// BlankNodeFactory allocates a new, unique blank node.
+// BlankNodeFactory is used to allocate new, globally-unique blank nodes.
 type BlankNodeFactory interface {
 	NewBlankNode() BlankNode
 }
 
 //
 
+// NewBlankNode creates a blank node using [DefaultBlankNodeFactory].
 func NewBlankNode() BlankNode {
 	return DefaultBlankNodeFactory.NewBlankNode()
 }
@@ -48,6 +49,7 @@ type bnF struct {
 
 var _ BlankNodeFactory = &bnF{}
 
+// NewBlankNodeFactory creates a new [BlankNodeFactory].
 func NewBlankNodeFactory() BlankNodeFactory {
 	return &bnF{
 		a: &atomic.Int64{},

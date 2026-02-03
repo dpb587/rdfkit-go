@@ -2,7 +2,7 @@ package rdf
 
 // PredicateValue represents any value that can be used for a predicate property.
 //
-// Normative values are an [IRI] type.
+// This is a closed interface. See [IRI].
 type PredicateValue interface {
 	Term
 

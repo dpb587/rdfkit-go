@@ -10,6 +10,9 @@ const (
 
 //
 
+// Term represents a value that may be used in some position of a statement.
+//
+// This is a closed interface. See [BlankNode], [IRI], and [Literal].
 type Term interface {
 	TermKind() TermKind
 	TermEquals(a Term) bool
@@ -36,18 +39,6 @@ func (f TermMatcherFunc) MatchTerm(t Term) bool {
 //
 
 type TermList []Term
-
-//
-
-func BuildTermList[S ~[]E, E Term](terms S) TermList {
-	tl := make(TermList, len(terms))
-
-	for termIdx, term := range terms {
-		tl[termIdx] = term
-	}
-
-	return tl
-}
 
 //
 

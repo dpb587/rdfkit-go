@@ -2,7 +2,7 @@ package rdf
 
 // SubjectValue represents any value that can be used for a subject property.
 //
-// Normative values are a [BlankNode] or [IRI] type.
+// This is a closed interface. See [BlankNode] and [IRI].
 type SubjectValue interface {
 	Term
 
