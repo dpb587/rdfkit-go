@@ -17,6 +17,7 @@ import (
 	"github.com/dpb587/rdfkit-go/rdf"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
+	"github.com/dpb587/rdfkit-go/rdfdescription/rdfdescriptionutil"
 )
 
 type EncoderOption interface {
@@ -36,6 +37,7 @@ type Encoder struct {
 }
 
 var _ encoding.QuadsEncoder = &Encoder{}
+var _ rdfdescriptionutil.DatasetResourceEncoder = &Encoder{}
 
 func NewEncoder(w io.Writer, opts ...EncoderOption) (*Encoder, error) {
 	compiledOpts := EncoderConfig{}
@@ -129,6 +131,16 @@ func (w *Encoder) AddQuad(ctx context.Context, t rdf.Quad) error {
 	}
 
 	w.builder.Add(t)
+
+	return nil
+}
+
+func (w *Encoder) AddDatasetResource(ctx context.Context, resource rdfdescription.DatasetResource) error {
+	if w.err != nil {
+		return w.err
+	}
+
+	w.builder.AddDatasetResource(ctx, resource)
 
 	return nil
 }
