@@ -15,6 +15,7 @@ type ResourceListBuilder struct {
 }
 
 var _ triples.GraphWriter = &ResourceListBuilder{}
+var _ ResourceWriter = &ResourceListBuilder{}
 
 func NewResourceListBuilder() *ResourceListBuilder {
 	return &ResourceListBuilder{
@@ -42,6 +43,14 @@ func (rb *ResourceListBuilder) Add(triples ...rdf.Triple) {
 			rb.blankNodeReferences[objectSubject.Identifier]++
 		}
 	}
+}
+
+func (rb *ResourceListBuilder) AddResource(ctx context.Context, resource Resource) error {
+	for _, t := range resource.NewTriples() {
+		rb.Add(t)
+	}
+
+	return nil
 }
 
 func (rb *ResourceListBuilder) GetBlankNodeReferences(bn rdf.BlankNode) int {

@@ -17,6 +17,7 @@ type BufferedQuadsEncoder struct {
 }
 
 var _ encoding.QuadsEncoder = &BufferedQuadsEncoder{}
+var _ rdfdescription.DatasetResourceWriter = &BufferedQuadsEncoder{}
 
 func NewBufferedQuadsEncoder(ctx context.Context, encoder DatasetResourceEncoder, exportOpts rdfdescription.ExportResourceOptions) *BufferedQuadsEncoder {
 	return &BufferedQuadsEncoder{
@@ -37,6 +38,10 @@ func (e *BufferedQuadsEncoder) GetContentMetadata() encoding.ContentMetadata {
 
 func (e *BufferedQuadsEncoder) AddQuad(ctx context.Context, quad rdf.Quad) error {
 	return e.builder.AddQuad(ctx, quad)
+}
+
+func (e *BufferedQuadsEncoder) AddDatasetResource(ctx context.Context, resource rdfdescription.DatasetResource) error {
+	return e.builder.AddDatasetResource(ctx, resource)
 }
 
 func (e *BufferedQuadsEncoder) Close() error {

@@ -17,6 +17,7 @@ type BufferedTriplesEncoder struct {
 }
 
 var _ encoding.TriplesEncoder = &BufferedTriplesEncoder{}
+var _ rdfdescription.ResourceWriter = &BufferedTriplesEncoder{}
 
 func NewBufferedTriplesEncoder(ctx context.Context, encoder ResourceEncoder, exportOpts rdfdescription.ExportResourceOptions) *BufferedTriplesEncoder {
 	return &BufferedTriplesEncoder{
@@ -37,6 +38,17 @@ func (e *BufferedTriplesEncoder) GetContentMetadata() encoding.ContentMetadata {
 
 func (e *BufferedTriplesEncoder) AddTriple(ctx context.Context, triple rdf.Triple) error {
 	return e.builder.AddTriple(ctx, triple)
+}
+
+func (e *BufferedTriplesEncoder) AddResource(ctx context.Context, resource rdfdescription.Resource) error {
+	for _, triple := range resource.NewTriples() {
+		err := e.AddTriple(ctx, triple)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
 func (e *BufferedTriplesEncoder) Close() error {
