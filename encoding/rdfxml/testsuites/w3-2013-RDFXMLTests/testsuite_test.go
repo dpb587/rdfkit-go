@@ -81,7 +81,7 @@ func Test(t *testing.T) {
 				return encodingtest.CollectTripleStatementsErr(rdfxml.NewDecoder(
 					testdata.NewFileByteReader(t, string(entry.Action)),
 					rdfxml.DecoderConfig{}.
-						SetBaseURL(string(entry.Action)).
+						SetDefaultBase(string(entry.Action)).
 						SetWarningListener(func(err error) {
 							t.Logf("warn: %s", err.Error())
 						}).

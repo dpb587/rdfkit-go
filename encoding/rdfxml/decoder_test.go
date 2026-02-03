@@ -1225,7 +1225,7 @@ func TestSpecTestcase(t *testing.T) {
 			dopt := DecoderConfig{}
 
 			if len(testcase.OptionBaseURL) > 0 {
-				dopt = dopt.SetBaseURL(testcase.OptionBaseURL)
+				dopt = dopt.SetDefaultBase(testcase.OptionBaseURL)
 			}
 
 			out, err := triples.CollectErr(NewDecoder(

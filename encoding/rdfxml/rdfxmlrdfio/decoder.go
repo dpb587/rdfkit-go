@@ -38,7 +38,7 @@ func (e decoder) NewDecoder(rr rdfiotypes.Reader, opts rdfiotypes.DecoderOptions
 
 	options := rdfxml.DecoderConfig{}.
 		SetBlankNodeStringFactory(bnFactory).
-		SetBaseURL(string(opts.BaseIRI))
+		SetDefaultBase(string(opts.BaseIRI))
 
 	if params.CaptureTextOffsets != nil {
 		options = options.SetCaptureTextOffsets(*params.CaptureTextOffsets)

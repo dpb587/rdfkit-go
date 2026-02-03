@@ -11,7 +11,7 @@ import (
 )
 
 type DecoderConfig struct {
-	baseURL         *string
+	defaultBase     *string
 	bnStringFactory blanknodes.StringFactory
 
 	captureTextOffsets *bool
@@ -22,8 +22,8 @@ type DecoderConfig struct {
 	warningListener         func(err error)
 }
 
-func (b DecoderConfig) SetBaseURL(v string) DecoderConfig {
-	b.baseURL = &v
+func (b DecoderConfig) SetDefaultBase(v string) DecoderConfig {
+	b.defaultBase = &v
 
 	return b
 }
@@ -41,6 +41,9 @@ func (b DecoderConfig) SetCaptureTextOffsets(v bool) DecoderConfig {
 }
 
 func (b DecoderConfig) SetInitialTextOffset(v cursorio.TextOffset) DecoderConfig {
+	t := true
+
+	b.captureTextOffsets = &t
 	b.initialTextOffset = &v
 
 	return b
@@ -65,8 +68,8 @@ func (b DecoderConfig) SetWarningListener(v func(err error)) DecoderConfig {
 }
 
 func (b DecoderConfig) apply(s *DecoderConfig) {
-	if b.baseURL != nil {
-		s.baseURL = b.baseURL
+	if b.defaultBase != nil {
+		s.defaultBase = b.defaultBase
 	}
 
 	if b.bnStringFactory != nil {
@@ -105,8 +108,8 @@ func (b DecoderConfig) newDecoder(r io.Reader) (*Decoder, error) {
 		buildTextOffsets:        encodingutil.BuildTextOffsetsNil,
 	}
 
-	if b.baseURL != nil {
-		baseURL, err := iri.ParseIRI(*b.baseURL)
+	if b.defaultBase != nil {
+		baseURL, err := iri.ParseIRI(*b.defaultBase)
 		if err != nil {
 			return nil, fmt.Errorf("base url: %v", err)
 		}

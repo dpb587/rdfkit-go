@@ -20,10 +20,8 @@ type EncoderOption interface {
 }
 
 type Encoder struct {
-	w                io.Writer
+	w                *json.Encoder
 	bnStringProvider blanknodes.StringProvider
-	prefix           string
-	indent           string
 
 	buf map[string]map[string][]any
 }
@@ -49,10 +47,7 @@ func (w *Encoder) GetContentTypeIdentifier() encoding.ContentTypeIdentifier {
 }
 
 func (w *Encoder) Close() error {
-	e := json.NewEncoder(w.w)
-	e.SetIndent(w.prefix, w.indent)
-
-	return e.Encode(w.buf)
+	return w.w.Encode(w.buf)
 }
 
 func (w *Encoder) AddTriple(ctx context.Context, t rdf.Triple) error {

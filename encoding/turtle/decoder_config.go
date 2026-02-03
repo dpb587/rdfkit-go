@@ -50,6 +50,7 @@ func (b DecoderConfig) SetCaptureTextOffsets(v bool) DecoderConfig {
 
 func (b DecoderConfig) SetInitialTextOffset(v cursorio.TextOffset) DecoderConfig {
 	t := true
+
 	b.captureTextOffsets = &t
 	b.initialTextOffset = &v
 

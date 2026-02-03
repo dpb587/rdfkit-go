@@ -1,25 +1,29 @@
 package rdfjson
 
 import (
+	"encoding/json"
 	"io"
 
 	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 )
 
 type EncoderConfig struct {
-	prefix           *string
-	indent           *string
+	jsonPrefix     *string
+	jsonIndent     *string
+	jsonEscapeHTML *bool
+
 	bnStringProvider blanknodes.StringProvider
 }
 
-func (s EncoderConfig) SetPrefix(v string) EncoderConfig {
-	s.prefix = &v
+func (s EncoderConfig) SetIndent(prefix, indent string) EncoderConfig {
+	s.jsonPrefix = &prefix
+	s.jsonIndent = &indent
 
 	return s
 }
 
-func (s EncoderConfig) SetIndent(v string) EncoderConfig {
-	s.indent = &v
+func (s EncoderConfig) SetEscapeHTML(v bool) EncoderConfig {
+	s.jsonEscapeHTML = &v
 
 	return s
 }
@@ -31,12 +35,16 @@ func (s EncoderConfig) SetBlankNodeStringProvider(v blanknodes.StringProvider) E
 }
 
 func (s EncoderConfig) apply(d *EncoderConfig) {
-	if s.prefix != nil {
-		d.prefix = s.prefix
+	if s.jsonPrefix != nil {
+		d.jsonPrefix = s.jsonPrefix
 	}
 
-	if s.indent != nil {
-		d.indent = s.indent
+	if s.jsonIndent != nil {
+		d.jsonIndent = s.jsonIndent
+	}
+
+	if s.jsonEscapeHTML != nil {
+		d.jsonEscapeHTML = s.jsonEscapeHTML
 	}
 
 	if s.bnStringProvider != nil {
@@ -46,21 +54,21 @@ func (s EncoderConfig) apply(d *EncoderConfig) {
 
 func (s EncoderConfig) newEncoder(w io.Writer) (*Encoder, error) {
 	ww := &Encoder{
-		w:                w,
+		w:                json.NewEncoder(w),
 		bnStringProvider: s.bnStringProvider,
 		buf:              map[string]map[string][]any{},
 	}
 
-	if s.prefix != nil {
-		ww.prefix = *s.prefix
-	}
-
-	if s.indent != nil {
-		ww.indent = *s.indent
-	}
-
 	if ww.bnStringProvider == nil {
 		ww.bnStringProvider = blanknodes.NewInt64StringProvider("b%d")
+	}
+
+	if s.jsonPrefix != nil && s.jsonIndent != nil {
+		ww.w.SetIndent(*s.jsonPrefix, *s.jsonIndent)
+	}
+
+	if s.jsonEscapeHTML != nil {
+		ww.w.SetEscapeHTML(*s.jsonEscapeHTML)
 	}
 
 	return ww, nil
