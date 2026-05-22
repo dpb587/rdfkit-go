@@ -304,6 +304,112 @@ func TestW3trHtmlRdfaNonNormative(t *testing.T) {
 	}
 }
 
+func TestVocabTrailingSlash(t *testing.T) {
+	for _, testcase := range []struct {
+		Name     string
+		Snippet  string
+		Expected encodingtest.TripleStatementList
+	}{
+		{
+			Name:    "vocab http without trailing slash gets slash appended",
+			Snippet: `<div vocab="http://schema.org"><span typeof="Thing"></span></div>`,
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
+					Triple: rdf.Triple{
+						Subject:   rdf.IRI(""),
+						Predicate: rdfairi.UsesVocabulary_Property,
+						Object:    rdf.IRI("http://schema.org/"),
+					},
+				},
+				encodingtest.TripleStatement{
+					Triple: rdf.Triple{
+						Subject:   testingBnode.NewStringBlankNode("b0"),
+						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
+						Object:    rdf.IRI("http://schema.org/Thing"),
+					},
+				},
+			},
+		},
+		{
+			Name:    "vocab https without trailing slash gets slash appended",
+			Snippet: `<div vocab="https://schema.org"><span typeof="Thing"></span></div>`,
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
+					Triple: rdf.Triple{
+						Subject:   rdf.IRI(""),
+						Predicate: rdfairi.UsesVocabulary_Property,
+						Object:    rdf.IRI("https://schema.org/"),
+					},
+				},
+				encodingtest.TripleStatement{
+					Triple: rdf.Triple{
+						Subject:   testingBnode.NewStringBlankNode("b0"),
+						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
+						Object:    rdf.IRI("https://schema.org/Thing"),
+					},
+				},
+			},
+		},
+		{
+			Name:    "vocab ftp without trailing slash unchanged",
+			Snippet: `<div vocab="ftp://schema.org"><span typeof="Thing"></span></div>`,
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
+					Triple: rdf.Triple{
+						Subject:   rdf.IRI(""),
+						Predicate: rdfairi.UsesVocabulary_Property,
+						Object:    rdf.IRI("ftp://schema.org"),
+					},
+				},
+				encodingtest.TripleStatement{
+					Triple: rdf.Triple{
+						Subject:   testingBnode.NewStringBlankNode("b0"),
+						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
+						Object:    rdf.IRI("ftp://schema.orgThing"),
+					},
+				},
+			},
+		},
+		{
+			Name:    "vocab http with trailing slash unchanged",
+			Snippet: `<div vocab="http://schema.org/"><span typeof="Thing"></span></div>`,
+			Expected: encodingtest.TripleStatementList{
+				encodingtest.TripleStatement{
+					Triple: rdf.Triple{
+						Subject:   rdf.IRI(""),
+						Predicate: rdfairi.UsesVocabulary_Property,
+						Object:    rdf.IRI("http://schema.org/"),
+					},
+				},
+				encodingtest.TripleStatement{
+					Triple: rdf.Triple{
+						Subject:   testingBnode.NewStringBlankNode("b0"),
+						Predicate: rdf.IRI("http://www.w3.org/1999/02/22-rdf-syntax-ns#type"),
+						Object:    rdf.IRI("http://schema.org/Thing"),
+					},
+				},
+			},
+		},
+	} {
+		t.Run(testcase.Name, func(t *testing.T) {
+			htmlDocument, err := html.ParseDocument(
+				bytes.NewBufferString(testcase.Snippet),
+				html.DocumentConfig{}.SetCaptureTextOffsets(true),
+			)
+			if err != nil {
+				t.Fatalf("unexpected error: %v", err)
+			}
+
+			out, err := triples.CollectErr(NewDecoder(htmlDocument))
+			if err != nil {
+				t.Fatalf("unexpected error: %v", err)
+			}
+
+			testingassert.IsomorphicGraphs(t.Context(), t, testcase.Expected.AsTriples(), out)
+		})
+	}
+}
+
 // https://www.w3.org/TR/rdfa-core/
 func TestW3trRdfaCoreNonNormative(t *testing.T) {
 	for _, testcase := range []struct {

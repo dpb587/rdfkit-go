@@ -366,6 +366,16 @@ func (v *Decoder) walkNode(ectx evaluationContext, n *html.Node) error {
 				if !ok {
 					// TODO warning
 				} else {
+					// The spec has @vocab as an IRI and concatenation prefix. However, forgetting a trailing slash
+					// seems like a common typo; therefore, since http/https declare an empty path and '/' as
+					// equivalent, kindly normalize the path to avoid `http://schema.orgThing`-type values. A little
+					// hacky since not fully normalizing case and port.
+					if parsed, err := iri.ParseIRI(string(vocabIRI)); err == nil {
+						if scheme := parsed.URL().Scheme; (scheme == "http" || scheme == "https") && parsed.URL().Path == "" {
+							vocabIRI = rdf.IRI(string(vocabIRI) + "/")
+						}
+					}
+
 					localDefaultVocabulary = ptr.Value(string(vocabIRI))
 
 					var objectOffsets *cursorio.TextOffsetRange
