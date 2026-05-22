@@ -241,7 +241,7 @@ func (a algorithmCanonicalization) Call() (*Canonicalization, error) {
 	}
 
 	// [spec // 4.4.3 // 6] Add the issued identifiers map from the canonical issuer to the canonicalized dataset.
-	// [dpb] automatic via GetBlankNodeIdentifier
+	// [dpb] automatic via GetBlankNodeString
 
 	// [spec // 4.4.3 // 7] Return the serialized canonical form of the canonicalized dataset. Upon request, alternatively
 	// (or additionally) return the canonicalized dataset itself, which includes the input blank node identifier map, and

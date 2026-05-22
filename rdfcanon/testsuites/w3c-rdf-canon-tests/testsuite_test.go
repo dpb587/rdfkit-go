@@ -180,7 +180,7 @@ func Test(t *testing.T) {
 				// Build the actual map from original identifiers to canonical identifiers
 				actualMap := make(map[string]string)
 				for origID, bn := range mapper.mappings {
-					actualMap[origID] = canonicalization.GetBlankNodeIdentifier(bn)
+					actualMap[origID] = canonicalization.GetBlankNodeString(bn)
 				}
 
 				if len(expectedMap) != len(actualMap) {

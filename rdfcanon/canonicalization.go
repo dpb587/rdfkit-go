@@ -21,7 +21,11 @@ type Canonicalization struct {
 	nquads           []canonicalizedQuad
 }
 
-func (c *Canonicalization) GetBlankNodeIdentifier(bn rdf.BlankNode) string {
+var _ blanknodes.StringProvider = &Canonicalization{}
+
+func (c *Canonicalization) GetBlankNodeString(bn rdf.BlankNode) string {
+	// TODO consider panic if used for a blank node that was not created via canonicalization?
+	// however, string provider is configurable via user options, so not practical to enforce?
 	return c.bnStringProvider.GetBlankNodeString(bn)
 }
 
