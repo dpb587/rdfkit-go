@@ -214,6 +214,17 @@ func (e *Encoder) buildResource(builder *rdfdescription.ResourceListBuilder, res
 						}
 					}
 				default:
+					if obj.Datatype == rdfiri.LangString_Datatype {
+						if tag, ok := obj.Tag.(rdf.LanguageLiteralTag); ok {
+							statementObject = map[string]any{
+								"@value":    obj.LexicalForm,
+								"@language": tag.Language,
+							}
+
+							continue
+						}
+					}
+
 					pr, ok := e.prefixes.CompactPrefix(string(obj.Datatype))
 					if ok {
 						statementObject = map[string]any{
@@ -227,11 +238,6 @@ func (e *Encoder) buildResource(builder *rdfdescription.ResourceListBuilder, res
 						}
 					}
 
-					if obj.Datatype == rdfiri.LangString_Datatype {
-						if tag, ok := obj.Tag.(rdf.LanguageLiteralTag); ok {
-							statementObject.(map[string]any)["@language"] = tag.Language
-						}
-					}
 				}
 			}
 		default:

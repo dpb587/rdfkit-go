@@ -50,7 +50,7 @@ func (e encoder) NewEncoder(ww rdfiotypes.Writer, opts rdfiotypes.EncoderOptions
 		options = options.SetIndent("", "\t")
 	}
 
-	if *params.IrisUseBase {
+	if *params.IrisUseBase && len(opts.BaseIRI) > 0 {
 		options = options.SetBase(string(opts.BaseIRI))
 	}
 

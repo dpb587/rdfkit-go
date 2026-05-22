@@ -49,7 +49,7 @@ func (e encoder) NewEncoder(ww rdfiotypes.Writer, opts rdfiotypes.EncoderOptions
 		options = options.SetBuffered(true)
 	}
 
-	if *params.IrisUseBase == true {
+	if *params.IrisUseBase && len(opts.BaseIRI) > 0 {
 		options = options.SetBase(string(opts.BaseIRI))
 	}
 
