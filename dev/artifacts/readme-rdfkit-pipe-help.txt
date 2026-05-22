@@ -18,7 +18,7 @@ Flags:
 
 Encodings:
 
-  org.json-ld.document (decode)
+  org.json-ld.document (decode, encode)
 
     Aliases: jsonld
     File Extensions: .jsonld
@@ -29,6 +29,18 @@ Encodings:
 
     --in-param tokenizer.lax[=bool]
       Accept and recover common syntax errors
+
+    --out-param buffered[=bool]
+      Load all statements into memory before writing any output
+
+    --out-param iris.useBase[=bool]
+      Prefer IRIs relative to the resource IRI
+
+    --out-param iris.usePrefix=string...
+      Prefer IRIs using a prefix. Use the syntax of "{prefix}:{iri}", "rdfa-context", or "none"
+
+    --out-param pretty[=bool]
+      Use tab indentation for human-readable output
 
   org.w3.n-quads (decode, encode)
 
