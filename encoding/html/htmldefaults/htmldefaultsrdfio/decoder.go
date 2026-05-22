@@ -6,6 +6,8 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/html/htmlcontent"
 	"github.com/dpb587/rdfkit-go/encoding/html/htmldefaults"
+	"github.com/dpb587/rdfkit-go/encoding/htmljsonld"
+	"github.com/dpb587/rdfkit-go/encoding/jsonld"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
 	"github.com/dpb587/rdfkit-go/rdfio/rdfiotypes"
 )
@@ -39,7 +41,13 @@ func (e decoder) NewDecoder(rr rdfiotypes.Reader, opts rdfiotypes.DecoderOptions
 	}
 
 	options := htmldefaults.DecoderConfig{}.
-		SetDocumentLoaderJSONLD(e.jsonldDocumentLoader).
+		SetJSONLDOptions(
+			htmljsonld.DecoderConfig{}.
+				SetDecoderOptions(
+					jsonld.DecoderConfig{}.
+						SetDocumentLoader(e.jsonldDocumentLoader),
+				),
+		).
 		SetLocation(string(opts.BaseIRI))
 
 	if params.CaptureTextOffsets != nil {

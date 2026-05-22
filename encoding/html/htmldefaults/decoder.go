@@ -12,7 +12,6 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding/htmljsonld"
 	"github.com/dpb587/rdfkit-go/encoding/htmlmicrodata"
 	"github.com/dpb587/rdfkit-go/encoding/htmlrdfa"
-	"github.com/dpb587/rdfkit-go/encoding/jsonld"
 	"github.com/dpb587/rdfkit-go/rdf"
 )
 
@@ -118,14 +117,16 @@ func (d *Decoder) init() ([]nestedIterator, error) {
 
 	htmlJsonld, err := htmljsonld.NewDecoder(
 		htmlDocument,
-		htmljsonld.DecoderConfig{}.
-			SetParserOptions(
-				inspectjson.TokenizerConfig{}.
-					SetLax(true),
-			).
-			SetDecoderOptions(jsonld.DecoderConfig{}.
-				SetDocumentLoader(d.cfg.jsonldDocumentLoader),
-			),
+		append(
+			[]htmljsonld.DecoderOption{
+				htmljsonld.DecoderConfig{}.
+					SetParserOptions(
+						inspectjson.TokenizerConfig{}.
+							SetLax(true),
+					),
+			},
+			d.cfg.jsonldOptions...,
+		)...,
 	)
 	if err != nil {
 		return nil, fmt.Errorf("htmljsonld: %v", err)
@@ -133,14 +134,19 @@ func (d *Decoder) init() ([]nestedIterator, error) {
 
 	htmlMicrodata, err := htmlmicrodata.NewDecoder(
 		htmlDocument,
-		htmlmicrodata.DecoderConfig{}.
-			SetVocabularyResolver(htmlmicrodata.ItemtypeVocabularyResolver),
+		append(
+			[]htmlmicrodata.DecoderOption{
+				htmlmicrodata.DecoderConfig{}.
+					SetVocabularyResolver(htmlmicrodata.ItemtypeVocabularyResolver),
+			},
+			d.cfg.microdataOptions...,
+		)...,
 	)
 	if err != nil {
 		return nil, fmt.Errorf("htmlmicrodata: %v", err)
 	}
 
-	htmlRdfa, err := htmlrdfa.NewDecoder(htmlDocument)
+	htmlRdfa, err := htmlrdfa.NewDecoder(htmlDocument, d.cfg.rdfaOptions...)
 	if err != nil {
 		return nil, fmt.Errorf("htmlrdfa: %v", err)
 	}
