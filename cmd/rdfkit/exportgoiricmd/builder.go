@@ -3,26 +3,48 @@ package exportgoiricmd
 import (
 	"bytes"
 	"fmt"
+	"go/format"
 	"io"
 	"regexp"
 	"slices"
 	"strings"
 
+	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/ontology/rdf/rdfiri"
 	"github.com/dpb587/rdfkit-go/ontology/rdfs/rdfsiri"
 	"github.com/dpb587/rdfkit-go/ontology/xsd/xsdiri"
 	"github.com/dpb587/rdfkit-go/rdf"
+	"github.com/mitchellh/go-wordwrap"
 )
 
-type builder struct {
+type Builder struct {
 	base        rdf.IRI
 	baseTerm    rdf.IRI
 	baseMatcher *regexp.Regexp
 
 	statementsBySubject map[rdf.IRI]*builderSubject
+
+	maxLineLength      int
+	commentTransformer func(string) string
 }
 
-func (b *builder) DetectBase() (string, bool) {
+func NewBuilderFromQuadsDecoder(d encoding.QuadsDecoder) (*Builder, error) {
+	b := &Builder{
+		statementsBySubject: map[rdf.IRI]*builderSubject{},
+	}
+
+	for d.Next() {
+		b.AddStatement(d.Quad())
+	}
+
+	if err := d.Err(); err != nil {
+		return nil, err
+	}
+
+	return b, nil
+}
+
+func (b *Builder) DetectBase() (string, bool) {
 	var groups = map[string]int{}
 
 	for _, subject := range b.statementsBySubject {
@@ -56,8 +78,8 @@ func (b *builder) DetectBase() (string, bool) {
 	return maxBase, true
 }
 
-func (b *builder) FilterBase(base rdf.IRI) *builder {
-	b2 := &builder{
+func (b *Builder) FilterBase(base rdf.IRI) *Builder {
+	b2 := &Builder{
 		base:                base,
 		statementsBySubject: map[rdf.IRI]*builderSubject{},
 	}
@@ -81,7 +103,7 @@ func (b *builder) FilterBase(base rdf.IRI) *builder {
 	return b2
 }
 
-func (b *builder) AddStatement(quad rdf.Quad) {
+func (b *Builder) AddStatement(quad rdf.Quad) {
 	sIRI, ok := quad.Triple.Subject.(rdf.IRI)
 	if !ok {
 		return
@@ -120,7 +142,7 @@ func (b *builder) AddStatement(quad rdf.Quad) {
 	}
 }
 
-func (b *builder) ListDefinedTerms() []rdf.IRI {
+func (b *Builder) ListDefinedTerms() []rdf.IRI {
 	var terms []rdf.IRI
 
 	for _, subject := range b.statementsBySubject {
@@ -159,8 +181,12 @@ var replaceFirst = map[byte]string{
 	'9': "Nine",
 }
 
-func (b *builder) GetGoIdent(t rdf.IRI) string {
+func (b *Builder) GetGoIdent(t rdf.IRI) string {
 	baseIdentity := b.baseMatcher.ReplaceAllString(string(t), "")
+
+	if b.statementsBySubject[t] == nil || len(b.statementsBySubject[t].Types) == 0 {
+		return ""
+	}
 
 	typeSuffix := string(b.statementsBySubject[t].Types[0])
 	if strings.Contains(string(typeSuffix), "#") {
@@ -188,7 +214,7 @@ func (b *builder) GetGoIdent(t rdf.IRI) string {
 
 var reIdentUnsafe = regexp.MustCompile(`[^a-zA-Z0-9_]`)
 
-func (b *builder) safeIdent(ident string) string {
+func (b *Builder) safeIdent(ident string) string {
 	ident = regexp.MustCompile(`(\s+|_)(\w)`).ReplaceAllStringFunc(
 		reIdentUnsafe.ReplaceAllString(ident, "_"),
 		func(s string) string {
@@ -204,7 +230,7 @@ func (b *builder) safeIdent(ident string) string {
 	return strings.ToUpper(ident[0:1]) + ident[1:]
 }
 
-func (b builder) WriteGoComment(w io.Writer, t rdf.IRI, linePrefix string, skipNL bool) (bool, error) {
+func (b Builder) writeGoComment(w io.Writer, t rdf.IRI, linePrefix string, skipNL bool) (bool, error) {
 	s := b.statementsBySubject[t]
 	if s == nil {
 		return false, nil
@@ -228,6 +254,8 @@ func (b builder) WriteGoComment(w io.Writer, t rdf.IRI, linePrefix string, skipN
 		break
 	}
 
+	comment = strings.TrimSpace(comment)
+
 	if len(comment) == 0 {
 		for _, v := range s.Comments {
 			if v.Datatype != xsdiri.String_Datatype {
@@ -244,6 +272,10 @@ func (b builder) WriteGoComment(w io.Writer, t rdf.IRI, linePrefix string, skipN
 		return false, nil
 	}
 
+	if b.commentTransformer != nil {
+		comment = b.commentTransformer(comment)
+	}
+
 	if !skipNL {
 		_, err := fmt.Fprintf(w, "\n")
 		if err != nil {
@@ -251,43 +283,104 @@ func (b builder) WriteGoComment(w io.Writer, t rdf.IRI, linePrefix string, skipN
 		}
 	}
 
-	_, err := fmt.Fprintf(w, "%s", linePrefix)
-	if err != nil {
-		return true, err
-	}
+	var err error
 
-	var lineLength = len(linePrefix)
-
-	for _, field := range strings.Fields(comment) {
-		fieldLen := len(bytes.Runes([]byte(field))) + 1
-		if lineLength+fieldLen >= maxLineLength {
-			_, err = fmt.Fprintf(w, "\n%s", linePrefix)
-			if err != nil {
-				return true, err
-			}
-
-			lineLength = len(linePrefix)
-			fieldLen--
-		} else if lineLength == len(linePrefix) {
-			fieldLen--
-		} else {
-			_, err = fmt.Fprintf(w, " ")
-			if err != nil {
-				return true, err
-			}
-		}
-
-		_, err = fmt.Fprintf(w, "%s", field)
+	for line := range strings.SplitSeq(wordwrap.WrapString(comment, uint(b.maxLineLength-len(linePrefix))), "\n") {
+		_, err = fmt.Fprintf(w, "%s%s\n", linePrefix, line)
 		if err != nil {
 			return true, err
 		}
-
-		lineLength += fieldLen
 	}
 
-	_, err = fmt.Fprintf(w, "\n")
-
 	return true, err
+}
+
+type ExportSourceOptions struct {
+	Generator          string // default: "rdfkit/exportgoiricmd"
+	PackageName        string
+	Prefix             string
+	SourceHash         []byte
+	SourceIRI          string
+	CommentTransformer func(string) string // default: no-op
+	MaxLineLength      int                 // default: 120
+}
+
+func (b *Builder) ExportSource(w io.Writer, opts ExportSourceOptions) error {
+	if opts.Generator == "" {
+		opts.Generator = "rdfkit/exportgoiricmd"
+	}
+	if opts.MaxLineLength == 0 {
+		opts.MaxLineLength = 120
+	}
+
+	b.maxLineLength = opts.MaxLineLength
+	b.commentTransformer = opts.CommentTransformer
+
+	outBuffer := bytes.NewBuffer(nil)
+
+	fmt.Fprintf(outBuffer, `// Code generated by %s; DO NOT EDIT.
+// %x  %s
+
+package %s
+
+import "github.com/dpb587/rdfkit-go/rdf"
+
+`,
+		opts.Generator,
+		opts.SourceHash,
+		opts.SourceIRI,
+		opts.PackageName,
+	)
+
+	_, err := b.writeGoComment(outBuffer, rdf.IRI(b.baseTerm), "// ", true)
+	if err != nil {
+		return fmt.Errorf("write: %w", err)
+	}
+
+	_, err = fmt.Fprintf(outBuffer, "const %sBase rdf.IRI = %q\n", opts.Prefix, b.base)
+	if err != nil {
+		return fmt.Errorf("write: %w", err)
+	}
+
+	fmt.Fprintf(outBuffer, "\nconst (\n")
+
+	var lastComment bool
+
+	for termIdx, term := range b.ListDefinedTerms() {
+		thisComment, err := b.writeGoComment(outBuffer, term, "\t// ", termIdx == 0)
+		if err != nil {
+			return fmt.Errorf("write: %w", err)
+		} else if lastComment && !thisComment {
+			_, err = fmt.Fprintf(outBuffer, "\n")
+			if err != nil {
+				return fmt.Errorf("write: %w", err)
+			}
+		}
+
+		lastComment = thisComment
+
+		if after, ok := strings.CutPrefix(string(term), string(b.base)); ok {
+			_, err = fmt.Fprintf(outBuffer, "\t%[1]s%[2]s = %[1]sBase + %[3]q\n", opts.Prefix, b.GetGoIdent(term), after)
+		} else {
+			_, err = fmt.Fprintf(outBuffer, "\t%[1]s%[2]s = %q\n", opts.Prefix, b.GetGoIdent(term), term)
+		}
+		if err != nil {
+			return fmt.Errorf("write: %w", err)
+		}
+	}
+
+	_, err = fmt.Fprint(outBuffer, ")\n")
+	if err != nil {
+		return fmt.Errorf("write: %w", err)
+	}
+
+	formattedContents, err := format.Source(outBuffer.Bytes())
+	if err != nil {
+		return fmt.Errorf("gofmt: %w", err)
+	}
+
+	_, err = w.Write(formattedContents)
+	return err
 }
 
 type builderSubject struct {
@@ -295,5 +388,3 @@ type builderSubject struct {
 	Types    []rdf.IRI
 	Comments []rdf.Literal
 }
-
-var maxLineLength = 120
