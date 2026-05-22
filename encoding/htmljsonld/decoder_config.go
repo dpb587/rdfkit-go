@@ -1,6 +1,8 @@
 package htmljsonld
 
 import (
+	"slices"
+
 	"github.com/dpb587/inspectjson-go/inspectjson"
 	encodinghtml "github.com/dpb587/rdfkit-go/encoding/html"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld"
@@ -26,8 +28,20 @@ func (b DecoderConfig) SetParserOptions(v ...inspectjson.ParserOption) DecoderCo
 	return b
 }
 
+func (b DecoderConfig) AddParserOptions(v ...inspectjson.ParserOption) DecoderConfig {
+	b.parserOptions = slices.Concat(b.parserOptions, v)
+
+	return b
+}
+
 func (b DecoderConfig) SetDecoderOptions(v ...jsonld.DecoderOption) DecoderConfig {
 	b.decoderOptions = v
+
+	return b
+}
+
+func (b DecoderConfig) AddDecoderOptions(v ...jsonld.DecoderOption) DecoderConfig {
+	b.decoderOptions = slices.Concat(b.decoderOptions, v)
 
 	return b
 }
@@ -38,11 +52,11 @@ func (b DecoderConfig) apply(s *DecoderConfig) {
 	}
 
 	if b.parserOptions != nil {
-		s.parserOptions = b.parserOptions
+		s.parserOptions = append(s.parserOptions, b.parserOptions...)
 	}
 
 	if b.decoderOptions != nil {
-		s.decoderOptions = b.decoderOptions
+		s.decoderOptions = append(s.decoderOptions, b.decoderOptions...)
 	}
 }
 

@@ -2,6 +2,7 @@ package htmldefaults
 
 import (
 	"io"
+	"slices"
 
 	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/rdfkit-go/encoding/htmljsonld"
@@ -45,14 +46,32 @@ func (b DecoderConfig) SetJSONLDOptions(v ...htmljsonld.DecoderOption) DecoderCo
 	return b
 }
 
+func (b DecoderConfig) AddJSONLDOptions(v ...htmljsonld.DecoderOption) DecoderConfig {
+	b.jsonldOptions = slices.Concat(b.jsonldOptions, v)
+
+	return b
+}
+
 func (b DecoderConfig) SetMicrodataOptions(v ...htmlmicrodata.DecoderOption) DecoderConfig {
 	b.microdataOptions = v
 
 	return b
 }
 
+func (b DecoderConfig) AddMicrodataOptions(v ...htmlmicrodata.DecoderOption) DecoderConfig {
+	b.microdataOptions = slices.Concat(b.microdataOptions, v)
+
+	return b
+}
+
 func (b DecoderConfig) SetRDFaOptions(v ...htmlrdfa.DecoderOption) DecoderConfig {
 	b.rdfaOptions = v
+
+	return b
+}
+
+func (b DecoderConfig) AddRDFaOptions(v ...htmlrdfa.DecoderOption) DecoderConfig {
+	b.rdfaOptions = slices.Concat(b.rdfaOptions, v)
 
 	return b
 }
@@ -71,15 +90,15 @@ func (b DecoderConfig) apply(s *DecoderConfig) {
 	}
 
 	if b.jsonldOptions != nil {
-		s.jsonldOptions = b.jsonldOptions
+		s.jsonldOptions = append(s.jsonldOptions, b.jsonldOptions...)
 	}
 
 	if b.microdataOptions != nil {
-		s.microdataOptions = b.microdataOptions
+		s.microdataOptions = append(s.microdataOptions, b.microdataOptions...)
 	}
 
 	if b.rdfaOptions != nil {
-		s.rdfaOptions = b.rdfaOptions
+		s.rdfaOptions = append(s.rdfaOptions, b.rdfaOptions...)
 	}
 }
 

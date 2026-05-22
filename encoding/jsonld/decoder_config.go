@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"slices"
 
 	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/inspectjson-go/inspectjson"
@@ -66,6 +67,12 @@ func (b DecoderConfig) SetParserOptions(v ...inspectjson.ParserOption) DecoderCo
 	return b
 }
 
+func (b DecoderConfig) AddParserOptions(v ...inspectjson.ParserOption) DecoderConfig {
+	b.parserOptions = slices.Concat(b.parserOptions, v)
+
+	return b
+}
+
 func (b DecoderConfig) SetBlankNodeStringFactory(v blanknodes.StringFactory) DecoderConfig {
 	b.bnStringFactory = v
 
@@ -122,7 +129,7 @@ func (b DecoderConfig) apply(s *DecoderConfig) {
 	}
 
 	if b.parserOptions != nil {
-		s.parserOptions = b.parserOptions
+		s.parserOptions = append(s.parserOptions, b.parserOptions...)
 	}
 
 	if b.bnStringFactory != nil {
