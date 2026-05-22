@@ -18,24 +18,30 @@ type EncoderOptions struct {
 	DecoderPipe *DecoderHandle
 }
 
-func (base EncoderOptions) ApplyOptions(r Registry, ww Writer, opts *EncoderOptions) error {
-	if len(base.Type) > 0 {
-		opts.Type = base.Type
+func (next EncoderOptions) ApplyOptions(r Registry, ww Writer, base *EncoderOptions) error {
+	if len(next.Type) > 0 {
+		base.Type = next.Type
 	}
 
-	if len(base.BaseIRI) > 0 {
-		opts.BaseIRI = base.BaseIRI
+	if len(next.BaseIRI) > 0 {
+		base.BaseIRI = next.BaseIRI
 	}
 
-	opts.Params = append(opts.Params, base.Params...)
+	base.Params = append(base.Params, next.Params...)
 
-	if base.Patcher != nil {
-		// TODO merge?
-		opts.Patcher = base.Patcher
-	}
+	if next.Patcher != nil {
+		if base.Patcher != nil {
+			base.Patcher = GenericOptionsPatcherFunc(func(wopts any) (any, error) {
+				nopts, err := base.Patcher(wopts)
+				if err != nil {
+					return nil, fmt.Errorf("base patcher: %v", err)
+				}
 
-	if base.DecoderPipe != nil {
-		opts.DecoderPipe = base.DecoderPipe
+				return next.Patcher(nopts)
+			})
+		} else {
+			base.Patcher = next.Patcher
+		}
 	}
 
 	return nil

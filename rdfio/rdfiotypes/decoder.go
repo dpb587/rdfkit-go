@@ -15,20 +15,32 @@ type DecoderOptions struct {
 	Patcher GenericOptionsPatcherFunc
 }
 
-func (base DecoderOptions) ApplyOptions(r Registry, rr Reader, opts *DecoderOptions) error {
-	if len(base.Type) > 0 {
-		opts.Type = base.Type
+func (next DecoderOptions) ApplyOptions(r Registry, rr Reader, base *DecoderOptions) error {
+	if len(next.Type) > 0 {
+		base.Type = next.Type
 	}
 
-	if len(base.BaseIRI) > 0 {
-		opts.BaseIRI = base.BaseIRI
+	if len(next.BaseIRI) > 0 {
+		base.BaseIRI = next.BaseIRI
 	}
 
-	opts.Params = append(opts.Params, base.Params...)
+	base.Params = append(base.Params, next.Params...)
 
-	if base.Patcher != nil {
-		// TODO merge?
-		opts.Patcher = base.Patcher
+	if next.Patcher != nil {
+		if base.Patcher != nil {
+			originalPatcher := base.Patcher
+
+			base.Patcher = GenericOptionsPatcherFunc(func(wopts any) (any, error) {
+				nopts, err := originalPatcher(wopts)
+				if err != nil {
+					return nil, fmt.Errorf("base patcher: %v", err)
+				}
+
+				return next.Patcher(nopts)
+			})
+		} else {
+			base.Patcher = next.Patcher
+		}
 	}
 
 	return nil
