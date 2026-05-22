@@ -175,9 +175,7 @@ func (r Registry) NewEncoder(ww Writer, opts ...EncoderOptionsBuilder) (*Encoder
 		}
 	}
 
-	if len(applied.BaseIRI) == 0 {
-		applied.BaseIRI = ww.GetIRI()
-	}
+	// unlike decoder, not defaulting the base iri since output is typically local files
 
 	cti, ok := r.ResolveEncoderType(ww, applied.Type)
 	if !ok {
