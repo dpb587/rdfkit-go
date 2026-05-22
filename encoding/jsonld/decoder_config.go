@@ -3,12 +3,21 @@ package jsonld
 import (
 	"fmt"
 	"io"
+	"net/http"
 
 	"github.com/dpb587/cursorio-go/cursorio"
 	"github.com/dpb587/inspectjson-go/inspectjson"
 	"github.com/dpb587/rdfkit-go/encoding/encodingutil"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
+)
+
+// DefaultDocumentLoader is the default JSON-LD document loader used by decoders when no other document loader is
+// configured. By default, it caches documents in memory, and it is not recommended for long-running processes.
+//
+// Use [DecoderConfig.SetDocumentLoader] to explicitly manage the document loader used by a decoder.
+var DefaultDocumentLoader jsonldtype.DocumentLoader = jsonldtype.NewCachingDocumentLoader(
+	jsonldtype.NewDefaultDocumentLoader(http.DefaultClient),
 )
 
 type DecoderConfig struct {
@@ -174,6 +183,10 @@ func (b DecoderConfig) newDecoder(r io.Reader) (*Decoder, error) {
 
 	if b.bnStringFactory == nil {
 		d.bnStringFactory = blanknodes.NewStringFactory()
+	}
+
+	if d.documentLoader == nil {
+		d.documentLoader = DefaultDocumentLoader
 	}
 
 	if b.processingMode != nil {

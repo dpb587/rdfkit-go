@@ -9,7 +9,6 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding/html/htmldefaults/htmldefaultsrdfio"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldcontent"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldrdfio"
-	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
 	"github.com/dpb587/rdfkit-go/encoding/nquads/nquadscontent"
 	"github.com/dpb587/rdfkit-go/encoding/nquads/nquadsrdfio"
 	"github.com/dpb587/rdfkit-go/encoding/ntriples/ntriplescontent"
@@ -27,12 +26,7 @@ import (
 	"github.com/dpb587/rdfkit-go/rdfio/rdfiotypes"
 )
 
-type RegistryOptions struct {
-	HttpClient           *http.Client
-	DocumentLoaderJSONLD jsonldtype.DocumentLoader
-}
-
-func NewRegistry(opts RegistryOptions) rdfiotypes.Registry {
+func NewRegistry() rdfiotypes.Registry {
 	return rdfiotypes.Registry{
 		Aliases: map[string]encoding.ContentTypeIdentifier{
 			"dev/null":    encodingtest.DiscardEncoderContentTypeIdentifier,
@@ -124,8 +118,8 @@ func NewRegistry(opts RegistryOptions) rdfiotypes.Registry {
 			fileresource.NewManager(),
 		},
 		DecoderManagers: map[encoding.ContentTypeIdentifier]rdfiotypes.DecoderManager{
-			htmlcontent.TypeIdentifier:     htmldefaultsrdfio.NewDecoder(opts.DocumentLoaderJSONLD),
-			jsonldcontent.TypeIdentifier:   jsonldrdfio.NewDecoder(opts.DocumentLoaderJSONLD),
+			htmlcontent.TypeIdentifier:     htmldefaultsrdfio.NewDecoder(),
+			jsonldcontent.TypeIdentifier:   jsonldrdfio.NewDecoder(),
 			ntriplescontent.TypeIdentifier: ntriplesrdfio.NewDecoder(),
 			nquadscontent.TypeIdentifier:   nquadsrdfio.NewDecoder(),
 			rdfxmlcontent.TypeIdentifier:   rdfxmlrdfio.NewDecoder(),

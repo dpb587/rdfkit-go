@@ -2,27 +2,21 @@ package jsonldrdfio
 
 import (
 	"fmt"
-	"net/http"
 
 	"github.com/dpb587/inspectjson-go/inspectjson"
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld"
 	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldcontent"
-	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
 	"github.com/dpb587/rdfkit-go/rdf/blanknodes"
 	"github.com/dpb587/rdfkit-go/rdfio/rdfiotypes"
 )
 
-type decoder struct {
-	jsonldDocumentLoader jsonldtype.DocumentLoader
-}
+type decoder struct{}
 
 var _ rdfiotypes.DecoderManager = decoder{}
 
-func NewDecoder(jsonldDocumentLoader jsonldtype.DocumentLoader) rdfiotypes.DecoderManager {
-	return decoder{
-		jsonldDocumentLoader: jsonldDocumentLoader,
-	}
+func NewDecoder() rdfiotypes.DecoderManager {
+	return decoder{}
 }
 
 func (decoder) GetContentTypeIdentifier() encoding.ContentTypeIdentifier {
@@ -45,7 +39,6 @@ func (e decoder) NewDecoder(rr rdfiotypes.Reader, opts rdfiotypes.DecoderOptions
 
 	options := jsonld.DecoderConfig{}.
 		SetBlankNodeStringFactory(bnFactory).
-		SetDocumentLoader(jsonldtype.NewDefaultDocumentLoader(http.DefaultClient)).
 		SetDefaultBase(string(opts.BaseIRI))
 
 	tokenizerOptions := inspectjson.TokenizerConfig{}

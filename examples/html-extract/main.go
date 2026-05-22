@@ -7,9 +7,6 @@ import (
 	"os"
 
 	"github.com/dpb587/rdfkit-go/encoding/html/htmldefaults"
-	"github.com/dpb587/rdfkit-go/encoding/htmljsonld"
-	"github.com/dpb587/rdfkit-go/encoding/jsonld"
-	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
 	"github.com/dpb587/rdfkit-go/encoding/turtle"
 	"github.com/dpb587/rdfkit-go/iri/rdfacontext"
 	"github.com/dpb587/rdfkit-go/rdfdescription"
@@ -38,16 +35,7 @@ func main() {
 	decoder, err := htmldefaults.NewDecoder(
 		res.Body,
 		htmldefaults.DecoderConfig{}.
-			SetLocation(res.Request.URL.String()).
-			SetJSONLDOptions(
-				htmljsonld.DecoderConfig{}.
-					SetDecoderOptions(
-						jsonld.DecoderConfig{}.
-							SetDocumentLoader(jsonldtype.NewCachingDocumentLoader(
-								jsonldtype.NewDefaultDocumentLoader(http.DefaultClient),
-							)),
-					),
-			),
+			SetLocation(res.Request.URL.String()),
 	)
 	if err != nil {
 		panic(fmt.Errorf("creating decoder: %v", err))

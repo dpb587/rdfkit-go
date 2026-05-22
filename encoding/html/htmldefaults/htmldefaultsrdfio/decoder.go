@@ -6,22 +6,15 @@ import (
 	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/html/htmlcontent"
 	"github.com/dpb587/rdfkit-go/encoding/html/htmldefaults"
-	"github.com/dpb587/rdfkit-go/encoding/htmljsonld"
-	"github.com/dpb587/rdfkit-go/encoding/jsonld"
-	"github.com/dpb587/rdfkit-go/encoding/jsonld/jsonldtype"
 	"github.com/dpb587/rdfkit-go/rdfio/rdfiotypes"
 )
 
-type decoder struct {
-	jsonldDocumentLoader jsonldtype.DocumentLoader
-}
+type decoder struct{}
 
 var _ rdfiotypes.DecoderManager = decoder{}
 
-func NewDecoder(jsonldDocumentLoader jsonldtype.DocumentLoader) rdfiotypes.DecoderManager {
-	return decoder{
-		jsonldDocumentLoader: jsonldDocumentLoader,
-	}
+func NewDecoder() rdfiotypes.DecoderManager {
+	return decoder{}
 }
 
 func (decoder) GetContentTypeIdentifier() encoding.ContentTypeIdentifier {
@@ -41,13 +34,6 @@ func (e decoder) NewDecoder(rr rdfiotypes.Reader, opts rdfiotypes.DecoderOptions
 	}
 
 	options := htmldefaults.DecoderConfig{}.
-		SetJSONLDOptions(
-			htmljsonld.DecoderConfig{}.
-				SetDecoderOptions(
-					jsonld.DecoderConfig{}.
-						SetDocumentLoader(e.jsonldDocumentLoader),
-				),
-		).
 		SetLocation(string(opts.BaseIRI))
 
 	if params.CaptureTextOffsets != nil {
