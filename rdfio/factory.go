@@ -128,6 +128,7 @@ func NewRegistry() rdfiotypes.Registry {
 			turtlecontent.TypeIdentifier:   turtlerdfio.NewDecoder(),
 		},
 		EncoderManagers: map[encoding.ContentTypeIdentifier]rdfiotypes.EncoderManager{
+			jsonldcontent.TypeIdentifier:                     jsonldrdfio.NewEncoder(),
 			ntriplescontent.TypeIdentifier:                   ntriplesrdfio.NewEncoder(),
 			nquadscontent.TypeIdentifier:                     nquadsrdfio.NewEncoder(),
 			rdfjsoncontent.TypeIdentifier:                    rdfjsonrdfio.NewEncoder(),

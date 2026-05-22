@@ -121,6 +121,8 @@ func (s EncoderConfig) newEncoder(w io.Writer) (*Encoder, error) {
 
 	if s.jsonEscapeHTML != nil {
 		e.w.SetEscapeHTML(*s.jsonEscapeHTML)
+	} else {
+		e.w.SetEscapeHTML(false)
 	}
 
 	return e, nil
