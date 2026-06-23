@@ -14,7 +14,7 @@ import (
 //
 
 type Registry struct {
-	ResourceManagers []ResourceManager
+	ResourceManagers ResourceManagerList
 	EncoderManagers  map[encoding.ContentTypeIdentifier]EncoderManager
 	DecoderManagers  map[encoding.ContentTypeIdentifier]DecoderManager
 
@@ -111,33 +111,11 @@ func (r Registry) ResolveEncoderType(ww Writer, t string) (encoding.ContentTypeI
 }
 
 func (r Registry) OpenReader(ctx context.Context, opts ReaderOptions) (Reader, error) {
-	for _, rm := range r.ResourceManagers {
-		rr, err := rm.NewReader(ctx, opts)
-		if err == ErrResourceNotSupported {
-			continue
-		} else if err != nil {
-			return nil, err
-		}
-
-		return rr, nil
-	}
-
-	return nil, ErrResourceNotSupported
+	return r.ResourceManagers.OpenReader(ctx, opts)
 }
 
 func (r Registry) OpenWriter(ctx context.Context, opts WriterOptions) (Writer, error) {
-	for _, rm := range r.ResourceManagers {
-		ww, err := rm.NewWriter(ctx, opts)
-		if err == ErrResourceNotSupported {
-			continue
-		} else if err != nil {
-			return nil, err
-		}
-
-		return ww, nil
-	}
-
-	return nil, ErrResourceNotSupported
+	return r.ResourceManagers.OpenWriter(ctx, opts)
 }
 
 func (r Registry) NewDecoder(rr Reader, opts ...DecoderOptionsBuilder) (*DecoderHandle, error) {

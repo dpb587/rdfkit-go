@@ -30,7 +30,7 @@ func (e manager) NewReaderParams() rdfiotypes.Params {
 	return newReaderParams()
 }
 
-func (rm *manager) NewReader(ctx context.Context, opts rdfiotypes.ReaderOptions) (rdfiotypes.Reader, error) {
+func (rm *manager) OpenReader(ctx context.Context, opts rdfiotypes.ReaderOptions) (rdfiotypes.Reader, error) {
 	if !strings.HasPrefix(opts.Name, "http://") && !strings.HasPrefix(opts.Name, "https://") {
 		return nil, rdfiotypes.ErrResourceNotSupported
 	}
@@ -133,6 +133,6 @@ func (rm *manager) NewReader(ctx context.Context, opts rdfiotypes.ReaderOptions)
 	return rr, nil
 }
 
-func (rm *manager) NewWriter(ctx context.Context, opts rdfiotypes.WriterOptions) (rdfiotypes.Writer, error) {
+func (rm *manager) OpenWriter(ctx context.Context, opts rdfiotypes.WriterOptions) (rdfiotypes.Writer, error) {
 	return nil, rdfiotypes.ErrResourceNotSupported
 }

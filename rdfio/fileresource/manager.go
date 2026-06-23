@@ -28,7 +28,7 @@ func (e manager) NewReaderParams() rdfiotypes.Params {
 	return newReaderParams()
 }
 
-func (rm *manager) NewReader(ctx context.Context, opts rdfiotypes.ReaderOptions) (rdfiotypes.Reader, error) {
+func (rm *manager) OpenReader(ctx context.Context, opts rdfiotypes.ReaderOptions) (rdfiotypes.Reader, error) {
 	params := newReaderParams()
 
 	err := rdfiotypes.LoadAndApplyParams(params, opts.Params...)
@@ -97,7 +97,7 @@ func (e manager) NewWriterParams() rdfiotypes.Params {
 	return &writerParams{}
 }
 
-func (rm *manager) NewWriter(ctx context.Context, opts rdfiotypes.WriterOptions) (rdfiotypes.Writer, error) {
+func (rm *manager) OpenWriter(ctx context.Context, opts rdfiotypes.WriterOptions) (rdfiotypes.Writer, error) {
 	params := newWriterParams()
 
 	err := rdfiotypes.LoadAndApplyParams(params, opts.Params...)

@@ -56,6 +56,42 @@ type Writer interface {
 //
 
 type ResourceManager interface {
-	NewReader(ctx context.Context, ref ReaderOptions) (Reader, error)
-	NewWriter(ctx context.Context, ref WriterOptions) (Writer, error)
+	OpenReader(ctx context.Context, ref ReaderOptions) (Reader, error)
+	OpenWriter(ctx context.Context, ref WriterOptions) (Writer, error)
+}
+
+//
+
+type ResourceManagerList []ResourceManager
+
+var _ ResourceManager = ResourceManagerList{}
+
+func (rl ResourceManagerList) OpenReader(ctx context.Context, opts ReaderOptions) (Reader, error) {
+	for _, rm := range rl {
+		rr, err := rm.OpenReader(ctx, opts)
+		if err == ErrResourceNotSupported {
+			continue
+		} else if err != nil {
+			return nil, err
+		}
+
+		return rr, nil
+	}
+
+	return nil, ErrResourceNotSupported
+}
+
+func (rl ResourceManagerList) OpenWriter(ctx context.Context, opts WriterOptions) (Writer, error) {
+	for _, rm := range rl {
+		ww, err := rm.OpenWriter(ctx, opts)
+		if err == ErrResourceNotSupported {
+			continue
+		} else if err != nil {
+			return nil, err
+		}
+
+		return ww, nil
+	}
+
+	return nil, ErrResourceNotSupported
 }
