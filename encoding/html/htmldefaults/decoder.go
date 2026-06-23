@@ -29,6 +29,7 @@ type Decoder struct {
 	r     io.Reader
 	cfg   DecoderConfig
 	err   error
+	doc   *html.Document
 	iters []nestedIterator
 }
 
@@ -49,6 +50,10 @@ func (d *Decoder) GetContentTypeIdentifier() encoding.ContentTypeIdentifier {
 	return htmlcontent.TypeIdentifier
 }
 
+func (d *Decoder) GetDocument() *html.Document {
+	return d.doc
+}
+
 func (d *Decoder) Close() error {
 	for _, it := range d.iters {
 		it.Close()
@@ -66,7 +71,7 @@ func (d *Decoder) Next() bool {
 		if d.err != nil {
 			return false
 		} else if d.iters == nil {
-			d.iters, d.err = d.init()
+			d.init()
 
 			continue
 		} else if len(d.iters) == 0 {
@@ -95,65 +100,73 @@ func (d *Decoder) StatementTextOffsets() encoding.StatementTextOffsets {
 	return d.iters[0].StatementTextOffsets()
 }
 
-func (d *Decoder) init() ([]nestedIterator, error) {
-	options := html.DocumentConfig{}
+func (d *Decoder) init() {
+	err := func() error {
+		options := html.DocumentConfig{}
 
-	if d.cfg.location != nil {
-		options = options.SetLocation(*d.cfg.location)
-	}
+		if d.cfg.location != nil {
+			options = options.SetLocation(*d.cfg.location)
+		}
 
-	if d.cfg.captureTextOffsets != nil {
-		options = options.SetCaptureTextOffsets(*d.cfg.captureTextOffsets)
-	}
+		if d.cfg.captureTextOffsets != nil {
+			options = options.SetCaptureTextOffsets(*d.cfg.captureTextOffsets)
+		}
 
-	if d.cfg.initialTextOffset != nil {
-		options = options.SetInitialTextOffset(*d.cfg.initialTextOffset)
-	}
+		if d.cfg.initialTextOffset != nil {
+			options = options.SetInitialTextOffset(*d.cfg.initialTextOffset)
+		}
 
-	htmlDocument, err := html.ParseDocument(d.r, options)
+		htmlDocument, err := html.ParseDocument(d.r, options)
+		if err != nil {
+			return fmt.Errorf("html: %v", err)
+		}
+
+		htmlJsonld, err := htmljsonld.NewDecoder(
+			htmlDocument,
+			append(
+				[]htmljsonld.DecoderOption{
+					htmljsonld.DecoderConfig{}.
+						SetParserOptions(
+							inspectjson.TokenizerConfig{}.
+								SetLax(true),
+						),
+				},
+				d.cfg.jsonldOptions...,
+			)...,
+		)
+		if err != nil {
+			return fmt.Errorf("htmljsonld: %v", err)
+		}
+
+		htmlMicrodata, err := htmlmicrodata.NewDecoder(
+			htmlDocument,
+			append(
+				[]htmlmicrodata.DecoderOption{
+					htmlmicrodata.DecoderConfig{}.
+						SetVocabularyResolver(htmlmicrodata.ItemtypeVocabularyResolver),
+				},
+				d.cfg.microdataOptions...,
+			)...,
+		)
+		if err != nil {
+			return fmt.Errorf("htmlmicrodata: %v", err)
+		}
+
+		htmlRdfa, err := htmlrdfa.NewDecoder(htmlDocument, d.cfg.rdfaOptions...)
+		if err != nil {
+			return fmt.Errorf("htmlrdfa: %v", err)
+		}
+
+		d.doc = htmlDocument
+		d.iters = []nestedIterator{
+			htmlJsonld,
+			encodingutil.NewTripleAsQuadDecoder(htmlMicrodata, nil),
+			encodingutil.NewTripleAsQuadDecoder(htmlRdfa, nil),
+		}
+
+		return nil
+	}()
 	if err != nil {
-		return nil, fmt.Errorf("html: %v", err)
+		d.err = err
 	}
-
-	htmlJsonld, err := htmljsonld.NewDecoder(
-		htmlDocument,
-		append(
-			[]htmljsonld.DecoderOption{
-				htmljsonld.DecoderConfig{}.
-					SetParserOptions(
-						inspectjson.TokenizerConfig{}.
-							SetLax(true),
-					),
-			},
-			d.cfg.jsonldOptions...,
-		)...,
-	)
-	if err != nil {
-		return nil, fmt.Errorf("htmljsonld: %v", err)
-	}
-
-	htmlMicrodata, err := htmlmicrodata.NewDecoder(
-		htmlDocument,
-		append(
-			[]htmlmicrodata.DecoderOption{
-				htmlmicrodata.DecoderConfig{}.
-					SetVocabularyResolver(htmlmicrodata.ItemtypeVocabularyResolver),
-			},
-			d.cfg.microdataOptions...,
-		)...,
-	)
-	if err != nil {
-		return nil, fmt.Errorf("htmlmicrodata: %v", err)
-	}
-
-	htmlRdfa, err := htmlrdfa.NewDecoder(htmlDocument, d.cfg.rdfaOptions...)
-	if err != nil {
-		return nil, fmt.Errorf("htmlrdfa: %v", err)
-	}
-
-	return []nestedIterator{
-		htmlJsonld,
-		encodingutil.NewTripleAsQuadDecoder(htmlMicrodata, nil),
-		encodingutil.NewTripleAsQuadDecoder(htmlRdfa, nil),
-	}, nil
 }
