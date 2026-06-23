@@ -5,6 +5,7 @@ import (
 	"slices"
 
 	"github.com/dpb587/cursorio-go/cursorio"
+	"github.com/dpb587/rdfkit-go/encoding/html"
 	"github.com/dpb587/rdfkit-go/encoding/htmljsonld"
 	"github.com/dpb587/rdfkit-go/encoding/htmlmicrodata"
 	"github.com/dpb587/rdfkit-go/encoding/htmlrdfa"
@@ -14,6 +15,7 @@ type DecoderConfig struct {
 	location           *string
 	captureTextOffsets *bool
 	initialTextOffset  *cursorio.TextOffset
+	rootVisitor        html.NodeVisitor
 	jsonldOptions      []htmljsonld.DecoderOption
 	microdataOptions   []htmlmicrodata.DecoderOption
 	rdfaOptions        []htmlrdfa.DecoderOption
@@ -36,6 +38,12 @@ func (b DecoderConfig) SetInitialTextOffset(v cursorio.TextOffset) DecoderConfig
 
 	b.captureTextOffsets = &t
 	b.initialTextOffset = &v
+
+	return b
+}
+
+func (b DecoderConfig) SetRootVisitor(v html.NodeVisitor) DecoderConfig {
+	b.rootVisitor = v
 
 	return b
 }
@@ -87,6 +95,10 @@ func (b DecoderConfig) apply(s *DecoderConfig) {
 
 	if b.initialTextOffset != nil {
 		s.initialTextOffset = b.initialTextOffset
+	}
+
+	if b.rootVisitor != nil {
+		s.rootVisitor = b.rootVisitor
 	}
 
 	if b.jsonldOptions != nil {

@@ -116,6 +116,10 @@ func (d *Decoder) init() {
 			options = options.SetInitialTextOffset(*d.cfg.initialTextOffset)
 		}
 
+		if d.cfg.rootVisitor != nil {
+			options = options.SetRootVisitor(d.cfg.rootVisitor)
+		}
+
 		htmlDocument, err := html.ParseDocument(d.r, options)
 		if err != nil {
 			return fmt.Errorf("html: %v", err)

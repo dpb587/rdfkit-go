@@ -15,6 +15,7 @@ type DocumentConfig struct {
 
 	captureTextOffsets *bool
 	initialTextOffset  *cursorio.TextOffset
+	rootTransformer    NodeVisitor
 }
 
 var _ DocumentOption = DocumentConfig{}
@@ -40,6 +41,12 @@ func (o DocumentConfig) SetInitialTextOffset(v cursorio.TextOffset) DocumentConf
 	return o
 }
 
+func (o DocumentConfig) SetRootVisitor(v NodeVisitor) DocumentConfig {
+	o.rootTransformer = v
+
+	return o
+}
+
 func (b DocumentConfig) apply(s *DocumentConfig) {
 	if b.location != nil {
 		s.location = b.location
@@ -51,6 +58,10 @@ func (b DocumentConfig) apply(s *DocumentConfig) {
 
 	if b.initialTextOffset != nil {
 		s.initialTextOffset = b.initialTextOffset
+	}
+
+	if b.rootTransformer != nil {
+		s.rootTransformer = b.rootTransformer
 	}
 }
 
@@ -93,6 +104,13 @@ func (b DocumentConfig) newDocument(r io.Reader) (*Document, error) {
 
 	if err != nil {
 		return nil, err
+	}
+
+	if b.rootTransformer != nil {
+		err = b.rootTransformer.VisitNode(d.root)
+		if err != nil {
+			return nil, fmt.Errorf("transform: %v", err)
+		}
 	}
 
 	if baseHref, ok := findFirstBaseHref(d.root); ok {
