@@ -48,6 +48,8 @@ type Decoder struct {
 	laxContentAttributeUse  bool
 	laxContentAttributeHook func(err DecoderError_LaxContentAttribute)
 
+	messageWriter encoding.DecoderMessageWriter
+
 	err error
 
 	statements    []statement
@@ -118,7 +120,7 @@ func (r *Decoder) StatementTextOffsets() encoding.StatementTextOffsets {
 func (w *Decoder) walk(ectx evaluationContext, n *html.Node) {
 	if n.Namespace == "" { // http://www.w3.org/1999/xhtml
 		var attrItemid, attrItemprop, attrItemref, attrItemtype string
-		var attrItemidIdx, attrItempropIdx, attrItemtypeIdx int
+		var attrItemidIdx, attrItempropIdx, attrItemrefIdx, attrItemtypeIdx int
 		var attrItemscope bool
 
 		for attrIdx, attr := range n.Attr {
@@ -135,6 +137,7 @@ func (w *Decoder) walk(ectx evaluationContext, n *html.Node) {
 				attrItempropIdx = attrIdx
 			case "itemref":
 				attrItemref = attr.Val
+				attrItemrefIdx = attrIdx
 			case "itemscope":
 				attrItemscope = true
 			case "itemtype":
@@ -324,16 +327,33 @@ func (w *Decoder) walk(ectx evaluationContext, n *html.Node) {
 				}
 			}
 		} else {
-			if len(attrItemid) > 0 {
-				// WARN
-			}
+			if w.messageWriter != nil {
+				if len(attrItemid) > 0 {
+					w.messageWriter.WriteMessage(DecoderMessage_DetachedScopeAttribute{
+						Decoder:  w,
+						Node:     n,
+						NodeAttr: attrItemidIdx,
+						AttrName: "itemid",
+					})
+				}
 
-			if len(attrItemref) > 0 {
-				// WARN
-			}
+				if len(attrItemref) > 0 {
+					w.messageWriter.WriteMessage(DecoderMessage_DetachedScopeAttribute{
+						Decoder:  w,
+						Node:     n,
+						NodeAttr: attrItemrefIdx,
+						AttrName: "itemref",
+					})
+				}
 
-			if len(attrItemtype) > 0 {
-				// WARN
+				if len(attrItemtype) > 0 {
+					w.messageWriter.WriteMessage(DecoderMessage_DetachedScopeAttribute{
+						Decoder:  w,
+						Node:     n,
+						NodeAttr: attrItemtypeIdx,
+						AttrName: "itemtype",
+					})
+				}
 			}
 
 			if len(attrItemprop) > 0 && ectx.CurrentSubject != nil {

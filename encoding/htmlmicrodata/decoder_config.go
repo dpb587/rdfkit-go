@@ -3,6 +3,7 @@ package htmlmicrodata
 import (
 	"fmt"
 
+	"github.com/dpb587/rdfkit-go/encoding"
 	"github.com/dpb587/rdfkit-go/encoding/encodingutil"
 	encodinghtml "github.com/dpb587/rdfkit-go/encoding/html"
 	"github.com/dpb587/rdfkit-go/iri"
@@ -13,6 +14,8 @@ type DecoderConfig struct {
 
 	laxContentAttributeUse  *bool
 	laxContentAttributeHook func(err DecoderError_LaxContentAttribute)
+
+	messageWriter encoding.DecoderMessageWriter
 }
 
 var _ DecoderOption = DecoderConfig{}
@@ -30,6 +33,12 @@ func (b DecoderConfig) SetLaxContentAttribute(use bool, hook func(err DecoderErr
 	return b
 }
 
+func (b DecoderConfig) SetMessageWriter(w encoding.DecoderMessageWriter) DecoderConfig {
+	b.messageWriter = w
+
+	return b
+}
+
 func (b DecoderConfig) apply(s *DecoderConfig) {
 	if b.vocabularyResolver != nil {
 		s.vocabularyResolver = b.vocabularyResolver
@@ -41,6 +50,10 @@ func (b DecoderConfig) apply(s *DecoderConfig) {
 
 	if b.laxContentAttributeHook != nil {
 		s.laxContentAttributeHook = b.laxContentAttributeHook
+	}
+
+	if b.messageWriter != nil {
+		s.messageWriter = b.messageWriter
 	}
 }
 
@@ -80,6 +93,10 @@ func (b DecoderConfig) newDecoder(doc *encodinghtml.Document) (*Decoder, error) 
 	if b.laxContentAttributeHook != nil {
 		w.laxContentAttributeHook = b.laxContentAttributeHook
 		w.laxContentAttribute = true
+	}
+
+	if b.messageWriter != nil {
+		w.messageWriter = b.messageWriter
 	}
 
 	return w, nil
