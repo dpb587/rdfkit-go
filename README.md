@@ -343,18 +343,18 @@ Better-supported storage or alternative, remote service clients will likely be a
 
 An *encoding* (or *file format*) is used to decode and encode RDF data. The following encodings are available under the [`encoding` package](encoding).
 
-| Package | Decode | Encode |
-|:------- |:------:|:------:|
-| [`htmljsonld`](encoding/htmljsonld) | Quad | - |
-| [`htmlmicrodata`](encoding/htmlmicrodata) | Triple | - |
-| [`htmlrdfa`](encoding/htmlrdfa) | Triple | - |
-| [`jsonld`](encoding/jsonld) | Quad | Quad, Description |
-| [`nquads`](encoding/nquads) | Quad | Quad |
-| [`ntriples`](encoding/ntriples) | Triple | Triple |
-| [`rdfjson`](encoding/rdfjson) | Triple | Triple |
-| [`rdfxml`](encoding/rdfxml) | Triple | - |
-| [`trig`](encoding/trig) | Quad | - |
-| [`turtle`](encoding/turtle) | Triple | Triple, Description |
+| Package | Version | Decode | Encode |
+|:------- |:-------:|:------:|:------:|
+| [`htmljsonld`](encoding/htmljsonld) | - | Quad | - |
+| [`htmlmicrodata`](encoding/htmlmicrodata) | - | Triple | - |
+| [`htmlrdfa`](encoding/htmlrdfa) | [1.1](https://www.w3.org/TR/html-rdfa/) | Triple | - |
+| [`jsonld`](encoding/jsonld) | [1.1](https://www.w3.org/TR/2020/REC-json-ld11-20200716/) | Quad | Quad, Description |
+| [`nquads`](encoding/nquads) | [1.1](https://www.w3.org/TR/2014/REC-n-quads-20140225/) | Quad | Quad |
+| [`ntriples`](encoding/ntriples) | [1.1](https://www.w3.org/TR/2014/REC-n-triples-20140225/) | Triple | Triple |
+| [`rdfjson`](encoding/rdfjson) | [1.1](https://www.w3.org/TR/2013/NOTE-rdf-json-20131107/) | Triple | Triple |
+| [`rdfxml`](encoding/rdfxml) | [1.1](https://www.w3.org/TR/2014/REC-rdf-syntax-grammar-20140225/) | Triple | - |
+| [`trig`](encoding/trig) | [1.1](https://www.w3.org/TR/2014/REC-trig-20140225/) | Quad | - |
+| [`turtle`](encoding/turtle) | [1.1](https://www.w3.org/TR/2014/REC-turtle-20140225/) | Triple | Triple, Description |
 
 ### Decoder
 
